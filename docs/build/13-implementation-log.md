@@ -263,3 +263,31 @@ loopback smoke green)
   rooms, settlement). Schema: ItineraryLeg, Subgroup(+Member), Activity, PackingItem,
   TransportLeg, Room(+Assignment) (migration release_d). Tests: 68 total green (4 new).
 - Still open: release E, R0-02 IaC, operator launch obligations.
+
+## Release E (v0.7.0 candidate, branch vibe/release-e-db71a4)
+
+- **E-01**: rehearsal simulation `simulateDay` — read-only (principle 3): programme,
+  itinerary legs, transport legs, activities and task due times merged into one UTC
+  timeline; overlaps, tasks due inside a block and over-capacity rooms flagged; test
+  asserts nothing is persisted (audit/check-in counts unchanged) and outsiders get
+  FORBIDDEN.
+- **E-02**: QR check-in `checkInByQr` via the C-09 scoped qrId — arrival marked through
+  a Correction row + AuditLog (principle 4), idempotent per household (Q4, double scan
+  tested); `guestFlowEstimates` (Q5) returns aggregates only — expected (RSVP yes),
+  checked-in, not-arrived, 30-min arrival buckets and a rate-based projection capped at
+  expected.
+- **E-03**: limited offline capture — arrivals + own checklist ticks only; queued with a
+  clientKey unique per occasion (Q4 upsert, replay tested); `reconcileOfflineQueue`
+  processes pending items exactly once in transactions, marks applied/conflict; a tick
+  whose task changed server-side after capture is surfaced as `changed_since_capture`
+  and NOT merged (tested); offline arrivals create CheckIn via `offline_reconciled`
+  with correction + audit. Web: POST/GET `/api/occasions/[id]/offline` for the PWA.
+- **E-04**: sustainability goals vs measured quantities — `setSustainabilityGoal`
+  (managers), `recordMeasurement` (any member; null = unknown), status unknown/measured/
+  on_track/behind; unknown never counts as fitting (principle 5, tested).
+- Web: `/occasions/[id]/operate` page (rehearsal, check-in + flow, offline queue,
+  sustainability) + tab; server actions in `app/actions/releasee.ts`. Schema: CheckIn,
+  OfflineSyncItem, SustainabilityGoal (migration release_e). Tests: 72 total green
+  (4 new E tests). i18n ro/en 679 keys each.
+- Still open: v1.0.0 production readiness (R0-02 IaC artifacts, R0-14 deploy runbook,
+  LAU buildables, final QA).

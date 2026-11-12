@@ -46,3 +46,4 @@ export * from './promotion';
 export * from './arrangements';
 
 export * from './travel';
+export * from './releasee';

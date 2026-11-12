@@ -327,6 +327,9 @@ model Occasion {
   readiness      ReadinessDecision[]
   closeout       Closeout?
   spaceModels    SpaceModelVersion[]
+  checkIns       CheckIn[]
+  offlineSyncItems OfflineSyncItem[]
+  sustainabilityGoals SustainabilityGoal[]
 
   @@index([ownerId])
 }
@@ -450,6 +453,7 @@ model Household {
   seatAssignments SeatAssignment[]
   privateRequests PrivateRequest[]
   publicRegistrations PublicRegistration[]
+  checkIns CheckIn[]
 
   @@index([occasionId])
 }
@@ -1796,5 +1800,59 @@ model RoomAssignment {
   householdId String
 
   @@unique([roomId, householdId])
+}
+
+// E-02: QR check-in arrivals. Each arrival is marked via an audited Correction row
+// (principle 4); the scan itself is idempotent per household (Q4).
+model CheckIn {
+  id           String    @id @default(cuid())
+  occasionId   String
+  occasion     Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  householdId  String
+  household    Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  qrId         String // scoped invitation qrId that was scanned (C-09)
+  checkedInAt  DateTime  @default(now())
+  actorId      String? // account that scanned / reconciled
+  via          String    @default("qr") // qr | offline_reconciled
+  correctionId String?   @unique // Correction row recording before/after (principle 4)
+
+  @@unique([occasionId, householdId])
+  @@index([occasionId])
+}
+
+// E-03: limited offline capture — arrivals and own checklist ticks only. Queued with a
+// client idempotency key (Q4), reconciled once on reconnect; conflicts are surfaced in
+// `result`, never silently merged.
+model OfflineSyncItem {
+  id           String   @id @default(cuid())
+  occasionId   String
+  occasion     Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  clientKey    String // idempotency key from the offline device (Q4)
+  kind         String // arrival | checklist_tick
+  payload      Json
+  actorId      String
+  createdAtUtc DateTime @default(now())
+  state        String   @default("pending") // pending | applied | conflict
+  result       Json?
+
+  @@unique([occasionId, clientKey])
+  @@index([occasionId, state])
+}
+
+// E-04: optional sustainability goals tracked against measured quantities.
+// measured = null means unknown — unknown stays unknown (principle 5).
+model SustainabilityGoal {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  metric     String // e.g. food_waste_kg | transport_km | single_use_items
+  unit       String
+  target     Float? // optional goal; null = measure only
+  measured   Float? // null = unknown (principle 5)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([occasionId, metric])
+  @@index([occasionId])
 }
 
