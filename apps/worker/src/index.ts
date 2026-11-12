@@ -47,6 +47,8 @@ async function main(): Promise<void> {
   await enqueue('daily-digest', {}, new Date());
   await enqueue('retention-purge', {}, new Date());
   await enqueue('nightly-stats', {}, new Date());
+  await enqueue('listing-stats-nightly', {}, new Date());
+  await enqueue('enquiry-nudge-48h', {}, new Date());
   for (;;) {
     await tick();
     const depth = await queueDepth();

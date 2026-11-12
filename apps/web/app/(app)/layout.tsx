@@ -18,6 +18,8 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
         </Link>
         <nav>
           <Link href="/dashboard">{t('nav.occasions')}</Link>
+          <Link href="/directory">{t('nav.directory')}</Link>
+          <Link href="/business">{t('nav.business')}</Link>
           <Link href="/account">{t('nav.account')}</Link>
           <LangToggle />
           <form action={signOutAction}>

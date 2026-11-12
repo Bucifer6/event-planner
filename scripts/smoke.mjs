@@ -84,6 +84,24 @@ await check('unknown guest link 404s (SEC2)', async () => {
   if (r.status !== 404) throw new Error(`expected 404, got ${r.status}`);
 });
 
+await check('GET /directory renders in Romanian (P-04, L1)', async () => {
+  const r = await fetch('http://localhost:3100/directory');
+  if (r.status !== 200) throw new Error(`expected 200, got ${r.status}`);
+  const html = await r.text();
+  if (!html.includes('Director de firme')) throw new Error('directory title missing');
+  if (!html.includes('S\u0103li de evenimente') && !html.includes('evenimente')) throw new Error('seeded categories missing');
+});
+
+await check('GET /directory/<unknown> 404s', async () => {
+  const r = await fetch('http://localhost:3100/directory/definitely-not-a-listing');
+  if (r.status !== 404) throw new Error(`expected 404, got ${r.status}`);
+});
+
+await check('GET /business redirects to signin when anonymous (auth wall)', async () => {
+  const r = await fetch('http://localhost:3100/business', { redirect: 'manual' });
+  if (r.status !== 307 && r.status !== 308) throw new Error(`expected redirect, got ${r.status}`);
+});
+
 web.kill('SIGTERM');
 await pg.stop();
 console.log(failures === 0 ? 'SMOKE ALL OK' : `SMOKE ${failures} FAILURES`);

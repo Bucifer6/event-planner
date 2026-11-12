@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { requireUser } from '../../../lib/session';
 import { getLocale, tf } from '../../../lib/i18n';
 import { getOverview } from '@eventdesk/core';
@@ -45,6 +46,18 @@ export default async function OverviewPage({ params }: { params: Promise<{ id: s
             </button>
           </div>
         </form>
+      </Card>
+      <Card>
+        <h2>{t('p.dir.title')}</h2>
+        <Link href={`/directory?occasion=${id}`} className="btn secondary">
+          {t('nav.directory')}
+        </Link>{' '}
+        <Link href={`/occasions/${id}/enquiries`} className="btn secondary">
+          {t('p.biz.enquiries')}
+        </Link>{' '}
+        <Link href={`/occasions/${id}/space`} className="btn secondary">
+          {t('p.space.title')}
+        </Link>
       </Card>
       <Card>
         <h2>{t('occ.next_milestone')}</h2>

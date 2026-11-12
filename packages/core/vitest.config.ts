@@ -6,5 +6,7 @@ export default defineConfig({
     testTimeout: 120_000,
     hookTimeout: 180_000,
     include: ['test/**/*.test.ts'],
+    // all suites share one embedded-Postgres database: never run files in parallel
+    fileParallelism: false,
   },
 });

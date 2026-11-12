@@ -111,3 +111,61 @@ loopback smoke green)
   admin/payment/other-account tools (MCP6). All tested.
 - Still open: R0-02 infra IaC, R0-14 GitHub-App deploy pipeline (Deploy model
   exists), release P (business module), releases C/D/E.
+
+## Release P (v0.3.0 candidate, branch vibe/release-p-db71a4)
+
+- **P-01**: business accounts (email required, P29), ≤5 listings per business, fixed
+  picklists only — 1–5 of the 21 seeded categories, ≤5 counties, 1–20 localities that
+  must belong to the chosen counties; free text rejected by construction (tested).
+  P18 admin rules (owner-only admin create/remove) in `packages/core/src/business.ts`.
+- **P-02/W2**: moderation queue `packages/core/src/moderation.ts` — every revision
+  (create + edit) is pending until a `listing_moderator` who is NOT a business member
+  approves (tested: member-approver FORBIDDEN, live-stays-up until approval, decided
+  revisions immutable). W3 suspension/restriction with recorded reason.
+- **P-03/P-04**: factual badges only (ONRC registration, insurance-with-date); public
+  directory `/directory` + `/directory/[id]` in ro+en (smoke-tested), search per
+  category × county (+ locality). Organic order = sha256(UTC-day|listing|category|
+  county), rotates daily, no payment field participates (tested: a Subscription row
+  does not change order). MON5: while the switch is OFF no Featured renders at all;
+  when ON, active Featured slots are excluded from organic order (tested).
+- **P-05**: enquiries planner→business (`packages/core/src/enquiries.ts`): P8
+  pre-filled free fields only, planner email only if ticked (P9); P10 creates/reuses
+  the supplier record + booking so the thread sits in the plan (tested: 10 bookings);
+  P11 limits 10/occasion + 30/account/day server-side (tested: 11th refused); P29
+  unclaimed listings reject enquiries (tested); P33 state machine sent/awaiting/
+  answered/closed + one re-send after 7 days on the same thread; P32 arrival email in
+  the listing language + exactly one 48h nudge (`enquiry-nudge-48h` worker job,
+  per-business off switch `Business.nudge48h`).
+- **P-06 (V1–V11)**: drawings per space with stated real dimensions; V7 two-point
+  calibration gates space-model attachment (tested: uncalibrated attach refused);
+  V4 drawing updates arrive as What-if previews, never silent overwrites (tested:
+  version 1→2 only after confirm); V5 custom tables; V6 fit check excludes unknown
+  dims; V8 POIs/fixtures; V10/V11 parking facts known/unknown with mismatch→unknown.
+  Web: business listing manage page + occasion `/space` page.
+- **P-07 (F1/F2)**: flower catalogues on the listing page and public page;
+  indicative prices never quotes (F3). Quote requests ride the enquiry flow (F5)
+  and count against both P11 limits.
+- **P-09 (BD1–BD7)**: discovery drafts from lawful sources, dedup queued for humans
+  (tested), moderator approval → live unclaimed listing with source cited, exactly
+  one claim invitation emailed only to a publicly listed address (tested via outbox),
+  per-source kill switch, objections/removals honoured within 30 days and recorded.
+- **P-10 (P30)**: claiming via emailed code (tested: wrong code rejected, right code
+  claims + creates the business); moderator-verify fallback when no public email.
+- **P-11 (P31/INF11/D4)**: nightly `listing-stats-nightly` worker job computes
+  response stats from application events only; published only at ≥10 answered
+  enquiries; `hideStats` suppresses (both tested). No visitor identifiers, no
+  payment influence.
+- **P-14/P-15**: console screens W2 moderation, W4 discovery (drafts/sources/
+  objections), W3 businesses; MCP tools `search_directory`, `get_listing`,
+  `list_catalogues`, `get_space_model` (read-only; space model bounded by own
+  occasion grants, MCP2; unclaimed listings expose only the published route, P29).
+- Schema: Release P models + `Business.nudge48h` (migration `release_p`,
+  `release_p_nudge`); seed adds the 21 categories and 42 counties + localities.
+- Tests: `packages/core/test/release-p.test.ts` — 9 tests; suite total 43 green
+  (i18n sync test included, ro/en 430 keys each). `fileParallelism: false` in core
+  vitest config (single shared embedded PG); release-b MON test made deterministic.
+- Smoke (`scripts/smoke.mjs`, loopback only): health, SEC5 headers, RO UI, CSRF
+  reject, guest 404, `/directory` 200 RO + seeded categories, unknown listing 404,
+  `/business` auth-wall redirect — all OK.
+- Still open: P-08 business occasions/branding/handover, P-12/P-13 dormant billing +
+  Featured (by design until MON ON), R0-02 IaC, R0-14 deploy pipeline, releases C/D/E.

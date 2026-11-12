@@ -1,6 +1,15 @@
 import { prisma } from '@eventdesk/db';
 import { AppError, hashToken, newToken, now } from '@eventdesk/shared';
-import { audit, createPreview, getMember, requireMember } from '@eventdesk/core';
+import {
+  audit,
+  createPreview,
+  getListingPublic,
+  getMember,
+  getSpaceModel,
+  listPublicCatalogues,
+  requireMember,
+  searchDirectory,
+} from '@eventdesk/core';
 
 // MCP1-MCP8 + SEC15: personal scoped tokens (hashed, revocable, 30-day inactivity
 // expiry); read tools bounded by the user's own grants (MCP2); propose tools
@@ -252,6 +261,99 @@ export async function toolProposeInvitationText(
 
 // The fixed, versioned tool catalogue (MCP8): served by the MCP server itself;
 // every tool declares its scope. No payment/admin/other-account tools exist.
+// --- Release P directory tools (MCP8: public factual data, read-only; the space
+// model stays bounded by the user's own occasion grants, MCP2) ---
+
+export async function toolSearchDirectory(
+  ctx: McpContext,
+  args: { categorySlug: string; countyCode: string; localityId?: string; limit?: number }
+) {
+  void ctx;
+  const results = await searchDirectory({
+    categorySlug: args.categorySlug,
+    countyCode: args.countyCode,
+    localityId: args.localityId || undefined,
+    limit: args.limit,
+  });
+  return results.map((r) => ({
+    listingId: r.listing.id,
+    name: r.listing.name,
+    badges: r.badges,
+    unclaimed: r.unclaimed,
+    stats: r.stats ?? null,
+    categories: r.listing.categories.map((c) => c.category.slug),
+    counties: r.listing.counties.map((c) => c.county.code),
+  }));
+}
+
+export async function toolGetListing(ctx: McpContext, args: { listingId: string }) {
+  void ctx;
+  const r = await getListingPublic(args.listingId);
+  return {
+    listingId: r.listing.id,
+    name: r.listing.name,
+    description: r.listing.description,
+    badges: r.badges,
+    unclaimed: r.unclaimed,
+    publicContactRoute: r.unclaimed ? (r.publicContactRoute ?? null) : null, // P29: only the published route, never a claimed business's private data
+    stats: r.stats ?? null,
+    categories: r.listing.categories.map((c) => ({
+      slug: c.category.slug,
+      name: c.category.nameRo,
+    })),
+    counties: r.listing.counties.map((c) => c.county.code),
+    localities:
+      (r.listing as { localities?: { locality: { nameRo: string } }[] }).localities?.map(
+        (l) => l.locality.nameRo
+      ) ?? [],
+    calibratedDrawings:
+      (
+        r.listing as { drawings?: { id: string; spaceName: string; version: number }[] }
+      ).drawings?.map((d) => ({ id: d.id, spaceName: d.spaceName, version: d.version })) ?? [],
+    catalogues:
+      (r.listing as { catalogues?: { id: string; name: string }[] }).catalogues?.map((c) => ({
+        id: c.id,
+        name: c.name,
+      })) ?? [],
+  };
+}
+
+export async function toolListCatalogues(ctx: McpContext, args: { categorySlug?: string }) {
+  void ctx;
+  const catalogues = await listPublicCatalogues(args.categorySlug ?? 'floristi');
+  return catalogues.map((c) => ({
+    catalogueId: c.id,
+    listingId: c.listingId,
+    name: c.name,
+    items: c.items.map((i) => ({
+      variety: i.variety,
+      seasonality: i.seasonality,
+      pricePerStemBani: i.pricePerStemBani,
+      colours: i.colours,
+    })),
+  }));
+}
+
+export async function toolGetSpaceModel(ctx: McpContext, args: { occasionId: string }) {
+  const model = await getSpaceModel(args.occasionId, ctx.accountId); // MCP2: own grants only
+  if (!model) return null;
+  return {
+    occasionId: args.occasionId,
+    version: model.version,
+    effectiveAt: model.effectiveAt,
+    drawing: {
+      id: model.drawing.id,
+      spaceName: model.drawing.spaceName,
+      pixelsPerMeter: model.drawing.pixelsPerMeter,
+      tables: model.drawing.tables,
+      fixtures: model.drawing.fixtures,
+      pois: model.drawing.pois,
+      parking: model.drawing.parking,
+    },
+    customTables: model.customTables,
+  };
+}
+
 export const TOOL_CATALOGUE = [
   {
     name: 'get_occasion',
@@ -291,6 +393,29 @@ export const TOOL_CATALOGUE = [
     kind: 'propose',
     description: 'Invitation wording drafts labelled as AI-generated',
   },
+  {
+    name: 'search_directory',
+    kind: 'read',
+    description:
+      'Public directory search: live listings per category x county, daily-rotated organic order, factual badges only',
+  },
+  {
+    name: 'get_listing',
+    kind: 'read',
+    description:
+      'Public listing page data; unclaimed listings expose only the published contact route (P29)',
+  },
+  {
+    name: 'list_catalogues',
+    kind: 'read',
+    description: 'Published flower/styling catalogues with indicative prices (never quotes)',
+  },
+  {
+    name: 'get_space_model',
+    kind: 'read',
+    description:
+      'Occasion space model (venue drawing version, tables, fixtures, POIs, parking) - own occasions only',
+  },
 ] as const;
 
 export async function dispatchTool(
@@ -322,6 +447,18 @@ export async function dispatchTool(
         break;
       case 'propose_invitation_text':
         result = await toolProposeInvitationText(ctx, args as never);
+        break;
+      case 'search_directory':
+        result = await toolSearchDirectory(ctx, args as never);
+        break;
+      case 'get_listing':
+        result = await toolGetListing(ctx, args as never);
+        break;
+      case 'list_catalogues':
+        result = await toolListCatalogues(ctx, args as never);
+        break;
+      case 'get_space_model':
+        result = await toolGetSpaceModel(ctx, args as never);
         break;
       default:
         throw new AppError('NOT_FOUND', `Unknown tool: ${name}`);

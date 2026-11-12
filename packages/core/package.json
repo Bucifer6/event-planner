@@ -15,9 +15,10 @@
   "dependencies": {
     "@eventdesk/auth": "workspace:*",
     "@eventdesk/db": "workspace:*",
+    "@eventdesk/email": "workspace:*",
     "@eventdesk/shared": "workspace:*",
-    "zod": "4.6.7",
-    "exceljs": "4.4.0"
+    "exceljs": "4.4.0",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "typescript": "5.9.3",

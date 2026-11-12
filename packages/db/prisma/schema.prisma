@@ -102,6 +102,7 @@ model Account {
   mcpTokens     McpToken[]
   staffMember   StaffMember?
   occasions     Occasion[]
+  business      Business?
 }
 
 model Session {
@@ -268,6 +269,8 @@ model Occasion {
   id               String        @id @default(cuid())
   ownerId          String
   owner            Account       @relation(fields: [ownerId], references: [id])
+  businessId       String? // P17: business-owned occasions
+  business         Business?     @relation(fields: [businessId], references: [id])
   title            String
   kind             String // template kind: picnic | aniversare | nunta | botez | revelion | voiaj_solo | voiaj_grup | custom
   dateMode         DateMode      @default(date)
@@ -299,6 +302,7 @@ model Occasion {
   deliveries     Delivery[]
   readiness      ReadinessDecision[]
   closeout       Closeout?
+  spaceModels    SpaceModelVersion[]
 
   @@index([ownerId])
 }
@@ -958,4 +962,443 @@ model McpCallLog {
 
   @@index([tokenId])
   @@index([at])
+}
+
+// ---------------------------------------------------------------------------
+// Release P: business module — directory, listings, moderation, discovery,
+// drawings/space model, catalogues, enquiries, stats (P1-P33, V1-V11, F1-F6,
+// BD1-BD7). MON5: while the monetization switch is OFF, FeaturedSlot rows are
+// never created or rendered — the directory is organic only.
+// ---------------------------------------------------------------------------
+
+model Business {
+  id                   String   @id @default(cuid())
+  accountId            String   @unique // business accounts require an email (P29/P30)
+  account              Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  name                 String
+  onrcRegistration     String? // "Verificat: înregistrare ONRC" badge (P4)
+  insuranceValidUntil  DateTime? // "Verificat: asigurare văzută până la <data>" (P4)
+  logoAssetId          String?
+  accentColor          String? // P20 branding on guest pages of business occasions
+  suspendedAt          DateTime? // W3 restriction, survives staff session end
+  suspensionReason     String?
+  nudge48h             Boolean  @default(true) // P32: the one 48h nudge has an off switch
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+
+  members   BusinessMember[]
+  listings  Listing[]
+  occasions Occasion[]
+}
+
+// P18: one owner, admins, staff; an admin cannot create or remove other admins.
+model BusinessMember {
+  id         String   @id @default(cuid())
+  businessId String
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  accountId  String
+  role       String // owner | admin | staff
+  createdAt  DateTime @default(now())
+
+  @@unique([businessId, accountId])
+  @@index([businessId])
+}
+
+// P2: the 21 fixed launch categories, ro name + en toggle.
+model Category {
+  id      String  @id @default(cuid())
+  slug    String  @unique
+  nameRo  String
+  nameEn  String
+  sortKey Int     @default(0)
+
+  listings ListingCategory[]
+}
+
+// Geography: 41 counties + Bucharest as fixed picklist; locality second picklist (P2 defs).
+model County {
+  id     String  @id @default(cuid())
+  code   String  @unique // e.g. "B", "CJ", "IF"
+  nameRo String
+  nameEn String
+
+  localities Locality[]
+  listings   ListingCounty[]
+}
+
+model Locality {
+  id       String  @id @default(cuid())
+  countyId String
+  county   County  @relation(fields: [countyId], references: [id], onDelete: Cascade)
+  nameRo   String
+  nameEn   String
+
+  @@unique([countyId, nameRo])
+  listings ListingLocality[]
+}
+
+// P1/P29: up to 5 listings per business; unclaimed (discovery) listings carry
+// the public contact route and the "not claimed yet" label, and cannot receive
+// enquiries, quote requests, Featured or uploads until claimed (P29).
+model Listing {
+  id              String    @id @default(cuid())
+  businessId      String? // null = unclaimed discovery listing
+  business        Business? @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  name            String
+  description     String?
+  status          String    @default("draft") // draft | pending | live | suspended
+  claimed         Boolean   @default(false) // P29/P30
+  publicContactRoute String? // as the public source states it (unclaimed listings, P29)
+  sourceUrl       String? // discovery source citation (BD2/BD4)
+  hideStats       Boolean   @default(false) // P31: listing may hide its statistics
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  categories ListingCategory[]
+  counties   ListingCounty[]
+  localities ListingLocality[]
+  revisions  ListingRevision[]
+  drawings   Drawing[]
+  catalogues FlowerCatalogue[]
+  enquiries  Enquiry[]
+  featured   FeaturedSlot[]
+
+  @@index([status])
+  @@index([businessId])
+}
+
+model ListingCategory {
+  listingId  String
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  @@id([listingId, categoryId])
+}
+
+model ListingCounty {
+  listingId String
+  listing   Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  countyId  String
+  county    County  @relation(fields: [countyId], references: [id])
+
+  @@id([listingId, countyId])
+}
+
+model ListingLocality {
+  listingId  String
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  localityId String
+  locality   Locality @relation(fields: [localityId], references: [id])
+
+  @@id([listingId, localityId])
+}
+
+// P3: every listing revision (incl. drawings, catalogue items) is moderated by
+// a staff member who is NOT a member of that business; the live version stays up
+// while an edit is pending.
+model ListingRevision {
+  id          String    @id @default(cuid())
+  listingId   String
+  listing     Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  payload     Json
+  state       String    @default("pending") // pending | approved | rejected | changes_requested
+  moderatorId String?
+  decidedAt   DateTime?
+  reason      String?
+  createdAt   DateTime  @default(now())
+
+  @@index([listingId, state])
+}
+
+// V1-V11: venue drawings, calibrated (V7), versioned into plan space models (V4).
+model Drawing {
+  id             String    @id @default(cuid())
+  listingId      String
+  listing        Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  assetId        String
+  spaceName      String
+  realWidthM     Float? // stated real dimensions (V1)
+  realHeightM    Float?
+  calibrationP1  Json? // two-point calibration (V7)
+  calibrationP2  Json?
+  pixelsPerMeter Float? // derived scale; null = uncalibrated, unusable for space models (V7)
+  revisionId     String? // moderated with the listing (V3)
+  version        Int       @default(1)
+  createdAt      DateTime  @default(now())
+
+  tables      TableInventory[]
+  fixtures    Fixture[]
+  pois        PointOfInterest[]
+  parking     ParkingFacts?
+  spaceModels SpaceModelVersion[]
+
+  @@index([listingId])
+}
+
+model TableInventory {
+  id          String   @id @default(cuid())
+  drawingId   String
+  drawing     Drawing  @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+  tableType   String
+  widthM      Float?
+  heightM     Float?
+  count       Int
+
+  @@index([drawingId])
+}
+
+// V5: planner-defined custom tables, marked custom, never venue-supplied.
+model CustomTable {
+  id             String   @id @default(cuid())
+  spaceModelId   String
+  spaceModel     SpaceModelVersion @relation(fields: [spaceModelId], references: [id], onDelete: Cascade)
+  name           String
+  widthM         Float?
+  heightM        Float?
+
+  @@index([spaceModelId])
+}
+
+// V8: named fixtures with real dimensions (dance floor, candy bar, photo cabin, scenă…).
+model Fixture {
+  id        String  @id @default(cuid())
+  drawingId String
+  drawing   Drawing @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+  kind      String // dance_floor | candy_bar | photo_cabin | stage | other
+  widthM    Float?
+  heightM   Float?
+
+  @@index([drawingId])
+}
+
+// V8/V9: points of interest (toilets, garderobă, bar, intrări/ieșiri, colț foto, scenă).
+model PointOfInterest {
+  id        String  @id @default(cuid())
+  drawingId String
+  drawing   Drawing @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+  kind      String // toilet | cloakroom | bar | entrance | exit | photo_corner | stage
+  label     String?
+
+  @@index([drawingId])
+}
+
+// V10/V11: parking facts, each known or unknown — never guessed, never blank.
+model ParkingFacts {
+  id                  String   @id @default(cuid())
+  drawingId           String   @unique
+  drawing             Drawing  @relation(fields: [drawingId], references: [id], onDelete: Cascade)
+  onSite              Boolean? // null = unknown
+  spaceCount          Int? // null = unknown
+  onStreet            Boolean?
+  paid                Boolean?
+  accessibleSpaces    Boolean?
+  walkingDistanceM    Float?
+  drawingSpaceCount   Int? // count drawn on the drawing; mismatch => unknown until confirmed (V11)
+  createdAt           DateTime @default(now())
+}
+
+// V4: the occasion's space model, pinned to a drawing version + effective date;
+// later drawing updates arrive as a What-if proposal, never a silent overwrite.
+model SpaceModelVersion {
+  id           String    @id @default(cuid())
+  occasionId   String
+  occasion     Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  drawingId    String
+  drawing      Drawing   @relation(fields: [drawingId], references: [id])
+  version      Int
+  effectiveAt  DateTime  @default(now())
+  acceptedById String?
+
+  customTables CustomTable[]
+
+  @@index([occasionId])
+}
+
+// F1/F2: flower catalogues, moderated with the listing, reusable across occasions.
+model FlowerCatalogue {
+  id        String   @id @default(cuid())
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  name      String
+  revisionId String?
+  createdAt DateTime @default(now())
+
+  items CatalogueItem[]
+
+  @@index([listingId])
+}
+
+model CatalogueItem {
+  id           String         @id @default(cuid())
+  catalogueId  String
+  catalogue    FlowerCatalogue @relation(fields: [catalogueId], references: [id], onDelete: Cascade)
+  variety      String
+  imageAssetId String?
+  seasonality  String?
+  pricePerStemBani Int? // indicative price per stem/bunch (F1) — indicative, never a quote (F3)
+  colours      String[]
+
+  @@index([catalogueId])
+}
+
+// P8-P11/P33/F5: enquiry threads planner <-> business. State: sent/awaiting/answered/closed.
+model Enquiry {
+  id            String   @id @default(cuid())
+  listingId     String
+  listing       Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  occasionId    String? // P10: the thread sits in the plan
+  supplierId    String? // linked supplier record (P10)
+  plannerAccountId String
+  state         String   @default("sent") // sent | awaiting | answered | closed
+  kind          String   @default("enquiry") // enquiry | quote_request (F5)
+  payload       Json // P8 fields: occasion kind, date, ~guests, county/locality, budget band, message; F5: arrangement + date + guests + message only
+  shareEmail    Boolean  @default(false) // P9: planner email shared only if ticked
+  sentAt        DateTime @default(now())
+  answeredAt    DateTime?
+  closedAt      DateTime?
+  resendCount   Int      @default(0) // P33: re-send once after 7 days
+  lastResendAt  DateTime?
+  nudged48h     Boolean  @default(false) // P32: at most one 48h nudge
+
+  messages EnquiryMessage[]
+
+  @@index([listingId])
+  @@index([plannerAccountId])
+  @@index([occasionId])
+}
+
+model EnquiryMessage {
+  id        String   @id @default(cuid())
+  enquiryId String
+  enquiry   Enquiry  @relation(fields: [enquiryId], references: [id], onDelete: Cascade)
+  fromBusiness Boolean @default(false)
+  body      String
+  quoteAssetId String? // P12/F6: a PDF marked as a quote
+  arrangementVersionId String? // F6 link
+  createdAt DateTime @default(now())
+
+  @@index([enquiryId])
+}
+
+// BD1-BD7: discovery sources, runs and unclaimed drafts (never public until approved).
+model DiscoverySource {
+  id          String   @id @default(cuid())
+  name        String   @unique
+  kind        String // onrc | website | social | licensed_dataset
+  enabled     Boolean  @default(true) // BD7 kill switch per source
+  rateLimitPerHour Int @default(60)
+  config      Json?
+  createdAt   DateTime @default(now())
+
+  runs   DiscoveryRun[]
+  drafts DiscoveryDraft[]
+}
+
+model DiscoveryRun {
+  id         String          @id @default(cuid())
+  sourceId   String
+  source     DiscoverySource @relation(fields: [sourceId], references: [id])
+  startedAt  DateTime        @default(now())
+  finishedAt DateTime?
+  itemsFound Int             @default(0)
+  draftsCreated Int          @default(0)
+  duplicatesSkipped Int      @default(0)
+
+  drafts DiscoveryDraft[]
+
+  @@index([sourceId])
+}
+
+// BD2/BD3: unclaimed draft listing; dedup by name/address/public identifiers,
+// suspected duplicates queued for humans, never auto-merged.
+model DiscoveryDraft {
+  id            String   @id @default(cuid())
+  sourceId      String
+  source        DiscoverySource @relation(fields: [sourceId], references: [id])
+  name          String
+  categoryGuess String?
+  countyCode    String?
+  locality      String?
+  publicContactRoute String?
+  sourceUrl     String
+  collectedAt   DateTime  @default(now())
+  state         String    @default("pending") // pending | approved | rejected | duplicate_queued
+  listingId     String? // set when approved -> live unclaimed listing
+  runId         String?
+  run           DiscoveryRun? @relation(fields: [runId], references: [id])
+
+  @@index([state])
+}
+
+// BD5: a single claim invitation per approved unclaimed listing, emailed only to
+// the publicly listed address; none if no public email.
+model ClaimInvitation {
+  id          String   @id @default(cuid())
+  listingId   String   @unique
+  sentAt      DateTime @default(now())
+  codeHash    String? // P30: code emailed to the published contact address
+}
+
+// BD6: removal/objection requests honoured within 30 days, recorded 3 years (INF6).
+model ObjectionRecord {
+  id          String   @id @default(cuid())
+  listingId   String?
+  contactHash String
+  kind        String // removal | objection | correction
+  detail      String
+  receivedAt  DateTime @default(now())
+  handledAt   DateTime?
+  handledBy   String?
+
+  @@index([handledAt])
+}
+
+// P31/INF11: daily aggregates computed by the nightly worker; no visitor identifiers.
+model ListingStats {
+  id              String   @id @default(cuid())
+  listingId       String   @unique
+  enquiriesSent   Int      @default(0)
+  enquiriesAnswered Int    @default(0)
+  medianReplyHours Float?
+  computedAt      DateTime @default(now())
+}
+
+// P13-P16/MON5: dormant while the switch is OFF — never created or rendered then.
+model FeaturedSlot {
+  id         String   @id @default(cuid())
+  listingId  String
+  listing    Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  categoryId String
+  active     Boolean  @default(true)
+  createdAt  DateTime @default(now())
+
+  @@index([categoryId, active])
+}
+
+// P24-P26/PAY: dormant until MON ON; features switch only from a verified webhook.
+model Subscription {
+  id          String   @id @default(cuid())
+  businessId  String
+  kind        String // business_plan | featured
+  state       String   @default("active")
+  priceBani   Int
+  currency    String   @default("RON")
+  periodEnd   DateTime?
+  graceUntil  DateTime? // P25: 14 days of grace after a failed renewal
+  processorRef String? // Stripe/etc reference, from webhook only
+  createdAt   DateTime @default(now())
+
+  @@index([businessId])
+}
+
+model Invoice {
+  id            String   @id @default(cuid())
+  subscriptionId String?
+  businessId    String
+  amountBani    Int
+  tvaBani       Int      @default(0) // PAY4: TVA shown separately, prices excl. TVA
+  currency      String   @default("RON")
+  fiscalRef     String? // PAY3: RO e-Factura reference via SmartBill/Oblio webhook
+  createdAt     DateTime @default(now())
 }

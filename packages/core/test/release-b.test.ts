@@ -239,6 +239,9 @@ describe('B10: closeout', () => {
 describe('W6/MON2 + W9: monetization switch needs a second person', () => {
   it('stays OFF; enabling queues until approved by a different staff member', async () => {
     const { owner } = await setup();
+    // deterministic single-operator mode regardless of other suites' staff rows
+    await prisma.staffMember.deleteMany({});
+    await prisma.totpSecret.deleteMany({});
     // make owner a staff member with confirmed TOTP
     await prisma.staffMember.create({ data: { accountId: owner.id, roles: ['platform_admin'] } });
     await prisma.totpSecret.create({

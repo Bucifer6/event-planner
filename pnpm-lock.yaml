@@ -175,6 +175,9 @@ importers:
       '@eventdesk/db':
         specifier: workspace:*
         version: link:../db
+      '@eventdesk/email':
+        specifier: workspace:*
+        version: link:../email
       '@eventdesk/shared':
         specifier: workspace:*
         version: link:../shared
