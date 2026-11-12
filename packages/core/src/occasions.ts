@@ -28,7 +28,13 @@ export async function createOccasion(input: {
       },
     });
     await tx.occasionMember.create({
-      data: { occasionId: occ.id, accountId: input.ownerId, role: 'owner' },
+      data: {
+        occasionId: occ.id,
+        accountId: input.ownerId,
+        role: 'owner',
+        finance: true,
+        privateRequests: true,
+      },
     });
     await tx.auditLog.create({
       data: {

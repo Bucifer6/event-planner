@@ -22,13 +22,18 @@
     "@eventdesk/ui": "workspace:*",
     "next": "15.5.29",
     "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "react-dom": "19.3.1",
+    "@eventdesk/storage": "workspace:*",
+    "@eventdesk/mcp": "workspace:*",
+    "pdfkit": "0.20.2",
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "24.10.0",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "typescript": "5.9.3",
-    "vitest": "4.1.12"
+    "vitest": "4.1.12",
+    "@types/pdfkit": "0.17.7"
   }
 }

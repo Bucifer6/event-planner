@@ -72,6 +72,18 @@ export const handlers: Record<string, JobHandler> = {
     });
   },
 
+  // MCP1: tokens expire after 30 days of inactivity.
+  'mcp-token-expiry': async () => {
+    const cutoff = new Date(Date.now() - 30 * 86_400_000);
+    await prisma.mcpToken.updateMany({
+      where: {
+        revokedAt: null,
+        OR: [{ lastUsedAt: { lt: cutoff } }, { lastUsedAt: null, createdAt: { lt: cutoff } }],
+      },
+      data: { revokedAt: now() },
+    });
+  },
+
   // INF11/D4: nightly server-side aggregates; no visitor identifier anywhere.
   'nightly-stats': async () => {
     const day = startOfUtcDay(now());

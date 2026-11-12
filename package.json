@@ -33,7 +33,8 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "@embedded-postgres/linux-x64",
-      "argon2"
+      "argon2",
+      "sharp"
     ],
     "overrides": {
       "postcss": "^8.5.32",

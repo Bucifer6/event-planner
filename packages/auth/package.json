@@ -14,7 +14,8 @@
   "dependencies": {
     "@eventdesk/db": "workspace:*",
     "@eventdesk/shared": "workspace:*",
-    "argon2": "0.45.2"
+    "argon2": "0.45.2",
+    "otpauth": "9.6.0"
   },
   "devDependencies": {
     "typescript": "5.9.3",

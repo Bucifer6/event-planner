@@ -81,6 +81,8 @@ enum OccasionStatus {
   active
   archived
   closed
+  cancelled
+  postponed
 }
 
 model Account {
@@ -174,7 +176,10 @@ model McpToken {
   scopes     String[] // read | read_propose (MCP1)
   lastUsedAt DateTime?
   revokedAt  DateTime?
+  consentShownAt DateTime? // MCP4: per-token consent warning shown before first use
   createdAt  DateTime  @default(now())
+
+  callLogs McpCallLog[]
 
   @@index([accountId])
 }
@@ -241,6 +246,8 @@ model StaffMember {
   account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
   roles     String[]
   createdAt DateTime @default(now())
+
+  sessions StaffSession[]
 }
 
 // Second-person approval queue (W9): queued actions have no effect until approved.
@@ -284,6 +291,14 @@ model Occasion {
   needs          ContributionNeed[]
   previews       WhatIfPreview[]
   digests        ReminderDigest[]
+  categories     BudgetCategory[]
+  expenses       Expense[]
+  ledgerEntries  LedgerEntry[]
+  suppliers      Supplier[]
+  bookings       Booking[]
+  deliveries     Delivery[]
+  readiness      ReadinessDecision[]
+  closeout       Closeout?
 
   @@index([ownerId])
 }
@@ -648,4 +663,299 @@ model StatsAggregate {
   createdAt DateTime @default(now())
 
   @@unique([day, metric])
+}
+
+// ---------------------------------------------------------------------------
+// Release B: budget, suppliers, deliveries, readiness, closeout (B1-B12)
+// Money is integer minor units (bani) per currency; RON at launch (L3).
+// ---------------------------------------------------------------------------
+
+model BudgetCategory {
+  id            String   @id @default(cuid())
+  occasionId    String
+  occasion      Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name          String
+  currency      String   @default("RON")
+  // B1: five money states, stored and displayed separately, never merged.
+  estimateBani  Int      @default(0)
+  committedBani Int      @default(0)
+  invoicedBani  Int      @default(0)
+  paidBani      Int      @default(0)
+  forecastBani  Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  expenses Expense[]
+
+  @@index([occasionId])
+}
+
+model Expense {
+  id             String         @id @default(cuid())
+  occasionId     String
+  occasion       Occasion       @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  categoryId     String
+  category       BudgetCategory @relation(fields: [categoryId], references: [id])
+  title          String
+  amountBani     Int
+  currency       String         @default("RON")
+  receiptAssetId String?
+  receipt        Asset?         @relation(fields: [receiptAssetId], references: [id])
+  // B2: approval and payment are separate states.
+  approvalState  String         @default("pending") // pending | approved | rejected
+  paymentState   String         @default("unpaid") // unpaid | paid
+  approvedById   String?
+  paidAt         DateTime?
+  createdById    String
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+
+  @@index([occasionId])
+}
+
+// R0-10: uploaded files (receipts, drawings, catalogues, quotes).
+model Asset {
+  id         String   @id @default(cuid())
+  occasionId String?
+  businessId String?
+  uploaderId String
+  kind       String // image | pdf | other
+  storageKey String   @unique
+  fileName   String
+  mime       String
+  sizeBytes  Int
+  scanStatus String   @default("pending") // pending | clean | infected
+  reEncoded  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  expenses Expense[]
+
+  @@index([occasionId])
+  @@index([businessId])
+}
+
+// B3: one balanced ledger - who paid, who benefits, who owes whom, per currency.
+model LedgerEntry {
+  id            String        @id @default(cuid())
+  occasionId    String
+  occasion      Occasion      @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  payerMemberId String
+  amountBani    Int
+  currency      String        @default("RON")
+  note          String?
+  createdAt     DateTime      @default(now())
+
+  splits LedgerSplit[]
+
+  @@index([occasionId])
+}
+
+model LedgerSplit {
+  id        String      @id @default(cuid())
+  entryId   String
+  entry     LedgerEntry @relation(fields: [entryId], references: [id], onDelete: Cascade)
+  memberId  String
+  shareBani Int
+
+  @@unique([entryId, memberId])
+}
+
+model Supplier {
+  id           String    @id @default(cuid())
+  occasionId   String
+  occasion     Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name         String
+  contactEmail String?
+  phone        String?
+  notes        String?
+  createdById  String
+  createdAt    DateTime  @default(now())
+
+  bookings Booking[]
+
+  @@index([occasionId])
+}
+
+// B4: booking states enquired | quoted | booked | completed | cancelled.
+model Booking {
+  id           String    @id @default(cuid())
+  supplierId   String
+  supplier     Supplier  @relation(fields: [supplierId], references: [id], onDelete: Cascade)
+  occasionId   String
+  occasion     Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title        String
+  state        String    @default("enquired")
+  quoteAssetId String? // a PDF marked as a quote (P12)
+  createdById  String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  briefings BriefingVersion[]
+  snapshots OrderSnapshot[]
+  deadlines PaymentDeadline[]
+
+  @@index([occasionId])
+}
+
+// B4: versioned briefings, immutable; the supplier acknowledges via scoped link.
+model BriefingVersion {
+  id             String    @id @default(cuid())
+  bookingId      String
+  booking        Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  version        Int
+  content        String
+  createdById    String
+  createdAt      DateTime  @default(now())
+  acknowledgedAt DateTime?
+  acknowledgedBy String?
+
+  @@unique([bookingId, version])
+}
+
+// B5: final-order snapshots are immutable; later changes are delta rows.
+model OrderSnapshot {
+  id          String    @id @default(cuid())
+  bookingId   String
+  booking     Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  version     Int
+  items       Json
+  finalizedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  deltas OrderDelta[]
+
+  @@unique([bookingId, version])
+}
+
+model OrderDelta {
+  id         String        @id @default(cuid())
+  snapshotId String
+  snapshot   OrderSnapshot @relation(fields: [snapshotId], references: [id], onDelete: Cascade)
+  change     Json
+  source     String // rsvp_change | manual
+  createdAt  DateTime      @default(now())
+}
+
+// B6: deliveries, hired items, returns. receivedQty changes ONLY via a
+// Correction row - a DB trigger blocks direct overwrites (principle 4).
+model Delivery {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  bookingId   String?
+  title       String
+  kind        String // delivery | hired_item | return
+  expectedQty Int
+  receivedQty Int      @default(0)
+  unitLabel   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([occasionId])
+}
+
+// principle 4: facts (arrivals, payments, received stock) change only via an
+// audited correction record that keeps before/after and actor - never overwritten.
+model Correction {
+  id         String   @id @default(cuid())
+  targetType String
+  targetId   String
+  field      String
+  before     Json
+  after      Json
+  actorId    String
+  reason     String
+  createdAt  DateTime @default(now())
+
+  @@index([targetType, targetId])
+}
+
+// B8: Hold | Proceed | Proceed with conditions, tied to evidence.
+model ReadinessDecision {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  decision   String // hold | proceed | proceed_with_conditions
+  evidence   Json // at least one evidence reference required
+  actorId    String
+  createdAt  DateTime @default(now())
+
+  @@index([occasionId])
+}
+
+// B12: advances, instalments, final balances carry due dates; finance digest.
+model PaymentDeadline {
+  id         String    @id @default(cuid())
+  bookingId  String
+  booking    Booking   @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  kind       String // advance | instalment | final
+  amountBani Int
+  currency   String    @default("RON")
+  dueAt      DateTime
+  paidAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([dueAt])
+}
+
+// B10: closeout - unpaid balances, returns, deposits; lessons carried forward.
+model Closeout {
+  id             String    @id @default(cuid())
+  occasionId     String    @unique
+  occasion       Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  unpaidBalances Json
+  returns        Json
+  deposits       Json
+  lessons        String?
+  createdAt      DateTime  @default(now())
+  completedAt    DateTime?
+}
+
+// ---------------------------------------------------------------------------
+// Staff console (R0-13), deploys (R0-14), MCP call log (R0-15)
+// ---------------------------------------------------------------------------
+
+// S5: staff console session expires after 12 h or 30 min idle.
+model StaffSession {
+  id         String      @id @default(cuid())
+  staffId    String
+  staff      StaffMember @relation(fields: [staffId], references: [id], onDelete: Cascade)
+  lastSeenAt DateTime    @default(now())
+  expiresAt  DateTime
+  revokedAt  DateTime?
+  createdAt  DateTime    @default(now())
+
+  @@index([staffId])
+}
+
+// DEP2-DEP6: every deploy audit-logged with hash, tag, actors, result, duration.
+model Deploy {
+  id           String    @id @default(cuid())
+  tag          String
+  commitHash   String
+  requesterId  String
+  approverId   String?
+  result       String    @default("queued") // queued | running | done | failed | rolled_back
+  ciStatus     String? // green | not_run | failed (DEP7)
+  emergency    Boolean   @default(false)
+  reason       String?
+  startedAt    DateTime?
+  finishedAt   DateTime?
+  rolledBackAt DateTime?
+  durationMs   Int?
+  createdAt    DateTime  @default(now())
+}
+
+model McpCallLog {
+  id      String    @id @default(cuid())
+  tokenId String
+  token   McpToken @relation(fields: [tokenId], references: [id], onDelete: Cascade)
+  tool    String
+  scope   String
+  ok      Boolean   @default(true)
+  error   String?
+  at      DateTime  @default(now())
+
+  @@index([tokenId])
+  @@index([at])
 }

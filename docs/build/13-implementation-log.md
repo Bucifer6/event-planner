@@ -70,3 +70,44 @@ loopback smoke green)
   release P (directory/business/discovery/MON switch UI), releases C/D/E.
 - Auth is exercised through `packages/*` integration tests and a loopback smoke test
   (`scripts/smoke.mjs`); Playwright e2e + k6 load (Q5) are wired in CI as next steps.
+
+## Release B + R0-10/13/15 (v0.2.0 candidate, branch vibe/release-b-db71a4)
+
+- **B1/B2**: budget categories with estimate/committed/invoiced/paid/forecast as
+  separate columns; expenses with independent approval and payment states; finance
+  grant enforced server-side (D2) — tested (finance-less member gets 403).
+- **B3**: balanced shared-cost ledger with per-currency settlement view (zero-sum
+  invariant tested); unbalanced splits rejected.
+- **B4/B5/B12**: suppliers, booking state transitions (audited), immutable versioned
+  briefings with supplier acknowledgement, final-order snapshots + delta rows for
+  later guest changes (principle 4), payment deadlines feeding the finance digest.
+- **B6**: deliveries/hired/returns; `receivedQty` changes only via an audited
+  `Correction` — enforced by a DB trigger (direct UPDATE rejected, tested).
+- **B7**: event-day view (Ready/Running/Waiting/Done) over the same task rows,
+  Midnight Candlelight dark theme via prefers-color-scheme.
+- **B8**: readiness decisions Hold/Proceed/Proceed-with-conditions requiring at
+  least one evidence reference (tested).
+- **B9/B10**: cancel/postpone/close as What-if previews (nothing applied silently);
+  closeout lists unpaid balances/returns/deposits, saves lessons, closes the
+  occasion and starts the INF6 retention clock.
+- **B11**: PWA manifest + offline service-worker shell; downloadable briefing PDF
+  (pdfkit) generated from the same records.
+- **R0-10**: `packages/storage` upload pipeline — S3-compatible (operator-configurable,
+  EU) with local-disk dev transport; PNG/JPG re-encoded server-side via sharp
+  (metadata stripped, SEC4); PDFs served only with `Content-Disposition:
+  attachment` + sandboxed CSP (`/api/media/*`); malware scan before visibility;
+  fair-use limits counted at upload (Q6 100 MiB/occasion, Q9 200 MiB/business,
+  10 MiB/file, formats per Q9).
+- **R0-13**: staff console — six roles, staff 2FA mandatory (TOTP via otpauth, S5),
+  console session 12h/30min-idle, second-person approval queue with single-operator
+  restricted mode (W9, tested), audit viewer (W8), dashboard counts (W1), W6
+  monetization switch OFF by default with two-person enable (MON2, tested).
+- **R0-15**: MCP server at `/mcp` (stateless Streamable-HTTP JSON-RPC, Bearer personal
+  tokens hashed + revocable + 30-day inactivity expiry job), fixed versioned tool
+  catalogue announced on initialize/tools/list (MCP8), per-token consent warning
+  before first use (MCP4), read tools bounded by own grants (MCP2), propose tools
+  bounded by write grants returning a proposal id — never applying (MCP3/SEC15),
+  per-call `McpCallLog` (MCP1), external-assistant labelling (MCP5), no
+  admin/payment/other-account tools (MCP6). All tested.
+- Still open: R0-02 infra IaC, R0-14 GitHub-App deploy pipeline (Deploy model
+  exists), release P (business module), releases C/D/E.

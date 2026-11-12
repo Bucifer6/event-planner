@@ -22,6 +22,13 @@ export default async function OccasionLayout({
     ['occ.guests', `/occasions/${id}/guests`],
     ['occ.polls', `/occasions/${id}/polls`],
     ['occ.contributions', `/occasions/${id}/contributions`],
+    ['occ.budget', `/occasions/${id}/budget`],
+    ['occ.ledger', `/occasions/${id}/ledger`],
+    ['occ.suppliers', `/occasions/${id}/suppliers`],
+    ['occ.deliveries', `/occasions/${id}/deliveries`],
+    ['occ.eventday', `/occasions/${id}/eventday`],
+    ['occ.readiness', `/occasions/${id}/readiness`],
+    ['occ.closeout', `/occasions/${id}/closeout`],
     ['occ.settings', `/occasions/${id}/settings`],
   ] as const;
   return (
@@ -34,6 +41,7 @@ export default async function OccasionLayout({
           </Link>
         ))}
         <Link href={`/occasions/${id}/export`}>{t('occ.export')}</Link>
+        <Link href={`/occasions/${id}/briefing`}>{t('occ.briefing')}</Link>
       </div>
       {children}
     </main>

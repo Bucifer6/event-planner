@@ -151,7 +151,9 @@ export async function parseGuestFile(
     if (!ws) return { headers: [], rows: [] };
     const headerRow = ws.getRow(1);
     const headers = headerRow.cellCount
-      ? Array.from({ length: headerRow.cellCount }, (_, i) => String(headerRow.getCell(i + 1).value ?? '').trim())
+      ? Array.from({ length: headerRow.cellCount }, (_, i) =>
+          String(headerRow.getCell(i + 1).value ?? '').trim()
+        )
       : [];
     const rows: Record<string, string>[] = [];
     ws.eachRow((row, rowNum) => {
@@ -159,7 +161,9 @@ export async function parseGuestFile(
       const record: Record<string, string> = {};
       headers.forEach((h, i) => {
         const v = row.getCell(i + 1).value;
-        record[h] = String(v == null ? '' : typeof v === 'object' ? ((v as { text?: string }).text ?? '') : v).trim();
+        record[h] = String(
+          v == null ? '' : typeof v === 'object' ? ((v as { text?: string }).text ?? '') : v
+        ).trim();
       });
       rows.push(record);
     });
