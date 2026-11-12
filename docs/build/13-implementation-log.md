@@ -326,3 +326,35 @@ loopback smoke green)
 - Schema: Incident, PlatformSetting (migration v1_readiness). Tests: 83 total green
   (61 core incl. 5 new v1 tests, 7 web incl. 6 a11y). i18n ro/en 723 keys each.
 - Operator-owned gates remain on `/console/launch` (LAU2/3/4/6/7 + provider choices).
+
+## Post-v1.0.0 QA pass (bug check + security check + e2e), branch vibe/qa-pass-db71a4
+
+- **Bug check**: typecheck 0 errors; 83 tests green; web/public/worker builds OK; prettier
+  clean; `pnpm audit --audit-level=high` passes — the single moderate is transitive
+  `uuid@8.3.2` pinned by `exceljs@4.4.0` (`^8.3.0`, cannot move without replacing the XLSX
+  lib); the vulnerable path (v3/v5/v6 with a `buf` arg) is never used (exceljs calls v4
+  only) — accepted risk. Static sweep: no TODO/FIXME, no `dangerouslySetInnerHTML`, no
+  `eval`, no stray `console.log` outside worker job logs. Smoke 10/10.
+- **Real bug found & fixed by e2e**: `/occasions/[id]/tasks` returned 500 — the checklist
+  checkbox used `onChange` inside a server component ("Event handlers cannot be passed to
+  Client Component props"). Fixed with a `CheckItemToggle` client component taking the
+  bound server action as a prop. Sweep confirmed no other server component uses event
+  handlers.
+- **Security check**: every API route authenticated or intentionally public with its guard
+  (media: scan-clean PDFs only + attachment/noinline/sandbox CSP; lang: same-origin;
+  magic link: single-use; stripe webhook: signature; MCP: Bearer, JSON-RPC -32001 without;
+  uploads/offline/print-pack: session + member/grant checks in core). No secrets in the
+  repo (only `.env.example`; test-local PG credentials in test setup). SEC10 append-only
+  AuditLog proven live (UPDATE/DELETE throw). Cookies httpOnly/secure-in-prod/lax; fixed
+  `/api/lang` to keep the `secure` flag on `ed_lang` in production. All raw SQL
+  parameterized. No server-side fetch of user-controlled URLs (only fixed vendor APIs),
+  so no SSRF surface in this build. External links carry `rel="noopener noreferrer"`.
+  localStorage holds only the cookie-notice acknowledgement (SEC12). Hardening note (not a
+  spec violation): TOTP secrets are stored base32, not encrypted at rest — PRD SEC8 covers
+  codes/tokens only.
+- **E2E**: new `scripts/e2e.mjs` (36 checks, wired into CI) boots embedded PG + both apps
+  and drives real HTTP journeys: public site pages with D1 assertions, anonymous negative
+  paths (bad guest token 404, console redirect, MCP/webhook/upload/sign-out rejections),
+  signed-in planner journey (dashboard, all occasion tabs incl. operate simulation, offline
+  QR arrival queue→reconcile→visible, idempotent clientKey, bad kind 400, print-pack PDF +
+  anonymous rejection), guest link + QR + public event page. Result: E2E ALL OK.

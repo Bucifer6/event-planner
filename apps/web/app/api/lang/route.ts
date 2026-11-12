@@ -8,7 +8,8 @@ export async function POST(request: Request) {
   const lang = form.get('lang');
   const res = NextResponse.json({ ok: true });
   res.cookies.set('ed_lang', lang === 'en' ? 'en' : 'ro', {
-    httpOnly: false,
+    httpOnly: false, // language preference only; nothing security-relevant (SEC12)
+    secure: process.env.NODE_ENV === 'production', // keep the Secure flag in prod (SEC12)
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 365,
     path: '/',

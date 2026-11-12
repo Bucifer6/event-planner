@@ -6,6 +6,7 @@ import { prisma } from '@eventdesk/db';
 import { setHideDirectoryLinksAction } from '../../../../actions/business';
 import { formatDate } from '@eventdesk/shared';
 import { Card } from '@eventdesk/ui';
+import { CheckItemToggle } from '../../../../../components/CheckItemToggle';
 import {
   createTaskAction,
   setTaskStatusAction,
@@ -117,19 +118,12 @@ export default async function TasksPage({
                 {task.owner ? ` · ${task.owner.customLabel ?? t(`roles.${task.owner.role}`)}` : ''}
               </div>
               {task.checkItems.map((c) => (
-                <form key={c.id} action={toggleCheckAction.bind(null, id, c.id, !c.done)}>
-                  <div className="row">
-                    <input
-                      type="checkbox"
-                      checked={c.done}
-                      onChange={(e) => (e.currentTarget.form as HTMLFormElement).requestSubmit()}
-                      aria-label={c.label}
-                    />
-                    <span style={{ textDecoration: c.done ? 'line-through' : 'none' }}>
-                      {c.label}
-                    </span>
-                  </div>
-                </form>
+                <CheckItemToggle
+                  key={c.id}
+                  action={toggleCheckAction.bind(null, id, c.id, !c.done)}
+                  done={c.done}
+                  label={c.label}
+                />
               ))}
               <div className="row">
                 {STATUSES.map((s) => (
