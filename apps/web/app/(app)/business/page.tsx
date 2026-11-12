@@ -57,12 +57,7 @@ export default async function BusinessPage() {
       <h2>{t('p.biz.listings')}</h2>
       {listings.length === 0 && <div className="notice">{t('p.biz.empty')}</div>}
       {listings.map((l) => (
-        <Link
-          key={l.id}
-          href={`/business/listings/${l.id}`}
-          className="card"
-          style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-        >
+        <Link key={l.id} href={`/business/listings/${l.id}`} className="card link">
           <h3 style={{ margin: 0 }}>{l.name}</h3>
           <div className="muted mono">
             {t(

@@ -722,5 +722,9 @@
   "console.launch.a11y.save": "Salvează în consolă",
   "console.launch.a11y.recorded": "Înregistrat",
   "console.launch.a11y.none": "Nimic înregistrat încă.",
-  "common.ok": "OK"
+  "common.ok": "OK",
+  "site.hero.lead": "Planifică nunți, botezuri, călătorii și orice ocazie — într-un singur loc: invitații cu link personal, RSVP, program, buget, furnizori și ziua evenimentului. Gratuit la lansare.",
+  "site.hero.f1": "Invitații cu link personal și RSVP — fiecare gospodărie vede doar datele ei.",
+  "site.hero.f2": "Programul zilei, check-in prin QR și captură offline când rețeaua pică.",
+  "site.hero.f3": "Buget și decont pe valută, dintr-un singur registru; nimic nu se plătește automat."
 }

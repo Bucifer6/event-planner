@@ -32,7 +32,7 @@ export default async function OccasionLayout({
     ['occ.settings', `/occasions/${id}/settings`],
   ] as const;
   return (
-    <main className="wrap">
+    <main className="wrap wide">
       <h1>{occasion.title}</h1>
       <div className="tabs">
         {tabs.map(([key, href]) => (

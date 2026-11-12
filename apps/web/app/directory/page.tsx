@@ -112,8 +112,7 @@ export default async function DirectoryPage({
         <Link
           key={r.listing.id}
           href={`/directory/${r.listing.id}${occasionId ? `?occasion=${occasionId}` : ''}`}
-          className="card"
-          style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+          className="card link"
         >
           <h2 style={{ margin: 0 }}>{r.listing.name}</h2>
           <div className="label-factual">
@@ -128,8 +127,7 @@ export default async function DirectoryPage({
         <Link
           key={r.listing.id}
           href={`/directory/${r.listing.id}${occasionId ? `?occasion=${occasionId}` : ''}`}
-          className="card"
-          style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+          className="card link"
         >
           <h2 style={{ margin: 0 }}>{r.listing.name}</h2>
           <div className="muted">

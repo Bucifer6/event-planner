@@ -358,3 +358,21 @@ loopback smoke green)
   signed-in planner journey (dashboard, all occasion tabs incl. operate simulation, offline
   QR arrival queue→reconcile→visible, idempotent clientKey, bad kind 400, print-pack PDF +
   anonymous rejection), guest link + QR + public event page. Result: E2E ALL OK.
+
+## v1.1.0 UI polish pass (branch vibe/ui-polish-db71a4)
+
+Response to "looks unfinished": concrete gaps found by inspecting rendered pages, fixed:
+- Webfonts were referenced in tokens (Sora / Cormorant Garamond / DM Mono) but never
+  loaded — added self-hosted `@font-face` pointing at `/fonts/*.woff2` with READMEs in
+  `apps/web/public/fonts` and `apps/public/public/fonts` (operator drops the files;
+  D1-safe, system fallbacks apply until then).
+- Public landing showed the dashboard empty-state copy to anonymous visitors — replaced
+  with a proper hero (lead + 3 feature bullets + CTA), new `site.hero.*` i18n keys ro/en,
+  hero styles in the public globals.
+- Auth pages had no brand header — new `(auth)/layout.tsx` with the wordmark topbar.
+- CSS polish layer in `tokens.css`: type scale + heading margins, list rows inside
+  cards (no bullet dumps), `.card.link` (replaced 4 inline-style link cards), visible
+  `:focus-visible`, hover states for buttons/tabs/cards, input focus + placeholder
+  styling, `.wrap.wide` (1080px) for occasion + console screens (phone layout
+  unchanged, A12).
+- Verified: typecheck 0 errors, 83+ tests green, builds OK, D1 grep clean, e2e 38/38.

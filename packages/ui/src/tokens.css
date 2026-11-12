@@ -249,3 +249,142 @@ a {
   font-family: var(--font-mono);
   font-size: 13px;
 }
+
+/* --- Self-hosted fonts (D1: no third-party font requests). The operator drops the
+   woff2 files into apps/web/public/fonts/ and apps/public/public/fonts/ (see the
+   README there); until then the named system fallbacks below apply. --- */
+@font-face {
+  font-family: 'Sora';
+  src: url('/fonts/sora-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Sora';
+  src: url('/fonts/sora-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  src: url('/fonts/cormorant-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'DM Mono';
+  src: url('/fonts/dmmono-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+/* --- Polish layer: type scale, rhythm, states --- */
+h1 {
+  font-size: 30px;
+  margin: 8px 0 12px;
+}
+h2 {
+  font-size: 23px;
+  margin: 20px 0 8px;
+}
+h3 {
+  font-size: 19px;
+  margin: 16px 0 6px;
+}
+h4 {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  margin: 14px 0 6px;
+}
+p {
+  margin: 8px 0;
+}
+form {
+  margin-bottom: 16px;
+}
+img {
+  max-width: 100%;
+}
+hr {
+  border: none;
+  border-top: 1px solid var(--sage);
+  margin: 16px 0;
+}
+
+/* Lists inside cards read as rows, not bullet dumps. */
+.card ul {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+.card li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--sage);
+}
+.card li:last-child {
+  border-bottom: none;
+}
+.card h2,
+.card h3 {
+  margin-top: 0;
+}
+/* A card used as a link (dashboard, directory results). */
+.card.link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.card.link:hover {
+  border-color: var(--ink);
+}
+
+/* Wider reading column for dense app/console screens; phone layout unchanged (A12). */
+.wrap.wide {
+  max-width: 1080px;
+}
+
+/* States: visible focus everywhere (Q2), hover feedback, calm placeholders. */
+:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+.btn:hover {
+  filter: brightness(1.1);
+}
+.btn.secondary:hover {
+  background: var(--sage);
+}
+.btn.attention:hover {
+  filter: brightness(1.05);
+}
+.tabs a:hover {
+  border-color: var(--ink);
+}
+a:hover {
+  text-decoration: underline;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--ink);
+  outline: none;
+}
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 1px;
+}
+::placeholder {
+  color: var(--grey-unknown);
+  opacity: 0.8;
+}
+@media (prefers-color-scheme: dark) {
+  .card li {
+    border-bottom-color: #2c3752;
+  }
+  hr {
+    border-top-color: #2c3752;
+  }
+}

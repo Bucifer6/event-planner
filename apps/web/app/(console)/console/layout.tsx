@@ -39,7 +39,7 @@ export default async function ConsoleLayout({ children }: { children: ReactNode 
           <Link href="/dashboard">{t('nav.occasions')}</Link>
         </nav>
       </header>
-      <main className="wrap">{children}</main>
+      <main className="wrap wide">{children}</main>
     </>
   );
 }

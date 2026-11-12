@@ -16,11 +16,20 @@ export default function Landing() {
         <Link href="/?lang=en">EN</Link>
       </nav>
       <main className="wrap">
-        <h1>{t('ro', 'app.tagline')}</h1>
-        <p>{t('ro', 'dash.empty')}</p>
-        <Link className="cta" href="https://app.eventdesk.ro/signin">
-          {t('ro', 'auth.signin.title')}
-        </Link>
+        <section className="hero">
+          <h1>{t('ro', 'app.tagline')}</h1>
+          <p className="lead">{t('ro', 'site.hero.lead')}</p>
+          <p>
+            <Link className="cta" href="https://app.eventdesk.ro/signin">
+              {t('ro', 'auth.signin.title')}
+            </Link>
+          </p>
+          <ul className="features">
+            <li>{t('ro', 'site.hero.f1')}</li>
+            <li>{t('ro', 'site.hero.f2')}</li>
+            <li>{t('ro', 'site.hero.f3')}</li>
+          </ul>
+        </section>
       </main>
       <footer>EventDesk.ro — București · ANSPDCP · GDPR</footer>
     </>

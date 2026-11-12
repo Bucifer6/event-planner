@@ -722,5 +722,9 @@
   "console.launch.a11y.save": "Save in console",
   "console.launch.a11y.recorded": "Recorded",
   "console.launch.a11y.none": "Nothing recorded yet.",
-  "common.ok": "OK"
+  "common.ok": "OK",
+  "site.hero.lead": "Plan weddings, baptisms, trips and any occasion in one place: invitations with personal links, RSVP, programme, budget, suppliers and event day. Free at launch.",
+  "site.hero.f1": "Invitations with personal links and RSVP — each household sees only its own data.",
+  "site.hero.f2": "Day-of programme, QR check-in and offline capture when the network drops.",
+  "site.hero.f3": "Budget and per-currency settlement from one ledger; nothing is ever paid automatically."
 }

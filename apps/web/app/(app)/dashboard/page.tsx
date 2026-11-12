@@ -19,12 +19,7 @@ export default async function DashboardPage() {
       </div>
       {occasions.length === 0 && <div className="notice">{t('dash.empty')}</div>}
       {occasions.map((o) => (
-        <Link
-          key={o.id}
-          href={`/occasions/${o.id}`}
-          className="card"
-          style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
-        >
+        <Link key={o.id} href={`/occasions/${o.id}`} className="card link">
           <h2 style={{ margin: 0 }}>{o.title}</h2>
           <div className="muted mono">
             {o.dateStart ? formatDate(o.dateStart, locale) : t('common.unknown')} · {o.status}
