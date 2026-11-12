@@ -23,7 +23,7 @@ export default async function EventDayPage({ params }: { params: Promise<{ id: s
   return (
     <div className="board">
       {cols.map(([label, status]) => (
-        <div className="col" key={status}>
+        <div className={`col${status === 'in_progress' ? ' running' : ''}`} key={status}>
           <div className="label-factual">{t(label)}</div>
           {tasks
             .filter((task) => task.status === status)

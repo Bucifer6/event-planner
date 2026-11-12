@@ -56,9 +56,17 @@ export default async function GuestPage({
           {branding.name}
         </div>
       )}
-      <div className="row between">
-        <h1>{t(locale, 'rsvp.welcome', { occasion: view.occasion.title })}</h1>
-        <LangToggle guestBase={`/g/${token}`} />
+      {/* 02 Garden Soirée: the guest link opens like an invitation, not a form. */}
+      <div className="invitation-hero">
+        <div className="eyebrow">{t(locale, 'guest.invited')}</div>
+        <h1>{view.occasion.title}</h1>
+        <div className="meta">
+          {view.occasion.dateStart ? formatDate(view.occasion.dateStart, locale) : ''}
+          {view.occasion.venueAddress ? ` · ${view.occasion.venueAddress}` : ''}
+        </div>
+        <div style={{ marginTop: 8 }}>
+          <LangToggle guestBase={`/g/${token}`} />
+        </div>
       </div>
       {view.changedSinceLastVisit && <Notice attention>{t(locale, 'rsvp.changed')}</Notice>}
       <Card>
@@ -80,11 +88,12 @@ export default async function GuestPage({
             <form action={votePollAction}>
               <input type="hidden" name="token" value={token} />
               <input type="hidden" name="pollId" value={poll.id} />
-              <div className="row">
+              <div className="chips">
                 {(['yes', 'maybe', 'no'] as const).map((choice) => (
                   <button
                     key={choice}
-                    className="btn secondary"
+                    className="chip"
+                    aria-pressed={poll.votes[0]?.choice === choice}
                     name="choice"
                     value={choice}
                     type="submit"

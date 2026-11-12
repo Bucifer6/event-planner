@@ -278,6 +278,25 @@ a {
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Fraunces';
+  src: url('/fonts/fraunces-600.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Marcellus';
+  src: url('/fonts/marcellus-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Space Grotesk';
+  src: url('/fonts/spacegrotesk-400.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
 /* --- Polish layer: type scale, rhythm, states --- */
 h1 {
   font-size: 30px;
@@ -386,5 +405,191 @@ textarea:focus-visible {
   }
   hr {
     border-top-color: #2c3752;
+  }
+}
+
+/* --- v1.2 design upgrade, inspired by the five GatherTable directions ---
+   01 Editorial Banquet: brass hairlines + typeset figures on the occasion overview.
+   02 Garden Soirée: invitation hero + chip answers on the guest link (primary language).
+   03 Midnight Candlelight: brass "now" glow on the event-day board (dark mode).
+   04 Paper & Ink: blueprint grid + engraved table outlines on the space designer.
+   05 The Honest Directory: unmistakable Featured cards + stated organic rotation. --- */
+
+:root {
+  --brass-soft: color-mix(in srgb, var(--brass) 45%, transparent);
+  --font-editorial: 'Fraunces', 'Iowan Old Style', 'Palatino Linotype', Georgia, serif;
+  --font-display: 'Marcellus', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-geo: 'Space Grotesk', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* Editorial Banquet: a brass rule-line crowns every card; the body stays quiet. */
+.card {
+  border-top: 2px solid var(--brass-soft);
+}
+
+/* Typeset figures (budget/stats): voice serif, big, with a mono caption. */
+.figure {
+  font-family: var(--font-editorial);
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.figure-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--grey-unknown);
+}
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 4px 0 12px;
+  border-bottom: 1px solid var(--brass-soft);
+  margin-bottom: 12px;
+}
+/* Warm colour is reserved for what needs attention (overdue). */
+.attention-text {
+  color: var(--terracotta);
+}
+
+/* Hairline "menu" rows for overview sections. */
+.rows {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+.rows li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--brass-soft);
+}
+.rows li:last-child {
+  border-bottom: none;
+}
+
+/* Garden Soirée guest link: invitation hero + chip answers. */
+.invitation-hero {
+  text-align: center;
+  padding: 24px 0 8px;
+}
+.invitation-hero .eyebrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--grey-unknown);
+}
+.invitation-hero h1 {
+  font-family: var(--font-display);
+  font-size: 38px;
+  margin: 6px 0 4px;
+}
+.invitation-hero .meta {
+  color: var(--grey-unknown);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.chip {
+  min-height: var(--target-min);
+  padding: 10px 18px;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--sage);
+  background: #fff;
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  cursor: pointer;
+}
+.chip[aria-pressed='true'],
+.chip.selected {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.stepper {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.stepper button {
+  min-width: var(--target-min);
+  min-height: var(--target-min);
+  border-radius: 50%;
+  border: 1.5px solid var(--ink);
+  background: transparent;
+  color: var(--ink);
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* The Honest Directory: featured cards are distinct AND labelled in type you can't miss. */
+.card.featured {
+  background: linear-gradient(160deg, #fbf6ea, #ffffff 60%);
+  border: 1.5px solid var(--brass);
+  border-top: 2px solid var(--brass);
+}
+.label-featured {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--terracotta);
+}
+.organic-note {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--grey-unknown);
+  border-top: 1px solid var(--brass-soft);
+  padding-top: 10px;
+  margin-top: 16px;
+}
+
+/* Paper & Ink: blueprint paper with an engraved grid; custom tables dashed. */
+.blueprint {
+  background-color: #f5f8fc;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--ink) 7%, transparent) 1px, transparent 1px);
+  background-size: 24px 24px;
+  border: 1px solid var(--sage);
+  border-radius: var(--radius-card);
+  padding: 16px;
+}
+.tbl {
+  display: inline-block;
+  min-width: 72px;
+  min-height: var(--target-min);
+  padding: 8px 12px;
+  margin: 6px;
+  border: 1.5px solid var(--ink);
+  border-radius: 8px;
+  background: #fff;
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+.tbl.custom {
+  border-style: dashed;
+  border-color: var(--terracotta);
+}
+
+/* Midnight Candlelight: the running column glows brass at dusk. */
+@media (prefers-color-scheme: dark) {
+  .board .col.running {
+    box-shadow:
+      0 0 0 1px var(--brass),
+      0 0 22px color-mix(in srgb, var(--brass) 35%, transparent);
+  }
+  .board .col.running .label-factual {
+    color: var(--brass);
   }
 }

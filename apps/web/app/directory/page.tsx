@@ -108,21 +108,24 @@ export default async function DirectoryPage({
           </button>
         </div>
       </form>
+      {/* 05 The Honest Directory: featured is visually distinct AND labelled in type
+          you cannot mistake for an endorsement; organic rotation is stated out loud. */}
       {featured.map((r) => (
         <Link
           key={r.listing.id}
           href={`/directory/${r.listing.id}${occasionId ? `?occasion=${occasionId}` : ''}`}
-          className="card link"
+          className="card featured link"
         >
           <h2 style={{ margin: 0 }}>{r.listing.name}</h2>
-          <div className="label-factual">
-            {locale === 'en' ? 'Featured — paid placement' : r.featuredLabel}
+          <div className="label-featured">
+            {locale === 'en' ? t('p.dir.featured') : r.featuredLabel || t('p.dir.featured')}
           </div>
         </Link>
       ))}
       {results.length === 0 && featured.length === 0 && (
         <div className="notice">{t('p.dir.empty')}</div>
       )}
+      {results.length > 0 && <div className="organic-note">{t('p.dir.organic_note')}</div>}
       {results.map((r) => (
         <Link
           key={r.listing.id}

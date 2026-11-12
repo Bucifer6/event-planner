@@ -726,5 +726,11 @@
   "site.hero.lead": "Planifică nunți, botezuri, călătorii și orice ocazie — într-un singur loc: invitații cu link personal, RSVP, program, buget, furnizori și ziua evenimentului. Gratuit la lansare.",
   "site.hero.f1": "Invitații cu link personal și RSVP — fiecare gospodărie vede doar datele ei.",
   "site.hero.f2": "Programul zilei, check-in prin QR și captură offline când rețeaua pică.",
-  "site.hero.f3": "Buget și decont pe valută, dintr-un singur registru; nimic nu se plătește automat."
+  "site.hero.f3": "Buget și decont pe valută, dintr-un singur registru; nimic nu se plătește automat.",
+  "occ.stats.coming": "Invitați",
+  "occ.stats.tasks": "Sarcini făcute",
+  "occ.stats.overdue": "Restante",
+  "guest.invited": "Ești invitat(ă)",
+  "p.dir.organic_note": "Toate rezultatele · rotație zilnică · ordinea nu se vinde niciodată",
+  "p.dir.featured": "Promovat — plasare plătită"
 }

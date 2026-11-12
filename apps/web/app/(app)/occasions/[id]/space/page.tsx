@@ -59,25 +59,23 @@ export default async function SpacePage({ params }: { params: Promise<{ id: stri
             {t('p.space.effective')}: {formatDateTime(model.effectiveAt, locale)} ·{' '}
             {t('p.draw.calibrated')} {model.drawing.pixelsPerMeter?.toFixed(2)} px/m
           </div>
+          {/* 04 Paper & Ink: the space model reads as a draughtsman's plan — blueprint
+              paper, engraved table outlines, custom tables dashed (V5). */}
           <h3>{t('p.draw.table')}</h3>
-          <ul>
+          <div className="blueprint">
             {model.drawing.tables.map((tb) => (
-              <li key={tb.id}>
-                {tb.tableType} × {tb.count} —{' '}
-                {tb.widthM != null && tb.heightM != null
-                  ? `${tb.widthM}×${tb.heightM} m`
-                  : t('common.unknown')}
-              </li>
+              <span key={tb.id} className="tbl">
+                {tb.tableType} ×{tb.count}
+                {tb.widthM != null && tb.heightM != null ? ` · ${tb.widthM}×${tb.heightM}m` : ''}
+              </span>
             ))}
             {model.customTables.map((ct) => (
-              <li key={ct.id}>
-                {ct.name} (custom) —{' '}
-                {ct.widthM != null && ct.heightM != null
-                  ? `${ct.widthM}×${ct.heightM} m`
-                  : t('common.unknown')}
-              </li>
+              <span key={ct.id} className="tbl custom">
+                {ct.name}
+                {ct.widthM != null && ct.heightM != null ? ` · ${ct.widthM}×${ct.heightM}m` : ''}
+              </span>
             ))}
-          </ul>
+          </div>
           <h3>{t('p.draw.fixture')}</h3>
           <ul>
             {model.drawing.fixtures.map((f) => (

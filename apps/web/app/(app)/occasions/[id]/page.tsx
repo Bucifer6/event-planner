@@ -4,6 +4,7 @@ import { getLocale, tf } from '../../../lib/i18n';
 import { getOverview } from '@eventdesk/core';
 import { formatDateTime } from '@eventdesk/shared';
 import { Card } from '@eventdesk/ui';
+import { prisma } from '@eventdesk/db';
 import { updateBriefAction } from '../../../actions/occasions';
 
 export default async function OverviewPage({ params }: { params: Promise<{ id: string }> }) {
@@ -13,8 +14,41 @@ export default async function OverviewPage({ params }: { params: Promise<{ id: s
   const t = tf(locale);
   const overview = await getOverview(id, user.accountId);
   const priorities = (overview.occasion.briefPriorities as string[] | null) ?? [];
+  const o = overview.occasion;
+  const tasksTotal = await prisma.task.count({ where: { occasionId: id } });
+  const tasksDone = await prisma.task.count({
+    where: { occasionId: id, status: 'done' },
+  });
   return (
     <>
+      {/* 01 Editorial Banquet: the overview reads like a set menu — typeset figures,
+          brass hairlines, warm colour only where attention is due. */}
+      <div className="invitation-hero" style={{ textAlign: 'left', paddingTop: 8 }}>
+        <div className="eyebrow">{t('occ.overview')}</div>
+        <h1>{o.title}</h1>
+        <div className="meta">
+          {o.dateStart ? formatDateTime(o.dateStart, locale) : t('common.unknown')}
+          {o.capacityTotal ? ` · ${o.seatsTaken}/${o.capacityTotal}` : ''}
+        </div>
+      </div>
+      <div className="stats">
+        <div>
+          <div className="figure">{o.capacityTotal ? o.seatsTaken : '—'}</div>
+          <div className="figure-label">{t('occ.stats.coming')}</div>
+        </div>
+        <div>
+          <div className="figure">
+            {tasksDone}/{tasksTotal}
+          </div>
+          <div className="figure-label">{t('occ.stats.tasks')}</div>
+        </div>
+        <div>
+          <div className={`figure ${overview.overdue.length ? 'attention-text' : ''}`}>
+            {overview.overdue.length}
+          </div>
+          <div className="figure-label">{t('occ.stats.overdue')}</div>
+        </div>
+      </div>
       <Card>
         <h2>{t('occ.brief.purpose')}</h2>
         <p>{overview.brief.purpose ?? <span className="unknown">{t('common.unknown')}</span>}</p>
@@ -60,30 +94,40 @@ export default async function OverviewPage({ params }: { params: Promise<{ id: s
         </Link>
       </Card>
       <Card>
-        <h2>{t('occ.next_milestone')}</h2>
-        <p>
-          {overview.nextMilestone
-            ? `${overview.nextMilestone.title} — ${formatDateTime(overview.nextMilestone.dueAt!, locale)}`
-            : t('occ.none')}
-        </p>
-        <h2>{t('occ.overdue')}</h2>
-        <p>
-          {overview.overdue.length
-            ? overview.overdue.map((x) => x.title).join(', ')
-            : t('occ.none')}
-        </p>
-        <h2>{t('occ.unaccepted')}</h2>
-        <p>
-          {overview.unacceptedDelegations.length
-            ? overview.unacceptedDelegations.map((x) => x.task.title).join(', ')
-            : t('occ.none')}
-        </p>
-        <h2>{t('occ.blockers')}</h2>
-        <p>
-          {overview.blockers.length
-            ? overview.blockers.map((x) => x.title).join(', ')
-            : t('occ.none')}
-        </p>
+        <ul className="rows">
+          <li>
+            <span className="label-factual">{t('occ.next_milestone')}</span>
+            <span>
+              {overview.nextMilestone
+                ? `${overview.nextMilestone.title} — ${formatDateTime(overview.nextMilestone.dueAt!, locale)}`
+                : t('occ.none')}
+            </span>
+          </li>
+          <li>
+            <span className="label-factual">{t('occ.overdue')}</span>
+            <span className={overview.overdue.length ? 'attention-text' : ''}>
+              {overview.overdue.length
+                ? overview.overdue.map((x) => x.title).join(', ')
+                : t('occ.none')}
+            </span>
+          </li>
+          <li>
+            <span className="label-factual">{t('occ.unaccepted')}</span>
+            <span>
+              {overview.unacceptedDelegations.length
+                ? overview.unacceptedDelegations.map((x) => x.task.title).join(', ')
+                : t('occ.none')}
+            </span>
+          </li>
+          <li>
+            <span className="label-factual">{t('occ.blockers')}</span>
+            <span>
+              {overview.blockers.length
+                ? overview.blockers.map((x) => x.title).join(', ')
+                : t('occ.none')}
+            </span>
+          </li>
+        </ul>
       </Card>
     </>
   );

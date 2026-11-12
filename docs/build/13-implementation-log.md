@@ -376,3 +376,24 @@ Response to "looks unfinished": concrete gaps found by inspecting rendered pages
   styling, `.wrap.wide` (1080px) for occasion + console screens (phone layout
   unchanged, A12).
 - Verified: typecheck 0 errors, 83+ tests green, builds OK, D1 grep clean, e2e 38/38.
+
+## v1.2.0 design upgrade from the five GatherTable directions (branch vibe/design-upgrade-db71a4)
+
+Compared the current UI against `five-ui-ux-design-directions` (GatherTable doc):
+02 Garden Soirée and 03 Midnight Candlelight were already the adopted language; the
+other three mapped screens were plain. Upgrades, all in tokens.css + page markup:
+- **01 Editorial Banquet → occasion overview**: invitation-style header, typeset
+  figures (coming / tasks done / overdue) in editorial serif with mono captions, brass
+  hairline crowning every card, hairline "menu" rows for the four status sections, and
+  terracotta reserved for overdue only.
+- **02 Garden Soirée → guest link**: invitation hero ("Ești invitat(ă)" + occasion
+  title + date/venue), RSVP poll answers as ≥44px chips with pressed state.
+- **03 Midnight Candlelight → event day**: the Running column glows brass in dark mode.
+- **04 Paper & Ink → space model**: blueprint grid paper, engraved table outlines,
+  custom tables dashed terracotta.
+- **05 The Honest Directory → directory results**: featured cards get a brass gradient
+  treatment AND an unmistakable "Promovat — plasare plătită" label; organic section
+  headed by "rotație zilnică · ordinea nu se vinde".
+- Fonts: added Fraunces / Marcellus / Space Grotesk to the self-hosted @font-face set
+  (drop-in woff2 READMEs updated); elegant system fallbacks until files are dropped in.
+- Verified: typecheck 0 errors, all tests green (i18n 734 keys), builds OK, e2e 38/38.
