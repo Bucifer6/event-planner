@@ -20,6 +20,8 @@ jobs:
           node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
+      - name: Generate Prisma client (postinstall is sandboxed for deps)
+        run: pnpm --filter @eventdesk/db exec prisma generate
       - run: pnpm typecheck
       - run: pnpm test
       - run: pnpm --filter @eventdesk/web build

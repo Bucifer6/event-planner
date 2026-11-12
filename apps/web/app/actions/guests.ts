@@ -66,7 +66,7 @@ export async function importPreviewAction(occasionId: string, formData: FormData
   const file = formData.get('file');
   if (!(file instanceof File)) redirect(`/occasions/${occasionId}/guests?error=err.generic`);
   const data = Buffer.from(await file.arrayBuffer());
-  const { headers, rows } = parseGuestFile(file.name, data);
+  const { headers, rows } = await parseGuestFile(file.name, data);
   const households = await listHouseholds(occasionId, user.accountId);
   const mapping = {
     name: String(formData.get('mapName') ?? headers[0] ?? ''),

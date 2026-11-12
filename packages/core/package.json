@@ -16,12 +16,12 @@
     "@eventdesk/auth": "workspace:*",
     "@eventdesk/db": "workspace:*",
     "@eventdesk/shared": "workspace:*",
-    "xlsx": "0.18.5",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "exceljs": "4.4.0"
   },
   "devDependencies": {
     "typescript": "5.9.3",
-    "vitest": "3.2.7",
+    "vitest": "4.1.12",
     "@types/node": "24.19.2"
   }
 }

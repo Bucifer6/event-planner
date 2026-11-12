@@ -1,6 +1,6 @@
 import { prisma, type Household, type Invitation } from '@eventdesk/db';
 import { AppError, hashToken, newToken } from '@eventdesk/shared';
-import * as XLSX from 'xlsx';
+import ExcelJS from 'exceljs';
 import { audit } from './audit';
 import { requireMember, requireRole } from './access';
 
@@ -140,15 +140,29 @@ export interface ImportRow {
   household: string;
 }
 
-export function parseGuestFile(
+export async function parseGuestFile(
   fileName: string,
   data: Buffer
-): { headers: string[]; rows: Record<string, string>[] } {
+): Promise<{ headers: string[]; rows: Record<string, string>[] }> {
   if (/\.xlsx?$/i.test(fileName)) {
-    const wb = XLSX.read(data, { type: 'buffer' });
-    const ws = wb.Sheets[wb.SheetNames[0]!]!;
-    const rows = XLSX.utils.sheet_to_json<Record<string, string>>(ws, { defval: '' });
-    const headers = rows.length ? Object.keys(rows[0]!) : [];
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.load(data as unknown as ExcelJS.Buffer);
+    const ws = wb.worksheets[0];
+    if (!ws) return { headers: [], rows: [] };
+    const headerRow = ws.getRow(1);
+    const headers = headerRow.cellCount
+      ? Array.from({ length: headerRow.cellCount }, (_, i) => String(headerRow.getCell(i + 1).value ?? '').trim())
+      : [];
+    const rows: Record<string, string>[] = [];
+    ws.eachRow((row, rowNum) => {
+      if (rowNum === 1) return;
+      const record: Record<string, string> = {};
+      headers.forEach((h, i) => {
+        const v = row.getCell(i + 1).value;
+        record[h] = String(v == null ? '' : typeof v === 'object' ? ((v as { text?: string }).text ?? '') : v).trim();
+      });
+      rows.push(record);
+    });
     return { headers, rows };
   }
   const text = data.toString('utf8');
