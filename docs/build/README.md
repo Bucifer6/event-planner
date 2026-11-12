@@ -24,6 +24,8 @@ reported, not resolved silently.
 | `08-releases-C-D-E.md` | Release C, D, E work items (each needs its own go-ahead per PRD section 6/9) | Later; not gated by business income |
 | `09-traceability.md` | PRD requirement ID → work item mapping (coverage proof) | When picking up or reviewing a work item |
 | `10-operator-decisions.md` | Decisions only the operator may make; agents must not guess these | When a work item says "operator-configurable" |
+| `11-testing-and-qa.md` | Test layers, per-release automated test plans, bug-check/release-blocker checklist | Before and during every release |
+| `12-security-review.md` | Brief for a cybersecurity agent: scope, checklist mapped to SEC/S/D/MCP/DEP, severity triage, finding template | Before security review and before LAU4 pen test |
 
 ## Non-negotiable invariants (enforce in code and tests)
 
