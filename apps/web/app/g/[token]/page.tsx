@@ -42,6 +42,13 @@ export default async function GuestPage({
           : undefined
       }
     >
+      {view.seat && (
+        <div className="notice">
+          {t(locale, 'c.seat.yours')}: {view.seat.tableRef}
+          {view.seat.seat ? ` · ${t(locale, 'c.seat.seat_n')} ${view.seat.seat}` : ''} (v
+          {view.seat.planVersion})
+        </div>
+      )}
       {branding && (
         <div className="label-factual" style={{ color: branding.accentColor ?? undefined }}>
           {branding.name}

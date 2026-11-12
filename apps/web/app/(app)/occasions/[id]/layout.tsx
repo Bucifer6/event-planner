@@ -42,6 +42,15 @@ export default async function OccasionLayout({
         ))}
         <Link href={`/occasions/${id}/export`}>{t('occ.export')}</Link>
         <Link href={`/occasions/${id}/briefing`}>{t('occ.briefing')}</Link>
+        <Link href={`/occasions/${id}/space`}>{t('p.space.title')}</Link>
+        <Link href={`/occasions/${id}/seating`}>{t('c.seat.tab')}</Link>
+        <Link href={`/occasions/${id}/programme`}>{t('c.prog.tab')}</Link>
+        <Link href={`/occasions/${id}/menus`}>{t('c.menu.tab')}</Link>
+        <Link href={`/occasions/${id}/public`}>{t('c.pub.tab')}</Link>
+        <Link href={`/occasions/${id}/invitations`}>{t('c.inv.tab')}</Link>
+        <Link href={`/occasions/${id}/arrangements`}>{t('c.arr.tab')}</Link>
+        <Link href={`/occasions/${id}/gift`}>{t('c.gift.tab')}</Link>
+        <Link href={`/occasions/${id}/promotion`}>{t('c.promo.tab')}</Link>
       </div>
       {children}
     </main>

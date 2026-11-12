@@ -1,5 +1,6 @@
 import { prisma, type Invitation } from '@eventdesk/db';
 import { AppError, hashToken, now } from '@eventdesk/shared';
+import { getGuestSeat } from './seating';
 import { assertHuman } from '@eventdesk/auth';
 import { audit } from './audit';
 import { looksLikeChildData } from './childcheck';
@@ -24,8 +25,34 @@ export async function resolveInvitation(token: string) {
 
 // The guest view: household, its members, RSVP questions one at a time, poll state,
 // and the "changed since your last visit" marker (INF5).
+// C-09: printed-invitation QR resolves through the scoped qrId (the raw token stays
+// hashed, SEC2). The QR id grants exactly the same single-household view as the link.
+export async function resolveInvitationByQr(qrId: string) {
+  const invitation = await prisma.invitation.findUnique({
+    where: { qrId },
+    include: { household: { include: { guests: true } }, occasion: true },
+  });
+  if (
+    !invitation ||
+    invitation.revokedAt ||
+    (invitation.expiresAt && invitation.expiresAt < now())
+  ) {
+    throw new AppError('NOT_FOUND', 'Invitation not valid.');
+  }
+  return invitation;
+}
+
+export async function getGuestViewByQr(qrId: string) {
+  const invitation = await resolveInvitationByQr(qrId);
+  return getGuestViewByInvitation(invitation);
+}
+
 export async function getGuestView(token: string) {
   const invitation = await resolveInvitation(token);
+  return getGuestViewByInvitation(invitation);
+}
+
+async function getGuestViewByInvitation(invitation: Awaited<ReturnType<typeof resolveInvitation>>) {
   const questions = await prisma.rsvpQuestion.findMany({
     where: { occasionId: invitation.occasionId },
     orderBy: { sortOrder: 'asc' },
@@ -40,6 +67,9 @@ export async function getGuestView(token: string) {
   });
   const changedSinceLastVisit =
     !!lastResponse && invitation.occasion.revision > lastResponse.lastSeenRevision;
+  // C-08: the guest's own table/seat appears only when the seating plan is published;
+  // unpublished seating is never visible to guests.
+  const seat = await getGuestSeat(invitation.occasionId, invitation.householdId);
   return {
     invitation,
     household: invitation.household,
@@ -48,6 +78,7 @@ export async function getGuestView(token: string) {
     polls,
     lastResponse,
     changedSinceLastVisit,
+    seat,
   };
 }
 

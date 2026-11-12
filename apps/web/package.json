@@ -18,22 +18,24 @@
     "@eventdesk/email": "workspace:*",
     "@eventdesk/i18n": "workspace:*",
     "@eventdesk/jobs": "workspace:*",
+    "@eventdesk/mcp": "workspace:*",
     "@eventdesk/shared": "workspace:*",
+    "@eventdesk/storage": "workspace:*",
     "@eventdesk/ui": "workspace:*",
     "next": "15.5.29",
+    "pdfkit": "0.20.2",
+    "qrcode": "1.5.4",
     "react": "19.3.1",
     "react-dom": "19.3.1",
-    "@eventdesk/storage": "workspace:*",
-    "@eventdesk/mcp": "workspace:*",
-    "pdfkit": "0.20.2",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "24.10.0",
+    "@types/pdfkit": "0.17.7",
+    "@types/qrcode": "1.5.5",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "typescript": "5.9.3",
-    "vitest": "4.1.12",
-    "@types/pdfkit": "0.17.7"
+    "vitest": "4.1.12"
   }
 }

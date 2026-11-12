@@ -209,3 +209,41 @@ loopback smoke green)
   content reports, subscription/invoice billing fields (migrations release_p_finish,
   release_p_billing). Tests: 55 total green (11 new core + 1 new MCP). Smoke extended.
 - Still open: releases C/D/E, R0-02 IaC, operator launch obligations (LAU2-LAU5, LAU7).
+
+## Release C (v0.5.0 candidate, branch vibe/release-c-db71a4)
+
+- **C-01/C-08**: seating plan on the space model; the form IS the tap path (Q10), drag
+  optional; publish action; guests see their own table/seat on their link and on the
+  printed-invitation QR (`/g/q/[qrId]`, scoped id — raw token stays hashed, SEC2) ONLY
+  after publish; unpublished never visible (tested via getGuestSeat/getGuestView).
+- **C-02**: meal-stage fit checks against stated dims; unknown dims excluded and shown
+  unknown (V6, tested).
+- **C-03/C-10**: programme items with versioned cue lists; programmeRevision bumps per
+  change; guests notified ONCE per revision (INF5, tested sent=1 then 0); guest event
+  page `/e/[slug]` shows venue address + external nav link (rel="noopener noreferrer",
+  SEC7), programme, menu, read-only space view (V9 POIs, V10 parking).
+- **C-04**: invitation/stationery designer with versioned designs, proof approval gate
+  before any print PDF (tested), print-ready PDF asset attached after proof.
+- **C-05**: menus + diet tags + per-household meal choices; aggregated quantities for
+  order snapshots (tested).
+- **C-06**: public event page with slug, open/close, conditional questions; public
+  registration endpoint with SEC11 bot guard (honeypot + time floor + rate limits) and
+  ATOMIC capacity claim — one shared count, conditional UPDATE decides
+  registered/waitlist (tested incl. duplicate rejection); waitlist promotion atomic.
+- **C-07**: private dietary/access requests gated by the privateRequests grant (D2,
+  tested); accessible guest journey published as static ro+en content.
+- **C-09**: print pack PDF (pdfkit+qrcode) from the same records: invitation QRs ->
+  scoped `/g/q/` views, table-card QR -> `/e/[slug]`, to-scale room plan; PDF served
+  with attachment + sandboxed CSP.
+- **C-11**: gift estimator — private per-planner ranges, labelled cultural guide, no
+  sharing across planners (tested), free forever.
+- **C-12**: promotion pack export-only (tested exportOnly; nothing posted/spent).
+- **C-13/F3-F6**: arrangement designer — base form + catalogue items + stem counts,
+  running indicative cost labelled indicative (tested); quote request via enquiry flow
+  carrying only F5 fields (tested payload), accepted quote linked to design version (F6).
+- Schema: SeatingPlan/SeatAssignment, MealStage, ProgrammeItem/Cue, InvitationDesign,
+  Menu/MenuItem/MealChoice, PublicRegistration, PrivateRequest, GiftEstimate,
+  ArrangementDesign, Occasion public/venue/programme fields, Invitation.qrId
+  (migrations release_c, release_c_fields, release_c_qrid).
+- Tests: 64 total green (9 new C tests). i18n ro/en 604 keys each.
+- Still open: releases D/E, R0-02 IaC, operator launch obligations (LAU2-LAU5, LAU7).

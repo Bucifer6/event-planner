@@ -275,6 +275,13 @@ model Occasion {
   handedOverAt     DateTime? // P22: handover to the client ends business-side access
   handedOverToId   String?
   handoverById     String?
+  publicSlug       String?   @unique // C-06: public event page slug
+  publicPageOn     Boolean   @default(false) // C-06: registration open
+  publicQuestions  Json? // C-06: conditional registration questions
+  programmeRevision Int      @default(0) // C-10: bumped per programme change; guests notified once per bump
+  lastProgrammeNoticeRevision Int @default(0) // C-10: guests already notified up to this revision
+  venueAddress     String? // C-10: guest event page address
+  venueMapsUrl     String? // C-10: external navigation link (opens guest's maps app, SEC7)
   title            String
   kind             String // template kind: picnic | aniversare | nunta | botez | revelion | voiaj_solo | voiaj_grup | custom
   dateMode         DateMode      @default(date)
@@ -300,6 +307,13 @@ model Occasion {
   digests        ReminderDigest[]
   categories     BudgetCategory[]
   expenses       Expense[]
+  seatingPlans   SeatingPlan[]
+  mealStages     MealStage[]
+  programme      ProgrammeItem[]
+  invitationDesigns InvitationDesign[]
+  menus          Menu[]
+  publicRegistrations PublicRegistration[]
+  arrangementDesigns ArrangementDesign[]
   ledgerEntries  LedgerEntry[]
   suppliers      Supplier[]
   bookings       Booking[]
@@ -426,6 +440,10 @@ model Household {
   guests      Guest[]
   invitations Invitation[]
   responses   RsvpResponse[]
+  mealChoices MealChoice[]
+  seatAssignments SeatAssignment[]
+  privateRequests PrivateRequest[]
+  publicRegistrations PublicRegistration[]
 
   @@index([occasionId])
 }
@@ -451,6 +469,7 @@ model Invitation {
   householdId  String
   household    Household           @relation(fields: [householdId], references: [id], onDelete: Cascade)
   tokenHash    String              @unique
+  qrId         String              @unique @default(cuid()) // C-09: scoped QR id for printed invitations (the token itself stays hashed, SEC2)
   locale       String              @default("ro") // the guest link opens in the invitation language (L2)
   expiryMode   InvitationExpiryMode @default(never)
   expiresAt    DateTime?
@@ -1507,5 +1526,167 @@ model ContentReport {
   decidedAt   DateTime?
   reason      String?
   receivedAt  DateTime  @default(now())
+}
+
+// --- v0.5.0: Release C (design and run a celebration) ---
+
+// C-01/C-08: seating plan on the occasion's space model. Assignments are a draft
+// until published; unpublished seating is NEVER visible to guests (C-08).
+model SeatingPlan {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  version     Int      @default(1)
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  createdById String
+  createdAt   DateTime @default(now())
+
+  assignments SeatAssignment[]
+
+  @@index([occasionId])
+}
+
+model SeatAssignment {
+  id          String      @id @default(cuid())
+  planId      String
+  plan        SeatingPlan @relation(fields: [planId], references: [id], onDelete: Cascade)
+  householdId String
+  household   Household   @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  tableRef    String // space-model table id or "custom:<id>"
+  seat        String? // seat label if assigned
+
+  @@unique([planId, householdId])
+}
+
+// C-02: fit check at every meal stage (incl. between courses) against stated dims.
+model MealStage {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  label      String // e.g. "starter", "main", "between courses"
+  guestCount Int
+  result     Json? // { checked, excludedUnknown } from V6 fit check
+  checkedAt  DateTime?
+  createdAt  DateTime @default(now())
+}
+
+// C-03: entertainment programme + versioned cue list.
+model ProgrammeItem {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title       String
+  startsAt    DateTime?
+  durationMin Int?
+  version     Int      @default(1) // cue list versioned per item
+  createdAt   DateTime @default(now())
+
+  cues Cue[]
+}
+
+model Cue {
+  id      String        @id @default(cuid())
+  itemId  String
+  item    ProgrammeItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+  atLabel String // "T-10min" etc.
+  action  String
+  note    String?
+}
+
+// C-04: invitation/stationery design versions; proof step before send; print-ready PDF.
+model InvitationDesign {
+  id              String   @id @default(cuid())
+  occasionId      String
+  occasion        Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  version         Int      @default(1)
+  content         Json
+  pdfAssetId      String?
+  proofApprovedAt DateTime? // proof step before send (C-04)
+  createdById     String
+  createdAt       DateTime @default(now())
+}
+
+// C-05: menus, per-guest meal choices, quantities into order snapshots.
+model Menu {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name       String
+  items      MenuItem[]
+}
+
+model MenuItem {
+  id        String   @id @default(cuid())
+  menuId    String
+  menu      Menu     @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  name      String
+  dietTags  String[] // vegetarian, vegan, child, allergen...
+  choices   MealChoice[]
+}
+
+model MealChoice {
+  id          String    @id @default(cuid())
+  householdId String
+  household   Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  itemId      String
+  item        MenuItem  @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@unique([householdId, itemId])
+}
+
+// C-06: public event page registration + waitlist (atomic promotion like A8) +
+// conditional questions. SEC11 bot protection on the public POST route.
+model PublicRegistration {
+  id         String    @id @default(cuid())
+  occasionId String
+  occasion   Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  householdId String?
+  household  Household? @relation(fields: [householdId], references: [id])
+  name       String
+  contactHash String // hashed contact; never stored raw
+  answers    Json // conditional question answers
+  state      String    @default("registered") // registered | waitlist
+  createdAt  DateTime  @default(now())
+
+  @@index([occasionId])
+}
+
+// C-07: private dietary/access requests — visible only with the privateRequests grant (D2).
+model PrivateRequest {
+  id          String    @id @default(cuid())
+  occasionId  String
+  householdId String?
+  household   Household? @relation(fields: [householdId], references: [id])
+  kind        String // diet | access
+  detail      String
+  createdAt   DateTime  @default(now())
+
+  @@index([occasionId])
+}
+
+// C-11: gift estimator — private per-planner, labelled cultural guide, no sharing.
+model GiftEstimate {
+  id          String   @id @default(cuid())
+  accountId   String
+  inputs      Json // relationship, distance, venue type
+  rangeMinBani Int
+  rangeMaxBani Int
+  createdAt   DateTime @default(now())
+}
+
+// C-13: flower arrangement design versions; linked to the accepted quote (F6).
+model ArrangementDesign {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  accountId   String
+  baseForm    String
+  items       Json // [{ catalogueItemId, stems }]
+  indicativeCostBani Int @default(0) // F3: indicative, never a quote
+  version     Int      @default(1)
+  quoteEnquiryId String? // F5/F6: the quote request sent from this design
+  acceptedQuoteAssetId String?
+  createdAt   DateTime @default(now())
 }
 
