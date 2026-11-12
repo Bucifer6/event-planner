@@ -31,7 +31,8 @@ ENV NODE_ENV=production
 WORKDIR /app
 COPY --from=build /app /app
 COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
+# strip CR defensively in case the file was checked out with CRLF on Windows
+RUN sed -i 's/\r$//' /docker-entrypoint.sh && chmod +x /docker-entrypoint.sh
 EXPOSE 3000
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["web"]
