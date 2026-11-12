@@ -1856,3 +1856,29 @@ model SustainabilityGoal {
   @@index([occasionId])
 }
 
+// --- v1.0.0: production readiness ---
+
+// LAU5: production incident log, console-visible; while an incident is active,
+// guest-facing pages show a plain-language status message, never a stack trace.
+model Incident {
+  id         String    @id @default(cuid())
+  title      String
+  impact     String // plain-language guest-facing summary (ro+en kept by the operator)
+  status     String    @default("investigating") // investigating | monitoring | resolved
+  startedAt  DateTime  @default(now())
+  resolvedAt DateTime?
+  createdById String
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  @@index([status])
+}
+
+// v1.0.0 console settings (LAU9 accessibility statement record, etc.).
+model PlatformSetting {
+  key       String   @id
+  value     Json
+  updatedBy String
+  updatedAt DateTime @updatedAt
+}
+

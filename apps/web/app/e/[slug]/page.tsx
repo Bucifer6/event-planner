@@ -3,6 +3,7 @@ import { getPublicEventPage } from '@eventdesk/core';
 import { getLocale, tf } from '../../lib/i18n';
 import { formatDate } from '@eventdesk/shared';
 import { LangToggle } from '../../../components/LangToggle';
+import IncidentBanner from '../../../components/IncidentBanner';
 
 // C-06/C-10: the public guest event page — venue address with an external navigation
 // link (opens the guest's maps app, rel="noopener noreferrer" SEC7), programme, menu,
@@ -21,6 +22,7 @@ export default async function PublicEventPage({ params }: { params: Promise<{ sl
   const o = page.occasion;
   return (
     <main className="wrap">
+      <IncidentBanner />
       <div className="row between">
         <h1>{o.title}</h1>
         <LangToggle />

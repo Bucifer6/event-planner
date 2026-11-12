@@ -6,6 +6,7 @@ import { isLocale, t, type Locale } from '@eventdesk/i18n';
 import { formatDate } from '@eventdesk/shared';
 import { Card, Notice } from '@eventdesk/ui';
 import { LangToggle } from '../../../components/LangToggle';
+import IncidentBanner from '../../../components/IncidentBanner';
 import { votePollAction } from '../../actions/rsvp';
 
 // S6/SEC2: the guest link exposes only its own household's view. L2: the link opens in
@@ -42,6 +43,7 @@ export default async function GuestPage({
           : undefined
       }
     >
+      <IncidentBanner />
       {view.seat && (
         <div className="notice">
           {t(locale, 'c.seat.yours')}: {view.seat.tableRef}

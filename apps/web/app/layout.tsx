@@ -2,6 +2,8 @@ import type { ReactNode } from 'react';
 import './globals.css';
 import { getLocale } from './lib/i18n';
 import { LangProvider } from '../components/LangProvider';
+import { CookieNotice } from '../components/CookieNotice';
+import { COOKIE_SET_SIGNATURE } from './lib/cookie-set';
 
 export const metadata = {
   title: 'EventDesk.ro',
@@ -19,7 +21,10 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
   return (
     <html lang={locale}>
       <body>
-        <LangProvider locale={locale}>{children}</LangProvider>
+        <LangProvider locale={locale}>
+          {children}
+          <CookieNotice signature={COOKIE_SET_SIGNATURE} />
+        </LangProvider>
       </body>
     </html>
   );

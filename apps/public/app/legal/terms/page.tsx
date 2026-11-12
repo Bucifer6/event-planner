@@ -13,6 +13,16 @@ export default function Terms() {
         automat (P28).
       </p>
       <p>
+        Reguli de moderare (LAU8, în limbaj simplu): conținutul și listările ilegale sunt eliminate;
+        oricine poate raporta prin formularul „Raportează”; fiecare raport și decizie este
+        înregistrată, iar motivul este comunicat părții afectate.
+      </p>
+      <p>
+        Moderation rules (LAU8, plain language): illegal content and listings are removed; anyone
+        can report via the &quot;Report&quot; form; every report and decision is logged and the
+        reason is given to the affected party.
+      </p>
+      <p>
         Operator-owned legal document. During the free phase everything is free; future paid tiers
         activate only via the console switch with 60 days&apos; notice. English version follows the
         Romanian text (L5).

@@ -12,6 +12,7 @@ export default function Landing() {
         <Link href="/legal/terms">Termeni și condiții</Link>
         <Link href="/legal/privacy">Confidențialitate</Link>
         <Link href="/status">Status</Link>
+        <Link href="https://app.eventdesk.ro/report">Raportează / Report</Link>
         <Link href="/?lang=en">EN</Link>
       </nav>
       <main className="wrap">

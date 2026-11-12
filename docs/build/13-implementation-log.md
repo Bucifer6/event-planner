@@ -291,3 +291,38 @@ loopback smoke green)
   (4 new E tests). i18n ro/en 679 keys each.
 - Still open: v1.0.0 production readiness (R0-02 IaC artifacts, R0-14 deploy runbook,
   LAU buildables, final QA).
+
+## v1.0.0 (branch vibe/v1-db71a4)
+
+- **R0-02 (artifacts)**: `infra/terraform/` — DNS (eventdesk.ro / app / media), managed
+  encrypted Postgres with 30-day backups (KMS key managed separately, SEC9), S3-compatible
+  EU media store with attachment-disposition policy (SEC4), app compute wired to a secret
+  store by ARN only; every operator decision is a tfvar with placeholder default; NOT
+  applied from this environment. Boot env validation: `packages/shared/src/env.ts`
+  (assertBootEnv, names-only errors, SEC13, unit-tested) + self-contained
+  `apps/web/instrumentation.ts` (production refuses to boot without DATABASE_URL/APP_URL).
+- **R0-14 (artifacts)**: `.github/workflows/deploy.yml` — tag-triggered, production
+  environment (DEP3 two-person approval via protection rules), DEP7 CI-green gate with
+  audited emergency path, DEP4 order backup → migrate → release → health → auto-rollback
+  (DEP5 rollback never deletes data), serialized deploys; `scripts/record-deploy.mjs`
+  writes every deploy to the Deploy table (console W10); `docs/build/14-deploy-runbook.md`
+  maps DEP1–DEP7 + LAU7 runbook.
+- **LAU1**: in-app cookie notice (`CookieNotice`, SSR-visible, acknowledged in
+  localStorage keyed by the cookie-set signature so it re-shows only when the cookie set
+  changes); lists exactly ed_session/ed_device/ed_lang, states no tracking, links the
+  public cookie notice. Web/core signature constants asserted equal in CI.
+- **LAU5**: `Incident` model + console `/console/incidents` (security_administrator only,
+  audit-logged); active incidents render a plain-language `IncidentBanner` on all
+  guest-facing pages (/g/[token], /g/q/[qrId], /e/[slug]) linking the public status page.
+- **LAU8**: public `/report` notice-and-action form on the app (per-IP rate limit SEC16,
+  reporter contact hashed SEC8, reuses ContentReport + W3 moderation flow), linked from
+  the public site; moderation rules in plain Romanian on /report and legal/terms.
+- **LAU9**: accessibility statement ro+en already on the public site; console
+  `/console/launch` renders the LAU1–LAU9 checklist and records the statement date +
+  evaluation method as a PlatformSetting (staff-only, audit-logged).
+- **QA**: `apps/web/test/a11y-320.test.ts` — 44px targets, no >320px fixed widths,
+  device-width viewport, LAU1/5/8/9 wiring asserted in CI; smoke extended with /report
+  and cookie-notice checks (10/10 OK).
+- Schema: Incident, PlatformSetting (migration v1_readiness). Tests: 83 total green
+  (61 core incl. 5 new v1 tests, 7 web incl. 6 a11y). i18n ro/en 723 keys each.
+- Operator-owned gates remain on `/console/launch` (LAU2/3/4/6/7 + provider choices).

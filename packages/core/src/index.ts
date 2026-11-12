@@ -47,3 +47,4 @@ export * from './arrangements';
 
 export * from './travel';
 export * from './releasee';
+export * from './launch';

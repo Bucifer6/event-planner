@@ -4,6 +4,7 @@ import { getGuestViewByQr } from '@eventdesk/core';
 import { isLocale, t, type Locale } from '@eventdesk/i18n';
 import { formatDate } from '@eventdesk/shared';
 import { LangToggle } from '../../../../components/LangToggle';
+import IncidentBanner from '../../../../components/IncidentBanner';
 
 // C-09: the QR on a printed invitation opens the guest's OWN invitation view through
 // the scoped qrId (the raw token stays hashed, SEC2). Same single-household view as
@@ -26,6 +27,7 @@ export default async function GuestQrPage({
   const locale: Locale = isLocale(sp.lang) ? sp.lang : (view.invitation.locale as Locale);
   return (
     <main className="wrap">
+      <IncidentBanner />
       <div className="row between">
         <h1>{view.occasion.title}</h1>
         <LangToggle />
