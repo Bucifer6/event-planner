@@ -29,6 +29,7 @@ RUN pnpm build
 FROM node:22-alpine AS runner
 ENV NODE_ENV=production
 WORKDIR /app
+RUN corepack enable
 COPY --from=build /app /app
 COPY docker-entrypoint.sh /docker-entrypoint.sh
 # strip CR defensively in case the file was checked out with CRLF on Windows
