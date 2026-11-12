@@ -1,0 +1,13 @@
+.git
+node_modules
+**/node_modules
+**/.next
+**/out
+**/dist
+**/tsconfig.tsbuildinfo
+.pgdata
+.pgdata-*
+.env
+.env.local
+*.log
+.DS_Store

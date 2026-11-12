@@ -53,6 +53,24 @@ come from the platform secret store. Operator-only decisions (providers, legal e
 prices, launch counties, staffing) are listed in `docs/build/10-operator-decisions.md` and
 read from env config, never hard-coded.
 
+## Run with Docker (local evaluation copy)
+
+```bash
+docker compose up --build
+# App: http://localhost:3000  ·  Public site: http://localhost:3001  ·  Postgres: localhost:5432
+# Seed demo data + get a sign-in code:
+docker compose exec web sh -c "pnpm --filter @eventdesk/db exec prisma db seed"
+docker compose exec db sh -c "psql -U postgres -d eventdesk -c 'SELECT subject, body FROM \"EmailOutbox\" ORDER BY \"createdAt\" DESC LIMIT 1;'"
+```
+
+All published ports bind to `127.0.0.1` only — nothing is exposed beyond the host.
+In the compose setup `EMAIL_PROVIDER=dev`, so sign-in codes are written to the
+`EmailOutbox` table and never sent. The app image (`apps/web/Dockerfile`, also built by
+the deploy workflow) runs migrations on boot and serves either service:
+`docker compose up web` / `worker` (`CMD ["web"]`, `command: ["worker"]`).
+`apps/public/Dockerfile` serves the static export with nginx (D1: no cookies, no
+third-party scripts). Stop and wipe everything with `docker compose down -v`.
+
 ## Conventions
 
 - Branches: `feat/<work-item>-<slug>` from `main`; PRs to `main` with the checklist in
