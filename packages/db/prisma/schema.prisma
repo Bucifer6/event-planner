@@ -92,6 +92,7 @@ model Account {
   username        String?     @unique
   passwordHash    String? // Argon2id, per-account salt (S8); null for email accounts
   locale          String      @default("ro")
+  hideDirectoryLinks Boolean  @default(false) // P7: per-account switch for the task directory link
   emailVerifiedAt DateTime?
   createdAt       DateTime    @default(now())
   updatedAt       DateTime    @updatedAt
@@ -271,6 +272,9 @@ model Occasion {
   owner            Account       @relation(fields: [ownerId], references: [id])
   businessId       String? // P17: business-owned occasions
   business         Business?     @relation(fields: [businessId], references: [id])
+  handedOverAt     DateTime? // P22: handover to the client ends business-side access
+  handedOverToId   String?
+  handoverById     String?
   title            String
   kind             String // template kind: picnic | aniversare | nunta | botez | revelion | voiaj_solo | voiaj_grup | custom
   dateMode         DateMode      @default(date)
@@ -317,6 +321,7 @@ model OccasionMember {
   customLabel       String? // localized role labels, e.g. naș/nasă, domn/damnă de cununie (A5)
   finance           Boolean  @default(false) // separate grant (A5, D2)
   privateRequests   Boolean  @default(false) // separate grant (A5, D2)
+  hideDirectoryLinks Boolean @default(false) // P7: per-occasion switch
   createdAt         DateTime @default(now())
 
   ownedTasks Task[]
@@ -652,10 +657,12 @@ model EmailOutbox {
 
 // Single platform-level monetization switch (MON2), OFF by default.
 model MonetizationSwitch {
-  id        String   @id @default("main")
-  state     String   @default("OFF") // OFF | ON
-  history   Json     @default("[]")
-  updatedAt DateTime @updatedAt
+  id              String    @id @default("main")
+  state           String    @default("OFF") // OFF | ON
+  history         Json      @default("[]")
+  noticeStartedAt DateTime? // MON2/P28: 60-day public notice when switching ON
+  noticeEndsAt    DateTime?
+  updatedAt       DateTime  @updatedAt
 }
 
 // Server-side daily aggregates only; no visitor identifier anywhere (D4, INF11).
@@ -790,6 +797,7 @@ model Booking {
   title        String
   state        String    @default("enquired")
   quoteAssetId String? // a PDF marked as a quote (P12)
+  acceptedQuoteAssetId String? // P12/F6: the quote the planner accepted into the supplier record + budget
   createdById  String
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
@@ -983,12 +991,14 @@ model Business {
   suspendedAt          DateTime? // W3 restriction, survives staff session end
   suspensionReason     String?
   nudge48h             Boolean  @default(true) // P32: the one 48h nudge has an off switch
+  planLapsedAt         DateTime? // P23: on plan lapse only NEW business occasions/branding/library edits stop
   createdAt            DateTime @default(now())
   updatedAt            DateTime @updatedAt
 
-  members   BusinessMember[]
-  listings  Listing[]
-  occasions Occasion[]
+  members       BusinessMember[]
+  listings      Listing[]
+  occasions     Occasion[]
+  libraryItems  BusinessLibraryItem[]
 }
 
 // P18: one owner, admins, staff; an admin cannot create or remove other admins.
@@ -1006,11 +1016,13 @@ model BusinessMember {
 
 // P2: the 21 fixed launch categories, ro name + en toggle.
 model Category {
-  id      String  @id @default(cuid())
-  slug    String  @unique
-  nameRo  String
-  nameEn  String
-  sortKey Int     @default(0)
+  id        String    @id @default(cuid())
+  slug      String    @unique
+  nameRo    String
+  nameEn    String
+  sortKey   Int       @default(0)
+  published Boolean   @default(true) // W4: publish/unpublish directory pages
+  retiredAt DateTime? // W4: retired categories stop accepting new listings
 
   listings ListingCategory[]
 }
@@ -1018,9 +1030,10 @@ model Category {
 // Geography: 41 counties + Bucharest as fixed picklist; locality second picklist (P2 defs).
 model County {
   id     String  @id @default(cuid())
-  code   String  @unique // e.g. "B", "CJ", "IF"
-  nameRo String
-  nameEn String
+  code      String  @unique // e.g. "B", "CJ", "IF"
+  nameRo    String
+  nameEn    String
+  published Boolean @default(true) // W4
 
   localities Locality[]
   listings   ListingCounty[]
@@ -1030,8 +1043,9 @@ model Locality {
   id       String  @id @default(cuid())
   countyId String
   county   County  @relation(fields: [countyId], references: [id], onDelete: Cascade)
-  nameRo   String
-  nameEn   String
+  nameRo    String
+  nameEn    String
+  published Boolean @default(true) // W4
 
   @@unique([countyId, nameRo])
   listings ListingLocality[]
@@ -1378,27 +1392,120 @@ model FeaturedSlot {
 
 // P24-P26/PAY: dormant until MON ON; features switch only from a verified webhook.
 model Subscription {
-  id          String   @id @default(cuid())
-  businessId  String
-  kind        String // business_plan | featured
-  state       String   @default("active")
-  priceBani   Int
-  currency    String   @default("RON")
-  periodEnd   DateTime?
-  graceUntil  DateTime? // P25: 14 days of grace after a failed renewal
-  processorRef String? // Stripe/etc reference, from webhook only
-  createdAt   DateTime @default(now())
+  id                   String    @id @default(cuid())
+  businessId           String
+  kind                 String // business_plan | featured
+  state                String    @default("active") // active | past_due | lapsed | canceled
+  priceBani            Int // PAY4: excl. TVA
+  currency             String    @default("RON")
+  periodEnd            DateTime?
+  graceUntil           DateTime? // P25: 14 days of grace after a failed renewal
+  cancelAtPeriodEnd    Boolean   @default(false) // P25: cancellation takes effect at period end
+  processorRef         String? // Stripe/etc reference, from webhook only (P24)
+  stripeCustomerId     String?
+  stripeSubscriptionId String?
+  createdAt            DateTime  @default(now())
 
   @@index([businessId])
 }
 
 model Invoice {
-  id            String   @id @default(cuid())
+  id             String    @id @default(cuid())
   subscriptionId String?
-  businessId    String
-  amountBani    Int
-  tvaBani       Int      @default(0) // PAY4: TVA shown separately, prices excl. TVA
-  currency      String   @default("RON")
-  fiscalRef     String? // PAY3: RO e-Factura reference via SmartBill/Oblio webhook
-  createdAt     DateTime @default(now())
+  businessId     String
+  number         String?   @unique
+  amountBani     Int // PAY4: excl. TVA
+  tvaBani        Int       @default(0) // PAY4: TVA shown separately
+  currency       String    @default("RON")
+  status         String    @default("issued") // issued | paid | void
+  fiscalRef      String? // PAY3: RO e-Factura reference via SmartBill/Oblio webhook (SANDBOX-* in test mode)
+  pdfAssetId     String?
+  issuedAt       DateTime?
+  createdAt      DateTime  @default(now())
 }
+
+// --- v0.4.0: finish Release P (P-08/P-12/P-13/P-14) ---
+
+// P19: shared libraries of templates, checklists and supplier contacts, shareable
+// to the whole business team.
+model BusinessLibraryItem {
+  id          String   @id @default(cuid())
+  businessId  String
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  kind        String // template | checklist | supplier_contact
+  title       String
+  payload     Json
+  createdById String
+  createdAt   DateTime @default(now())
+
+  @@index([businessId, kind])
+}
+
+// P21/D4: catalogue-item and drawing usage as DAILY TOTALS — no visitor identifier.
+model AssetUsageDaily {
+  id        String   @id @default(cuid())
+  day       DateTime // UTC day
+  assetKind String // drawing | catalogue_item
+  assetId   String
+  listingId String
+  uses      Int      @default(0)
+
+  @@unique([day, assetKind, assetId])
+  @@index([listingId])
+}
+
+// P15: last-30-days directory searches per category x county, daily aggregates only.
+model DirectorySearchDaily {
+  id         String   @id @default(cuid())
+  day        DateTime
+  categoryId String
+  countyId   String
+  searches   Int      @default(0)
+
+  @@unique([day, categoryId, countyId])
+}
+
+// MON4: billing acceptance in test mode must be recorded before the switch can go ON.
+model BillingAcceptance {
+  id               String    @id @default("main")
+  testModePassedAt DateTime?
+  verifiedBy       String?
+  notes            String?
+  updatedAt        DateTime  @updatedAt
+}
+
+// W8: compliance access to retained data needs THREE people (19.12).
+model ComplianceAccessRequest {
+  id        String   @id @default(cuid())
+  requesterId String
+  purpose   String
+  approvals String[] // accountIds of approvers; needs 3 distinct
+  state     String   @default("pending") // pending | approved | rejected
+  createdAt DateTime @default(now())
+}
+
+// W7: platform notices go to businesses only — never to planner-entered contacts (19.11).
+model PlatformNotice {
+  id         String   @id @default(cuid())
+  subject    String
+  body       String
+  sentById   String
+  sentAt     DateTime?
+  recipientCount Int   @default(0)
+  createdAt  DateTime @default(now())
+}
+
+// LAU8 (DSA notice-and-action): reports reuse the W3 restriction flow + SEC10 audit.
+model ContentReport {
+  id          String    @id @default(cuid())
+  reporterContactHash String
+  listingId   String?
+  kind        String // illegal_content | unlawful_listing | other
+  detail      String
+  state       String    @default("open") // open | actioned | dismissed
+  decidedBy   String?
+  decidedAt   DateTime?
+  reason      String?
+  receivedAt  DateTime  @default(now())
+}
+

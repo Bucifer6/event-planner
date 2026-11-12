@@ -384,6 +384,8 @@ describe('P5/P6/MON5: organic directory order is daily-rotating and payment-inde
         .map((r) => r.listing.id);
       expect(got3).toEqual([b.listing.id]); // featured one excluded from organic
     } finally {
+      const cat = await prisma.category.findUniqueOrThrow({ where: { slug: 'floristi' } });
+      await prisma.featuredSlot.deleteMany({ where: { categoryId: cat.id } });
       await prisma.monetizationSwitch.update({ where: { id: 'main' }, data: { state: prevMon } });
     }
   });

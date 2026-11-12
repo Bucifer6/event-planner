@@ -129,6 +129,22 @@ export async function createEnquiry(accountId: string, input: EnquiryInput) {
     return e;
   });
 
+  // F5/P21: a quote request that references catalogue items counts their usage as a
+  // daily total (no visitor identifier)
+  const arrangement = (input.arrangement ?? {}) as { catalogueItemIds?: string[] };
+  if (input.kind === 'quote_request' && Array.isArray(arrangement.catalogueItemIds)) {
+    const { recordAssetUsage } = await import('./bizdashboard');
+    for (const itemId of arrangement.catalogueItemIds) {
+      const item = await prisma.catalogueItem.findUnique({
+        where: { id: itemId },
+        select: { catalogue: { select: { listingId: true } } },
+      });
+      if (item && item.catalogue.listingId === listing.id) {
+        await recordAssetUsage('catalogue_item', itemId, listing.id);
+      }
+    }
+  }
+
   // P32: notify the business on arrival by email, in the language of its listing (L4)
   const businessEmails =
     listing.business?.members

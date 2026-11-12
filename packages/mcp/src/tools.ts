@@ -3,11 +3,13 @@ import { AppError, hashToken, newToken, now } from '@eventdesk/shared';
 import {
   audit,
   createPreview,
+  fitCheck,
   getListingPublic,
   getMember,
   getSpaceModel,
   listPublicCatalogues,
   requireMember,
+  requireRole,
   searchDirectory,
 } from '@eventdesk/core';
 
@@ -354,6 +356,217 @@ export async function toolGetSpaceModel(ctx: McpContext, args: { occasionId: str
   };
 }
 
+// --- Release P propose tools (MCP3/SEC15: propose-only, bounded by write grants) ---
+
+export async function toolProposeSupplierShortlist(
+  ctx: McpContext,
+  args: { occasionId: string; listingIds: string[]; rationale: string }
+) {
+  requireProposeScope(ctx);
+  await requireMember(args.occasionId, ctx.accountId);
+  // P-15: a shortlist is a planner-side note only — it notifies nobody, and the
+  // planner still sends any enquiry personally (P8). Labelling state is carried
+  // over verbatim from the directory (D3).
+  const items = [] as {
+    listingId: string;
+    name: string;
+    badges: string[];
+    unclaimed: boolean;
+    featuredLabel: string | null;
+  }[];
+  for (const id of args.listingIds) {
+    try {
+      const r = await getListingPublic(id);
+      items.push({
+        listingId: id,
+        name: r.listing.name,
+        badges: r.badges,
+        unclaimed: r.unclaimed,
+        featuredLabel: null, // MON5: while OFF there is no Featured; when ON the label is copied verbatim by the caller UI
+      });
+    } catch {
+      throw new AppError('NOT_FOUND', `Listing ${id} is not live.`);
+    }
+  }
+  const preview = await createPreview({
+    occasionId: args.occasionId,
+    subject: 'mcp_propose_supplier_shortlist',
+    delta: {
+      items,
+      rationale: args.rationale,
+      label: 'creat cu un asistent extern',
+      notifiesNobody: true,
+    },
+    proposedByAccountId: ctx.accountId,
+    proposedByTokenId: ctx.tokenId,
+  });
+  await audit({
+    actorId: ctx.accountId,
+    actorKind: 'mcp_token',
+    action: 'mcp_proposal_created',
+    objectType: 'WhatIfPreview',
+    objectId: preview.id,
+    after: { tool: 'propose_supplier_shortlist', proposalId: preview.id },
+  });
+  return { proposalId: preview.id, state: preview.state };
+}
+
+export async function toolProposeSeatingLayout(
+  ctx: McpContext,
+  args: {
+    occasionId: string;
+    assignments: { householdId: string; tableId: string; seat?: string }[];
+  }
+) {
+  requireProposeScope(ctx);
+  await requireRole(args.occasionId, ctx.accountId, [
+    'owner',
+    'project_manager',
+    'workstream_lead',
+  ]);
+  const model = await getSpaceModel(args.occasionId, ctx.accountId); // V6 fit check against the space model
+  if (!model) throw new AppError('NOT_FOUND', 'No space model on this occasion.');
+  const fit = fitCheck({
+    tables: [
+      ...model.drawing.tables.map((t) => ({ widthM: t.widthM, heightM: t.heightM })),
+      ...model.customTables.map((t) => ({ widthM: t.widthM, heightM: t.heightM })),
+    ],
+  });
+  const preview = await createPreview({
+    occasionId: args.occasionId,
+    subject: 'mcp_propose_seating_layout',
+    delta: {
+      assignments: args.assignments,
+      fitCheck: fit, // V6: unknown dims excluded and reported
+      label: 'creat cu un asistent extern',
+    },
+    proposedByAccountId: ctx.accountId,
+    proposedByTokenId: ctx.tokenId,
+  });
+  await audit({
+    actorId: ctx.accountId,
+    actorKind: 'mcp_token',
+    action: 'mcp_proposal_created',
+    objectType: 'WhatIfPreview',
+    objectId: preview.id,
+    after: { tool: 'propose_seating_layout', proposalId: preview.id },
+  });
+  return { proposalId: preview.id, state: preview.state, fitCheck: fit };
+}
+
+export async function toolProposeCustomTable(
+  ctx: McpContext,
+  args: { occasionId: string; name: string; widthM?: number; heightM?: number }
+) {
+  requireProposeScope(ctx);
+  await requireRole(args.occasionId, ctx.accountId, [
+    'owner',
+    'project_manager',
+    'workstream_lead',
+  ]);
+  const preview = await createPreview({
+    occasionId: args.occasionId,
+    subject: 'mcp_propose_custom_table',
+    delta: {
+      name: args.name,
+      widthM: args.widthM ?? null,
+      heightM: args.heightM ?? null,
+      custom: true,
+      label: 'creat cu un asistent extern',
+    }, // V5
+    proposedByAccountId: ctx.accountId,
+    proposedByTokenId: ctx.tokenId,
+  });
+  await audit({
+    actorId: ctx.accountId,
+    actorKind: 'mcp_token',
+    action: 'mcp_proposal_created',
+    objectType: 'WhatIfPreview',
+    objectId: preview.id,
+    after: { tool: 'propose_custom_table', proposalId: preview.id },
+  });
+  return { proposalId: preview.id, state: preview.state };
+}
+
+export async function toolProposeArrangementDesign(
+  ctx: McpContext,
+  args: {
+    occasionId: string;
+    baseForm: string;
+    items: { catalogueItemId: string; stems: number }[];
+    note?: string;
+  }
+) {
+  requireProposeScope(ctx);
+  await requireMember(args.occasionId, ctx.accountId);
+  // F3: running indicative cost from published prices, labelled indicative, never a quote
+  let indicativeBani = 0;
+  for (const it of args.items) {
+    const item = await prisma.catalogueItem.findUnique({
+      where: { id: it.catalogueItemId },
+      select: { pricePerStemBani: true },
+    });
+    if (!item) throw new AppError('NOT_FOUND', `Catalogue item ${it.catalogueItemId} not found.`);
+    if (item.pricePerStemBani != null) indicativeBani += item.pricePerStemBani * it.stems;
+  }
+  const preview = await createPreview({
+    occasionId: args.occasionId,
+    subject: 'mcp_propose_arrangement_design',
+    delta: {
+      baseForm: args.baseForm,
+      items: args.items,
+      note: args.note ?? null,
+      indicativeCostBani: indicativeBani,
+      indicativeNotQuote: true, // F3
+      label: 'creat cu un asistent extern',
+    },
+    proposedByAccountId: ctx.accountId,
+    proposedByTokenId: ctx.tokenId,
+  });
+  await audit({
+    actorId: ctx.accountId,
+    actorKind: 'mcp_token',
+    action: 'mcp_proposal_created',
+    objectType: 'WhatIfPreview',
+    objectId: preview.id,
+    after: { tool: 'propose_arrangement_design', proposalId: preview.id },
+  });
+  return { proposalId: preview.id, state: preview.state, indicativeCostBani: indicativeBani };
+}
+
+export async function toolProposeBudgetNote(
+  ctx: McpContext,
+  args: { occasionId: string; note: string; categoryId?: string; estimateDeltaBani?: number }
+) {
+  requireProposeScope(ctx);
+  const member = await requireMember(args.occasionId, ctx.accountId);
+  if (!member.finance) {
+    throw new AppError('FORBIDDEN', 'Finance access required for budget notes (SEC15).');
+  }
+  const preview = await createPreview({
+    occasionId: args.occasionId,
+    subject: 'mcp_propose_budget_note',
+    delta: {
+      note: args.note,
+      categoryId: args.categoryId ?? null,
+      estimateDeltaBani: args.estimateDeltaBani ?? null,
+      estimatesAreEstimates: true,
+      label: 'creat cu un asistent extern',
+    },
+    proposedByAccountId: ctx.accountId,
+    proposedByTokenId: ctx.tokenId,
+  });
+  await audit({
+    actorId: ctx.accountId,
+    actorKind: 'mcp_token',
+    action: 'mcp_proposal_created',
+    objectType: 'WhatIfPreview',
+    objectId: preview.id,
+    after: { tool: 'propose_budget_note', proposalId: preview.id },
+  });
+  return { proposalId: preview.id, state: preview.state };
+}
+
 export const TOOL_CATALOGUE = [
   {
     name: 'get_occasion',
@@ -416,6 +629,34 @@ export const TOOL_CATALOGUE = [
     description:
       'Occasion space model (venue drawing version, tables, fixtures, POIs, parking) - own occasions only',
   },
+  {
+    name: 'propose_supplier_shortlist',
+    kind: 'propose',
+    description:
+      'Directory shortlist as a plan note only; notifies nobody; Featured/labelling carried verbatim',
+  },
+  {
+    name: 'propose_seating_layout',
+    kind: 'propose',
+    description:
+      'Seating plan as a fit-checked (V6) proposal against the space model; applied only on explicit confirm',
+  },
+  {
+    name: 'propose_custom_table',
+    kind: 'propose',
+    description: 'A custom table (marked custom, V5) as a proposal',
+  },
+  {
+    name: 'propose_arrangement_design',
+    kind: 'propose',
+    description:
+      'Arrangement design from catalogue items with running indicative cost labelled indicative (F3), never a quote',
+  },
+  {
+    name: 'propose_budget_note',
+    kind: 'propose',
+    description: 'Budget note/estimate adjustment as a proposal (finance access required, SEC15)',
+  },
 ] as const;
 
 export async function dispatchTool(
@@ -459,6 +700,21 @@ export async function dispatchTool(
         break;
       case 'get_space_model':
         result = await toolGetSpaceModel(ctx, args as never);
+        break;
+      case 'propose_supplier_shortlist':
+        result = await toolProposeSupplierShortlist(ctx, args as never);
+        break;
+      case 'propose_seating_layout':
+        result = await toolProposeSeatingLayout(ctx, args as never);
+        break;
+      case 'propose_custom_table':
+        result = await toolProposeCustomTable(ctx, args as never);
+        break;
+      case 'propose_arrangement_design':
+        result = await toolProposeArrangementDesign(ctx, args as never);
+        break;
+      case 'propose_budget_note':
+        result = await toolProposeBudgetNote(ctx, args as never);
         break;
       default:
         throw new AppError('NOT_FOUND', `Unknown tool: ${name}`);

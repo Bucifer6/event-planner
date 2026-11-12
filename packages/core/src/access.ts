@@ -7,9 +7,38 @@ export async function getMember(
   occasionId: string,
   accountId: string
 ): Promise<OccasionMember | null> {
-  return prisma.occasionMember.findUnique({
+  const direct = await prisma.occasionMember.findUnique({
     where: { occasionId_accountId: { occasionId, accountId } },
   });
+  if (direct) return direct;
+  // P17/P22: on a business-owned occasion, every active business member has team
+  // access (synthetic staff grant) until the occasion is handed over to the client;
+  // after handover business members lose access — including via their MCP tokens
+  // (MCP7), because the MCP read tools all go through getMember.
+  const occ = await prisma.occasion.findUnique({
+    where: { id: occasionId },
+    select: { businessId: true, handedOverAt: true },
+  });
+  if (occ?.businessId && !occ.handedOverAt) {
+    const bm = await prisma.businessMember.findUnique({
+      where: { businessId_accountId: { businessId: occ.businessId, accountId } },
+    });
+    if (bm) {
+      return {
+        id: `biz-${bm.id}`,
+        occasionId,
+        accountId,
+        inviteEmail: null,
+        role: 'contributor',
+        customLabel: null,
+        finance: false,
+        privateRequests: false,
+        hideDirectoryLinks: false,
+        createdAt: bm.createdAt,
+      } as unknown as OccasionMember;
+    }
+  }
+  return null;
 }
 
 export async function requireMember(

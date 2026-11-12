@@ -76,6 +76,20 @@ export default async function BusinessPage() {
       <Link className="btn secondary" href="/business/enquiries">
         {t('p.biz.enquiries')} ({openEnquiries})
       </Link>
+      <div className="row">
+        <Link className="btn secondary" href="/business/occasions">
+          {t('p.bocc.title')}
+        </Link>
+        <Link className="btn secondary" href="/business/branding">
+          {t('p.brand.title')}
+        </Link>
+        <Link className="btn secondary" href="/business/dashboard">
+          {t('p.dash.title')}
+        </Link>
+        <Link className="btn secondary" href="/business/featured">
+          {t('p.feat.title')}
+        </Link>
+      </div>
     </main>
   );
 }

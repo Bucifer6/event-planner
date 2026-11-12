@@ -41,9 +41,10 @@ export async function searchDirectory(input: {
   limit?: number;
 }): Promise<DirectoryResult[]> {
   const category = await prisma.category.findUnique({ where: { slug: input.categorySlug } });
-  if (!category) throw new AppError('NOT_FOUND', 'Unknown category.');
+  if (!category || !category.published || category.retiredAt)
+    throw new AppError('NOT_FOUND', 'Unknown category.');
   const county = await prisma.county.findUnique({ where: { code: input.countyCode } });
-  if (!county) throw new AppError('NOT_FOUND', 'Unknown county.');
+  if (!county || !county.published) throw new AppError('NOT_FOUND', 'Unknown county.');
 
   const where: Record<string, unknown> = {
     status: 'live',
@@ -53,6 +54,10 @@ export async function searchDirectory(input: {
   if (input.localityId) {
     where.localities = { some: { localityId: input.localityId } };
   }
+
+  // P15: daily aggregate search counter — no visitor identifier (D4/INF11)
+  const { recordDirectorySearch } = await import('./billing');
+  await recordDirectorySearch(category.id, county.id);
 
   const listings = await prisma.listing.findMany({
     where,

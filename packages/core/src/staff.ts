@@ -178,6 +178,15 @@ export async function applyMonetizationEnable(
   const request = await prisma.approvalRequest.findUnique({ where: { id: requestId } });
   if (!request || request.action !== 'monetization_enable')
     throw new AppError('NOT_FOUND', 'Request not found.');
+  // MON4: billing acceptance in test mode is a hard precondition, checked BEFORE
+  // the approval is consumed
+  const acceptance = await prisma.billingAcceptance.findUnique({ where: { id: 'main' } });
+  if (!acceptance?.testModePassedAt) {
+    throw new AppError(
+      'FORBIDDEN',
+      'Billing must pass acceptance in test mode before the switch can go ON (MON4).'
+    );
+  }
   await approveRequest(requestId, approverId);
   const current = await getMonetizationSwitch();
   const history = (current.history as unknown[]) ?? [];
@@ -188,9 +197,15 @@ export async function applyMonetizationEnable(
     approver: approverId,
     noticeDays: 60,
   };
+  const noticeStart = now();
   await prisma.monetizationSwitch.update({
     where: { id: 'main' },
-    data: { state: 'ON', history: [...history, entry] as never },
+    data: {
+      state: 'ON',
+      history: [...history, entry] as never,
+      noticeStartedAt: noticeStart, // MON2/P28: 60-day public notice, reminders at 30/7 days
+      noticeEndsAt: new Date(noticeStart.getTime() + 60 * 86_400_000),
+    },
   });
   await audit({
     actorId: approverId,

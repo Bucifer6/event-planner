@@ -29,6 +29,11 @@ export default async function ConsoleLayout({ children }: { children: ReactNode 
           <Link href="/console/moderation">{t('console.moderation')}</Link>
           <Link href="/console/discovery">{t('console.discovery')}</Link>
           <Link href="/console/businesses">{t('console.businesses')}</Link>
+          <Link href="/console/directory">{t('console.directory')}</Link>
+          <Link href="/console/commercial">{t('console.commercial')}</Link>
+          <Link href="/console/comms">{t('console.comms')}</Link>
+          <Link href="/console/access">{t('console.access')}</Link>
+          <Link href="/console/deploys">{t('console.deploys')}</Link>
           <Link href="/dashboard">{t('nav.occasions')}</Link>
         </nav>
       </header>

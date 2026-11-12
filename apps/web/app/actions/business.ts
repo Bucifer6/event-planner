@@ -235,3 +235,82 @@ export async function addCustomTableAction(occasionId: string, formData: FormDat
   });
   revalidatePath(`/occasions/${occasionId}/space`);
 }
+
+// --- v0.4.0: business occasions (P17-P23), branding (P20), library (P19), Featured (P13-P15) ---
+
+import {
+  createBusinessOccasion,
+  handoverOccasion,
+  listBusinessOccasions,
+  setBranding,
+  addLibraryItem,
+  removeLibraryItem,
+  setHideDirectoryLinks,
+  prePurchaseView,
+} from '@eventdesk/core';
+
+export async function createBusinessOccasionAction(
+  businessId: string,
+  formData: FormData
+): Promise<void> {
+  const user = await requireUser();
+  await createBusinessOccasion(businessId, user.accountId, {
+    ownerId: user.accountId,
+    title: String(formData.get('title') ?? ''),
+    kind: String(formData.get('kind') ?? 'custom'),
+    dateMode: 'date',
+    dateStart: formData.get('dateStart') ? new Date(String(formData.get('dateStart'))) : undefined,
+  });
+  revalidatePath('/business/occasions');
+}
+
+export async function handoverOccasionAction(
+  occasionId: string,
+  formData: FormData
+): Promise<void> {
+  const user = await requireUser();
+  await handoverOccasion(occasionId, user.accountId, String(formData.get('clientAccountId') ?? ''));
+  revalidatePath('/business/occasions');
+}
+
+export async function setBrandingAction(businessId: string, formData: FormData): Promise<void> {
+  const user = await requireUser();
+  await setBranding(businessId, user.accountId, {
+    name: String(formData.get('name') ?? ''),
+    logoAssetId: String(formData.get('logoAssetId') ?? '') || null,
+    accentColor: String(formData.get('accentColor') ?? '') || null,
+  });
+  revalidatePath('/business/branding');
+}
+
+export async function addLibraryItemAction(businessId: string, formData: FormData): Promise<void> {
+  const user = await requireUser();
+  await addLibraryItem(businessId, user.accountId, {
+    kind: String(formData.get('kind') ?? 'checklist') as
+      'template' | 'checklist' | 'supplier_contact',
+    title: String(formData.get('title') ?? ''),
+    payload: { note: String(formData.get('note') ?? '') },
+  });
+  revalidatePath('/business/branding');
+}
+
+export async function removeLibraryItemAction(itemId: string, businessId: string): Promise<void> {
+  const user = await requireUser();
+  await removeLibraryItem(itemId, businessId, user.accountId);
+  revalidatePath('/business/branding');
+}
+
+export async function setHideDirectoryLinksAction(
+  occasionId: string | null,
+  hidden: boolean
+): Promise<void> {
+  const user = await requireUser();
+  await setHideDirectoryLinks(user.accountId, occasionId ? { occasionId } : {}, hidden);
+  revalidatePath(occasionId ? `/occasions/${occasionId}` : '/account');
+}
+
+export async function featuredPrePurchaseAction(categorySlug: string, countyCode: string) {
+  return prePurchaseView({ categorySlug, countyCode });
+}
+
+export { listBusinessOccasions };

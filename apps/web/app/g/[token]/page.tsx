@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import { prisma } from '@eventdesk/db';
 import { getGuestView } from '@eventdesk/core';
 import { isLocale, t, type Locale } from '@eventdesk/i18n';
 import { formatDate } from '@eventdesk/shared';
@@ -24,9 +25,28 @@ export default async function GuestPage({
   } catch {
     notFound();
   }
+  // P20: branding of the business that owns the occasion (only before handover, P22)
+  const branding = await prisma.business.findFirst({
+    where: {
+      occasions: { some: { id: view.occasion.id, handedOverAt: null } },
+    },
+    select: { name: true, accentColor: true, logoAssetId: true },
+  });
   const locale: Locale = isLocale(sp.lang) ? sp.lang : (view.invitation.locale as Locale);
   return (
-    <main className="wrap">
+    <main
+      className="wrap"
+      style={
+        branding?.accentColor
+          ? ({ ['--accent' as string]: branding.accentColor } as React.CSSProperties)
+          : undefined
+      }
+    >
+      {branding && (
+        <div className="label-factual" style={{ color: branding.accentColor ?? undefined }}>
+          {branding.name}
+        </div>
+      )}
       <div className="row between">
         <h1>{t(locale, 'rsvp.welcome', { occasion: view.occasion.title })}</h1>
         <LangToggle guestBase={`/g/${token}`} />

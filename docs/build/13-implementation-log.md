@@ -169,3 +169,43 @@ loopback smoke green)
   `/business` auth-wall redirect — all OK.
 - Still open: P-08 business occasions/branding/handover, P-12/P-13 dormant billing +
   Featured (by design until MON ON), R0-02 IaC, R0-14 deploy pipeline, releases C/D/E.
+
+## Finish Release P (v0.4.0 candidate, branch vibe/release-p-finish-db71a4)
+
+- **P-08 (P17-P23)**: business-owned occasions creatable by any active member with the
+  same planning features; team access via business membership ends at handover (P22,
+  MCP7: business tokens stop passing getMember for that occasion); handover keeps
+  history and transfers ownership to the client; plan lapse (P23) blocks only NEW
+  business occasions/branding/library/listings — existing occasions and in-use
+  drawings/catalogues stay fully usable (all tested). P20 branding (name/logo/accent)
+  renders on guest pages pre-handover. P19 shared library. P21 cross-occasion
+  dashboard with asset usage as daily totals, no visitor ids (D4). P7 dismissible
+  directory link on tasks, switchable per account/occasion.
+- **P-12 dormant billing (MON1-MON5, P24-P28, PAY1-PAY5)**: `/api/webhooks/stripe`
+  verifies HMAC-SHA256 signatures (5-min tolerance) before anything flips (P24);
+  browser redirects grant nothing. invoice.payment_failed → 14-day grace (P25);
+  cancel-at-period-end → lapse → P23 guard. Checkout dormant (MON ON + key only),
+  wallet order Apple Pay → Google Pay → card (PAY1/PAY2). Refunds/credits queue for a
+  second person (P26/W9). e-Factura invoicing via SmartBill/Oblio webhook when
+  configured, else SANDBOX fiscal ref; TVA separate, prices excl. TVA (PAY3/PAY4).
+  MON4: switch ON refused without recorded test-mode billing acceptance; ON records
+  the 60-day notice window (MON2/P28). MON5: Featured does not exist while OFF.
+- **P-13 dormant Featured (P13-P16)**: up to 3 random cards per request, label
+  verbatim "Promovat — plasare plătită", organic order untouched; P15 pre-purchase
+  view min(1, 3/(n+1)) + 30-day search aggregates; P16 absence from exports tested.
+- **P-14 console (full)**: W4 directory management (categories create/retire/publish,
+  daily per category×county stats), W6 commercial (free-phase cost dashboard, switch +
+  notice, billing acceptance, refund queue), W7 comms to businesses only, W8 access
+  management + audit filters/export + 3-person compliance access, W10 deployments
+  (GitHub App server-side creds, deploy by tag with green CI only, second-person or
+  audit-marked emergency). LAU8 notice-and-action content reports reuse W3 + SEC10.
+- **P-15 MCP**: propose_supplier_shortlist (notifies nobody, labels verbatim),
+  propose_seating_layout (V6 fit-checked), propose_custom_table (V5),
+  propose_arrangement_design (indicative cost, never a quote, F3),
+  propose_budget_note (finance grant, SEC15) — all propose-only What-if previews,
+  guest-role/finance-less denials tested.
+- Schema: handover fields, planLapsedAt, library, asset-usage-daily,
+  directory-search-daily, billing acceptance, compliance access, platform notices,
+  content reports, subscription/invoice billing fields (migrations release_p_finish,
+  release_p_billing). Tests: 55 total green (11 new core + 1 new MCP). Smoke extended.
+- Still open: releases C/D/E, R0-02 IaC, operator launch obligations (LAU2-LAU5, LAU7).

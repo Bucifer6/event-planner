@@ -3,7 +3,7 @@ import {
   listCounties,
   listDirectoryCategories,
   listOccasionsForAccount,
-  searchDirectory,
+  searchDirectoryWithFeatured,
 } from '@eventdesk/core';
 import { getLocale, tf } from '../lib/i18n';
 import { currentUser } from '../lib/session';
@@ -33,14 +33,17 @@ export default async function DirectoryPage({
   const countyCode = sp.county ?? counties[0]?.code ?? '';
   const county = counties.find((c) => c.code === countyCode);
 
-  let results: Awaited<ReturnType<typeof searchDirectory>> = [];
+  let featured: Awaited<ReturnType<typeof searchDirectoryWithFeatured>>['featured'] = [];
+  let results: Awaited<ReturnType<typeof searchDirectoryWithFeatured>>['organic'] = [];
   if (categorySlug && countyCode) {
     try {
-      results = await searchDirectory({
+      const r = await searchDirectoryWithFeatured({
         categorySlug,
         countyCode,
         localityId: sp.locality || undefined,
       });
+      featured = r.featured;
+      results = r.organic;
     } catch {
       results = [];
     }
@@ -105,7 +108,22 @@ export default async function DirectoryPage({
           </button>
         </div>
       </form>
-      {results.length === 0 && <div className="notice">{t('p.dir.empty')}</div>}
+      {featured.map((r) => (
+        <Link
+          key={r.listing.id}
+          href={`/directory/${r.listing.id}${occasionId ? `?occasion=${occasionId}` : ''}`}
+          className="card"
+          style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
+        >
+          <h2 style={{ margin: 0 }}>{r.listing.name}</h2>
+          <div className="label-factual">
+            {locale === 'en' ? 'Featured — paid placement' : r.featuredLabel}
+          </div>
+        </Link>
+      ))}
+      {results.length === 0 && featured.length === 0 && (
+        <div className="notice">{t('p.dir.empty')}</div>
+      )}
       {results.map((r) => (
         <Link
           key={r.listing.id}

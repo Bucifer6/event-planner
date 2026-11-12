@@ -161,6 +161,8 @@ export async function attachSpaceModel(
     orderBy: { version: 'desc' },
   });
   const version = (last?.version ?? 0) + 1;
+  const { recordAssetUsage } = await import('./bizdashboard');
+  await recordAssetUsage('drawing', drawingId, drawing.listingId); // P21 daily total, no visitor id
   return prisma.spaceModelVersion.create({
     data: {
       occasionId,

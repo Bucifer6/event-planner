@@ -143,6 +143,74 @@ describe('MCP1-MCP8, SEC15', () => {
     expect(calls).toBeGreaterThan(0);
   });
 
+  it('P-15 propose tools: shortlist notifies nobody, budget note needs finance, guest cannot propose tasks (SEC15)', async () => {
+    const { owner, occasion, contributor } = await setup();
+    const { token } = await createToken(owner.id, 'o', ['read_propose']);
+    const ctx = await authenticateToken(token);
+
+    const shortlist = (await dispatchTool(ctx, 'propose_supplier_shortlist', {
+      occasionId: occasion.id,
+      listingIds: [],
+      rationale: 'cele mai apropiate',
+    })) as { proposalId: string; state: string };
+    const sp = await prisma.whatIfPreview.findUniqueOrThrow({
+      where: { id: shortlist.proposalId },
+    });
+    expect((sp.delta as { notifiesNobody: boolean }).notifiesNobody).toBe(true);
+    expect((sp.delta as { label: string }).label).toBe('creat cu un asistent extern');
+
+    const ct = (await dispatchTool(ctx, 'propose_custom_table', {
+      occasionId: occasion.id,
+      name: 'masă rotundă mare',
+      widthM: 1.8,
+      heightM: 1.8,
+    })) as { proposalId: string };
+    const ctp = await prisma.whatIfPreview.findUniqueOrThrow({ where: { id: ct.proposalId } });
+    expect((ctp.delta as { custom: boolean }).custom).toBe(true); // V5
+
+    // no space model yet -> seating proposal refused
+    await expect(
+      dispatchTool(ctx, 'propose_seating_layout', { occasionId: occasion.id, assignments: [] })
+    ).rejects.toMatchObject({ code: 'NOT_FOUND' });
+
+    const design = (await dispatchTool(ctx, 'propose_arrangement_design', {
+      occasionId: occasion.id,
+      baseForm: 'hand-tied',
+      items: [],
+    })) as { proposalId: string; indicativeCostBani: number };
+    expect(design.indicativeCostBani).toBe(0);
+    const dp = await prisma.whatIfPreview.findUniqueOrThrow({ where: { id: design.proposalId } });
+    expect((dp.delta as { indicativeNotQuote: boolean }).indicativeNotQuote).toBe(true); // F3
+
+    // finance-less contributor cannot send budget notes (SEC15)
+    const { token: cToken } = await createToken(contributor.id, 'c', ['read_propose']);
+    await expect(
+      dispatchTool(await authenticateToken(cToken), 'propose_budget_note', {
+        occasionId: occasion.id,
+        note: 'x',
+      })
+    ).rejects.toMatchObject({ code: 'FORBIDDEN' });
+
+    // guest-role token cannot propose task lists (SEC15)
+    const guest = await prisma.account.create({
+      data: {
+        kind: 'email',
+        email: `mcp-guest-${Math.random().toString(36).slice(2)}@example.com`,
+        emailVerifiedAt: new Date(),
+      },
+    });
+    await prisma.occasionMember.create({
+      data: { occasionId: occasion.id, accountId: guest.id, role: 'guest', finance: false },
+    });
+    const { token: gToken } = await createToken(guest.id, 'g', ['read_propose']);
+    await expect(
+      dispatchTool(await authenticateToken(gToken), 'propose_task_list', {
+        occasionId: occasion.id,
+        tasks: [],
+      })
+    ).rejects.toMatchObject({ code: 'FORBIDDEN' });
+  });
+
   it('the catalogue is fixed and versioned; every tool declares its scope (MCP8)', () => {
     for (const t of TOOL_CATALOGUE) {
       expect(['read', 'propose']).toContain(t.kind);

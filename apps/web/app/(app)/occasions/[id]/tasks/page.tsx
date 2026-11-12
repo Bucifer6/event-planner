@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { requireUser } from '../../../../lib/session';
 import { getLocale, tf } from '../../../../lib/i18n';
 import { listTasks, getOccasionForMember } from '@eventdesk/core';
+import { prisma } from '@eventdesk/db';
+import { setHideDirectoryLinksAction } from '../../../../actions/business';
 import { formatDate } from '@eventdesk/shared';
 import { Card } from '@eventdesk/ui';
 import {
@@ -27,9 +29,52 @@ export default async function TasksPage({
   const t = tf(locale);
   const view = sp.view === 'board' || sp.view === 'calendar' ? sp.view : 'list';
   const tasks = await listTasks(id, user.accountId);
-  const { member } = await getOccasionForMember(id, user.accountId);
+  const { member, occasion } = await getOccasionForMember(id, user.accountId);
+  // P7: one dismissible directory link naming no business, switchable per account or
+  // per occasion member
+  const account = await prisma.account.findUniqueOrThrow({ where: { id: user.accountId } });
+  const dirHidden = account.hideDirectoryLinks || member.hideDirectoryLinks;
+  const kindToCategory: Record<string, string> = {
+    nunta: 'sali-evenimente',
+    botez: 'sali-evenimente',
+    aniversare: 'inchiriere-echipamente',
+    revelion: 'dj',
+    picnic: 'catering',
+    voiaj_solo: 'cazare',
+    voiaj_grup: 'transport',
+    custom: 'sali-evenimente',
+  };
+  const categorySlug = kindToCategory[occasion.kind] ?? 'sali-evenimente';
+  const lastEnquiry = await prisma.enquiry.findFirst({
+    where: { occasionId: id },
+    orderBy: { sentAt: 'desc' },
+    select: { payload: true },
+  });
+  const countyCode = (lastEnquiry?.payload as { countyCode?: string } | null)?.countyCode ?? 'B';
   return (
     <>
+      {!dirHidden && (
+        <div className="notice">
+          <Link href={`/directory?occasion=${id}&category=${categorySlug}&county=${countyCode}`}>
+            {t('p7.link', { category: categorySlug, county: countyCode })}
+          </Link>{' '}
+          <form
+            action={setHideDirectoryLinksAction.bind(null, id, true)}
+            style={{ display: 'inline' }}
+          >
+            <button className="btn secondary" type="submit">
+              {t('p7.hide')}
+            </button>
+          </form>
+        </div>
+      )}
+      {dirHidden && (
+        <form action={setHideDirectoryLinksAction.bind(null, id, false)}>
+          <button className="btn secondary" type="submit">
+            {t('p7.show')}
+          </button>
+        </form>
+      )}
       <div className="tabs">
         {(['list', 'board', 'calendar'] as const).map((v) => (
           <Link

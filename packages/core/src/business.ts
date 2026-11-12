@@ -119,9 +119,11 @@ async function validatePicklists(input: ListingInput) {
   }
   // fixed picklists: every id must exist; free text is impossible by construction
   const [cats, counties, localities] = await Promise.all([
-    prisma.category.findMany({ where: { id: { in: input.categoryIds } } }),
-    prisma.county.findMany({ where: { id: { in: input.countyIds } } }),
-    prisma.locality.findMany({ where: { id: { in: input.localityIds } } }),
+    prisma.category.findMany({
+      where: { id: { in: input.categoryIds }, published: true, retiredAt: null },
+    }),
+    prisma.county.findMany({ where: { id: { in: input.countyIds }, published: true } }),
+    prisma.locality.findMany({ where: { id: { in: input.localityIds }, published: true } }),
   ]);
   if (cats.length !== input.categoryIds.length)
     throw new AppError('INVALID_INPUT', 'Unknown category — pick from the list.');
@@ -149,6 +151,8 @@ export async function createListing(
   const count = await prisma.listing.count({ where: { businessId } });
   if (count >= 5) throw new AppError('INVALID_INPUT', 'A business can have up to 5 listings (P1).');
   if (business.suspendedAt) throw new AppError('FORBIDDEN', 'This business is restricted (W3).');
+  if (business.planLapsedAt)
+    throw new AppError('FORBIDDEN', 'Plan lapsed: new listings are paused (P23).');
   await validatePicklists(input);
   return prisma.$transaction(async (tx) => {
     const listing = await tx.listing.create({
