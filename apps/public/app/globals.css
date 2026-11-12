@@ -1,0 +1,41 @@
+@import '@eventdesk/ui/src/tokens.css';
+
+body {
+  background: var(--cream);
+}
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 24px 16px;
+}
+h1 {
+  font-size: 34px;
+}
+nav.top {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--sage);
+}
+nav.top a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  text-decoration: none;
+}
+.cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--cream);
+  text-decoration: none;
+}
+footer {
+  padding: 24px 16px;
+  color: var(--grey-unknown);
+  font-family: var(--font-mono);
+  font-size: 12px;
+}

@@ -1,0 +1,251 @@
+/* Garden Soirée — adopted primary design language (PRD section 21).
+   Palette: cream/sage foundation, ink-green text, terracotta for attention only.
+   Type: Sora (UI), Cormorant Garamond (human voice), DM Mono (factual labels),
+   each with named system fallbacks; self-hosted fonts preferred (D1). */
+:root {
+  --cream: #fdfefa;
+  --sage: #dcead1;
+  --ink: #23301f;
+  --terracotta: #b0674a;
+  --grey-unknown: #6b7263;
+  --radius-card: 16px;
+  --radius-pill: 999px;
+  --font-ui: 'Sora', 'Avenir Next', 'Segoe UI', system-ui, sans-serif;
+  --font-voice: 'Cormorant Garamond', 'Palatino Linotype', Palatino, Georgia, serif;
+  --font-mono: 'DM Mono', 'SFMono-Regular', Menlo, 'Courier New', monospace;
+  --target-min: 44px;
+  --navy: #141b2e;
+  --brass: #c9a86a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* Single-column phone layout first; desktop is the expanded view (A12). */
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.card {
+  background: #ffffff;
+  border: 1px solid var(--sage);
+  border-radius: var(--radius-card);
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+/* Pill buttons, all targets >= 44px (A12). */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--target-min);
+  min-width: var(--target-min);
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--cream);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn.secondary {
+  background: transparent;
+  color: var(--ink);
+}
+
+.btn.attention {
+  background: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+}
+
+/* Every interactive element >= 44px. */
+input,
+select,
+textarea,
+a.link,
+button.linklike {
+  min-height: var(--target-min);
+  font-size: 16px;
+  font-family: var(--font-ui);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+input[type='date'],
+input[type='datetime-local'],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--sage);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--ink);
+}
+
+label {
+  display: block;
+  margin: 12px 0 4px;
+  font-weight: 600;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-voice);
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+/* Honest Directory convention: factual/paid/unknown labels in small mono caps. */
+.label-factual {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+}
+
+/* Unknown stays visible: italic grey "unknown", never zero (principle 5). */
+.unknown {
+  font-style: italic;
+  color: var(--grey-unknown);
+  font-family: var(--font-mono);
+  font-size: 13px;
+}
+
+.notice {
+  background: var(--sage);
+  border-radius: var(--radius-card);
+  padding: 12px 16px;
+  margin-bottom: 12px;
+}
+
+.notice.attention {
+  background: #f6e3da;
+  border: 1px solid var(--terracotta);
+}
+
+.error {
+  color: var(--terracotta);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  min-height: 20px;
+}
+
+a {
+  color: var(--ink);
+}
+
+/* Event-day / dark mode: "Midnight Candlelight" (section 21 situational surface). */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream: #141b2e;
+    --sage: #232c47;
+    --ink: #eef1e6;
+    --grey-unknown: #9aa38b;
+  }
+  .card {
+    background: #1b2338;
+    border-color: #2c3752;
+  }
+  input,
+  select,
+  textarea {
+    background: #10162a;
+    color: var(--ink);
+    border-color: #2c3752;
+  }
+  .btn.secondary {
+    color: var(--ink);
+  }
+}
+
+/* Board view columns and calendar strip render the same task rows (principle 2). */
+.board {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+}
+.board .col {
+  background: var(--sage);
+  border-radius: var(--radius-card);
+  padding: 8px;
+}
+@media (prefers-color-scheme: dark) {
+  .board .col {
+    background: #1b2338;
+  }
+}
+.calendar {
+  display: grid;
+  gap: 8px;
+}
+.calendar .day {
+  border-left: 3px solid var(--sage);
+  padding-left: 12px;
+}
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+.tabs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--target-min);
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--sage);
+  text-decoration: none;
+}
+.tabs a.active {
+  background: var(--ink);
+  color: var(--cream);
+  border-color: var(--ink);
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--target-min);
+}
+.row.between {
+  justify-content: space-between;
+}
+.muted {
+  color: var(--grey-unknown);
+}
+.mono {
+  font-family: var(--font-mono);
+  font-size: 13px;
+}

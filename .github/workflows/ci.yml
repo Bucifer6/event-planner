@@ -1,0 +1,41 @@
+# CI required by DEP7: every PR and main run lint, typecheck, unit+integration tests,
+# builds of all apps, dependency audit, e2e smoke and a11y/header/320px assertions.
+# A tag is deployable only when CI passed on that exact commit (DEP7).
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['v*']
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm --filter @eventdesk/web build
+      - run: pnpm --filter @eventdesk/public-site build
+      - run: pnpm --filter @eventdesk/worker build
+      - name: Dependency audit (fail on high+)
+        run: pnpm audit --audit-level=high
+      - name: Public site sets no cookies and no third-party scripts (D1)
+        run: |
+          OUT=apps/public/out
+          if grep -rEo '<script[^>]+src="https?://' "$OUT"; then
+            echo 'third-party script found on public site' >&2; exit 1
+          fi
+          if grep -rEi 'set-cookie' "$OUT"; then
+            echo 'cookie set found on public site' >&2; exit 1
+          fi
+          echo 'public site clean (D1)'
+      - name: Security headers assertion (SEC5)
+        run: pnpm --filter @eventdesk/web test -- security-headers

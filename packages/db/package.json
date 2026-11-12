@@ -1,0 +1,29 @@
+{
+  "name": "@eventdesk/db",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "prisma generate",
+    "test": "vitest run --passWithNoTests",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "db:seed": "prisma db seed"
+  },
+  "prisma": {
+    "seed": "tsx prisma/seed.ts"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "3.3.0",
+    "@prisma/client": "6.19.3",
+    "prisma": "6.19.3"
+  },
+  "devDependencies": {
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "3.2.7",
+    "@types/node": "24.19.2"
+  }
+}

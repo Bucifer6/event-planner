@@ -1,0 +1,651 @@
+// EventDesk.ro data model — see docs/build/02-data-model.md (PRD v4.9).
+// Conventions: cuid2 ids (never sequential, SEC2); invitation/guest-link tokens >=128-bit,
+// stored hashed (SEC8); timestamps stored in UTC (INF8); money in integer minor units (bani);
+// unknown values are NULL and render as "unknown", never 0 (principle 5);
+// AuditLog is append-only, enforced by a DB trigger (SEC10).
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AccountKind {
+  email
+  anonymous
+}
+
+enum Role {
+  owner
+  project_manager
+  workstream_lead
+  contributor
+  supplier
+  guest
+}
+
+enum TaskStatus {
+  todo
+  in_progress
+  blocked
+  done
+}
+
+enum DelegationState {
+  offered
+  accepted
+  declined
+}
+
+enum PollChoice {
+  yes
+  maybe
+  no
+}
+
+enum PreviewState {
+  pending
+  applied
+  discarded
+}
+
+enum InvitationExpiryMode {
+  never
+  rsvp_deadline
+  closeout
+}
+
+enum ClaimState {
+  claimed
+  released
+}
+
+enum RsvpQuestionKind {
+  menu_choice
+  allergies
+  accommodation_need
+  transport_need
+  free_text
+}
+
+enum DateMode {
+  date
+  range
+  poll
+}
+
+enum OccasionStatus {
+  active
+  archived
+  closed
+}
+
+model Account {
+  id              String      @id @default(cuid())
+  kind            AccountKind @default(email)
+  email           String?     @unique
+  username        String?     @unique
+  passwordHash    String? // Argon2id, per-account salt (S8); null for email accounts
+  locale          String      @default("ro")
+  emailVerifiedAt DateTime?
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime    @updatedAt
+
+  sessions      Session[]
+  recoveryCodes RecoveryCode[]
+  totpSecret    TotpSecret?
+  mcpTokens     McpToken[]
+  staffMember   StaffMember?
+  occasions     Occasion[]
+}
+
+model Session {
+  id         String    @id @default(cuid())
+  accountId  String
+  account    Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  deviceType String?
+  lastSeenAt DateTime  @default(now())
+  expiresAt  DateTime // 30 days, or 14 days idle (S3)
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([accountId])
+  @@index([expiresAt])
+}
+
+// Sign-in codes: identifier is an email (email accounts) or username (anonymous).
+// Only hashes are stored (SEC8). Codes expire after 15 min, max 5 attempts (INF4),
+// single-use, and a newer code invalidates older ones (SEC1).
+model SignInCode {
+  id             String    @id @default(cuid())
+  accountId      String?
+  identifierHash String // sha256 of normalized email or username
+  codeHash       String
+  attempts       Int       @default(0)
+  expiresAt      DateTime
+  usedAt         DateTime?
+  createdAt      DateTime  @default(now())
+
+  magicLinks MagicLink[]
+
+  @@index([identifierHash])
+}
+
+model MagicLink {
+  id         String      @id @default(cuid())
+  tokenHash  String      @unique
+  codeId     String
+  code       SignInCode  @relation(fields: [codeId], references: [id], onDelete: Cascade)
+  identifier String // the address the code was requested for (codes/tokens stay hashed, SEC8)
+  usedAt     DateTime?
+  expiresAt  DateTime // expires together with its code (SEC14)
+  createdAt  DateTime    @default(now())
+}
+
+model RecoveryCode {
+  id        String    @id @default(cuid())
+  accountId String
+  account   Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  codeHash  String
+  usedAt    DateTime?
+  createdAt DateTime  @default(now())
+
+  @@index([accountId])
+}
+
+model TotpSecret {
+  id          String    @id @default(cuid())
+  accountId   String    @unique
+  account     Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  secret      String
+  confirmedAt DateTime?
+  createdAt   DateTime  @default(now())
+}
+
+model McpToken {
+  id         String    @id @default(cuid())
+  accountId  String
+  account    Account   @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  name       String
+  tokenHash  String    @unique
+  scopes     String[] // read | read_propose (MCP1)
+  lastUsedAt DateTime?
+  revokedAt  DateTime?
+  createdAt  DateTime  @default(now())
+
+  @@index([accountId])
+}
+
+// SEC16/SEC11 rate-limit buckets, one row per (axis, key, window).
+model RateLimitBucket {
+  id           String    @id @default(cuid())
+  axis         String // email | ip | device
+  key          String
+  windowStart  DateTime
+  count        Int       @default(0)
+  level        Int       @default(0) // escalating backoff level, per address only, never a lockout
+  penaltyUntil DateTime?
+  expiresAt    DateTime
+
+  @@unique([axis, key, windowStart])
+  @@index([expiresAt])
+}
+
+// Security log: never records whether an account exists (SEC16).
+model SecurityLog {
+  id       String   @id @default(cuid())
+  event    String
+  axisKey  String?
+  at       DateTime @default(now())
+  meta     Json?
+
+  @@index([at])
+}
+
+// Append-only audit log (SEC10): a DB trigger blocks UPDATE/DELETE for every role.
+model AuditLog {
+  id         String   @id @default(cuid())
+  actorId    String?
+  actorKind  String // account | staff | system | mcp_token
+  action     String
+  objectType String
+  objectId   String?
+  before     Json?
+  after      Json?
+  at         DateTime @default(now())
+
+  @@index([at])
+  @@index([objectType, objectId])
+}
+
+model DeletionRequest {
+  id           String    @id @default(cuid())
+  targetType   String // account | occasion
+  targetId     String
+  requestedAt  DateTime  @default(now())
+  undoUntil    DateTime // +7 days (D6)
+  completedAt  DateTime?
+  retainedNote String?
+
+  @@unique([targetType, targetId])
+}
+
+// Six staff roles (PRD section 10): platform_admin, content_editor, listing_moderator,
+// commercial_manager, privacy_owner, security_administrator.
+model StaffMember {
+  id        String   @id @default(cuid())
+  accountId String   @unique
+  account   Account  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  roles     String[]
+  createdAt DateTime @default(now())
+}
+
+// Second-person approval queue (W9): queued actions have no effect until approved.
+model ApprovalRequest {
+  id          String    @id @default(cuid())
+  action      String
+  payload     Json
+  requesterId String
+  approverId  String?
+  state       String    @default("pending") // pending | approved | rejected
+  createdAt   DateTime  @default(now())
+  decidedAt   DateTime?
+
+  @@index([state])
+}
+
+model Occasion {
+  id               String        @id @default(cuid())
+  ownerId          String
+  owner            Account       @relation(fields: [ownerId], references: [id])
+  title            String
+  kind             String // template kind: picnic | aniversare | nunta | botez | revelion | voiaj_solo | voiaj_grup | custom
+  dateMode         DateMode      @default(date)
+  dateStart        DateTime?
+  dateEnd          DateTime?
+  status           OccasionStatus @default(active)
+  capacityTotal    Int? // one capacity count shared by invited and public guests (A8)
+  seatsTaken       Int           @default(0)
+  briefPurpose     String?
+  briefPriorities  Json? // up to 3 priorities (A11)
+  revision         Int           @default(0) // bumped on every change; powers "changed since your last visit" (INF5)
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime      @updatedAt
+
+  members        OccasionMember[]
+  tasks          Task[]
+  households     Household[]
+  invitations    Invitation[]
+  rsvpQuestions  RsvpQuestion[]
+  polls          DatePoll[]
+  needs          ContributionNeed[]
+  previews       WhatIfPreview[]
+  digests        ReminderDigest[]
+
+  @@index([ownerId])
+}
+
+model OccasionMember {
+  id                String   @id @default(cuid())
+  occasionId        String
+  occasion          Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  accountId         String?
+  inviteEmail       String? // pending invite before the account exists
+  role              Role
+  customLabel       String? // localized role labels, e.g. naș/nasă, domn/damnă de cununie (A5)
+  finance           Boolean  @default(false) // separate grant (A5, D2)
+  privateRequests   Boolean  @default(false) // separate grant (A5, D2)
+  createdAt         DateTime @default(now())
+
+  ownedTasks Task[]
+
+  @@unique([occasionId, accountId])
+  @@index([occasionId])
+}
+
+model Template {
+  id        String         @id @default(cuid())
+  kind      String         @unique
+  nameKey   String // i18n key for the localized name (L1)
+  tasks     TemplateTask[]
+  createdAt DateTime       @default(now())
+}
+
+model TemplateTask {
+  id           String    @id @default(cuid())
+  templateId   String
+  template     Template  @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  titleKey     String // i18n key
+  offsetMonths Int // auto-scheduled relative to the occasion date: 12, 9, 6, 3, 1 (A2)
+  sortOrder    Int       @default(0)
+
+  @@index([templateId])
+}
+
+model Task {
+  id             String     @id @default(cuid())
+  occasionId     String
+  occasion       Occasion   @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title          String
+  description    String?
+  ownerMemberId  String?
+  owner          OccasionMember? @relation(fields: [ownerMemberId], references: [id])
+  status         TaskStatus @default(todo)
+  dueAt          DateTime?
+  parentId       String?
+  parent         Task?      @relation("TaskChildren", fields: [parentId], references: [id])
+  children       Task[]     @relation("TaskChildren")
+  templateTaskId String? // set when created from a template; unique per occasion (re-run diff, A2)
+  createdById    String
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @updatedAt
+
+  dependencies  TaskDependency[] @relation("TaskDeps")
+  dependents    TaskDependency[] @relation("TaskDependents")
+  checkItems    TaskCheckItem[]
+  delegations   Delegation[]
+
+  @@unique([occasionId, templateTaskId])
+  @@index([occasionId])
+  @@index([ownerMemberId])
+}
+
+model TaskDependency {
+  id           String @id @default(cuid())
+  taskId       String
+  task         Task   @relation("TaskDeps", fields: [taskId], references: [id], onDelete: Cascade)
+  dependsOnId  String
+  dependsOn    Task   @relation("TaskDependents", fields: [dependsOnId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, dependsOnId])
+}
+
+model TaskCheckItem {
+  id        String   @id @default(cuid())
+  taskId    String
+  task      Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  label     String
+  done      Boolean  @default(false)
+  sortOrder Int      @default(0)
+
+  @@index([taskId])
+}
+
+model Delegation {
+  id           String          @id @default(cuid())
+  taskId       String
+  task         Task            @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  fromMemberId String
+  toMemberId   String
+  state        DelegationState @default(offered)
+  reason       String?
+  createdAt    DateTime        @default(now())
+  respondedAt  DateTime?
+
+  @@index([taskId])
+  @@index([toMemberId, state])
+}
+
+// Households: a lead responds for their party (A6). Children are never persons:
+// only an attending count on the RSVP response — no child rows or fields anywhere.
+model Household {
+  id         String    @id @default(cuid())
+  occasionId String
+  occasion   Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name       String
+  leadEmail  String? // captured when the household responds on the guest link (INF5)
+  createdAt  DateTime  @default(now())
+
+  guests      Guest[]
+  invitations Invitation[]
+  responses   RsvpResponse[]
+
+  @@index([occasionId])
+}
+
+// Adult guests only (A6).
+model Guest {
+  id          String       @id @default(cuid())
+  householdId String
+  household   Household    @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  name        String
+  createdAt   DateTime     @default(now())
+
+  attendances RsvpPersonAttendance[]
+
+  @@index([householdId])
+}
+
+// Scoped, revocable guest links: >=128-bit random token, stored hashed (SEC2, SEC8).
+model Invitation {
+  id           String              @id @default(cuid())
+  occasionId   String
+  occasion     Occasion            @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  householdId  String
+  household    Household           @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  tokenHash    String              @unique
+  locale       String              @default("ro") // the guest link opens in the invitation language (L2)
+  expiryMode   InvitationExpiryMode @default(never)
+  expiresAt    DateTime?
+  revokedAt    DateTime?
+  createdAt    DateTime            @default(now())
+
+  responses RsvpResponse[]
+  votes     PollVote[]
+
+  @@index([occasionId])
+}
+
+model RsvpQuestion {
+  id         String           @id @default(cuid())
+  occasionId String
+  occasion   Occasion         @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  kind       RsvpQuestionKind
+  promptKey  String // i18n key
+  required   Boolean          @default(false)
+  sortOrder  Int              @default(0)
+
+  answers RsvpAnswer[]
+
+  @@index([occasionId])
+}
+
+model RsvpResponse {
+  id              String    @id @default(cuid())
+  invitationId    String
+  invitation      Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  householdId     String
+  household       Household @relation(fields: [householdId], references: [id], onDelete: Cascade)
+  adults          Int       @default(0)
+  childrenCount   Int       @default(0) // count only — never child details (A6)
+  lastSeenRevision Int      @default(0) // "changed since your last visit" marker (INF5)
+  submittedAt     DateTime  @default(now())
+
+  attendances RsvpPersonAttendance[]
+  answers     RsvpAnswer[]
+
+  @@index([invitationId])
+  @@index([householdId])
+}
+
+// Each person's attendance is recorded per session (A6).
+model RsvpPersonAttendance {
+  id         String       @id @default(cuid())
+  responseId String
+  response   RsvpResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  guestId    String
+  guest      Guest        @relation(fields: [guestId], references: [id], onDelete: Cascade)
+  attending  Boolean
+
+  @@unique([responseId, guestId])
+}
+
+model RsvpAnswer {
+  id               String       @id @default(cuid())
+  responseId       String
+  response         RsvpResponse @relation(fields: [responseId], references: [id], onDelete: Cascade)
+  questionId       String
+  question         RsvpQuestion @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  value            String
+  childDataFlagged Boolean      @default(false) // free-text child-details warning (A6)
+
+  @@index([responseId])
+}
+
+model DatePoll {
+  id            String    @id @default(cuid())
+  occasionId    String
+  occasion      Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title         String?
+  decidedDate   DateTime? // set when the host confirms (A7)
+  confirmedAt   DateTime?
+  createdAt     DateTime  @default(now())
+
+  votes PollVote[]
+
+  @@index([occasionId])
+}
+
+// Votes never reserve places (A7); capacity is enforced separately on Occasion (A8).
+model PollVote {
+  id           String     @id @default(cuid())
+  pollId       String
+  poll         DatePoll   @relation(fields: [pollId], references: [id], onDelete: Cascade)
+  invitationId String
+  invitation   Invitation @relation(fields: [invitationId], references: [id], onDelete: Cascade)
+  choice       PollChoice
+  createdAt    DateTime   @default(now())
+
+  @@unique([pollId, invitationId])
+}
+
+model ContributionNeed {
+  id           String   @id @default(cuid())
+  occasionId   String
+  occasion     Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title        String
+  unitLabel    String?
+  totalUnits   Int?
+  claimedUnits Int      @default(0)
+  createdById  String
+  createdAt    DateTime @default(now())
+
+  claims ContributionClaim[]
+
+  @@index([occasionId])
+}
+
+// Atomic last-unit claims: conditional UPDATE on claimedUnits (A9).
+model ContributionClaim {
+  id         String     @id @default(cuid())
+  needId     String
+  need       ContributionNeed @relation(fields: [needId], references: [id], onDelete: Cascade)
+  memberId   String?
+  invitationId String?
+  units      Int
+  state      ClaimState @default(claimed)
+  createdAt  DateTime   @default(now())
+  releasedAt DateTime?
+
+  @@index([needId])
+}
+
+// What-if previews and MCP proposals share one table (principle 3, MCP3):
+// nothing is applied until explicit confirmation; confirm is idempotent (Q4).
+model WhatIfPreview {
+  id                  String       @id @default(cuid())
+  occasionId          String?
+  occasion            Occasion?    @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  subject             String
+  delta               Json
+  proposedByAccountId String?
+  proposedByTokenId   String? // MCP token that proposed it (SEC15, MCP5)
+  state               PreviewState @default(pending)
+  idempotencyKey      String?      @unique
+  createdAt           DateTime     @default(now())
+  decidedAt           DateTime?
+
+  @@index([occasionId])
+}
+
+model ReminderDigest {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  memberId   String
+  digestDate DateTime // UTC day
+  sentAt     DateTime @default(now())
+
+  @@unique([occasionId, memberId, digestDate])
+  @@index([digestDate])
+}
+
+// Postgres-backed job queue (Q7): leased with FOR UPDATE SKIP LOCKED (packages/jobs).
+model Job {
+  id          String    @id @default(cuid())
+  type        String
+  payload     Json
+  runAt       DateTime  @default(now())
+  attempts    Int       @default(0)
+  maxAttempts Int       @default(5)
+  lockedAt    DateTime?
+  lockedBy    String?
+  lastError   String?
+  completedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  @@index([runAt, completedAt])
+}
+
+// Q6 fair use: 500 emails/day/occasion enforced server-side via this log.
+model EmailLog {
+  id              String   @id @default(cuid())
+  occasionId      String?
+  toIdentifierHash String
+  template        String
+  sentAt          DateTime @default(now())
+
+  @@index([occasionId, sentAt])
+  @@index([sentAt])
+}
+
+// Hard-bounced addresses are never emailed again (INF2).
+model EmailSuppression {
+  id              String   @id @default(cuid())
+  identifierHash  String   @unique
+  reason          String
+  createdAt       DateTime @default(now())
+}
+
+// Dev email transport writes here instead of calling a provider (R0-11).
+model EmailOutbox {
+  id        String   @id @default(cuid())
+  to        String
+  subject   String
+  bodyText  String
+  bodyHtml  String?
+  template  String
+  sentAt    DateTime @default(now())
+}
+
+// Single platform-level monetization switch (MON2), OFF by default.
+model MonetizationSwitch {
+  id        String   @id @default("main")
+  state     String   @default("OFF") // OFF | ON
+  history   Json     @default("[]")
+  updatedAt DateTime @updatedAt
+}
+
+// Server-side daily aggregates only; no visitor identifier anywhere (D4, INF11).
+model StatsAggregate {
+  id        String   @id @default(cuid())
+  day       DateTime
+  metric    String
+  value     Float
+  createdAt DateTime @default(now())
+
+  @@unique([day, metric])
+}

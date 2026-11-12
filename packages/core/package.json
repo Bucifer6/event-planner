@@ -1,0 +1,27 @@
+{
+  "name": "@eventdesk/core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:integration": "vitest run",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@eventdesk/auth": "workspace:*",
+    "@eventdesk/db": "workspace:*",
+    "@eventdesk/shared": "workspace:*",
+    "xlsx": "0.18.5",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "typescript": "5.9.3",
+    "vitest": "3.2.7",
+    "@types/node": "24.19.2"
+  }
+}
