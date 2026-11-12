@@ -89,6 +89,14 @@ C → C-01…C-13; D → D-01…D-05; E → E-01…E-04 (see `08-releases-C-D-E.
 | LAU8 | R0-17 (notice-and-action intake) |
 | LAU9 | R0-07, R0-17 (accessibility statement) |
 
+## Testing, QA and security review (this plan)
+| Item | Where |
+| --- | --- |
+| Automated test layers (unit/integration/e2e/security/load/a11y/audit) and CI wiring | `11-testing-and-qa.md` |
+| Per-release test plans (journeys + negative tests) | `11-testing-and-qa.md` |
+| Bug-check / release-blocker checklist (PRD §12 blockers) | `11-testing-and-qa.md` |
+| Cybersecurity-agent brief: scope, SEC/S/D/MCP/DEP verification checklist, vuln hunt list, severity triage, finding template, secure-release gate | `12-security-review.md` |
+
 ## Design language (PRD §21)
 Garden Soirée + Honest Directory → R0-06; Midnight Candlelight → B-07; Paper & Ink layout designer →
 C-01; design gates (WCAG AA at 320px before A, Featured label legibility before P, phone-first mocks)
