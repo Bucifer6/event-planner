@@ -721,5 +721,6 @@
   "console.launch.a11y.method": "Metoda de evaluare",
   "console.launch.a11y.save": "Salvează în consolă",
   "console.launch.a11y.recorded": "Înregistrat",
-  "console.launch.a11y.none": "Nimic înregistrat încă."
+  "console.launch.a11y.none": "Nimic înregistrat încă.",
+  "common.ok": "OK"
 }

@@ -113,6 +113,14 @@ export async function createAnonymousAction(formData: FormData): Promise<void> {
   redirect('/account');
 }
 
+// Clears the one-time recovery-codes flash cookie (S8). Cookie mutation is only
+// allowed in a Server Action — never during page render.
+export async function dismissRecoveryAction(): Promise<void> {
+  const { cookies } = await import('next/headers');
+  const store = await cookies();
+  store.delete('ed_recovery');
+}
+
 export async function signOutAction(): Promise<void> {
   const { cookies } = await import('next/headers');
   const store = await cookies();

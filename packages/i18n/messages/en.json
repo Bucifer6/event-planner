@@ -721,5 +721,6 @@
   "console.launch.a11y.method": "Evaluation method",
   "console.launch.a11y.save": "Save in console",
   "console.launch.a11y.recorded": "Recorded",
-  "console.launch.a11y.none": "Nothing recorded yet."
+  "console.launch.a11y.none": "Nothing recorded yet.",
+  "common.ok": "OK"
 }

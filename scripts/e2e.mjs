@@ -175,6 +175,10 @@ await check('offline API without session rejected', async () => {
 });
 
 // ---- C. signed-in planner journey ----
+await check('GET /account 200 as signed-in user (no cookie mutation during render)', async () => {
+  const r = await fetch(`${app}/account`, { headers: asUser() });
+  if (r.status !== 200) throw new Error(`status ${r.status}`);
+});
 await check('GET /dashboard 200 as signed-in user', async () => {
   const r = await fetch(`${app}/dashboard`, { headers: asUser() });
   if (r.status !== 200) throw new Error(`status ${r.status}`);

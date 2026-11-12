@@ -4,7 +4,7 @@ import { requireUser } from '../../lib/session';
 import { getLocale, tf } from '../../lib/i18n';
 import { listSessions } from '@eventdesk/auth';
 import { Card, Notice } from '@eventdesk/ui';
-import { signOutEverywhereAction } from '../../actions/auth';
+import { dismissRecoveryAction, signOutEverywhereAction } from '../../actions/auth';
 
 export default async function AccountPage() {
   const user = await requireUser();
@@ -12,11 +12,16 @@ export default async function AccountPage() {
   const t = tf(locale);
   const sessions = await listSessions(user.accountId);
   const store = await cookies();
+  // Read-only here: cookies cannot be mutated in a Server Component — the flash
+  // cookie is cleared by dismissRecoveryAction (or expires after 600 s). S8.
   const recoveryRaw = store.get('ed_recovery')?.value;
   let recovery: { username: string; recoveryCodes: string[] } | null = null;
   if (recoveryRaw) {
-    recovery = JSON.parse(recoveryRaw);
-    store.delete('ed_recovery'); // shown exactly once (S8)
+    try {
+      recovery = JSON.parse(recoveryRaw);
+    } catch {
+      recovery = null;
+    }
   }
   return (
     <main className="wrap">
@@ -33,6 +38,11 @@ export default async function AccountPage() {
             ))}
           </ul>
           <div>{t('auth.recovery.warning')}</div>
+          <form action={dismissRecoveryAction}>
+            <button className="btn secondary" type="submit">
+              {t('common.ok')}
+            </button>
+          </form>
         </Notice>
       )}
       <Card>
