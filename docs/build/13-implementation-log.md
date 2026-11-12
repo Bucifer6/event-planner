@@ -247,3 +247,19 @@ loopback smoke green)
   (migrations release_c, release_c_fields, release_c_qrid).
 - Tests: 64 total green (9 new C tests). i18n ro/en 604 keys each.
 - Still open: releases D/E, R0-02 IaC, operator launch obligations (LAU2-LAU5, LAU7).
+
+## Release D (v0.6.0 candidate, branch vibe/release-d-db71a4)
+
+- **D-01**: itinerary legs stored UTC (INF8), displayed in Europe/Bucharest AND the
+  trip zone (`formatInZone`, DST-tested); booking imports arrive as What-if previews,
+  applied only on explicit confirm (tested: nothing applied while pending).
+- **D-02**: subgroups + optional activities; subgroup-scoped views respect grants (D2,
+  tested: outsider FORBIDDEN, member-by-leadEmail and managers pass).
+- **D-03**: packing lists with toggle (checklist reuse).
+- **D-04**: transport legs; room allocation ATOMIC like capacity (A8 conditional
+  UPDATE on occupants, rowCount decides; over-capacity refused, tested).
+- **D-05**: settlement per currency grouped from the one ledger (B3, tested RON+EUR).
+- Web: `/occasions/[id]/travel` page (itinerary, subgroups, packing, transport,
+  rooms, settlement). Schema: ItineraryLeg, Subgroup(+Member), Activity, PackingItem,
+  TransportLeg, Room(+Assignment) (migration release_d). Tests: 68 total green (4 new).
+- Still open: release E, R0-02 IaC, operator launch obligations.

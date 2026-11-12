@@ -51,6 +51,7 @@ export default async function OccasionLayout({
         <Link href={`/occasions/${id}/arrangements`}>{t('c.arr.tab')}</Link>
         <Link href={`/occasions/${id}/gift`}>{t('c.gift.tab')}</Link>
         <Link href={`/occasions/${id}/promotion`}>{t('c.promo.tab')}</Link>
+        <Link href={`/occasions/${id}/travel`}>{t('d.tab')}</Link>
       </div>
       {children}
     </main>

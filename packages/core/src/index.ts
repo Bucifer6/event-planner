@@ -44,3 +44,5 @@ export * from './privaterequests';
 export * from './gift';
 export * from './promotion';
 export * from './arrangements';
+
+export * from './travel';

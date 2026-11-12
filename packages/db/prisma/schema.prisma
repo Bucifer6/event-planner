@@ -314,6 +314,12 @@ model Occasion {
   menus          Menu[]
   publicRegistrations PublicRegistration[]
   arrangementDesigns ArrangementDesign[]
+  itineraryLegs   ItineraryLeg[]
+  subgroups       Subgroup[]
+  activities      Activity[]
+  packingItems    PackingItem[]
+  transportLegs   TransportLeg[]
+  rooms           Room[]
   ledgerEntries  LedgerEntry[]
   suppliers      Supplier[]
   bookings       Booking[]
@@ -1688,5 +1694,107 @@ model ArrangementDesign {
   quoteEnquiryId String? // F5/F6: the quote request sent from this design
   acceptedQuoteAssetId String?
   createdAt   DateTime @default(now())
+}
+
+// --- v0.6.0: Release D (solo or group holiday) ---
+
+// D-01: itinerary legs — stored in UTC (INF8), displayed in Europe/Bucharest and the
+// trip zone. Booking imports arrive as What-if previews and apply only on confirm.
+model ItineraryLeg {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  title       String
+  kind        String // flight | stay | transport | activity | other
+  startsAtUtc DateTime
+  endsAtUtc   DateTime?
+  zone        String   @default("Europe/Bucharest") // IANA trip zone for display
+  details     Json?
+  createdAt   DateTime @default(now())
+
+  @@index([occasionId])
+}
+
+// D-02: subgroups with scoped views (grants respected, D2).
+model Subgroup {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name       String
+  members    SubgroupMember[]
+  activities Activity[]
+  packing    PackingItem[]
+
+  @@index([occasionId])
+}
+
+model SubgroupMember {
+  id          String   @id @default(cuid())
+  subgroupId  String
+  subgroup    Subgroup @relation(fields: [subgroupId], references: [id], onDelete: Cascade)
+  householdId String
+
+  @@unique([subgroupId, householdId])
+}
+
+// D-02: optional activities, optionally subgroup-scoped.
+model Activity {
+  id          String    @id @default(cuid())
+  occasionId  String
+  occasion    Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  subgroupId  String?
+  subgroup    Subgroup? @relation(fields: [subgroupId], references: [id])
+  title       String
+  startsAtUtc DateTime
+  zone        String    @default("Europe/Bucharest")
+  optional    Boolean   @default(true)
+}
+
+// D-03: packing lists (checklist reuse).
+model PackingItem {
+  id          String    @id @default(cuid())
+  occasionId  String
+  occasion    Occasion  @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  subgroupId  String?
+  subgroup    Subgroup? @relation(fields: [subgroupId], references: [id])
+  label       String
+  packed      Boolean   @default(false)
+  packedAt    DateTime?
+}
+
+// D-04: transport legs.
+model TransportLeg {
+  id          String   @id @default(cuid())
+  occasionId  String
+  occasion    Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  label       String
+  fromPlace   String
+  toPlace     String
+  departsAtUtc DateTime
+  seats       Int      @default(0)
+  zone        String   @default("Europe/Bucharest")
+}
+
+// D-04: room allocation — assigned atomically like capacity (A8): conditional UPDATE
+// on Room.occupants, rowCount decides success.
+model Room {
+  id         String   @id @default(cuid())
+  occasionId String
+  occasion   Occasion @relation(fields: [occasionId], references: [id], onDelete: Cascade)
+  name       String
+  capacity   Int
+  occupants  Int      @default(0)
+  assignments RoomAssignment[]
+
+  @@index([occasionId])
+}
+
+model RoomAssignment {
+  id          String @id @default(cuid())
+  roomId      String
+  room        Room   @relation(fields: [roomId], references: [id], onDelete: Cascade)
+  householdId String
+
+  @@unique([roomId, householdId])
 }
 

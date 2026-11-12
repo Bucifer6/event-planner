@@ -114,3 +114,26 @@ export function formatRon(bani: number, locale: Locale = 'ro'): string {
   const withFrac = frac === 0 ? grouped : `${grouped},${String(frac).padStart(2, '0')}`;
   return locale === 'ro' ? `${withFrac} RON` : `${withFrac} RON`;
 }
+
+// D-01/INF8: display a UTC timestamp in an arbitrary IANA trip zone (in addition to
+// Europe/Bucharest). Storage stays UTC; only display converts.
+export function formatInZone(d: Date | string, zone: string, locale: Locale = 'ro'): string {
+  const date = typeof d === 'string' ? new Date(d) : d;
+  const p = new Intl.DateTimeFormat('en-GB', {
+    timeZone: zone,
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: false,
+  }).formatToParts(date);
+  const out: Record<string, string> = {};
+  for (const x of p) out[x.type] = x.value;
+  const dd = String(Number(out.day)).padStart(2, '0');
+  const mm = String(Number(out.month)).padStart(2, '0');
+  const hh = String(Number(out.hour) % 24).padStart(2, '0');
+  const min = String(Number(out.minute)).padStart(2, '0');
+  const dateStr = locale === 'ro' ? `${dd}.${mm}.${out.year}` : `${dd}/${mm}/${out.year}`;
+  return `${dateStr}, ${hh}:${min} (${zone})`;
+}
