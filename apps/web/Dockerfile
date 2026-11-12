@@ -19,6 +19,8 @@ COPY packages/mcp/package.json packages/mcp/package.json
 COPY packages/shared/package.json packages/shared/package.json
 COPY packages/storage/package.json packages/storage/package.json
 COPY packages/ui/package.json packages/ui/package.json
+# the root postinstall runs `prisma generate`, so the schema must exist before install
+COPY packages/db/prisma/schema.prisma packages/db/prisma/schema.prisma
 RUN pnpm install --frozen-lockfile
 COPY . .
 RUN pnpm --filter @eventdesk/db exec prisma generate
