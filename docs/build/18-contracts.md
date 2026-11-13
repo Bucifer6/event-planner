@@ -168,3 +168,35 @@ Propose tools: call `createPreview` from `@ed/core/whatif`, then `return mcpProp
 - Fresh auth in UI: pre-check `isFreshAuth`, render the existing `FreshGate` (see team/settings pages) linking to `/account#fresh`.
 - `.ed-vh` inside a horizontally scrolling container needs a `position: relative` ancestor.
 - `next dev` cannot run twice inside `apps/web`: to smoke-test, copy the repo's apps/web to a temp dir or coordinate; always use your own port + private database, and clean up.
+
+---
+
+# Wave 3 additions (Release B)
+
+- `@ed/core/corrections`: `recordCorrection(ctx, { occasionId?, targetTable, targetId, field, before, after, reason })` (inside the fact-changing tx; DB guards use GUC `ed.correction`), `listCorrections`.
+- `@ed/core/lifecycle`: `registerLifecycleImpact`, `registerCloseoutSection`, **`assertOccasionWritable(ctx, occasionId)`** (CONFLICT when closed — call it in your writes).
+- `@ed/core/budget`: `registerBudgetSource`, `getBudget`, `requireFinance(ctx, occasionId, { manage? })`. `@ed/core/expenses`: `createExpense(ctx, { occasionId, categoryId?, description, amountMinor, currency?, spentOn, supplierLabel?, bookingId?, receiptAssetId?, idempotencyKey })`, `listExpenses`, `expenseTotalsByBooking`. `@ed/core/ledger`: `getLedger`, `addLedgerEntry`, `getOwnBalance` (per-currency settlement already exists).
+- `@ed/core/closeout`: what-if kinds `occasion.cancel|postpone|close`, `getCloseout`, `getClosedOccasionsOlderThan(systemCtx, days)`, `listLessons(ctx, kind?)`.
+- `@ed/core/suppliers`: `listSuppliers`, `getSupplier`, `createSupplier`, **`findOrCreateSupplierForListing(ctx, { occasionId, listingId, name, categoryLabel })`**, **`ensureBooking(ctx, supplierId)`** (store the returned `booking.id` on your enquiry row), supplier link helpers, `PLANNING_ROLES`, `supplierAccess`.
+- `@ed/core/bookings`: `setBookingState`, `attachQuote` (PDF quote, purpose `occasion.quote`), `updateBookingTerms`. `@ed/core/briefings`: `publishBriefing`, `listBriefingVersions`, `acknowledgeBriefing`. `@ed/core/orders`: `createOrderSnapshot(ctx, { bookingId, items })`, `getOrderState` (post-snapshot RSVP changes become `order_deltas` via a DB trigger).
+- `@ed/core/deliveries`, `@ed/core/payments` (finance; what-if `payment.move`).
+- `@ed/core/eventday`: `getDayView(ctx, occasionId, { day? })`, `setDayState`, `addDayItem`; `task_day_state` holds time of day for a task. `@ed/core/readiness`.
+- `@ed/core/briefingpdf` (PDF toolkit for other PDFs): `newPdfDocument({ title, lang, createdAt })` → `{ doc, done() }` with fonts `serif`, `serif-bold`, `serif-italic`, `sans`, `sans-bold` (DejaVu, Romanian diacritics OK), `PDF_COLORS`, `PDF_MARGIN`, `pdfFontDir()`. Binary exports cast bytes to `ExportFile.content` (see briefingpdf export).
+- Purge of immutable rows: set GUC `ed.purge` in the purge hook (see `020_suppliers_guards.sql`).
+- Modules that register things at import time (exports, overview sections, what-if kinds) must be imported in `apps/web/instrumentation-node.ts` (one line) and, if they have jobs/digest sections, `packages/jobs/src/registry.ts`.
+- Never `require.resolve` font/binary files with a literal path in code Turbopack bundles — walk the filesystem at run time.
+- Web dev server: `pnpm --filter @ed/web exec next dev --port N` (the `dev` script hardcodes 3000).
+
+---
+
+# Wave 3 additions (Release P: business, listings, moderation, directory)
+
+- `@ed/core/business`: `requireBusinessMember(ctx, businessId, { roles? })` → `{ business, member, role }` (roles owner|admin|staff), `isAccountBusinessMember`, `listMyBusinesses`, `getBusinessView`, `canManageRole`, `isBusinessLapsed(business)`, `assertBusinessCanCreate(ctx, businessId)`, `setBusinessStatus(staffCtx, …)`, `addBusinessNotice(txCtx, …)`, `queueBusinessEmail(txCtx, { businessId, headlineKey, reason })`, `getBusinessBadges`. Upload purpose `business.photo`. `businesses` has `planLapsedAt`, `nudge48h`, `hideStats`, `status`.
+- `@ed/core/listings`: `createListing`, `saveListingDraft`, `submitListing`, `requireListingMember`, `getLivePayload`, **`createUnclaimedListing(ctx, { name, descriptionRo?, categoryIds, localityIds, publicContactRoute, sourceUrl, collectedAt?, sourceNote? })`** → `{ listingId, revisionId }` (discovery), **`convertListingToClaimed(ctx, { listingId, businessId })`** (claiming), `suspendListing`, `restoreListing`.
+- `@ed/core/moderation` (ONE generic queue): `registerModerationKind(kind, { labelKey, describe(ctx, rev) → { title, fields[{ key, labelKey, before, after }], imageAssetIds? }, apply(txCtx, rev), onRejected?, onWithdrawn? })`, `submitForModeration(ctx, { kind, subjectId, payload, basePayload?, listingId?, businessId?, sourceNote? })`, `decideRevision`, `listModerationQueue`. Pages/actions using a kind must import its domain module. Approver must not be a member of the business.
+- `@ed/core/directory`: `getDirectoryResults(ctx, { categoryId, countyCode, localityId?, day?, limit?, offset? })` → `{ featured: [] (P13 goes here), organic, total, day }` (pure read), `organicOrder`, `getPublicListing(ctx, id)` (`acceptsEnquiries`, `unclaimed`, …), `getDirectoryPrefill(ctx, occasionId)`, `suggestDirectoryLink`, `getDirectoryStats(staffCtx, { days })`, `recordDirectorySearch`.
+- `@ed/core/listingstats`: `setEnquiryStatsProvider(async (ctx, { listingIds, until }) => Map<listingId, { received, answered, medianReplyMinutes }>)`, `getPublishedListingStats`.
+- `@ed/core/geography`: `getPicklists(ctx)`, `listCategories`, `listCounties`, `listLocalities({ countyCode? })`, `getCategoryBySlug`, `localName(row, locale)`.
+- Slots to fill in `apps/web/app/directory/_slots/`: `EnquiryCta.tsx` (`{ listing, occasionId? }`; keep the `acceptsEnquiries` guard), `ListingExtras.tsx` (drawings, catalogues).
+- Business area routes: `/business`, `/business/[businessId]` (+ `/listings/[listingId]`, `/team`, `/settings`). Console: `/console/moderation`, `/console/businesses`, `/console/directory`.
+- Source-scan test: any source line containing "rating", "testimonial", "stele", "★" etc. without a negation fails `directory.test.ts`.

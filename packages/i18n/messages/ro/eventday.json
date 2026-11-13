@@ -1,0 +1,111 @@
+{
+  "title": "Ziua evenimentului",
+  "clockLabel": "Ora acum:",
+  "noDate": "Ocazia nu are încă o dată",
+  "notToday": "nu este azi",
+  "daysNav": "Zilele ocaziei",
+  "now": "Acum",
+  "states": {
+    "ready": "Pregătit",
+    "running": "În desfășurare",
+    "waiting": "În așteptare",
+    "done": "Gata"
+  },
+  "actions": {
+    "start": "Începe",
+    "resume": "Reia",
+    "finish": "Gata",
+    "wait": "În așteptare",
+    "reopen": "Redeschide"
+  },
+  "programme": {
+    "title": "Programul zilei",
+    "add": "Adaugă un moment",
+    "addTitle": "Moment nou în program",
+    "addIntro": "Momentul este o sarcină obișnuită, cu termen în această zi: apare și în lista de sarcini.",
+    "addSubmit": "Adaugă momentul",
+    "empty": "Niciun moment în programul acestei zile. Adaugă primul moment — de exemplu „Sosirea invitaților” — sau pune termen în această zi unei sarcini existente.",
+    "noDate": "Programul zilei apare după ce ocazia are o dată.",
+    "setDate": "Stabilește data",
+    "allDone": "Totul este gata. Felicitări!"
+  },
+  "item": {
+    "title": "Ce se întâmplă",
+    "titleHint": "De exemplu: sosirea invitaților, tăierea tortului.",
+    "time": "Ora",
+    "timeHint": "În formatul 18:30. Lasă gol dacă nu are o oră fixă.",
+    "phone": "Telefon de contact",
+    "phoneHint": "Pe cine suni pentru acest moment.",
+    "noTime": "fără oră fixă",
+    "setTime": "Pune ora",
+    "editTime": "Schimbă ora",
+    "detailsTitle": "Ora și contactul — {title}"
+  },
+  "deliveries": {
+    "title": "Livrări azi",
+    "all": "Toate livrările",
+    "none": "Nicio livrare programată în această zi."
+  },
+  "contacts": {
+    "title": "Contacte",
+    "none": "Niciun telefon salvat. Adaugă telefonul la furnizori ca să îi poți suna de aici.",
+    "call": "Sună:"
+  },
+  "readiness": {
+    "title": "Decizia de pregătire",
+    "none": "Nicio decizie înregistrată încă.",
+    "first": "Înregistrează o decizie",
+    "again": "Înregistrează o decizie nouă",
+    "formTitle": "Suntem gata?",
+    "by": "{name} · {date}",
+    "conditionsLabel": "Condiții",
+    "evidence": "Dovezi",
+    "history": "Decizii anterioare ({count})",
+    "decisions": {
+      "hold": "Amânăm",
+      "proceed": "Continuăm",
+      "conditions": "Continuăm cu condiții"
+    },
+    "evidenceTypes": {
+      "task": "Sarcină",
+      "delivery": "Livrare",
+      "briefing_ack": "Briefing confirmat",
+      "note": "Notă"
+    },
+    "form": {
+      "decision": "Decizia",
+      "conditions": "Condiții",
+      "conditionsHint": "Obligatoriu pentru „Continuăm cu condiții”: ce trebuie să fie adevărat.",
+      "note": "Notă",
+      "evidenceTitle": "Pe ce te bazezi",
+      "evidenceHint": "Bifează cel puțin o dovadă: o sarcină, o livrare, un briefing confirmat — sau scrie o notă cu un link.",
+      "tasks": "Sarcini",
+      "deliveries": "Livrări",
+      "acks": "Briefinguri confirmate",
+      "noteEvidence": "Notă cu link",
+      "noteLabel": "Ce arată linkul",
+      "noteUrl": "Link",
+      "noteUrlHint": "Începe cu https://",
+      "submit": "Înregistrează decizia",
+      "done": "Decizia a fost înregistrată."
+    },
+    "overview": {
+      "hold": "Amânăm — decis de {name}, {date}",
+      "proceed": "Continuăm — decis de {name}, {date}",
+      "conditions": "Continuăm cu condiții — decis de {name}, {date}",
+      "conditions_text": "Condiții: {conditions}"
+    }
+  },
+  "errors": {
+    "time": "Scrie ora în formatul 18:30.",
+    "phone": "Scrie un număr de telefon valid, de exemplu 0722 123 456.",
+    "titleRequired": "Scrie ce se întâmplă în acest moment.",
+    "decisionRequired": "Alege decizia.",
+    "evidenceRequired": "Adaugă cel puțin o dovadă: bifează o sarcină, o livrare sau un briefing confirmat, ori scrie o notă cu link.",
+    "evidenceMissing": "Una dintre dovezile alese nu mai există. Reîncarcă pagina și alege din nou.",
+    "evidenceTooMany": "Ai ales prea multe dovezi. Păstrează-le pe cele mai importante.",
+    "conditionsRequired": "Scrie condițiile în care continuăm.",
+    "noteText": "Scrie ce arată linkul.",
+    "noteUrl": "Scrie un link complet, care începe cu https://."
+  }
+}

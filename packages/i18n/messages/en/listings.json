@@ -1,0 +1,166 @@
+{
+  "back": "Back to listings",
+  "status": {
+    "draft": "Draft",
+    "pending": "Under review",
+    "live": "Live",
+    "suspended": "Suspended",
+    "retired": "Withdrawn",
+    "editPending": "Edit under review",
+    "rejected": "Not approved"
+  },
+  "list": {
+    "title": "Listings",
+    "add": "Add a listing",
+    "addFirst": "Add the first listing",
+    "count": "{count} of {max} listings used.",
+    "full": "You have reached the limit: withdraw one to add another.",
+    "emptyTitle": "No listing yet",
+    "emptyBody": "A listing says what you do and where. After you send it, a moderator checks it and then it appears in the directory.",
+    "liveWithEdit": "Live. An edit has been waiting for review since {date}.",
+    "pendingSince": "Sent for review on {date}. Not public yet.",
+    "suspendedMeta": "Suspended by EventDesk. Open it to see the reason.",
+    "rejectedMeta": "The last submission was not approved. Open it to see the reason.",
+    "meta": {
+      "draft": "Draft. Not sent for review.",
+      "pending": "Under review. Not public yet.",
+      "live": "Live in the directory.",
+      "suspended": "Suspended.",
+      "retired": "Withdrawn."
+    }
+  },
+  "new": {
+    "title": "New listing",
+    "description": "Choose from the lists what you do and where. Nothing becomes public until a moderator approves the listing.",
+    "blocked": {
+      "restricted": "The business is restricted or suspended: no listings can be added.",
+      "lapsed": "You cannot add new listings right now. Existing ones stay live and can be corrected.",
+      "full": "You already have {max} listings. Withdraw one to add another."
+    }
+  },
+  "fields": {
+    "name": "Listing name",
+    "descriptionRo": "Description in Romanian",
+    "descriptionEn": "Description in English",
+    "categories": "Categories",
+    "counties": "Counties",
+    "localities": "Localities",
+    "contactPhone": "Phone",
+    "contactEmail": "Contact email",
+    "website": "Website",
+    "photoCount": "Photos (count)",
+    "publicContactRoute": "Published contact",
+    "sourceUrl": "Public source"
+  },
+  "editor": {
+    "counter": "{count} of {max}",
+    "fixErrors": "A few things still need fixing. You will find them beside their fields.",
+    "nameHint": "The name shown in the directory.",
+    "whatTitle": "What you do",
+    "categoriesHint": "Choose between one and five categories.",
+    "whereTitle": "Where you work",
+    "whereHint": "Add up to five counties, then tick the localities in each — twenty at most in total.",
+    "addCountyLabel": "County to add",
+    "chooseCounty": "Choose a county…",
+    "addCounty": "Add the county",
+    "removeCounty": "Remove",
+    "removeCountyNamed": "Remove {county} county",
+    "localitiesIn": "Localities in {county}",
+    "aboutTitle": "Description",
+    "descriptionRoHint": "At least a few sentences: what you offer, for what kind of events, what sets you apart. No promises you cannot keep.",
+    "descriptionEnHint": "If it is missing, visitors reading in English see the Romanian text, marked “Romanian only”.",
+    "contactTitle": "Public contact",
+    "contactHint": "They appear on the listing page, for anyone. Fill in only what you want to be public.",
+    "websiteHint": "The full address, with https://",
+    "photosTitle": "Photos",
+    "photoAlt": "Photo {n}",
+    "removePhoto": "Remove",
+    "removePhotoNamed": "Remove photo {n}",
+    "addPhoto": "Add a photo",
+    "photoHint": "PNG or JPG, 10 MiB at most. Only photos that are yours.",
+    "photosAfterSave": "You can add photos after you save the draft.",
+    "submit": "Send for review",
+    "submitting": "Sending…",
+    "saveDraft": "Save draft",
+    "savingDraft": "Saving…"
+  },
+  "saved": {
+    "draft": "The draft has been saved. Nothing public has changed.",
+    "submitted": "The listing has been sent for review.",
+    "submittedBody": "A moderator will check it. Until then the public version stays as it is."
+  },
+  "detail": {
+    "title": "Listing",
+    "empty": "not filled in",
+    "liveTitle": "What is public now",
+    "notLiveYet": "Nothing yet: the listing has not been approved.",
+    "viewPublic": "View the public page",
+    "pendingTitle": "What is waiting for review",
+    "pendingEditBody": "Sent on {date}. The public version stays unchanged until the moderator decides.",
+    "pendingNewBody": "Sent on {date}. The listing becomes public once approved.",
+    "pendingNoChange": "No difference from the public version.",
+    "withdraw": "Withdraw the submission",
+    "withdrawing": "Withdrawing…",
+    "editTitle": "Edit the listing",
+    "contentTitle": "Listing content",
+    "editBody": "Every change goes to a moderator again. Until then the version above stays public.",
+    "draftNotice": "You have a saved draft that has not been sent yet.",
+    "moreTitle": "More options"
+  },
+  "rejected": {
+    "title": "The last submission was not approved",
+    "reason": "The moderator's reason:",
+    "next": "Your text is kept below. Fix it and send it again."
+  },
+  "suspended": {
+    "title": "The listing is suspended",
+    "body": "It does not appear in the directory and cannot be changed until the suspension is lifted.",
+    "reason": "Reason:"
+  },
+  "stats": {
+    "title": "Response statistics",
+    "body": "After ten enquiries you have answered, the listing page shows how often and how quickly you reply. They are computed daily and cannot be bought or edited. You can hide them.",
+    "hiddenNow": "They are hidden now.",
+    "shownNow": "They are public now (last verified: {date}).",
+    "notYet": "They do not appear yet: not enough answered enquiries.",
+    "hide": "Hide this listing's statistics",
+    "show": "Show this listing's statistics",
+    "saving": "Saving…"
+  },
+  "retire": {
+    "title": "Withdraw the listing",
+    "body": "The listing leaves the directory and frees one of the five places. It cannot be brought back.",
+    "open": "Withdraw the listing…",
+    "confirmTitle": "Withdraw “{name}”?",
+    "confirmBody": "The public page disappears at once. If you only want to change something, edit the listing instead of withdrawing it.",
+    "confirm": "Withdraw “{name}”",
+    "retiring": "Withdrawing…"
+  },
+  "retired": {
+    "done": "The listing has been withdrawn."
+  },
+  "errors": {
+    "unknownField": "The form contains an unknown field. Categories and localities can only be chosen from the lists.",
+    "tooManyCategories": "Choose five categories at most.",
+    "noCategory": "Choose at least one category.",
+    "unknownCategory": "One of the categories is not on the list. Choose from those shown.",
+    "tooManyCounties": "Choose five counties at most.",
+    "noCounty": "Add at least one county.",
+    "unknownCounty": "One of the counties is not on the list. Choose from those shown.",
+    "tooManyLocalities": "Choose twenty localities at most.",
+    "noLocality": "Tick at least one locality.",
+    "unknownLocality": "One of the localities is not on the list. Choose from those shown.",
+    "localityOutsideCounties": "A locality is not in the chosen counties.",
+    "countyWithoutLocality": "Tick at least one locality in each county you added, or remove the county.",
+    "descriptionTooShort": "Write at least a few sentences (20 characters minimum).",
+    "phoneInvalid": "Enter a valid phone number, for example 0722 123 456.",
+    "websiteHttps": "Enter the full address, starting with https://",
+    "tooManyPhotos": "You can add eight photos at most.",
+    "photoNotYours": "One of the photos is no longer available. Remove it and upload it again.",
+    "tooManyListings": "You already have {max} listings. Withdraw one to add another.",
+    "nothingToSubmit": "There is nothing to send. Fill in the listing first.",
+    "retired": "The listing has been withdrawn and can no longer be changed.",
+    "suspended": "The listing is suspended and cannot be changed until the suspension is lifted.",
+    "alreadyClaimed": "The listing is already claimed."
+  }
+}

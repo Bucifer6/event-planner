@@ -1,0 +1,135 @@
+{
+  "status": {
+    "planning": "being planned",
+    "postponed": "postponed",
+    "cancelled": "cancelled",
+    "closed": "closed"
+  },
+  "settings": {
+    "postponeTitle": "Postpone the occasion",
+    "postponeIntro": "Pick a new date and first see everything that changes: the tasks that move, the guests who said yes, the money. Nothing is applied until you confirm.",
+    "newDate": "New date",
+    "currentDate": "Current date: {date}",
+    "noDate": "The occasion has no date yet.",
+    "postponeSubmit": "See what changes if you postpone",
+    "postponeSubmitting": "Preparing the preview…",
+    "cancelTitle": "Cancel the occasion",
+    "cancelIntro": "First see everything affected: tasks, guests, expenses, suppliers. Guests who left an email address are told only after you confirm.",
+    "cancelSubmit": "See what happens if you cancel",
+    "cancelSubmitting": "Preparing the preview…",
+    "closeoutTitle": "Closeout",
+    "closeoutIntro": "After the event: what is left to pay or return, what you learned, and closing the occasion.",
+    "closeoutLink": "Open the closeout list",
+    "freshTitle": "Confirm it is you",
+    "freshBody": "Postponing, cancelling and closing need a recent confirmation.",
+    "freshLink": "Confirm from the account page",
+    "alreadyCancelled": "The occasion is cancelled.",
+    "alreadyClosed": "The occasion is closed and can no longer be postponed or cancelled."
+  },
+  "whatif": {
+    "cancelTitle": "Cancel “{title}”",
+    "postponeTitle": "Postpone “{title}” to {date}",
+    "closeTitle": "Close “{title}”",
+    "statusRow": "Occasion status",
+    "notifyLabel": "Notice",
+    "notifyRow": "Households told by email: {count}",
+    "notifyNobody": "No household left an email address",
+    "notifyNote": "Each gets one email, after you confirm. The others see the change on their invitation page.",
+    "notifyPageNote": "Guests see the change on their invitation page.",
+    "readOnlyRow": "The occasion becomes read-only",
+    "retentionRow": "Private requests are deleted after {days} days",
+    "retentionNote": "Receipts and financial records are kept for 7 years.",
+    "openItemsRow": "Still open in the closeout list: {count}",
+    "openItemsNote": "You can still see them, but no longer change them."
+  },
+  "impact": {
+    "tasksLabel": "Tasks",
+    "tasksOpen": "Unfinished tasks: {count}",
+    "tasksCancelNote": "They stay in the list, unchanged.",
+    "tasksCloseNote": "They stay unfinished.",
+    "guestsLabel": "Guests",
+    "guestsYes": "Said yes: {people} people from {households} households",
+    "guestsCancelNote": "They will see the cancellation on their invitation page.",
+    "guestsPostponeNote": "They will see the new date on their invitation page. Their answers stay.",
+    "moneyLabel": "Money",
+    "expensesPaid": "Expenses already paid: {count}, {amount} in total",
+    "expensesPaidCancelNote": "They stay on record. Check what can be recovered from suppliers.",
+    "expensesPaidNote": "They stay on record.",
+    "expensesUnpaid": "Unpaid expenses: {count}, {amount} in total",
+    "expensesUnpaidNote": "Still to pay or to sort out.",
+    "ledgerLabel": "Shared costs",
+    "ledgerOwes": "{from} owes {to} {amount}",
+    "ledgerNote": "The debt stays until you settle it."
+  },
+  "guest": {
+    "cancelled": "The occasion has been cancelled.",
+    "postponed": "The occasion has been postponed. See the new date below."
+  },
+  "email": {
+    "greeting": "Hello, {household},",
+    "cancelled": {
+      "subject": "{occasion} has been cancelled",
+      "bodyNoDate": "We are letting you know that “{occasion}” has been cancelled. We are sorry for the change."
+    },
+    "postponed": {
+      "subject": "{occasion} has been postponed",
+      "body": "We are letting you know that “{occasion}” has been postponed. The new date is {date}.",
+      "bodyNoDate": "We are letting you know that “{occasion}” has been postponed. The new date will be announced."
+    },
+    "where": "The up-to-date details are on your invitation page, at the link you received.",
+    "why": "You get this message once, because you left your email address when you answered the invitation."
+  },
+  "closeout": {
+    "title": "Closeout",
+    "description": "What is still open after the event, what you learned, and closing the occasion.",
+    "back": "Back to settings",
+    "hero": {
+      "label": "Left to sort out, today {date}",
+      "none": "Nothing is left open.",
+      "some": "Sort them out, or close the occasion as it is."
+    },
+    "sections": {
+      "expensesUnpaid": "Unpaid expenses",
+      "ledgerUnsettled": "Unsettled shared costs"
+    },
+    "sectionEmpty": "Nothing open here.",
+    "notes": {
+      "approvedUnpaid": "approved, unpaid",
+      "pendingUnpaid": "not approved, unpaid"
+    },
+    "ledgerOwes": "{from} owes {to}",
+    "noSections": "You have no access to the financial data, so outstanding amounts are not shown here.",
+    "closeTitle": "Close the occasion",
+    "closeIntro": "Closing makes the occasion read-only and starts the retention periods: private requests are deleted after {days} days, and receipts are kept for 7 years. You will see a preview first.",
+    "closeSubmit": "Close the occasion",
+    "closeSubmitting": "Preparing the preview…",
+    "closedTitle": "The occasion is closed",
+    "closedBody": "Closed on {date}. The data can be read but no longer changed.",
+    "managersOnly": "Only the owner or the project manager can close the occasion."
+  },
+  "lessons": {
+    "title": "What you learned",
+    "intro": "The notes stay in your account and we show them when you plan your next occasion.",
+    "label": "Lessons for next time",
+    "hint": "For example: “book the band 9 months ahead”, “fewer courses on the menu”.",
+    "save": "Save notes",
+    "saving": "Saving…",
+    "saved": "The notes were saved to your account.",
+    "overviewTitle": "Lessons from past occasions",
+    "pastTitle": "From your past occasions",
+    "pastEmpty": "You have no notes from other occasions yet."
+  },
+  "errors": {
+    "closed": "The occasion is closed and can no longer be changed.",
+    "already": {
+      "cancelled": "The occasion is already cancelled.",
+      "closed": "The occasion is already closed.",
+      "planning": "The occasion is being planned.",
+      "postponed": "The occasion is already postponed."
+    },
+    "dateRequired": "Choose the new date.",
+    "sameDate": "This is the current date. Choose another day.",
+    "dateInPast": "The new date must be in the future.",
+    "dateEarlier": "Postponing means a later date. For an earlier date use “Move the date”."
+  }
+}

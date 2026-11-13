@@ -37,7 +37,28 @@
     "./members": "./src/members.ts",
     "./overview": "./src/overview.ts",
     "./digest": "./src/digest.ts",
-    "./exports": "./src/exports.ts"
+    "./exports": "./src/exports.ts",
+    "./corrections": "./src/corrections.ts",
+    "./lifecycle": "./src/lifecycle.ts",
+    "./budget": "./src/budget.ts",
+    "./expenses": "./src/expenses.ts",
+    "./ledger": "./src/ledger.ts",
+    "./closeout": "./src/closeout.ts",
+    "./suppliers": "./src/suppliers.ts",
+    "./bookings": "./src/bookings.ts",
+    "./briefings": "./src/briefings.ts",
+    "./orders": "./src/orders.ts",
+    "./deliveries": "./src/deliveries.ts",
+    "./payments": "./src/payments.ts",
+    "./eventday": "./src/eventday.ts",
+    "./readiness": "./src/readiness.ts",
+    "./briefingpdf": "./src/briefingpdf.ts",
+    "./geography": "./src/geography.ts",
+    "./business": "./src/business.ts",
+    "./moderation": "./src/moderation.ts",
+    "./listings": "./src/listings.ts",
+    "./listingstats": "./src/listingstats.ts",
+    "./directory": "./src/directory.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -46,14 +67,18 @@
   "dependencies": {
     "@ed/db": "workspace:*",
     "@ed/email": "workspace:*",
+    "@ed/i18n": "workspace:*",
     "@ed/jobs": "workspace:*",
     "@ed/shared": "workspace:*",
     "@ed/storage": "workspace:*",
+    "dejavu-fonts-ttf": "2.37.3",
+    "pdfkit": "0.20.2",
     "read-excel-file": "9.3.17",
     "zod": "4.6.7"
   },
   "devDependencies": {
     "@types/node": "22.20.5",
+    "@types/pdfkit": "0.17.7",
     "typescript": "5.9.3",
     "vitest": "5.1.0"
   }

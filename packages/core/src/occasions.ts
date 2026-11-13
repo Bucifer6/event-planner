@@ -375,6 +375,81 @@ function dateText(start: Date | null, end: Date | null, tz: string): WhatIfDelta
   return end ? `${formatDay(start, tz)} – ${formatDay(end, tz)}` : formatDay(start, tz);
 }
 
+/**
+ * The preview rows of moving the occasion to new dates: the date itself, then every open task
+ * whose due date shifts. Changes nothing. NO access check (callers check). Shared with
+ * "occasion.postpone" (@ed/core/closeout).
+ */
+export async function computeMoveDateDelta(
+  ctx: Ctx,
+  occasion: Occasion,
+  input: { dateMode: OccasionDateMode; startsOn?: string; endsOn?: string },
+): Promise<WhatIfDeltaRow[]> {
+  const tz = occasion.timezone;
+  const next = newDates(occasion, input as MoveDateInput);
+  const shifts = await computeShifts(ctx, occasion, next.startsAt);
+  const delta: WhatIfDeltaRow[] = [
+    {
+      key: "_date",
+      what: { key: "occasions.whatif.dateRow" },
+      kindLabelKey: "whatif.kinds.moved",
+      before: dateText(occasion.startsAt, occasion.endsAt, tz),
+      after: dateText(next.startsAt, next.endsAt, tz),
+    },
+  ];
+  for (const s of shifts.slice(0, PREVIEW_ROW_LIMIT)) {
+    delta.push({
+      key: s.id,
+      what: s.title,
+      kindLabelKey: "occasions.whatif.taskLabel",
+      before: s.from ? formatDay(s.from, tz) : null,
+      after: s.to ? formatDay(s.to, tz) : null,
+    });
+  }
+  if (shifts.length > PREVIEW_ROW_LIMIT) {
+    delta.push({
+      key: "_more",
+      what: { key: "occasions.whatif.moreTasks", params: { count: shifts.length - PREVIEW_ROW_LIMIT } },
+    });
+  }
+  if (shifts.length === 0) {
+    delta.push({ key: "_none", what: { key: "occasions.whatif.noTasksMove" } });
+  }
+  return delta;
+}
+
+/**
+ * Moves the occasion and shifts its open tasks, inside the caller's transaction, with the
+ * audit row. NO access check. Returns how many tasks moved. Shared with "occasion.postpone".
+ */
+export async function applyMoveDate(
+  tx: Ctx,
+  occasion: Occasion,
+  input: { dateMode: OccasionDateMode; startsOn?: string; endsOn?: string },
+): Promise<number> {
+  const next = newDates(occasion, input as MoveDateInput);
+  const shifts = await computeShifts(tx, occasion, next.startsAt);
+  for (const s of shifts) {
+    await tx.db
+      .update(tasks)
+      .set({ dueAt: s.to })
+      .where(and(eq(tasks.id, s.id), eq(tasks.occasionId, occasion.id)));
+  }
+  await tx.db
+    .update(occasions)
+    .set({ dateMode: input.dateMode, startsAt: next.startsAt, endsAt: next.endsAt })
+    .where(eq(occasions.id, occasion.id));
+  await audit(tx, {
+    action: "occasion.date_moved",
+    objectType: "occasion",
+    objectId: occasion.id,
+    before: { dateMode: occasion.dateMode, startsAt: occasion.startsAt, endsAt: occasion.endsAt },
+    after: { dateMode: input.dateMode, startsAt: next.startsAt, endsAt: next.endsAt },
+    meta: { tasksShifted: shifts.length },
+  });
+  return shifts.length;
+}
+
 registerWhatIf<MoveDateInput>(MOVE_DATE_KIND, {
   input: moveDateInput,
   authorize: async (ctx, subject, action) => {
@@ -382,37 +457,7 @@ registerWhatIf<MoveDateInput>(MOVE_DATE_KIND, {
   },
   compute: async (ctx, input, subject) => {
     const occasion = await loadOccasion(ctx, subject.occasionId ?? "");
-    const tz = occasion.timezone;
-    const next = newDates(occasion, input);
-    const shifts = await computeShifts(ctx, occasion, next.startsAt);
-    const delta: WhatIfDeltaRow[] = [
-      {
-        key: "_date",
-        what: { key: "occasions.whatif.dateRow" },
-        kindLabelKey: "whatif.kinds.moved",
-        before: dateText(occasion.startsAt, occasion.endsAt, tz),
-        after: dateText(next.startsAt, next.endsAt, tz),
-      },
-    ];
-    for (const s of shifts.slice(0, PREVIEW_ROW_LIMIT)) {
-      delta.push({
-        key: s.id,
-        what: s.title,
-        kindLabelKey: "occasions.whatif.taskLabel",
-        before: s.from ? formatDay(s.from, tz) : null,
-        after: s.to ? formatDay(s.to, tz) : null,
-      });
-    }
-    if (shifts.length > PREVIEW_ROW_LIMIT) {
-      delta.push({
-        key: "_more",
-        what: { key: "occasions.whatif.moreTasks", params: { count: shifts.length - PREVIEW_ROW_LIMIT } },
-      });
-    }
-    if (shifts.length === 0) {
-      delta.push({ key: "_none", what: { key: "occasions.whatif.noTasksMove" } });
-    }
-    return { title: { key: "occasions.whatif.moveTitle" }, delta };
+    return { title: { key: "occasions.whatif.moveTitle" }, delta: await computeMoveDateDelta(ctx, occasion, input) };
   },
   apply: async (tx, preview) => {
     const occasion = await loadOccasion(tx, preview.occasionId ?? "");
@@ -421,26 +466,7 @@ registerWhatIf<MoveDateInput>(MOVE_DATE_KIND, {
     if (input.expectedStartsOn !== undefined && input.expectedStartsOn !== current) {
       throw new AppError("CONFLICT", "whatif.errors.stale");
     }
-    const next = newDates(occasion, input);
-    const shifts = await computeShifts(tx, occasion, next.startsAt);
-    for (const s of shifts) {
-      await tx.db
-        .update(tasks)
-        .set({ dueAt: s.to })
-        .where(and(eq(tasks.id, s.id), eq(tasks.occasionId, occasion.id)));
-    }
-    await tx.db
-      .update(occasions)
-      .set({ dateMode: input.dateMode, startsAt: next.startsAt, endsAt: next.endsAt })
-      .where(eq(occasions.id, occasion.id));
-    await audit(tx, {
-      action: "occasion.date_moved",
-      objectType: "occasion",
-      objectId: occasion.id,
-      before: { dateMode: occasion.dateMode, startsAt: occasion.startsAt, endsAt: occasion.endsAt },
-      after: { dateMode: input.dateMode, startsAt: next.startsAt, endsAt: next.endsAt },
-      meta: { tasksShifted: shifts.length },
-    });
+    await applyMoveDate(tx, occasion, input);
   },
 });
 

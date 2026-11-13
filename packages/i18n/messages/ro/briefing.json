@@ -1,0 +1,113 @@
+{
+  "title": "Briefing",
+  "empty": "Încă nu ai publicat niciun briefing. Scrie ce are de făcut furnizorul, când, unde și cu cine vorbește.",
+  "emptyReadOnly": "Niciun briefing publicat încă.",
+  "publishedOn": "Publicat la {date}",
+  "acked": "Confirmat",
+  "notAcked": "Neconfirmat",
+  "fields": {
+    "what": "Ce",
+    "when": "Când",
+    "where": "Unde",
+    "contacts": "Contacte",
+    "specialNotes": "Mențiuni speciale",
+    "freeText": "Alte detalii"
+  },
+  "hints": {
+    "what": "Ce are de făcut furnizorul.",
+    "when": "Ziua și orele: sosire, montaj, program.",
+    "where": "Adresa și locul exact.",
+    "contacts": "Pe cine sună în ziua evenimentului.",
+    "specialNotes": "Acces, parcare, restricții, alergii."
+  },
+  "status": {
+    "acked": "Versiunea {version} este confirmată de furnizor",
+    "notAcked": "Versiunea {version} nu este confirmată încă",
+    "ackedBy": "Confirmat de {name}, la {date}.",
+    "waiting": "Furnizorul are linkul; așteptăm confirmarea.",
+    "needsLink": "Generează linkul pentru furnizor (mai jos) și trimite-l, ca să poată confirma.",
+    "noAckYet": "Furnizorul nu a confirmat această versiune."
+  },
+  "editor": {
+    "openFirst": "Scrie briefingul",
+    "openNext": "Scrie versiunea {version}",
+    "title": "Briefing — versiunea {version}",
+    "introFirst": "După publicare, versiunea nu se mai modifică. Dacă se schimbă ceva, publici o versiune nouă, iar furnizorul vede ce s-a schimbat.",
+    "introNext": "Pornești de la versiunea publicată. Versiunea veche rămâne neschimbată, iar furnizorul vede ce diferă și confirmă din nou.",
+    "publish": "Publică versiunea {version}",
+    "publishing": "Se publică…",
+    "published": "Versiunea a fost publicată."
+  },
+  "errors": {
+    "empty": "Briefingul este gol. Scrie cel puțin ce are de făcut furnizorul.",
+    "unchanged": "Nu ai schimbat nimic față de versiunea publicată.",
+    "ackName": "Scrie numele tău, ca organizatorul să știe cine a confirmat.",
+    "linkGone": "Acest link nu mai este valabil. Cere organizatorului unul nou."
+  },
+  "gone": {
+    "title": "Linkul nu este valabil.",
+    "body": "Este posibil să fi fost înlocuit sau retras. Cere organizatorului un link nou."
+  },
+  "throttled": {
+    "title": "Prea multe încercări",
+    "body": "Mai încearcă puțin mai târziu.",
+    "bodyAt": "Poți încerca din nou după {time}."
+  },
+  "link": {
+    "metaTitle": "Briefing",
+    "kicker": "Briefing pentru furnizor",
+    "for": "Pentru {name}",
+    "map": "Vezi pe hartă",
+    "dateUndecided": "Data nu este stabilită încă",
+    "briefingTitle": "Briefingul tău",
+    "version": "Versiunea {version}",
+    "noBriefing": "Organizatorul nu a publicat încă un briefing. Revino pe acest link mai târziu.",
+    "changedTitle": "Ce s-a schimbat față de versiunea {version}, pe care ai confirmat-o",
+    "emptyBefore": "(nimic)",
+    "emptyAfter": "(șters)",
+    "orderTitle": "Comanda finală",
+    "orderFixed": "Fixată la {date}",
+    "orderBasedOn": "pentru {total} persoane ({adults} adulți, {children} copii)",
+    "deliveriesTitle": "Livrările tale",
+    "slotUnknown": "Interval nestabilit încă",
+    "ackTitle": "Confirmare",
+    "ackIntro": "Citește versiunea {version} de mai sus. Când totul este clar, confirmă.",
+    "ackName": "Numele tău",
+    "ackNameHint": "Organizatorul vede cine a confirmat și când.",
+    "ackSubmit": "Am primit și am înțeles briefingul",
+    "ackPending": "Se trimite confirmarea…",
+    "ackDone": "Ai confirmat versiunea {version}",
+    "honeypot": "Lasă acest câmp gol",
+    "cancelledTitle": "Rezervarea a fost anulată",
+    "cancelledBody": "Pentru detalii, ia legătura cu organizatorul.",
+    "postponedTitle": "Evenimentul a fost amânat",
+    "postponedBody": "Organizatorul te anunță noua dată. Briefingul de mai jos poate să se schimbe.",
+    "footer": "Pagină privată, doar pentru această rezervare. Nu o trimite mai departe."
+  },
+  "pdf": {
+    "exportTitle": "Briefingul ocaziei (PDF)",
+    "exportDescription": "Data, locul, programul zilei, furnizorii cu ultimul briefing, livrările și numărul de invitați. Fără lista de invitați și fără sume.",
+    "eyebrow": "Briefing",
+    "subject": "Briefingul ocaziei",
+    "date": "Data",
+    "dateUndecided": "Data nu este stabilită încă",
+    "venue": "Locul",
+    "venueUnknown": "Loc necunoscut",
+    "guests": "Invitați confirmați",
+    "guestCounts": "{total} persoane — {adults} adulți, {children} copii",
+    "programme": "Programul zilei",
+    "programmeEmpty": "Niciun moment în programul zilei.",
+    "suppliers": "Furnizori",
+    "suppliersEmpty": "Niciun furnizor.",
+    "contactUnknown": "Contact necunoscut",
+    "state": "Stare",
+    "briefingNone": "Fără briefing publicat.",
+    "briefingVersion": "Briefing — versiunea {version}, publicată la {date}",
+    "acknowledged": "Confirmat de {name}, la {date}.",
+    "notAcknowledged": "Neconfirmat încă de furnizor.",
+    "deliveries": "Livrări",
+    "deliveriesEmpty": "Nicio livrare.",
+    "slotUnknown": "Interval nestabilit",
+    "footer": "EventDesk.ro · generat la {date} · pagina {page} din {pages}"
+  }
+}

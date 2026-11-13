@@ -1,0 +1,127 @@
+{
+  "eyebrow": "Firme",
+  "title": "Găsește firme pentru ocazia ta",
+  "description": "Fiecare listare este verificată de un moderator înainte să apară. Ordinea rezultatelor se rotește zilnic și nu se vinde.",
+  "signIn": "Intră în cont",
+  "romanianOnly": "numai în română",
+  "meta": {
+    "title": "Firme pentru evenimente",
+    "description": "Săli, fotografi, floriști, muzică și alte firme pentru evenimente, pe județe. Listări verificate, ordine care se rotește zilnic și nu se vinde.",
+    "resultsDescription": "{category} în {area}: listări verificate de un moderator, în ordine rotită zilnic."
+  },
+  "foot": {
+    "honest": "Ordinea se rotește zilnic. Nu se vinde.",
+    "forBusinesses": "Ai o firmă? Listarea este gratuită"
+  },
+  "crumbs": {
+    "label": "Unde te afli",
+    "directory": "Firme",
+    "listing": "Listare"
+  },
+  "prefill": {
+    "title": "Cauți pentru „{occasion}”",
+    "withArea": "Am ales județul {area} după locul ocaziei și am pus în față categoriile obișnuite pentru ea. Poți schimba orice.",
+    "noArea": "Am pus în față categoriile obișnuite pentru această ocazie. Alege județul.",
+    "back": "Înapoi la ocazie"
+  },
+  "search": {
+    "title": "Caută",
+    "category": "Categorie",
+    "county": "Județ",
+    "locality": "Localitate",
+    "choose": "Alege…",
+    "wholeCounty": "Tot județul",
+    "optional": "opțional",
+    "submit": "Caută firme",
+    "launchGroup": "Zone de lansare",
+    "otherGroup": "Alte județe",
+    "suggestedGroup": "Potrivite pentru ocazia ta",
+    "allGroup": "Toate categoriile",
+    "categoryRequired": "Alege o categorie din listă.",
+    "countyRequired": "Alege un județ din listă."
+  },
+  "register": {
+    "title": "Categorii",
+    "suggestedFirst": "Cele obișnuite pentru ocazia ta sunt primele",
+    "inCounties": "{category} pe județe"
+  },
+  "counties": {
+    "title": "Alte județe",
+    "body": "Directorul pornește în București, Ilfov și Cluj. Celelalte județe sunt deschise: firmele se pot lista oriunde.",
+    "show": "Arată toate cele {count} județe"
+  },
+  "results": {
+    "title": "{category} în {area}",
+    "count": {
+      "zero": "Nicio firmă listată încă.",
+      "one": "O firmă listată.",
+      "few": "{count} firme listate.",
+      "other": "{count} de firme listate."
+    },
+    "rotation": "rotație zilnică · ordinea nu se vinde",
+    "localities": "Localități",
+    "wholeCounty": "Tot județul",
+    "listLabel": "Rezultate",
+    "morePlaces": "încă {count}",
+    "emptyTitle": "Nicio firmă încă în această zonă",
+    "emptyBody": "Directorul este la început. Firmele se listează singure, gratuit, iar fiecare listare este verificată de un moderator înainte să apară aici.",
+    "emptyAction": "Listează-ți firma gratuit",
+    "truncated": "Se văd primele {shown} din {total}.",
+    "elsewhere": "{category} în alte zone"
+  },
+  "unclaimed": {
+    "label": "Adăugat de EventDesk — nefiind revendicat încă",
+    "contactNote": "Contactul apare așa cum îl publică firma. EventDesk nu mijlocește legătura.",
+    "sourceTitle": "De unde vine listarea",
+    "body": "Această listare nu a fost încă revendicată de firmă. Datele provin dintr-o sursă publică și au fost verificate de un moderator. Pentru corectare sau eliminare, folosește „Raportează”.",
+    "source": "Sursa publică",
+    "collected": "culese la {date}"
+  },
+  "badges": {
+    "onrc": "Verificat: înregistrare ONRC",
+    "insurance": "Verificat: asigurare văzută până la {date}"
+  },
+  "listing": {
+    "about": "Despre",
+    "noDescription": "fără descriere",
+    "photos": "Fotografii",
+    "photoAlt": "{name} — fotografia {n}",
+    "facts": "Date despre listare",
+    "contact": "Contact",
+    "noContact": "necomunicat",
+    "areas": "Zone deservite",
+    "moderated": "Listare verificată de un moderator EventDesk înainte de publicare.",
+    "report": "Raportează această listare"
+  },
+  "stats": {
+    "title": "Cum răspunde",
+    "answered": "Răspunde la {count} din 10 cereri",
+    "replyMinutes": {
+      "one": "de obicei într-un minut",
+      "few": "de obicei în {count} minute",
+      "other": "de obicei în {count} de minute"
+    },
+    "replyHours": {
+      "one": "de obicei într-o oră",
+      "few": "de obicei în {count} ore",
+      "other": "de obicei în {count} de ore"
+    },
+    "replyDays": {
+      "one": "de obicei într-o zi",
+      "few": "de obicei în {count} zile",
+      "other": "de obicei în {count} de zile"
+    },
+    "computed": "Calculat zilnic din cererile primite prin EventDesk. Ultima verificare: {date}."
+  },
+  "taskLink": {
+    "label": "Vezi firme de {category} în {area}",
+    "labelNoArea": "Vezi firme de {category}",
+    "hide": "Nu mai arăta",
+    "hiding": "Se ascunde…",
+    "hideForOccasion": "Ascunde pentru această ocazie",
+    "hideEverywhere": "Ascunde la toate ocaziile mele",
+    "hidden": "Linkul către firme este ascuns.",
+    "show": "Arată din nou",
+    "showing": "Se afișează…"
+  }
+}

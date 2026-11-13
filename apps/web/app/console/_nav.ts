@@ -20,4 +20,7 @@ export const consoleNav: ConsoleNavItem[] = [
   { key: "operations", href: "/console/operations", roles: ["security_administrator", "platform_admin"] },
   { key: "reports", href: "/console/reports", roles: ["listing_moderator", "platform_admin"] },
   { key: "launch", href: "/console/launch", roles: ["platform_admin", "privacy_owner", "security_administrator", "commercial_manager"] },
+  { key: "moderation", href: "/console/moderation", roles: ["listing_moderator", "platform_admin"] },
+  { key: "businesses", href: "/console/businesses", roles: ["listing_moderator", "platform_admin"] },
+  { key: "directory", href: "/console/directory", roles: ["listing_moderator", "platform_admin"] },
 ];

@@ -12,7 +12,10 @@
     "incidents": "Incidente",
     "operations": "Operațiuni",
     "reports": "Rapoarte conținut",
-    "launch": "Lansare"
+    "launch": "Lansare",
+    "moderation": "Moderare",
+    "businesses": "Firme",
+    "directory": "Director"
   },
   "roles": {
     "platform_admin": "Administrator platformă",
@@ -109,6 +112,11 @@
       "cancelled": "Anulate",
       "postponed": "Amânate",
       "closed": "Încheiate"
+    },
+    "counters": {
+      "businesses": "Firme",
+      "listings": "Listări",
+      "moderationQueue": "Moderare · în așteptare"
     }
   },
   "ops": {

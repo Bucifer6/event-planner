@@ -1,0 +1,170 @@
+{
+  "title": "Afacerea mea",
+  "eyebrow": "Afacerea mea",
+  "roles": {
+    "owner": "Proprietar",
+    "admin": "Administrator",
+    "staff": "Membru"
+  },
+  "roleHelp": {
+    "owner": "Conduce firma pe EventDesk: listările, echipa și setările. Există un singur proprietar.",
+    "admin": "Lucrează la listări și invită membri. Nu poate numi sau elimina alți administratori.",
+    "staff": "Lucrează la listări. Nu schimbă echipa și nici setările."
+  },
+  "status": {
+    "active": "Activă",
+    "restricted": "Restricționată",
+    "suspended": "Suspendată"
+  },
+  "choose": {
+    "title": "Alege firma",
+    "description": "Faci parte din mai multe echipe.",
+    "open": "Deschide",
+    "openNamed": "Deschide {name}"
+  },
+  "start": {
+    "title": "Listează-ți firma",
+    "description": "Listarea este gratuită. Spui ce faci și unde, un moderator verifică, apoi firma apare în director — în aceeași rotație zilnică cu toate celelalte.",
+    "howTitle": "Cum merge",
+    "step1": "Creezi contul firmei. Durează un minut.",
+    "step2": "Adaugi până la cinci listări: categorii și localități alese din liste, descriere, contact, fotografii.",
+    "step3": "Un moderator care nu are legătură cu firma verifică fiecare listare și fiecare modificare. Ce este deja public rămâne neschimbat între timp.",
+    "formTitle": "Contul firmei",
+    "submit": "Creează contul firmei",
+    "submitting": "Se creează…",
+    "emailRequiredTitle": "Adaugă mai întâi o adresă de email",
+    "emailRequiredBody": "Un cont de firmă are nevoie de o adresă de email: acolo ajung deciziile moderatorilor și, mai târziu, cererile clienților.",
+    "emailRequiredLink": "Adaugă adresa de email"
+  },
+  "fields": {
+    "name": "Numele firmei",
+    "nameHint": "Așa cum este cunoscută. Fiecare listare își are propriul nume public.",
+    "onrc": "Număr de înregistrare ONRC",
+    "onrcHint": "De forma J12/345/2020. Îl poți adăuga și mai târziu; un moderator îl poate verifica, gratuit.",
+    "onrcChangeHint": "Dacă îl schimbi, verificarea ONRC se reia pentru noul număr."
+  },
+  "tabs": {
+    "label": "Secțiunile firmei",
+    "listings": "Listări",
+    "team": "Echipă",
+    "settings": "Setări"
+  },
+  "restriction": {
+    "restrictedTitle": "Firma este restricționată",
+    "restrictedBody": "Listările rămân publice, dar nu poți adăuga sau modifica nimic până la ridicarea restricției.",
+    "suspendedTitle": "Firma este suspendată",
+    "suspendedBody": "Listările nu mai apar în director până la ridicarea suspendării.",
+    "reason": "Motivul:",
+    "contact": "Dacă nu ești de acord cu decizia, răspunde la emailul primit de la EventDesk."
+  },
+  "lapsed": {
+    "title": "Nu poți adăuga listări noi acum",
+    "body": "Listările existente rămân active și le poți corecta oricând."
+  },
+  "notices": {
+    "title": "Noutăți",
+    "reason": "Motivul: {reason}",
+    "openListing": "Vezi listarea",
+    "markRead": "Am citit",
+    "marking": "Se salvează…",
+    "kinds": {
+      "business_restricted": "Firma a fost restricționată",
+      "business_suspended": "Firma a fost suspendată",
+      "business_restored": "Restricția asupra firmei a fost ridicată",
+      "listing_suspended": "O listare a fost suspendată",
+      "listing_restored": "O listare este din nou publică",
+      "revision_approved": "O listare a fost aprobată și este publică",
+      "revision_rejected": "O listare nu a fost aprobată"
+    }
+  },
+  "team": {
+    "you": "tu",
+    "membersTitle": "Echipa",
+    "invitedTitle": "Invitații trimise",
+    "alone": "Ești singur în echipă. Poți invita colegi mai jos.",
+    "makeAdmin": "Fă administrator",
+    "makeStaff": "Fă membru",
+    "saving": "Se salvează…",
+    "remove": "Elimină din echipă",
+    "leave": "Părăsește echipa",
+    "removing": "Se elimină…",
+    "inviteWaiting": "Așteaptă răspuns",
+    "inviteExpired": "Expirată",
+    "withdrawInvite": "Retrage invitația",
+    "inviteTitle": "Invită un coleg",
+    "email": "Adresa de email",
+    "emailHint": "Trimitem un link valabil 14 zile. Funcționează doar pentru această adresă.",
+    "role": "Rol",
+    "invite": "Trimite invitația",
+    "inviting": "Se trimite…",
+    "invited": "Invitația a fost trimisă.",
+    "inviteNeedsFresh": "Confirmă mai întâi că ești tu, apoi poți trimite invitații.",
+    "freshTitle": "Confirmă că ești tu",
+    "freshBody": "Schimbările în echipă cer o confirmare recentă.",
+    "freshLink": "Confirmă în contul tău",
+    "rolesTitle": "Ce poate face fiecare rol"
+  },
+  "settings": {
+    "detailsTitle": "Datele firmei",
+    "nudge": "Reamintire după 48 de ore pentru cererile fără răspuns",
+    "nudgeHint": "Anunțul la primirea unei cereri vine întotdeauna; doar reamintirea se poate opri.",
+    "hideStats": "Ascunde statisticile de răspuns la toate listările",
+    "hideStatsHint": "Statisticile apar abia după zece cereri la care ai răspuns. Le poți ascunde oricând.",
+    "save": "Salvează setările",
+    "saving": "Se salvează…",
+    "saved": "Setările au fost salvate."
+  },
+  "badges": {
+    "title": "Fapte verificate",
+    "body": "Pe listări pot apărea doar două mențiuni, ambele simple fapte: înregistrarea la ONRC și asigurarea văzută de un moderator, cu data până la care este valabilă.",
+    "none": "Deocamdată nu este verificat niciun fapt.",
+    "how": "Verificările sunt făcute de un moderator și sunt gratuite. Pentru ONRC, completează numărul de înregistrare mai sus."
+  },
+  "invite": {
+    "title": "Invitație în echipă",
+    "body": "Ai fost invitat în echipa „{business}” ca {role}.",
+    "accept": "Intră în echipa {business}",
+    "accepting": "Se confirmă…",
+    "goneTitle": "Invitația nu mai este valabilă",
+    "goneBody": "A fost deja folosită sau retrasă.",
+    "toBusiness": "Mergi la „Afacerea mea”",
+    "expiredTitle": "Invitația a expirat",
+    "expiredBody": "Cere unui administrator al firmei „{business}” să o trimită din nou."
+  },
+  "email": {
+    "reason": "Motivul: {reason}",
+    "open": "Deschide „Afacerea mea”",
+    "inviteSubject": "Invitație în echipa {business} pe EventDesk",
+    "inviteIntro": "Ai fost invitat în echipa „{business}” pe EventDesk, ca {role}.",
+    "inviteButton": "Acceptă invitația",
+    "inviteValidity": "Linkul este valabil {days} zile și funcționează doar pentru această adresă de email.",
+    "inviteNotExpected": "Dacă nu te așteptai la acest mesaj, îl poți ignora.",
+    "status": {
+      "active": "Restricția asupra firmei {business} a fost ridicată",
+      "restricted": "Firma {business} a fost restricționată pe EventDesk",
+      "suspended": "Firma {business} a fost suspendată pe EventDesk"
+    },
+    "revision": {
+      "approved": "O listare a firmei {business} a fost aprobată",
+      "rejected": "O listare a firmei {business} nu a fost aprobată"
+    },
+    "listing": {
+      "suspended": "O listare a firmei {business} a fost suspendată",
+      "restored": "O listare a firmei {business} este din nou publică"
+    }
+  },
+  "errors": {
+    "emailRequired": "Un cont de firmă are nevoie de o adresă de email. Adaug-o mai întâi în contul tău.",
+    "alreadyOwner": "Ai deja o firmă pe acest cont.",
+    "roleRequired": "Rolul tău în firmă nu permite această acțiune.",
+    "adminCannotManageAdmins": "Un administrator nu poate numi sau elimina alți administratori. Doar proprietarul poate.",
+    "ownerStays": "Proprietarul nu poate fi eliminat din echipă.",
+    "alreadyMember": "Această adresă este deja în echipă.",
+    "inviteGone": "Invitația nu mai este valabilă.",
+    "inviteExpired": "Invitația a expirat. Cere una nouă.",
+    "inviteOtherEmail": "Invitația a fost trimisă altei adrese de email. Intră în cont cu adresa la care ai primit-o.",
+    "restricted": "Firma este restricționată: nu poți adăuga sau modifica nimic până la ridicarea restricției.",
+    "suspended": "Firma este suspendată: nu poți adăuga sau modifica nimic până la ridicarea suspendării.",
+    "lapsed": "Nu poți adăuga listări noi acum. Listările existente rămân active și pot fi corectate."
+  }
+}

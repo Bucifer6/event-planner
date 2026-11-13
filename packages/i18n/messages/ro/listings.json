@@ -1,0 +1,166 @@
+{
+  "back": "Înapoi la listări",
+  "status": {
+    "draft": "Ciornă",
+    "pending": "În verificare",
+    "live": "Publică",
+    "suspended": "Suspendată",
+    "retired": "Retrasă",
+    "editPending": "Modificare în verificare",
+    "rejected": "Neaprobată"
+  },
+  "list": {
+    "title": "Listări",
+    "add": "Adaugă o listare",
+    "addFirst": "Adaugă prima listare",
+    "count": "{count} din {max} listări folosite.",
+    "full": "Ai ajuns la limită: retrage una ca să adaugi alta.",
+    "emptyTitle": "Nicio listare încă",
+    "emptyBody": "O listare spune ce faci și unde. După ce o trimiți, un moderator o verifică și apoi apare în director.",
+    "liveWithEdit": "Publică. O modificare așteaptă verificarea din {date}.",
+    "pendingSince": "Trimisă spre verificare la {date}. Încă nu este publică.",
+    "suspendedMeta": "Suspendată de EventDesk. Deschide-o ca să vezi motivul.",
+    "rejectedMeta": "Ultima trimitere nu a fost aprobată. Deschide-o ca să vezi motivul.",
+    "meta": {
+      "draft": "Ciornă. Nu a fost trimisă spre verificare.",
+      "pending": "În verificare. Încă nu este publică.",
+      "live": "Publică în director.",
+      "suspended": "Suspendată.",
+      "retired": "Retrasă."
+    }
+  },
+  "new": {
+    "title": "Listare nouă",
+    "description": "Alege din liste ce faci și unde. Nimic nu devine public până când un moderator nu aprobă listarea.",
+    "blocked": {
+      "restricted": "Firma este restricționată sau suspendată: nu se pot adăuga listări.",
+      "lapsed": "Nu poți adăuga listări noi acum. Cele existente rămân active și pot fi corectate.",
+      "full": "Ai deja {max} listări. Retrage una ca să adaugi alta."
+    }
+  },
+  "fields": {
+    "name": "Numele listării",
+    "descriptionRo": "Descriere în română",
+    "descriptionEn": "Descriere în engleză",
+    "categories": "Categorii",
+    "counties": "Județe",
+    "localities": "Localități",
+    "contactPhone": "Telefon",
+    "contactEmail": "Email de contact",
+    "website": "Site web",
+    "photoCount": "Fotografii (număr)",
+    "publicContactRoute": "Contact publicat",
+    "sourceUrl": "Sursa publică"
+  },
+  "editor": {
+    "counter": "{count} din {max}",
+    "fixErrors": "Mai sunt câteva lucruri de corectat. Le găsești lângă câmpurile lor.",
+    "nameHint": "Numele care apare în director.",
+    "whatTitle": "Ce faci",
+    "categoriesHint": "Alege între una și cinci categorii.",
+    "whereTitle": "Unde lucrezi",
+    "whereHint": "Adaugă cel mult cinci județe, apoi bifează localitățile din fiecare — cel mult douăzeci în total.",
+    "addCountyLabel": "Județ de adăugat",
+    "chooseCounty": "Alege un județ…",
+    "addCounty": "Adaugă județul",
+    "removeCounty": "Scoate",
+    "removeCountyNamed": "Scoate județul {county}",
+    "localitiesIn": "Localități din {county}",
+    "aboutTitle": "Descriere",
+    "descriptionRoHint": "Cel puțin câteva propoziții: ce oferi, pentru ce fel de evenimente, ce te deosebește. Fără promisiuni pe care nu le poți ține.",
+    "descriptionEnHint": "Dacă lipsește, vizitatorii care citesc în engleză văd textul în română, cu mențiunea „numai în română”.",
+    "contactTitle": "Contact public",
+    "contactHint": "Apar pe pagina listării, pentru oricine. Completează doar ce vrei să fie public.",
+    "websiteHint": "Adresa completă, cu https://",
+    "photosTitle": "Fotografii",
+    "photoAlt": "Fotografia {n}",
+    "removePhoto": "Scoate",
+    "removePhotoNamed": "Scoate fotografia {n}",
+    "addPhoto": "Adaugă o fotografie",
+    "photoHint": "PNG sau JPG, cel mult 10 MiB. Doar fotografii care îți aparțin.",
+    "photosAfterSave": "Poți adăuga fotografii după ce salvezi ciorna.",
+    "submit": "Trimite spre verificare",
+    "submitting": "Se trimite…",
+    "saveDraft": "Salvează ciorna",
+    "savingDraft": "Se salvează…"
+  },
+  "saved": {
+    "draft": "Ciorna a fost salvată. Nimic public nu s-a schimbat.",
+    "submitted": "Listarea a fost trimisă spre verificare.",
+    "submittedBody": "Un moderator o va verifica. Până atunci, versiunea publică rămâne neschimbată."
+  },
+  "detail": {
+    "title": "Listare",
+    "empty": "necompletat",
+    "liveTitle": "Ce este public acum",
+    "notLiveYet": "Nimic deocamdată: listarea nu a fost încă aprobată.",
+    "viewPublic": "Vezi pagina publică",
+    "pendingTitle": "Ce așteaptă verificarea",
+    "pendingEditBody": "Trimis la {date}. Versiunea publică rămâne neschimbată până la decizia moderatorului.",
+    "pendingNewBody": "Trimis la {date}. Listarea devine publică după aprobare.",
+    "pendingNoChange": "Nicio diferență față de versiunea publică.",
+    "withdraw": "Retrage trimiterea",
+    "withdrawing": "Se retrage…",
+    "editTitle": "Modifică listarea",
+    "contentTitle": "Conținutul listării",
+    "editBody": "Orice modificare trece din nou pe la un moderator. Până atunci rămâne publică versiunea de mai sus.",
+    "draftNotice": "Ai o ciornă salvată care nu a fost încă trimisă.",
+    "moreTitle": "Alte opțiuni"
+  },
+  "rejected": {
+    "title": "Ultima trimitere nu a fost aprobată",
+    "reason": "Motivul moderatorului:",
+    "next": "Textul tău este păstrat mai jos. Corectează și trimite din nou."
+  },
+  "suspended": {
+    "title": "Listarea este suspendată",
+    "body": "Nu apare în director și nu poate fi modificată până la ridicarea suspendării.",
+    "reason": "Motivul:"
+  },
+  "stats": {
+    "title": "Statistici de răspuns",
+    "body": "După zece cereri la care ai răspuns, pagina listării arată cât de des și cât de repede răspunzi. Sunt calculate zilnic și nu pot fi cumpărate sau modificate. Le poți ascunde.",
+    "hiddenNow": "Acum sunt ascunse.",
+    "shownNow": "Acum sunt publice (ultima verificare: {date}).",
+    "notYet": "Încă nu apar: nu sunt destule cereri cu răspuns.",
+    "hide": "Ascunde statisticile acestei listări",
+    "show": "Arată statisticile acestei listări",
+    "saving": "Se salvează…"
+  },
+  "retire": {
+    "title": "Retrage listarea",
+    "body": "Listarea dispare din director și eliberează unul dintre cele cinci locuri. Nu poate fi readusă.",
+    "open": "Retrage listarea…",
+    "confirmTitle": "Retragi „{name}”?",
+    "confirmBody": "Pagina publică dispare imediat. Dacă vrei doar să schimbi ceva, modifică listarea în loc să o retragi.",
+    "confirm": "Retrage „{name}”",
+    "retiring": "Se retrage…"
+  },
+  "retired": {
+    "done": "Listarea a fost retrasă."
+  },
+  "errors": {
+    "unknownField": "Formularul conține un câmp necunoscut. Categoriile și localitățile se aleg doar din liste.",
+    "tooManyCategories": "Alege cel mult cinci categorii.",
+    "noCategory": "Alege cel puțin o categorie.",
+    "unknownCategory": "Una dintre categorii nu există în listă. Alege din cele afișate.",
+    "tooManyCounties": "Alege cel mult cinci județe.",
+    "noCounty": "Adaugă cel puțin un județ.",
+    "unknownCounty": "Unul dintre județe nu există în listă. Alege din cele afișate.",
+    "tooManyLocalities": "Alege cel mult douăzeci de localități.",
+    "noLocality": "Bifează cel puțin o localitate.",
+    "unknownLocality": "Una dintre localități nu există în listă. Alege din cele afișate.",
+    "localityOutsideCounties": "O localitate nu face parte din județele alese.",
+    "countyWithoutLocality": "Bifează cel puțin o localitate în fiecare județ adăugat sau scoate județul.",
+    "descriptionTooShort": "Scrie cel puțin câteva propoziții (minimum 20 de caractere).",
+    "phoneInvalid": "Scrie un număr de telefon valid, de exemplu 0722 123 456.",
+    "websiteHttps": "Scrie adresa completă, începând cu https://",
+    "tooManyPhotos": "Poți adăuga cel mult opt fotografii.",
+    "photoNotYours": "Una dintre fotografii nu mai este disponibilă. Scoate-o și încarc-o din nou.",
+    "tooManyListings": "Ai deja {max} listări. Retrage una ca să adaugi alta.",
+    "nothingToSubmit": "Nu este nimic de trimis. Completează listarea mai întâi.",
+    "retired": "Listarea a fost retrasă și nu mai poate fi modificată.",
+    "suspended": "Listarea este suspendată și nu poate fi modificată până la ridicarea suspendării.",
+    "alreadyClaimed": "Listarea este deja revendicată."
+  }
+}

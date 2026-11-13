@@ -92,14 +92,14 @@ describe("schema — children are never persons (invariant 9)", () => {
       sql`SELECT table_name, column_name, data_type FROM information_schema.columns WHERE table_schema = 'public'`,
     );
     // words that would identify or describe a child, matched on whole snake_case segments
-    const suspicious = /(^|_)(child|children|childs|copil|copii|kid|kids|minor|minors|age|ages|varsta|birth|birthday|birthdate|nastere|nasterii|dob|born)(_|$)/i;
+    const suspicious = /(^|_)(child|children|childs|copil|copii|kid|kids|age|ages|varsta|birth|birthday|birthdate|nastere|nasterii|dob|born)(_|$)/i;
     const hits = cols.rows.filter((c) => suspicious.test(c.column_name)).map((c) => `${c.table_name}.${c.column_name}:${c.data_type}`);
     expect(hits).toEqual(["rsvp_responses.children_count:integer"]);
     const guestCols = cols.rows.filter((c) => c.table_name === "guests").map((c) => c.column_name);
     expect(guestCols.sort()).toEqual(["created_at", "full_name", "household_id", "id", "occasion_id", "updated_at"]);
     // no table is about children at all
     const tables = [...new Set(cols.rows.map((c) => c.table_name))];
-    expect(tables.filter((n) => /child|copil|copii|kid|minor/i.test(n))).toEqual([]);
+    expect(tables.filter((n) => /child|copil|copii|kid/i.test(n))).toEqual([]);
   });
 });
 

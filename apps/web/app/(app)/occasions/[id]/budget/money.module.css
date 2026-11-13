@@ -1,0 +1,45 @@
+/* Budget and ledger pieces composed from tokens only (no new colours, radii or spacing). */
+
+.hero { margin-bottom: var(--s-4); }
+
+.legend { max-width: var(--measure); margin-top: var(--s-2); }
+
+.rowNote { display: block; font-size: var(--text-xs); color: var(--danger); font-weight: 600; white-space: normal; }
+
+.catName { display: block; font-weight: 600; min-width: 9rem; }
+
+.amountEnd { display: flex; flex-direction: column; align-items: flex-end; gap: var(--s-1); text-align: right; }
+
+.amount { font-variant-numeric: tabular-nums lining-nums; font-weight: 600; white-space: nowrap; }
+
+.tags { display: flex; flex-wrap: wrap; gap: var(--s-1); justify-content: flex-end; }
+
+.rowLink { color: inherit; text-decoration: none; display: block; }
+.rowLink:hover .rowTitle, .rowLink:focus-visible .rowTitle { text-decoration: underline; }
+
+.voided { text-decoration: line-through; color: var(--ink-3); }
+
+.split { display: flex; flex-direction: column; gap: var(--s-2); margin: 0; padding: 0; border: 0; min-width: 0; }
+
+.splitRow { display: grid; grid-template-columns: minmax(0, 1fr) 7.5rem; gap: var(--s-3); align-items: center; }
+
+.splitRow label { min-width: 0; overflow-wrap: anywhere; }
+
+.people { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: 0; list-style: none; }
+
+.person { display: inline-flex; align-items: center; gap: var(--s-1); padding-left: var(--s-3); border: var(--hair) solid var(--line); border-radius: var(--radius); background: var(--surface); min-height: var(--tap); }
+
+.personPlain { padding-right: var(--s-3); }
+
+.narrow { max-width: var(--page-narrow); }
+
+.inlineForms { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: flex-end; }
+
+.history { display: flex; flex-direction: column; gap: var(--s-3); margin: 0; padding: 0; list-style: none; }
+
+.history li { padding-bottom: var(--s-3); border-bottom: var(--hair) solid var(--line); }
+.history li:last-child { border-bottom: 0; padding-bottom: 0; }
+
+.rowTitle { color: var(--ink); }
+
+.tagsStart { display: flex; flex-wrap: wrap; gap: var(--s-1); margin-top: var(--s-1); }

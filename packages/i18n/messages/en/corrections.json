@@ -1,0 +1,11 @@
+{
+  "errors": {
+    "reasonRequired": "Say briefly why you are making the correction (at least 3 characters)."
+  },
+  "title": "Corrections",
+  "empty": "No corrections.",
+  "reason": "Reason",
+  "before": "Before",
+  "after": "After",
+  "by": "Corrected on {date}"
+}

@@ -12,6 +12,7 @@ import Link from "next/link";
 import { FreshGate } from "@/app/(app)/account/_components/fresh-gate";
 import { requireCtx } from "@/lib/ctx";
 import { orNotFound } from "../../_lib/load";
+import { LifecycleSections } from "./lifecycle/Lifecycle";
 import { DeleteOccasion, DetailsForm, MoveDateForm } from "./SettingsForms";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -65,6 +66,8 @@ export default async function SettingsPage({ params }: { params: Promise<{ id: s
           endsOn={occasion.endsAt ? instantToDay(occasion.endsAt, tz) : ""}
         />
       </Section>
+
+      <LifecycleSections occasion={occasion} locale={ctx.locale} now={ctx.now} fresh={fresh} freshGate={<FreshGate method={method} />} />
 
       {member.role === "owner" ? (
         <Section title={t("deletion.title")} level={3} id="delete">

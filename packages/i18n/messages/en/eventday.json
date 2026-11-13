@@ -1,0 +1,111 @@
+{
+  "title": "Event day",
+  "clockLabel": "The time now:",
+  "noDate": "The occasion has no date yet",
+  "notToday": "not today",
+  "daysNav": "Days of the occasion",
+  "now": "Now",
+  "states": {
+    "ready": "Ready",
+    "running": "Running",
+    "waiting": "Waiting",
+    "done": "Done"
+  },
+  "actions": {
+    "start": "Start",
+    "resume": "Resume",
+    "finish": "Done",
+    "wait": "Waiting",
+    "reopen": "Reopen"
+  },
+  "programme": {
+    "title": "Programme of the day",
+    "add": "Add a moment",
+    "addTitle": "New moment in the programme",
+    "addIntro": "A moment is an ordinary task due on this day: it also appears in the task list.",
+    "addSubmit": "Add the moment",
+    "empty": "Nothing in this day's programme. Add the first moment — for example “Guests arrive” — or set an existing task due on this day.",
+    "noDate": "The programme of the day appears once the occasion has a date.",
+    "setDate": "Set the date",
+    "allDone": "Everything is done. Congratulations!"
+  },
+  "item": {
+    "title": "What happens",
+    "titleHint": "For example: guests arrive, cutting the cake.",
+    "time": "Time",
+    "timeHint": "In the format 18:30. Leave it empty if there is no fixed time.",
+    "phone": "Contact phone",
+    "phoneHint": "Who you call about this moment.",
+    "noTime": "no fixed time",
+    "setTime": "Set the time",
+    "editTime": "Change the time",
+    "detailsTitle": "Time and contact — {title}"
+  },
+  "deliveries": {
+    "title": "Deliveries today",
+    "all": "All deliveries",
+    "none": "No delivery scheduled for this day."
+  },
+  "contacts": {
+    "title": "Contacts",
+    "none": "No phone number saved. Add the phone to your suppliers to call them from here.",
+    "call": "Call:"
+  },
+  "readiness": {
+    "title": "Readiness decision",
+    "none": "No decision recorded yet.",
+    "first": "Record a decision",
+    "again": "Record a new decision",
+    "formTitle": "Are we ready?",
+    "by": "{name} · {date}",
+    "conditionsLabel": "Conditions",
+    "evidence": "Evidence",
+    "history": "Earlier decisions ({count})",
+    "decisions": {
+      "hold": "Hold",
+      "proceed": "Proceed",
+      "conditions": "Proceed with conditions"
+    },
+    "evidenceTypes": {
+      "task": "Task",
+      "delivery": "Delivery",
+      "briefing_ack": "Briefing acknowledged",
+      "note": "Note"
+    },
+    "form": {
+      "decision": "The decision",
+      "conditions": "Conditions",
+      "conditionsHint": "Required for “Proceed with conditions”: what has to hold.",
+      "note": "Note",
+      "evidenceTitle": "What you rely on",
+      "evidenceHint": "Tick at least one piece of evidence: a task, a delivery, an acknowledged briefing — or write a note with a link.",
+      "tasks": "Tasks",
+      "deliveries": "Deliveries",
+      "acks": "Acknowledged briefings",
+      "noteEvidence": "Note with a link",
+      "noteLabel": "What the link shows",
+      "noteUrl": "Link",
+      "noteUrlHint": "Starts with https://",
+      "submit": "Record the decision",
+      "done": "The decision has been recorded."
+    },
+    "overview": {
+      "hold": "Hold — decided by {name}, {date}",
+      "proceed": "Proceed — decided by {name}, {date}",
+      "conditions": "Proceed with conditions — decided by {name}, {date}",
+      "conditions_text": "Conditions: {conditions}"
+    }
+  },
+  "errors": {
+    "time": "Write the time in the format 18:30.",
+    "phone": "Write a valid phone number, for example 0722 123 456.",
+    "titleRequired": "Write what happens at this moment.",
+    "decisionRequired": "Choose the decision.",
+    "evidenceRequired": "Add at least one piece of evidence: tick a task, a delivery or an acknowledged briefing, or write a note with a link.",
+    "evidenceMissing": "One of the chosen pieces of evidence no longer exists. Reload the page and choose again.",
+    "evidenceTooMany": "You chose too many pieces of evidence. Keep the most important ones.",
+    "conditionsRequired": "Write the conditions under which we proceed.",
+    "noteText": "Write what the link shows.",
+    "noteUrl": "Write a full link that starts with https://."
+  }
+}

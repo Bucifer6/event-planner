@@ -1,5 +1,7 @@
 import type { Db } from "../client";
 import { templatesSeed } from "./templates";
+import { categoriesSeed } from "./categories";
+import { geographySeed } from "./geography";
 
 /**
  * A seed module. It MUST be idempotent: running it twice leaves the same data
@@ -12,7 +14,7 @@ export type Seed = {
 
 // Registry. To add a seed: create src/seed/<name>.ts exporting a `Seed`, import it here and
 // append it to the array (append only; seeds run in array order).
-export const seeds: Seed[] = [templatesSeed];
+export const seeds: Seed[] = [templatesSeed, categoriesSeed, geographySeed];
 
 /** Runs every registered seed, each in its own transaction. Returns the names that ran. */
 export async function runSeeds(db: Db, only?: string[]): Promise<string[]> {

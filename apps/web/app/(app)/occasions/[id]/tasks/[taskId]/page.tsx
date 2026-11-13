@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { TaskDirectoryLink } from "@/app/directory/_components/TaskDirectoryLink";
 import { requireCtx } from "@/lib/ctx";
 import { OfferActions, WithdrawOffer } from "../../../_components/OfferActions";
 import { StatusSelect } from "../../../_components/StatusSelect";
@@ -89,6 +90,8 @@ export default async function TaskPage({ params }: { params: Promise<{ id: strin
           <StatusSelect occasionId={id} taskId={task.id} status={task.status} taskTitle={task.title} disabled={!can.progress} />
         </div>
         <TaskTags task={task} />
+        {/* Release P (P7): one dismissible "Vezi firme de <categorie> în <zona>" link; names no business; renders nothing when not relevant or switched off. */}
+        <TaskDirectoryLink occasionId={id} taskTitle={task.title} canManage={member.role === "owner" || member.role === "pm"} />
 
         <DescriptionList
           cols={2}

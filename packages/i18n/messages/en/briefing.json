@@ -1,0 +1,113 @@
+{
+  "title": "Briefing",
+  "empty": "You have not published a briefing yet. Write what the supplier has to do, when, where and who they talk to.",
+  "emptyReadOnly": "No briefing published yet.",
+  "publishedOn": "Published on {date}",
+  "acked": "Acknowledged",
+  "notAcked": "Not acknowledged",
+  "fields": {
+    "what": "What",
+    "when": "When",
+    "where": "Where",
+    "contacts": "Contacts",
+    "specialNotes": "Special notes",
+    "freeText": "Other details"
+  },
+  "hints": {
+    "what": "What the supplier has to do.",
+    "when": "The day and the times: arrival, set-up, programme.",
+    "where": "The address and the exact spot.",
+    "contacts": "Who they call on the day.",
+    "specialNotes": "Access, parking, restrictions, allergies."
+  },
+  "status": {
+    "acked": "Version {version} is acknowledged by the supplier",
+    "notAcked": "Version {version} is not acknowledged yet",
+    "ackedBy": "Acknowledged by {name}, on {date}.",
+    "waiting": "The supplier has the link; we are waiting for the acknowledgement.",
+    "needsLink": "Generate the supplier link (below) and send it, so they can acknowledge.",
+    "noAckYet": "The supplier has not acknowledged this version."
+  },
+  "editor": {
+    "openFirst": "Write the briefing",
+    "openNext": "Write version {version}",
+    "title": "Briefing — version {version}",
+    "introFirst": "Once published, a version is never edited. If something changes, you publish a new version and the supplier sees what changed.",
+    "introNext": "You start from the published version. The old version stays as it is, and the supplier sees what differs and acknowledges again.",
+    "publish": "Publish version {version}",
+    "publishing": "Publishing…",
+    "published": "The version has been published."
+  },
+  "errors": {
+    "empty": "The briefing is empty. Write at least what the supplier has to do.",
+    "unchanged": "You changed nothing compared with the published version.",
+    "ackName": "Write your name, so the planner knows who acknowledged.",
+    "linkGone": "This link is no longer valid. Ask the planner for a new one."
+  },
+  "gone": {
+    "title": "This link is not valid.",
+    "body": "It may have been replaced or withdrawn. Ask the planner for a new link."
+  },
+  "throttled": {
+    "title": "Too many attempts",
+    "body": "Try again a little later.",
+    "bodyAt": "You can try again after {time}."
+  },
+  "link": {
+    "metaTitle": "Briefing",
+    "kicker": "Supplier briefing",
+    "for": "For {name}",
+    "map": "See on the map",
+    "dateUndecided": "The date is not decided yet",
+    "briefingTitle": "Your briefing",
+    "version": "Version {version}",
+    "noBriefing": "The planner has not published a briefing yet. Come back to this link later.",
+    "changedTitle": "What changed since version {version}, which you acknowledged",
+    "emptyBefore": "(nothing)",
+    "emptyAfter": "(removed)",
+    "orderTitle": "Final order",
+    "orderFixed": "Fixed on {date}",
+    "orderBasedOn": "for {total} people ({adults} adults, {children} children)",
+    "deliveriesTitle": "Your deliveries",
+    "slotUnknown": "Slot not agreed yet",
+    "ackTitle": "Acknowledgement",
+    "ackIntro": "Read version {version} above. When everything is clear, acknowledge it.",
+    "ackName": "Your name",
+    "ackNameHint": "The planner sees who acknowledged and when.",
+    "ackSubmit": "I have received and understood the briefing",
+    "ackPending": "Sending the acknowledgement…",
+    "ackDone": "You acknowledged version {version}",
+    "honeypot": "Leave this field empty",
+    "cancelledTitle": "The booking has been cancelled",
+    "cancelledBody": "For details, get in touch with the planner.",
+    "postponedTitle": "The event has been postponed",
+    "postponedBody": "The planner will tell you the new date. The briefing below may change.",
+    "footer": "Private page, for this booking only. Do not pass it on."
+  },
+  "pdf": {
+    "exportTitle": "Occasion briefing (PDF)",
+    "exportDescription": "The date, the venue, the programme of the day, the suppliers with their latest briefing, the deliveries and the guest count. No guest list and no amounts.",
+    "eyebrow": "Briefing",
+    "subject": "Occasion briefing",
+    "date": "Date",
+    "dateUndecided": "The date is not decided yet",
+    "venue": "Venue",
+    "venueUnknown": "Venue unknown",
+    "guests": "Guests confirmed",
+    "guestCounts": "{total} people — {adults} adults, {children} children",
+    "programme": "Programme of the day",
+    "programmeEmpty": "Nothing in the programme of the day.",
+    "suppliers": "Suppliers",
+    "suppliersEmpty": "No suppliers.",
+    "contactUnknown": "Contact unknown",
+    "state": "State",
+    "briefingNone": "No briefing published.",
+    "briefingVersion": "Briefing — version {version}, published on {date}",
+    "acknowledged": "Acknowledged by {name}, on {date}.",
+    "notAcknowledged": "Not acknowledged by the supplier yet.",
+    "deliveries": "Deliveries",
+    "deliveriesEmpty": "No deliveries.",
+    "slotUnknown": "Slot not agreed",
+    "footer": "EventDesk.ro · generated on {date} · page {page} of {pages}"
+  }
+}

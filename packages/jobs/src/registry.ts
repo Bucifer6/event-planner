@@ -25,6 +25,9 @@ import { registerJobs as digest } from "@ed/core/digest";
 import { registerJobs as authCleanup } from "./auth-cleanup";
 import { registerJobs as mcp } from "@ed/mcp";
 import { registerJobs as reports } from "@ed/core/reports";
+import { registerJobs as closeout } from "@ed/core/closeout";
+import { registerJobs as supplierSide } from "@ed/core/payments";
+import { registerJobs as directory } from "@ed/core/directory";
 
 const registrations: Array<() => void> = [
   builtin,
@@ -37,6 +40,9 @@ const registrations: Array<() => void> = [
   authCleanup,
   mcp,
   reports,
+  closeout,
+  supplierSide,
+  directory,
 ];
 
 let done = false;

@@ -1,0 +1,86 @@
+/* The Honest Directory: typographic, quiet, factual. Tokens only. Hairlines, not cards. */
+
+.foot {
+  margin-top: var(--s-6);
+  padding: var(--s-4) 0 var(--s-6);
+  border-top: var(--hair) solid var(--line);
+  color: var(--ink-2);
+  font-size: var(--text-sm);
+}
+.footInner { max-width: var(--page); margin-inline: auto; padding-inline: var(--s-3); display: flex; flex-wrap: wrap; gap: var(--s-2) var(--s-4); justify-content: space-between; }
+@media (min-width: 720px) { .footInner { padding-inline: var(--s-5); } }
+.foot a { display: inline-flex; align-items: center; min-height: 44px; }
+.footLinks { display: flex; flex-wrap: wrap; gap: 0 var(--s-4); }
+.signin { display: none; align-items: center; min-height: 44px; padding-inline: var(--s-2); font-size: var(--text-sm); font-weight: 600; white-space: nowrap; }
+@media (min-width: 480px) { .signin { display: inline-flex; } }
+
+/* Search form: one column on a phone, one line on a desk. */
+.search { display: grid; gap: var(--s-3); grid-template-columns: minmax(0, 1fr); align-items: end; }
+.searchAction { display: flex; }
+.searchAction :global(.ed-btn) { width: 100%; }
+@media (min-width: 880px) {
+  .search { grid-template-columns: repeat(3, minmax(0, 1fr)) auto; }
+  .searchAction :global(.ed-btn) { width: auto; }
+}
+
+/* Index: categories as an indexed register, counties as plain links beside each name. */
+.register { margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--line); }
+.registerRow {
+  display: grid;
+  grid-template-columns: var(--s-5) minmax(0, 1fr);
+  column-gap: var(--s-3);
+  row-gap: var(--s-1);
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair) solid var(--line);
+  align-items: baseline;
+}
+.registerIndex { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--gilt-ink); font-variant-numeric: lining-nums; }
+.registerName { font-family: var(--font-display); font-size: var(--display-sm); line-height: 1.2; }
+.registerLinks { grid-column: 2; display: flex; flex-wrap: wrap; gap: 0 var(--s-3); margin: 0; padding: 0; list-style: none; }
+.registerLinks a { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-sm); }
+@media (min-width: 880px) {
+  .registerRow { grid-template-columns: var(--s-5) minmax(0, 1fr) auto; }
+  .registerLinks { grid-column: 3; justify-content: flex-end; }
+}
+
+.counties { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: var(--s-4); }
+.counties li { break-inside: avoid; }
+.counties a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (min-width: 720px) { .counties { columns: 4; } }
+.summary { cursor: pointer; display: inline-flex; align-items: center; min-height: var(--tap); color: var(--accent); text-decoration: underline; text-underline-offset: 0.2em; }
+
+/* Results: hairline-separated entries. The name speaks in Bodoni; facts are small labels. */
+.rotation { margin-top: var(--s-3); display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-1) var(--s-3); padding-bottom: var(--s-2); }
+.results { margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--ink); }
+.entry { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-4) 0; border-bottom: var(--hair) solid var(--line); min-width: 0; }
+.entryName { font-family: var(--font-display); font-size: var(--display-md); font-weight: 400; line-height: 1.1; letter-spacing: -0.01em; margin: 0; overflow-wrap: anywhere; }
+.entryName a { color: inherit; text-decoration: none; }
+.entryName a:hover { text-decoration: underline; text-underline-offset: 0.18em; text-decoration-thickness: 1px; }
+.entryMeta { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-3); }
+.entryText { color: var(--ink-2); max-width: var(--measure); margin: 0; }
+.facts { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-4); margin: 0; padding: 0; list-style: none; }
+.facts li { display: inline-flex; min-height: 24px; align-items: center; }
+.note { font-size: var(--text-sm); font-style: italic; color: var(--ink-3); }
+
+.chips { display: flex; flex-wrap: wrap; gap: var(--s-2); margin: 0; padding: 0; list-style: none; }
+
+/* Listing page */
+.listingName { font-family: var(--font-display); font-size: var(--display-xl); font-weight: 400; line-height: 1.02; letter-spacing: -0.03em; text-wrap: balance; margin: 0; overflow-wrap: anywhere; }
+.listingHead { display: flex; flex-direction: column; gap: var(--s-3); padding-bottom: var(--s-4); border-bottom: var(--hair) solid var(--ink); }
+.columns { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); margin-top: var(--s-5); }
+@media (min-width: 880px) { .columns { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: var(--s-6); } }
+.aside { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }
+.asideBlock { display: flex; flex-direction: column; gap: var(--s-2); padding-top: var(--s-3); border-top: var(--hair) solid var(--line); min-width: 0; }
+.description { white-space: pre-line; max-width: var(--measure); overflow-wrap: anywhere; }
+.photos { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-2); margin: 0; padding: 0; list-style: none; }
+.photos img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: var(--hair) solid var(--line); border-radius: var(--radius); background: var(--sunken); }
+@media (min-width: 720px) { .photos { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.contact { margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; }
+.contact li { display: flex; flex-direction: column; gap: 2px; padding: var(--s-2) 0; overflow-wrap: anywhere; }
+.contact a { display: inline-flex; align-items: center; min-height: 44px; }
+.report { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-sm); color: var(--ink-2); }
+.statLine { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.35; }
+.crumbs { display: flex; flex-wrap: wrap; gap: 0 var(--s-2); margin: 0; padding: 0; list-style: none; font-size: var(--text-sm); color: var(--ink-2); }
+.crumbs li { display: inline-flex; align-items: center; gap: var(--s-2); min-height: 44px; }
+.crumbs li + li::before { content: "/"; color: var(--ink-3); }
+.linkOff { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2) var(--s-3); }
