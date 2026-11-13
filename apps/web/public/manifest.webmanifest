@@ -1,9 +1,0 @@
-{
-  "name": "EventDesk.ro",
-  "short_name": "EventDesk",
-  "start_url": "/",
-  "display": "standalone",
-  "background_color": "#fdfefa",
-  "theme_color": "#23301f",
-  "icons": []
-}
