@@ -1,0 +1,29 @@
+{
+  "name": "@ed/shared",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./errors": "./src/errors.ts",
+    "./ids": "./src/ids.ts",
+    "./money": "./src/money.ts",
+    "./time": "./src/time.ts",
+    "./env": "./src/env.ts",
+    "./ssrf": "./src/ssrf.ts",
+    "./zod": "./src/zod.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@paralleldrive/cuid2": "3.3.0",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0"
+  }
+}

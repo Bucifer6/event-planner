@@ -1,0 +1,5 @@
+/* MAISON — EventDesk design system. Import once, from the root layout. */
+@import "./tokens.css";
+@import "./base.css";
+@import "./components.css";
+@import "./shell.css";

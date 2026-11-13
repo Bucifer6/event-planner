@@ -1,0 +1,8 @@
+node_modules
+.next
+out
+pnpm-lock.yaml
+packages/db/drizzle
+packages/i18n/src/messages.generated.ts
+docs
+packages/ui

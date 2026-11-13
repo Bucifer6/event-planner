@@ -1,0 +1,204 @@
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAISON — the EventDesk design language
+   Ivory paper, midnight ink, one hairline of gilt. Tailored, not rounded.
+   Tokens only. Components live in components.css, the app frame in shell.css.
+   ───────────────────────────────────────────────────────────────────────────── */
+
+@font-face {
+  font-family: "Bodoni Moda";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("../fonts/bodoni-moda-latin-ext-standard-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("../fonts/bodoni-moda-latin-standard-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("../fonts/bodoni-moda-latin-ext-standard-italic.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Bodoni Moda";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 400 900;
+  src: url("../fonts/bodoni-moda-latin-standard-italic.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/hanken-grotesk-latin-ext-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/hanken-grotesk-latin-wght-normal.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/hanken-grotesk-latin-ext-wght-italic.woff2") format("woff2-variations");
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308,
+    U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113,
+    U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: italic;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("../fonts/hanken-grotesk-latin-wght-italic.woff2") format("woff2-variations");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304,
+    U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+  color-scheme: light dark;
+
+  /* Type */
+  --font-display: "Bodoni Moda", "Didot", "Bodoni 72", "Playfair Display", Georgia, serif;
+  --font-text: "Hanken Grotesk", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+
+  --text-xs: 0.75rem; /* 12 — labels only */
+  --text-sm: 0.875rem; /* 14 */
+  --text-md: 1rem; /* 16 — body, inputs */
+  --text-lg: 1.125rem; /* 18 */
+  --display-sm: 1.375rem; /* 22 */
+  --display-md: 1.75rem; /* 28 */
+  --display-lg: 2.25rem; /* 36 */
+  --display-xl: clamp(2.5rem, 7vw, 4rem);
+
+  /* Space — the only scale */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 16px;
+  --s-4: 24px;
+  --s-5: 32px;
+  --s-6: 48px;
+  --s-7: 64px;
+
+  /* Form — tailored: square corners, hairlines, no shadows */
+  --radius: 2px;
+  --hair: 1px;
+  --tap: 48px;
+  --measure: 65ch;
+  --page: 1120px;
+  --page-narrow: 640px;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --t-in: 220ms;
+  --t-out: 160ms;
+
+  /* Colour — light ("Ivoire") */
+  --paper: #f5f2ec;
+  --surface: #fffdf8;
+  --sunken: #ece8df;
+  --ink: #17161b;
+  --ink-2: #4b4853;
+  --ink-3: #66636e;
+  --line: #ddd7cb;
+  --line-strong: #a9a294;
+
+  --accent: #1c2452; /* bleu nuit — the only action colour */
+  --accent-hover: #2b356f;
+  --on-accent: #fffdf8;
+  --accent-tint: #e6e8f2;
+
+  --gilt: #a08342; /* ornament only: hairlines, seals, large numerals */
+  --gilt-ink: #7a622b; /* gilt that must be read as text (≥4.5:1 on paper) */
+
+  --danger: #9b2626;
+  --danger-tint: #f7e7e3;
+  --success: #1d5f45;
+  --success-tint: #e2efe7;
+  --attention: #7d520f;
+  --attention-tint: #f6ecd7;
+
+  --overlay: rgb(23 22 27 / 0.48);
+  --focus: var(--accent);
+}
+
+/* Colour — dark ("Minuit"). Automatic, and forced on the event-day surface. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --paper: #141318;
+    --surface: #1c1b21;
+    --sunken: #100f13;
+    --ink: #ece8df;
+    --ink-2: #bcb8af;
+    --ink-3: #9d9990;
+    --line: #33313a;
+    --line-strong: #5a5763;
+
+    --accent: #b9c0f2;
+    --accent-hover: #d0d5f8;
+    --on-accent: #141318;
+    --accent-tint: #24263a;
+
+    --gilt: #c9ab70;
+    --gilt-ink: #d6ba82;
+
+    --danger: #f0a69c;
+    --danger-tint: #3a1f1d;
+    --success: #93d1b1;
+    --success-tint: #1a3026;
+    --attention: #e3c07c;
+    --attention-tint: #332914;
+
+    --overlay: rgb(0 0 0 / 0.6);
+  }
+}
+[data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141318;
+  --surface: #1c1b21;
+  --sunken: #100f13;
+  --ink: #ece8df;
+  --ink-2: #bcb8af;
+  --ink-3: #9d9990;
+  --line: #33313a;
+  --line-strong: #5a5763;
+  --accent: #b9c0f2;
+  --accent-hover: #d0d5f8;
+  --on-accent: #141318;
+  --accent-tint: #24263a;
+  --gilt: #c9ab70;
+  --gilt-ink: #d6ba82;
+  --danger: #f0a69c;
+  --danger-tint: #3a1f1d;
+  --success: #93d1b1;
+  --success-tint: #1a3026;
+  --attention: #e3c07c;
+  --attention-tint: #332914;
+  --overlay: rgb(0 0 0 / 0.6);
+}
