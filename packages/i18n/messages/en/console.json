@@ -15,7 +15,12 @@
     "launch": "Launch",
     "moderation": "Moderation",
     "businesses": "Businesses",
-    "directory": "Directory"
+    "directory": "Directory",
+    "deploys": "Deployments",
+    "complianceAccess": "Compliance access",
+    "commercial": "Commercial",
+    "communications": "Communications",
+    "discovery": "Discovery"
   },
   "roles": {
     "platform_admin": "Platform admin",

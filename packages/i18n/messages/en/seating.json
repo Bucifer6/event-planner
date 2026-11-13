@@ -1,0 +1,334 @@
+{
+  "title": "Seating",
+  "description": "Place the tables on the plan and the guests at the tables. You can drag with a finger or use the buttons: both do the same thing.",
+  "ownMeta": "entered by you",
+  "planLabel": "Seating plan for {name}",
+  "table": "Table {label}",
+  "seatsOf": "{taken} of {seats} seats",
+  "seatsUnknown": "{taken} seated · seats unknown",
+  "custom": "own table",
+  "venueSupplied": "venue's",
+  "sizeUnknown": "dimensions unknown",
+  "hasProblem": "has a placement problem",
+  "saving": "Saving…",
+  "saved": "Saved.",
+  "empty": {
+    "title": "First choose the room plan",
+    "body": "Seating is done on the plan of the space: the venue's, or one you describe.",
+    "action": "Choose the room plan"
+  },
+  "newerDrawing": {
+    "title": "The venue has published a newer version of the plan",
+    "link": "See what changes, in Room plan"
+  },
+  "publish": {
+    "title": "What guests see",
+    "tagOn": "Visible to guests",
+    "tagOff": "Hidden from guests",
+    "offBody": "For now guests see nothing of the seating. After publishing, each one sees only their own table on their link.",
+    "seatedNow": "People seated so far: {count}",
+    "show": "Show guests their seat",
+    "showing": "Publishing…",
+    "onBody": "Published on {date}. Each guest sees their table (and seat, if you chose one) on their link. Nobody sees anyone else's name.",
+    "hide": "Hide the seating again",
+    "hiding": "Hiding…"
+  },
+  "changes": {
+    "published": "You can now see your table.",
+    "withdrawn": "The seating is still changing."
+  },
+  "stage": {
+    "tabs": "Stages of the meal",
+    "base": "Base layout",
+    "manage": "Stages",
+    "hint": "You are in the stage “{name}”. What you move or put away here applies to this stage only; the base layout stays the same.",
+    "away": "put away in this stage",
+    "awayNote": "Not in the room during the stage “{name}”.",
+    "putAway": "Put away in this stage",
+    "bringBack": "Bring back in this stage",
+    "asBase": "As in the base layout",
+    "sheetTitle": "Stages of the meal",
+    "sheetBody": "Each stage has its own layout variant and its own fit check: for dancing, for example, you take out a few tables and extend the dance floor.",
+    "addDefaults": "Add the usual stages",
+    "nameOf": "Stage {n}",
+    "up": "Move the stage “{name}” up",
+    "down": "Move the stage “{name}” down",
+    "remove": "Delete the stage “{name}”",
+    "newName": "New stage",
+    "newHint": "For example “Between courses” or “Cake”.",
+    "add": "Add the stage",
+    "sameAsBase": "In this stage it is the same as in the base layout."
+  },
+  "stages": {
+    "defaults": {
+      "welcome": "Welcome",
+      "starter": "Starter",
+      "main": "Main course",
+      "dance": "Dancing",
+      "cake": "Cake"
+    }
+  },
+  "fit": {
+    "label": "Fit check, base layout",
+    "labelStage": "Fit check, stage {name}",
+    "fits": "It fits",
+    "short": {
+      "fits": "fits",
+      "no": "does not fit",
+      "unknown": "unknown"
+    },
+    "problemsVerdict": {
+      "one": "Does not fit: one placement problem",
+      "few": "Does not fit: {count} placement problems",
+      "other": "Does not fit: {count} placement problems"
+    },
+    "missingVerdict": {
+      "one": "Does not fit: one seat missing",
+      "few": "Does not fit: {count} seats missing",
+      "other": "Does not fit: {count} seats missing"
+    },
+    "unknownTables": {
+      "one": "Unknown: one table without dimensions",
+      "few": "Unknown: {count} tables without dimensions",
+      "other": "Unknown: {count} tables without dimensions"
+    },
+    "unknownItems": {
+      "one": "Unknown: one item without dimensions",
+      "few": "Unknown: {count} items without dimensions",
+      "other": "Unknown: {count} items without dimensions"
+    },
+    "unknownFloor": "Unknown: the room's dimensions are not known",
+    "unknownSeats": "Unknown: some tables have no seat count",
+    "unknownShort": "unknown",
+    "missingSeats": "does not fit: seats missing {count}",
+    "problems": "does not fit: placement problems {count}",
+    "seats": "Seats at tables:",
+    "attending": "confirmed:",
+    "missingAlso": {
+      "one": "one seat missing",
+      "few": "{count} seats missing",
+      "other": "{count} seats missing"
+    },
+    "invited": "Invited in total:",
+    "invitedMissing": {
+      "one": "one more seat would be needed for everyone",
+      "few": "{count} more seats would be needed for everyone",
+      "other": "{count} more seats would be needed for everyone"
+    },
+    "unknownWord": "unknown",
+    "area": "Floor taken:",
+    "of": "of",
+    "details": {
+      "one": "See the detail",
+      "few": "See the {count} details",
+      "other": "See the {count} details"
+    },
+    "show": "Show",
+    "excluded": "{name} ({kind}) has no dimensions: it is left out of the check.",
+    "seatsUnknownLine": "{name} has no seat count: its seats are not counted."
+  },
+  "issues": {
+    "overlap": "{a} overlaps {b}.",
+    "tooClose": "{a} and {b} are too close: {gap} cm of passage is left, the minimum is {min} cm.",
+    "outside": "{a} goes outside the usable area.",
+    "overInventory": "There are {count} more “{name}” tables than the venue has."
+  },
+  "zoom": {
+    "in": "Zoom in",
+    "out": "Zoom out"
+  },
+  "key": {
+    "venue": "venue's table",
+    "custom": "own table",
+    "fixture": "fixture (dance floor, stage…)",
+    "unknown": "dimensions unknown"
+  },
+  "bar": {
+    "label": "Actions for {name}",
+    "deselect": "Close the actions",
+    "unknownDims": "Its dimensions are not known, so it is left out of the fit check. Fill them in under “Edit”.",
+    "overCapacity": "There are {over} more people than seats.",
+    "placeHint": "Touch the place on the plan where you want it.",
+    "placeCancel": "Cancel",
+    "move": "Move",
+    "up": "Move up by {cm} cm",
+    "down": "Move down by {cm} cm",
+    "left": "Move left by {cm} cm",
+    "right": "Move right by {cm} cm",
+    "stepLabel": "Step of {cm} cm. Touch to change the step.",
+    "rotate": "Rotate",
+    "rotateLeft": "Rotate 15 degrees to the left",
+    "rotateRight": "Rotate 15 degrees to the right",
+    "rotateQuarter": "Rotate 90 degrees",
+    "placeHere": "Place here",
+    "exact": "Exact position",
+    "guests": "Guests at the table",
+    "seeGuests": "See who sits here",
+    "edit": "Edit",
+    "remove": "Take off the plan",
+    "step": "Step {cm} cm",
+    "more": "More"
+  },
+  "add": {
+    "open": "Add a table",
+    "title": "Add to the plan",
+    "venueTitle": "The venue's tables",
+    "venueHint": "From the inventory the venue states, with its dimensions.",
+    "seats": "Seats: {count}",
+    "seatsUnknown": "seats unknown",
+    "countUnknown": "count unknown",
+    "left": "Left: {left} of {count}",
+    "venueAdd": "Add",
+    "venueAddLabel": "Add a “{name}” table",
+    "allPlaced": "All are on the plan",
+    "what": "Or add something of your own",
+    "customTable": "Own table",
+    "customFixture": "Own fixture (candy bar, photo corner…)",
+    "customNote": "What you add is drawn with a dashed line and is not presented as the venue's.",
+    "customDefault": "Own table",
+    "customSubmit": "Add the table",
+    "fixtureSubmit": "Add the fixture"
+  },
+  "fields": {
+    "name": "Name",
+    "tableNameHint": "For example “Long table”. If you leave it empty, we call it “Own table”.",
+    "fixtureNameHint": "For example “Candy bar”.",
+    "shape": "Shape",
+    "diameter": "Diameter (m)",
+    "width": "Width (m)",
+    "length": "Length (m)",
+    "emptyUnknown": "empty = unknown",
+    "seats": "Seats",
+    "howMany": "How many tables",
+    "label": "Number or name of the table",
+    "labelHint": "Shown on the plan and on the guests' link: “3” or “Couple”."
+  },
+  "shapes": {
+    "round": "Round",
+    "rect": "Rectangular"
+  },
+  "tables": {
+    "title": "Tables ({count})",
+    "empty": "No table on the plan. Add the first one with the button above.",
+    "emptyRead": "No table on the plan yet.",
+    "over": "too many"
+  },
+  "unseated": {
+    "title": "Not seated ({count})",
+    "noGuests": "The guest list is empty. Add guests under “Guests and replies”.",
+    "none": "Every guest has a seat.",
+    "how": "Touch a table in the list or on the plan, then tick who sits at it."
+  },
+  "people": {
+    "extra": {
+      "one": "+1 adult",
+      "few": "+{count} adults",
+      "other": "+{count} adults"
+    },
+    "children": {
+      "one": "+1 child",
+      "few": "+{count} children",
+      "other": "+{count} children"
+    },
+    "confirmed": "confirmed",
+    "notAnswered": "no reply"
+  },
+  "position": {
+    "title": "Position of {name}",
+    "body": "The centre, measured from the top-left corner of the plan.",
+    "x": "From the left (m)",
+    "y": "From the top (m)",
+    "rotation": "Rotation (degrees)",
+    "submit": "Move here"
+  },
+  "edit": {
+    "title": "Edit “{name}”",
+    "submit": "Save",
+    "venueFacts": "The dimensions and seats are those stated by the venue and cannot be changed here."
+  },
+  "remove": {
+    "title": "Take {name} off the plan?",
+    "body": "You can add it again at any time.",
+    "bodySeated": "The people seated at it ({count}) go back to the not-seated list.",
+    "keep": "Keep",
+    "confirm": "Take off {name}"
+  },
+  "assign": {
+    "here": "At this table",
+    "nobody": "Nobody yet.",
+    "unseated": "Not seated",
+    "everyoneSeated": "Every guest already has a seat.",
+    "search": "Search for a guest",
+    "noMatch": "No guest with this name.",
+    "submit": "Seat at the table",
+    "submitCount": {
+      "one": "Seat one person at the table",
+      "few": "Seat {count} people at the table",
+      "other": "Seat {count} people at the table"
+    },
+    "tooMany": "You chose {picked} people, but only {left} seats are free.",
+    "done": "Done",
+    "remove": "Take from the table",
+    "removeLabel": "Take from the table: {name}",
+    "seatFor": "Seat for {name}",
+    "noSeat": "No seat",
+    "seat": "Seat {n}"
+  },
+  "export": {
+    "title": "Seating",
+    "description": "The list with each guest's table and seat (CSV)."
+  },
+  "whatif": {
+    "title": "Seating proposal — tables: {count}",
+    "table": "Table {label}",
+    "at": "{x} m from the left, {y} m from the top",
+    "newCustom": "New own table",
+    "newVenue": "New table from the venue's inventory",
+    "seatAt": "Guests at table {label}",
+    "people": "people or groups added: {count}",
+    "onPlan": "on the plan",
+    "removed": "taken off the plan",
+    "fit": "Fit check",
+    "excluded": "Items without dimensions, left out of the check: {count}"
+  },
+  "guest": {
+    "title": "Your seat",
+    "tableWord": "Table",
+    "several": "Your family sits at several tables:",
+    "table": "Table {label}",
+    "seat": "seat {n}",
+    "extra": {
+      "one": "+1 adult",
+      "few": "+{count} adults",
+      "other": "+{count} adults"
+    },
+    "children": {
+      "one": "+1 child",
+      "few": "+{count} children",
+      "other": "+{count} children"
+    },
+    "planLabel": "Room plan with your table marked",
+    "planNote": "Your table is the ringed one."
+  },
+  "errors": {
+    "network": "We could not save. Check your internet connection and try again.",
+    "reloaded": "We reloaded the layout as it is saved now.",
+    "measure": "Type a measure in metres, for example 1.8.",
+    "bothSides": "Type both sides or leave both empty.",
+    "seats": "Type the number of seats (60 at most).",
+    "count": "Type how many tables, between 1 and 40.",
+    "rotation": "Type the rotation in degrees, between 0 and 360.",
+    "conflict": "Someone else moved table “{label}” meanwhile. We kept their move; check and move it again if needed.",
+    "itemGone": "This item is no longer on the plan. Someone else may have removed it.",
+    "tooManyItems": "The plan can hold at most {max} items.",
+    "unknownTableType": "The venue does not have this table type.",
+    "inventoryExhausted": "The venue has only {count} “{name}” tables and all are already on the plan. Add a table of your own.",
+    "venueFact": "The dimensions of the venue's tables are stated by the venue and cannot be changed here.",
+    "tooManyStages": "You can have at most {max} stages.",
+    "guestGone": "This guest is no longer on the list.",
+    "tableFull": "Table {label} has {free} free seats and you chose {wanted}. Choose fewer people or another table.",
+    "pickSomeone": "Tick at least one person.",
+    "seatOutOfRange": "The table has only {seats} seats.",
+    "seatTaken": "Seat {seatNo} already belongs to someone else at this table."
+  }
+}

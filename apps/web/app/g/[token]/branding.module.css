@@ -1,0 +1,13 @@
+/* Release P (P20): business branding on guest pages. Tokens only; the brand colour arrives as
+   --brand / --brand-on from a style attribute on the page wrapper (see Branding.tsx). */
+.scope :global(.ed-btn--primary),
+.scope :global(.ed-btn--primary):hover { background: var(--brand); border-color: var(--brand); color: var(--brand-on); }
+.scope :global(.ed-btn--primary):hover { filter: brightness(0.94); }
+/* links keep their readable colour; the brand shows in the underline */
+.scope a { text-decoration-color: var(--brand); text-decoration-thickness: 2px; }
+.scope .name { border-bottom-color: var(--brand); }
+
+.block { display: flex; flex-direction: column; align-items: center; gap: var(--s-2); text-align: center; }
+.logo { display: block; max-height: 64px; max-width: 200px; width: auto; height: auto; }
+.line { display: flex; flex-direction: column; align-items: center; gap: var(--s-1); margin: 0; }
+.name { font-family: var(--font-display); font-size: var(--display-sm); line-height: 1.2; padding-bottom: 2px; border-bottom: 2px solid var(--gilt); overflow-wrap: anywhere; }

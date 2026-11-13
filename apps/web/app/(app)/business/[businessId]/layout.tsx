@@ -15,6 +15,7 @@ export default async function BusinessLayout({ children, params }: { children: R
   const { businessId } = await params;
   const ctx = await requireCtx();
   const t = await getTranslations("business");
+  const tb = await getTranslations("bizoccasions"); // Release P tabs
   const { business, lapsed } = await orNotFound(getBusinessView(ctx, businessId));
   const base = `/business/${business.id}`;
   return (
@@ -51,6 +52,15 @@ export default async function BusinessLayout({ children, params }: { children: R
                 { href: base, label: t("tabs.listings"), exact: true },
                 { href: `${base}/team`, label: t("tabs.team") },
                 { href: `${base}/settings`, label: t("tabs.settings") },
+                // Release P (P17–P23): business occasions, library, branding, reports, plan — append only
+                { href: `${base}/occasions`, label: tb("tabs.occasions") },
+                { href: `${base}/library`, label: tb("tabs.library") },
+                { href: `${base}/branding`, label: tb("tabs.branding") },
+                { href: `${base}/reports`, label: tb("tabs.reports") },
+                { href: `${base}/plan`, label: tb("tabs.plan") },
+                // Release P (P-05, P-07): enquiries inbox and flower catalogues — append only
+                { href: `${base}/enquiries`, label: (await getTranslations("enquiries"))("title") },
+                { href: `${base}/catalogues`, label: (await getTranslations("catalogues"))("tab") },
               ],
             },
           ]}

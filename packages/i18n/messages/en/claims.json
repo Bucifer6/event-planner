@@ -1,0 +1,120 @@
+{
+  "title": "Claim the listing",
+  "eyebrow": "Unclaimed listing",
+  "lead": "\"{name}\" was added by EventDesk from public information. If it is your business, you can claim it for free: correct it, complete it and receive enquiries from planners.",
+  "source": "The public source of the information",
+  "viewListing": "See the listing",
+  "steps": {
+    "title": "How it works",
+    "one": "You start the claim from your EventDesk account.",
+    "twoCode": "We send a code to the email address the business publishes ({email}). You enter it here.",
+    "twoModerator": "The public source has no email address, so a moderator checks the claim against the public source.",
+    "three": "A second person on the EventDesk team approves. Then the listing belongs to your business."
+  },
+  "alreadyClaimed": {
+    "title": "This listing has already been claimed",
+    "body": "If it is your business and you did not claim it, write to us through the report form."
+  },
+  "report": "Report a problem",
+  "signIn": {
+    "title": "Sign in to claim",
+    "body": "You need an account with an email address. After signing in, come back to this page — sign-in does not bring you back here yet.",
+    "action": "Sign in"
+  },
+  "noEmail": {
+    "title": "Your account has no email address",
+    "body": "A business needs an owner with an email address. Add one to your account, then come back.",
+    "action": "Open the account"
+  },
+  "form": {
+    "title": "Start the claim",
+    "businessName": "Business name",
+    "businessNameHint": "This is how your business will appear in EventDesk. You can change it later.",
+    "ownBusiness": "The listing will be attached to your business \"{name}\".",
+    "statement": "Your role in the business",
+    "statementHint": "For example \"administrator\" or \"owner\". It helps the moderator.",
+    "submit": "Start the claim",
+    "submitting": "Starting…",
+    "optional": "optional",
+    "codeNote": "The code goes only to the address the business publishes, never to an address written here."
+  },
+  "code": {
+    "title": "Enter the code",
+    "body": "We sent a six-digit code to {email}. It is valid for 15 minutes.",
+    "label": "The code from the email",
+    "submit": "Confirm the code",
+    "submitting": "Checking…",
+    "resend": "Send a new code",
+    "resending": "Sending…",
+    "resent": "We sent a new code.",
+    "cancel": "Give up the claim",
+    "cancelling": "Cancelling…"
+  },
+  "status": {
+    "verifiedTitle": "Code confirmed",
+    "verifiedBody": "The claim is waiting for the EventDesk team's check and approval. We will tell you here; there is nothing more for you to do.",
+    "needsCheckTitle": "The claim is waiting to be checked",
+    "needsCheckBody": "A moderator compares it with the public source. If a document is needed, they contact you at your account's address.",
+    "inApprovalTitle": "Checked, in approval",
+    "inApprovalBody": "A second person on the team has to approve. Until then the listing stays unclaimed.",
+    "approvedTitle": "The listing belongs to your business",
+    "approvedBody": "You can correct and complete it from the business area. Changes go through checking, as for any listing.",
+    "approvedAction": "Open the business area",
+    "rejectedTitle": "The claim was not approved",
+    "rejectedReason": "Reason: {reason}",
+    "rejectedClaimed": "The listing was claimed by someone else.",
+    "cancelledTitle": "You gave up this claim",
+    "again": "You can start again below."
+  },
+  "remove": {
+    "title": "Ask for removal or a correction",
+    "lead": "\"{name}\" was added from public information. If you represent the business, you can ask for the listing to be removed, object to it, or ask for a correction. We answer within 30 days at most.",
+    "viaInvitation": "You came here from the invitation sent to the business's published address. A removal request or an objection takes effect at once.",
+    "kind": "What you ask for",
+    "kinds": {
+      "removal": "Remove the listing",
+      "objection": "I object to the listing",
+      "correction": "A correction"
+    },
+    "message": "Details",
+    "messageHint": "For a correction, write what is wrong and what is right.",
+    "contact": "Email address for the answer",
+    "contactHint": "We use it only for this request.",
+    "trap": "Leave this field empty",
+    "submit": "Send the request",
+    "submitting": "Sending…",
+    "optional": "optional",
+    "doneNow": "The listing has been withdrawn and the business will not be added from public sources again.",
+    "doneLater": "We have recorded the request. We will act on it within 30 days at most.",
+    "claimInstead": "If you would rather keep the listing and manage it yourself, you can claim it.",
+    "privacy": "We keep the request and how it was handled for 3 years, as evidence.",
+    "notAvailable": {
+      "title": "There is no unclaimed listing here",
+      "body": "The listing has already been withdrawn or claimed. For a claimed listing, use the report form."
+    }
+  },
+  "approval": {
+    "describe_code": "Claim for \"{listing}\" — code confirmed at the published address",
+    "describe_moderator": "Claim for \"{listing}\" — checked by a moderator against the public source"
+  },
+  "errors": {
+    "codeInvalid": "The code is not correct or has expired. Ask for a new one and try again.",
+    "emailRequired": "You need an account with an email address to claim a listing.",
+    "tooManyCodes": "We have already sent the maximum number of codes for this claim. Give it up and start again later.",
+    "notReady": "The claim is not in the right state for this action.",
+    "checkRequired": "Describe the check against the public source, at least 10 characters."
+  },
+  "email": {
+    "code": {
+      "subject": "The code for claiming the listing \"{listing}\"",
+      "body": "Someone asked to claim the listing \"{listing}\" in the EventDesk directory. If it is you, enter this code on the claim page:",
+      "note": "The code is valid for {minutes} minutes. If you did not ask for the claim, ignore this message: without the code, nothing changes."
+    }
+  },
+  "cta": {
+    "title": "Is this your business?",
+    "claim": "Claim the listing",
+    "body": "Free. Once verified you can correct it, complete it and receive enquiries.",
+    "remove": "Ask for removal or a correction"
+  }
+}

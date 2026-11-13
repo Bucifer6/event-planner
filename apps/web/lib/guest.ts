@@ -1,6 +1,7 @@
 import "server-only";
 import "@ed/core/polls"; // registers the "polls" guest section
 import "@ed/core/contributions"; // registers the "contributions" guest section
+import "@ed/core/seating"; // registers the "seat" and "spaceView" guest sections
 import { makeCtx, type Ctx, type Locale } from "@ed/core/context";
 import { resolveGuestLink, type GuestLink } from "@ed/core/invitations";
 import { checkPublicForm, FORM_STAMP_FIELD, HONEYPOT_FIELD } from "@ed/core/ratelimit";

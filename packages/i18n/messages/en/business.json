@@ -74,7 +74,11 @@
       "listing_suspended": "A listing has been suspended",
       "listing_restored": "A listing is public again",
       "revision_approved": "A listing has been approved and is public",
-      "revision_rejected": "A listing was not approved"
+      "revision_rejected": "A listing was not approved",
+      "platform_notice": "Notice from EventDesk",
+      "monetization_notice60": "In 60 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:",
+      "monetization_notice30": "In 30 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:",
+      "monetization_notice7": "In 7 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:"
     }
   },
   "team": {

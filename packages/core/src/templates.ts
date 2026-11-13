@@ -85,6 +85,22 @@ export function scheduleDue(
   return dayToInstant(day, tz);
 }
 
+/**
+ * A plan started late must not open with a wall of overdue work: a template stage that is
+ * already in the past when the template is applied is scheduled two weeks from today instead
+ * (never later than the day before the occasion). Stages still ahead keep their exact offset.
+ */
+export function catchUpDue(due: Date | null, startsAt: Date | null, now: Date, tz: string): Date | null {
+  if (!due || !startsAt) return due;
+  const today = instantToDay(now, tz);
+  if (instantToDay(due, tz) >= today) return due;
+  const occasionDay = instantToDay(startsAt, tz);
+  if (occasionDay <= today) return due; // the occasion itself has passed: keep the facts as they are
+  const inTwoWeeks = shiftDay(today, { days: 14 });
+  const dayBefore = shiftDay(occasionDay, { days: -1 });
+  return dayToInstant(inTwoWeeks < dayBefore ? inTwoWeeks : dayBefore, tz);
+}
+
 /* ── Catalogue ──────────────────────────────────────────────────────────── */
 
 export type Template = typeof templates.$inferSelect;
@@ -168,7 +184,12 @@ export async function planTemplate(
   return tplTasks.map((tt) => {
     const templateTaskKey = `${kind}:${tt.key}`;
     const title = occasion.locale === "en" ? tt.titleEn : tt.titleRo;
-    const dueAt = scheduleDue(occasion.startsAt, occasion.timezone, tt.offsetMonths, tt.offsetDays);
+    const dueAt = catchUpDue(
+      scheduleDue(occasion.startsAt, occasion.timezone, tt.offsetMonths, tt.offsetDays),
+      occasion.startsAt,
+      ctx.now,
+      occasion.timezone,
+    );
     const base = {
       templateTaskKey,
       title,

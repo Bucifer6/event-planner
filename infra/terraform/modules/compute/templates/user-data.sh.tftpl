@@ -1,0 +1,55 @@
+#!/bin/bash
+# First-boot setup of the reference Docker host. Holds no secret: the application
+# environment is fetched from the secret store by reference (render-env below).
+set -euo pipefail
+
+dnf install -y docker jq
+systemctl enable --now docker
+
+# Docker Compose plugin (pinned release)
+install -d /usr/libexec/docker/cli-plugins
+curl -fsSL "https://github.com/docker/compose/releases/download/${docker_compose_version}/docker-compose-linux-x86_64" \
+  -o /usr/libexec/docker/cli-plugins/docker-compose
+chmod 0755 /usr/libexec/docker/cli-plugins/docker-compose
+
+# The deploy user: key-only login, may run docker, owns the release directory.
+id deploy >/dev/null 2>&1 || useradd --create-home --shell /bin/bash deploy
+usermod -aG docker deploy
+install -d -o deploy -g deploy -m 0750 "${deploy_dir}"
+%{ if deploy_ssh_public_key != "" ~}
+install -d -o deploy -g deploy -m 0700 /home/deploy/.ssh
+printf '%s\n' "${deploy_ssh_public_key}" > /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy/.ssh/authorized_keys
+chmod 0600 /home/deploy/.ssh/authorized_keys
+%{ endif ~}
+sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config
+systemctl reload sshd || true
+
+# Host names for the ingress (not secrets).
+cat > "${deploy_dir}/ingress.env" <<EOF
+APP_HOST=${app_host}
+MEDIA_HOST=${media_host}
+PUBLIC_HOST=${public_host}
+ACME_EMAIL=${acme_email}
+EOF
+
+# render-env: the application environment, by reference from the secret store (SEC13).
+# The secret is one JSON object { "NAME": "value", … }; newlines inside a value (a PEM key)
+# are written as \n so every variable stays on one line.
+cat > "${deploy_dir}/render-env" <<'EOF'
+#!/bin/bash
+set -euo pipefail
+umask 077
+cd "$(dirname "$0")"
+aws secretsmanager get-secret-value --region "__REGION__" --secret-id "__SECRET__" --query SecretString --output text \
+  | jq -r 'to_entries[] | "\(.key)=\(.value | tostring | gsub("\n"; "\\n"))"' > app.env.next
+[ -s app.env.next ] || { echo "render-env: the secret is empty" >&2; exit 1; }
+mv app.env.next app.env
+echo "render-env: app.env written ($(wc -l < app.env) variables)"
+EOF
+sed -i "s|__REGION__|${region}|; s|__SECRET__|${app_secret_arn}|" "${deploy_dir}/render-env"
+chmod 0750 "${deploy_dir}/render-env"
+chown deploy:deploy "${deploy_dir}/ingress.env" "${deploy_dir}/render-env"
+
+# docker-compose.yml and Caddyfile are copied here from infra/reference-docker-host/ by the
+# operator (runbook, "Before the first deployment"); the deploy scripts do the rest.

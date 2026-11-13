@@ -100,12 +100,33 @@ export type DirectoryCard = {
   stats: PublishedListingStats | null;
 };
 
+/**
+ * RELEASE P (P13, P14): a Featured card. It exists ONLY in `DirectoryResults.featured`, and
+ * always carries its honest label — `featured: true` + the i18n key of
+ * "Promovat — plasare plătită" — so no caller can show it unlabelled.
+ */
+export type FeaturedCard = DirectoryCard & { featured: true; labelKey: "featured.label" };
+export const FEATURED_LABEL_KEY = "featured.label" as const;
+export const MAX_FEATURED = 3;
+
+/**
+ * RELEASE P (P13): where Featured comes from. @ed/core/featured registers the provider; with
+ * none registered — and whenever the provider says so, i.e. always while monetization is OFF
+ * (MON5) — `featured` is []. The provider returns listing ids ONLY and is called AFTER the
+ * organic order is fixed: it cannot see, reorder or filter `organic` (invariant 7).
+ */
+export type FeaturedProvider = (ctx: Ctx, search: { categoryId: string; countyCode: string; localityId?: string }) => Promise<string[]>;
+const featuredRegistry = globalThis as unknown as { __edFeaturedProvider?: FeaturedProvider };
+export function setFeaturedProvider(fn: FeaturedProvider | null): void {
+  featuredRegistry.__edFeaturedProvider = fn ?? undefined;
+}
+
 export type DirectoryResults = {
   /**
-   * ALWAYS EMPTY while monetization is off (MON5): Featured placement does not exist. A later
-   * agent implements P13 here, behind the monetization switch, without touching `organic`.
+   * ALWAYS EMPTY while monetization is off (MON5): Featured placement does not exist. When it
+   * is on: up to three labelled cards, random per request (P13) — see setFeaturedProvider.
    */
-  featured: DirectoryCard[];
+  featured: FeaturedCard[];
   organic: DirectoryCard[];
   /** Number of organic results before paging. */
   total: number;
@@ -211,7 +232,12 @@ export async function getDirectoryResults(ctx: Ctx, input: z.input<typeof result
     directorySearchKey(q.categoryId, q.countyCode),
   );
   const organic = await loadCards(ctx, ordered.slice(q.offset, q.offset + q.limit));
-  return { featured: [], organic, total: ordered.length, day };
+  // RELEASE P (P13): Featured is fetched separately and placed BESIDE the organic list — the
+  // lines above are untouched and `organic` is the same with or without it (test: featured.test.ts).
+  const provider = featuredRegistry.__edFeaturedProvider;
+  const featuredIds = provider ? (await provider(ctx, { categoryId: q.categoryId, countyCode: q.countyCode, localityId: q.localityId })).slice(0, MAX_FEATURED) : [];
+  const featured: FeaturedCard[] = (await loadCards(ctx, featuredIds)).map((card) => ({ ...card, featured: true, labelKey: FEATURED_LABEL_KEY }));
+  return { featured, organic, total: ordered.length, day };
 }
 
 /** D4 / INF11: counts one search in today's aggregate — category and county only, nothing about who searched. */

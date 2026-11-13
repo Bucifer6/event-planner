@@ -1,6 +1,6 @@
-import type { DirectoryCard, DirectoryResults } from "@ed/core/directory";
+import type { DirectoryCard, DirectoryResults, FeaturedCard } from "@ed/core/directory";
 import type { CategoryView, CountyView, LocalityView } from "@ed/core/geography";
-import { buttonClassName, EmptyState, Fact, Page } from "@ed/ui";
+import { buttonClassName, EmptyState, Fact, Page, PaidLabel } from "@ed/ui";
 import { getLocale, getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { plural } from "@/app/(app)/occasions/_lib/plural";
@@ -49,6 +49,31 @@ async function Entry({ card, occasionId }: { card: DirectoryCard; occasionId: st
   );
 }
 
+/**
+ * RELEASE P (P13, P14): one Featured card. The label "Promovat — plasare plătită" is set with
+ * <PaidLabel> in the SAME size and weight as the business name beside it (design gate, PRD
+ * §21): the label line and the name share one class. The card itself is deliberately
+ * quieter than an organic entry — no excerpt, no facts — so nothing competes with the label.
+ */
+async function FeaturedEntry({ card, occasionId }: { card: FeaturedCard; occasionId: string | null }) {
+  const t = await getTranslations();
+  const places = card.localities.slice(0, MAX_PLACES).map((l) => l.name);
+  return (
+    <li className={styles.featuredEntry}>
+      <p className={styles.featuredLine}>
+        <PaidLabel>{t(card.labelKey)}</PaidLabel>
+      </p>
+      <h2 className={styles.featuredLine}>
+        <Link href={`${listingHref(card.id)}${occasionId ? `?occasion=${occasionId}` : ""}`}>{card.name}</Link>
+      </h2>
+      <div className={styles.entryMeta}>
+        <span className="ed-label">{card.categories.map((c) => c.name).join(" · ")}</span>
+        <span className="ed-label">{places.join(" · ")}</span>
+      </div>
+    </li>
+  );
+}
+
 /** Shared by the county page and the locality page (P6). */
 export async function ResultsView({
   category,
@@ -69,6 +94,7 @@ export async function ResultsView({
   occasionId: string | null;
 }) {
   const t = await getTranslations("directory");
+  const tf = await getTranslations("featured"); // Release P (P13)
   const locale = await getLocale();
   const area = locality ? `${locality.name}, ${county.name}` : county.name;
   return (
@@ -111,9 +137,16 @@ export async function ResultsView({
       ) : null}
 
       <section className="ed-section" aria-label={t("results.listLabel")}>
-        {/* MON5: there is no Featured placement while monetization is off — `results.featured`
-            is always empty and nothing is rendered for it. The later P13 implementation adds its
-            labelled cards (<PaidLabel>, P14) HERE, above the organic list, behind the switch. */}
+        {/* MON5 / P13: `results.featured` is [] while monetization is off — then nothing at all is
+            rendered here. When it is on: up to three labelled cards ABOVE the organic list, which
+            itself is exactly what it would be without them. */}
+        {results.featured.length > 0 ? (
+          <ol className={styles.featured} aria-label={tf("sectionLabel")}>
+            {results.featured.map((card) => (
+              <FeaturedEntry key={card.id} card={card} occasionId={occasionId} />
+            ))}
+          </ol>
+        ) : null}
         {results.organic.length === 0 ? (
           <EmptyState
             title={t("results.emptyTitle")}

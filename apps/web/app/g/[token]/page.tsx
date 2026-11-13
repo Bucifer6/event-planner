@@ -1,3 +1,4 @@
+import { getOccasionBranding } from "@ed/core/bizoccasions"; // Release P (P20)
 import { getGuestView, markGuestLinkViewed, type GuestView } from "@ed/core/invitations";
 import { FORM_STAMP_FIELD, HONEYPOT_FIELD, issueFormStamp } from "@ed/core/ratelimit";
 import { questionField } from "@ed/core/rsvp";
@@ -8,6 +9,7 @@ import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { IncidentBanner } from "@/components/incident-banner/IncidentBanner";
 import { childrenForm, GUEST_LANG_PARAM, guestHref, guestTranslator, resolveGuestRequest } from "@/lib/guest";
+import { BrandBlock, brandScope } from "./Branding"; // Release P (P20)
 import styles from "./guest.module.css";
 import { RsvpWizard, type WizardLabels, type WizardQuestion } from "./rsvp-wizard";
 import type { GuestFormBase } from "./section-forms";
@@ -71,6 +73,9 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
   const { ctx, locale } = req;
   const view = await getGuestView(ctx);
   await markGuestLinkViewed(ctx);
+  // Release P (P20): name, logo and accent of the business running this occasion; null after handover (P22)
+  const branding = await getOccasionBranding(ctx, view.occasion.id);
+  const scope = brandScope(branding);
   const t = guestTranslator(locale, "rsvp");
   const tr = guestTranslator(locale);
 
@@ -172,7 +177,7 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
     : "";
 
   return (
-    <div className="ed-solo" lang={locale}>
+    <div className={`ed-solo${scope.className ? ` ${scope.className}` : ""}`} style={scope.style} lang={locale}>
       <header className={`ed-solo__head ${styles.head}`}>
         <Seal size={32} />
         <nav className="ed-langswitch" aria-label={tr("common.languages.switchTo")}>
@@ -187,6 +192,7 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
 
       <main className="ed-solo__main" id="main">
         <IncidentBanner />
+        {branding ? <BrandBlock branding={branding} label={tr("bizoccasions.guest.organisedBy")} /> : null}
 
         {view.occasion.status === "cancelled" ? (
           <Notice tone="attention" title={t("status.cancelledTitle")}>

@@ -1,0 +1,232 @@
+{
+  "title": "Deployments",
+  "description": "Releases of the connected repository, what is live, and the history of every deployment. A deployment is always a release tag and needs a second person.",
+  "refreshing": "This page refreshes by itself while a deployment is running.",
+  "config": {
+    "title": "The connection to GitHub is not configured",
+    "body": "The console deploys from one private GitHub repository through a GitHub App. The operator must set these server environment variables (in the secret store, never in the repository):",
+    "steps": "The steps are in docs/build/14-deploy-runbook.md, section \"Before the first deployment\". Nothing can be deployed from here until this is done.",
+    "recordToken": "DEPLOY_RECORD_TOKEN is not set (or is shorter than 32 characters). The pipeline cannot report its progress, so a deployment would be refused at its first step.",
+    "repo": "Connected repository",
+    "githubDown": "GitHub could not be reached or refused the request. The history below is still accurate; releases and commits cannot be shown right now.",
+    "githubDownTitle": "Releases are unavailable right now"
+  },
+  "live": {
+    "title": "Live release",
+    "none": "No deployment has been made from the console yet",
+    "noneBody": "The first deployment recorded here becomes the live release.",
+    "tag": "Release",
+    "hash": "Commit",
+    "at": "Deployed",
+    "running": "Version reported by this server",
+    "runningUnknown": "not reported",
+    "mismatch": "The server reports a different version than the last successful deployment. Check the deployment history and the hosting before deploying again."
+  },
+  "active": {
+    "title": "Deployment in progress",
+    "body": "Release {tag} is being deployed. No other deployment, emergency deployment or rollback can start until it ends.",
+    "waiting": "Approved. Waiting for the pipeline to start.",
+    "stage": "Current step",
+    "started": "Started",
+    "progress": "Progress",
+    "abandon": "Close as failed",
+    "abandonTitle": "Close a deployment that stopped reporting",
+    "abandonBody": "Use this only when the pipeline died and will not report again (possible 90 minutes after its last message). It changes the record only — check the hosting first to see which release is really running.",
+    "abandonReason": "What happened",
+    "abandonSubmit": "Close as failed",
+    "abandoning": "Closing…",
+    "abandoned": "The deployment was closed as failed."
+  },
+  "stages": {
+    "verify": "Checking the tag and CI",
+    "build": "Building the images",
+    "backup": "Backing up the database",
+    "migrate": "Migrating the database",
+    "roll": "Switching to the new release",
+    "health": "Health checks",
+    "rollback": "Rolling back",
+    "done": "Done"
+  },
+  "states": {
+    "requested": "Waiting for approval",
+    "approved": "Approved, starting",
+    "running": "Running",
+    "succeeded": "Succeeded",
+    "failed": "Failed",
+    "rolled_back": "Rolled back",
+    "cancelled": "Not started"
+  },
+  "kinds": {
+    "deploy": "Deployment",
+    "rollback": "Rollback"
+  },
+  "ci": {
+    "success": "CI passed",
+    "failure": "CI failed",
+    "pending": "CI running",
+    "unknown": "CI has not run"
+  },
+  "events": {
+    "requested": "Requested",
+    "approved": "Approved by a second person",
+    "emergency_requested": "Emergency deployment started",
+    "rollback_requested": "Rollback started",
+    "start": "Pipeline started",
+    "stage": "Step",
+    "succeeded": "Finished successfully",
+    "failed": "Failed",
+    "rolled_back": "Rolled back to the previous release",
+    "rollback_blocked": "Rollback stopped",
+    "abandoned": "Closed as failed by staff"
+  },
+  "pending": {
+    "title": "Waiting for a second person",
+    "body": "Release {tag}, requested by {who}.",
+    "open": "Open approvals",
+    "singleOperator": "Only one person holds a staff role, so nobody can approve. The request stays queued with no effect."
+  },
+  "releases": {
+    "title": "Releases",
+    "none": "No release tags yet",
+    "noneBody": "Releases are annotated tags named vX.Y.Z, cut from the protected main branch.",
+    "tag": "Release",
+    "hash": "Commit",
+    "ci": "CI on this commit",
+    "isLive": "live",
+    "view": "Review",
+    "viewing": "selected"
+  },
+  "candidate": {
+    "title": "Release {tag}",
+    "commits": "Changes since the live release",
+    "commitsNone": "No commits between the live release and this one.",
+    "firstDeploy": "There is no live release to compare with: this would be the first deployment recorded here.",
+    "more": "Showing the newest {shown} of {total} commits.",
+    "commit": "Commit",
+    "change": "Change",
+    "date": "Date",
+    "isLive": "This release is live.",
+    "ciRefused": "This release cannot be deployed: CI has not passed on its commit. Fix the problem and cut a new release.",
+    "noRole": "Deployments are requested by a platform admin or a security administrator."
+  },
+  "request": {
+    "reason": "Why this release is deployed now",
+    "reasonHint": "The second person reads this before approving.",
+    "submit": "Request deployment",
+    "submitting": "Sending the request…",
+    "requested": "Requested. A second person must approve it —",
+    "requestedLink": "open approvals"
+  },
+  "emergency": {
+    "open": "Emergency deployment",
+    "title": "Emergency deployment of {tag}",
+    "body": "For an urgent security fix only. It starts at once, without a second person, and is marked as an emergency in the audit log together with your reason.",
+    "ciWarning": "CI has not passed on this commit. Deploying anyway is recorded in the audit log as a CI bypass.",
+    "reason": "Reason for the emergency",
+    "reasonHint": "At least 10 characters. It is kept in the audit log.",
+    "submit": "Deploy now, alone",
+    "submitting": "Starting the deployment…",
+    "started": "The emergency deployment has started."
+  },
+  "rollback": {
+    "title": "Rollback",
+    "body": "Sends production back to release {tag}. It switches the release only and never deletes data. If a migration made since then cannot be reversed, the rollback stops and says so.",
+    "none": "There is no previous release to go back to. To change what is live, deploy a release.",
+    "open": "Roll back to {tag}",
+    "sheetTitle": "Roll back to {tag}",
+    "reason": "Why the rollback is needed",
+    "reasonHint": "One person may do this. The reason is kept in the audit log.",
+    "submit": "Roll back",
+    "submitting": "Starting the rollback…",
+    "started": "The rollback has started."
+  },
+  "history": {
+    "title": "History",
+    "none": "No deployments yet",
+    "when": "Requested",
+    "kind": "Kind",
+    "release": "Release",
+    "requester": "Requested by",
+    "approver": "Approved by",
+    "result": "Result",
+    "duration": "Duration",
+    "note": "Notes",
+    "emergency": "emergency",
+    "nobody": "nobody (one-person action)",
+    "rolledBackTo": "Back on {tag}.",
+    "durationValue": "{minutes} min {seconds} s"
+  },
+  "approvals": {
+    "deploy": "Deploy release {tag} ({hash}) to production",
+    "complianceAccess": "Compliance access to the records of data subject {subject}, for {hours} hours"
+  },
+  "errors": {
+    "notConfigured": "The connection to GitHub is not configured on the server.",
+    "badKey": "The GitHub App key on the server cannot be used. The operator must check it.",
+    "github": "GitHub refused or failed the request (status {status}). Nothing was changed.",
+    "notATag": "A deployment is a release tag such as v1.4.0 that exists in the repository — never a branch or a commit.",
+    "ciNotGreen": "Release {tag} cannot be deployed: CI has not passed on its exact commit.",
+    "running": "A deployment is already in progress. Wait for it to end.",
+    "alreadyRequested": "Release {tag} already has a request waiting for approval.",
+    "notRequested": "This deployment request is no longer open.",
+    "tagMoved": "Tag {tag} no longer points at the commit that was requested. Make a new request.",
+    "emergencyReason": "Write the reason for the emergency (at least 10 characters).",
+    "noPrevious": "There is no previous release to roll back to.",
+    "notActive": "This deployment is not in progress.",
+    "notStale": "The pipeline may still be working. A deployment can be closed by hand only 90 minutes after its last message.",
+    "notApproved": "This deployment was not approved in the console for this release.",
+    "notRunning": "This deployment is not running.",
+    "finished": "This deployment has already ended."
+  },
+  "compliance": {
+    "title": "Compliance access",
+    "description": "Access to one person's retained records for a legal reason, such as a data access request. It takes three people: the privacy owner asks and two other staff members approve. Access lasts a limited time and every read is written to the audit log.",
+    "threePeople": "Requests are approved in Approvals by two people other than the requester.",
+    "singleOperator": "Fewer than three people can take part right now, so a request would wait with no effect.",
+    "request": {
+      "title": "Request access",
+      "email": "Email of the person the records are about",
+      "emailHint": "The login email of their account.",
+      "reason": "Legal reason",
+      "reasonHint": "For example: access request under GDPR art. 15, received on 03.02.2027. The approvers read this.",
+      "hours": "How long access is needed",
+      "hoursOption": "{hours} hours",
+      "submit": "Request access",
+      "submitting": "Sending the request…",
+      "requested": "Requested. Two other people must approve it —",
+      "requestedLink": "open approvals",
+      "ownerOnly": "Only the privacy owner can request compliance access. You can see the requests and approve them in Approvals."
+    },
+    "list": {
+      "title": "Requests and grants",
+      "none": "No compliance access has been requested",
+      "subject": "Data subject",
+      "reason": "Legal reason",
+      "requester": "Requested by",
+      "requested": "Requested",
+      "status": "Status",
+      "until": "Access until",
+      "approvals": "{done} of {needed} approvals",
+      "you": "you",
+      "export": "Download the records (JSON)",
+      "exportHint": "Account profile and the ids of the occasions it owns. The download is written to the audit log.",
+      "revoke": "End access now",
+      "revoking": "Ending…"
+    },
+    "statuses": {
+      "pending": "Waiting for approvals",
+      "live": "Access open",
+      "expired": "Expired",
+      "revoked": "Ended early",
+      "rejected": "Rejected",
+      "cancelled": "Withdrawn"
+    },
+    "errors": {
+      "reason": "Write the legal reason (at least 10 characters).",
+      "subjectNotFound": "There is no account for this person.",
+      "noGrant": "You have no open compliance access to these records.",
+      "notPending": "This access request is no longer open.",
+      "notLive": "This access is not open."
+    }
+  }
+}

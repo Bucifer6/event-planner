@@ -74,7 +74,11 @@
       "listing_suspended": "O listare a fost suspendată",
       "listing_restored": "O listare este din nou publică",
       "revision_approved": "O listare a fost aprobată și este publică",
-      "revision_rejected": "O listare nu a fost aprobată"
+      "revision_rejected": "O listare nu a fost aprobată",
+      "platform_notice": "Anunț de la EventDesk",
+      "monetization_notice60": "Peste 60 de zile, planul Business și plasarea Promovat devin opționale, cu plată. Nimic nu se taxează automat. Data:",
+      "monetization_notice30": "Peste 30 de zile, planul Business și plasarea Promovat devin opționale, cu plată. Nimic nu se taxează automat. Data:",
+      "monetization_notice7": "Peste 7 zile, planul Business și plasarea Promovat devin opționale, cu plată. Nimic nu se taxează automat. Data:"
     }
   },
   "team": {

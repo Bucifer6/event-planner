@@ -1,0 +1,13 @@
+/* Console commercial + communications. Tokens only; strictly neutral. */
+.rel { position: relative; min-width: 0; }
+.timeline { margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--line); }
+.timeline li { display: grid; grid-template-columns: minmax(0, 12ch) minmax(0, 1fr) auto; gap: var(--s-3); align-items: baseline; padding: var(--s-2) 0; border-bottom: var(--hair) solid var(--line); font-size: var(--text-sm); }
+.timeline li > :first-child { font-variant-numeric: tabular-nums lining-nums; white-space: nowrap; }
+.narrow { max-width: var(--page-narrow); display: flex; flex-direction: column; gap: var(--s-3); }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); align-items: start; }
+.body { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-5); margin-top: var(--s-4); }
+.body :global(.ed-section) { margin-top: 0; }
+@media (min-width: 1024px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.pre { white-space: pre-line; overflow-wrap: anywhere; max-width: 48ch; }
+.cell { max-width: 30ch; overflow-wrap: anywhere; }
+.link { overflow-wrap: anywhere; }

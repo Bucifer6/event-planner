@@ -1,0 +1,15 @@
+# Releases whose database migrations CANNOT be safely reversed (DEP5).
+#
+# One line per migration:   <release tag>  <migration name>  <why, in a few words>
+#
+# Add a line IN THE SAME PULL REQUEST as the migration when older code cannot run against the
+# migrated database: a dropped or renamed column or table, a constraint the old code violates,
+# data rewritten in place. Additive migrations (new table, new nullable column, new index) are
+# reversible in the sense that matters here — the previous release simply ignores them — and
+# are NOT listed.
+#
+# scripts/deploy/rollback.sh reads this file: a rollback that would cross a listed release
+# stops with a message in the console instead of guessing. Never remove a line.
+#
+# Example (keep commented):
+# v1.4.0  0007_drop_legacy_rsvp_columns  old code still reads rsvp.legacy_state

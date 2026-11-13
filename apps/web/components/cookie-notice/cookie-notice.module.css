@@ -41,6 +41,7 @@
     right: var(--s-4);
     bottom: var(--s-4);
     margin: 0;
+    max-width: 360px;
     max-height: calc(100dvh - var(--s-6));
     overflow-y: auto;
   }

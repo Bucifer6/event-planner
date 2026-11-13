@@ -4,6 +4,7 @@ import type { GuestView } from "@ed/core/invitations";
 import type { GuestPoll } from "@ed/core/polls";
 import { formatWeekdayDate } from "@ed/i18n/format";
 import type { ReactNode } from "react";
+import { GuestSeatSection, GuestSpaceSection } from "@/components/plan/GuestSections"; // seating domain (C-08, V9)
 import { guestTranslator } from "@/lib/guest";
 import styles from "./guest.module.css";
 import { ContributionForm, PollVoteForm, type GuestFormBase } from "./section-forms";
@@ -86,6 +87,8 @@ function ContributionSection({ data, locale, base }: SectionProps<GuestNeeds>) {
 const renderers: Record<string, (props: SectionProps<any>) => ReactNode | Promise<ReactNode>> = {
   polls: PollSection,
   contributions: ContributionSection,
+  seat: GuestSeatSection,
+  spaceView: GuestSpaceSection,
 };
 
 export function GuestSections({ view, locale, base }: { view: GuestView; locale: Locale; base: GuestFormBase }) {

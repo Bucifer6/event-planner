@@ -50,6 +50,9 @@ const nextConfig: NextConfig = {
   // here when they arrive.
   serverExternalPackages: ["pg", "drizzle-kit", "@node-rs/argon2"],
   outputFileTracingRoot: repoRoot,
+  // Container builds only (Dockerfile sets NEXT_OUTPUT=standalone): a self-contained server in
+  // .next/standalone. Left off otherwise so `next dev` and `next start` behave as before.
+  output: process.env.NEXT_OUTPUT === "standalone" ? "standalone" : undefined,
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
   },

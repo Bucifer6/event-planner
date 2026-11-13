@@ -28,6 +28,14 @@ import { registerJobs as reports } from "@ed/core/reports";
 import { registerJobs as closeout } from "@ed/core/closeout";
 import { registerJobs as supplierSide } from "@ed/core/payments";
 import { registerJobs as directory } from "@ed/core/directory";
+import { registerJobs as monetization } from "@ed/core/monetization";
+import { registerJobs as billing } from "@ed/core/billing";
+import { registerJobs as invoicing } from "@ed/core/invoicing";
+import { registerJobs as comms } from "@ed/core/comms";
+import { registerJobs as enquiries } from "@ed/core/enquiries";
+import { registerJobs as catalogues } from "@ed/core/catalogues";
+import { registerJobs as discovery } from "@ed/core/discovery";
+import { registerJobs as claims } from "@ed/core/claims";
 
 const registrations: Array<() => void> = [
   builtin,
@@ -43,6 +51,14 @@ const registrations: Array<() => void> = [
   closeout,
   supplierSide,
   directory,
+  monetization,
+  billing,
+  invoicing,
+  comms,
+  enquiries,
+  catalogues,
+  discovery,
+  claims,
 ];
 
 let done = false;

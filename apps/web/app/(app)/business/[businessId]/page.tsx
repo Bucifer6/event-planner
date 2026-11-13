@@ -41,7 +41,8 @@ export default async function BusinessListingsPage({ params, searchParams }: { p
               <li key={n.id} className="ed-row">
                 <div className="ed-row__main">
                   <span className="ed-row__title">{t.has(`notices.kinds.${n.kind.replace(".", "_")}` as never) ? t(`notices.kinds.${n.kind.replace(".", "_")}` as never) : n.kind}</span>
-                  {n.reason ? <span className={`ed-row__meta ${styles.reason}`}>{t("notices.reason", { reason: n.reason })}</span> : null}
+                  {/* Release P: platform and monetization notices carry their own text, not a "reason" */}
+                  {n.reason ? <span className={`ed-row__meta ${styles.reason}`}>{/^(platform|monetization)\./.test(n.kind) ? n.reason : t("notices.reason", { reason: n.reason })}</span> : null}
                   <span className="ed-row__meta ed-num">{formatDate(n.createdAt, ctx.locale)}</span>
                 </div>
                 {n.listingId ? (

@@ -1,0 +1,300 @@
+{
+  "plan": {
+    "tab": "Plan",
+    "title": "Planul firmei",
+    "leadFree": "Totul este gratuit în perioada de lansare.",
+    "leadOn": "Planul Business este activ pentru firma ta.",
+    "leadFreeTier": "Firma ta este pe nivelul gratuit permanent.",
+    "freeBody": "Listările, cererile, ocaziile pentru clienți, biblioteca, identitatea pe paginile invitaților și rapoartele sunt incluse, fără card și fără perioadă de probă. Nu ai nimic de activat.",
+    "noticeTitle": "Din {date}, o parte dintre funcții devin opționale, cu plată",
+    "noticeBody": "Până atunci nu se schimbă nimic. După această dată, cine nu cumpără nimic rămâne pe nivelul gratuit permanent, descris mai jos. Nimic nu se taxează automat.",
+    "freeTierTitle": "Ce rămâne gratuit pentru totdeauna",
+    "freeTierBody": "Orice s-ar schimba mai târziu, acestea rămân ale firmei tale fără plată.",
+    "freeTier": {
+      "account": "Contul firmei și echipa ei.",
+      "listing": "Listările existente rămân publice și pot fi corectate.",
+      "enquiries": "Primești cereri și răspunzi la ele.",
+      "assets": "Planurile și cataloagele deja publicate și fișierele deja partajate rămân de citit.",
+      "ownStatistics": "Statisticile propriilor listări.",
+      "existingOccasions": "Ocaziile clienților care există deja rămân complet utilizabile, cu toată echipa.",
+      "handover": "Poți preda oricând o ocazie clientului."
+    },
+    "promiseTitle": "Ce promitem dacă apare vreodată un plan plătit",
+    "promise1": "Te anunțăm cu cel puțin 60 de zile înainte, aici și pe email, și îți reamintim cu 30 și cu 7 zile înainte.",
+    "promise2": "Nu se taxează nimic automat. Nu îți cerem niciodată un card dinainte.",
+    "promise3": "Ocaziile clienților tăi nu se blochează niciodată, orice plan ai avea.",
+    "laterBody": "Dacă va exista un plan plătit, el va acoperi doar crearea de ocazii noi pentru clienți, schimbările de identitate, modificările din bibliotecă și listările noi. Ordinea rezultatelor din director nu se vinde."
+  },
+  "paid": {
+    "returnedTitle": "Te-ai întors de la plată",
+    "returnedBody": "Planul se activează când primim confirmarea procesatorului de plăți. De obicei durează sub un minut; reîncarcă pagina.",
+    "pricesTitle": "Prețuri",
+    "exclTva": "Prețurile sunt fără TVA. TVA-ul și totalul sunt afișate separat.",
+    "noTva": "Operatorul nu este înregistrat în scopuri de TVA: nu se adaugă TVA.",
+    "col": {
+      "what": "Ce",
+      "net": "Fără TVA",
+      "tva": "TVA {rate}%",
+      "gross": "Total"
+    },
+    "plans": {
+      "businessMonthly": "Plan Business, pe lună",
+      "businessYearly": "Plan Business, pe an",
+      "featuredMonthly": "Promovat, pe listare și categorie, pe lună"
+    },
+    "planNames": {
+      "business_monthly": "Plan Business lunar",
+      "business_yearly": "Plan Business anual",
+      "featured_monthly": "Promovat lunar"
+    },
+    "status": {
+      "active": "Activ",
+      "past_due": "Plată în așteptare",
+      "grace": "Perioadă de grație",
+      "canceled": "Încheiat"
+    },
+    "stops": "Fără planul Business se opresc doar: ocaziile noi pentru clienți, schimbările de identitate, modificările din bibliotecă și listările noi. Tot ce există rămâne.",
+    "yoursTitle": "Abonamentele firmei",
+    "graceUntil": "Plata nu a reușit. Planul rămâne activ până pe {date}.",
+    "endsOn": "Se încheie pe {date}",
+    "renewsOn": "Se reînnoiește pe {date}",
+    "waiting": "Așteptăm confirmarea plății",
+    "cancel": "Oprește la sfârșitul perioadei",
+    "cancelling": "Se trimite…",
+    "cancelRequested": "Am trimis cererea. Planul rămâne activ până la sfârșitul perioadei plătite.",
+    "buyTitle": "Cumpără planul Business",
+    "buyTitleLapsed": "Reactivează planul Business",
+    "buyBody": "Plata se face pe pagina procesatorului de plăți, cu Apple Pay, Google Pay sau card. Pentru fiecare plată primești factură fiscală cu TVA-ul evidențiat.",
+    "buyMonthly": "Plătește lunar — {total} cu TVA",
+    "buyYearly": "Plătește anual — {total} cu TVA",
+    "buyFeatured": "Cumpără — {total} pe lună, cu TVA",
+    "opening": "Se deschide plata…",
+    "notConfigured": "Plata nu este disponibilă încă. Revino mai târziu.",
+    "featuredTitle": "Plasare Promovat",
+    "featuredBody": "Promovat înseamnă un loc deasupra rezultatelor obișnuite, cu eticheta „Promovat — plasare plătită”. La fiecare căutare se aleg la întâmplare cel mult trei listări promovate. Ordinea rezultatelor obișnuite nu se schimbă.",
+    "featuredNoListing": "Ai nevoie de o listare publică pentru a cumpăra o plasare.",
+    "featuredCaption": "Estimare pentru {name}",
+    "featuredNoGuarantee": "Cifrele sunt o estimare, fără garanție: numărul de afișări nu este promis.",
+    "fcol": {
+      "where": "Categorie și județ",
+      "now": "Promovate acum",
+      "share": "Cotă estimată din afișări",
+      "searches": "Căutări în ultimele 30 de zile",
+      "buy": "Cumpără"
+    }
+  },
+  "console": {
+    "title": "Comercial",
+    "description": "Costul fazei gratuite, comutatorul de monetizare și facturarea în mod de test. Orice schimbare importantă are nevoie de a doua persoană.",
+    "tabsLabel": "Secțiuni comerciale",
+    "tabs": {
+      "cost": "Costuri",
+      "switch": "Comutator",
+      "billing": "Facturare",
+      "prices": "Prețuri"
+    },
+    "choose": "Alege…",
+    "saving": "Se salvează…",
+    "saved": "Am salvat.",
+    "requesting": "Se trimite cererea…",
+    "requested": "Cererea așteaptă a doua persoană.",
+    "openApprovals": "Deschide aprobările",
+    "reason": "Motivul",
+    "reasonHint": "Rămâne în jurnalul de audit. Cel puțin 10 caractere.",
+    "cost": {
+      "title": "Faza gratuită",
+      "monthly": "Cost fix lunar",
+      "perMonth": "pe lună, introdus de operator",
+      "placeholder": "valoare provizorie — introdu costul real mai jos",
+      "businesses": "Firme",
+      "listings": "Listări publice",
+      "enquiries": "Cereri trimise",
+      "income": "Venit lunar",
+      "incomeOff": "monetizarea este oprită",
+      "incomeOn": "din abonamente; vezi Facturare",
+      "now": "acum",
+      "last30": "ultimele 30 de zile",
+      "breakEven": "La prețurile actuale, costul lunar ar fi acoperit de {plans} planuri Business lunare.",
+      "breakEvenPlaceholder": "La prețurile pilot, încă neconfirmate, costul lunar ar fi acoperit de {plans} planuri Business lunare.",
+      "setTitle": "Costul fix lunar",
+      "amount": "Cost pe lună, în RON",
+      "amountHint": "Doar cifre, fără separator de mii. Exemplu: 18500 sau 18500,50.",
+      "save": "Salvează costul"
+    },
+    "switch": {
+      "title": "Comutatorul de monetizare",
+      "state": "Stare",
+      "phase": {
+        "off": "Oprit",
+        "notice": "Pornit — perioadă de notificare",
+        "on": "Pornit"
+      },
+      "about": {
+        "off": "Totul este gratuit. Nu există prețuri, plată sau card nicăieri în produs, iar Promovat nu există.",
+        "notice": "Firmele au fost anunțate. Până la data intrării în vigoare nu se schimbă nimic pentru ele.",
+        "on": "Planul Business și Promovat pot fi cumpărate. Firmele fără plan sunt pe nivelul gratuit permanent."
+      },
+      "noticeStart": "Notificare începută",
+      "effective": "Intră în vigoare",
+      "timeline": "Calendarul notificării",
+      "reminder": "Anunț către firme, cu {days} zile înainte",
+      "sent": "trimis — firme: {count}",
+      "planned": "programat",
+      "takesEffect": "Planurile plătite intră în vigoare",
+      "enableTitle": "Cere pornirea",
+      "enableBody": "Pornirea are nevoie de aprobarea unui administrator de platformă. La aprobare începe notificarea publică de {days} de zile; planurile plătite intră în vigoare abia la sfârșitul ei.",
+      "disableTitle": "Cere oprirea",
+      "disableBody": "Oprirea readuce totul la gratuit pentru toate firmele. Are nevoie de aprobarea unui administrator de platformă.",
+      "singleOperator": "O singură persoană are rol în consolă. Pornirea și plățile reale au nevoie de a doua persoană.",
+      "needsAcceptance": "Lipsește acceptanța facturării în mod de test. Înregistreaz-o alături.",
+      "requesterOnly": "Cererea poate fi făcută de un manager comercial.",
+      "requestEnable": "Cere pornirea monetizării",
+      "requestDisable": "Cere oprirea monetizării"
+    },
+    "acceptance": {
+      "title": "Acceptanța facturării în mod de test",
+      "body": "Înainte de pornire, facturarea trebuie verificată cap-coadă în mod de test: plată, confirmare semnată, grație, anulare, rambursare, factură fiscală cu TVA.",
+      "missing": "Nicio acceptanță înregistrată",
+      "recorded": "Înregistrată pe {date}",
+      "evidence": "Unde este dovada",
+      "evidenceHint": "Raportul rulării, tichetul sau documentul.",
+      "notes": "Note",
+      "record": "Înregistrează acceptanța"
+    },
+    "history": {
+      "title": "Istoricul comutatorului",
+      "empty": "Comutatorul nu a fost schimbat niciodată.",
+      "when": "Când",
+      "change": "Schimbare",
+      "requester": "Cerut de",
+      "approvers": "Aprobat de",
+      "changes": {
+        "enable": "Pornire",
+        "disable": "Oprire"
+      }
+    },
+    "processor": {
+      "title": "Procesatorul de plăți",
+      "key": "Cheie API",
+      "webhook": "Secret de confirmare",
+      "mode": "Mod",
+      "present": "configurat",
+      "absent": "lipsește",
+      "test": "test",
+      "live": "real",
+      "body": "Cheile se pun în configurarea serverului, nu aici. Fără ele, orice încercare de plată este refuzată politicos."
+    },
+    "sandbox": {
+      "title": "Rulare de test",
+      "body": "Deschide o plată în modul de test al procesatorului, pentru acceptanță. Nu se taxează nimic și firma nu primește nimic.",
+      "business": "Identificatorul firmei",
+      "businessHint": "Îl găsești în adresa paginii firmei din consolă.",
+      "run": "Deschide plata de test",
+      "opening": "Se deschide…",
+      "ready": "Plata de test este pregătită",
+      "open": "Deschide pagina de plată de test",
+      "featuredByHand": "Pentru Promovat, adaugă o plasare de test mai jos.",
+      "unavailable": "Rularea de test are nevoie de o cheie de test configurată."
+    },
+    "subs": {
+      "title": "Abonamente",
+      "offNote": "Cât timp monetizarea este oprită, aici apar doar abonamentele din rulările de test. Ele nu schimbă nimic pentru firme.",
+      "empty": "Niciun abonament.",
+      "business": "Firmă",
+      "plan": "Plan",
+      "status": "Stare",
+      "periodEnd": "Până la",
+      "id": "Identificator",
+      "sandbox": "test"
+    },
+    "invoices": {
+      "title": "Facturi fiscale",
+      "number": "Număr",
+      "fiscalRef": "Referință fiscală",
+      "tva": "TVA",
+      "status": {
+        "pending": "În așteptare",
+        "issued": "Emisă",
+        "failed": "Eșuată",
+        "cancelled": "Anulată"
+      }
+    },
+    "refunds": {
+      "title": "Rambursări și credite",
+      "empty": "Nicio cerere.",
+      "kind": "Fel",
+      "kinds": {
+        "refund": "Rambursare",
+        "credit": "Credit"
+      },
+      "amount": "Sumă, în RON",
+      "states": {
+        "requested": "Așteaptă aprobare",
+        "approved": "Aprobată",
+        "rejected": "Respinsă",
+        "done": "Efectuată"
+      },
+      "requestTitle": "Cere o rambursare sau un credit",
+      "subscription": "Identificatorul abonamentului",
+      "subscriptionHint": "Din tabelul de abonamente.",
+      "request": "Trimite cererea"
+    },
+    "featured": {
+      "title": "Plasări Promovat",
+      "body": "Cel mult trei, alese la întâmplare la fiecare căutare, deasupra rezultatelor obișnuite și cu eticheta „Promovat — plasare plătită”.",
+      "empty": "Nicio plasare activă.",
+      "listing": "Listare",
+      "category": "Categorie",
+      "county": "Județ",
+      "allCounties": "toate județele listării",
+      "until": "Până la",
+      "end": "Oprește plasarea",
+      "addTitle": "Plasare de test",
+      "listingId": "Identificatorul listării",
+      "listingIdHint": "Îl găsești în adresa paginii listării.",
+      "days": "Durată, în zile",
+      "add": "Adaugă plasarea"
+    },
+    "prices": {
+      "title": "Prețuri",
+      "body": "Prețurile sunt fără TVA. O schimbare este o cerere pe care o aprobă a doua persoană.",
+      "placeholder": "Prețurile afișate sunt cele pilot, încă neconfirmate de operator.",
+      "tvaNow": "Cota de TVA folosită: {rate}%.",
+      "businessMonthly": "Plan Business pe lună, în RON fără TVA",
+      "businessYearly": "Plan Business pe an, în RON fără TVA",
+      "featuredMonthly": "Promovat pe lună, în RON fără TVA",
+      "tva": "Cota de TVA, în procente",
+      "tvaHint": "Pune 0 dacă operatorul nu este înregistrat în scopuri de TVA.",
+      "request": "Cere schimbarea prețurilor"
+    }
+  },
+  "approvals": {
+    "enable": "Pornește monetizarea, cu notificare publică de {days} de zile",
+    "disable": "Oprește monetizarea: totul redevine gratuit",
+    "prices": "Prețuri noi fără TVA: {monthly} RON pe lună, {yearly} RON pe an, Promovat {featured} RON; TVA {tva}%",
+    "refund": "Rambursare sau credit, cererea {id}"
+  },
+  "email": {
+    "subject": "EventDesk: ce se schimbă pentru firme din {date}",
+    "intro60": "Bună, {business}. Din {date}, planul Business și plasarea Promovat devin opționale, cu plată. Până atunci nu se schimbă nimic.",
+    "intro30": "Bună, {business}. Îți reamintim: din {date}, planul Business și plasarea Promovat devin opționale, cu plată.",
+    "intro7": "Bună, {business}. Peste o săptămână, din {date}, planul Business și plasarea Promovat devin opționale, cu plată.",
+    "keep": "Dacă nu faci nimic, firma rămâne pe nivelul gratuit permanent: cont, listări, cereri, fișierele deja publicate și statisticile proprii. Ocaziile clienților care există deja rămân complet utilizabile.",
+    "nothingAutomatic": "Nu se taxează nimic automat și nu îți cerem un card.",
+    "open": "Vezi planul firmei"
+  },
+  "errors": {
+    "acceptanceMissing": "Înregistrează întâi acceptanța facturării în mod de test.",
+    "singleOperator": "Este nevoie de a doua persoană cu rol în consolă.",
+    "alreadyOn": "Monetizarea este deja pornită.",
+    "alreadyOff": "Monetizarea este deja oprită.",
+    "reasonRequired": "Scrie motivul, cel puțin 10 caractere.",
+    "notConfigured": "Plata nu este configurată încă.",
+    "processor": "Procesatorul de plăți nu a răspuns cum trebuie. Încearcă din nou.",
+    "sandboxNeedsTestKey": "Rularea de test merge doar cu o cheie de test.",
+    "signature": "Semnătura nu a putut fi verificată.",
+    "unknownSubscription": "Abonament necunoscut încă.",
+    "amount": "Scrie suma doar cu cifre, de exemplu 18500 sau 199,50.",
+    "percent": "Scrie cota în procente, de exemplu 21."
+  }
+}

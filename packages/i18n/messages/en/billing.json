@@ -1,0 +1,300 @@
+{
+  "plan": {
+    "tab": "Plan",
+    "title": "The business's plan",
+    "leadFree": "Everything is free during the launch period.",
+    "leadOn": "The Business plan is active for your business.",
+    "leadFreeTier": "Your business is on the permanent free tier.",
+    "freeBody": "Listings, enquiries, client occasions, the library, branding on guest pages and reports are included, with no card and no trial. There is nothing for you to activate.",
+    "noticeTitle": "From {date}, some features become optional paid tiers",
+    "noticeBody": "Nothing changes until then. After that date, anyone who buys nothing stays on the permanent free tier described below. Nothing is charged automatically.",
+    "freeTierTitle": "What stays free for good",
+    "freeTierBody": "Whatever changes later, these stay with your business at no cost.",
+    "freeTier": {
+      "account": "The business account and its team.",
+      "listing": "Existing listings stay public and can be corrected.",
+      "enquiries": "You receive enquiries and answer them.",
+      "assets": "Floor plans and catalogues already published and files already shared stay readable.",
+      "ownStatistics": "Statistics for your own listings.",
+      "existingOccasions": "Client occasions that already exist stay fully usable, for the whole team.",
+      "handover": "You can hand an occasion over to the client at any time."
+    },
+    "promiseTitle": "What we promise if a paid plan ever appears",
+    "promise1": "We tell you at least 60 days ahead, here and by email, and remind you 30 and 7 days before.",
+    "promise2": "Nothing is charged automatically. We never ask for a card in advance.",
+    "promise3": "Your clients' occasions are never blocked, whatever plan you have.",
+    "laterBody": "If there is ever a paid plan, it will cover only creating new client occasions, branding changes, library edits and new listings. The order of directory results is not for sale."
+  },
+  "paid": {
+    "returnedTitle": "You are back from the payment page",
+    "returnedBody": "The plan becomes active when we receive the payment processor's confirmation. It usually takes under a minute; reload the page.",
+    "pricesTitle": "Prices",
+    "exclTva": "Prices exclude VAT (TVA). The VAT and the total are shown separately.",
+    "noTva": "The operator is not VAT-registered: no VAT is added.",
+    "col": {
+      "what": "What",
+      "net": "Excl. VAT",
+      "tva": "VAT {rate}%",
+      "gross": "Total"
+    },
+    "plans": {
+      "businessMonthly": "Business plan, per month",
+      "businessYearly": "Business plan, per year",
+      "featuredMonthly": "Featured, per listing and category, per month"
+    },
+    "planNames": {
+      "business_monthly": "Business plan, monthly",
+      "business_yearly": "Business plan, yearly",
+      "featured_monthly": "Featured, monthly"
+    },
+    "status": {
+      "active": "Active",
+      "past_due": "Payment pending",
+      "grace": "Grace period",
+      "canceled": "Ended"
+    },
+    "stops": "Without the Business plan only these stop: new client occasions, branding changes, library edits and new listings. Everything that exists stays.",
+    "yoursTitle": "The business's subscriptions",
+    "graceUntil": "The payment did not go through. The plan stays active until {date}.",
+    "endsOn": "Ends on {date}",
+    "renewsOn": "Renews on {date}",
+    "waiting": "Waiting for the payment confirmation",
+    "cancel": "Stop at the end of the period",
+    "cancelling": "Sending…",
+    "cancelRequested": "Request sent. The plan stays active until the end of the paid period.",
+    "buyTitle": "Buy the Business plan",
+    "buyTitleLapsed": "Reactivate the Business plan",
+    "buyBody": "You pay on the payment processor's page, with Apple Pay, Google Pay or a card. For each payment you receive a fiscal invoice with the VAT shown.",
+    "buyMonthly": "Pay monthly — {total} incl. VAT",
+    "buyYearly": "Pay yearly — {total} incl. VAT",
+    "buyFeatured": "Buy — {total} per month, incl. VAT",
+    "opening": "Opening the payment…",
+    "notConfigured": "Payment is not available yet. Come back later.",
+    "featuredTitle": "Featured placement",
+    "featuredBody": "Featured means a place above the ordinary results, with the label “Featured — paid placement”. On every search at most three featured listings are picked at random. The order of the ordinary results does not change.",
+    "featuredNoListing": "You need a public listing to buy a placement.",
+    "featuredCaption": "Estimate for {name}",
+    "featuredNoGuarantee": "The figures are an estimate, with no guarantee: the number of views is not promised.",
+    "fcol": {
+      "where": "Category and county",
+      "now": "Featured now",
+      "share": "Expected share of views",
+      "searches": "Searches in the last 30 days",
+      "buy": "Buy"
+    }
+  },
+  "console": {
+    "title": "Commercial",
+    "description": "The cost of the free phase, the monetization switch and billing in test mode. Every change that matters needs a second person.",
+    "tabsLabel": "Commercial sections",
+    "tabs": {
+      "cost": "Costs",
+      "switch": "Switch",
+      "billing": "Billing",
+      "prices": "Prices"
+    },
+    "choose": "Choose…",
+    "saving": "Saving…",
+    "saved": "Saved.",
+    "requesting": "Sending the request…",
+    "requested": "The request is waiting for a second person.",
+    "openApprovals": "Open approvals",
+    "reason": "Reason",
+    "reasonHint": "It stays in the audit log. At least 10 characters.",
+    "cost": {
+      "title": "Free phase",
+      "monthly": "Monthly fixed cost",
+      "perMonth": "per month, entered by the operator",
+      "placeholder": "placeholder value — enter the real cost below",
+      "businesses": "Businesses",
+      "listings": "Public listings",
+      "enquiries": "Enquiries sent",
+      "income": "Monthly income",
+      "incomeOff": "monetization is off",
+      "incomeOn": "from subscriptions; see Billing",
+      "now": "now",
+      "last30": "last 30 days",
+      "breakEven": "At the current prices, the monthly cost would be covered by {plans} monthly Business plans.",
+      "breakEvenPlaceholder": "At the pilot prices, not yet confirmed, the monthly cost would be covered by {plans} monthly Business plans.",
+      "setTitle": "The monthly fixed cost",
+      "amount": "Cost per month, in RON",
+      "amountHint": "Digits only, no thousands separator. Example: 18500 or 18500,50.",
+      "save": "Save the cost"
+    },
+    "switch": {
+      "title": "The monetization switch",
+      "state": "State",
+      "phase": {
+        "off": "Off",
+        "notice": "On — notice period",
+        "on": "On"
+      },
+      "about": {
+        "off": "Everything is free. There are no prices, payment or card anywhere in the product, and Featured does not exist.",
+        "notice": "Businesses have been told. Until the effective date nothing changes for them.",
+        "on": "The Business plan and Featured can be bought. Businesses without a plan are on the permanent free tier."
+      },
+      "noticeStart": "Notice started",
+      "effective": "Takes effect",
+      "timeline": "Notice calendar",
+      "reminder": "Notice to businesses, {days} days before",
+      "sent": "sent — businesses: {count}",
+      "planned": "scheduled",
+      "takesEffect": "Paid plans take effect",
+      "enableTitle": "Request turning it on",
+      "enableBody": "Turning it on needs a platform admin's approval. On approval the {days}-day public notice starts; paid plans take effect only at its end.",
+      "disableTitle": "Request turning it off",
+      "disableBody": "Turning it off makes everything free again for every business. It needs a platform admin's approval.",
+      "singleOperator": "Only one person holds a console role. Turning it on and real payments need a second person.",
+      "needsAcceptance": "The test-mode billing acceptance is missing. Record it alongside.",
+      "requesterOnly": "The request can be made by a commercial manager.",
+      "requestEnable": "Request monetization on",
+      "requestDisable": "Request monetization off"
+    },
+    "acceptance": {
+      "title": "Billing acceptance in test mode",
+      "body": "Before turning it on, billing must be checked end to end in test mode: payment, signed confirmation, grace, cancellation, refund, fiscal invoice with VAT.",
+      "missing": "No acceptance recorded",
+      "recorded": "Recorded on {date}",
+      "evidence": "Where the evidence is",
+      "evidenceHint": "The run report, ticket or document.",
+      "notes": "Notes",
+      "record": "Record the acceptance"
+    },
+    "history": {
+      "title": "Switch history",
+      "empty": "The switch has never been changed.",
+      "when": "When",
+      "change": "Change",
+      "requester": "Requested by",
+      "approvers": "Approved by",
+      "changes": {
+        "enable": "Turned on",
+        "disable": "Turned off"
+      }
+    },
+    "processor": {
+      "title": "Payment processor",
+      "key": "API key",
+      "webhook": "Confirmation secret",
+      "mode": "Mode",
+      "present": "configured",
+      "absent": "missing",
+      "test": "test",
+      "live": "live",
+      "body": "Keys go in the server configuration, not here. Without them every payment attempt is politely refused."
+    },
+    "sandbox": {
+      "title": "Test run",
+      "body": "Opens a payment in the processor's test mode, for the acceptance. Nothing is charged and the business receives nothing.",
+      "business": "Business identifier",
+      "businessHint": "You find it in the address of the business's console page.",
+      "run": "Open the test payment",
+      "opening": "Opening…",
+      "ready": "The test payment is ready",
+      "open": "Open the test payment page",
+      "featuredByHand": "For Featured, add a test placement below.",
+      "unavailable": "A test run needs a configured test key."
+    },
+    "subs": {
+      "title": "Subscriptions",
+      "offNote": "While monetization is off, only subscriptions from test runs appear here. They change nothing for businesses.",
+      "empty": "No subscriptions.",
+      "business": "Business",
+      "plan": "Plan",
+      "status": "Status",
+      "periodEnd": "Until",
+      "id": "Identifier",
+      "sandbox": "test"
+    },
+    "invoices": {
+      "title": "Fiscal invoices",
+      "number": "Number",
+      "fiscalRef": "Fiscal reference",
+      "tva": "VAT",
+      "status": {
+        "pending": "Pending",
+        "issued": "Issued",
+        "failed": "Failed",
+        "cancelled": "Cancelled"
+      }
+    },
+    "refunds": {
+      "title": "Refunds and credits",
+      "empty": "No requests.",
+      "kind": "Kind",
+      "kinds": {
+        "refund": "Refund",
+        "credit": "Credit"
+      },
+      "amount": "Amount, in RON",
+      "states": {
+        "requested": "Waiting for approval",
+        "approved": "Approved",
+        "rejected": "Rejected",
+        "done": "Done"
+      },
+      "requestTitle": "Request a refund or a credit",
+      "subscription": "Subscription identifier",
+      "subscriptionHint": "From the subscriptions table.",
+      "request": "Send the request"
+    },
+    "featured": {
+      "title": "Featured placements",
+      "body": "At most three, picked at random on every search, above the ordinary results and with the label “Featured — paid placement”.",
+      "empty": "No active placements.",
+      "listing": "Listing",
+      "category": "Category",
+      "county": "County",
+      "allCounties": "all the listing's counties",
+      "until": "Until",
+      "end": "End the placement",
+      "addTitle": "Test placement",
+      "listingId": "Listing identifier",
+      "listingIdHint": "You find it in the address of the listing's page.",
+      "days": "Duration, in days",
+      "add": "Add the placement"
+    },
+    "prices": {
+      "title": "Prices",
+      "body": "Prices exclude VAT. A change is a request that a second person approves.",
+      "placeholder": "The prices shown are the pilot ones, not yet confirmed by the operator.",
+      "tvaNow": "VAT rate in use: {rate}%.",
+      "businessMonthly": "Business plan per month, in RON excl. VAT",
+      "businessYearly": "Business plan per year, in RON excl. VAT",
+      "featuredMonthly": "Featured per month, in RON excl. VAT",
+      "tva": "VAT rate, in percent",
+      "tvaHint": "Enter 0 if the operator is not VAT-registered.",
+      "request": "Request the price change"
+    }
+  },
+  "approvals": {
+    "enable": "Turn monetization on, with a {days}-day public notice",
+    "disable": "Turn monetization off: everything becomes free again",
+    "prices": "New prices excl. VAT: {monthly} RON per month, {yearly} RON per year, Featured {featured} RON; VAT {tva}%",
+    "refund": "Refund or credit, request {id}"
+  },
+  "email": {
+    "subject": "EventDesk: what changes for businesses from {date}",
+    "intro60": "Hello, {business}. From {date}, the Business plan and Featured placement become optional paid tiers. Nothing changes until then.",
+    "intro30": "Hello, {business}. A reminder: from {date}, the Business plan and Featured placement become optional paid tiers.",
+    "intro7": "Hello, {business}. In a week, from {date}, the Business plan and Featured placement become optional paid tiers.",
+    "keep": "If you do nothing, your business stays on the permanent free tier: account, listings, enquiries, files already published and your own statistics. Client occasions that already exist stay fully usable.",
+    "nothingAutomatic": "Nothing is charged automatically and we do not ask for a card.",
+    "open": "See the business's plan"
+  },
+  "errors": {
+    "acceptanceMissing": "Record the test-mode billing acceptance first.",
+    "singleOperator": "A second person with a console role is needed.",
+    "alreadyOn": "Monetization is already on.",
+    "alreadyOff": "Monetization is already off.",
+    "reasonRequired": "Write the reason, at least 10 characters.",
+    "notConfigured": "Payment is not configured yet.",
+    "processor": "The payment processor did not answer as expected. Try again.",
+    "sandboxNeedsTestKey": "A test run only works with a test key.",
+    "signature": "The signature could not be verified.",
+    "unknownSubscription": "Subscription not known yet.",
+    "amount": "Write the amount in digits only, for example 18500 or 199,50.",
+    "percent": "Write the rate in percent, for example 21."
+  }
+}

@@ -33,6 +33,7 @@ import { OrderEditor } from "../_components/OrderEditor";
 import { QuoteUpload } from "../_components/QuoteUpload";
 import styles from "../_components/suppliers.module.css";
 import { dayText, STATE_TONE } from "../_components/tones";
+import { SupplierEnquiries } from "../enquiries/_components/SupplierEnquiries"; // P-05: enquiry threads of this supplier (P10)
 
 type Props = {
   params: Promise<{ id: string; supplierId: string }>;
@@ -134,6 +135,9 @@ export default async function SupplierPage({ params, searchParams }: Props) {
         />
         {s.notes ? <p className={styles.pre}>{s.notes}</p> : null}
       </Section>
+
+      {/* P-05 (enquiries agent): the enquiry / quote threads that sit in this supplier record (P10, P33). Renders nothing when there is none. */}
+      <SupplierEnquiries occasionId={id} bookingId={b.id} />
 
       <Section title={t("booking.title")}>
         <BookingStepper

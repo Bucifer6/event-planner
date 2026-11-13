@@ -1,0 +1,370 @@
+# Production deploy (R0-14, W10, DEP1–DEP7).
+#
+# Started ONLY by the console: /console/deploys → second-person approval → the GitHub App
+# dispatches this workflow (workflow_dispatch). There is no push, tag or schedule trigger.
+#
+# What stops a deploy that the console did not approve, even if someone presses "Run workflow"
+# in GitHub by hand:
+#   1. the ref must be a release tag vX.Y.Z whose commit is on main (DEP3: tag only);
+#   2. the FIRST thing the job does is ask the console to confirm this exact deploy id, tag and
+#      commit (scripts/record-deploy.mjs start). The console answers yes only for a deploy it
+#      approved (or an audited emergency / rollback) — otherwise the job stops here;
+#   3. the tag's commit must carry a green "release-ci" status (DEP7), unless the console
+#      marked the deploy as an emergency — the bypass is recorded;
+#   4. `environment: production`: its secrets exist only for this job, and the operator may add
+#      required reviewers there as a second lock (see the runbook for how that interacts with
+#      emergency deploys).
+#
+# Order (DEP4): verify → build and push the images → database backup → migrations → switch the
+# release → health checks (30 × 10 s) → on failure, automatic rollback to the previous
+# release with the reason recorded. Images are built BEFORE the backup so a release that
+# cannot be built never touches the database. A rollback never deletes data and stops with a
+# message when a migration cannot be reversed (DEP5, scripts/deploy/irreversible.txt).
+#
+# Every stage is reported to the console (DEP6). One deploy at a time: the concurrency group
+# queues a second run instead of cancelling the first; the console refuses to start one anyway.
+#
+# The hosting vendor is an operator decision. All vendor-specific work is behind
+# scripts/deploy/*.sh and the DEPLOY_TARGET variable; the one implemented target
+# ("ssh-docker", a generic Docker host over SSH) is a reference.
+#
+# Environment "production" — variables: APP_URL, PUBLIC_URL, DEPLOY_TARGET, REGISTRY, IMAGE_PREFIX,
+#   DEPLOY_SSH_HOST, DEPLOY_SSH_USER, DEPLOY_SSH_PORT, DEPLOY_DIR
+# secrets: DEPLOY_RECORD_TOKEN, REGISTRY_USERNAME, REGISTRY_PASSWORD, DEPLOY_SSH_KEY,
+#   DEPLOY_SSH_KNOWN_HOSTS
+name: Deploy
+
+run-name: >-
+  ${{ inputs.mode == 'rollback' && 'Rollback to' || (inputs.emergency && 'EMERGENCY deploy of' || 'Deploy of') }}
+  ${{ inputs.tag }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Release tag to run (vX.Y.Z) — never a branch
+        required: true
+        type: string
+      deployId:
+        description: The console's id for this deploy
+        required: true
+        type: string
+      mode:
+        description: deploy, or rollback to an earlier release
+        type: choice
+        options: [deploy, rollback]
+        default: deploy
+      emergency:
+        description: Emergency security fix (one security administrator, CI bypass recorded)
+        type: boolean
+        default: false
+      requestedBy:
+        description: Staff id of the requester (audit)
+        required: true
+        type: string
+      approvedBy:
+        description: Staff id of the approver (empty for emergency and rollback)
+        type: string
+        default: ""
+      previousTag:
+        description: The release that is live now (rollback target on failure)
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  deploy:
+    name: ${{ inputs.mode == 'rollback' && 'Rollback' || 'Deploy' }} ${{ inputs.tag }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    environment: production
+    permissions:
+      contents: read
+      statuses: read
+    env:
+      TAG: ${{ inputs.tag }}
+      MODE: ${{ inputs.mode }}
+      EMERGENCY: ${{ inputs.emergency }}
+      INPUT_PREVIOUS_TAG: ${{ inputs.previousTag }}
+      DEPLOY_ID: ${{ inputs.deployId }}
+      DEPLOY_TAG: ${{ inputs.tag }}
+      DEPLOY_RECORD_URL: ${{ vars.APP_URL }}/api/deploys/record
+      DEPLOY_RECORD_TOKEN: ${{ secrets.DEPLOY_RECORD_TOKEN }}
+      APP_URL: ${{ vars.APP_URL }}
+      DEPLOY_TARGET: ${{ vars.DEPLOY_TARGET }}
+      REGISTRY: ${{ vars.REGISTRY }}
+      IMAGE_PREFIX: ${{ vars.IMAGE_PREFIX }}
+      DEPLOY_SSH_HOST: ${{ vars.DEPLOY_SSH_HOST }}
+      DEPLOY_SSH_USER: ${{ vars.DEPLOY_SSH_USER }}
+      DEPLOY_SSH_PORT: ${{ vars.DEPLOY_SSH_PORT }}
+      DEPLOY_DIR: ${{ vars.DEPLOY_DIR }}
+    steps:
+      # ── 1. inputs: a release tag, nothing else ─────────────────────────────
+      - name: Refuse anything that is not a release tag
+        run: |
+          # one-line, secret-free reason for the console when a later step fails
+          echo "DEPLOY_REASON_FILE=$RUNNER_TEMP/deploy-reason.txt" >> "$GITHUB_ENV"
+          tag_re='^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z][0-9A-Za-z.]*)?$'
+          [[ "$TAG" =~ $tag_re ]] || { echo "::error::\"$TAG\" is not a release tag (vX.Y.Z). Deploys are by tag only (DEP3)."; exit 1; }
+          [[ "$DEPLOY_ID" =~ ^[a-z0-9]{8,40}$ ]] || { echo "::error::deployId is missing or malformed. Deploys start from the console."; exit 1; }
+          [[ "$MODE" == deploy || "$MODE" == rollback ]] || { echo "::error::unknown mode"; exit 1; }
+          if [[ "$MODE" == rollback ]]; then
+            [[ "$INPUT_PREVIOUS_TAG" =~ $tag_re ]] || { echo "::error::a rollback needs the release that is live now (previousTag)"; exit 1; }
+          fi
+          for name in APP_URL DEPLOY_TARGET DEPLOY_RECORD_TOKEN; do
+            [ -n "${!name}" ] || { echo "::error::the production environment is missing $name"; exit 1; }
+          done
+          [[ "$APP_URL" == https://* ]] || { echo "::error::APP_URL must be https"; exit 1; }
+
+      # For a rollback the scripts and the irreversible-migration list come from the release
+      # being LEFT (it is the one that knows which of its migrations cannot be reversed).
+      - name: Check out the tag
+        uses: actions/checkout@v4
+        with:
+          ref: refs/tags/${{ inputs.mode == 'rollback' && inputs.previousTag || inputs.tag }}
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve the tag to its commit and check it is on main
+        id: ref
+        run: |
+          git fetch --quiet --tags origin
+          git fetch --quiet origin main
+          commit="$(git rev-parse --verify --quiet "refs/tags/${TAG}^{commit}")" || { echo "::error::tag $TAG does not exist"; exit 1; }
+          if ! git merge-base --is-ancestor "$commit" origin/main; then
+            echo "::error::$TAG does not point at a commit on main (DEP7)"; exit 1
+          fi
+          echo "commit=$commit" >> "$GITHUB_OUTPUT"
+          echo "DEPLOY_COMMIT=$commit" >> "$GITHUB_ENV"
+          echo "$TAG → $commit"
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      # ── 2. the console must have approved exactly this deploy ──────────────
+      - name: Confirm with the console (gate) and record the start
+        id: start
+        run: node scripts/record-deploy.mjs start
+
+      - name: Work out the previous release
+        id: prev
+        env:
+          RECORDED_PREVIOUS: ${{ steps.start.outputs.previous_tag }}
+        run: |
+          # the console's own record wins over the workflow input
+          previous="${RECORDED_PREVIOUS:-$INPUT_PREVIOUS_TAG}"
+          if [ -n "$previous" ] && ! [[ "$previous" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z][0-9A-Za-z.]*)?$ ]]; then previous=""; fi
+          echo "tag=$previous" >> "$GITHUB_OUTPUT"
+          echo "STAGE=verify" >> "$GITHUB_ENV"
+          echo "previous release: ${previous:-none}"
+
+      # ── 3. CI must be green on this exact commit (DEP7) ────────────────────
+      - name: CI status of the commit
+        if: inputs.mode == 'deploy'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          COMMIT: ${{ steps.ref.outputs.commit }}
+        run: |
+          status="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${COMMIT}/status")"
+          combined="$(jq -r '.state' <<<"$status")"
+          release="$(jq -r '[.statuses[] | select(.context == "release-ci")][0].state // "missing"' <<<"$status")"
+          echo "release-ci: $release — combined: $combined"
+          if [ "$release" = success ] && [ "$combined" = success ]; then exit 0; fi
+          if [ "$EMERGENCY" = true ]; then
+            echo "::warning::CI is not green on $TAG; continuing because this is an audited emergency deploy (DEP3)."
+            node scripts/record-deploy.mjs stage --stage verify --note "CI not green (release-ci: $release); bypassed by the emergency path"
+            exit 0
+          fi
+          echo "CI has not passed on this commit (release-ci: $release)" > "$DEPLOY_REASON_FILE"
+          echo "::error::CI has not passed on $TAG ($COMMIT). The deploy is refused (DEP7)."
+          exit 1
+
+      # ── target access (reference target: a Docker host over SSH) ───────────
+      - name: Prepare SSH access
+        if: vars.DEPLOY_TARGET == 'ssh-docker'
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_SSH_KNOWN_HOSTS: ${{ secrets.DEPLOY_SSH_KNOWN_HOSTS }}
+        run: |
+          [ -n "$DEPLOY_SSH_KEY" ] && [ -n "$DEPLOY_SSH_KNOWN_HOSTS" ] || { echo "::error::DEPLOY_SSH_KEY and DEPLOY_SSH_KNOWN_HOSTS must be set"; exit 1; }
+          umask 077
+          mkdir -p "$RUNNER_TEMP/ssh"
+          printf '%s\n' "$DEPLOY_SSH_KEY" > "$RUNNER_TEMP/ssh/id"
+          printf '%s\n' "$DEPLOY_SSH_KNOWN_HOSTS" > "$RUNNER_TEMP/ssh/known_hosts"
+          echo "DEPLOY_SSH_KEY_FILE=$RUNNER_TEMP/ssh/id" >> "$GITHUB_ENV"
+          echo "DEPLOY_SSH_KNOWN_HOSTS_FILE=$RUNNER_TEMP/ssh/known_hosts" >> "$GITHUB_ENV"
+
+      # ── 4. build and push the images (nothing in production changes yet) ───
+      - name: Stage — build
+        if: inputs.mode == 'deploy'
+        run: |
+          echo "STAGE=build" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage build
+
+      - name: Set up Buildx
+        if: inputs.mode == 'deploy'
+        uses: docker/setup-buildx-action@v3
+
+      - name: Sign in to the registry
+        if: inputs.mode == 'deploy'
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - name: Build and push web
+        if: inputs.mode == 'deploy'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: web
+          push: true
+          tags: ${{ vars.IMAGE_PREFIX }}/web:${{ inputs.tag }}
+          build-args: APP_VERSION=${{ inputs.tag }}
+          cache-from: type=gha,scope=web
+          provenance: false
+
+      - name: Build and push worker
+        if: inputs.mode == 'deploy'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: worker
+          push: true
+          tags: ${{ vars.IMAGE_PREFIX }}/worker:${{ inputs.tag }}
+          build-args: APP_VERSION=${{ inputs.tag }}
+          cache-from: type=gha,scope=web
+          provenance: false
+
+      - name: Build and push public
+        if: inputs.mode == 'deploy'
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: public
+          push: true
+          tags: ${{ vars.IMAGE_PREFIX }}/public:${{ inputs.tag }}
+          build-args: |
+            NEXT_PUBLIC_APP_URL=${{ vars.APP_URL }}
+            NEXT_PUBLIC_SITE_URL=${{ vars.PUBLIC_URL }}
+          cache-from: type=gha,scope=web
+          provenance: false
+
+      # ── 5. backup → migrate → switch → health (DEP4) ───────────────────────
+      - name: Stage — database backup (encrypted, before anything changes)
+        if: inputs.mode == 'deploy'
+        run: |
+          echo "STAGE=backup" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage backup
+          bash scripts/deploy/backup.sh "$TAG"
+          node scripts/record-deploy.mjs stage --stage backup --note "encrypted backup stored"
+
+      - name: Stage — migrations
+        if: inputs.mode == 'deploy'
+        run: |
+          echo "STAGE=migrate" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage migrate
+          bash scripts/deploy/migrate.sh "$TAG"
+
+      - name: Stage — switch web, worker and public site to the new release
+        if: inputs.mode == 'deploy'
+        run: |
+          echo "STAGE=roll" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage roll
+          bash scripts/deploy/roll.sh "$TAG"
+
+      - name: Stage — health checks (30 × 10 s)
+        if: inputs.mode == 'deploy'
+        run: |
+          echo "STAGE=health" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage health
+          if ! bash scripts/deploy/health.sh "$TAG"; then
+            echo "health checks failed on $TAG" > "$DEPLOY_REASON_FILE"
+            exit 1
+          fi
+
+      # ── manual rollback from the console (DEP5) ────────────────────────────
+      - name: Rollback to the earlier release
+        if: inputs.mode == 'rollback'
+        run: |
+          echo "STAGE=rollback" >> "$GITHUB_ENV"
+          node scripts/record-deploy.mjs stage --stage rollback
+          set +e
+          bash scripts/deploy/rollback.sh "$TAG" "$INPUT_PREVIOUS_TAG"
+          rc=$?
+          set -e
+          if [ "$rc" -eq 3 ]; then
+            node scripts/record-deploy.mjs rollback_blocked --note "$(cat "$DEPLOY_REASON_FILE" 2>/dev/null || echo 'a migration cannot be reversed; nothing was changed')"
+            echo "ROLLBACK_BLOCKED=true" >> "$GITHUB_ENV"
+            echo "::error::The rollback was refused: a migration cannot be reversed. Nothing was changed."
+            exit 1
+          fi
+          [ "$rc" -eq 0 ] || { echo "switching back to $TAG failed" > "$DEPLOY_REASON_FILE"; exit 1; }
+          node scripts/record-deploy.mjs stage --stage health
+          if ! bash scripts/deploy/health.sh "$TAG"; then
+            echo "$TAG was put back but its health checks fail" > "$DEPLOY_REASON_FILE"
+            exit 1
+          fi
+
+      # ── 6. results ─────────────────────────────────────────────────────────
+      - name: Record success
+        run: node scripts/record-deploy.mjs succeeded
+
+      # Health checks (or the switch itself) failed: put the previous release back (DEP4).
+      - name: Automatic rollback to the previous release
+        id: auto_rollback
+        if: failure() && inputs.mode == 'deploy' && steps.start.outcome == 'success' && (env.STAGE == 'roll' || env.STAGE == 'health')
+        env:
+          PREVIOUS: ${{ steps.prev.outputs.tag }}
+        run: |
+          why="$(cat "$DEPLOY_REASON_FILE" 2>/dev/null || echo "the release switch failed on $TAG")"
+          if [ -z "$PREVIOUS" ] || [ "$PREVIOUS" = "$TAG" ]; then
+            node scripts/record-deploy.mjs failed --stage "$STAGE" --note "$why; there is no previous release to roll back to — production needs attention"
+            exit 0
+          fi
+          node scripts/record-deploy.mjs stage --stage rollback --note "$why"
+          set +e
+          bash scripts/deploy/rollback.sh "$PREVIOUS" "$TAG"
+          rc=$?
+          set -e
+          if [ "$rc" -eq 3 ]; then
+            node scripts/record-deploy.mjs rollback_blocked --note "$why; $(cat "$DEPLOY_REASON_FILE" 2>/dev/null || echo 'a migration cannot be reversed'). $TAG is still running — act now"
+            exit 0
+          fi
+          if [ "$rc" -ne 0 ]; then
+            node scripts/record-deploy.mjs failed --stage rollback --note "$why; switching back to $PREVIOUS failed — production needs attention"
+            exit 0
+          fi
+          if HEALTH_ATTEMPTS=12 bash scripts/deploy/health.sh "$PREVIOUS"; then
+            node scripts/record-deploy.mjs rolled_back --note "$why; $PREVIOUS is running again and healthy"
+          else
+            node scripts/record-deploy.mjs rolled_back --note "$why; $PREVIOUS was put back but is NOT answering its health checks — act now"
+          fi
+
+      # Anything that failed before the release was switched: production was not changed.
+      - name: Record failure
+        if: failure() && steps.start.outcome == 'success' && steps.auto_rollback.outcome == 'skipped' && env.ROLLBACK_BLOCKED != 'true'
+        run: |
+          why="$(cat "$DEPLOY_REASON_FILE" 2>/dev/null || echo "stopped at stage ${STAGE:-verify}")"
+          case "${STAGE:-verify}" in
+            migrate) why="$why; a migration failed — the release was not switched. Check the database before trying again" ;;
+            verify|build|backup) why="$why; production was not changed" ;;
+          esac
+          node scripts/record-deploy.mjs failed --stage "${STAGE:-verify}" --note "$why"
+
+      - name: Remove the SSH key
+        if: always()
+        run: rm -rf "$RUNNER_TEMP/ssh" "$RUNNER_TEMP/deploy-reason.txt"

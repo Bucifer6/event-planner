@@ -15,7 +15,12 @@
     "launch": "Lansare",
     "moderation": "Moderare",
     "businesses": "Firme",
-    "directory": "Director"
+    "directory": "Director",
+    "deploys": "Publicări",
+    "complianceAccess": "Acces de conformitate",
+    "commercial": "Comercial",
+    "communications": "Comunicări",
+    "discovery": "Descoperire"
   },
   "roles": {
     "platform_admin": "Administrator platformă",

@@ -6,6 +6,7 @@ import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { undoDeleteOccasionAction } from "@/app/actions/occasions";
 import { ActionForm } from "@/app/(auth)/_components/forms";
+import { businessOccasionBanner } from "@/app/(app)/business/[businessId]/occasions/OccasionBanner"; // Release P
 import { OccasionFrame } from "@/components/shell/OccasionFrame";
 import { requireCtx } from "@/lib/ctx";
 import { orNotFound } from "../_lib/load";
@@ -39,10 +40,13 @@ export default async function OccasionLayout({ children, params }: { children: R
   if (!member.grants.finance) hiddenKeys.push("budget", "ledger");
   if (!member.grants.privateRequests) hiddenKeys.push("requests");
 
+  // Release P (P17, P19, P22): run by a business / files a business shared — null for ordinary occasions
+  const businessBanner = await businessOccasionBanner(ctx, occasion.id);
   const banner =
-    deletion || occasion.status !== "planning" ? (
+    deletion || occasion.status !== "planning" || businessBanner ? (
       <Page>
         <Stack gap={3}>
+          {businessBanner}
           {deletion ? (
             <Notice tone="attention" title={t("deletion.bannerTitle")}>
               <Stack gap={3}>

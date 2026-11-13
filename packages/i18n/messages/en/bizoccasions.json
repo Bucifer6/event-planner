@@ -1,0 +1,293 @@
+{
+  "tabs": {
+    "occasions": "Client occasions",
+    "library": "Library",
+    "branding": "Branding",
+    "reports": "Reports",
+    "plan": "Plan"
+  },
+  "optional": "optional",
+  "choose": "Choose…",
+  "saving": "Saving…",
+  "saved": "Saved.",
+  "status": {
+    "planning": "In progress",
+    "postponed": "Postponed",
+    "cancelled": "Cancelled",
+    "closed": "Closed"
+  },
+  "list": {
+    "title": "Occasions you run",
+    "emptyTitle": "No occasions yet",
+    "emptyBody": "Create the first occasion for a client below. The whole team sees it and can work in it.",
+    "emptyBodyNoCreate": "The occasions the business runs for clients appear here.",
+    "noDate": "no date",
+    "manage": "Manage",
+    "manageNamed": "Manage “{title}”",
+    "openTasks": {
+      "zero": "no open tasks",
+      "one": "one open task",
+      "few": "{count} open tasks",
+      "other": "{count} open tasks"
+    }
+  },
+  "create": {
+    "title": "New occasion for a client",
+    "name": "Occasion name",
+    "nameHint": "For example “Mara and Vlad's wedding”.",
+    "kind": "Kind of occasion",
+    "date": "Date",
+    "dateHint": "You can leave it empty and set it later.",
+    "submit": "Create the occasion",
+    "pending": "Creating…",
+    "lapsed": "The business plan has lapsed: existing occasions carry on, but new ones cannot be created.",
+    "notActive": "The business is restricted, so nothing can be changed here for now."
+  },
+  "handedOver": {
+    "title": "Handed over to clients",
+    "body": "After a handover the occasion belongs to the client. The business keeps only this record.",
+    "on": "Handed over on {date}"
+  },
+  "grants": {
+    "title": "What the team sees in the business's occasions",
+    "body": "Every team member works in the business's occasions as an organiser. You choose whether they also see the money and guests' private requests.",
+    "legend": "The team can see",
+    "finance": "Budget and payments",
+    "financeHint": "Amounts, invoices, due dates.",
+    "privateRequests": "Guests' private requests",
+    "privateRequestsHint": "For example allergies or access needs.",
+    "save": "Save team access"
+  },
+  "manage": {
+    "title": "Business occasion",
+    "back": "Back to client occasions",
+    "openPlan": "Open the plan",
+    "previewTitle": "What changes"
+  },
+  "apply": {
+    "title": "Apply from the library",
+    "emptyTitle": "The library is empty",
+    "emptyBody": "Add task templates, checklists or suppliers to the library, then apply them here.",
+    "openLibrary": "Open the library",
+    "item": "What to apply",
+    "itemHint": "We first show what would be added. Nothing changes until you confirm.",
+    "preview": "See what is added",
+    "previewing": "Preparing…"
+  },
+  "files": {
+    "title": "Files shared with the occasion",
+    "body": "Shared files can be opened by every member of the occasion and stay with them after the handover.",
+    "sharedOn": "Shared on {date}",
+    "item": "File from the library",
+    "share": "Share the file",
+    "shared": "The file is now visible in the occasion.",
+    "none": "No files shared yet. Add files to the library and you can share them from here.",
+    "lapsed": "The business plan has lapsed: files already shared stay, but no more can be shared."
+  },
+  "handover": {
+    "title": "Hand the occasion over to the client",
+    "body": "When the event becomes the client's, you hand the occasion over. This is what happens:",
+    "ends1": "The chosen client becomes the owner of the occasion, with access to the budget and private requests.",
+    "ends2": "The whole team's access ends, and so do the business's assistant connections.",
+    "ends3": "The business's name, logo and colour disappear from guest pages.",
+    "stays": "The plan stays whole: tasks, guests, suppliers, money and shared files.",
+    "noClientTitle": "The client is not in the occasion yet",
+    "noClientBody": "Invite the client as a member of the occasion. Once they accept, you can choose them here.",
+    "inviteClient": "Invite the client",
+    "freshTitle": "A handover needs you to confirm it is you",
+    "freshBody": "You can see what changes, but applying it needs a recent confirmation.",
+    "freshLink": "Confirm from your account",
+    "to": "Hand over to",
+    "toHint": "Only members of the occasion who are not on the business team.",
+    "preview": "See what ends"
+  },
+  "library": {
+    "kindsLabel": "Kinds of items",
+    "kinds": {
+      "template": "Task templates",
+      "checklist": "Checklists",
+      "contact": "Suppliers",
+      "asset": "Files"
+    },
+    "kindOne": {
+      "template": "Template",
+      "checklist": "Checklist",
+      "contact": "Supplier",
+      "asset": "File"
+    },
+    "about": {
+      "template": "A template is a list of tasks you apply to an occasion. Each task gets its due date worked out from the event date.",
+      "checklist": "In an occasion, a checklist becomes one task with its steps.",
+      "contact": "Suppliers you work with often. Applied to an occasion, a contact appears in its supplier list.",
+      "asset": "Images or PDFs you share with occasions: floor plans, menus, standard offers."
+    },
+    "emptyTitle": {
+      "template": "No templates yet",
+      "checklist": "No checklists yet",
+      "contact": "No suppliers yet",
+      "asset": "No files yet"
+    },
+    "emptyBody": "Add the first item below. The whole team will be able to use it.",
+    "lapsed": "The business plan has lapsed: the library can still be read and applied, but no longer changed.",
+    "editNamed": "Edit “{title}”",
+    "save": "Save changes",
+    "archive": "Remove from the library",
+    "archiving": "Removing…",
+    "archiveHint": "What was already applied or shared stays in the occasions.",
+    "added": "Added to the library.",
+    "file": "The file",
+    "titleLabel": {
+      "template": "Template name",
+      "checklist": "Checklist name",
+      "contact": "Supplier name",
+      "asset": "File name"
+    },
+    "linesLabel": {
+      "template": "Tasks, one per line",
+      "checklist": "Steps, one per line"
+    },
+    "linesHint": {
+      "template": "For a due date, end the line with “; ” and the number of months before the event. Example: “Choose the venue; 6”.",
+      "checklist": "Example: “Confirm the flowers”."
+    },
+    "addTitle": {
+      "template": "New template",
+      "checklist": "New checklist",
+      "contact": "New supplier",
+      "asset": "New file"
+    },
+    "add": {
+      "template": "Add the template",
+      "checklist": "Add the checklist",
+      "contact": "Add the supplier",
+      "asset": "Add the file"
+    },
+    "count": {
+      "tasks": {
+        "one": "one task",
+        "few": "{count} tasks",
+        "other": "{count} tasks"
+      },
+      "steps": {
+        "one": "one step",
+        "few": "{count} steps",
+        "other": "{count} steps"
+      }
+    },
+    "fileKind": {
+      "image": "Image",
+      "pdf": "PDF"
+    },
+    "contact": {
+      "category": "What they offer",
+      "person": "Contact person",
+      "email": "Email",
+      "phone": "Phone",
+      "notes": "Notes",
+      "noDetails": "no contact details"
+    }
+  },
+  "branding": {
+    "title": "How guests see you",
+    "body": "Your name, logo and one accent colour appear on the guest pages of the occasions you run, until each occasion is handed over.",
+    "staffOnly": "Branding can be changed by the owner or an admin.",
+    "lapsed": "The business plan has lapsed: the chosen branding stays on guest pages, but can no longer be changed.",
+    "name": "Name shown to guests",
+    "nameHint": "If you leave it empty, “{name}” is shown.",
+    "logo": "Logo",
+    "logoReplace": "Replace the logo",
+    "logoNow": "Current logo",
+    "removeLogo": "Remove the logo",
+    "useAccent": "Use your own accent colour",
+    "useAccentHint": "Otherwise the EventDesk colour stays.",
+    "accent": "Accent colour",
+    "accentDefault": "the EventDesk colour",
+    "save": "Save branding",
+    "previewLabel": "How it looks on a guest's page",
+    "previewTitle": "Mara and Vlad's wedding",
+    "previewButton": "Answer the invitation",
+    "previewLink": "See the venue on the map"
+  },
+  "guest": {
+    "organisedBy": "Organised by"
+  },
+  "banner": {
+    "title": "Occasion run by {business}",
+    "team": "You work here as a member of the team, with organiser rights.",
+    "client": "The business's team has organiser access until the occasion is handed over to you.",
+    "join": "Join the occasion",
+    "joining": "Adding…",
+    "joinHint": "So that tasks can be assigned to you.",
+    "handover": "Hand over to the client",
+    "files": "Files from the organiser: {count}"
+  },
+  "reports": {
+    "title": "The business's occasions",
+    "inWork": "Occasions in progress now",
+    "inWorkNote": "of {total} in total, including those handed over",
+    "overdue": "Overdue tasks",
+    "openTasks": "Open tasks",
+    "handedOver": "Handed over to clients",
+    "enquiries": "Enquiries received",
+    "enquiriesNote": "last {days} days · unanswered: {unanswered}",
+    "lastDays": "last {days} days",
+    "today": "today",
+    "allTime": "since the start",
+    "byStatus": "By status",
+    "status": "Status",
+    "occasions": "Occasions",
+    "upcoming": "Dates coming up",
+    "upcomingEmpty": "No occasion with a set date in the coming period.",
+    "todayShort": "today",
+    "inDays": {
+      "one": "tomorrow",
+      "few": "in {count} days",
+      "other": "in {count} days"
+    },
+    "assetUse": "Library use, last {days} days",
+    "assetUseBody": "Daily totals. Who used what is not kept.",
+    "assetUseEmpty": "Nothing from the library was used in this period.",
+    "byDay": "By day",
+    "day": "Day",
+    "uses": "Uses",
+    "assetKinds": {
+      "library_template": "Templates applied",
+      "library_checklist": "Checklists applied",
+      "library_contact": "Suppliers added",
+      "library_asset": "Files shared",
+      "drawing": "Floor plans used",
+      "catalogue": "Catalogue items chosen"
+    }
+  },
+  "whatif": {
+    "applyTitle": {
+      "template": "Applying the template “{title}”",
+      "checklist": "Applying the checklist “{title}”",
+      "contact": "Adding the supplier “{title}”"
+    },
+    "supplierAdded": "new supplier",
+    "noContact": "no contact",
+    "steps": "steps: {count}",
+    "alreadyThere": "Already in the plan, left unchanged: {count}",
+    "handoverTitle": "Handing “{title}” over to the client",
+    "owner": "Owner of the occasion",
+    "teamAccess": "The business team's access",
+    "teamCount": "members: {count}",
+    "branding": "The business's branding on guest pages",
+    "assistants": "The business's assistant connections",
+    "assistantCount": "active connections: {count}",
+    "none": "ends",
+    "ends": "ends",
+    "planStays": "Tasks, guests, suppliers, money, shared files",
+    "stays": "stays"
+  },
+  "errors": {
+    "accentFormat": "Choose a colour from the picker.",
+    "logoInvalid": "The logo must be an image uploaded by the business.",
+    "fileInvalid": "Upload the file first.",
+    "linesRequired": "Write at least one line.",
+    "tooManyLines": "There are too many lines. Split them into two items.",
+    "libraryFull": "The library has reached its limit. Remove an item to add another.",
+    "handoverTarget": "Choose a member of the occasion who is not on the business team."
+  }
+}

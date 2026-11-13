@@ -1,0 +1,9 @@
+/* Guest-link sections of the seating domain — tokens only; mirrors g/[token]/guest.module.css blocks. */
+.block { display: flex; flex-direction: column; gap: var(--s-3); padding-top: var(--s-4); border-top: var(--hair) solid var(--line); min-width: 0; }
+.title { font-family: var(--font-display); font-size: var(--display-sm); font-weight: 500; line-height: 1.2; }
+.sub { font-size: var(--text-md); font-weight: 650; }
+.table { display: flex; flex-direction: column; gap: var(--s-1); margin: 0; }
+.tableNo { font-family: var(--font-display); font-size: var(--display-lg); line-height: 1; letter-spacing: -0.02em; overflow-wrap: anywhere; }
+.places { list-style: none; margin: 0; padding: 0; }
+.places li { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); padding: var(--s-2) 0; border-top: var(--hair) solid var(--line); overflow-wrap: anywhere; }
+.places li:first-child { border-top: 0; }

@@ -1,0 +1,77 @@
+# Local development services (not for production):
+#
+#   docker compose -f docker-compose.dev.yml up -d          start
+#   docker compose -f docker-compose.dev.yml down           stop (data is kept)
+#   docker compose -f docker-compose.dev.yml down -v        stop and erase the data
+#
+# - postgres: PostgreSQL 16 with the role the code and the tests expect
+#   (postgresql://ed:ed@127.0.0.1:5432 — "ed" is a superuser so the test harness can create
+#   and drop its own databases). Database: eventdesk_dev.
+# - minio: an S3-compatible object store (INF3) with the two buckets the app uses. The app
+#   works without it: with no S3_* variables it keeps uploads in a local folder.
+# - mailpit: a mail catcher with a web inbox at http://localhost:8025. Note: with
+#   EMAIL_PROVIDER=dev (the default) no email leaves the app at all — the message is kept in
+#   the email_outbox table. Mailpit is here for trying an SMTP/HTTP provider later.
+#
+# Everything listens on 127.0.0.1 only. The passwords below are throwaway local values.
+
+name: eventdesk-dev
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ed
+      POSTGRES_PASSWORD: ed
+      POSTGRES_DB: eventdesk_dev
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ed -d eventdesk_dev"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  minio:
+    image: minio/minio:latest
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: eventdesk
+      MINIO_ROOT_PASSWORD: eventdesk-local-only
+    ports:
+      - "127.0.0.1:9000:9000" # S3 API  → S3_ENDPOINT=http://127.0.0.1:9000
+      - "127.0.0.1:9001:9001" # web console
+    volumes:
+      - miniodata:/data
+    healthcheck:
+      test: ["CMD", "mc", "ready", "local"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # Creates the buckets once, then exits.
+  minio-setup:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: ["/bin/sh", "-c"]
+    command:
+      - >
+        mc alias set local http://minio:9000 eventdesk eventdesk-local-only &&
+        mc mb --ignore-existing local/eventdesk-private local/eventdesk-media local/eventdesk-backups &&
+        mc version enable local/eventdesk-private &&
+        mc version enable local/eventdesk-media
+    restart: "no"
+
+  mailpit:
+    image: axllent/mailpit:latest
+    ports:
+      - "127.0.0.1:1025:1025" # SMTP
+      - "127.0.0.1:8025:8025" # web inbox
+
+volumes:
+  pgdata:
+  miniodata:

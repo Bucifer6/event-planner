@@ -143,6 +143,15 @@ export default async function ListingPage({
         </Section>
       ) : null}
 
+      {/* P-06 (drawings agent): venue spaces, drawings and parking facts live on their own page */}
+      {listing.status !== "retired" ? (
+        <p>
+          <Link href={`/business/${businessId}/listings/${listing.id}/spaces`} className={buttonClassName({})}>
+            {all("drawings.list.linkFromListing")}
+          </Link>
+        </p>
+      ) : null}
+
       {manage && listing.status !== "retired" ? (
         <Section title={t("detail.moreTitle")} level={3}>
           <div className="ed-stack" data-gap="4">

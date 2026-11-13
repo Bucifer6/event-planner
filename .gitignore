@@ -12,3 +12,11 @@ next-env.d.ts
 *.log
 playwright-report/
 test-results/
+
+# Terraform (infra/): state and variable files can describe production — never commit
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+*.plan

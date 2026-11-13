@@ -1,0 +1,23 @@
+# Copy to staging.tfvars (never commit it). Staging has its own state and its own data —
+# never a copy of production data — and is in the EU as well (INF9).
+#   terraform plan -var-file=staging.tfvars
+
+environment   = "staging"
+domain        = "eventdesk.ro"
+staging_label = "staging"
+region        = "eu-central-1"
+
+# Staging adds its records to the zone that production created.
+manage_dns  = true
+dns_zone_id = "REPLACE-with-the-production-zone-id"
+
+db_instance_class       = "db.t4g.micro"
+db_allocated_storage_gb = 20
+db_multi_az             = false
+host_instance_type      = "t3.small"
+
+deploy_ssh_public_key = ""
+deploy_ssh_cidrs      = []
+
+acme_email  = "ops@example.invalid"
+alert_email = "alerts@example.invalid"
