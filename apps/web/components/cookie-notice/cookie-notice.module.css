@@ -1,14 +1,9 @@
-/* In-app cookie notice (LAU1): a small card pinned to the bottom, clear of the phone nav. */
+/* In-app cookie notice (LAU1). On phones it sits in the page flow, after the content, so it
+   never covers the action in thumb reach; from 720px it is a small card pinned bottom-right. */
 .notice {
-  position: fixed;
-  z-index: 40;
-  left: var(--s-3);
-  right: var(--s-3);
-  bottom: calc(56px + var(--s-3) + env(safe-area-inset-bottom));
+  position: static;
+  margin: var(--s-4) var(--s-3) calc(56px + var(--s-4) + env(safe-area-inset-bottom));
   max-width: 480px;
-  margin-inline: auto;
-  max-height: calc(100dvh - 56px - var(--s-6));
-  overflow-y: auto;
   background: var(--surface);
   border: var(--hair, 1px) solid var(--line-strong);
   border-radius: var(--radius);
@@ -41,9 +36,12 @@
 }
 @media (min-width: 720px) {
   .notice {
-    left: auto;
+    position: fixed;
+    z-index: 40;
     right: var(--s-4);
     bottom: var(--s-4);
-    margin-inline: 0;
+    margin: 0;
+    max-height: calc(100dvh - var(--s-6));
+    overflow-y: auto;
   }
 }

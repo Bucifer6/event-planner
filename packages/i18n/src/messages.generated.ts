@@ -4,24 +4,50 @@
 import ro_account from "../messages/ro/account.json";
 import ro_auth from "../messages/ro/auth.json";
 import ro_common from "../messages/ro/common.json";
+import ro_console from "../messages/ro/console.json";
+import ro_contributions from "../messages/ro/contributions.json";
 import ro_cookies from "../messages/ro/cookies.json";
+import ro_digest from "../messages/ro/digest.json";
 import ro_emails from "../messages/ro/emails.json";
+import ro_guests from "../messages/ro/guests.json";
 import ro_guides from "../messages/ro/guides.json";
 import ro_legal from "../messages/ro/legal.json";
+import ro_mcp from "../messages/ro/mcp.json";
 import ro_nav from "../messages/ro/nav.json";
+import ro_occasions from "../messages/ro/occasions.json";
+import ro_overview from "../messages/ro/overview.json";
 import ro_platform from "../messages/ro/platform.json";
+import ro_polls from "../messages/ro/polls.json";
+import ro_report from "../messages/ro/report.json";
+import ro_rsvp from "../messages/ro/rsvp.json";
 import ro_site from "../messages/ro/site.json";
+import ro_tasks from "../messages/ro/tasks.json";
+import ro_team from "../messages/ro/team.json";
+import ro_templates from "../messages/ro/templates.json";
 import ro_whatif from "../messages/ro/whatif.json";
 import en_account from "../messages/en/account.json";
 import en_auth from "../messages/en/auth.json";
 import en_common from "../messages/en/common.json";
+import en_console from "../messages/en/console.json";
+import en_contributions from "../messages/en/contributions.json";
 import en_cookies from "../messages/en/cookies.json";
+import en_digest from "../messages/en/digest.json";
 import en_emails from "../messages/en/emails.json";
+import en_guests from "../messages/en/guests.json";
 import en_guides from "../messages/en/guides.json";
 import en_legal from "../messages/en/legal.json";
+import en_mcp from "../messages/en/mcp.json";
 import en_nav from "../messages/en/nav.json";
+import en_occasions from "../messages/en/occasions.json";
+import en_overview from "../messages/en/overview.json";
 import en_platform from "../messages/en/platform.json";
+import en_polls from "../messages/en/polls.json";
+import en_report from "../messages/en/report.json";
+import en_rsvp from "../messages/en/rsvp.json";
 import en_site from "../messages/en/site.json";
+import en_tasks from "../messages/en/tasks.json";
+import en_team from "../messages/en/team.json";
+import en_templates from "../messages/en/templates.json";
 import en_whatif from "../messages/en/whatif.json";
 
 export const messagesByLocale = {
@@ -29,26 +55,52 @@ export const messagesByLocale = {
     "account": ro_account,
     "auth": ro_auth,
     "common": ro_common,
+    "console": ro_console,
+    "contributions": ro_contributions,
     "cookies": ro_cookies,
+    "digest": ro_digest,
     "emails": ro_emails,
+    "guests": ro_guests,
     "guides": ro_guides,
     "legal": ro_legal,
+    "mcp": ro_mcp,
     "nav": ro_nav,
+    "occasions": ro_occasions,
+    "overview": ro_overview,
     "platform": ro_platform,
+    "polls": ro_polls,
+    "report": ro_report,
+    "rsvp": ro_rsvp,
     "site": ro_site,
+    "tasks": ro_tasks,
+    "team": ro_team,
+    "templates": ro_templates,
     "whatif": ro_whatif,
   },
   en: {
     "account": en_account,
     "auth": en_auth,
     "common": en_common,
+    "console": en_console,
+    "contributions": en_contributions,
     "cookies": en_cookies,
+    "digest": en_digest,
     "emails": en_emails,
+    "guests": en_guests,
     "guides": en_guides,
     "legal": en_legal,
+    "mcp": en_mcp,
     "nav": en_nav,
+    "occasions": en_occasions,
+    "overview": en_overview,
     "platform": en_platform,
+    "polls": en_polls,
+    "report": en_report,
+    "rsvp": en_rsvp,
     "site": en_site,
+    "tasks": en_tasks,
+    "team": en_team,
+    "templates": en_templates,
     "whatif": en_whatif,
   },
 } as const;

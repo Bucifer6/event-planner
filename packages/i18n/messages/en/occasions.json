@@ -1,0 +1,163 @@
+{
+  "list": {
+    "eyebrow": "Your plans",
+    "title": "Occasions",
+    "description": "The nearest ones come first.",
+    "new": "New occasion",
+    "emptyTitle": "No occasions yet",
+    "emptyBody": "Start with a title and a date. Begin from a template with prepared tasks, or from a blank page.",
+    "noDateShort": "no date",
+    "openTasks": {
+      "zero": "no open tasks",
+      "one": "{count} open task",
+      "few": "{count} open tasks",
+      "other": "{count} open tasks"
+    }
+  },
+  "kinds": {
+    "picnic": "Picnic",
+    "aniversare": "Birthday",
+    "nunta": "Wedding",
+    "botez": "Christening",
+    "revelion": "New Year's Eve",
+    "voiaj_solo": "Solo trip",
+    "voiaj_grup": "Group trip",
+    "blank": "Occasion"
+  },
+  "date": {
+    "byPoll": "Date to be decided by poll",
+    "legend": "When is it?",
+    "mode": {
+      "date": "On one day",
+      "range": "Over several days",
+      "poll": "We'll decide by poll"
+    },
+    "pollHint": "You can create the occasion without a date. Template tasks get their due dates once you set it.",
+    "startsOn": "Date",
+    "startsOnRange": "First day",
+    "endsOn": "Last day"
+  },
+  "countdown": {
+    "today": "today",
+    "inDays": {
+      "one": "tomorrow",
+      "few": "in {count} days",
+      "other": "in {count} days"
+    },
+    "past": "past"
+  },
+  "status": {
+    "planning": "Planning",
+    "pendingDeletion": "Being deleted",
+    "cancelled": "Cancelled",
+    "postponed": "Postponed",
+    "closed": "Closed"
+  },
+  "new": {
+    "back": "Occasions",
+    "title": "New occasion",
+    "description": "A title, a template and a date are enough to begin. Everything else can change later.",
+    "templateLegend": "Start from a template",
+    "templateNote": {
+      "one": "{description} {count} prepared task, scheduled around the date.",
+      "few": "{description} {count} prepared tasks, scheduled around the date.",
+      "other": "{description} {count} prepared tasks, scheduled around the date."
+    },
+    "templateBlank": "No prepared tasks: you add your own.",
+    "briefToggle": "Add the purpose and priorities",
+    "submit": "Create the occasion",
+    "submitting": "Creating…",
+    "cancel": "Cancel",
+    "freeNote": "Creating an occasion is free."
+  },
+  "fields": {
+    "title": "Occasion title",
+    "titleHint": "For example “Ioana and Andrei's wedding”.",
+    "venueName": "Venue",
+    "venueAddress": "Address"
+  },
+  "brief": {
+    "title": "In brief",
+    "intro": "Why the occasion is happening and what matters most. Tasks can be linked to these priorities.",
+    "purpose": "Purpose",
+    "purposeHint": "A sentence or two that everyone on the team will understand.",
+    "priority": "Priority {number}"
+  },
+  "deletion": {
+    "bannerTitle": "This occasion is going to be deleted",
+    "bannerBody": "Until {date} you can restore it with everything in it. After that it is deleted for good.",
+    "undo": "Cancel the deletion",
+    "undoing": "Cancelling…",
+    "title": "Deleting the occasion",
+    "pendingHere": "The deletion is scheduled. You can cancel it until {date}, from the band at the top of the page.",
+    "intro": "After you ask for deletion you have {days} days to cancel it. During that time the team still sees the occasion, with a notice. Then its tasks, team, guests and files are deleted for good.",
+    "retainedIntro": "The law requires us to keep a few things even after deletion:",
+    "retainedReceipts": "receipts and payment documents — {years} years, for accounting;",
+    "retainedObjections": "objection and removal requests — {years} years, so we can keep honouring them;",
+    "retainedAudit": "the log of sensitive actions — {years} years, for security.",
+    "freshTitle": "First confirm it is you",
+    "freshBody": "Deleting an occasion needs a fresh confirmation. You can do it here or from your account page.",
+    "freshLink": "Open the account page",
+    "open": "Delete the occasion",
+    "confirmTitle": "Delete this occasion?",
+    "confirmBody": "“{title}” will be deleted in {days} days. Until then you can restore it at any time.",
+    "keep": "Keep the occasion",
+    "submit": "Delete the occasion"
+  },
+  "statusBanner": {
+    "cancelled": {
+      "title": "This occasion was cancelled",
+      "body": "The plan stays here for reference."
+    },
+    "postponed": {
+      "title": "This occasion was postponed",
+      "body": "When you set the new date, task due dates move with it."
+    },
+    "closed": {
+      "title": "This occasion is over",
+      "body": "The plan stays here for reference."
+    }
+  },
+  "proposals": {
+    "title": "What if?",
+    "description": "Important changes appear here first, with everything they would alter. Nothing is applied until someone confirms.",
+    "pendingTitle": "Waiting for a decision",
+    "emptyTitle": "No proposals waiting",
+    "emptyBody": "When you move the date or re-run a template, the preview appears here.",
+    "historyTitle": "Decided recently",
+    "historyEmpty": "Nothing has been decided yet.",
+    "state": {
+      "applied": "Applied",
+      "discarded": "Discarded"
+    }
+  },
+  "settings": {
+    "title": "Settings",
+    "description": "The occasion's details, its date, and deletion.",
+    "saved": "Details saved.",
+    "save": "Save details",
+    "detailsTitle": "Details and brief",
+    "readOnlyTitle": "Settings belong to the organiser",
+    "readOnlyBody": "Only the owner and project managers can change the occasion's details."
+  },
+  "move": {
+    "title": "Occasion date",
+    "intro": "Choose the new date and see what changes first: every task whose due date moves is listed in a preview. Nothing is applied until you confirm.",
+    "submit": "See what changes",
+    "submitting": "Working it out…"
+  },
+  "errors": {
+    "dateRequired": "Choose the date, or switch to “We'll decide by poll”.",
+    "endRequired": "Choose the last day too.",
+    "endBeforeStart": "The last day cannot be before the first day.",
+    "sameDate": "That is already the occasion's date. Choose a different one."
+  },
+  "whatif": {
+    "byPoll": "to be decided by poll",
+    "dateRow": "Occasion date",
+    "taskLabel": "Due date",
+    "moreTasks": "and {count} more tasks change their due date",
+    "noTasksMove": "No task due dates change.",
+    "moveTitle": "Moving the occasion date"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "title": "Report illegal content",
+  "lead": "Anyone can report illegal content or an unlawful listing on EventDesk. You do not need an account.",
+  "rules": "The rules we moderate content by are written in plain Romanian in the <link>moderation rules</link>.",
+  "next": {
+    "title": "What happens to your report",
+    "step1": "You receive a report reference at once.",
+    "step2": "A person on our team reviews it. We do not decide automatically.",
+    "step3": "We record the decision and its reason and give them to the affected party. If you leave an email, we also write to you with the outcome."
+  },
+  "form": {
+    "title": "Your report",
+    "target": "What you are reporting",
+    "targetHint": "The page address (link) or the name of the business or listing.",
+    "category": "The reason",
+    "categoryPlaceholder": "Choose the reason",
+    "description": "What is wrong",
+    "descriptionHint": "Say briefly what you saw and why you believe it is illegal. At least 10 characters.",
+    "contact": "Your email",
+    "contactHint": "We use it only to tell you the outcome. You can report without it.",
+    "optional": "optional",
+    "trap": "Leave this field empty",
+    "submit": "Send the report",
+    "submitting": "Sending the report…"
+  },
+  "categories": {
+    "illegal_content": "Illegal content",
+    "fraud": "Fraud or fake business",
+    "intellectual_property": "Copyright or trademark",
+    "privacy": "Personal data published without consent",
+    "false_information": "False information",
+    "offensive": "Offensive content",
+    "other": "Something else"
+  },
+  "done": {
+    "title": "We have received your report.",
+    "body": "Its reference is {reference}. Keep it if you want to follow up on the report."
+  },
+  "privacy": "We keep your email for at most six months after the decision and never show it to the reported business.",
+  "errors": {
+    "descriptionTooShort": "Describe the problem briefly, in at least 10 characters."
+  }
+}

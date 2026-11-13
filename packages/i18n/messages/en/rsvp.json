@@ -1,0 +1,112 @@
+{
+  "invite": {
+    "kicker": "You are invited",
+    "dateUndecided": "The date is being decided together",
+    "map": "See on the map",
+    "for": "For {name}"
+  },
+  "form": {
+    "honeypot": "Leave this field empty",
+    "progress": "Question {current} of {total}",
+    "deadline": "Please reply by {date}.",
+    "send": "Send reply",
+    "sending": "Sending…",
+    "attendingQuestion": "Will you join us?",
+    "attendingYes": "Yes, gladly",
+    "attendingMaybe": "Maybe — not sure yet",
+    "attendingNo": "I can't make it",
+    "adultsQuestion": "How many adults are coming?",
+    "adultsHint": "Count yourself too.",
+    "childrenQuestion": "How many children are coming with you?",
+    "childrenHint": "We only need the number. We never ask for or keep children's names, ages or any other details.",
+    "decrease": "One fewer",
+    "increase": "One more",
+    "textHint": "Please don't write details about children here (names, ages).",
+    "childDetailsBody": "About children we keep only how many are coming. Please remove the name, age or birth date from your answer. If this is not about a child, leave the text as it is and continue.",
+    "emailQuestion": "Where can we tell you if something changes?",
+    "emailHint": "Leave an email address only if you want to hear when the date, place or programme changes. We use it for nothing else.",
+    "emailHintOnFile": "We already have an address for you. Leave this empty to keep it, or write another one.",
+    "emailLabel": "Email address",
+    "reviewTitle": "Does everything look right?",
+    "reviewIntro": "Have a look, then send. You can still change your reply later.",
+    "reviewProgress": "Last step"
+  },
+  "summary": {
+    "attending": "Attending",
+    "adults": "Adults",
+    "children": "Children",
+    "noChildren": "No children",
+    "email": "Email for updates",
+    "emailNone": "no address",
+    "emailKept": "We keep the address we have",
+    "noAnswer": "no answer",
+    "childrenOne": "+1 child",
+    "childrenFew": "+{count} children",
+    "childrenMany": "+{count} children"
+  },
+  "recorded": {
+    "eyebrow": "Your reply",
+    "title": {
+      "yes": "We look forward to seeing you",
+      "maybe": "Noted: maybe",
+      "no": "We're sorry you can't make it"
+    },
+    "saved": "We have your reply. Thank you!",
+    "at": "Reply recorded on {date}.",
+    "childrenNote": "About children we keep only the number.",
+    "change": "Change reply",
+    "changeUntil": "You can change it until {date}.",
+    "closed": "The reply deadline has passed. If something changed, please write to the host directly."
+  },
+  "closed": {
+    "title": "The reply deadline has passed",
+    "body": "We can no longer take replies here. If you would still like to come, please write to the host directly."
+  },
+  "status": {
+    "cancelledTitle": "The event has been cancelled",
+    "cancelledBody": "The host cancelled the event. No reply is needed any more.",
+    "postponedTitle": "The event has been postponed",
+    "postponedBody": "The host is looking for a new date. Come back to this link to find out."
+  },
+  "changes": {
+    "title": "Something changed since your last visit",
+    "generic": "The host updated the event details. Have a look below.",
+    "date": "The event date was set or changed.",
+    "deadline": "The reply deadline changed.",
+    "questions": "The host added or changed the questions for guests.",
+    "poll": "The host proposed new dates. Tell us which ones suit you."
+  },
+  "foot": {
+    "privacy": "This link belongs to your household only. We keep just your reply and, about children, only how many are coming."
+  },
+  "gone": {
+    "title": "This link is no longer valid.",
+    "body": "It may have been replaced or it may have expired. Please ask the host for a new link."
+  },
+  "throttled": {
+    "title": "Too many attempts",
+    "body": "Please try again a little later.",
+    "bodyAt": "You can try again after {time}."
+  },
+  "errors": {
+    "chooseAttending": "Choose one of the answers.",
+    "atLeastOneAdult": "At least one adult has to come.",
+    "answerRequired": "Write an answer to continue.",
+    "chooseOption": "Choose one of the options.",
+    "childDetails": "It looks like you wrote details about a child.",
+    "closed": "The reply deadline has passed. Please write to the host directly.",
+    "lastPlaceTaken": "Sorry, the last place was taken just now. Places left: {left}.",
+    "linkGone": "This link is no longer valid. Please ask the host for a new one.",
+    "needTwoOptions": "Write at least two options, one per line."
+  },
+  "email": {
+    "subject": "You are invited: {title}",
+    "greeting": "Hello, {name}!",
+    "intro": "You are invited to “{title}”. We would be delighted to have you with us.",
+    "when": "When: {date}",
+    "where": "Where: {venue}",
+    "button": "Open the invitation and reply",
+    "linkNote": "The link belongs to your household only. You don't need an account.",
+    "childrenNote": "If you bring children, we only ask how many — no other detail."
+  }
+}

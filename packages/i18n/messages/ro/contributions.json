@@ -1,0 +1,69 @@
+{
+  "title": "Cine ce aduce",
+  "description": "Spune de ce este nevoie, iar invitații și echipa își aleg ce aduc.",
+  "fields": {
+    "title": "Ce este de adus",
+    "titleHint": "De exemplu: Sticle de vin",
+    "units": "Câte bucăți",
+    "unitsHint": "De exemplu: 12",
+    "note": "Detalii",
+    "noteHint": "De exemplu: roșu sec, dacă se poate"
+  },
+  "add": {
+    "button": "Adaugă o nevoie",
+    "title": "O nevoie nouă",
+    "submit": "Adaugă nevoia"
+  },
+  "edit": {
+    "title": "Modifică nevoia"
+  },
+  "remove": {
+    "button": "Șterge",
+    "title": "Ștergi „{title}”?",
+    "body": "Se șterge nevoia împreună cu tot ce au promis invitații pentru ea.",
+    "submit": "Șterge nevoia"
+  },
+  "empty": {
+    "title": "Încă nu ai cerut nimic",
+    "body": "Adaugă prima nevoie — de exemplu „Sticle de vin, 12”. Invitații o văd pe linkul lor și își aleg partea."
+  },
+  "hero": {
+    "label": "Acoperit până acum",
+    "unit": "din {needed} bucăți",
+    "left": "Mai este nevoie de: {count}",
+    "done": "Totul este acoperit"
+  },
+  "list": {
+    "title": "Nevoi",
+    "count": "{claimed} din {needed}",
+    "covered": "Acoperit complet",
+    "left": "Mai lipsesc: {count}",
+    "claim": "{by}: {units}",
+    "noClaims": "Încă nu s-a oferit nimeni."
+  },
+  "mine": {
+    "claim": "Aduc eu",
+    "change": "Aduci {count} — schimbă",
+    "intro": "Poți lua cel mult {left}.",
+    "units": "Câte aduci",
+    "unitsHint": "Scrie 0 dacă nu mai poți aduce nimic.",
+    "save": "Salvează ce aduc"
+  },
+  "errors": {
+    "taken": "Între timp s-a oferit altcineva. Au mai rămas de adus: {left}.",
+    "belowClaimed": "Invitații au promis deja {claimed}. Nu poți cere mai puțin de atât."
+  },
+  "guest": {
+    "title": "Cine ce aduce",
+    "intro": "Dacă vrei să pui umărul, alege ce aduci. Poți schimba sau renunța oricând.",
+    "meter": "Mai este nevoie de {left} din {needed}",
+    "stepper": "Câte aduci",
+    "decrease": "Mai puțin cu unu",
+    "increase": "Mai mult cu unu",
+    "save": "Salvează",
+    "saving": "Se salvează…",
+    "saved": "Am notat. Mulțumim!",
+    "full": "Aici este totul acoperit. Mulțumim!",
+    "mine": "Acum aduci: {count}."
+  }
+}

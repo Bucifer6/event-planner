@@ -17,6 +17,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AccountPage() {
   const ctx = await requireCtx();
   const t = await getTranslations("account");
+  const tMcp = await getTranslations("mcp.accountLink");
   const [account, sessions, twoStep] = await Promise.all([
     getOwnAccount(ctx),
     listSessions(ctx),
@@ -117,6 +118,15 @@ export default async function AccountPage() {
             end={
               <Link href="/account/security" className={buttonClassName({ size: "sm" })}>
                 {t("security.manageTwoStep")}
+              </Link>
+            }
+          />
+          <Row
+            title={tMcp("title")}
+            meta={tMcp("meta")}
+            end={
+              <Link href="/account/assistants" className={buttonClassName({ size: "sm" })}>
+                {tMcp("action")}
               </Link>
             }
           />

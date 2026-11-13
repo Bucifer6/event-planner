@@ -20,6 +20,11 @@ import { registerJobs as stats } from "@ed/core/stats";
 import { registerJobs as whatif } from "@ed/core/whatif";
 import { registerJobs as storage } from "@ed/storage";
 import { registerJobs as builtin } from "./builtin";
+import { registerJobs as occasions } from "@ed/core/occasions";
+import { registerJobs as digest } from "@ed/core/digest";
+import { registerJobs as authCleanup } from "./auth-cleanup";
+import { registerJobs as mcp } from "@ed/mcp";
+import { registerJobs as reports } from "@ed/core/reports";
 
 const registrations: Array<() => void> = [
   builtin,
@@ -27,6 +32,11 @@ const registrations: Array<() => void> = [
   stats,
   whatif,
   storage,
+  occasions,
+  digest,
+  authCleanup,
+  mcp,
+  reports,
 ];
 
 let done = false;

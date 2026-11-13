@@ -1,0 +1,87 @@
+{
+  "title": "Asistenți AI",
+  "description": "Conectează-ți propriul asistent AI la EventDesk. Asistentul vede exact ce vezi tu în aplicație și poate cel mult să propună schimbări — tu le confirmi.",
+  "back": "Înapoi la cont",
+  "accountLink": {
+    "title": "Asistenți AI conectați",
+    "meta": "Tokenuri personale pentru asistentul tău (MCP)",
+    "action": "Gestionează"
+  },
+  "list": {
+    "title": "Conexiuni active",
+    "emptyTitle": "Niciun asistent conectat",
+    "emptyBody": "Creează un token și adaugă-l în asistentul tău ca să poată citi planul ocaziilor tale.",
+    "caption": "Tokenuri de conectare",
+    "name": "Nume",
+    "scope": "Acces",
+    "ending": "Se termină în",
+    "lastUsed": "Folosit ultima dată",
+    "expires": "Expiră dacă nu e folosit",
+    "never": "niciodată",
+    "actions": "Acțiuni",
+    "revoke": "Deconectează",
+    "revoking": "Se deconectează…",
+    "consentNeeded": "Așteaptă acordul tău",
+    "accept": "Accept și activez",
+    "accepting": "Se activează…",
+    "expiryNote": "Un token nefolosit {days} de zile expiră singur. Deconectarea are efect imediat. „Deconectează-mă peste tot” din pagina contului oprește și toate tokenurile."
+  },
+  "scopes": {
+    "read": "Doar citire",
+    "read_propose": "Citire și propuneri",
+    "readHint": "Asistentul poate citi planul, dar nu poate propune nimic.",
+    "read_proposeHint": "Asistentul poate și să propună liste de sarcini, texte sau așezări. Nimic nu se aplică până nu confirmi tu în aplicație."
+  },
+  "create": {
+    "title": "Conectează un asistent",
+    "nameLabel": "Numele conexiunii",
+    "nameHint": "Doar pentru tine, ca să o recunoști. De exemplu: „Asistentul de pe laptop”.",
+    "scopeLegend": "Ce are voie asistentul",
+    "continue": "Continuă",
+    "freshTitle": "Mai întâi confirmă că ești tu",
+    "freshBody": "Crearea unui token este o acțiune sensibilă. Confirmă cu un cod nou în pagina contului, apoi revino aici.",
+    "freshLink": "Confirmă în pagina contului",
+    "limit": "Poți avea cel mult {max} conexiuni active."
+  },
+  "consent": {
+    "title": "Înainte să creezi tokenul",
+    "lead": "Dacă conectezi un asistent, datele ocaziilor tale pleacă din EventDesk către furnizorul asistentului pe care îl alegi tu. EventDesk nu poate controla ce face acel furnizor cu ele.",
+    "classesTitle": "Ce poate primi asistentul",
+    "classes": {
+      "occasionDetails": "Detaliile ocaziilor: tip, dată sau starea sondajului de date, rolurile tale",
+      "tasks": "Sarcinile: responsabil, termen, stare",
+      "guestCounts": "Numărul de invitați și de răspunsuri — nu și numele lor, dacă nu ai acces la lista de invitați",
+      "budgetSummaries": "Totalurile bugetului pe categorii, numai dacă ai acces la bani",
+      "spaceModel": "Planul locației: dimensiuni, mese, puncte de interes, parcare",
+      "ownMessages": "Mesajele tale"
+    },
+    "limits": "Asistentul primește doar ce poți vedea tu în aplicație. Nu vede cererile private ale invitaților, datele altor conturi, plățile sau consola de administrare.",
+    "transfer": "Dacă furnizorul asistentului este în afara Spațiului Economic European, datele sunt transferate în afara SEE. Recomandăm asistenți găzduiți în SEE.",
+    "retention": "EventDesk nu păstrează răspunsurile asistentului — numai propunerile pe care le trimite. Poți deconecta asistentul oricând; accesul se oprește pe loc.",
+    "checkbox": "Am înțeles și sunt de acord ca aceste date să fie trimise asistentului meu",
+    "checkboxRequired": "Bifează acordul ca să continui.",
+    "submit": "Accept și creez tokenul",
+    "submitting": "Se creează tokenul…",
+    "backToForm": "Înapoi"
+  },
+  "created": {
+    "title": "Tokenul tău",
+    "once": "Îl vezi o singură dată. Copiază-l acum; după ce închizi pagina mai rămân vizibile doar ultimele patru caractere.",
+    "tokenLabel": "Token",
+    "copy": "Copiază tokenul",
+    "copied": "Copiat",
+    "howTitle": "Cum îl conectezi",
+    "howBody": "În asistentul tău adaugă un server MCP (HTTP) cu adresa și antetul de mai jos.",
+    "urlLabel": "Adresa serverului",
+    "headerLabel": "Antet",
+    "copyUrl": "Copiază adresa",
+    "copyHeader": "Copiază antetul",
+    "done": "Am copiat tokenul"
+  },
+  "proposalNote": "Propunerea nu a schimbat nimic. Deschide linkul în EventDesk ca să o vezi și să o confirmi sau să o respingi.",
+  "errors": {
+    "consentRequired": "Acest token nu este încă activ. Deschide {url} și acceptă avertismentul despre datele trimise asistentului.",
+    "readOnlyToken": "Acest token este doar pentru citire și nu poate propune schimbări. Creează un token „Citire și propuneri” la {url}.",
+    "tooManyTokens": "Ai deja numărul maxim de conexiuni active. Deconectează una ca să creezi alta."
+  }
+}

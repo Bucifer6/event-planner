@@ -11,8 +11,11 @@
     "test": "vitest run --passWithNoTests"
   },
   "dependencies": {
+    "@ed/auth": "workspace:*",
     "@ed/core": "workspace:*",
     "@ed/db": "workspace:*",
+    "@ed/i18n": "workspace:*",
+    "@ed/jobs": "workspace:*",
     "@ed/shared": "workspace:*",
     "zod": "4.6.7"
   },

@@ -1,0 +1,87 @@
+{
+  "title": "AI assistants",
+  "description": "Connect your own AI assistant to EventDesk. The assistant sees exactly what you see in the app and can at most propose changes — you confirm them.",
+  "back": "Back to account",
+  "accountLink": {
+    "title": "Connected AI assistants",
+    "meta": "Personal tokens for your assistant (MCP)",
+    "action": "Manage"
+  },
+  "list": {
+    "title": "Active connections",
+    "emptyTitle": "No assistant connected",
+    "emptyBody": "Create a token and add it to your assistant so it can read the plan of your occasions.",
+    "caption": "Connection tokens",
+    "name": "Name",
+    "scope": "Access",
+    "ending": "Ends in",
+    "lastUsed": "Last used",
+    "expires": "Expires if unused",
+    "never": "never",
+    "actions": "Actions",
+    "revoke": "Disconnect",
+    "revoking": "Disconnecting…",
+    "consentNeeded": "Waiting for your consent",
+    "accept": "Accept and activate",
+    "accepting": "Activating…",
+    "expiryNote": "A token unused for {days} days expires on its own. Disconnecting takes effect immediately. “Sign out everywhere” on the account page also stops every token."
+  },
+  "scopes": {
+    "read": "Read only",
+    "read_propose": "Read and propose",
+    "readHint": "The assistant can read the plan but cannot propose anything.",
+    "read_proposeHint": "The assistant can also propose task lists, wording or seating. Nothing is applied until you confirm it in the app."
+  },
+  "create": {
+    "title": "Connect an assistant",
+    "nameLabel": "Connection name",
+    "nameHint": "Only for you, so you can recognise it. For example: “The assistant on my laptop”.",
+    "scopeLegend": "What the assistant may do",
+    "continue": "Continue",
+    "freshTitle": "First confirm it is you",
+    "freshBody": "Creating a token is a sensitive action. Confirm with a new code on the account page, then come back here.",
+    "freshLink": "Confirm on the account page",
+    "limit": "You can have at most {max} active connections."
+  },
+  "consent": {
+    "title": "Before you create the token",
+    "lead": "If you connect an assistant, the data of your occasions leaves EventDesk for the provider of the assistant you choose. EventDesk cannot control what that provider does with it.",
+    "classesTitle": "What the assistant can receive",
+    "classes": {
+      "occasionDetails": "Occasion details: kind, date or date-poll state, the roles you hold",
+      "tasks": "Tasks: owner, due date, status",
+      "guestCounts": "Guest and response counts — not their names, unless you have access to the guest list",
+      "budgetSummaries": "Budget totals per category, only if you have access to money",
+      "spaceModel": "The venue plan: dimensions, tables, points of interest, parking",
+      "ownMessages": "Your own messages"
+    },
+    "limits": "The assistant receives only what you can see in the app. It does not see guests' private requests, other accounts' data, payments or the admin console.",
+    "transfer": "If the assistant's provider is outside the European Economic Area, the data is transferred outside the EEA. We recommend assistants hosted in the EEA.",
+    "retention": "EventDesk does not keep the assistant's answers — only the proposals it submits. You can disconnect the assistant at any time; access stops at once.",
+    "checkbox": "I understand and agree to this data being sent to my assistant",
+    "checkboxRequired": "Tick the agreement to continue.",
+    "submit": "Accept and create the token",
+    "submitting": "Creating the token…",
+    "backToForm": "Back"
+  },
+  "created": {
+    "title": "Your token",
+    "once": "You see it only once. Copy it now; after you close the page only the last four characters stay visible.",
+    "tokenLabel": "Token",
+    "copy": "Copy the token",
+    "copied": "Copied",
+    "howTitle": "How to connect it",
+    "howBody": "In your assistant, add an MCP server (HTTP) with the address and header below.",
+    "urlLabel": "Server address",
+    "headerLabel": "Header",
+    "copyUrl": "Copy the address",
+    "copyHeader": "Copy the header",
+    "done": "I have copied the token"
+  },
+  "proposalNote": "The proposal changed nothing. Open the link in EventDesk to review it and confirm or discard it.",
+  "errors": {
+    "consentRequired": "This token is not active yet. Open {url} and accept the warning about the data sent to the assistant.",
+    "readOnlyToken": "This token is read-only and cannot propose changes. Create a “Read and propose” token at {url}.",
+    "tooManyTokens": "You already have the maximum number of active connections. Disconnect one to create another."
+  }
+}

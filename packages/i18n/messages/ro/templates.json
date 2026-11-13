@@ -1,0 +1,27 @@
+{
+  "whatif": {
+    "noDate": "fără termen încă",
+    "renamed": "Titlul devine „{title}”.",
+    "more": "și încă {count} sarcini",
+    "skipped": "{count} sarcini rămân neschimbate (sunt la zi sau sunt deja gata)",
+    "skipLabel": "Neschimbat",
+    "applyTitle": {
+      "picnic": "Aplicarea modelului „Picnic”",
+      "aniversare": "Aplicarea modelului „Aniversare”",
+      "nunta": "Aplicarea modelului „Nuntă”",
+      "botez": "Aplicarea modelului „Botez”",
+      "revelion": "Aplicarea modelului „Revelion”",
+      "voiaj_solo": "Aplicarea modelului „Voiaj solo”",
+      "voiaj_grup": "Aplicarea modelului „Voiaj de grup”",
+      "blank": "Aplicarea unui model"
+    }
+  },
+  "rerun": {
+    "open": "Aplică un model",
+    "title": "Aplică un model de sarcini",
+    "body": "Vezi mai întâi diferențele: ce sarcini s-ar adăuga, ce s-ar modifica și ce rămâne neschimbat. Sarcinile existente nu se dublează, iar cele deja gata nu se ating.",
+    "kindLabel": "Modelul",
+    "submit": "Vezi diferențele",
+    "submitting": "Se compară…"
+  }
+}

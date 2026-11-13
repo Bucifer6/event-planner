@@ -1,0 +1,112 @@
+{
+  "invite": {
+    "kicker": "Ești invitat(ă)",
+    "dateUndecided": "Data se stabilește împreună",
+    "map": "Vezi pe hartă",
+    "for": "Pentru {name}"
+  },
+  "form": {
+    "honeypot": "Lasă acest câmp gol",
+    "progress": "Întrebarea {current} din {total}",
+    "deadline": "Te rugăm să răspunzi până {date}.",
+    "send": "Trimite răspunsul",
+    "sending": "Se trimite…",
+    "attendingQuestion": "Vii la eveniment?",
+    "attendingYes": "Da, vin cu drag",
+    "attendingMaybe": "Poate — încă nu știu",
+    "attendingNo": "Nu pot veni",
+    "adultsQuestion": "Câți adulți veniți?",
+    "adultsHint": "Numără-te și pe tine.",
+    "childrenQuestion": "Câți copii vin cu voi?",
+    "childrenHint": "Avem nevoie doar de număr. Nu cerem și nu păstrăm numele, vârsta sau alte detalii despre copii.",
+    "decrease": "Mai puțin cu unu",
+    "increase": "Mai mult cu unu",
+    "textHint": "Te rugăm să nu scrii aici detalii despre copii (nume, vârstă).",
+    "childDetailsBody": "Despre copii păstrăm doar numărul lor. Te rugăm să ștergi numele, vârsta sau data nașterii din răspuns. Dacă nu este vorba despre un copil, lasă textul așa și mergi mai departe.",
+    "emailQuestion": "Unde te anunțăm dacă se schimbă ceva?",
+    "emailHint": "Lasă o adresă de e-mail doar dacă vrei să afli când se schimbă data, locul sau programul. Nu o folosim pentru nimic altceva.",
+    "emailHintOnFile": "Avem deja o adresă pentru voi. Lasă câmpul gol ca să o păstrăm sau scrie alta.",
+    "emailLabel": "Adresa de e-mail",
+    "reviewTitle": "Totul este în ordine?",
+    "reviewIntro": "Aruncă o privire, apoi trimite. Poți schimba răspunsul și mai târziu.",
+    "reviewProgress": "Ultimul pas"
+  },
+  "summary": {
+    "attending": "Participare",
+    "adults": "Adulți",
+    "children": "Copii",
+    "noChildren": "Fără copii",
+    "email": "E-mail pentru anunțuri",
+    "emailNone": "fără adresă",
+    "emailKept": "Păstrăm adresa pe care o avem",
+    "noAnswer": "fără răspuns",
+    "childrenOne": "+1 copil",
+    "childrenFew": "+{count} copii",
+    "childrenMany": "+{count} de copii"
+  },
+  "recorded": {
+    "eyebrow": "Răspunsul tău",
+    "title": {
+      "yes": "Te așteptăm cu drag",
+      "maybe": "Am notat: poate",
+      "no": "Ne pare rău că nu poți veni"
+    },
+    "saved": "Am primit răspunsul. Mulțumim!",
+    "at": "Răspuns înregistrat la {date}.",
+    "childrenNote": "Despre copii păstrăm doar numărul.",
+    "change": "Schimbă răspunsul",
+    "changeUntil": "Îl poți schimba până {date}.",
+    "closed": "Termenul pentru răspuns a trecut. Dacă s-a schimbat ceva, scrie-i direct gazdei."
+  },
+  "closed": {
+    "title": "Termenul pentru răspuns a trecut",
+    "body": "Nu mai putem primi răspunsuri aici. Dacă vrei totuși să vii, scrie-i direct gazdei."
+  },
+  "status": {
+    "cancelledTitle": "Evenimentul a fost anulat",
+    "cancelledBody": "Gazda a anulat evenimentul. Nu mai este nevoie de niciun răspuns.",
+    "postponedTitle": "Evenimentul a fost amânat",
+    "postponedBody": "Gazda caută o dată nouă. Revino pe acest link ca să o afli."
+  },
+  "changes": {
+    "title": "S-a schimbat ceva de la ultima ta vizită",
+    "generic": "Gazda a actualizat detaliile evenimentului. Aruncă o privire mai jos.",
+    "date": "Data evenimentului a fost stabilită sau schimbată.",
+    "deadline": "Termenul pentru răspuns s-a schimbat.",
+    "questions": "Gazda a adăugat sau a schimbat întrebările pentru invitați.",
+    "poll": "Gazda a propus date noi. Spune-ne care ți se potrivesc."
+  },
+  "foot": {
+    "privacy": "Acest link este doar al familiei tale. Păstrăm numai răspunsul vostru și, despre copii, doar numărul lor."
+  },
+  "gone": {
+    "title": "Acest link nu mai este valabil.",
+    "body": "Este posibil să fi fost înlocuit sau să fi expirat. Cere-i gazdei un link nou."
+  },
+  "throttled": {
+    "title": "Prea multe încercări",
+    "body": "Mai încearcă puțin mai târziu.",
+    "bodyAt": "Poți încerca din nou după ora {time}."
+  },
+  "errors": {
+    "chooseAttending": "Alege unul dintre răspunsuri.",
+    "atLeastOneAdult": "Trebuie să vină cel puțin un adult.",
+    "answerRequired": "Scrie un răspuns ca să mergi mai departe.",
+    "chooseOption": "Alege una dintre variante.",
+    "childDetails": "Se pare că ai scris detalii despre un copil.",
+    "closed": "Termenul pentru răspuns a trecut. Scrie-i direct gazdei.",
+    "lastPlaceTaken": "Ne pare rău, ultimul loc a fost ocupat chiar acum. Locuri rămase: {left}.",
+    "linkGone": "Acest link nu mai este valabil. Cere-i gazdei un link nou.",
+    "needTwoOptions": "Scrie cel puțin două variante, câte una pe rând."
+  },
+  "email": {
+    "subject": "Ești invitat(ă): {title}",
+    "greeting": "Bună, {name}!",
+    "intro": "Ești invitat(ă) la „{title}”. Ne-ar face mare plăcere să fii alături de noi.",
+    "when": "Când: {date}",
+    "where": "Unde: {venue}",
+    "button": "Deschide invitația și răspunde",
+    "linkNote": "Linkul este doar al familiei tale. Nu ai nevoie de cont.",
+    "childrenNote": "Dacă veniți cu copii, vă întrebăm doar câți sunt — niciun alt detaliu."
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "title": "Sarcini",
+  "summary": "{done} din {total} gata",
+  "back": "Sarcini",
+  "noDue": "fără termen",
+  "noOwner": "fără responsabil",
+  "checklistProgress": "{done}/{total} bifate",
+  "childrenProgress": "{done}/{total} subsarcini",
+  "showMore": "Arată mai multe ({shown} din {total})",
+  "boardEmpty": "Nimic aici.",
+  "boardMore": "încă {count} în listă",
+  "status": {
+    "label": "Starea sarcinii „{title}”",
+    "saving": "Se salvează…",
+    "todo": "De făcut",
+    "doing": "În lucru",
+    "waiting": "În așteptare",
+    "done": "Gata"
+  },
+  "tags": {
+    "overdue": "Întârziată",
+    "doneBeforeDependency": "Gata înaintea celei de care depinde",
+    "doneWithOpenChildren": "Gata, dar are subsarcini deschise",
+    "blocked": {
+      "one": "Așteaptă după o sarcină",
+      "few": "Așteaptă după {count} sarcini",
+      "other": "Așteaptă după {count} de sarcini"
+    },
+    "offered": "Ofertă în așteptare"
+  },
+  "groups": {
+    "overdue": "Întârziate",
+    "m12": "Cu 12 luni înainte",
+    "m9": "Cu 9 luni înainte",
+    "m6": "Cu 6 luni înainte",
+    "m3": "Cu 3 luni înainte",
+    "m1": "În ultima lună",
+    "week": "Săptămâna evenimentului",
+    "after": "După eveniment",
+    "undated": "Fără termen"
+  },
+  "views": {
+    "label": "Moduri de a vedea sarcinile",
+    "list": "Listă",
+    "board": "Panou",
+    "calendar": "Calendar"
+  },
+  "filters": {
+    "label": "Ale cui sarcini",
+    "all": "Toate",
+    "mine": "Ale mele",
+    "priority": "Legate de prioritatea „{text}”",
+    "clear": "Arată toate sarcinile"
+  },
+  "empty": {
+    "title": "Nicio sarcină încă",
+    "body": "Scrie prima sarcină în câmpul de mai sus. Poți adăuga termenul acum sau mai târziu.",
+    "bodyReadOnly": "Organizatorii nu au adăugat încă nicio sarcină.",
+    "filteredTitle": "Nimic pentru acest filtru",
+    "filteredBody": "Nicio sarcină nu se potrivește cu ce ai ales."
+  },
+  "calendar": {
+    "prev": "Luna anterioară",
+    "next": "Luna următoare",
+    "emptyMonth": "Niciun termen în această lună.",
+    "occasionDay": "Evenimentul",
+    "more": "încă {count}",
+    "truncated": "Luna are prea multe sarcini ca să încapă toate aici. Restul sunt în listă."
+  },
+  "add": {
+    "title": "Sarcină nouă",
+    "childTitle": "Subsarcină nouă",
+    "placeholder": "De exemplu: Rezervă fotograful",
+    "submit": "Adaugă sarcina",
+    "submitting": "Se adaugă…",
+    "withDetails": "Adaugă o sarcină cu responsabil, prioritate și note"
+  },
+  "fields": {
+    "title": "Ce este de făcut",
+    "due": "Termen",
+    "owner": "Responsabil",
+    "ownerHint": "O sarcină are un singur responsabil. Dacă alegi pe altcineva, îi trimitem o ofertă pe care o poate accepta sau refuza.",
+    "ownerHintEdit": "Ca să o dai altcuiva, folosește „Oferă sarcina” de pe pagina sarcinii.",
+    "priority": "Prioritate din brief",
+    "priorityHint": "Leagă sarcina de una dintre prioritățile ocaziei.",
+    "noPriority": "Niciuna",
+    "parent": "Face parte din",
+    "parentHint": "Alege sarcina mai mare din care face parte.",
+    "noParent": "Nu face parte din altă sarcină",
+    "notes": "Note",
+    "status": "Stare",
+    "stage": "Etapă"
+  },
+  "owner": {
+    "keep": "Rămâne cum este",
+    "me": "Eu",
+    "none": "Nimeni deocamdată",
+    "offerTo": "Oferă lui {name}"
+  },
+  "new": {
+    "title": "Sarcină nouă",
+    "description": "Titlul este de ajuns. Restul îl poți completa oricând.",
+    "submit": "Adaugă sarcina"
+  },
+  "edit": {
+    "open": "Modifică",
+    "title": "Modifică sarcina",
+    "submit": "Salvează sarcina"
+  },
+  "delete": {
+    "open": "Șterge",
+    "title": "Ștergi sarcina?",
+    "body": "„{title}” se șterge împreună cu lista ei de verificare. Subsarcinile rămân în plan.",
+    "keep": "Păstrează sarcina",
+    "submit": "Șterge sarcina"
+  },
+  "checklist": {
+    "title": "Listă de verificare",
+    "empty": "Niciun punct încă.",
+    "addLabel": "Punct nou",
+    "add": "Adaugă punctul",
+    "adding": "Se adaugă…",
+    "remove": "Șterge punctul „{label}”"
+  },
+  "children": {
+    "title": "Subsarcini",
+    "empty": "Nicio subsarcină."
+  },
+  "dependencies": {
+    "title": "Depinde de",
+    "empty": "Nu depinde de nicio altă sarcină.",
+    "addLabel": "Așteaptă după sarcina",
+    "choose": "Alege o sarcină",
+    "add": "Adaugă legătura",
+    "adding": "Se adaugă…",
+    "remove": "Scoate legătura cu „{title}”",
+    "requiredBy": "După ea așteaptă:"
+  },
+  "offer": {
+    "title": "Delegare",
+    "decline": "Refuză",
+    "accept": "Acceptă sarcina",
+    "accepting": "Se acceptă…",
+    "declineTitle": "Refuzi sarcina?",
+    "declineBody": "„{title}” se întoarce la {from}, care ți-a oferit-o. Nu ajunge la altcineva.",
+    "reasonLabel": "Motivul, pe scurt",
+    "reasonHint": "Îl vede cel care ți-a oferit sarcina.",
+    "declining": "Se trimite…",
+    "declineSubmit": "Refuză sarcina",
+    "keepThinking": "Mă mai gândesc",
+    "withdraw": "Retrage oferta",
+    "withdrawing": "Se retrage…",
+    "nobodyToOffer": "Nu este nimeni altcineva în echipă. Invită pe cineva din „Echipă și roluri”.",
+    "toLabel": "Oferă sarcina lui",
+    "toHint": "Devine responsabil doar dacă acceptă.",
+    "choose": "Alege un om din echipă",
+    "offering": "Se trimite oferta…",
+    "submit": "Oferă sarcina",
+    "toYouTitle": "{from} îți oferă această sarcină",
+    "waitingTitle": "Oferită lui {to} — așteaptă răspuns",
+    "toYouBody": "Dacă accepți, devii responsabil de ea. Dacă refuzi, se întoarce la cel care ți-a oferit-o.",
+    "waitingBody": "Ofertă trimisă pe {date}. Până la răspuns, responsabilul rămâne neschimbat.",
+    "declinedTitle": "{to} a refuzat sarcina",
+    "declinedBody": "Motiv: „{reason}”. Sarcina s-a întors la {from}.",
+    "none": "Sarcina nu este oferită nimănui."
+  },
+  "violations": {
+    "doneBeforeDependency": {
+      "title": "Marcată gata înaintea celei de care depinde",
+      "body": "Cel puțin o sarcină de care depinde nu este încă gata. Verifică lista „Depinde de”."
+    },
+    "doneWithOpenChildren": {
+      "title": "Gata, dar are subsarcini deschise",
+      "body": "Termină subsarcinile sau redeschide sarcina, ca planul să arate realitatea."
+    },
+    "blocked": {
+      "title": {
+        "one": "Așteaptă după o sarcină neterminată",
+        "few": "Așteaptă după {count} sarcini neterminate",
+        "other": "Așteaptă după {count} de sarcini neterminate"
+      },
+      "body": "O poți începe oricum; ți-o semnalăm doar ca să știi ce o ține în loc."
+    }
+  },
+  "errors": {
+    "cannotAdd": "Rolul tău nu poate adăuga sarcini.",
+    "cannotEdit": "Nu poți modifica această sarcină.",
+    "otherTaskMissing": "Sarcina aleasă nu mai există în această ocazie.",
+    "selfParent": "O sarcină nu poate face parte din ea însăși.",
+    "parentLoop": "Sarcina aleasă face deja parte din aceasta. Alege alta.",
+    "selfDependency": "O sarcină nu poate depinde de ea însăși.",
+    "dependencyLoop": "Sarcina aleasă depinde deja de aceasta. Legătura ar forma un cerc.",
+    "cannotDelegate": "Doar organizatorii, coordonatorii și responsabilul sarcinii o pot oferi altcuiva.",
+    "offerToSelf": "Ca să iei tu sarcina, alege „Eu” la responsabil.",
+    "offerTargetMissing": "Persoana aleasă nu mai face parte din echipă sau nu a acceptat încă invitația.",
+    "notYourOffer": "Doar persoana căreia i s-a oferit sarcina poate răspunde.",
+    "offerClosed": "Oferta nu mai este deschisă.",
+    "reasonRequired": "Scrie pe scurt de ce refuzi (cel puțin 3 caractere)."
+  }
+}

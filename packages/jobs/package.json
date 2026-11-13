@@ -16,7 +16,9 @@
     "@ed/db": "workspace:*",
     "@ed/shared": "workspace:*",
     "zod": "4.6.7",
-    "@ed/storage": "workspace:*"
+    "@ed/storage": "workspace:*",
+    "@ed/auth": "workspace:*",
+    "@ed/mcp": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "22.20.5",

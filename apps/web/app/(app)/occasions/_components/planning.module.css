@@ -1,0 +1,136 @@
+/* Planning screens (release A). Tokens only — no new colours, radii, shadows or spacing. */
+
+/* ── Occasions list: a programme of dated entries ─────────────────────────── */
+.occasions { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--ink); }
+.occasion {
+  display: grid;
+  grid-template-columns: 64px minmax(0, 1fr);
+  gap: var(--s-1) var(--s-3);
+  align-items: start;
+  padding: var(--s-4) 0;
+  border-bottom: var(--hair) solid var(--line);
+  color: inherit;
+  text-decoration: none;
+}
+.occasion:hover { text-decoration: none; }
+.occasion:hover .occasionTitle { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
+.plate { display: flex; flex-direction: column; align-items: flex-start; gap: 2px; grid-row: span 2; }
+.plateDay { font-family: var(--font-display); font-size: var(--display-lg); line-height: 1; letter-spacing: -0.02em; font-variant-numeric: lining-nums; }
+.plateDay[data-open] { font-style: italic; color: var(--gilt-ink); }
+.plateMonth { font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.occasionMain { display: flex; flex-direction: column; gap: var(--s-1); min-width: 0; }
+.occasionTitle { font-family: var(--font-display); font-size: var(--display-sm); line-height: 1.2; letter-spacing: -0.01em; overflow-wrap: anywhere; }
+.occasionMeta { display: flex; flex-wrap: wrap; gap: 2px var(--s-3); font-size: var(--text-sm); color: var(--ink-2); }
+.occasionEnd { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); grid-column: 2; }
+.countdown { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--ink); white-space: nowrap; }
+@media (min-width: 720px) {
+  .occasion { grid-template-columns: 88px minmax(0, 1fr) auto; align-items: center; gap: var(--s-1) var(--s-4); }
+  .plate { grid-row: auto; }
+  .plateDay { font-size: var(--display-xl); }
+  .occasionTitle { font-size: var(--display-md); }
+  .occasionEnd { grid-column: auto; flex-direction: column; align-items: flex-end; text-align: right; }
+}
+
+/* ── Overview hero ────────────────────────────────────────────────────────── */
+.hero { display: grid; gap: var(--s-4); }
+.heroSide { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+@media (min-width: 720px) {
+  .hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: end; gap: var(--s-5); }
+}
+.clear { display: flex; align-items: center; gap: var(--s-2); min-height: 44px; color: var(--ink-2); border-top: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); }
+.clear svg { flex: none; color: var(--success); }
+.quarters { display: grid; gap: var(--s-5); }
+@media (min-width: 720px) { .quarters { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-5) var(--s-6); } }
+.quarters > section + section { margin-top: 0; }
+
+/* ── Task rows ────────────────────────────────────────────────────────────── */
+.taskRow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--s-2) var(--s-3);
+  padding: var(--s-3) 0;
+  border-bottom: var(--hair) solid var(--line);
+}
+.taskMain { display: flex; flex-direction: column; gap: var(--s-1); min-width: 0; }
+.taskTitle { display: inline-block; padding-block: var(--s-1); font-weight: 600; color: var(--ink); text-decoration: none; overflow-wrap: anywhere; }
+.taskTitle:hover { text-decoration: underline; text-underline-offset: 0.2em; }
+.taskTitle[data-done] { color: var(--ink-2); text-decoration: line-through; text-decoration-thickness: 1px; }
+.taskMeta { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-1) var(--s-3); font-size: var(--text-sm); color: var(--ink-2); }
+.taskMeta > span { display: inline-flex; align-items: center; gap: var(--s-1); min-width: 0; }
+.taskMeta svg { flex: none; color: var(--ink-3); }
+.taskTags { display: flex; flex-wrap: wrap; gap: var(--s-1) var(--s-2); }
+@media (min-width: 720px) {
+  .taskRow[data-has-end] { grid-template-columns: minmax(0, 1fr) 184px; align-items: center; }
+}
+.status { position: relative; display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.status :global(.ed-select) { min-height: 44px; }
+.groupCount { font-family: var(--font-display); font-style: italic; color: var(--ink-2); margin-left: var(--s-2); font-weight: 400; }
+
+/* quick add: title, date, one button */
+.quickAdd { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-3); align-items: end; padding: var(--s-4); border: var(--hair) solid var(--line); border-radius: var(--radius); background: var(--surface); }
+@media (min-width: 720px) { .quickAdd { grid-template-columns: minmax(0, 1fr) 176px auto; } }
+.quickAdd :global(.ed-btn) { width: 100%; }
+
+.viewbar { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--s-2) var(--s-4); border-bottom: var(--hair) solid var(--line); }
+.viewbar :global(.ed-tabs) { border-bottom: 0; }
+.segment { display: inline-flex; margin-bottom: var(--s-2); border: var(--hair) solid var(--line-strong); border-radius: var(--radius); background: var(--surface); }
+.segment a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 var(--s-3); color: var(--ink-2); font-size: var(--text-sm); font-weight: 600; text-decoration: none; }
+.segment a + a { border-left: var(--hair) solid var(--line-strong); }
+.segment a:hover { color: var(--ink); }
+.segment a[aria-current="true"] { background: var(--ink); color: var(--paper); }
+/* wide content (board, month) scrolls inside itself and never widens the page */
+.scroller { contain: inline-size; overflow-x: auto; }
+
+/* ── Board cards ──────────────────────────────────────────────────────────── */
+.boardCard { display: flex; flex-direction: column; gap: var(--s-2); padding: var(--s-3); border: var(--hair) solid var(--line); border-radius: var(--radius); background: var(--surface); min-width: 0; }
+.boardEmpty { padding: var(--s-3) 0; color: var(--ink-3); font-size: var(--text-sm); font-style: italic; }
+
+/* ── Calendar: month grid from 720px, agenda list on phones ───────────────── */
+.calNav { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.calTitle { font-family: var(--font-display); font-size: var(--display-sm); text-transform: capitalize; }
+.month { display: none; }
+.agenda { display: flex; flex-direction: column; margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--line); }
+.agendaDay { display: grid; grid-template-columns: 56px minmax(0, 1fr); gap: var(--s-3); padding: var(--s-3) 0; border-bottom: var(--hair) solid var(--line); }
+.agendaDate { display: flex; flex-direction: column; }
+.agendaNum { font-family: var(--font-display); font-size: var(--display-md); line-height: 1; font-variant-numeric: lining-nums; }
+.agendaDow { font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); }
+.agendaTasks { display: flex; flex-direction: column; gap: var(--s-2); margin: 0; padding: 0; list-style: none; min-width: 0; }
+@media (min-width: 720px) {
+  .agenda { display: none; }
+  .month { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: var(--hair) solid var(--ink); border-left: var(--hair) solid var(--line); }
+  .dow { padding: var(--s-2); font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-2); border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); }
+  .cell { display: flex; flex-direction: column; gap: var(--s-1); min-height: 112px; padding: var(--s-2); border-right: var(--hair) solid var(--line); border-bottom: var(--hair) solid var(--line); min-width: 0; }
+  .cell[data-outside] { background: var(--sunken); }
+  .cellNum { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1; color: var(--ink-2); font-variant-numeric: lining-nums; }
+  .cell[data-today] .cellNum { color: var(--accent); font-weight: 700; }
+  .cell[data-occasion] { outline: var(--hair) solid var(--gilt); outline-offset: -3px; }
+  .cellTask { display: block; font-size: var(--text-sm); line-height: 1.3; color: var(--ink); text-decoration: none; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 2px 0; }
+  .cellTask:hover { text-decoration: underline; }
+  .cellTask[data-done] { color: var(--ink-3); text-decoration: line-through; }
+  .cellTask[data-overdue] { color: var(--danger); font-weight: 600; }
+  .cellMore { font-size: var(--text-xs); color: var(--ink-2); }
+  .cellMark { font-size: var(--text-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gilt-ink); }
+}
+
+/* ── Checklist ────────────────────────────────────────────────────────────── */
+.checkRow { display: flex; align-items: center; justify-content: space-between; gap: var(--s-2); border-bottom: var(--hair) solid var(--line); min-height: 48px; }
+.checkRow :global(.ed-check) { flex: 1; min-width: 0; }
+.inlineAdd { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-2); align-items: end; }
+@media (min-width: 480px) { .inlineAdd { grid-template-columns: minmax(0, 1fr) auto; } }
+
+/* ── Template picker ──────────────────────────────────────────────────────── */
+.suggest { display: flex; flex-wrap: wrap; gap: var(--s-2); }
+
+/* ── Print: the plan on paper, without the app around it ──────────────────── */
+.sheet { display: flex; flex-direction: column; gap: var(--s-4); }
+.sheetTitle { font-family: var(--font-display); font-size: var(--display-lg); line-height: 1.1; letter-spacing: -0.02em; }
+@media print {
+  :global(.ed-topbar), :global(.ed-bottomnav), :global(.ed-masthead), :global(.ed-rail), :global(.ed-actionbar) { display: none !important; }
+  :global(.ed-withrail) { display: block !important; }
+  :global(.ed-page) { padding: 0 !important; max-width: none !important; }
+  .sheet { gap: 12pt; }
+  .sheet :global(.ed-tablewrap) { border: 0; overflow: visible; }
+  .sheet table { font-size: 10pt; }
+  .sheet tr { break-inside: avoid; }
+  .sheet h3 { break-after: avoid; }
+}

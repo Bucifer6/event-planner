@@ -1,3 +1,4 @@
+import "@ed/mcp";
 import { assertBootEnv, EnvError } from "@ed/shared/env";
 
 // The app refuses to boot with a missing or invalid environment; only variable NAMES are
