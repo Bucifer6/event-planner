@@ -1,0 +1,57 @@
+{
+  "error": {
+    "title": "Ceva nu funcționează",
+    "body": "Nu s-a pierdut nimic din ce ai salvat. Încearcă din nou; dacă tot nu merge, revino peste câteva minute.",
+    "retry": "Încearcă din nou",
+    "home": "Înapoi la început",
+    "reference": "Cod de referință: {ref}"
+  },
+  "notFound": {
+    "title": "Pagina nu există",
+    "body": "Adresa poate fi greșită sau pagina a fost mutată ori ștearsă.",
+    "home": "Înapoi la început"
+  },
+  "loading": {
+    "label": "Se încarcă…"
+  },
+  "offline": {
+    "metaTitle": "Fără conexiune",
+    "title": "Nu ai conexiune la internet",
+    "body": "EventDesk are nevoie de internet ca să-ți arate datele la zi. Tot ce ai salvat este în siguranță.",
+    "retry": "Încearcă din nou"
+  },
+  "incident": {
+    "title": "Ceva nu funcționează",
+    "default": "Ceva nu funcționează cum trebuie în acest moment. Lucrăm la rezolvare, iar datele tale sunt în siguranță.",
+    "statusLink": "Vezi starea serviciului"
+  },
+  "manifest": {
+    "description": "Planifică evenimente fără bătăi de cap."
+  },
+  "errors": {
+    "csrf": "Cererea nu a venit din aplicație. Reîncarcă pagina și încearcă din nou."
+  },
+  "upload": {
+    "empty": "Fișierul este gol. Alege alt fișier.",
+    "tooLarge": "Fișierul este prea mare. Limita este de 10 MiB pe fișier.",
+    "type": "Acceptăm doar imagini PNG sau JPG.",
+    "typeWithPdf": "Acceptăm doar imagini PNG sau JPG și documente PDF.",
+    "unreadableImage": "Nu am putut citi imaginea. Salveaz-o din nou ca PNG sau JPG și încearcă încă o dată.",
+    "infected": "Fișierul a fost respins la verificarea de securitate și nu a fost salvat.",
+    "scanUnavailable": "Nu putem verifica fișierele în acest moment, așa că nu am salvat nimic. Încearcă din nou peste câteva minute.",
+    "overLimit": "Ai atins limita de {limit} pentru fișiere. Cel mai mare fișier este „{asset}” ({assetSize}). Șterge-l pe acesta sau pe altul, apoi încarcă din nou. Nu am șters nimic.",
+    "overLimitField": "Nu mai este loc pentru acest fișier. Șterge mai întâi un fișier existent.",
+    "overLimitEmpty": "Fișierul nu încape în limita de {limit}.",
+    "directUnavailable": "Încărcarea directă nu este disponibilă. Folosește formularul de încărcare.",
+    "unknownPurpose": "Acest tip de încărcare nu este disponibil.",
+    "missingFile": "Alege un fișier.",
+    "hintImages": "PNG sau JPG, cel mult 10 MiB.",
+    "hintWithPdf": "PNG, JPG sau PDF, cel mult 10 MiB.",
+    "uploading": "Se încarcă fișierul…",
+    "uploaded": "Am încărcat „{name}”.",
+    "failed": "Fișierul nu a putut fi încărcat. Verifică conexiunea și încearcă din nou.",
+    "remove": "Șterge fișierul „{name}”",
+    "removing": "Se șterge…",
+    "keep": "Păstrează fișierul"
+  }
+}

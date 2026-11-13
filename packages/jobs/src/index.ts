@@ -1,4 +1,9 @@
-// @ed/jobs — Postgres job queue (FOR UPDATE SKIP LOCKED leasing) and job definitions.
-// Skeleton: the jobs agent adds the implementation here.
-// apps/worker/src/index.ts has the seam where the runner is started.
-export {};
+// @ed/jobs — Postgres job queue (FOR UPDATE SKIP LOCKED leasing), schedules and the runner.
+// Domain registrations live in ./registry (import "@ed/jobs/registry" from the worker only).
+export * from "./queue";
+export * from "./schedule";
+export * from "./runs";
+export * from "./metrics";
+export * from "./runner";
+export * from "./log";
+export { BACKUP_JOB, RESTORE_TEST_JOB } from "./builtin";

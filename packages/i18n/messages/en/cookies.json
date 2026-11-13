@@ -1,0 +1,13 @@
+{
+  "title": "Three cookies, none for tracking",
+  "intro": "EventDesk uses only the cookies it needs in order to work:",
+  "items": {
+    "session": "keeps you signed in after you enter your account",
+    "rateLimit": "limits repeated sign-in attempts from this device",
+    "language": "remembers the language you chose"
+  },
+  "noTracking": "None of them is used for tracking or advertising.",
+  "more": "Cookie notice",
+  "privacy": "Privacy policy",
+  "accept": "Got it"
+}

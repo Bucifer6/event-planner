@@ -48,7 +48,7 @@ const nextConfig: NextConfig = {
   ],
   // Native / Node-only packages that must not be bundled. Add argon2-type natives and sharp
   // here when they arrive.
-  serverExternalPackages: ["pg", "drizzle-kit"],
+  serverExternalPackages: ["pg", "drizzle-kit", "@node-rs/argon2"],
   outputFileTracingRoot: repoRoot,
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

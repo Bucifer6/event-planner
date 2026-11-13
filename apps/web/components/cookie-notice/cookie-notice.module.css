@@ -1,0 +1,49 @@
+/* In-app cookie notice (LAU1): a small card pinned to the bottom, clear of the phone nav. */
+.notice {
+  position: fixed;
+  z-index: 40;
+  left: var(--s-3);
+  right: var(--s-3);
+  bottom: calc(56px + var(--s-3) + env(safe-area-inset-bottom));
+  max-width: 480px;
+  margin-inline: auto;
+  max-height: calc(100dvh - 56px - var(--s-6));
+  overflow-y: auto;
+  background: var(--surface);
+  border: var(--hair, 1px) solid var(--line-strong);
+  border-radius: var(--radius);
+  padding: var(--s-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+.title {
+  margin: 0;
+  font-size: var(--text-md);
+  font-weight: 650;
+}
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  font-size: var(--text-sm);
+}
+.name {
+  font-weight: 650;
+}
+.text {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+@media (min-width: 720px) {
+  .notice {
+    left: auto;
+    right: var(--s-4);
+    bottom: var(--s-4);
+    margin-inline: 0;
+  }
+}

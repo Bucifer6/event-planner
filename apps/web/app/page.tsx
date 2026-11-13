@@ -1,14 +1,8 @@
-import { getTranslations } from "next-intl/server";
+import { redirect } from "next/navigation";
+import { actorAccountId } from "@ed/core/context";
+import { getCtx } from "@/lib/ctx";
 
-// Placeholder. Route groups ((auth), (app), console, g/[token], e/[slug], directory, mcp)
-// are added by later agents.
 export default async function HomePage() {
-  const t = await getTranslations("common");
-  return (
-    <main>
-      <h1>{t("home.title")}</h1>
-      <p>{t("home.tagline")}</p>
-      <p>{t("home.comingSoon")}</p>
-    </main>
-  );
+  const ctx = await getCtx();
+  redirect(actorAccountId(ctx.actor) ? "/occasions" : "/sign-in");
 }

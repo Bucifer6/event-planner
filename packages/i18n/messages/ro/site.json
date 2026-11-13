@@ -1,0 +1,533 @@
+{
+  "meta": {
+    "siteName": "EventDesk.ro",
+    "description": "Planificator gratuit pentru nunți, botezuri, aniversări, petreceri și călătorii de grup, cu un director cinstit de firme din România."
+  },
+  "nav": {
+    "skip": "Sari la conținut",
+    "homeLabel": "EventDesk.ro — pagina principală",
+    "primaryLabel": "Meniu principal",
+    "menu": "Meniu",
+    "how": "Cum funcționează",
+    "business": "Pentru firme",
+    "guides": "Ghiduri",
+    "cta": "Începe gratuit",
+    "signIn": "Intră în cont",
+    "languageLabel": "Limba",
+    "ro": "Română",
+    "en": "English",
+    "roShort": "RO",
+    "enShort": "EN"
+  },
+  "footer": {
+    "label": "Subsol",
+    "about": "Planificare gratuită pentru sărbători, călătorii de grup și evenimente, cu un director de firme în care ordinea nu se cumpără.",
+    "product": "Produs",
+    "legal": "Legal",
+    "help": "Ajutor",
+    "terms": "Termeni și condiții",
+    "privacy": "Confidențialitate",
+    "cookies": "Cookie-uri",
+    "moderation": "Reguli de moderare",
+    "accessibility": "Declarație de accesibilitate",
+    "status": "Starea serviciului",
+    "report": "Raportează un conținut",
+    "noCookies": "Acest site nu setează cookie-uri și nu încarcă nimic de la terți: fără analitice, fără reclame, fără fonturi externe.",
+    "operator": "Operat de [operator — de completat]."
+  },
+  "home": {
+    "meta": {
+      "title": "Planifică orice ocazie, gratuit",
+      "description": "Nuntă, botez, aniversare, picnic, Revelion sau călătorie de grup: inviți, ții bugetul și duci ziua la bun sfârșit dintr-un singur plan. Gratuit pentru organizatori, fără card."
+    },
+    "hero": {
+      "eyebrow": "Gratuit pentru organizatori",
+      "title": "Orice ocazie, <em>pusă la punct</em>.",
+      "lead": "Nuntă, botez, aniversare, picnic, Revelion sau un voiaj cu prietenii. Inviți oamenii, ții bugetul sub control și duci ziua la bun sfârșit — dintr-un singur plan, direct de pe telefon.",
+      "occasionsLabel": "Feluri de ocazii",
+      "occasions": {
+        "wedding": "Nuntă",
+        "christening": "Botez",
+        "birthday": "Aniversare",
+        "picnic": "Picnic",
+        "newYear": "Revelion",
+        "trip": "Voiaj"
+      },
+      "secondary": "Vezi cum funcționează",
+      "note": "Gratuit pentru organizatori, pentru totdeauna. Fără card, fără perioadă de probă."
+    },
+    "plate": {
+      "label": "Exemplu de invitație creată în EventDesk",
+      "kicker": "Împreună cu familiile lor",
+      "first": "Ioana",
+      "second": "Andrei",
+      "line": "vă invită la nunta lor",
+      "date": "sâmbătă, 11 septembrie 2027",
+      "time": "ora 17:00",
+      "place": "Conacul din Livadă · Cluj",
+      "rsvp": "Vă rugăm să răspundeți până la 1 august"
+    },
+    "figures": {
+      "label": "EventDesk în patru cifre",
+      "price": {
+        "label": "Pentru organizatori",
+        "value": "0",
+        "unit": "lei",
+        "note": "Oricâte ocazii, oricând"
+      },
+      "categories": {
+        "label": "Categorii de firme",
+        "value": "21",
+        "note": "De la săli la sonorizare"
+      },
+      "counties": {
+        "label": "Județe în director",
+        "value": "41",
+        "unit": "+ București",
+        "note": "Alese din liste, nu scrise liber"
+      },
+      "cookies": {
+        "label": "Cookie-uri pe site",
+        "value": "0",
+        "note": "Nicio reclamă, niciun tracker"
+      }
+    },
+    "can": {
+      "eyebrow": "I — Ce poți face",
+      "title": "De la prima listă <em>până la ultimul dans</em>.",
+      "lead": "Un singur plan ține la un loc oamenii, banii și treburile. Începi simplu și adaugi doar ce-ți trebuie.",
+      "items": {
+        "plan": {
+          "title": "Planifici și inviți",
+          "text": "Pornești de la un șablon sau de la o listă simplă. Împarți sarcinile, trimiți un link și primești răspunsurile pe gospodării — fără ca invitații să instaleze ceva."
+        },
+        "budget": {
+          "title": "Ții bugetul și livrezi",
+          "text": "Bugetul, costurile împărțite, furnizorii și comenzile stau în același plan. Vezi oricând ce s-a plătit, ce urmează și ce e încă necunoscut."
+        },
+        "day": {
+          "title": "Trăiești ziua cea mare",
+          "text": "Un desfășurător clar pe telefon: ce urmează, cine se ocupă, ce a sosit. După eveniment, închizi socotelile fără foi rătăcite."
+        },
+        "find": {
+          "title": "Găsești firme",
+          "text": "Săli, formații, catering, floriști și alte categorii, într-un director fără reclame. Trimiți o cerere gratuită direct din plan și spui despre tine doar ce alegi."
+        }
+      }
+    },
+    "plates": {
+      "eyebrow": "II — Planul, de aproape",
+      "title": "Trei pagini <em>din același plan</em>.",
+      "lead": "Exemple cu date de probă. Așa arată informația când stă într-un singur loc și nu în cinci conversații.",
+      "rsvp": {
+        "caption": "Planșa I — Răspunsurile invitaților",
+        "label": "Vin la nuntă",
+        "value": "86",
+        "unit": "din 112 invitați",
+        "note": "14 încă n-au răspuns",
+        "adults": "Adulți",
+        "adultsValue": "78",
+        "children": "Copii",
+        "childrenValue": "8",
+        "childrenNote": "doar ca număr",
+        "declined": "Nu pot veni",
+        "declinedValue": "12",
+        "meter": "Au răspuns 98 din 112"
+      },
+      "whatif": {
+        "caption": "Planșa II — Ce-ar fi dacă?",
+        "question": "Ce-ar fi dacă vin încă doi invitați?",
+        "r1kind": "Catering",
+        "r1what": "Porții comandate",
+        "r1before": "86",
+        "r1after": "88",
+        "r2kind": "Buget",
+        "r2what": "Cost estimat al meniului",
+        "r2before": "25.800 RON",
+        "r2after": "26.400 RON",
+        "r3kind": "Așezare",
+        "r3what": "Masa 7",
+        "r3before": "10 din 10 locuri",
+        "r3after": "12 din 10 locuri",
+        "r3note": "Nu mai încap. Alege altă masă înainte să confirmi.",
+        "footer": "Nimic nu se schimbă până nu confirmi."
+      },
+      "tasks": {
+        "caption": "Planșa III — Sarcini, cu ce se știe și ce nu",
+        "t1": "Trimite invitațiile",
+        "t1meta": "Ioana · până la 01.06.2027",
+        "t1state": "Gata",
+        "t2": "Confirmă meniul cu cateringul",
+        "t2meta": "Maria · până la 20.08.2027",
+        "t2state": "În lucru",
+        "t3": "Alege florile pentru mese",
+        "t3meta": "Andrei · până la 05.08.2027",
+        "t3state": "De făcut",
+        "t4": "Fotograf — preț final",
+        "t4meta": "Ofertă cerută pe 12.05.2027",
+        "t4state": "necunoscut"
+      }
+    },
+    "principles": {
+      "eyebrow": "III — Principii",
+      "title": "Șase reguli de la care <em>nu ne abatem</em>.",
+      "lead": "Nu sunt promisiuni de reclamă. Sunt felul în care e construit produsul.",
+      "items": {
+        "record": {
+          "title": "Un singur registru, mai multe vederi",
+          "text": "O sarcină, un loc la masă sau o plată există o singură dată. Lista, calendarul, planul sălii și ecranul din ziua evenimentului arată aceeași informație, nu copii ale ei."
+        },
+        "preview": {
+          "title": "Vezi înainte să aplici",
+          "text": "Schimbi data, adaugi invitați sau înlocuiești un furnizor? „Ce-ar fi dacă?” îți arată întâi efectul asupra costurilor, termenelor și angajamentelor. Abia apoi hotărăști."
+        },
+        "facts": {
+          "title": "Faptele rămân fapte",
+          "text": "Sosirile, plățile și marfa primită nu se suprascriu. Se îndreaptă doar printr-o rectificare care rămâne în istoric, ca să știi mereu ce s-a întâmplat cu adevărat."
+        },
+        "unknown": {
+          "title": "Necunoscutul rămâne la vedere",
+          "text": "Un preț lipsă, o dimensiune nemăsurată sau o confirmare neprimită apar scrise „necunoscut”. Nu ghicim, nu punem zero și nu le socotim rezolvate."
+        },
+        "private": {
+          "title": "Privat din capul locului",
+          "text": "Lista de invitați, bugetul și cererile private le văd doar oamenii cărora le-ai dat tu acces, anume pentru asta."
+        },
+        "paid": {
+          "title": "Plata cumpără poziție, niciodată preferință",
+          "text": "Planificarea e gratuită și fără reclame. Când va exista promovare plătită în director, va fi etichetată limpede, nu va schimba ordinea celorlalte rezultate și nu va ajunge în planul tău."
+        }
+      }
+    },
+    "business": {
+      "eyebrow": "IV — Pentru firme",
+      "title": "Un director în care <em>ordinea nu e de vânzare</em>.",
+      "text": "Săli, formații, catering, floriști, fotografi: listarea este gratuită, la fel și cererile primite de la organizatori. În perioada de lansare, toate funcțiile pentru firme sunt gratuite.",
+      "link": "Află cum funcționează listarea",
+      "facts": {
+        "rotate": {
+          "title": "Ordinea se rotește zilnic",
+          "meta": "și nu poate fi cumpărată"
+        },
+        "badges": {
+          "title": "Doar ecusoane factuale",
+          "meta": "înregistrare ONRC, asigurare văzută — fără stele, fără testimoniale"
+        },
+        "moderated": {
+          "title": "Fiecare listare trece pe la un moderator",
+          "meta": "înainte să apară public"
+        }
+      }
+    },
+    "closing": {
+      "title": "Prima ocazie <em>te așteaptă</em>.",
+      "text": "Îți faci cont cu un cod primit pe email. Fără parolă, fără card, fără nimic de instalat.",
+      "cta": "Creează prima ocazie"
+    }
+  },
+  "how": {
+    "meta": {
+      "title": "Cum funcționează",
+      "description": "Drumul unui organizator în EventDesk, pas cu pas: cont cu cod pe email, sarcini, invitații, buget, „Ce-ar fi dacă?” și ziua evenimentului."
+    },
+    "eyebrow": "Cum funcționează",
+    "title": "De la idee la „a fost minunat”, <em>în șapte pași</em>.",
+    "lead": "Nu trebuie să-i parcurgi pe toți. O aniversare mică are nevoie de trei; o nuntă, de toți șapte. Planul crește odată cu ocazia.",
+    "stepsLabel": "Pașii unui organizator",
+    "steps": {
+      "account": {
+        "title": "Îți faci cont în mai puțin de un minut",
+        "text": "Scrii adresa de email și primești un cod din șase cifre, împreună cu un link pe care îl poți atinge direct. Nu există parole de ținut minte și nu cerem niciun card.",
+        "aside": "Cod pe email · fără parolă"
+      },
+      "occasion": {
+        "title": "Creezi ocazia",
+        "text": "Alegi felul ei — nuntă, botez, aniversare, petrecere, călătorie — și pornești de la un șablon sau de la o listă goală. O ocazie mică rămâne o simplă listă de bifat; una mare capătă structură pe măsură ce ai nevoie.",
+        "aside": "Șabloane · listă simplă"
+      },
+      "tasks": {
+        "title": "Împarți treburile",
+        "text": "Fiecare sarcină are un responsabil și un termen. Inviți colaboratori care văd doar partea lor: nașa se ocupă de flori, un prieten de muzică, iar tu vezi totul.",
+        "aside": "Responsabili · termene · memento-uri"
+      },
+      "invite": {
+        "title": "Inviți oamenii",
+        "text": "Trimiți un link. Invitații răspund pentru toată gospodăria lor, votează data dacă încă n-ai ales-o și pot anunța ce aduc. Nu instalează nimic și nu își fac cont. Copiii se trec doar ca număr, niciodată cu nume.",
+        "aside": "Răspuns pe gospodărie · sondaj de dată · contribuții"
+      },
+      "budget": {
+        "title": "Ții bugetul și furnizorii la un loc",
+        "text": "Notezi cât costă fiecare lucru, cine plătește și ce s-a achitat deja. Ofertele și discuțiile cu furnizorii rămân în plan, lângă comenzile și livrările lor. Ce nu știi încă rămâne scris „necunoscut”.",
+        "aside": "Buget · costuri împărțite · comenzi"
+      },
+      "whatif": {
+        "title": "Verifici orice schimbare înainte s-o faci",
+        "text": "Vin doi invitați în plus după termenul de la catering? Se mută data? „Ce-ar fi dacă?” îți arată ce se schimbă la costuri, la termene și la mese. Nimic nu se aplică până nu confirmi.",
+        "aside": "Previzualizare · confirmare"
+      },
+      "day": {
+        "title": "Trăiești ziua, apoi închizi socotelile",
+        "text": "În ziua evenimentului ai pe telefon desfășurătorul: ce urmează, cine se ocupă, ce a sosit. După aceea închizi conturile, exporți ce vrei să păstrezi și, dacă dorești, ștergi totul — cu șapte zile în care te poți răzgândi.",
+        "aside": "Desfășurător · decont · export"
+      }
+    },
+    "guest": {
+      "eyebrow": "Ce vede un invitat",
+      "title": "O invitație, <em>o întrebare pe rând</em>.",
+      "text": "Invitatul deschide linkul și răspunde în câteva atingeri: vine sau nu, câți adulți, câți copii, ce aduce. Poate reveni oricând asupra răspunsului până la termenul stabilit de tine și vede mereu ce a promis.",
+      "kicker": "Ești invitat",
+      "name": "Botezul <em>Sofiei</em>",
+      "meta": "duminică, 16 mai 2027 · Brașov",
+      "progress": "Întrebarea 2 din 4",
+      "question": "Câți veniți din familia voastră?",
+      "adults": "Adulți",
+      "adultsValue": "2",
+      "children": "Copii",
+      "childrenValue": "1",
+      "childrenHint": "Doar numărul. Nu cerem nume sau vârste."
+    },
+    "questions": {
+      "eyebrow": "Întrebări scurte",
+      "title": "Ce ne întreabă lumea <em>mai întâi</em>.",
+      "items": {
+        "free": {
+          "q": "Chiar e gratuit?",
+          "a": "Da. Organizatorii nu plătesc niciodată, pentru nicio ocazie. Nu există perioadă de probă și nu cerem card. Pe viitor, serviciul va fi susținut de firme, prin opțiuni plătite care deocamdată nu există."
+        },
+        "guests": {
+          "q": "Invitații trebuie să-și facă un cont?",
+          "a": "Nu. Răspund dintr-un link, de pe orice telefon, fără să instaleze nimic."
+        },
+        "privacy": {
+          "q": "Cine îmi vede lista de invitați și bugetul?",
+          "a": "Doar tu și oamenii cărora le dai acces anume. O firmă află cine ești numai dacă îi trimiți tu o cerere, și vede doar ce ai ales să-i spui."
+        },
+        "language": {
+          "q": "Pot folosi aplicația în engleză?",
+          "a": "Da. Româna este limba principală, iar engleza se poate alege oricând, inclusiv de către invitați."
+        }
+      }
+    },
+    "closing": {
+      "title": "Cel mai simplu e <em>să încerci</em>.",
+      "text": "Prima ocazie se creează în câteva minute și o poți șterge oricând.",
+      "cta": "Creează prima ocazie"
+    }
+  },
+  "business": {
+    "meta": {
+      "title": "Pentru firme",
+      "description": "Listare gratuită în directorul EventDesk: cum funcționează, ce primești și regulile unui director în care ordinea nu se cumpără."
+    },
+    "eyebrow": "Pentru firme",
+    "title": "Fii găsit exact când <em>cineva te caută</em>.",
+    "lead": "EventDesk are un director de firme chiar în interiorul planului. Organizatorul care are nevoie de o sală, de o formație sau de un florist te găsește în clipa în care lucrează la asta. Listarea e gratuită. Cererile primite sunt gratuite.",
+    "cta": "Listează-ți firma gratuit",
+    "launch": {
+      "title": "În perioada de lansare, totul este gratuit.",
+      "text": "Pentru organizatori, pentru invitați și pentru firme — inclusiv toate funcțiile planului Business. Nu există pagină de prețuri, nu există plată și nu cerem card."
+    },
+    "sample": {
+      "caption": "Exemplu de listare — date fictive",
+      "category": "Sală de evenimente",
+      "name": "Conacul din Livadă",
+      "area": "Cluj · Cluj-Napoca, Florești",
+      "fact1": "Verificat: înregistrare ONRC",
+      "fact2": "Verificat: asigurare văzută până la 31.12.2027",
+      "capacity": "Capacitate",
+      "capacityValue": "180 de locuri",
+      "parking": "Parcare",
+      "parkingValue": "40 de locuri",
+      "drawing": "Planul sălii",
+      "drawingValue": "publicat, la scară",
+      "price": "Preț orientativ",
+      "priceValue": "necunoscut"
+    },
+    "listing": {
+      "eyebrow": "I — Listarea",
+      "title": "Cum funcționează <em>o listare</em>.",
+      "lead": "Patru lucruri de știut înainte să începi.",
+      "steps": {
+        "account": {
+          "title": "Îți faci cont de firmă",
+          "text": "Un cont poate avea până la cinci listări. Fiecare listare alege între una și cinci categorii și până la douăzeci de localități, din cel mult cinci județe."
+        },
+        "lists": {
+          "title": "Alegi din liste fixe",
+          "text": "Categoriile, județele și localitățile se aleg din liste, nu se scriu liber. Așa, organizatorul care caută „floriști în Cluj” te găsește sigur, iar directorul rămâne curat."
+        },
+        "moderation": {
+          "title": "Un moderator verifică",
+          "text": "Fiecare versiune a listării este aprobată de un moderator care nu face parte din firma ta. Cât timp o modificare așteaptă, versiunea aprobată rămâne publică."
+        },
+        "badges": {
+          "title": "Primești ecusoane factuale",
+          "text": "Există doar două: „Verificat: înregistrare ONRC” și „Verificat: asigurare văzută până la” o dată anume. Verificările sunt gratuite. Nu există stele, note sau testimoniale."
+        }
+      }
+    },
+    "categories": {
+      "title": "Cele 21 de categorii",
+      "note": "Lista este fixă la lansare. Geografia folosește cele 41 de județe și Bucureștiul.",
+      "items": {
+        "c01": "Săli de evenimente",
+        "c02": "Catering",
+        "c03": "Torturi și cofetărie",
+        "c04": "Baruri mobile",
+        "c05": "Trupe (inclusiv lăutari)",
+        "c06": "Muzicieni și soliști",
+        "c07": "DJ",
+        "c08": "Fotografi",
+        "c09": "Videografi",
+        "c10": "Floriști",
+        "c11": "Decorațiuni și styling",
+        "c12": "Închiriere corturi",
+        "c13": "Închiriere echipamente de petrecere",
+        "c14": "Transport autocare și microbuze",
+        "c15": "Cazare",
+        "c16": "Animatori",
+        "c17": "Coafură și make-up",
+        "c18": "Invitații și tipografie",
+        "c19": "Mașini de nuntă",
+        "c20": "Securitate și personal de evenimente",
+        "c21": "Sonorizare, AV și lumini"
+      }
+    },
+    "get": {
+      "eyebrow": "II — Ce primești",
+      "title": "Unelte de lucru, <em>nu doar o vitrină</em>.",
+      "items": {
+        "enquiries": {
+          "title": "Cereri de la organizatori",
+          "text": "Organizatorul îți trimite o cerere gratuită cu felul ocaziei, data, numărul aproximativ de invitați, zona și, dacă vrea, bugetul. Afli despre el doar ce alege să-ți spună. Poți răspunde cu o ofertă PDF, pe care o poate accepta direct în planul lui."
+        },
+        "drawings": {
+          "title": "Planurile sălii",
+          "text": "Dacă ai o sală, îi încarci planul, îl calibrezi după o distanță cunoscută și marchezi mesele, ringul de dans, barul, garderoba și parcarea. Organizatorii care lucrează cu tine primesc planul în ocazia lor, la scară."
+        },
+        "catalogues": {
+          "title": "Cataloage de flori",
+          "text": "Floriștii își publică soiurile cu imagine, sezon, culori și preț orientativ pe fir sau pe buchet. Organizatorii pot cere o ofertă pornind chiar de la ele."
+        },
+        "plan": {
+          "title": "Funcțiile planului Business",
+          "text": "Ocazii ale firmei, lucrate în echipă cu roluri de proprietar, administrator și personal; biblioteci comune de șabloane, liste și contacte; logoul și culoarea ta pe paginile invitaților; predarea ocaziei către client când e gata. Gratuite pe toată perioada de lansare."
+        },
+        "stats": {
+          "title": "Statistici proprii",
+          "text": "Vezi câte afișări și câte cereri a avut listarea ta, ca totaluri zilnice. Nu urmărim vizitatori individuali — nici pentru tine, nici pentru noi."
+        }
+      }
+    },
+    "rules": {
+      "eyebrow": "III — Regulile directorului",
+      "title": "Un director cinstit, <em>spus pe șleau</em>.",
+      "lead": "Aceste reguli vor fi citate și în termenii pentru firme, ca să știi dinainte la ce te înscrii.",
+      "items": {
+        "organic": {
+          "title": "Ordinea organică se rotește zilnic și nu poate fi cumpărată.",
+          "text": "Nicio plată, de niciun fel, nu schimbă locul unei firme între rezultatele obișnuite."
+        },
+        "launch": {
+          "title": "Cât durează perioada de lansare, nu există prețuri.",
+          "text": "Nu există pagină de prețuri, plată sau introducere de card nicăieri în produs. Nu există nici plasare promovată: directorul arată doar rezultate organice."
+        },
+        "notice": {
+          "title": "„Promovat — plasare plătită” va exista doar după pornirea monetizării.",
+          "text": "Anunțăm public cu cel puțin 60 de zile înainte, cu reamintiri la 30 și la 7 zile. Nimic nu se taxează automat. Cine nu face nimic rămâne pe nivelul gratuit permanent."
+        },
+        "label": {
+          "title": "Eticheta va fi la fel de vizibilă ca numele firmei.",
+          "text": "Cardurile promovate vor sta deasupra rezultatelor organice, cel mult trei, alese la întâmplare la fiecare căutare, cu eticheta scrisă în aceeași mărime și grosime ca numele."
+        },
+        "plans": {
+          "title": "Ce e plătit nu intră în planuri.",
+          "text": "Conținutul promovat nu apare în planurile organizatorilor, pe paginile invitaților, în emailuri sau în exporturi. Plata cumpără poziție în director și nimic altceva."
+        },
+        "stars": {
+          "title": "Fără stele, fără testimoniale, fără „recomandat”.",
+          "text": "Arătăm fapte verificabile și lăsăm organizatorul să aleagă."
+        },
+        "free": {
+          "title": "Ce rămâne gratuit pentru totdeauna.",
+          "text": "Contul, listarea, cererile, planurile sălii, cataloagele și statisticile proprii. Dacă planul Business devine cândva plătit și nu-l alegi, ocaziile deja create rămân pe deplin utilizabile."
+        }
+      }
+    },
+    "unclaimed": {
+      "eyebrow": "IV — Listări nerevendicate",
+      "title": "Firma ta apare deja? <em>Tu hotărăști ce urmează.</em>",
+      "lead": "Unele listări sunt adăugate de EventDesk din surse publice — Registrul Comerțului, site-ul sau paginile publice ale firmei — și aprobate de un moderator. Sunt minimale, strict factuale și poartă eticheta „Adăugat de EventDesk — nefiind revendicat încă”.",
+      "items": {
+        "claim": {
+          "title": "Revendică",
+          "text": "Ceri un cod, pe care îl trimitem la adresa de contact publicată de firmă. Dacă nu există o adresă publică, un moderator verifică solicitarea după sursa publică. După aprobare, listarea devine a ta, cu toate funcțiile."
+        },
+        "correct": {
+          "title": "Corectează",
+          "text": "Dacă o informație e greșită, spune-ne care și de unde putem afla varianta corectă. Îndreptăm în cel mult 30 de zile."
+        },
+        "remove": {
+          "title": "Elimină",
+          "text": "Poți cere oricând eliminarea listării sau te poți opune prelucrării. Dăm curs cererii în cel mult 30 de zile și păstrăm o evidență a ei, ca firma să nu fie adăugată din nou."
+        }
+      },
+      "note": "O listare nerevendicată arată doar contactul publicat de firmă. Nu poate primi cereri prin platformă, nu poate fi promovată și nu primește de la noi decât o singură invitație de revendicare, pe email — în care spunem cine a adăugat listarea și cum poate fi revendicată, corectată sau eliminată. Nu trimitem marketing către contactele găsite astfel și nu folosim niciodată contactele introduse de organizatori.",
+      "link": "Revendică, corectează sau elimină o listare"
+    },
+    "closing": {
+      "title": "Listarea durează <em>câteva minute</em>.",
+      "text": "Îți faci cont cu un cod pe email, completezi listarea și o trimiți la moderare. Nu cerem card.",
+      "cta": "Listează-ți firma gratuit"
+    }
+  },
+  "status": {
+    "meta": {
+      "title": "Starea serviciului",
+      "description": "Starea curentă a EventDesk, spusă pe înțelesul tuturor."
+    },
+    "eyebrow": "Starea serviciului",
+    "title": "Totul <em>funcționează</em>.",
+    "lead": "Nu știm de nicio problemă în acest moment. Dacă apare una, o descriem aici pe înțelesul tuturor, împreună cu ce facem ca s-o rezolvăm.",
+    "state": "Funcționează",
+    "componentsLabel": "Părțile serviciului",
+    "components": {
+      "site": {
+        "title": "Site-ul public",
+        "meta": "eventdesk.ro"
+      },
+      "app": {
+        "title": "Aplicația de planificare",
+        "meta": "conturi, ocazii, sarcini, buget"
+      },
+      "email": {
+        "title": "Emailurile de conectare",
+        "meta": "coduri și linkuri de intrare în cont"
+      },
+      "guest": {
+        "title": "Linkurile pentru invitați",
+        "meta": "invitații și răspunsuri"
+      },
+      "directory": {
+        "title": "Directorul de firme",
+        "meta": "listări și cereri"
+      }
+    },
+    "updated": "Pagina este actualizată de echipa EventDesk. Ultima verificare: [dată — de completat de operator].",
+    "trouble": {
+      "title": "Ceva nu merge la tine?",
+      "p1": "Reîncarcă pagina și încearcă din nou. Dacă emailul cu codul de conectare nu sosește în câteva minute, uită-te și în dosarul Spam.",
+      "p2": "Pentru orice altceva, scrie-ne la [adresă de contact — de completat]. Nu pierzi nimic din ce ai salvat."
+    }
+  },
+  "notFound": {
+    "eyebrow": "Eroare 404",
+    "title": "Pagina aceasta <em>nu există</em>.",
+    "text": "Se poate să fi fost mutată sau adresa să aibă o greșeală de scriere. De aici te poți întoarce la un loc sigur.",
+    "home": "Mergi la pagina principală",
+    "guides": "Vezi ghidurile",
+    "enTitle": "This page does not exist.",
+    "enText": "It may have moved, or the address may contain a typo.",
+    "enHome": "Go to the English home page"
+  }
+}

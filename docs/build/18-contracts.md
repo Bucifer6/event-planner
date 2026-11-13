@@ -56,3 +56,63 @@ Routes under `apps/public/app/[locale]/`; every page calls `setRequestLocale(loc
 `pnpm --filter @ed/core typecheck` · `pnpm exec vitest run packages/core/test/x.test.ts` · `pnpm exec vitest run --project @ed/core`.
 Versions: next 16.4.6, react 19.3.1, next-intl 4.15.1, drizzle-orm 0.45.4, zod 4.6.7, vitest 5.1.0, typescript 5.9.3.
 (Next 16: middleware file is `proxy.ts`.)
+
+---
+
+# Wave 1 additions
+
+## Auth / sessions
+- Web `@/lib/session`: `resolveActor()` → `{ kind:"account", accountId, sessionId }`; `getCurrentSession()`, `ensureDeviceId()` (actions/route handlers only), `getDeviceId()`, `setLanguageCookie`. After sign-in users land on `/occasions`.
+- `@ed/auth`: `createSession(ctx, { accountId, userAgent?, fresh? })` → `{ token, sessionId, expiresAt }`, `signOutEverywhere(ctx)`, `onSignOutEverywhere(fn(ctx, accountId))` (MCP must register: revoke tokens).
+- `@ed/core/accounts`: `requireFreshAuth(ctx, minutes = 10)` (throws FORBIDDEN `account.errors.freshAuthRequired`, `details.freshAuthRequired = true`) — every S4 sensitive action in any domain (ownership transfer, deletion, grants, member changes) must call it; `isFreshAuth`, `getOwnAccount(ctx)`, `onAccountPurge(fn)`, `purgeDueAccounts(systemCtx)`.
+  The account page (`/account`) has the fresh-code UI; on `freshAuthRequired` show a Notice linking to `/account#fresh`.
+- Tests: insert an `accounts` row, then `accountCtx(db, id)`. For `requireFreshAuth` to pass insert a `sessions` row with `freshAuthAt` within 10 minutes (see `packages/core/test/deletion.test.ts`).
+- Local smoke: `EMAIL_PROVIDER=dev`; code is in `select body_text from email_outbox order by created_at desc limit 1`; or `/sign-in/anonymous/new`. `AUTH_TIMING_FLOOR_MS=0` skips the timing pad.
+- Reusable client form: `@/app/(auth)/_components/forms` → `ActionForm`, `FormError`.
+
+## Rate limiting and bot guard — `@ed/core/ratelimit`
+`enforceRateLimit(ctx, { scope, rules: [{ axis: "email"|"ip"|"device"|"key", key, limit, windowSeconds, backoff? }] })` (throws RATE_LIMITED + `details.retryAt`),
+`checkPublicForm(ctx, { formKey, linkKey?, honeypot, renderedAt, minSeconds?, perIpPerHour?, perLinkPerHour? })`, `issueFormStamp(now?)`,
+field names `HONEYPOT_FIELD = "website"`, `FORM_STAMP_FIELD = "ed_rendered"`, `logSecurityEvent(ctx, …)`.
+Call these with the request ctx BEFORE opening a transaction (or the counters roll back).
+
+## Deletion — `@ed/core/deletion`
+`requestDeletion(ctx, { targetType, targetId, retainedNote? })`, `undoDeletion`, `getOpenDeletion`, `listDue(systemCtx, …)`, `completeDeletion`, `DELETION_UNDO_DAYS`, `RETAINED_AFTER_DELETION`.
+
+## Email — `@ed/email`
+`sendEmail(ctx, { to, template, params, locale?, occasionId?, bilingual? })` → `{ status: "sent"|"suppressed", outboxId }` (LIMIT `emails.errors.dailyCap` over 500/day/occasion);
+`registerTemplate(name, (params, { locale, t }) => ({ subject, blocks }))` — blocks: `text | code | button | note`; `t` takes full i18n keys (put strings in YOUR namespace); bilingual RO-first by default.
+
+## Jobs — `@ed/jobs`
+`defineJob(name, zodSchema, handler(ctx, payload, meta), opts?)` → `.enqueue(ctx, payload, opts)`; `enqueue(ctx, name, payload, { runAt?, uniqueKey? })` (transactional on `ctx.db`);
+`defineSchedule({ name, job, every: {kind:"hourly",minute?}|{kind:"daily",at:"HH:MM"}|{kind:"monthly",day,at} })`; `runOnce(ctx, { names? })` for tests.
+Registration: your domain exports `registerJobs(): void`; append one import + one array entry in `packages/jobs/src/registry.ts`.
+`uniqueKey` dedupes while the row exists — repeating jobs need a time bucket in the key.
+
+## Retention / stats
+`@ed/core/retention`: `registerRetentionRule({ name, run(ctx): Promise<number> })`.
+`@ed/core/stats`: `recordEvent(ctx, metric, dims?, by = 1)` (daily counter; identifier-like dim names throw; ≤4 dims), `registerStatCollector`, `readDailyStats(ctx, { metric, from, to, dims? })` (no access check — call from checked core code).
+
+## What-if — `@ed/core/whatif`
+`registerWhatIf(kind, { input?: zod, authorize(ctx, subject, action), compute?(ctx, input, subject), apply(txCtx, preview) })` (`action`: create|read|confirm|discard; authorize throws),
+`createPreview(ctx, { kind, occasionId?, subjectType, subjectId, input, delta?, title?, source? })`, `confirmPreview(ctx, id)` → `{ preview, appliedNow }`, `discardPreview`, `listPending(ctx, occasionId)`, `getPreview`, `toPreviewView(preview)`.
+Delta row: `{ key, what, kindLabelKey?, before?, after?, noteKey?, noteParams? }`; `what/before/after` = string or `{ key, params }`; `null` = unknown.
+Only account/staff actors confirm; MCP `read_propose` tokens only propose (`proposedByKind: "mcp"`).
+Web: `<PreviewPanel preview={toPreviewView(p)} appliedHref? discardedHref? />` from `@/components/whatif/PreviewPanel`; actions `confirmWhatIf`, `discardWhatIf` in `@/app/actions/whatif`.
+The occasion "Ce-ar fi dacă?" page is `/occasions/[id]/proposals`.
+
+## Storage — `@ed/storage`
+`uploadAsset(ctx, { ownerType: "occasion"|"business"|"account", ownerId, file: { name, bytes, mime? }, allowPdf? })`, `getAssetUrl(ctx, assetId)`, `getAsset`, `listAssets`, `getUsage`, `deleteAsset`;
+`registerAssetAccess(ownerType, { canRead(ctx, asset), canWrite(ctx, owner) })` — `occasion` and `business` are system-only until their domain registers a rule;
+`registerUploadPurpose(name, { ownerType, allowPdf })` for the web route. Web: `<FileField label purpose ownerId allowPdf? name? onUploaded? />` from `@/components/upload/FileField`; `POST /api/uploads`.
+
+## Security / misc
+`@/lib/csrf`: `assertSameOrigin(request)` / `sameOriginOr403(request)` in every state-changing Route Handler (not webhooks/MCP). CSP is strict nonce-based: no inline scripts/styles handlers; `img-src` allows `data:`.
+`@ed/core/incidents`: `createIncident`, `resolveIncident`, `listIncidents` (staff), `getActiveIncident(ctx)` (public). `<IncidentBanner />` from `@/components/incident-banner/IncidentBanner` on guest-facing layouts.
+`@ed/core/fetching`: `fetchRobotsAllowed(url, ua?, { fetcher? })`. `@ed/core/cookies`: cookie set constants.
+
+## Shell (apps/web)
+`(app)/layout.tsx` wraps signed-in pages in the AppShell (top bar + bottom nav). Pages render `<Page>` content.
+Occasion pages live at `/occasions/[id]/<slug>` with slugs fixed in `apps/web/lib/occasion-nav.ts`; the frame is
+`<OccasionFrame occasionId eyebrow title meta? hiddenKeys? banner?>` from `@/components/shell/OccasionFrame` (used once, in `occasions/[id]/layout.tsx`).
+Inside the frame, pages do NOT wrap in `<Page>`; start with `<PageHeader level={2} …>`-style sections (use `Section`/`PageHeader`).

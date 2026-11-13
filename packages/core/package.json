@@ -7,7 +7,16 @@
     "./context": "./src/context.ts",
     "./audit": "./src/audit.ts",
     "./idempotency": "./src/idempotency.ts",
-    "./tx": "./src/tx.ts"
+    "./tx": "./src/tx.ts",
+    "./accounts": "./src/accounts.ts",
+    "./ratelimit": "./src/ratelimit.ts",
+    "./deletion": "./src/deletion.ts",
+    "./whatif": "./src/whatif.ts",
+    "./stats": "./src/stats.ts",
+    "./retention": "./src/retention.ts",
+    "./incidents": "./src/incidents.ts",
+    "./cookies": "./src/cookies.ts",
+    "./fetching": "./src/fetching.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",
@@ -16,7 +25,8 @@
   "dependencies": {
     "@ed/db": "workspace:*",
     "@ed/shared": "workspace:*",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "@ed/jobs": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "22.20.5",

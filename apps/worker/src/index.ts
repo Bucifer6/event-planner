@@ -3,6 +3,8 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { systemCtx, type Ctx } from "@ed/core/context";
 import { closeDb, getDb, sql } from "@ed/db";
+import { jsonLogger, listJobs, listSchedules, startRunner as startJobRunner } from "@ed/jobs";
+import { registerAllJobs } from "@ed/jobs/registry";
 import { assertBootEnv, EnvError } from "@ed/shared/env";
 
 // The single worker process (Q7): no HTTP surface; drains the Postgres job queue.
@@ -11,13 +13,21 @@ import { assertBootEnv, EnvError } from "@ed/shared/env";
 export type RunnerHandle = { stop: () => Promise<void> };
 
 /**
- * SEAM — owned by the jobs agent.
- * Start the @ed/jobs runner here (lease loop with FOR UPDATE SKIP LOCKED + the scheduler)
- * and return a handle whose stop() resolves once in-flight jobs have finished or been
- * released. `ctx` is a system-actor Ctx on the shared pool.
+ * Starts the @ed/jobs runner: registers every domain's jobs and schedules
+ * (packages/jobs/src/registry.ts), then loops lease → run with FOR UPDATE SKIP LOCKED.
+ * Logs are structured JSON lines; queue-depth and error-rate metrics are written to
+ * platform_settings["ops.queueMetrics"] every minute (LAU5).
+ * stop() waits for running jobs and hands back unfinished leases.
  */
-async function startRunner(_ctx: Ctx): Promise<RunnerHandle> {
-  return { stop: async () => {} };
+async function startRunner(ctx: Ctx): Promise<RunnerHandle> {
+  registerAllJobs();
+  jsonLogger("info", "jobs registered", {
+    jobs: listJobs().join(","),
+    schedules: listSchedules()
+      .map((s) => s.name)
+      .join(","),
+  });
+  return startJobRunner(ctx);
 }
 
 async function main(): Promise<void> {

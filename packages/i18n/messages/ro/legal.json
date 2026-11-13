@@ -1,0 +1,327 @@
+{
+  "common": {
+    "eyebrow": "Documente legale",
+    "draftTitle": "Proiect — în curs de revizuire juridică",
+    "draftText": "Textul de mai jos este un proiect scris pe înțeles. Nu produce încă efecte juridice și se poate schimba înainte de lansare. Locurile marcate între paranteze drepte urmează să fie completate de operator.",
+    "version": "Versiunea 0.1 · proiect din 13 noiembrie 2026",
+    "othersLabel": "Alte documente",
+    "others": "Vezi și"
+  },
+  "terms": {
+    "meta": {
+      "title": "Termeni și condiții",
+      "description": "Regulile de folosire a EventDesk pentru organizatori și invitați — proiect în curs de revizuire juridică."
+    },
+    "title": "Termeni și <em>condiții</em>",
+    "lead": "Regulile de folosire a EventDesk, scrise cât se poate de limpede. Acest document se adresează organizatorilor și invitaților; firmele au, în plus, termeni proprii.",
+    "body": {
+      "h1": "1. Cine suntem",
+      "p1": "EventDesk este operat de [operator — de completat], cu sediul în [adresă — de completat], înregistrat la Registrul Comerțului cu numărul [număr de înregistrare — de completat], cod de identificare fiscală [CUI — de completat]. Ne poți scrie la [adresă de contact — de completat].",
+      "h2": "2. Ce este EventDesk",
+      "p2a": "EventDesk este un serviciu online pentru planificarea ocaziilor — nunți, botezuri, aniversări, petreceri, călătorii de grup — și un director de firme care lucrează pentru astfel de ocazii.",
+      "p2b": "EventDesk nu este parte în înțelegerile dintre organizatori și firme. Prin platformă nu se fac rezervări și nu se plătesc firme: directorul înseamnă listări, cereri și oferte. Ce conveniți cu o firmă rămâne între voi.",
+      "h3": "3. Contul tău",
+      "ul3": {
+        "a": "Intri în cont cu un cod trimis pe email; nu există parole. Ai grijă cine are acces la căsuța ta de email, pentru că oricine o poate citi poate intra în cont.",
+        "b": "Poți folosi și un cont anonim, fără adresă de email, cu limitările descrise în aplicație.",
+        "c": "Trebuie să ai vârsta de la care poți încheia singur un asemenea acord: [vârsta minimă — de completat la revizuirea juridică].",
+        "d": "Invitații nu au nevoie de cont: răspund dintr-un link personal, pe care e bine să nu-l dea mai departe."
+      },
+      "h4": "4. Gratuit pentru organizatori",
+      "p4": "Organizatorii și invitații nu plătesc nimic, pentru nicio ocazie. Nu există perioadă de probă și nu cerem date de card. În perioada de lansare, serviciul este gratuit și pentru firme. Dacă pe viitor unele opțiuni pentru firme devin plătite, anunțăm public cu cel puțin 60 de zile înainte; pentru organizatori nu se schimbă nimic.",
+      "h5": "5. Conținutul tău",
+      "p5a": "Tot ce introduci — sarcini, liste de invitați, bugete, mesaje, fișiere — rămâne al tău. Ne dai doar dreptul de a-l stoca și afișa atât cât e nevoie ca serviciul să funcționeze pentru tine și pentru oamenii cărora le dai acces.",
+      "p5b": "Când treci în plan datele altor persoane (de exemplu, adresa de email a unei gospodării invitate), o faci pe răspunderea ta: folosește-le doar pentru ocazia respectivă. Copiii se înregistrează exclusiv ca număr, fără nume sau alte detalii.",
+      "h6": "6. Ce nu este permis",
+      "ul6": {
+        "a": "conținut ilegal sau care încalcă drepturile altcuiva;",
+        "b": "informații false în listări sau asumarea identității unei alte persoane ori firme;",
+        "c": "mesaje nesolicitate în masă, trimise prin invitații sau cereri;",
+        "d": "încercări de a ocoli limitele, de a accesa datele altor utilizatori sau de a perturba serviciul;",
+        "e": "colectarea automată a datelor din director."
+      },
+      "h7": "7. Directorul de firme",
+      "p7a": "Listările conțin informații declarate de firme și sunt verificate de un moderator înainte de publicare. Ecusoanele arată doar fapte verificate — înregistrarea la ONRC și asigurarea văzută până la o anumită dată — și nu sunt o recomandare. Nu există recenzii, note sau testimoniale.",
+      "p7b": "EventDesk nu garantează serviciile firmelor listate și nu răspunde pentru felul în care acestea își îndeplinesc obligațiile față de tine. Ordinea organică a rezultatelor se rotește zilnic și nu poate fi cumpărată.",
+      "h8": "8. Moderare și sesizări",
+      "p8": "Oricine poate sesiza un conținut ilegal sau o listare care încalcă regulile, chiar și fără cont. Fiecare sesizare este analizată de un om, iar decizia se comunică, împreună cu motivul, atât celui care a sesizat, cât și celui vizat.",
+      "link8a": {
+        "label": "Citește regulile de moderare",
+        "to": "moderation"
+      },
+      "link8b": {
+        "label": "Raportează un conținut",
+        "to": "report"
+      },
+      "h9": "9. Termeni pentru firme",
+      "p9": "Firmele acceptă, pe lângă acest document, „Termenii pentru firme”, un document separat care va fi publicat înainte de înregistrarea primei firme: [Termeni pentru firme — de publicat de operator]. Regulile lui esențiale sunt deja descrise pe pagina pentru firme.",
+      "link9": {
+        "label": "Vezi pagina pentru firme",
+        "to": "business"
+      },
+      "h10": "10. Disponibilitate și răspundere",
+      "p10a": "Ne străduim ca serviciul să funcționeze fără întreruperi și facem copii de siguranță zilnice, dar nu putem promite că nu va exista niciodată o problemă. Când apare una, o anunțăm pe pagina de stare.",
+      "p10b": "[Clauzele privind limitarea răspunderii — de completat la revizuirea juridică.] Nimic din acești termeni nu îți restrânge drepturile pe care legea ți le dă în calitate de consumator.",
+      "h11": "11. Închiderea contului",
+      "p11": "Îți poți șterge oricând contul sau o ocazie. După cerere ai șapte zile în care te poți răzgândi; apoi datele se șterg, cu excepția celor pe care legea ne obligă să le păstrăm, descrise în politica de confidențialitate. Putem restricționa sau închide un cont care încalcă acești termeni, explicând de fiecare dată motivul.",
+      "link11": {
+        "label": "Citește politica de confidențialitate",
+        "to": "privacy"
+      },
+      "h12": "12. Modificarea termenilor",
+      "p12": "Dacă schimbăm acești termeni, publicăm aici noua versiune, cu data ei, și te anunțăm în aplicație înainte ca ea să se aplice.",
+      "h13": "13. Legea aplicabilă",
+      "p13": "Acești termeni sunt guvernați de legea română. [Instanța competentă și căile de soluționare alternativă a litigiilor — de completat la revizuirea juridică.]"
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Politica de confidențialitate",
+      "description": "Ce date prelucrează EventDesk, de ce, cât timp le păstrează și ce drepturi ai — proiect în curs de revizuire juridică."
+    },
+    "title": "Politica de <em>confidențialitate</em>",
+    "lead": "Ce date ajung la noi, de ce avem nevoie de ele, cât le păstrăm și ce poți face tu în privința lor.",
+    "body": {
+      "note0": "Pe scurt: nu vindem date, nu afișăm reclame și nu urmărim pe nimeni. Ce pui în plan văd doar oamenii cărora le dai tu acces.",
+      "h1": "1. Operatorul datelor",
+      "p1": "Operatorul datelor este [operator — de completat], [adresă — de completat]. Pentru orice întrebare despre datele tale, scrie la [adresa responsabilului cu protecția datelor — de completat].",
+      "h2": "2. Ce date prelucrăm și de ce",
+      "table2": {
+        "caption": "Datele prelucrate și scopul lor",
+        "head": {
+          "what": "Ce date",
+          "why": "De ce"
+        },
+        "rows": {
+          "r1": {
+            "what": "Contul: adresa de email, numele pe care îl alegi, limba preferată",
+            "why": "Ca să poți intra în cont și să primești codurile de conectare și notificările pe care le-ai cerut."
+          },
+          "r2": {
+            "what": "Conținutul ocaziilor: sarcini, date, bugete, plăți notate, furnizori, mesaje, fișiere",
+            "why": "Ca să-ți putem păstra și arăta planul, ție și colaboratorilor aleși de tine."
+          },
+          "r3": {
+            "what": "Invitații: numele gospodăriei, adresa de email (dacă o introduci), răspunsul, numărul de adulți și de copii, cererile private",
+            "why": "Ca invitații să poată răspunde și ca tu să știi pe cine să te bazezi."
+          },
+          "r4": {
+            "what": "Siguranța conectării: adresa IP, un identificator de dispozitiv, momentul încercărilor de conectare",
+            "why": "Ca să limităm încercările repetate și să apărăm conturile de abuz."
+          },
+          "r5": {
+            "what": "Firme: datele listării, membrii echipei, cererile primite și răspunsurile date",
+            "why": "Ca să publicăm listarea și să transmitem cererile organizatorilor."
+          },
+          "r6": {
+            "what": "Firme adăugate din surse publice: denumire, categorie, localitate, contactul publicat de firmă, sursa",
+            "why": "Ca directorul să fie util de la început; fiecare astfel de listare este aprobată de un moderator și poate fi revendicată, corectată sau eliminată."
+          },
+          "r7": {
+            "what": "Sesizări: ce ai raportat, datele tale de contact dacă le dai, decizia luată",
+            "why": "Ca să analizăm sesizarea și să comunicăm decizia."
+          }
+        }
+      },
+      "p2": "Temeiul juridic al fiecărei prelucrări va fi precizat aici după revizuirea juridică: [temeiuri juridice — de completat].",
+      "h3": "3. Copiii",
+      "p3": "Copiii nu sunt niciodată stocați ca persoane. Un răspuns la invitație conține doar numărul copiilor dintr-o gospodărie — fără nume, fără vârste, fără alte detalii.",
+      "h4": "4. Ce nu facem",
+      "ul4": {
+        "a": "Nu vindem și nu închiriem date nimănui.",
+        "b": "Nu afișăm publicitate și nu folosim instrumente de urmărire sau de analiză de la terți.",
+        "c": "Statisticile directorului sunt totaluri zilnice, fără niciun identificator de vizitator.",
+        "d": "Nu trimitem marketing către contactele introduse de organizatori și nici către firmele găsite în surse publice."
+      },
+      "h5": "5. Cine vede datele",
+      "p5a": "Privat din capul locului: lista de invitați, bugetul și cererile private sunt văzute doar de persoanele cărora organizatorul le-a dat acel acces anume. O firmă află cine este un organizator numai dintr-o cerere pe care acesta i-o trimite și vede doar câmpurile pe care el a ales să le includă.",
+      "p5b": "Dacă îți conectezi tu un asistent AI extern, acesta primește doar datele pe care i le permiți, cât timp păstrezi conexiunea.",
+      "p5c": "Lucrăm cu furnizori care prelucrează date în numele nostru, de pildă pentru găzduire și pentru trimiterea emailurilor: [lista împuterniciților și țările în care prelucrează date — de completat].",
+      "h6": "6. Cât timp păstrăm datele",
+      "table6": {
+        "caption": "Perioade de păstrare",
+        "head": {
+          "what": "Tipul de date",
+          "how": "Cât se păstrează"
+        },
+        "rows": {
+          "r1": {
+            "what": "Coduri de conectare și alte coduri sensibile",
+            "how": "Șterse la 24 de ore după expirare sau folosire."
+          },
+          "r2": {
+            "what": "Conturi și ocazii",
+            "how": "Până la cererea de ștergere; urmează 7 zile în care te poți răzgândi, apoi ștergerea."
+          },
+          "r3": {
+            "what": "Cereri private ale invitaților",
+            "how": "30 de zile după închiderea ocaziei."
+          },
+          "r4": {
+            "what": "Conversații cu firmele (cereri și oferte), răspunsurile invitaților, emailurile gospodăriilor",
+            "how": "Cât există ocazia; se șterg odată cu ea."
+          },
+          "r5": {
+            "what": "Chitanțe și evidențe financiare",
+            "how": "7 ani de la închiderea ocaziei, cât cere legislația contabilă."
+          },
+          "r6": {
+            "what": "Ciorne respinse ale listărilor adăugate din surse publice",
+            "how": "90 de zile."
+          },
+          "r7": {
+            "what": "Evidența revendicărilor și a opozițiilor",
+            "how": "3 ani."
+          },
+          "r8": {
+            "what": "Jurnalul de audit",
+            "how": "2 ani."
+          },
+          "r9": {
+            "what": "Statisticile directorului",
+            "how": "Pe termen nelimitat, ca totaluri zilnice; date brute despre vizitatori nu există."
+          },
+          "r10": {
+            "what": "Orice alt tip de date",
+            "how": "Cât există contul sau ocazia de care ține; se șterge odată cu ele."
+          }
+        }
+      },
+      "h7": "7. Drepturile tale",
+      "p7a": "Ai dreptul să afli ce date avem despre tine și să primești o copie, să ceri corectarea sau ștergerea lor, să ceri restricționarea prelucrării, să te opui prelucrării și să-ți iei datele cu tine într-un format ușor de folosit. Multe dintre acestea le poți face direct din aplicație: exporturi, modificări, ștergerea contului.",
+      "p7b": "Pentru orice cerere, scrie la [adresa responsabilului cu protecția datelor — de completat]. Răspundem în cel mult 30 de zile. Dacă socotești că nu ți-am respectat drepturile, te poți adresa Autorității Naționale de Supraveghere a Prelucrării Datelor cu Caracter Personal (ANSPDCP).",
+      "h8": "8. Cookie-uri",
+      "p8": "Acest site public nu folosește niciun cookie. Aplicația folosește exact trei, niciunul pentru urmărire.",
+      "link8": {
+        "label": "Vezi lista cookie-urilor",
+        "to": "cookies"
+      },
+      "h9": "9. Modificări",
+      "p9": "Când schimbăm această politică, publicăm aici noua versiune, cu data ei, iar schimbările importante le anunțăm și în aplicație."
+    }
+  },
+  "cookies": {
+    "meta": {
+      "title": "Cookie-uri",
+      "description": "Site-ul public EventDesk nu folosește cookie-uri. Aplicația folosește exact trei, niciunul pentru urmărire sau publicitate."
+    },
+    "title": "Cookie-uri: <em>zero aici, trei în aplicație</em>",
+    "lead": "O pagină scurtă, pentru că nu e mult de spus.",
+    "body": {
+      "h1": "Pe acest site: niciunul",
+      "p1": "Site-ul public eventdesk.ro nu setează cookie-uri și nu încarcă nimic de la terți: fără instrumente de analiză, fără reclame, fără fonturi sau scripturi aduse din altă parte. De aceea nu vezi aici nicio fereastră de consimțământ — nu avem pentru ce să-ți cerem acordul.",
+      "h2": "În aplicație: exact trei",
+      "p2": "Aplicația de planificare folosește trei cookie-uri, toate necesare pentru funcționare.",
+      "table2": {
+        "caption": "Cookie-urile aplicației",
+        "head": {
+          "name": "Nume",
+          "why": "La ce folosește",
+          "how": "Durată"
+        },
+        "rows": {
+          "r1": {
+            "name": "ed_session",
+            "why": "Te ține conectat după ce ai introdus codul primit pe email.",
+            "how": "[durată — de completat de operator]"
+          },
+          "r2": {
+            "name": "ed_device",
+            "why": "Limitează încercările repetate de conectare de pe același dispozitiv, ca să apere conturile de abuz. Nu este un instrument de urmărire.",
+            "how": "[durată — de completat de operator]"
+          },
+          "r3": {
+            "name": "ed_lang",
+            "why": "Ține minte limba aleasă: română sau engleză.",
+            "how": "1 an"
+          }
+        }
+      },
+      "note2": "Niciunul dintre ele nu este folosit pentru urmărire sau pentru publicitate.",
+      "h3": "Când vezi această notă în aplicație",
+      "p3": "O singură dată, la prima folosire. O arătăm din nou numai dacă lista de mai sus se schimbă.",
+      "link3": {
+        "label": "Citește politica de confidențialitate",
+        "to": "privacy"
+      }
+    }
+  },
+  "accessibility": {
+    "meta": {
+      "title": "Declarație de accesibilitate",
+      "description": "Cum urmărim ca EventDesk să poată fi folosit de oricine: ținta WCAG 2.2 AA, ce facem și cum ne poți semnala o problemă."
+    },
+    "title": "Declarație de <em>accesibilitate</em>",
+    "lead": "Vrem ca EventDesk să poată fi folosit de oricine, cu orice dispozitiv și cu orice tehnologie de asistare.",
+    "body": {
+      "h1": "Ținta noastră",
+      "p1": "Ținta de conformitate pentru site-ul public și pentru aplicația de planificare este WCAG 2.2, nivelul AA.",
+      "h2": "Ce facem pentru asta",
+      "ul2": {
+        "a": "Textul are un contrast de cel puțin 4,5:1 față de fundal, atât în tema luminoasă, cât și în cea întunecată.",
+        "b": "Butoanele și linkurile au zone de atingere de cel puțin 44 pe 44 de pixeli.",
+        "c": "Totul se poate folosi doar cu tastatura, cu un contur de focalizare vizibil și cu un link de salt la conținut.",
+        "d": "Nimic nu se poate face doar prin tragere: orice aranjare are și o cale prin atingeri simple.",
+        "e": "O stare nu este comunicată niciodată numai prin culoare; o însoțesc mereu cuvinte.",
+        "f": "Respectăm preferința de mișcare redusă și tema aleasă în sistemul tău.",
+        "g": "Formularele au etichete vizibile, iar erorile apar lângă câmp și spun cum se îndreaptă."
+      },
+      "h3": "Ce știm că nu e încă în regulă",
+      "p3": "[Limitări cunoscute — de completat după evaluare.]",
+      "h4": "Evaluare",
+      "ul4": {
+        "a": "Data declarației: [dată — de completat de operator].",
+        "b": "Metoda de evaluare: [metodă — de completat: autoevaluare sau audit extern].",
+        "c": "Ultima revizuire: [dată — de completat de operator]."
+      },
+      "h5": "Spune-ne dacă te împiedici de ceva",
+      "p5a": "Dacă o pagină nu poate fi folosită cu cititorul tău de ecran, cu tastatura sau la mărirea textului, scrie-ne la [adresă pentru sesizări de accesibilitate — de completat]. Spune-ne pagina, ce încercai să faci și ce tehnologie folosești. Răspundem în [termen de răspuns — de completat].",
+      "p5b": "Dacă răspunsul nostru nu te mulțumește, te poți adresa autorității competente: [autoritatea de supraveghere — de completat]."
+    }
+  },
+  "moderation": {
+    "meta": {
+      "title": "Reguli de moderare",
+      "description": "Ce conținut nu este permis pe EventDesk, cum poate oricine să sesizeze o problemă și ce se întâmplă după aceea."
+    },
+    "title": "Reguli de <em>moderare</em>",
+    "lead": "Ce nu are ce căuta pe EventDesk, cum ne poți semnala o problemă și ce se întâmplă după ce ai făcut-o.",
+    "body": {
+      "h1": "Ce nu este permis",
+      "ul1": {
+        "a": "conținut ilegal potrivit legii române sau europene;",
+        "b": "listări ale unor firme care nu există, care nu au dreptul să ofere serviciul descris sau care folosesc numele altcuiva;",
+        "c": "afirmații false prezentate ca fapte: capacități, autorizații, asigurări, prețuri;",
+        "d": "date personale ale altor persoane, publicate fără drept;",
+        "e": "conținut care instigă la ură, hărțuiește sau amenință;",
+        "f": "mesaje nesolicitate trimise în masă prin invitații sau cereri."
+      },
+      "h2": "Ce verificăm înainte de publicare",
+      "p2": "Fiecare listare, fiecare plan de sală și fiecare catalog trec pe la un moderator înainte să devină publice. Moderatorul nu poate face parte din firma pe care o verifică. Cât timp o modificare așteaptă, rămâne vizibilă versiunea aprobată anterior.",
+      "h3": "Cum sesizezi o problemă",
+      "p3": "Oricine poate face o sesizare, cu sau fără cont. Ajută-ne cu trei lucruri: unde se află conținutul (adresa paginii), de ce socotești că e ilegal sau contrar regulilor și, dacă vrei un răspuns, o adresă de email.",
+      "link3": {
+        "label": "Deschide formularul de sesizare",
+        "to": "report"
+      },
+      "h4": "Ce se întâmplă după aceea",
+      "ol4": {
+        "a": "Confirmăm primirea sesizării, dacă ne-ai lăsat o adresă.",
+        "b": "Un om o analizează. Nu luăm decizii de moderare exclusiv automat.",
+        "c": "Hotărâm: conținutul rămâne, este restrâns, este eliminat sau contul este suspendat.",
+        "d": "Comunicăm decizia și motivul ei atât celui care a sesizat, cât și celui vizat.",
+        "e": "Sesizarea și decizia se păstrează în jurnalul nostru de audit."
+      },
+      "h5": "Dacă nu ești de acord cu decizia",
+      "p5": "Poți cere reanalizarea deciziei: [procedura și termenul de contestare — de completat de operator].",
+      "h6": "Listările nerevendicate",
+      "p6": "O firmă adăugată de EventDesk din surse publice poate cere oricând revendicarea, corectarea sau eliminarea listării. Dăm curs cererilor de eliminare și de opoziție în cel mult 30 de zile.",
+      "link6": {
+        "label": "Vezi cum funcționează pentru firme",
+        "to": "business"
+      },
+      "h7": "Punct de contact și transparență",
+      "p7": "EventDesk aplică Regulamentul (UE) 2022/2065 privind serviciile digitale. Punctul de contact pentru autorități și pentru utilizatori: [punct de contact — de completat de operator]. Publicăm anual un raport de transparență despre sesizările primite și deciziile luate: [adresa raportului — de completat]."
+    }
+  }
+}

@@ -8,5 +8,6 @@ export default defineConfig({
     passWithNoTests: true,
     testTimeout: 30_000,
     hookTimeout: 120_000,
+    globalSetup: ["../i18n/scripts/vitest-global-setup.mjs"],
   },
 });

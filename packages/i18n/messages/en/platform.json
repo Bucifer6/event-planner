@@ -1,0 +1,57 @@
+{
+  "error": {
+    "title": "Something is not working",
+    "body": "Nothing you saved has been lost. Try again; if it still fails, come back in a few minutes.",
+    "retry": "Try again",
+    "home": "Back to the start",
+    "reference": "Reference code: {ref}"
+  },
+  "notFound": {
+    "title": "This page does not exist",
+    "body": "The address may be wrong, or the page was moved or deleted.",
+    "home": "Back to the start"
+  },
+  "loading": {
+    "label": "Loading…"
+  },
+  "offline": {
+    "metaTitle": "Offline",
+    "title": "You are not connected to the internet",
+    "body": "EventDesk needs the internet to show you up-to-date information. Everything you saved is safe.",
+    "retry": "Try again"
+  },
+  "incident": {
+    "title": "Something is not working",
+    "default": "Something is not working as it should right now. We are fixing it, and your data is safe.",
+    "statusLink": "See the service status"
+  },
+  "manifest": {
+    "description": "Plan events without the headaches."
+  },
+  "errors": {
+    "csrf": "The request did not come from the app. Reload the page and try again."
+  },
+  "upload": {
+    "empty": "The file is empty. Choose another file.",
+    "tooLarge": "The file is too large. The limit is 10 MiB per file.",
+    "type": "We only accept PNG or JPG images.",
+    "typeWithPdf": "We only accept PNG or JPG images and PDF documents.",
+    "unreadableImage": "We could not read the image. Save it again as PNG or JPG and try once more.",
+    "infected": "The file was rejected by the security check and was not saved.",
+    "scanUnavailable": "We cannot check files right now, so nothing was saved. Try again in a few minutes.",
+    "overLimit": "You have reached the {limit} limit for files. The largest file is “{asset}” ({assetSize}). Delete it or another one, then upload again. We deleted nothing.",
+    "overLimitField": "There is no room left for this file. Delete an existing file first.",
+    "overLimitEmpty": "The file does not fit within the {limit} limit.",
+    "directUnavailable": "Direct upload is not available. Use the upload form.",
+    "unknownPurpose": "This kind of upload is not available.",
+    "missingFile": "Choose a file.",
+    "hintImages": "PNG or JPG, 10 MiB at most.",
+    "hintWithPdf": "PNG, JPG or PDF, 10 MiB at most.",
+    "uploading": "Uploading the file…",
+    "uploaded": "Uploaded “{name}”.",
+    "failed": "The file could not be uploaded. Check your connection and try again.",
+    "remove": "Delete the file “{name}”",
+    "removing": "Deleting…",
+    "keep": "Keep the file"
+  }
+}

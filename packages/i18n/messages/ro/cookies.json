@@ -1,0 +1,13 @@
+{
+  "title": "Trei cookie-uri, niciunul de urmărire",
+  "intro": "EventDesk folosește doar cookie-urile de care are nevoie ca să funcționeze:",
+  "items": {
+    "session": "îți păstrează sesiunea după ce intri în cont",
+    "rateLimit": "limitează încercările repetate de autentificare de pe acest dispozitiv",
+    "language": "ține minte limba aleasă"
+  },
+  "noTracking": "Niciunul nu este folosit pentru urmărire sau publicitate.",
+  "more": "Nota despre cookie-uri",
+  "privacy": "Politica de confidențialitate",
+  "accept": "Am înțeles"
+}

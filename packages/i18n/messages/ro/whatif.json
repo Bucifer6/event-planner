@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Previzualizare",
+  "defaultTitle": "Schimbări propuse",
+  "intro": "Uită-te la ce se schimbă. Nimic nu se aplică până nu confirmi.",
+  "external": "creat cu un asistent extern",
+  "apply": "Aplică schimbările",
+  "applying": "Se aplică…",
+  "discard": "Renunță",
+  "discarding": "Se renunță…",
+  "applied": "Schimbările au fost aplicate.",
+  "alreadyApplied": "Schimbările fuseseră deja aplicate. Nu s-a aplicat nimic a doua oară.",
+  "discarded": "Am renunțat la schimbări. Nu s-a modificat nimic.",
+  "noEffects": "Această schimbare nu are alte efecte.",
+  "expires": "Propunerea expiră pe {date}.",
+  "kinds": {
+    "added": "Adăugat",
+    "removed": "Eliminat",
+    "changed": "Modificat",
+    "moved": "Mutat",
+    "affected": "Afectat"
+  },
+  "errors": {
+    "unknownKind": "Acest tip de schimbare nu poate fi previzualizat.",
+    "discarded": "S-a renunțat deja la această propunere. Nu s-a modificat nimic.",
+    "expired": "Propunerea a expirat. Fă din nou schimbarea ca să vezi o previzualizare la zi.",
+    "alreadyApplied": "Schimbările au fost deja aplicate și nu mai pot fi anulate de aici.",
+    "stale": "Între timp s-a schimbat ceva, iar previzualizarea nu mai este la zi. Fă din nou schimbarea."
+  }
+}

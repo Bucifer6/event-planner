@@ -19,6 +19,8 @@ const nextConfig: NextConfig = {
   images: { unoptimized: true },
   transpilePackages: ["@ed/i18n", "@ed/shared", "@ed/ui"],
   outputFileTracingRoot: repoRoot,
+  // One styled, bilingual 404.html for the whole static site (app/global-not-found.tsx).
+  experimental: { globalNotFound: true },
 };
 
 export default createNextIntlPlugin("./i18n/request.ts")(nextConfig);
