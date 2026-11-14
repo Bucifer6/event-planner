@@ -1,3 +1,4 @@
+import "@ed/core/all";
 import "@ed/core/directory";
 import "@ed/mcp";
 import "@ed/core/closeout"; // release B money + lifecycle registrations (what-if kinds, exports, upload purpose)

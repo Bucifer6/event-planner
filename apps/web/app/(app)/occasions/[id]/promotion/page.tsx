@@ -47,7 +47,6 @@ export default async function PromotionPage({ params }: { params: Promise<{ id: 
       <Section title={t("assets.title")} level={3}>
         <div className={styles.layout}>
           <div>
-            {/* eslint-disable-next-line @next/next/no-img-element -- a data: SVG drawn by the server */}
             <img className={styles.card} src={svgDataUri(card)} width={420} height={420} alt={t("assets.previewAlt")} />
           </div>
           <div>

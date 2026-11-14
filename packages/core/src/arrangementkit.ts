@@ -194,7 +194,7 @@ const FORMS: Record<ArrangementFormKey, { place: Placer; outline: string[]; vess
   },
   // seen from the front: an arch with two posts
   arch: {
-    place: (i, n) => {
+    place: (i, _n) => {
       // evenly along the whole line: up the left post, over the arch, down the right post
       const post = 150;
       const arc = Math.PI * 112;

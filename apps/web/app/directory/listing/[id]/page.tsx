@@ -103,7 +103,6 @@ export default async function ListingPage({ params, searchParams }: Props) {
               <ul className={styles.photos}>
                 {listing.photos.map((p, i) => (
                   <li key={p.assetId}>
-                    {/* eslint-disable-next-line @next/next/no-img-element -- signed, short-lived same-origin link; not a static asset */}
                     <img src={p.url} alt={t("listing.photoAlt", { name: listing.name, n: i + 1 })} loading="lazy" width={480} height={360} />
                   </li>
                 ))}

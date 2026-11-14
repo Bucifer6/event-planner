@@ -334,7 +334,6 @@ export function ListingEditor({
           <ul className={styles.photos}>
             {v.photos.map((p, i) => (
               <li key={p.id} className={styles.photo}>
-                {/* eslint-disable-next-line @next/next/no-img-element -- signed, short-lived same-origin link */}
                 <img src={p.url} alt={t("photoAlt", { n: i + 1 })} width={320} height={240} />
                 <Button type="button" variant="quiet" size="sm" disabled={!canEdit} onClick={() => set("photos", v.photos.filter((x) => x.id !== p.id))} aria-label={t("removePhotoNamed", { n: i + 1 })}>
                   {t("removePhoto")}

@@ -111,7 +111,6 @@ export function SeatingEditor(props: SeatingEditorProps) {
     if (pending.current > 0 || timers.current.size > 0) return;
     setItems(props.model.items);
     setStages(props.stages);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- keyed on the server revision only
   }, [props.syncKey]);
 
   const stage = stageId === "base" ? null : (stages.find((s) => s.id === stageId) ?? null);
@@ -443,7 +442,6 @@ export function SeatingEditor(props: SeatingEditorProps) {
   }
 
   /* ── words ── */
-  const m = (mm: number) => mmToMetresText(mm, locale);
   const sizeOf = (it: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm">) => itemSizeText(it, locale);
   const tableName = (it: PlanItem) => (it.kind === "table" ? t("table", { label: it.label }) : it.label);
   const seatsText = (it: PlanItem) => (it.seats === null ? t("seatsUnknown", { taken: it.seated ?? 0 }) : t("seatsOf", { taken: it.seated ?? 0, seats: it.seats }));

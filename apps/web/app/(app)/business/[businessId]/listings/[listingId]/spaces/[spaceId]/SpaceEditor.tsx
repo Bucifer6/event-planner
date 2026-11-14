@@ -698,7 +698,6 @@ function MarkSheet({
     }
     const p = markings.pois.find((o) => o.id === id);
     return { kind: p?.kind ?? "toilets", name: p?.name ?? "", x: fm(p?.x ?? Math.round(sheetMm.w / 2)), y: fm(p?.y ?? Math.round(sheetMm.h / 2)) };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- computed once when the sheet opens
   }, []);
   const [v, setV] = useState<Values>(initial);
   const [errors, setErrors] = useState<Record<string, string>>({});

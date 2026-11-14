@@ -96,7 +96,6 @@ export default async function ModerationRevisionPage({ params }: { params: Promi
           <ul className={pageStyles.photos}>
             {photos.map((p, i) => (
               <li key={p.id}>
-                {/* eslint-disable-next-line @next/next/no-img-element -- signed, short-lived same-origin link */}
                 <img src={p.url} alt={t("detail.photoAlt", { n: i + 1 })} width={320} height={240} loading="lazy" />
               </li>
             ))}

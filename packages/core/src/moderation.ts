@@ -4,7 +4,7 @@ import { zId } from "@ed/shared/zod";
 import { z } from "zod";
 import { audit } from "./audit";
 import { addBusinessNotice, isAccountBusinessMember, queueBusinessEmail, requireBusinessMember } from "./business";
-import { actorAccountId, type Ctx } from "./context";
+import { type Ctx } from "./context";
 import { readSetting, registerDashboardCounter, requireStaffRole, writeSetting } from "./staff";
 import { inTx } from "./tx";
 

@@ -104,7 +104,9 @@
     "./rehearsal": "./src/rehearsal.ts",
     "./checkin": "./src/checkin.ts",
     "./offline": "./src/offline.ts",
-    "./sustainability": "./src/sustainability.ts"
+    "./sustainability": "./src/sustainability.ts",
+    "./all": "./src/all.ts",
+    "./wiring-programme": "./src/wiring-programme.ts"
   },
   "scripts": {
     "typecheck": "tsc --noEmit",

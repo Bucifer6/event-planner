@@ -27,6 +27,9 @@ export default tseslint.config(
         { argsIgnorePattern: "^_", varsIgnorePattern: "^_", caughtErrorsIgnorePattern: "^_" },
       ],
       "@typescript-eslint/consistent-type-imports": ["error", { fixStyle: "inline-type-imports" }],
+      // Non-breaking spaces are intentional in money/date formatting; control ranges are intentional in input sanitising.
+      "no-irregular-whitespace": "off",
+      "no-control-regex": "off",
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
     },
   },

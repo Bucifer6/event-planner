@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Checkbox, ChoiceChips, FocusFirstError, IconButton, Input, Notice, SelectField, Sheet, SubmitButton, TextareaField, TextField } from "@ed/ui";
+import { Button, Checkbox, FocusFirstError, IconButton, Input, Notice, SelectField, Sheet, SubmitButton, TextareaField, TextField } from "@ed/ui";
 import { IconAlert, IconClose } from "@ed/ui/icons";
 import { useTranslations } from "next-intl";
 import { useState } from "react";

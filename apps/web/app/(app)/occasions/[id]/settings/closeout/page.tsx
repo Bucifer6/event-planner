@@ -4,7 +4,7 @@ import { isFreshAuth } from "@ed/core/accounts";
 import { getCloseout, getLesson, listLessons, PRIVATE_REQUESTS_DAYS_AFTER_CLOSEOUT } from "@ed/core/closeout";
 import { getOccasionView } from "@ed/core/occasions";
 import { formatDate, formatMoney } from "@ed/i18n/format";
-import { Card, EmptyState, Figure, List, Notice, PageHeader, Row, Section, Stack } from "@ed/ui";
+import { Card, Figure, List, Notice, PageHeader, Row, Section, Stack } from "@ed/ui";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";

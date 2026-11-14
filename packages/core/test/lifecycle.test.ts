@@ -124,7 +124,6 @@ async function snapshot(occasionId: string) {
   return JSON.stringify({ status: o!.status, startsAt: o!.startsAt, closedAt: o!.closedAt, ts: ts.sort((a, b) => a.id.localeCompare(b.id)), rev: g?.guestRevision ?? 0, jobs: js.length, mail: mail.length });
 }
 
-const what = (row: { what: unknown }) => (typeof row.what === "string" ? row.what : (row.what as { key: string }).key);
 
 describe("cancel with preview (B9)", () => {
   it("the preview lists everything affected; discarding it changes nothing", async () => {

@@ -7,7 +7,6 @@ import {
   counties,
   eq,
   listingStats,
-  listings,
   localities,
   occasionMembers,
   occasions,

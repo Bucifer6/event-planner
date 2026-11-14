@@ -15,6 +15,7 @@
 //
 // Handlers get a system-actor Ctx and MUST be idempotent (at-least-once delivery).
 // This file is the only one in @ed/jobs that imports domain packages.
+import "@ed/core/all"; // every domain's import-time registrations (purge hooks, retention rules…)
 import { registerJobs as retention } from "@ed/core/retention";
 import { registerJobs as stats } from "@ed/core/stats";
 import { registerJobs as whatif } from "@ed/core/whatif";

@@ -187,7 +187,6 @@ export function StationeryDesigner({
       <div className={styles.proofColumn}>
         <Chips name="piece" legend={t("preview.pieceLegend")} value={piece} options={PIECES.map((p) => ({ value: p, label: t(`pieces.${pieceKey(p)}`) }))} onChange={setPiece} />
         <div className={styles.desk}>
-          {/* eslint-disable-next-line @next/next/no-img-element -- a data: SVG drawn by the server; next/image adds nothing */}
           <img
             className={styles.sheet}
             data-busy={busy ? "true" : undefined}

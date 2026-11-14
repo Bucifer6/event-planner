@@ -51,7 +51,6 @@ export async function ListingDrawings({ listing }: { listing: PublicListing }) {
                   ) : (
                     <>
                       {s.pictureUrl ? (
-                        // eslint-disable-next-line @next/next/no-img-element -- signed, short-lived media link
                         <img className={plan.picture} src={s.pictureUrl} alt={t("public.pictureAlt", { name: s.name })} loading="lazy" />
                       ) : null}
                       <p className="ed-unknown">{t("public.notCalibrated")}</p>

@@ -33,7 +33,7 @@ export default async function ManageRegistrationPage({ params, searchParams }: P
   const tq = guestTranslator(locale, "requests.guest");
   const tr = guestTranslator(locale);
 
-  let own: Awaited<ReturnType<typeof getOwnRegistration>> = null;
+  let own: Awaited<ReturnType<typeof getOwnRegistration>> ;
   try {
     own = await getOwnRegistration(ctx, { slug, token });
   } catch (e) {

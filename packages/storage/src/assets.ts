@@ -113,7 +113,7 @@ export type UploadOptions = {
 function cleanName(name: string, ext: string): string {
   const base = (name.split(/[\\/]/).pop() ?? "")
     .normalize("NFC")
-    // eslint-disable-next-line no-control-regex -- stripping control characters is the point
+     
     .replace(/[\u0000-\u001f\u007f"<>|:*?]/g, "")
     .trim()
     .slice(0, 120);
