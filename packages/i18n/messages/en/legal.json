@@ -1,0 +1,327 @@
+{
+  "common": {
+    "eyebrow": "Legal documents",
+    "draftTitle": "Draft — under legal review",
+    "draftText": "The text below is a draft written in plain language. It has no legal effect yet and may change before launch. Places marked in square brackets are still to be completed by the operator.",
+    "version": "Version 0.1 · draft of 13 November 2026",
+    "othersLabel": "Other documents",
+    "others": "See also"
+  },
+  "terms": {
+    "meta": {
+      "title": "Terms and conditions",
+      "description": "The rules for using EventDesk as a planner or a guest — a draft under legal review."
+    },
+    "title": "Terms and <em>conditions</em>",
+    "lead": "The rules for using EventDesk, written as plainly as we can. This document is for planners and guests; businesses have their own terms in addition.",
+    "body": {
+      "h1": "1. Who we are",
+      "p1": "EventDesk is operated by [operator — to be completed], with its registered office at [address — to be completed], registered with the Trade Register under number [registration number — to be completed], tax identification code [CUI — to be completed]. You can write to us at [contact address — to be completed].",
+      "h2": "2. What EventDesk is",
+      "p2a": "EventDesk is an online service for planning occasions — weddings, christenings, birthdays, parties, group trips — and a directory of businesses that work for such occasions.",
+      "p2b": "EventDesk is not a party to agreements between planners and businesses. No bookings are made and no business is paid through the platform: the directory means listings, enquiries and quotes. What you agree with a business stays between the two of you.",
+      "h3": "3. Your account",
+      "ul3": {
+        "a": "You sign in with a code sent to your email; there are no passwords. Mind who has access to your mailbox, because anyone who can read it can sign in.",
+        "b": "You can also use an anonymous account, with no email address, within the limits described in the app.",
+        "c": "You must be old enough to enter into an agreement like this on your own: [minimum age — to be completed at legal review].",
+        "d": "Guests need no account: they reply from a personal link, which they should not pass on."
+      },
+      "h4": "4. Free for planners",
+      "p4": "Planners and guests pay nothing, for any occasion. There is no trial period and we do not ask for card details. During the launch period the service is free for businesses too. If some business options become paid in future, we give at least 60 days’ public notice; nothing changes for planners.",
+      "h5": "5. Your content",
+      "p5a": "Everything you enter — tasks, guest lists, budgets, messages, files — remains yours. You give us only the right to store and display it as far as needed for the service to work for you and for the people you give access to.",
+      "p5b": "When you put other people’s data into a plan (for example, the email address of an invited household), you do so on your own responsibility: use it only for that occasion. Children are recorded strictly as a number, with no names or other details.",
+      "h6": "6. What is not allowed",
+      "ul6": {
+        "a": "content that is illegal or infringes someone else’s rights;",
+        "b": "false information in listings, or passing yourself off as another person or business;",
+        "c": "unsolicited bulk messages sent through invitations or enquiries;",
+        "d": "attempts to get round limits, to reach other users’ data or to disrupt the service;",
+        "e": "automated collection of data from the directory."
+      },
+      "h7": "7. The business directory",
+      "p7a": "Listings contain information stated by businesses and are checked by a moderator before publication. Badges show verified facts only — ONRC registration and insurance seen until a given date — and are not a recommendation. There are no reviews, scores or testimonials.",
+      "p7b": "EventDesk does not guarantee the services of listed businesses and is not responsible for how they meet their obligations to you. The organic order of results rotates daily and cannot be bought.",
+      "h8": "8. Moderation and reports",
+      "p8": "Anyone can report illegal content or a listing that breaks the rules, even without an account. Every report is reviewed by a person, and the decision is sent, with its reason, both to the person who reported and to the person affected.",
+      "link8a": {
+        "label": "Read the moderation rules",
+        "to": "moderation"
+      },
+      "link8b": {
+        "label": "Report content",
+        "to": "report"
+      },
+      "h9": "9. Business terms",
+      "p9": "Businesses accept, in addition to this document, the “Business terms”, a separate document that will be published before the first business registers: [Business terms — to be published by the operator]. Its essential rules are already described on the page for businesses.",
+      "link9": {
+        "label": "See the page for businesses",
+        "to": "business"
+      },
+      "h10": "10. Availability and liability",
+      "p10a": "We work to keep the service running without interruption and take daily backups, but we cannot promise there will never be a problem. When one occurs, we announce it on the status page.",
+      "p10b": "[Clauses on limitation of liability — to be completed at legal review.] Nothing in these terms restricts the rights the law gives you as a consumer.",
+      "h11": "11. Closing your account",
+      "p11": "You can delete your account or an occasion at any time. After the request you have seven days to change your mind; then the data is deleted, except what the law obliges us to keep, as described in the privacy policy. We may restrict or close an account that breaks these terms, explaining the reason every time.",
+      "link11": {
+        "label": "Read the privacy policy",
+        "to": "privacy"
+      },
+      "h12": "12. Changes to these terms",
+      "p12": "If we change these terms, we publish the new version here, with its date, and tell you in the app before it applies.",
+      "h13": "13. Governing law",
+      "p13": "These terms are governed by Romanian law. [Competent court and alternative dispute resolution — to be completed at legal review.]"
+    }
+  },
+  "privacy": {
+    "meta": {
+      "title": "Privacy policy",
+      "description": "What data EventDesk processes, why, how long it is kept and what rights you have — a draft under legal review."
+    },
+    "title": "Privacy <em>policy</em>",
+    "lead": "What data reaches us, why we need it, how long we keep it and what you can do about it.",
+    "body": {
+      "note0": "In short: we do not sell data, we show no adverts and we track no one. What you put in a plan is seen only by the people you give access to.",
+      "h1": "1. The data controller",
+      "p1": "The data controller is [operator — to be completed], [address — to be completed]. For any question about your data, write to [data protection contact address — to be completed].",
+      "h2": "2. What data we process and why",
+      "table2": {
+        "caption": "Data processed and its purpose",
+        "head": {
+          "what": "What data",
+          "why": "Why"
+        },
+        "rows": {
+          "r1": {
+            "what": "Account: email address, the name you choose, preferred language",
+            "why": "So that you can sign in and receive sign-in codes and the notifications you asked for."
+          },
+          "r2": {
+            "what": "Occasion content: tasks, dates, budgets, recorded payments, suppliers, messages, files",
+            "why": "So that we can keep and show your plan, to you and to the collaborators you choose."
+          },
+          "r3": {
+            "what": "Guests: household name, email address (if you enter one), reply, number of adults and of children, private requests",
+            "why": "So that guests can reply and you know whom to count on."
+          },
+          "r4": {
+            "what": "Sign-in safety: IP address, a device identifier, the time of sign-in attempts",
+            "why": "So that we can limit repeated attempts and protect accounts from abuse."
+          },
+          "r5": {
+            "what": "Businesses: listing data, team members, enquiries received and replies given",
+            "why": "So that we can publish the listing and pass on planners’ enquiries."
+          },
+          "r6": {
+            "what": "Businesses added from public sources: name, category, locality, the contact route the business published, the source",
+            "why": "So that the directory is useful from the start; each such listing is approved by a moderator and can be claimed, corrected or removed."
+          },
+          "r7": {
+            "what": "Reports: what you reported, your contact details if you give them, the decision taken",
+            "why": "So that we can review the report and communicate the decision."
+          }
+        }
+      },
+      "p2": "The legal basis for each kind of processing will be stated here after legal review: [legal bases — to be completed].",
+      "h3": "3. Children",
+      "p3": "Children are never stored as persons. A reply to an invitation contains only the number of children in a household — no names, no ages, no other details.",
+      "h4": "4. What we do not do",
+      "ul4": {
+        "a": "We do not sell or rent data to anyone.",
+        "b": "We show no advertising and use no third-party tracking or analytics tools.",
+        "c": "Directory statistics are daily totals, with no visitor identifier at all.",
+        "d": "We send no marketing to contacts entered by planners, nor to businesses found in public sources."
+      },
+      "h5": "5. Who sees the data",
+      "p5a": "Private by default: the guest list, the budget and private requests are seen only by the people the planner has given that specific access. A business learns who a planner is only from an enquiry the planner sends, and sees only the fields the planner chose to include.",
+      "p5b": "If you yourself connect an external AI assistant, it receives only the data you allow, for as long as you keep the connection.",
+      "p5c": "We work with providers that process data on our behalf, for instance for hosting and for sending email: [list of processors and the countries where they process data — to be completed].",
+      "h6": "6. How long we keep data",
+      "table6": {
+        "caption": "Retention periods",
+        "head": {
+          "what": "Type of data",
+          "how": "How long it is kept"
+        },
+        "rows": {
+          "r1": {
+            "what": "Sign-in codes and other sensitive codes",
+            "how": "Deleted 24 hours after they expire or are used."
+          },
+          "r2": {
+            "what": "Accounts and occasions",
+            "how": "Until you ask for deletion; then 7 days in which you can change your mind, then deletion."
+          },
+          "r3": {
+            "what": "Guests’ private requests",
+            "how": "30 days after the occasion is closed out."
+          },
+          "r4": {
+            "what": "Conversations with businesses (enquiries and quotes), guest replies, household email addresses",
+            "how": "As long as the occasion exists; deleted with it."
+          },
+          "r5": {
+            "what": "Receipts and financial records",
+            "how": "7 years after the occasion is closed out, as accounting law requires."
+          },
+          "r6": {
+            "what": "Rejected drafts of listings added from public sources",
+            "how": "90 days."
+          },
+          "r7": {
+            "what": "Records of claims and objections",
+            "how": "3 years."
+          },
+          "r8": {
+            "what": "The audit log",
+            "how": "2 years."
+          },
+          "r9": {
+            "what": "Directory statistics",
+            "how": "Indefinitely, as daily totals; no raw visitor data exists."
+          },
+          "r10": {
+            "what": "Any other type of data",
+            "how": "As long as the account or occasion it belongs to exists; deleted with it."
+          }
+        }
+      },
+      "h7": "7. Your rights",
+      "p7a": "You have the right to know what data we hold about you and to receive a copy, to ask for it to be corrected or deleted, to ask for processing to be restricted, to object to processing, and to take your data with you in an easily usable format. Much of this you can do directly in the app: exports, edits, deleting your account.",
+      "p7b": "For any request, write to [data protection contact address — to be completed]. We reply within 30 days. If you believe we have not respected your rights, you can turn to the Romanian data protection authority, ANSPDCP (Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal).",
+      "h8": "8. Cookies",
+      "p8": "This public site uses no cookies at all. The app uses exactly three, none of them for tracking.",
+      "link8": {
+        "label": "See the list of cookies",
+        "to": "cookies"
+      },
+      "h9": "9. Changes",
+      "p9": "When we change this policy, we publish the new version here, with its date, and announce important changes in the app as well."
+    }
+  },
+  "cookies": {
+    "meta": {
+      "title": "Cookies",
+      "description": "The public EventDesk site uses no cookies. The app uses exactly three, none for tracking or advertising."
+    },
+    "title": "Cookies: <em>none here, three in the app</em>",
+    "lead": "A short page, because there is not much to say.",
+    "body": {
+      "h1": "On this site: none",
+      "p1": "The public site eventdesk.ro sets no cookies and loads nothing from third parties: no analytics, no adverts, no fonts or scripts fetched from elsewhere. That is why you see no consent window here — there is nothing to ask your consent for.",
+      "h2": "In the app: exactly three",
+      "p2": "The planning app uses three cookies, all of them needed for it to work.",
+      "table2": {
+        "caption": "The app’s cookies",
+        "head": {
+          "name": "Name",
+          "why": "What it is for",
+          "how": "Lifetime"
+        },
+        "rows": {
+          "r1": {
+            "name": "ed_session",
+            "why": "Keeps you signed in after you enter the code sent to your email.",
+            "how": "[lifetime — to be completed by the operator]"
+          },
+          "r2": {
+            "name": "ed_device",
+            "why": "Limits repeated sign-in attempts from the same device, to protect accounts from abuse. It is not a tracking tool.",
+            "how": "[lifetime — to be completed by the operator]"
+          },
+          "r3": {
+            "name": "ed_lang",
+            "why": "Remembers the language you chose: Romanian or English.",
+            "how": "1 year"
+          }
+        }
+      },
+      "note2": "None of them is used for tracking or for advertising.",
+      "h3": "When you see this notice in the app",
+      "p3": "Once, the first time you use it. We show it again only if the list above changes.",
+      "link3": {
+        "label": "Read the privacy policy",
+        "to": "privacy"
+      }
+    }
+  },
+  "accessibility": {
+    "meta": {
+      "title": "Accessibility statement",
+      "description": "How we work to make EventDesk usable by everyone: the WCAG 2.2 AA target, what we do, and how to tell us about a problem."
+    },
+    "title": "Accessibility <em>statement</em>",
+    "lead": "We want EventDesk to be usable by everyone, on any device and with any assistive technology.",
+    "body": {
+      "h1": "Our target",
+      "p1": "The compliance target for the public site and for the planning app is WCAG 2.2, level AA.",
+      "h2": "What we do towards it",
+      "ul2": {
+        "a": "Text has a contrast of at least 4.5:1 against its background, in both the light and the dark theme.",
+        "b": "Buttons and links have touch targets of at least 44 by 44 pixels.",
+        "c": "Everything can be used with the keyboard alone, with a visible focus outline and a skip-to-content link.",
+        "d": "Nothing can be done by dragging only: every arrangement also has a path of simple taps.",
+        "e": "A state is never conveyed by colour alone; words always accompany it.",
+        "f": "We respect your reduced-motion preference and the theme chosen in your system.",
+        "g": "Forms have visible labels, and errors appear beside the field and say how to fix them."
+      },
+      "h3": "What we know is not right yet",
+      "p3": "[Known limitations — to be completed after evaluation.]",
+      "h4": "Evaluation",
+      "ul4": {
+        "a": "Date of this statement: [date — to be completed by the operator].",
+        "b": "Evaluation method: [method — to be completed: self-assessment or external audit].",
+        "c": "Last reviewed: [date — to be completed by the operator]."
+      },
+      "h5": "Tell us if something gets in your way",
+      "p5a": "If a page cannot be used with your screen reader, with the keyboard or with enlarged text, write to us at [address for accessibility feedback — to be completed]. Tell us the page, what you were trying to do and what technology you use. We reply within [response time — to be completed].",
+      "p5b": "If our answer does not satisfy you, you can turn to the competent authority: [supervisory authority — to be completed]."
+    }
+  },
+  "moderation": {
+    "meta": {
+      "title": "Moderation rules",
+      "description": "What content is not allowed on EventDesk, how anyone can report a problem, and what happens next."
+    },
+    "title": "Moderation <em>rules</em>",
+    "lead": "What has no place on EventDesk, how you can report a problem, and what happens once you have.",
+    "body": {
+      "h1": "What is not allowed",
+      "ul1": {
+        "a": "content that is illegal under Romanian or European law;",
+        "b": "listings of businesses that do not exist, that have no right to offer the service described, or that use someone else’s name;",
+        "c": "false statements presented as facts: capacities, permits, insurance, prices;",
+        "d": "other people’s personal data, published without the right to do so;",
+        "e": "content that incites hatred, harasses or threatens;",
+        "f": "unsolicited bulk messages sent through invitations or enquiries."
+      },
+      "h2": "What we check before publication",
+      "p2": "Every listing, every venue drawing and every catalogue passes a moderator before it becomes public. The moderator cannot be a member of the business being checked. While an edit is pending, the previously approved version stays visible.",
+      "h3": "How to report a problem",
+      "p3": "Anyone can make a report, with or without an account. Help us with three things: where the content is (the page address), why you believe it is illegal or against the rules and, if you want an answer, an email address.",
+      "link3": {
+        "label": "Open the report form",
+        "to": "report"
+      },
+      "h4": "What happens next",
+      "ol4": {
+        "a": "We confirm that we received the report, if you left an address.",
+        "b": "A person reviews it. We do not take moderation decisions by automated means alone.",
+        "c": "We decide: the content stays, is restricted, is removed, or the account is suspended.",
+        "d": "We send the decision and its reason both to the person who reported and to the person affected.",
+        "e": "The report and the decision are kept in our audit log."
+      },
+      "h5": "If you disagree with the decision",
+      "p5": "You can ask for the decision to be reviewed: [review procedure and time limit — to be completed by the operator].",
+      "h6": "Unclaimed listings",
+      "p6": "A business added by EventDesk from public sources can ask at any time to claim, correct or remove its listing. We act on removal and objection requests within 30 days.",
+      "link6": {
+        "label": "See how it works for businesses",
+        "to": "business"
+      },
+      "h7": "Point of contact and transparency",
+      "p7": "EventDesk applies Regulation (EU) 2022/2065 on digital services. The point of contact for authorities and for users: [point of contact — to be completed by the operator]. Each year we publish a transparency report on the reports received and the decisions taken: [report address — to be completed]."
+    }
+  }
+}

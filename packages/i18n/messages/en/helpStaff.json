@@ -1,0 +1,85 @@
+{
+  "staff-console-access": {
+    "title": "Access to the console",
+    "summary": "What you need in order to enter the console, and why the session ends.",
+    "keywords": "console staff access role two-step session 30 minutes 12 hours sign in again",
+    "where": "Console",
+    "need": "An active staff role and two-step sign-in.",
+    "body": {
+      "ol1": {
+        "a": "Receive a staff role. Roles are given from “Access”, and every change goes through a second person's approval.",
+        "b": "Turn on two-step sign-in in the account's security settings and keep the recovery codes somewhere safe.",
+        "c": "Sign out and sign in again, with the second step. The console opens only from a session that passed both steps.",
+        "d": "Open the console. You see only the sections your roles cover."
+      },
+      "note1": "Until two-step sign-in is on, no console page and no console action is available. The “Console access” page tells you which step is missing.",
+      "h1": "The console session",
+      "p1": "The session lasts at most 12 hours from sign-in and ends after 30 minutes without activity in the console. An ended session is not reopened: sign out and sign in again. The time it expires is shown in the console menu.",
+      "note2": "The menu only hides links. Every page and every action checks the role itself, so a guessed link does not help.",
+      "p2": "Every action in the console lands in the “Audit log”, with who did it and when. Entries cannot be changed or deleted by anyone.",
+      "p3": "Never write sign-in codes, recovery codes or tokens in tickets, messages or notes."
+    }
+  },
+  "staff-approvals": {
+    "title": "Approvals: the second person, and compliance access",
+    "summary": "Irreversible actions need a second person. Access to a person's records needs three.",
+    "keywords": "approvals second person four eyes request reject compliance three people data access",
+    "where": "Console → Approvals · Console → Compliance access",
+    "need": "Staff with the right role for the action requested.",
+    "body": {
+      "p1": "Some actions cannot be done by one person alone: changing staff roles, deploying to production, approving a listing claim, the monetization switch, prices, refunds and compliance access.",
+      "ol1": {
+        "a": "Someone requests the action from its section. The request appears in “Approvals”.",
+        "b": "A second person opens “Approvals” and reads who asked, for what and when.",
+        "c": "They press “Approve the request” or “Reject the request”. When rejecting they write the “Reason for rejection”; the requester sees it and it stays in the audit log."
+      },
+      "note1": "Whoever asked cannot also approve. On your own request you see “You cannot approve or reject your own request. A second person is needed.”",
+      "note2": "If only one person has a staff role, requests stay queued with no effect until someone else receives a role and approves them.",
+      "h1": "Compliance access",
+      "p2": "Access to a person's retained records is requested only for a legal reason, for example a data access request. Three people are needed: the privacy owner requests, and two other staff members approve.",
+      "p3": "Write the reason plainly, without extra personal data. The request, the approvals and every read stay in the audit log."
+    }
+  },
+  "staff-moderation": {
+    "title": "The moderation queue and content reports",
+    "summary": "Every new listing and every change waits for a decision. What is already public stays as it is until then.",
+    "keywords": "moderation queue listing approve reject reason content reports businesses suspension restriction",
+    "where": "Console → Moderation · Content reports · Businesses",
+    "need": "The listing moderator or platform admin role.",
+    "body": {
+      "ol1": {
+        "a": "Open “Moderation” and pick a submission from the queue.",
+        "b": "Under “What changes” compare the proposed version with the public one. Under “Proposed content” you read everything that would appear.",
+        "c": "Check the text, photos, categories and contact against the published moderation rules.",
+        "d": "Approve or reject. When rejecting, write a reason the business will understand: they receive it exactly as written and can correct their text."
+      },
+      "note1": "You cannot decide a submission from a business whose team you belong to. Leave it to a colleague.",
+      "note2": "The public version stays unchanged until you decide. A rejection does not take the listing out of the directory.",
+      "h1": "What does not pass",
+      "p1": "These do not pass: praise from customers, stars or scores, promises that cannot be checked, someone else's contact details. A listing shows only facts: ONRC and the insurance you have seen, with the date it is valid until.",
+      "h2": "Reports and businesses",
+      "p2": "“Content reports” gathers what anyone flags through the report form. Each report gets a decision with a reason. Under “Businesses” you see each business's status; a restriction or a suspension is applied from the business's page, with the reason recorded. The unclaimed listings, added from public sources, are there too."
+    }
+  },
+  "staff-incidents-deploys": {
+    "title": "Incidents and deployments",
+    "summary": "How you tell guests that something is not working, and how a new version reaches production.",
+    "keywords": "incident status message deployment deploy version tag emergency rollback production",
+    "where": "Console → Incidents · Console → Deployments",
+    "need": "The security administrator or platform admin role.",
+    "body": {
+      "h1": "Incidents",
+      "ol1": {
+        "a": "Open “Incidents” and press “Open an incident”.",
+        "b": "Write the “Message in Romanian” and the “Message in English”, simply, without technical detail. For example: “Replies are not being saved at the moment. We will be back shortly.”",
+        "c": "Press “Open the incident”. The message appears at once on guest pages, in their language.",
+        "d": "When it is fixed, press “Resolve the incident”."
+      },
+      "note1": "If you leave the messages empty, guests see the default text “Something is not working”. Do not promise a time you cannot keep.",
+      "h2": "Deployments",
+      "p1": "A version tag from the connected repository is always what gets deployed. You press “Request deployment”, and a second person approves in “Approvals”. While a deployment is running, no other deployment, emergency deployment or rollback can start.",
+      "note2": "“Emergency deployment” is only for an urgent security fix. It starts at once, without a second person, and is marked as an emergency in the audit log, together with your reason.",
+      "p2": "The page shows the live version and the history of every deployment. If the link to the repository is not configured, the page says what the operator has to set on the server; those values are never written anywhere in the console or in help."
+    }
+  }
+}

@@ -1,0 +1,200 @@
+{
+  "title": "Tasks",
+  "summary": "{done} of {total} done",
+  "back": "Tasks",
+  "noDue": "no due date",
+  "noOwner": "no owner",
+  "checklistProgress": "{done}/{total} ticked",
+  "childrenProgress": "{done}/{total} child tasks",
+  "showMore": "Show more ({shown} of {total})",
+  "boardEmpty": "Nothing here.",
+  "boardMore": "{count} more in the list",
+  "status": {
+    "label": "Status of “{title}”",
+    "saving": "Saving…",
+    "todo": "To do",
+    "doing": "In progress",
+    "waiting": "Waiting",
+    "done": "Done"
+  },
+  "tags": {
+    "overdue": "Overdue",
+    "doneBeforeDependency": "Done before what it depends on",
+    "doneWithOpenChildren": "Done, with open child tasks",
+    "blocked": {
+      "one": "Waiting for one task",
+      "few": "Waiting for {count} tasks",
+      "other": "Waiting for {count} tasks"
+    },
+    "offered": "Offer pending"
+  },
+  "groups": {
+    "overdue": "Overdue",
+    "m12": "12 months before",
+    "m9": "9 months before",
+    "m6": "6 months before",
+    "m3": "3 months before",
+    "m1": "The last month",
+    "week": "The week of the event",
+    "after": "After the event",
+    "undated": "No due date"
+  },
+  "views": {
+    "label": "Ways to view the tasks",
+    "list": "List",
+    "board": "Board",
+    "calendar": "Calendar"
+  },
+  "filters": {
+    "label": "Whose tasks",
+    "all": "All",
+    "mine": "Mine",
+    "priority": "Linked to the priority “{text}”",
+    "clear": "Show all tasks"
+  },
+  "empty": {
+    "title": "No tasks yet",
+    "body": "Type the first task in the field above. You can add the due date now or later.",
+    "bodyReadOnly": "The organisers have not added any tasks yet.",
+    "filteredTitle": "Nothing for this filter",
+    "filteredBody": "No task matches what you chose."
+  },
+  "calendar": {
+    "prev": "Previous month",
+    "next": "Next month",
+    "emptyMonth": "Nothing due this month.",
+    "occasionDay": "The event",
+    "more": "{count} more",
+    "truncated": "This month has too many tasks to show them all here. The rest are in the list."
+  },
+  "add": {
+    "title": "New task",
+    "childTitle": "New child task",
+    "placeholder": "For example: Book the photographer",
+    "submit": "Add the task",
+    "submitting": "Adding…",
+    "withDetails": "Add a task with an owner, a priority and notes"
+  },
+  "fields": {
+    "title": "What needs doing",
+    "due": "Due date",
+    "owner": "Owner",
+    "ownerHint": "A task has one accountable owner. If you choose someone else, we send them an offer they can accept or decline.",
+    "ownerHintEdit": "To give it to someone else, use “Offer the task” on the task page.",
+    "priority": "Priority from the brief",
+    "priorityHint": "Link the task to one of the occasion's priorities.",
+    "noPriority": "None",
+    "parent": "Part of",
+    "parentHint": "Choose the bigger task this belongs to.",
+    "noParent": "Not part of another task",
+    "notes": "Notes",
+    "status": "Status",
+    "stage": "Stage"
+  },
+  "owner": {
+    "keep": "Leave as it is",
+    "me": "Me",
+    "none": "Nobody for now",
+    "offerTo": "Offer to {name}"
+  },
+  "new": {
+    "title": "New task",
+    "description": "A title is enough. You can fill in the rest at any time.",
+    "submit": "Add the task"
+  },
+  "edit": {
+    "open": "Edit",
+    "title": "Edit the task",
+    "submit": "Save the task"
+  },
+  "delete": {
+    "open": "Delete",
+    "title": "Delete this task?",
+    "body": "“{title}” is deleted together with its checklist. Its child tasks stay in the plan.",
+    "keep": "Keep the task",
+    "submit": "Delete the task"
+  },
+  "checklist": {
+    "title": "Checklist",
+    "empty": "No items yet.",
+    "addLabel": "New item",
+    "add": "Add the item",
+    "adding": "Adding…",
+    "remove": "Delete the item “{label}”"
+  },
+  "children": {
+    "title": "Child tasks",
+    "empty": "No child tasks."
+  },
+  "dependencies": {
+    "title": "Depends on",
+    "empty": "It does not depend on any other task.",
+    "addLabel": "Waits for the task",
+    "choose": "Choose a task",
+    "add": "Add the link",
+    "adding": "Adding…",
+    "remove": "Remove the link to “{title}”",
+    "requiredBy": "Waiting for this one:"
+  },
+  "offer": {
+    "title": "Delegation",
+    "decline": "Decline",
+    "accept": "Accept the task",
+    "accepting": "Accepting…",
+    "declineTitle": "Decline this task?",
+    "declineBody": "“{title}” goes back to {from}, who offered it to you. It does not go to anyone else.",
+    "reasonLabel": "The reason, briefly",
+    "reasonHint": "The person who offered you the task will see it.",
+    "declining": "Sending…",
+    "declineSubmit": "Decline the task",
+    "keepThinking": "Let me think",
+    "withdraw": "Withdraw the offer",
+    "withdrawing": "Withdrawing…",
+    "nobodyToOffer": "Nobody else is on the team. Invite someone from “Team and roles”.",
+    "toLabel": "Offer the task to",
+    "toHint": "They become the owner only if they accept.",
+    "choose": "Choose a team member",
+    "offering": "Sending the offer…",
+    "submit": "Offer the task",
+    "toYouTitle": "{from} is offering you this task",
+    "waitingTitle": "Offered to {to} — waiting for an answer",
+    "toYouBody": "If you accept, you become its owner. If you decline, it goes back to the person who offered it.",
+    "waitingBody": "Offer sent on {date}. Until they answer, the owner stays as it is.",
+    "declinedTitle": "{to} declined the task",
+    "declinedBody": "Reason: “{reason}”. The task went back to {from}.",
+    "none": "The task is not on offer to anyone."
+  },
+  "violations": {
+    "doneBeforeDependency": {
+      "title": "Marked done before what it depends on",
+      "body": "At least one task it depends on is not done yet. Check the “Depends on” list."
+    },
+    "doneWithOpenChildren": {
+      "title": "Done, with open child tasks",
+      "body": "Finish the child tasks or reopen this one, so the plan shows what is true."
+    },
+    "blocked": {
+      "title": {
+        "one": "Waiting for one unfinished task",
+        "few": "Waiting for {count} unfinished tasks",
+        "other": "Waiting for {count} unfinished tasks"
+      },
+      "body": "You can start it anyway; we only point out what is holding it up."
+    }
+  },
+  "errors": {
+    "cannotAdd": "Your role cannot add tasks.",
+    "cannotEdit": "You cannot change this task.",
+    "otherTaskMissing": "The chosen task no longer exists in this occasion.",
+    "selfParent": "A task cannot be part of itself.",
+    "parentLoop": "The chosen task is already part of this one. Choose another.",
+    "selfDependency": "A task cannot depend on itself.",
+    "dependencyLoop": "The chosen task already depends on this one. The link would make a loop.",
+    "cannotDelegate": "Only organisers, workstream leads and the task's owner can offer it to someone.",
+    "offerToSelf": "To take the task yourself, choose “Me” as the owner.",
+    "offerTargetMissing": "That person is no longer on the team, or has not accepted the invitation yet.",
+    "notYourOffer": "Only the person the task was offered to can answer.",
+    "offerClosed": "This offer is no longer open.",
+    "reasonRequired": "Say briefly why you are declining (at least 3 characters)."
+  }
+}

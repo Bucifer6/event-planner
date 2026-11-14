@@ -1,0 +1,120 @@
+{
+  "title": "Revendică listarea",
+  "eyebrow": "Listare nerevendicată",
+  "lead": "„{name}” a fost adăugată de EventDesk din informații publice. Dacă este firma ta, o poți revendica gratuit: o corectezi, o completezi și primești cereri de la organizatori.",
+  "source": "Sursa publică a informațiilor",
+  "viewListing": "Vezi listarea",
+  "steps": {
+    "title": "Cum funcționează",
+    "one": "Începi revendicarea din contul tău EventDesk.",
+    "twoCode": "Trimitem un cod la adresa de email publicată de firmă ({email}). Îl introduci aici.",
+    "twoModerator": "Sursa publică nu are o adresă de email, așa că un moderator verifică revendicarea față de sursa publică.",
+    "three": "O a doua persoană din echipa EventDesk aprobă. Apoi listarea devine a firmei tale."
+  },
+  "alreadyClaimed": {
+    "title": "Listarea a fost deja revendicată",
+    "body": "Dacă e firma ta și nu tu ai revendicat-o, scrie-ne prin formularul de raportare."
+  },
+  "report": "Raportează o problemă",
+  "signIn": {
+    "title": "Intră în cont ca să revendici",
+    "body": "Ai nevoie de un cont cu adresă de email. După autentificare te aducem înapoi la această pagină.",
+    "action": "Intră în cont"
+  },
+  "noEmail": {
+    "title": "Contul tău nu are adresă de email",
+    "body": "O firmă are nevoie de un proprietar cu adresă de email. Adaugă una în contul tău, apoi revino.",
+    "action": "Deschide contul"
+  },
+  "form": {
+    "title": "Începe revendicarea",
+    "businessName": "Numele firmei",
+    "businessNameHint": "Așa va apărea firma ta în EventDesk. Îl poți schimba mai târziu.",
+    "ownBusiness": "Listarea va fi atașată firmei tale „{name}”.",
+    "statement": "Rolul tău în firmă",
+    "statementHint": "De exemplu „administrator” sau „proprietar”. Ajută moderatorul.",
+    "submit": "Începe revendicarea",
+    "submitting": "Se pornește…",
+    "optional": "opțional",
+    "codeNote": "Codul pleacă doar la adresa publicată de firmă, niciodată la o adresă scrisă aici."
+  },
+  "code": {
+    "title": "Introdu codul",
+    "body": "Am trimis un cod din șase cifre la {email}. Este valabil 15 minute.",
+    "label": "Codul din email",
+    "submit": "Confirmă codul",
+    "submitting": "Se verifică…",
+    "resend": "Trimite un cod nou",
+    "resending": "Se trimite…",
+    "resent": "Am trimis un cod nou.",
+    "cancel": "Renunță la revendicare",
+    "cancelling": "Se anulează…"
+  },
+  "status": {
+    "verifiedTitle": "Cod confirmat",
+    "verifiedBody": "Revendicarea așteaptă verificarea și aprobarea echipei EventDesk. Te anunțăm aici; nu mai ai nimic de făcut.",
+    "needsCheckTitle": "Revendicarea așteaptă verificarea",
+    "needsCheckBody": "Un moderator o compară cu sursa publică. Dacă are nevoie de un document, te contactează la adresa contului tău.",
+    "inApprovalTitle": "Verificată, la aprobare",
+    "inApprovalBody": "O a doua persoană din echipă trebuie să aprobe. Până atunci listarea rămâne nerevendicată.",
+    "approvedTitle": "Listarea este a firmei tale",
+    "approvedBody": "O poți corecta și completa din zona firmei. Modificările trec prin verificare, ca la orice listare.",
+    "approvedAction": "Deschide zona firmei",
+    "rejectedTitle": "Revendicarea nu a fost aprobată",
+    "rejectedReason": "Motivul: {reason}",
+    "rejectedClaimed": "Listarea a fost revendicată de altcineva.",
+    "cancelledTitle": "Ai renunțat la această revendicare",
+    "again": "Poți începe din nou mai jos."
+  },
+  "remove": {
+    "title": "Cere eliminarea sau corectarea",
+    "lead": "„{name}” a fost adăugată din informații publice. Dacă reprezinți firma, poți cere eliminarea listării, poți obiecta sau poți cere o corectură. Răspundem în cel mult 30 de zile.",
+    "viaInvitation": "Ai ajuns aici din invitația trimisă la adresa publicată a firmei. O cerere de eliminare sau o obiecție se aplică pe loc.",
+    "kind": "Ce ceri",
+    "kinds": {
+      "removal": "Eliminarea listării",
+      "objection": "Obiectez față de listare",
+      "correction": "O corectură"
+    },
+    "message": "Detalii",
+    "messageHint": "La o corectură, scrie ce este greșit și cum e corect.",
+    "contact": "Adresă de email pentru răspuns",
+    "contactHint": "O folosim doar pentru această cerere.",
+    "trap": "Lasă acest câmp gol",
+    "submit": "Trimite cererea",
+    "submitting": "Se trimite…",
+    "optional": "opțional",
+    "doneNow": "Listarea a fost retrasă și firma nu va mai fi adăugată din surse publice.",
+    "doneLater": "Am înregistrat cererea. Îi dăm curs în cel mult 30 de zile.",
+    "claimInstead": "Dacă vrei să păstrezi listarea și s-o administrezi tu, o poți revendica.",
+    "privacy": "Păstrăm cererea și modul în care a fost rezolvată timp de 3 ani, ca dovadă.",
+    "notAvailable": {
+      "title": "Nu există o listare nerevendicată aici",
+      "body": "Listarea a fost deja retrasă sau revendicată. Pentru o listare revendicată, folosește formularul de raportare."
+    }
+  },
+  "approval": {
+    "describe_code": "Revendicare pentru „{listing}” — cod confirmat la adresa publicată",
+    "describe_moderator": "Revendicare pentru „{listing}” — verificată de moderator față de sursa publică"
+  },
+  "errors": {
+    "codeInvalid": "Codul nu este corect sau a expirat. Cere unul nou și încearcă din nou.",
+    "emailRequired": "Ai nevoie de un cont cu adresă de email ca să revendici o listare.",
+    "tooManyCodes": "Am trimis deja numărul maxim de coduri pentru această revendicare. Renunță la ea și începe din nou mai târziu.",
+    "notReady": "Revendicarea nu este în starea potrivită pentru această acțiune.",
+    "checkRequired": "Descrie verificarea față de sursa publică, cel puțin 10 caractere."
+  },
+  "email": {
+    "code": {
+      "subject": "Codul pentru revendicarea listării „{listing}”",
+      "body": "Cineva a cerut revendicarea listării „{listing}” din directorul EventDesk. Dacă ești tu, introdu acest cod în pagina de revendicare:",
+      "note": "Codul este valabil {minutes} minute. Dacă nu ai cerut tu revendicarea, ignoră acest mesaj: fără cod, nimic nu se schimbă."
+    }
+  },
+  "cta": {
+    "title": "Este firma ta?",
+    "claim": "Revendică listarea",
+    "body": "Gratuit. După verificare o poți corecta, completa și poți primi cereri.",
+    "remove": "Cere eliminarea sau o corectură"
+  }
+}

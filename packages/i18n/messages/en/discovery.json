@@ -1,0 +1,287 @@
+{
+  "title": "Discovery",
+  "description": "Businesses found in lawful public sources. Nothing becomes public until a moderator approves. Every run is logged.",
+  "tabsLabel": "Sections",
+  "tabs": {
+    "sources": "Sources",
+    "drafts": "Drafts",
+    "runs": "Runs",
+    "objections": "Removals and objections",
+    "claims": "Claims"
+  },
+  "figures": {
+    "pending": "Drafts to review",
+    "duplicates": "Possible duplicates",
+    "objections": "Open removal requests",
+    "claims": "Open claims",
+    "now": "now",
+    "overdue": "{n} past 30 days",
+    "onTime": "all on time"
+  },
+  "kinds": {
+    "onrc_public": "ONRC public data",
+    "business_page": "Businesses' own pages",
+    "licensed_dataset": "Licensed dataset"
+  },
+  "sources": {
+    "add": "Add a source",
+    "addFirst": "Add the first source",
+    "emptyTitle": "No source configured",
+    "emptyBody": "A source is a dataset under contract, a list of businesses' public pages or the ONRC adapter. It starts paused.",
+    "cols": {
+      "name": "Source",
+      "kind": "Kind",
+      "terms": "Basis",
+      "rate": "Limit",
+      "state": "State",
+      "lastRun": "Last run",
+      "actions": "Actions"
+    },
+    "rate": "{n} requests/hour",
+    "enabled": "Active",
+    "paused": "Paused",
+    "neverRun": "never",
+    "lastRunSummary": "{date} · {seen} seen · {drafts} drafts · {duplicates} duplicates",
+    "run": "Run now",
+    "running": "Queueing…",
+    "queued": "The run has been queued. It appears in the log when it starts.",
+    "alreadyQueued": "A run of this source is already queued.",
+    "enable": "Switch the source on",
+    "pause": "Pause the source",
+    "switching": "Switching…",
+    "edit": "Configure",
+    "editNamed": "Configure the source {name}",
+    "pendingDrafts": "{n} drafts waiting"
+  },
+  "sourceForm": {
+    "newTitle": "New source",
+    "editTitle": "Configure the source",
+    "back": "Back to sources",
+    "name": "Name",
+    "kind": "Kind",
+    "kindLocked": "A source's kind cannot change after it is created.",
+    "terms": "Basis for use",
+    "termsHint": "The contract number, licence or terms that allow using the source.",
+    "rate": "Requests per hour limit",
+    "rateHint": "How many HTTP requests the source may make in an hour, robots.txt included.",
+    "format": "Dataset format",
+    "formats": {
+      "csv": "CSV",
+      "json": "JSON"
+    },
+    "url": "File address (https)",
+    "urlHint": "Optional if you paste the content below.",
+    "inline": "File content",
+    "inlineHint": "Columns: name, category, county, locality, contact, email, phone, identifier, website, url. At most 2 MB.",
+    "urls": "Businesses' public pages",
+    "urlsHint": "One https address per line, at most 200. Only the page's schema.org data and meta tags are read.",
+    "defaultCategory": "Default category",
+    "defaultCategoryHint": "For rows that name no category.",
+    "none": "None",
+    "targetCategories": "Only these categories",
+    "targetCategoriesHint": "Category ids separated by commas. Empty = all.",
+    "targetCounties": "Only these counties",
+    "targetCountiesHint": "County codes separated by commas, for example CJ, B, IF. Empty = all.",
+    "onrcNote": "The ONRC source uses an adapter installed by the operator. Without one, the run is logged and produces nothing.",
+    "create": "Add the source",
+    "save": "Save the configuration",
+    "saving": "Saving…",
+    "saved": "Configuration saved.",
+    "created": "Source added. It is paused until you switch it on.",
+    "optional": "optional"
+  },
+  "drafts": {
+    "filterLabel": "State",
+    "states": {
+      "pending": "To review",
+      "duplicate_review": "Possible duplicates",
+      "approved": "Approved",
+      "rejected": "Rejected"
+    },
+    "emptyTitle": "No drafts here",
+    "emptyBody": "Drafts appear after a source has run.",
+    "emptyAction": "See the sources",
+    "cols": {
+      "select": "Select",
+      "name": "Business",
+      "category": "Category",
+      "area": "Area",
+      "contact": "Public contact",
+      "source": "Source",
+      "collected": "Collected"
+    },
+    "selectNamed": "Select {name}",
+    "guessMissing": "to fill in",
+    "emailYes": "public email: yes",
+    "emailNo": "public email: no",
+    "sourceLink": "source page",
+    "duplicateOfListing": "Looks like the listing \"{name}\"",
+    "duplicateOfDraft": "Looks like the draft \"{name}\"",
+    "fix": "Correct",
+    "fixNamed": "Correct the category and locality for {name}",
+    "batchTitle": "Decision for the selected drafts",
+    "batchBody": "One decision and one reason for the whole batch. Approval publishes a minimal listing, labelled \"Added by EventDesk — not claimed yet\".",
+    "action": "Decision",
+    "actions": {
+      "approve": "Approve and publish",
+      "reject": "Reject",
+      "discard": "Discard (duplicate or noise)"
+    },
+    "reason": "Reason for the batch",
+    "reasonHint": "Kept in the log and in the moderation record.",
+    "submit": "Apply the decision",
+    "submitting": "Applying…",
+    "done": {
+      "approve": "Batch approved: the listings are public.",
+      "reject": "Batch rejected.",
+      "discard": "Batch discarded."
+    },
+    "needModerator": "Approving needs the listing moderator role.",
+    "fixTitle": "Category and locality",
+    "fixBody": "You correct only the guessed classification. The name, the contact and the source stay as collected.",
+    "category": "Category",
+    "locality": "Locality",
+    "choose": "Choose…",
+    "saveFix": "Save the classification",
+    "savingFix": "Saving…",
+    "savedFix": "Classification saved.",
+    "back": "Back to drafts",
+    "decidedOn": "Decided {date}",
+    "listing": "See the listing",
+    "invited": "Invitation sent {date}",
+    "notInvited": "No invitation: the source has no email"
+  },
+  "runs": {
+    "emptyTitle": "No runs yet",
+    "emptyBody": "The log shows every run: the source, what it saw, the drafts it created and the duplicates it set aside.",
+    "cols": {
+      "started": "Started",
+      "source": "Source",
+      "seen": "Seen",
+      "drafts": "Drafts",
+      "duplicates": "Duplicates",
+      "skipped": "Skipped",
+      "outcome": "Outcome",
+      "by": "Started by"
+    },
+    "finished": "Finished",
+    "running": "Running",
+    "stopped": {
+      "kill_switch": "Stopped: the source was paused",
+      "rate_limit": "Stopped: hourly limit"
+    },
+    "errors": "{n} errors",
+    "schedule": "schedule",
+    "staff": "staff"
+  },
+  "objections": {
+    "tabs": {
+      "open": "Open",
+      "handled": "Handled"
+    },
+    "emptyTitle": "No open requests",
+    "emptyBody": "Removal requests, objections and corrections sent for unclaimed listings appear here, with the 30-day deadline.",
+    "emptyHandled": "No handled requests",
+    "kinds": {
+      "removal": "Removal",
+      "objection": "Objection",
+      "correction": "Correction"
+    },
+    "received": "Received {date}",
+    "due": "Due: {date}",
+    "daysLeft": "{n} days left",
+    "overdue": "Past the deadline",
+    "viaInvitation": "through the invitation link",
+    "contact": "Reply to: {email}",
+    "noMessage": "no message",
+    "decision": "Decision",
+    "decisions": {
+      "honour": "Honour the request",
+      "decline": "Decline"
+    },
+    "honourNote": "For a removal or an objection the listing is withdrawn at once and the business is never discovered again.",
+    "note": "What was done and why",
+    "noteHint": "The evidence of handling, kept 3 years.",
+    "submit": "Record the decision",
+    "submitting": "Recording…",
+    "done": "Decision recorded.",
+    "states": {
+      "received": "Open",
+      "honoured": "Honoured",
+      "declined": "Declined"
+    },
+    "handled": "Handled {date}"
+  },
+  "claims": {
+    "tabs": {
+      "open": "Open",
+      "decided": "Closed"
+    },
+    "emptyTitle": "No open claims",
+    "emptyBody": "When someone claims an unclaimed listing, the request appears here after the proof.",
+    "emptyDecided": "No closed claims",
+    "states": {
+      "code_sent": "Code sent, not confirmed",
+      "verified": "Code confirmed",
+      "needs_check": "To check by hand",
+      "in_approval": "In approval",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Cancelled"
+    },
+    "methods": {
+      "code": "Code to the published address",
+      "moderator": "Check by a moderator"
+    },
+    "claimant": "Claimant: {email}",
+    "business": "Business: {name}",
+    "existingBusiness": "existing business",
+    "statement": "The claimant's statement: {text}",
+    "source": "The public source",
+    "contactRoute": "Public contact: {route}",
+    "check": "The check against the public source",
+    "checkHint": "What you compared with what: for example the administrator's name in the register with the document sent.",
+    "checkHintCode": "Optional: the code sent to the published address was confirmed.",
+    "submit": "Send for approval",
+    "submitting": "Sending…",
+    "submitted": "Sent for approval. A second person approves it under \"Approvals\".",
+    "reject": "Reject the claim",
+    "rejectReason": "The reason, for the claimant",
+    "rejecting": "Rejecting…",
+    "rejected": "Claim rejected.",
+    "inApproval": "Waiting for a second person under \"Approvals\".",
+    "approvals": "Open approvals",
+    "recorded": "Check recorded: {note}"
+  },
+  "errors": {
+    "termsRequired": "Write the basis that allows using the source.",
+    "urlHttps": "Use public https addresses, without a user name and password.",
+    "datasetRequired": "Give the file address or paste the content.",
+    "urlsRequired": "Write at least one address.",
+    "tooManyUrls": "At most 200 addresses per source.",
+    "inlineTooLarge": "The content is over 2 MB.",
+    "nameTaken": "A source with this name already exists.",
+    "paused": "The source is paused. Switch it on before running it.",
+    "alreadyDecided": "It has already been decided.",
+    "nothingSelected": "Select at least one draft.",
+    "reasonRequired": "Write the reason, at least 10 characters.",
+    "draftIncomplete": "\"{name}\" has no category and locality from the lists yet. Correct it, then approve.",
+    "listingClaimed": "The listing has been claimed in the meantime; it can no longer be withdrawn from here."
+  },
+  "email": {
+    "invitation": {
+      "subject": "\"{listing}\" appears in the EventDesk directory",
+      "who": "EventDesk, a Romanian event-planning app, has added a minimal listing for \"{listing}\" to its directory, from public information ({source}, collected on {date}).",
+      "what": "The listing shows only the name, the category, the area and the public contact. It is labelled \"Added by EventDesk — not claimed yet\" and receives no enquiries through the platform.",
+      "claim": "Claim the listing",
+      "correct": "Once claimed, you can correct and complete it. Claiming is free and is verified with a code sent to this address.",
+      "remove": "If you want it removed or you object to it, use this link: {url} — the listing is withdrawn at once.",
+      "once": "This is the only message you will receive from EventDesk about this listing. We send no advertising."
+    }
+  },
+  "kindHelp": {
+    "licensed_dataset": "A CSV or JSON file received under contract: paste it here or give its https address.",
+    "business_page": "A list of businesses' public pages. Only each page's schema.org data and meta tags are read.",
+    "onrc_public": "The Trade Register's public data, through an adapter installed by the operator."
+  }
+}

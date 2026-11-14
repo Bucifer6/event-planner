@@ -1,0 +1,125 @@
+/* Guest link layout — tokens only (docs/build/16-design.md). */
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.stepHead {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+}
+
+/* The question speaks in the occasion's voice: Bodoni, generous, never shouting. */
+.question {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  scroll-margin-top: var(--s-4);
+}
+/* focused by script when the step changes (for screen readers); it is not a control */
+.question:focus, .question:focus-visible { outline: none; }
+
+.stepper {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.household {
+  font-family: var(--font-text);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--ink-2);
+}
+
+.venue {
+  font-size: var(--text-md);
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: var(--hair) solid var(--line);
+}
+
+.blockTitle {
+  font-family: var(--font-display);
+  font-size: var(--display-sm);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.pollRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-3) 0;
+  border-top: var(--hair) solid var(--line);
+}
+.pollRow:first-child { border-top: 0; padding-top: 0; }
+
+.need {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding: var(--s-3) 0;
+  border-top: var(--hair) solid var(--line);
+}
+.need:first-child { border-top: 0; padding-top: 0; }
+
+.needControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: var(--s-3);
+}
+
+.confirmTitle {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.plain {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  text-align: center;
+  align-items: center;
+  padding: var(--s-6) 0;
+}
+
+.center { text-align: center; }
+.gapTop { margin-top: var(--s-2); }
+
+/* Custom invitation wording (planner-written or confirmed from an assistant's proposal) */
+.wording {
+  margin: var(--s-3) auto 0;
+  max-width: var(--measure);
+}
+.wordingText {
+  white-space: pre-line;
+  line-height: 1.5;
+}

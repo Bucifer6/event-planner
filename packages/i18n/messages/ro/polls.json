@@ -1,0 +1,59 @@
+{
+  "title": "Sondaj de date",
+  "description": "Propune câteva zile și vezi care li se potrivește invitaților. Tu alegi la final.",
+  "tally": "{yes} da · {maybe} poate · {no} nu",
+  "leader": "Cele mai multe „da”",
+  "noCapacity": "Voturile sunt doar păreri: nu rezervă niciun loc.",
+  "remove": "Scoate ziua",
+  "add": {
+    "title": "Adaugă o zi",
+    "label": "Zi propusă",
+    "hint": "Adaugi câte o zi pe rând, cel mult 12.",
+    "submit": "Adaugă ziua"
+  },
+  "empty": {
+    "title": "Încă nu ai propus nicio zi",
+    "body": "Adaugă prima zi. Fiecare familie va putea vota Da, Poate sau Nu pe linkul ei de invitație."
+  },
+  "hero": {
+    "label": "Ziua preferată până acum",
+    "unit": "„da” pentru {date}",
+    "voted": "Familii care au votat: {count}",
+    "noVotes": "Încă nu a votat nimeni"
+  },
+  "confirm": {
+    "title": "Alege ziua",
+    "body": "Când alegi o zi, îți arătăm mai întâi ce se mută odată cu data. Nimic nu se schimbă până nu confirmi.",
+    "button": "Alege această zi"
+  },
+  "confirmed": {
+    "title": "Data a fost stabilită: {date}",
+    "body": "Invitații o văd pe linkul lor de invitație."
+  },
+  "closed": {
+    "title": "Sondajul este închis",
+    "body": "Nu se mai primesc voturi."
+  },
+  "close": {
+    "button": "Închide sondajul fără să alegi"
+  },
+  "again": {
+    "title": "Un sondaj nou",
+    "body": "Dacă data trebuie hotărâtă din nou, propune alte zile."
+  },
+  "errors": {
+    "needDate": "Alege o zi.",
+    "tooManyDates": "Poți propune cel mult 12 zile.",
+    "closed": "Sondajul s-a încheiat. Nu se mai primesc voturi."
+  },
+  "guest": {
+    "title": "Când ți se potrivește?",
+    "intro": "Gazda alege data împreună cu invitații. Spune-ne ce zile sunt bune pentru voi — votul nu rezervă nimic.",
+    "yes": "Da",
+    "maybe": "Poate",
+    "no": "Nu",
+    "send": "Trimite voturile",
+    "sending": "Se trimit…",
+    "saved": "Am notat voturile. Mulțumim!"
+  }
+}

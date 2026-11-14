@@ -1,0 +1,93 @@
+# Release check (DEP7). Runs when a release tag vX.Y.Z is pushed: the FULL CI on that exact
+# commit, and the result recorded on the commit as the status "release-ci".
+#
+# That status is what makes a tag deployable: the console (packages/core/src/deploys.ts) and
+# deploy.yml both read it and refuse a tag without a green "release-ci" — except the audited
+# emergency path. Nothing is deployed from here.
+#
+# Repository settings this relies on (see docs/build/14-deploy-runbook.md):
+#   - main is a protected branch; tags matching v* are protected (only maintainers create
+#     them, nobody moves or deletes them).
+name: Release check
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  guard:
+    name: Tag is a release cut from main
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      statuses: write
+    steps:
+      - name: Mark the commit as pending
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state=pending -f context=release-ci \
+            -f description="CI is running for ${GITHUB_REF_NAME}" \
+            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" >/dev/null
+
+      - name: Check out with history
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Tag name and ancestry
+        run: |
+          if ! [[ "$GITHUB_REF_NAME" =~ ^v[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z][0-9A-Za-z.]*)?$ ]]; then
+            echo "::error::$GITHUB_REF_NAME is not a release tag (vX.Y.Z)"; exit 1
+          fi
+          if [ "$(git cat-file -t "refs/tags/$GITHUB_REF_NAME")" != "tag" ]; then
+            echo "::error::$GITHUB_REF_NAME is a lightweight tag; releases are annotated tags"; exit 1
+          fi
+          git fetch --quiet origin main
+          if ! git merge-base --is-ancestor "$GITHUB_SHA" origin/main; then
+            echo "::error::$GITHUB_REF_NAME does not point at a commit on main"; exit 1
+          fi
+
+  ci:
+    name: CI on the tagged commit
+    needs: guard
+    permissions:
+      contents: read
+    uses: ./.github/workflows/ci.yml
+    with:
+      ref: ${{ github.sha }}
+
+  record:
+    name: Record the result on the commit
+    needs: [guard, ci]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      statuses: write
+    steps:
+      - name: Post the "release-ci" status
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OK: ${{ needs.guard.result == 'success' && needs.ci.result == 'success' }}
+        run: |
+          if [ "$OK" = "true" ]; then state=success; text="CI passed on ${GITHUB_REF_NAME}"; else state=failure; text="CI did not pass on ${GITHUB_REF_NAME}"; fi
+          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}" \
+            -f state="$state" -f context=release-ci -f description="$text" \
+            -f target_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}" >/dev/null
+          echo "release-ci: $state"
+          [ "$state" = success ]

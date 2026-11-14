@@ -1,0 +1,45 @@
+{
+  "itinerary": {
+    "title": "The itinerary of a trip",
+    "summary": "The legs of the journey, each with the local time and, beside it, the time in Romania. You can import a booking instead of typing it.",
+    "keywords": "itinerary trip travel leg flight time zone import booking ics confirmation",
+    "where": "Your occasion → Itinerary and rooms → Itinerary",
+    "need": "The occasion's planning team.",
+    "body": {
+      "ol1": {
+        "a": "Open “Itinerary and rooms” and go to “Itinerary”.",
+        "b": "Press “Add a leg” and say what it is, from where, to where and at what times.",
+        "c": "Repeat for each flight, train, drive or stay."
+      },
+      "note1": "Every time is shown in the local zone and, beside it, in Romanian time. The date of the occasion is in Romanian time; each leg keeps the time zone of its place.",
+      "h1": "Import a booking",
+      "ol2": {
+        "a": "Press “Import a booking”.",
+        "b": "Paste the confirmation you received or choose the .ics file (under 300 KB). The file is read on your device.",
+        "c": "Press “Show what would be added”.",
+        "d": "Check the preview and confirm it."
+      },
+      "note2": "We read only what is certain — dates, times, flight numbers, the booking code. What we cannot read with certainty is left for you to fill in; we do not guess.",
+      "p1": "The main “Itinerary and rooms” page shows you the next leg, or the one under way, with both times."
+    }
+  },
+  "trip-groups-rooms": {
+    "title": "Groups, packing, transport and rooms",
+    "summary": "You split people into groups, cars and rooms, without a seat or a bed ever being given twice.",
+    "keywords": "groups activities packing list transport cars minibus seats rooms accommodation beds settlement",
+    "where": "Your occasion → Itinerary and rooms",
+    "need": "The occasion's planning team. “Settlement” needs the “Finance” access.",
+    "body": {
+      "ul1": {
+        "a": "“Groups and activities” — press “Add a group” to split people into smaller groups and “Add an activity” for things anyone can sign up for.",
+        "b": "“Packing” — press “New list”. Each list is a task with ticks: you also find it under “Tasks”, with the same ticks.",
+        "c": "“Transport” — press “Add a vehicle” for cars, minibuses or transfers and see who travels with what.",
+        "d": "“Rooms” — press “Add a room”, then choose the room, tick the people and press “Place here”.",
+        "e": "“Settlement” — who paid, who owes and who gives whom, separately for each currency."
+      },
+      "note1": "A seat in a car is taken once, even if two people press at the same moment. In the same way a bed cannot be given twice: the second person sees how many are left.",
+      "p1": "If you tick, for a room, someone already placed in another, you move them to the new room.",
+      "note2": "Settlement uses the same ledger as “Shared costs”. Amounts in different currencies are not mixed."
+    }
+  }
+}

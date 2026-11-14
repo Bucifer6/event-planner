@@ -1,0 +1,58 @@
+{
+  "how-eventdesk-works": {
+    "title": "How EventDesk works",
+    "summary": "The few simple rules the whole app follows, so you know what to expect.",
+    "keywords": "principles rules free preview unknown private facts correction getting started basics",
+    "where": "Everywhere in the app",
+    "body": {
+      "p1": "EventDesk helps you plan an occasion — a picnic, a birthday, a wedding, a christening, a New Year's Eve party or a trip — together with the people who help you. For planners it is free: creating an occasion costs nothing.",
+      "h1": "Five things to remember",
+      "ul1": {
+        "a": "See before you apply. Important changes (moving the date, removing a household, postponing) appear first as a preview. Nothing is applied until you press “Apply the changes”.",
+        "b": "Facts stay facts. A payment made, a quantity received or an arrival is never overwritten. It can only be corrected, with a reason, and the old value stays in the history.",
+        "c": "What is not known stays visible. A missing price, dimension or estimate is shown with the word “unknown”, never as zero.",
+        "d": "Private from the start. Only the people on the team see the plan. Money and guests' private requests are visible only with access granted separately, person by person.",
+        "e": "About children we keep only a count. No names, no ages, no dates of birth."
+      },
+      "note1": "In the business directory the order rotates daily and is not for sale. A paid placement, when there is one, is labelled as such and says nothing about quality.",
+      "p2": "The app has two languages, Romanian and English. The RO / EN switch in the top bar changes the wording only, never your data."
+    }
+  },
+  "sign-in-with-code": {
+    "title": "Sign in with a code by email",
+    "summary": "No passwords: type your email address, receive a six-digit code and you are in.",
+    "keywords": "sign in log in login code email password new account sign up register button",
+    "where": "The “Sign in” page",
+    "body": {
+      "ol1": {
+        "a": "Open the “Sign in” page and type your address in the “Email address” field.",
+        "b": "Press “Send me the code”. If you do not have an account yet, one is created now.",
+        "c": "Open the email you receive. It holds a six-digit code and a sign-in button — they do the same thing.",
+        "d": "Type the code in the “Code from the email” field and press “Sign in”, or press the button in the email.",
+        "e": "If you turned on two-step sign-in, you also type the “Code from the app”."
+      },
+      "note1": "The code and the button are valid for 15 minutes and can be used once. If your email program opens the link before you do, you see “This link was already used”: type the code from the same email and you get in just the same.",
+      "p1": "Typed the wrong address? Press “Use a different email address”. Prefer not to use an email? Under the form you will find “Use an anonymous account”.",
+      "p2": "After you sign in we take you back to the page you came from — for example a team invitation."
+    }
+  },
+  "create-occasion": {
+    "title": "Create your first occasion",
+    "summary": "A title, a template and a date are enough to start. Everything else can change at any time.",
+    "keywords": "new occasion event template wedding christening picnic birthday new year trip date poll brief priorities",
+    "where": "Occasions → New occasion",
+    "body": {
+      "ol1": {
+        "a": "From “Occasions”, press “New occasion”.",
+        "b": "Type the “Occasion title”, for example “Ioana and Andrei's wedding”.",
+        "c": "Under “Start from a template” choose the kind: Picnic, Birthday, Wedding, Christening, New Year's Eve, Solo trip or Group trip. The template brings prepared tasks, scheduled around the date. For a blank sheet, choose “Occasion”.",
+        "d": "Under “When is it?” choose “On one day”, “Over several days” or “We'll decide by poll”.",
+        "e": "If you like, press “Add the purpose and priorities” and say in a few words why the occasion is happening and what matters most.",
+        "f": "Press “Create the occasion”."
+      },
+      "note1": "You can create the occasion without a date. The template's tasks get their due dates once you set the date.",
+      "p1": "You land on the “Overview”, from where you go on to tasks, guests, budget and the other sections.",
+      "note2": "If you have closed other occasions and noted what you learned, your notes appear on the creation page under “Lessons from past occasions”."
+    }
+  }
+}

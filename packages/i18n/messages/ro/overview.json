@@ -1,0 +1,105 @@
+{
+  "title": "Privire de ansamblu",
+  "more": "și încă {count}",
+  "seeAll": "Vezi tot",
+  "hero": {
+    "label": "Până la eveniment",
+    "labelPast": "De la eveniment",
+    "noDate": "fără dată",
+    "noDateNote": "Data se decide prin sondaj. Termenele apar după ce o stabilești.",
+    "today": "astăzi",
+    "unit": {
+      "one": "zi",
+      "few": "zile",
+      "other": "de zile"
+    },
+    "progress": "{done} din {total} sarcini gata",
+    "noTasks": "Planul nu are încă nicio sarcină.",
+    "openTasks": "Deschide sarcinile",
+    "addFirstTask": "Adaugă prima sarcină"
+  },
+  "proposals": {
+    "title": {
+      "one": "O propunere așteaptă o decizie",
+      "few": "{count} propuneri așteaptă o decizie",
+      "other": "{count} de propuneri așteaptă o decizie"
+    },
+    "open": "Vezi propunerile",
+    "body": "Nimic nu se schimbă până nu confirmă cineva."
+  },
+  "milestone": {
+    "title": "Următorul termen",
+    "empty": "Niciun termen în perioada următoare."
+  },
+  "overdue": {
+    "title": "Întârziate",
+    "empty": "Nimic întârziat."
+  },
+  "delegations": {
+    "title": "Delegări neacceptate",
+    "empty": "Nicio ofertă fără răspuns.",
+    "toYou": "{from} ți-o oferă ție",
+    "waitingFor": "{to} nu a răspuns încă · oferită de {from}"
+  },
+  "blockers": {
+    "title": "Blocaje",
+    "empty": "Niciun blocaj.",
+    "reason": {
+      "waiting": "Cineva așteaptă un răspuns sau o livrare.",
+      "blocked": "Are termenul aproape, dar depinde de o sarcină neterminată.",
+      "outOfOrder": "A fost marcată gata înaintea celor de care depinde."
+    },
+    "tag": {
+      "waiting": "În așteptare",
+      "blocked": "Blocată",
+      "outOfOrder": "Ordine inversă"
+    }
+  },
+  "brief": {
+    "title": "Pe scurt",
+    "linked": {
+      "zero": "nicio sarcină deschisă",
+      "one": "{count} sarcină deschisă",
+      "few": "{count} sarcini deschise",
+      "other": "{count} de sarcini deschise"
+    },
+    "edit": "Modifică brief-ul",
+    "emptyTitle": "Brief-ul nu este scris încă",
+    "write": "Scrie brief-ul",
+    "emptyBody": "Scopul ocaziei și două-trei priorități ajută echipa să aleagă la fel ca tine."
+  },
+  "print": {
+    "title": "Tipărire și export",
+    "description": "Descarcă datele ocaziei sau tipărește planul.",
+    "printPlan": "Tipărește planul",
+    "downloads": "Descărcări",
+    "download": "Descarcă",
+    "ownDataNote": "Exporturile conțin doar datele acestei ocazii.",
+    "previewTitle": "Planul, gata de tipărit",
+    "previewBody": "Așa arată pagina pe hârtie: fără meniuri, doar planul.",
+    "planEyebrow": "Planul ocaziei",
+    "date": "Data",
+    "byPoll": "se decide prin sondaj",
+    "venue": "Locul",
+    "notSet": "nestabilit",
+    "progress": "Stadiu",
+    "progressValue": "{done} din {total} sarcini gata",
+    "noTasks": "Planul nu are încă nicio sarcină.",
+    "col": {
+      "task": "Sarcină",
+      "due": "Termen",
+      "owner": "Responsabil",
+      "status": "Stare"
+    }
+  },
+  "exports": {
+    "tasks": {
+      "title": "Sarcini (CSV)",
+      "description": "Toate sarcinile, cu stare, termen și responsabil. Se deschide în Excel sau Google Sheets."
+    },
+    "summary": {
+      "title": "Rezumatul planului (CSV)",
+      "description": "Titlul, data, locul, brief-ul și câte sarcini sunt gata."
+    }
+  }
+}

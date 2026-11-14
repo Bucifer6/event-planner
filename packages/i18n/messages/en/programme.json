@@ -1,0 +1,158 @@
+{
+  "title": "Programme of the day",
+  "description": "The moments of the day in order, who performs them and what guests see. Times are those of the event day.",
+  "dayLink": "Open the event-day view",
+  "undated": "The occasion has no date yet. Times stay as you write them and settle on the day once you choose it.",
+  "revision": "Changes guests have seen so far: {count}",
+  "notifyNote": "When you change a guest-visible moment, the guests it concerns get one email — not one per touch-up. Those who left no address see the change marked on their link.",
+  "nextDayHeading": "After midnight",
+  "add": {
+    "button": "Add a moment",
+    "title": "A new moment",
+    "submit": "Add the moment"
+  },
+  "edit": {
+    "button": "Edit",
+    "title": "Edit the moment",
+    "submit": "Save the moment"
+  },
+  "remove": {
+    "button": "Delete the moment",
+    "title": "Delete “{title}”?",
+    "body": "The moment leaves the programme together with its cues. If guests could see it, those it concerned are told once.",
+    "submit": "Delete the moment",
+    "keep": "Keep the moment"
+  },
+  "fields": {
+    "title": "Moment",
+    "titleHint": "For example: First dance",
+    "kind": "Kind",
+    "time": "Time",
+    "timeHint": "For example: 18:30",
+    "nextDay": "After midnight",
+    "nextDayHint": "Tick for moments in the night of the event, such as the cake at 00:30.",
+    "duration": "Length in minutes",
+    "durationHint": "For example: 45",
+    "place": "Place",
+    "placeHint": "For example: Main hall",
+    "performer": "Performer or supplier",
+    "performerNone": "None — the team runs it",
+    "performerHint": "A supplier's moments can be sent into their briefing.",
+    "visible": "Visible to guests",
+    "visibleHint": "Shown on the guests' link and, if you choose, on the public page.",
+    "concerns": "Who it concerns",
+    "concernsAll": "All guests",
+    "concernsSome": "Only some households",
+    "households": "Households it concerns",
+    "householdsEmpty": "There are no guests on the list yet.",
+    "notes": "Notes for the team",
+    "notesHint": "Never shown to guests."
+  },
+  "kinds": {
+    "ceremony": "Ceremony",
+    "meal": "Meal",
+    "music": "Music",
+    "dance": "Dance",
+    "speech": "Speech",
+    "moment": "Moment",
+    "other": "Other"
+  },
+  "concerns": {
+    "all": "all guests",
+    "someCount": "households: {count}"
+  },
+  "row": {
+    "minutes": "{n} min",
+    "durationUnknown": "length unknown",
+    "visible": "Visible to guests",
+    "hidden": "Team only",
+    "some": "For households: {count}",
+    "cues": "Cues: {count}",
+    "noCues": "No cues",
+    "show": "Show to guests",
+    "hide": "Hide from guests",
+    "changing": "Changing…"
+  },
+  "empty": {
+    "title": "The programme is still empty",
+    "body": "Add the first moment — for example “Ceremony, 16:00”. Then give it cues and show it to guests.",
+    "bodyReadOnly": "The organisers have not added any moment yet."
+  },
+  "cues": {
+    "button": "Cues",
+    "title": "Cues — {title}",
+    "intro": "The cue list says who does what and when, counted from the start of the moment. Every save keeps the version before it.",
+    "offset": "Minute",
+    "offsetHint": "0 = start",
+    "instruction": "What happens",
+    "who": "Who",
+    "row": "Cue {n}",
+    "addRow": "Add a cue",
+    "removeRow": "Remove cue {n}",
+    "save": "Save the new version",
+    "saving": "Saving…",
+    "saved": "Saved as version {version}.",
+    "unchanged": "Nothing to save — the list is the same as version {version}.",
+    "empty": "There are no cues yet. Add the first.",
+    "history": "All versions",
+    "version": "Version {version}",
+    "current": "current",
+    "versionAt": "saved on {date}",
+    "versionEmpty": "No cues in this version.",
+    "atStart": "at the start",
+    "after": "at {n} min",
+    "before": "{n} min before"
+  },
+  "briefing": {
+    "sectionTitle": "Performer briefings",
+    "sectionIntro": "Send each performer their moments and cues. They arrive as a new version of the briefing, which the performer confirms on their link.",
+    "moments": "Moments: {count}",
+    "noVersion": "No briefing published yet",
+    "version": "Briefing version {version}",
+    "acked": "version {version} confirmed",
+    "notAcked": "not confirmed yet",
+    "include": "Include the programme in the briefing",
+    "including": "Publishing…",
+    "included": "Published as version {version} of the briefing.",
+    "openSupplier": "Open the supplier",
+    "nextDay": "(next day)",
+    "minutes": "{n} min",
+    "atStart": "at the start",
+    "after": "+{n} min",
+    "before": "−{n} min"
+  },
+  "guest": {
+    "title": "Programme",
+    "intro": "The moments you are expected at.",
+    "changedNotice": "The programme has changed. The changed moments are marked below.",
+    "changed": "Changed",
+    "removed": "No longer taking place: {list}",
+    "nextDay": "after midnight",
+    "minutes": "{n} min",
+    "timeLabel": "At {time}"
+  },
+  "email": {
+    "subject": "The programme has changed: {occasion}",
+    "greeting": "Hello, {household}!",
+    "body": "The organisers changed something in the programme of “{occasion}” that concerns you.",
+    "moments": "New or changed moments: {list}.",
+    "removed": "No longer taking place: {list}.",
+    "where": "Open your invitation link to see the current times and places.",
+    "why": "You get this message once for this change, because you left your address when you answered the invitation."
+  },
+  "export": {
+    "title": "Programme of the day (CSV)",
+    "description": "Every moment with its time, place, performer and current cues."
+  },
+  "errors": {
+    "time": "Write the time like 18:30.",
+    "duration": "Write the length in minutes, between 1 and 1440.",
+    "chooseHouseholds": "Choose at least one household or switch to “all guests”.",
+    "tooMany": "The programme has reached the maximum number of moments.",
+    "cueOffset": "Write the minute as a number, for example 0 or 5.",
+    "cueInstruction": "Write what happens at this cue or remove the row.",
+    "tooManyCues": "A list can hold at most 60 cues.",
+    "noPerformerItems": "This supplier has no moment in the programme yet.",
+    "briefingUpToDate": "The briefing already has the current programme."
+  }
+}

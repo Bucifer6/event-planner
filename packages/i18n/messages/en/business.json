@@ -1,0 +1,174 @@
+{
+  "title": "My business",
+  "eyebrow": "My business",
+  "roles": {
+    "owner": "Owner",
+    "admin": "Admin",
+    "staff": "Staff"
+  },
+  "roleHelp": {
+    "owner": "Runs the business on EventDesk: listings, team and settings. There is one owner.",
+    "admin": "Works on listings and invites staff. Cannot appoint or remove other admins.",
+    "staff": "Works on listings. Does not change the team or the settings."
+  },
+  "status": {
+    "active": "Active",
+    "restricted": "Restricted",
+    "suspended": "Suspended"
+  },
+  "choose": {
+    "title": "Choose the business",
+    "description": "You are on more than one team.",
+    "open": "Open",
+    "openNamed": "Open {name}"
+  },
+  "start": {
+    "title": "List your business",
+    "description": "Listing is free. You say what you do and where, a moderator checks it, then the business appears in the directory — in the same daily rotation as everyone else.",
+    "howTitle": "How it works",
+    "step1": "You create the business account. It takes a minute.",
+    "step2": "You add up to five listings: categories and localities chosen from lists, a description, contact details, photos.",
+    "step3": "A moderator unconnected to the business checks every listing and every change. What is already public stays unchanged meanwhile.",
+    "formTitle": "Business account",
+    "submit": "Create the business account",
+    "submitting": "Creating…",
+    "emailRequiredTitle": "Add an email address first",
+    "emailRequiredBody": "A business account needs an email address: moderators' decisions and, later, clients' enquiries arrive there.",
+    "emailRequiredLink": "Add the email address"
+  },
+  "fields": {
+    "name": "Business name",
+    "nameHint": "As it is known. Each listing has its own public name.",
+    "onrc": "ONRC registration number",
+    "onrcHint": "In the form J12/345/2020. You can add it later; a moderator can verify it, free of charge.",
+    "onrcChangeHint": "If you change it, the ONRC check starts again for the new number."
+  },
+  "tabs": {
+    "label": "Business sections",
+    "listings": "Listings",
+    "team": "Team",
+    "settings": "Settings"
+  },
+  "restriction": {
+    "restrictedTitle": "The business is restricted",
+    "restrictedBody": "The listings stay public, but you cannot add or change anything until the restriction is lifted.",
+    "suspendedTitle": "The business is suspended",
+    "suspendedBody": "The listings no longer appear in the directory until the suspension is lifted.",
+    "reason": "Reason:",
+    "contact": "If you disagree with the decision, reply to the email you received from EventDesk."
+  },
+  "lapsed": {
+    "title": "You cannot add new listings right now",
+    "body": "Your existing listings stay live and you can correct them at any time."
+  },
+  "notices": {
+    "title": "Updates",
+    "reason": "Reason: {reason}",
+    "openListing": "View the listing",
+    "markRead": "Mark as read",
+    "marking": "Saving…",
+    "kinds": {
+      "business_restricted": "The business has been restricted",
+      "business_suspended": "The business has been suspended",
+      "business_restored": "The restriction on the business has been lifted",
+      "listing_suspended": "A listing has been suspended",
+      "listing_restored": "A listing is public again",
+      "revision_approved": "A listing has been approved and is public",
+      "revision_rejected": "A listing was not approved",
+      "platform_notice": "Notice from EventDesk",
+      "monetization_notice60": "In 60 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:",
+      "monetization_notice30": "In 30 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:",
+      "monetization_notice7": "In 7 days the Business plan and Featured placement become optional paid tiers. Nothing is charged automatically. Date:"
+    }
+  },
+  "team": {
+    "you": "you",
+    "membersTitle": "Team",
+    "invitedTitle": "Invitations sent",
+    "alone": "You are the only one on the team. You can invite colleagues below.",
+    "makeAdmin": "Make admin",
+    "makeStaff": "Make staff",
+    "saving": "Saving…",
+    "remove": "Remove from team",
+    "leave": "Leave the team",
+    "removing": "Removing…",
+    "inviteWaiting": "Waiting",
+    "inviteExpired": "Expired",
+    "withdrawInvite": "Withdraw invitation",
+    "inviteTitle": "Invite a colleague",
+    "email": "Email address",
+    "emailHint": "We send a link valid for 14 days. It works for this address only.",
+    "role": "Role",
+    "invite": "Send the invitation",
+    "inviting": "Sending…",
+    "invited": "The invitation has been sent.",
+    "inviteNeedsFresh": "Confirm it is you first, then you can send invitations.",
+    "freshTitle": "Confirm it is you",
+    "freshBody": "Changes to the team need a recent confirmation.",
+    "freshLink": "Confirm in your account",
+    "rolesTitle": "What each role can do"
+  },
+  "settings": {
+    "detailsTitle": "Business details",
+    "nudge": "Reminder after 48 hours for unanswered enquiries",
+    "nudgeHint": "The notice when an enquiry arrives always comes; only the reminder can be turned off.",
+    "hideStats": "Hide response statistics on all listings",
+    "hideStatsHint": "The statistics appear only after ten enquiries you have answered. You can hide them at any time.",
+    "save": "Save settings",
+    "saving": "Saving…",
+    "saved": "The settings have been saved."
+  },
+  "badges": {
+    "title": "Verified facts",
+    "body": "Only two statements can appear on listings, both plain facts: the ONRC registration and the insurance a moderator has seen, with the date it is valid until.",
+    "none": "No fact has been verified yet.",
+    "how": "The checks are done by a moderator and are free. For ONRC, fill in the registration number above."
+  },
+  "invite": {
+    "title": "Team invitation",
+    "body": "You have been invited to the “{business}” team as {role}.",
+    "accept": "Join the {business} team",
+    "accepting": "Joining…",
+    "goneTitle": "The invitation is no longer valid",
+    "goneBody": "It has already been used or withdrawn.",
+    "toBusiness": "Go to “My business”",
+    "expiredTitle": "The invitation has expired",
+    "expiredBody": "Ask an admin of “{business}” to send it again."
+  },
+  "email": {
+    "reason": "Reason: {reason}",
+    "open": "Open “My business”",
+    "inviteSubject": "Invitation to the {business} team on EventDesk",
+    "inviteIntro": "You have been invited to the “{business}” team on EventDesk, as {role}.",
+    "inviteButton": "Accept the invitation",
+    "inviteValidity": "The link is valid for {days} days and works for this email address only.",
+    "inviteNotExpected": "If you were not expecting this message, you can ignore it.",
+    "status": {
+      "active": "The restriction on {business} has been lifted",
+      "restricted": "{business} has been restricted on EventDesk",
+      "suspended": "{business} has been suspended on EventDesk"
+    },
+    "revision": {
+      "approved": "A listing of {business} has been approved",
+      "rejected": "A listing of {business} was not approved"
+    },
+    "listing": {
+      "suspended": "A listing of {business} has been suspended",
+      "restored": "A listing of {business} is public again"
+    }
+  },
+  "errors": {
+    "emailRequired": "A business account needs an email address. Add one to your account first.",
+    "alreadyOwner": "You already have a business on this account.",
+    "roleRequired": "Your role in the business does not allow this.",
+    "adminCannotManageAdmins": "An admin cannot appoint or remove other admins. Only the owner can.",
+    "ownerStays": "The owner cannot be removed from the team.",
+    "alreadyMember": "This address is already on the team.",
+    "inviteGone": "The invitation is no longer valid.",
+    "inviteExpired": "The invitation has expired. Ask for a new one.",
+    "inviteOtherEmail": "The invitation was sent to another email address. Sign in with the address that received it.",
+    "restricted": "The business is restricted: you cannot add or change anything until the restriction is lifted.",
+    "suspended": "The business is suspended: you cannot add or change anything until the suspension is lifted.",
+    "lapsed": "You cannot add new listings right now. Existing listings stay live and can be corrected."
+  }
+}

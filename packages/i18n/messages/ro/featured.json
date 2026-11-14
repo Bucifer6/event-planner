@@ -1,0 +1,7 @@
+{
+  "label": "Promovat — plasare plătită",
+  "sectionLabel": "Plasări plătite",
+  "errors": {
+    "notInCategory": "Listarea nu este în această categorie."
+  }
+}

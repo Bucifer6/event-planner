@@ -1,0 +1,83 @@
+# REFERENCE deployment target "ssh-docker": one Docker host running the release as three
+# images. It is a reference, not a vendor choice — see scripts/deploy/lib.sh for the contract
+# another target must meet. This file lives on the host as $DEPLOY_DIR/docker-compose.yml
+# (default /opt/eventdesk); the deploy scripts write release.env next to it:
+#
+#   WEB_IMAGE=…/web:vX.Y.Z   WORKER_IMAGE=…/worker:vX.Y.Z   PUBLIC_IMAGE=…/public:vX.Y.Z   APP_VERSION=vX.Y.Z
+#
+# Secrets are NOT in this file and not in the images. `app.env` is rendered on the host from
+# the secret store (by reference — infra/terraform/modules/compute shows one way) with mode
+# 0600, and holds the variables listed in .env.example. Nothing here publishes a database or
+# an object store: those are managed services reached over the private network.
+
+name: eventdesk
+
+services:
+  web:
+    image: ${WEB_IMAGE:?set by the deploy scripts}
+    env_file: [app.env]
+    environment:
+      APP_VERSION: ${APP_VERSION:?set by the deploy scripts}
+      NODE_ENV: production
+      PORT: "3000"
+    expose: ["3000"]
+    restart: unless-stopped
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [edge]
+
+  worker:
+    image: ${WORKER_IMAGE:?set by the deploy scripts}
+    env_file: [app.env]
+    environment:
+      APP_VERSION: ${APP_VERSION}
+      NODE_ENV: production
+    restart: unless-stopped
+    stop_grace_period: 45s # the worker finishes running jobs on SIGTERM (30 s limit)
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [edge]
+
+  public:
+    image: ${PUBLIC_IMAGE:?set by the deploy scripts}
+    expose: ["8080"]
+    restart: unless-stopped
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [edge]
+
+  # One-off jobs with the release's code: `pnpm db:migrate`, backups, the restore test.
+  # Never started by `up`; the deploy scripts use `docker compose run --rm tools …`.
+  tools:
+    image: ${WORKER_IMAGE}
+    env_file: [app.env]
+    environment:
+      NODE_ENV: production
+    profiles: [tools]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+    networks: [edge]
+
+  # TLS and the three host names. Certificates are obtained automatically (ACME).
+  ingress:
+    image: caddy:2-alpine
+    env_file: [ingress.env] # APP_HOST, MEDIA_HOST, PUBLIC_HOST, ACME_EMAIL — not secrets
+    ports: ["80:80", "443:443", "443:443/udp"]
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+    restart: unless-stopped
+    cap_drop: [ALL]
+    cap_add: [NET_BIND_SERVICE]
+    security_opt: ["no-new-privileges:true"]
+    networks: [edge]
+
+networks:
+  edge:
+
+volumes:
+  caddy_data:
+  caddy_config:

@@ -1,0 +1,36 @@
+{
+  "subject": "Today's digest — {occasion}",
+  "intro": "Good morning! Here is what needs attention for “{occasion}”. {countdown}",
+  "countdown": {
+    "days": "Days to go: {count}.",
+    "today": "The event is today.",
+    "past": "The event has passed.",
+    "noDate": "The date is not set yet."
+  },
+  "sections": {
+    "milestone": "Next milestone",
+    "overdue": "Overdue",
+    "delegations": "Unaccepted delegations",
+    "blockers": "Blockers"
+  },
+  "empty": {
+    "milestone": "No milestone coming up.",
+    "overdue": "Nothing overdue.",
+    "delegations": "No offers waiting for an answer.",
+    "blockers": "No blockers.",
+    "other": "Nothing to report."
+  },
+  "lines": {
+    "task": "{title} — due {date}",
+    "offerToYou": "{title} — offered to you by {from}; accept or decline",
+    "offerWaiting": "{title} — {to} has not answered yet",
+    "blocker": {
+      "waiting": "{title} — waiting",
+      "blocked": "{title} — depends on an unfinished task",
+      "outOfOrder": "{title} — marked done before what it depends on"
+    }
+  },
+  "more": "and {count} more",
+  "button": "Open the occasion",
+  "why": "You get this digest at most once a day because you are on the occasion's team."
+}

@@ -1,0 +1,109 @@
+{
+  "title": "Planul sălii",
+  "description": "Spațiul în care are loc ocazia, la scară. De aici pornesc așezarea la mese și verificările de încăpere.",
+  "planLabel": "Planul spațiului {name}",
+  "ownMeta": "introdus de tine",
+  "toSeating": "Așază mesele și invitații",
+  "venue": {
+    "title": "Folosește planul locației",
+    "body": "Locația ta a publicat planuri aprobate. Planul intră în ocazie la versiunea de acum; dacă locația îl schimbă mai târziu, primești o propunere pe care o accepți sau nu.",
+    "version": "Versiunea {n}, valabilă din {date}",
+    "use": "Folosește planul „{name}”",
+    "using": "Se aduce planul…",
+    "notCalibrated": "Locația nu și-a calibrat încă desenul, așa că nu poate fi folosit pentru așezarea la mese."
+  },
+  "own": {
+    "titleAlso": "Sau descrie tu spațiul",
+    "name": "Numele spațiului",
+    "nameHint": "De exemplu „Curtea bunicilor” sau „Salon”.",
+    "width": "Lățime (m)",
+    "length": "Lungime (m)",
+    "dimsHint": "Lasă gol dacă nu o știi încă.",
+    "emptyUnknown": "gol = necunoscut",
+    "create": "Creează spațiul"
+  },
+  "empty": {
+    "title": "Încă nu ai un plan al sălii",
+    "body": "Descrie spațiul mai jos ca să poți așeza mesele. Dacă adaugi locația din lista de firme la furnizori, planurile ei aprobate apar aici."
+  },
+  "source": {
+    "venue": "Planul locației",
+    "own": "Spațiu introdus de tine"
+  },
+  "newer": {
+    "title": "Locația a publicat versiunea {n} a planului, valabilă din {date}",
+    "body": "Planul tău rămâne la versiunea {n} până când accepți schimbarea. Nimic nu se modifică singur.",
+    "see": "Vezi ce se schimbă",
+    "preparing": "Se pregătește comparația…",
+    "notCalibrated": "Noua versiune nu este calibrată, deci nu poate fi folosită în plan."
+  },
+  "facts": {
+    "title": "Ce știm despre spațiu",
+    "space": "Spațiu",
+    "source": "Sursă",
+    "venueVersion": "Planul locației, versiunea {n}, valabilă din {date}",
+    "ownSource": "Introdus de tine, nu de locație",
+    "stated": "Dimensiuni declarate",
+    "usable": "Suprafață utilă",
+    "tablesPlaced": "Mese pe plan",
+    "aisle": "Culoar minim între mese"
+  },
+  "inventory": {
+    "title": "Mesele locației",
+    "body": "Ce pune locația la dispoziție. Poți adăuga și mese proprii din pagina de așezare.",
+    "placed": "Pe plan / disponibile"
+  },
+  "settings": {
+    "title": "Setările spațiului",
+    "open": "Modifică setările",
+    "aisle": "Culoar minim între mese (cm)",
+    "aisleHint": "Loc liber între mese, cu scaunele trase. De obicei 60 cm.",
+    "save": "Salvează setările"
+  },
+  "remove": {
+    "open": "Renunță la acest plan",
+    "title": "Renunți la planul sălii?",
+    "body": "Se șterg și mesele așezate, locurile invitaților și variantele pe etape. Invitații nu își mai văd locul.",
+    "confirm": "Șterge planul și așezarea",
+    "removing": "Se șterge…"
+  },
+  "errors": {
+    "noModel": "Ocazia nu are încă un plan al sălii. Alege-l mai întâi.",
+    "alreadyHasModel": "Ocazia are deja un plan al sălii. Renunță la el înainte de a alege altul.",
+    "notCalibrated": "Acest desen nu este calibrat, deci nu poate fi folosit pentru plan sau pentru verificări de încăpere.",
+    "stale": "Propunerea nu mai este de actualitate: planul s-a schimbat între timp. Renunță la ea și cere una nouă.",
+    "measure": "Scrie o măsură în metri, de exemplu 12 sau 8,5."
+  },
+  "whatif": {
+    "updateTitle": "Locația a actualizat planul „{name}”",
+    "version": "Versiunea planului",
+    "versionNo": "versiunea {n}",
+    "name": "Numele spațiului",
+    "width": "Lățime declarată",
+    "length": "Lungime declarată",
+    "usableArea": "Suprafață utilă",
+    "tableType": "Tip de masă: {name}",
+    "tableFacts": "{size}, locuri: {seats}, bucăți: {count}",
+    "added": "Nou în planul locației",
+    "removed": "nu mai există",
+    "fixture": "Element: {name}",
+    "placedTable": "Masa {label} de pe planul tău",
+    "placedFixture": "„{label}” de pe planul tău",
+    "venueTable": "masă a locației",
+    "becomesCustom": "devine masă proprie",
+    "overCount": "Locația mai are doar {count} mese „{name}”.",
+    "typeGone": "Locația nu mai are acest tip de masă.",
+    "fitsNow": "încape",
+    "noLongerFits": "nu mai încape în suprafața utilă",
+    "customTitle": "Masă proprie: {name}",
+    "customTable": "{name} — bucăți: {count}",
+    "customNote": "Masă proprie, nu a locației. Apare cu linie întreruptă.",
+    "customSeats": "Locuri adăugate"
+  },
+  "guest": {
+    "title": "Planul sălii",
+    "intro": "Unde găsești ce ai nevoie în sală.",
+    "planLabel": "Planul sălii {name}, cu punctele de interes",
+    "parking": "Parcare"
+  }
+}

@@ -1,0 +1,11 @@
+/* Claim and removal pages. Tokens only. */
+.head { display: flex; flex-direction: column; gap: var(--s-2); padding-bottom: var(--s-4); border-bottom: var(--hair) solid var(--ink); }
+.name { font-family: var(--font-display); font-size: var(--display-lg); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; margin: 0; overflow-wrap: anywhere; text-wrap: balance; }
+.steps { margin: 0; padding: 0; list-style: none; counter-reset: step; border-top: var(--hair) solid var(--line); }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.5em minmax(0, 1fr); gap: var(--s-2); padding: var(--s-3) 0; border-bottom: var(--hair) solid var(--line); }
+.steps li::before { content: counter(step); font-family: var(--font-display); font-style: italic; font-size: var(--display-sm); line-height: 1.1; color: var(--gilt-ink); }
+.links { display: flex; flex-wrap: wrap; gap: 0 var(--s-4); font-size: var(--text-sm); }
+.links a { display: inline-flex; align-items: center; min-height: 44px; }
+.tools { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }
+.tools :global(.ed-form) { flex-direction: row; gap: var(--s-2); max-width: none; }
+.reason { white-space: pre-line; overflow-wrap: anywhere; }

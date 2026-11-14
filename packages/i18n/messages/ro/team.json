@@ -1,0 +1,153 @@
+{
+  "title": "Echipă și roluri",
+  "description": "Cine te ajută și ce poate vedea fiecare. Accesul la finanțe și la cererile private se acordă separat, om cu om.",
+  "you": "tu",
+  "roles": {
+    "owner": "Organizator",
+    "pm": "Manager de proiect",
+    "workstream_lead": "Coordonator",
+    "contributor": "Ajutor",
+    "supplier": "Furnizor",
+    "guest": "Invitat"
+  },
+  "roleHelp": {
+    "owner": "Decide tot: echipa, accesul, data și ștergerea ocaziei.",
+    "pm": "Conduce planul împreună cu organizatorul: sarcini, echipă, dată.",
+    "workstream_lead": "Coordonează o parte a planului și poate împărți sarcini.",
+    "contributor": "Adaugă sarcini și se ocupă de cele pe care le acceptă.",
+    "supplier": "Vede planul și își actualizează sarcinile primite.",
+    "guest": "Vede planul și sarcinile care îi sunt date."
+  },
+  "labels": {
+    "nas": "naș",
+    "nasa": "nașă",
+    "nasCununie": "naș de cununie",
+    "nasaCununie": "nașă de cununie",
+    "domnisoaraOnoare": "domnișoară de onoare",
+    "cavalerOnoare": "cavaler de onoare"
+  },
+  "fields": {
+    "label": "Cum îi spuneți",
+    "labelHint": "O etichetă liberă care apare lângă rol.",
+    "labelSuggestions": "Sugestii de etichete",
+    "role": "Rol",
+    "grants": "Acces separat",
+    "grantsHint": "Nu vin odată cu rolul. Bifează doar ce are nevoie să vadă.",
+    "email": "Adresa de email",
+    "emailHint": "Trimitem un link de invitație valabil 14 zile."
+  },
+  "grants": {
+    "finance": "Finanțe",
+    "financeHint": "Vede și modifică bugetul și cheltuielile comune.",
+    "privateRequests": "Cereri private",
+    "privateRequestsHint": "Vede cererile private ale invitaților (alergii, nevoi speciale).",
+    "financeShort": "Finanțe",
+    "privateRequestsShort": "Cereri private"
+  },
+  "fresh": {
+    "title": "Confirmă întâi că ești tu",
+    "body": "Rolurile, accesul la finanțe și la cererile private, eliminarea din echipă și predarea ocaziei cer o confirmare proaspătă.",
+    "link": "Confirmă din pagina contului"
+  },
+  "invite": {
+    "open": "Invită pe cineva",
+    "title": "Invită în echipă",
+    "sentTitle": "Invitația a plecat",
+    "sentBody": "Persoana apare la „Invitații trimise” până acceptă. Poți invita pe altcineva mai jos.",
+    "suppressedTitle": "Invitația este salvată, dar emailul nu a plecat",
+    "suppressedBody": "Adresa aceasta nu mai primește emailuri de la noi. Verifică adresa sau folosește alta.",
+    "submit": "Trimite invitația",
+    "submitting": "Se trimite…"
+  },
+  "label": {
+    "title": "Etichetă",
+    "saved": "Am salvat eticheta.",
+    "submit": "Salvează eticheta"
+  },
+  "access": {
+    "title": "Rol și acces",
+    "saved": "Am salvat rolul și accesul.",
+    "submit": "Salvează accesul"
+  },
+  "remove": {
+    "sectionTitle": "Scoate din echipă",
+    "sectionTitleInvite": "Anulează invitația",
+    "intro": "Persoana pierde imediat accesul la ocazie. Sarcinile ei rămân în plan, fără responsabil, iar ofertele fără răspuns se retrag.",
+    "introInvite": "Linkul din email nu va mai funcționa.",
+    "open": "Scoate din echipă",
+    "openInvite": "Anulează invitația",
+    "title": "Scoți persoana din echipă?",
+    "titleInvite": "Anulezi invitația?",
+    "body": "{name} nu va mai vedea ocazia. Sarcinile sale rămân fără responsabil până le dai altcuiva.",
+    "bodyInvite": "Invitația pentru {name} nu va mai putea fi acceptată.",
+    "keep": "Păstrează în echipă",
+    "keepInvite": "Păstrează invitația",
+    "submit": "Scoate-l pe {name}",
+    "submitInvite": "Anulează invitația",
+    "submitting": "Se elimină…"
+  },
+  "transfer": {
+    "sectionTitle": "Predă ocazia",
+    "intro": "Noul organizator primește toate drepturile, inclusiv ștergerea ocaziei. Tu rămâi în echipă ca manager de proiect.",
+    "open": "Predă ocazia",
+    "title": "Predai ocazia?",
+    "body": "{name} devine organizator. Tu rămâi manager de proiect, fără acces automat la finanțe și la cererile private.",
+    "keep": "Rămân organizator",
+    "submit": "Predă ocazia lui {name}",
+    "submitting": "Se predă…"
+  },
+  "members": {
+    "title": "În echipă",
+    "edit": "Modifică",
+    "editFor": "Modifică rolul și accesul pentru {name}",
+    "alone": "Deocamdată ești doar tu. Invită pe cineva ca să împărțiți sarcinile."
+  },
+  "invited": {
+    "title": "Invitații trimise",
+    "expired": "Expirată",
+    "waiting": "Așteaptă răspuns",
+    "empty": "Nicio invitație în așteptare."
+  },
+  "rolesGuide": {
+    "title": "Ce poate face fiecare rol",
+    "grantsNote": "Bugetul, cheltuielile comune și cererile private ale invitaților nu se văd din niciun rol în afară de organizator. Se acordă separat, fiecărei persoane în parte."
+  },
+  "member": {
+    "title": "Membru al echipei",
+    "back": "Echipă și roluri",
+    "pending": "Invitat ca {role} — nu a acceptat încă"
+  },
+  "accept": {
+    "metaTitle": "Invitație în echipă",
+    "goneTitle": "Invitația nu mai este valabilă",
+    "goneBody": "Linkul a fost deja folosit, a fost anulat sau nu este corect. Cere-i organizatorului o invitație nouă.",
+    "toOccasions": "Mergi la ocaziile tale",
+    "signIn": "Intră în cont",
+    "eyebrow": "Ai fost invitat în echipă",
+    "body": "Ești invitat să ajuți la planificare, cu rolul de {role}.",
+    "label": "Eticheta ta: {label}.",
+    "expiredTitle": "Invitația a expirat",
+    "expiredBody": "Cere-i organizatorului să ți-o trimită din nou.",
+    "submit": "Acceptă invitația",
+    "submitting": "Se acceptă…",
+    "signInTitle": "Intră mai întâi în cont",
+    "signInBody": "După ce intri în cont te aducem înapoi aici, ca să accepți invitația."
+  },
+  "email": {
+    "subject": "Invitație în echipa ocaziei „{occasion}”",
+    "intro": "Ai fost invitat să ajuți la planificarea ocaziei „{occasion}”, cu rolul: {role}.",
+    "button": "Vezi invitația",
+    "validity": "Linkul este valabil {days} zile și poate fi folosit o singură dată.",
+    "notExpected": "Dacă nu te așteptai la această invitație, o poți ignora. Nu se întâmplă nimic până nu o accepți."
+  },
+  "errors": {
+    "ownerOnly": "Doar organizatorul poate schimba roluri, acorda acces sau numi manageri de proiect.",
+    "alreadyMember": "Această persoană este deja în echipă.",
+    "inviteGone": "Invitația nu mai este valabilă. Cere una nouă.",
+    "inviteExpired": "Invitația a expirat. Cere-i organizatorului să o trimită din nou.",
+    "ownerRoleFixed": "Rolul de organizator se schimbă doar prin „Predă ocazia”.",
+    "ownerCannotLeave": "Organizatorul nu poate fi scos din echipă. Predă mai întâi ocazia altcuiva.",
+    "alreadyOwner": "Ești deja organizatorul ocaziei.",
+    "notJoined": "Persoana trebuie mai întâi să accepte invitația."
+  }
+}

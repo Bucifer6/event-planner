@@ -1,0 +1,502 @@
+{
+  "title": "Consola EventDesk",
+  "badge": "Consolă",
+  "navLabel": "Secțiunile consolei",
+  "close": "Închide",
+  "saved": "Salvat.",
+  "nav": {
+    "dashboard": "Tablou",
+    "approvals": "Aprobări",
+    "audit": "Jurnal audit",
+    "access": "Acces",
+    "incidents": "Incidente",
+    "operations": "Operațiuni",
+    "reports": "Rapoarte conținut",
+    "launch": "Lansare",
+    "moderation": "Moderare",
+    "businesses": "Firme",
+    "directory": "Director",
+    "deploys": "Publicări",
+    "complianceAccess": "Acces de conformitate",
+    "commercial": "Comercial",
+    "communications": "Comunicări",
+    "discovery": "Descoperire",
+    "help": "Ajutor pentru echipă"
+  },
+  "roles": {
+    "platform_admin": "Administrator platformă",
+    "content_editor": "Editor de conținut",
+    "listing_moderator": "Moderator listări",
+    "commercial_manager": "Manager comercial",
+    "privacy_owner": "Responsabil confidențialitate",
+    "security_administrator": "Administrator securitate"
+  },
+  "roleHints": {
+    "platform_admin": "Acces, roluri, lansare, obligații DSA.",
+    "content_editor": "Pagini publice și ghiduri.",
+    "listing_moderator": "Moderarea listărilor, a planurilor și a cataloagelor; rapoarte de conținut.",
+    "commercial_manager": "Monetizare, prețuri, rambursări, termeni pentru firme.",
+    "privacy_owner": "Documente legale, ANSPDCP, DPIA, declarația de accesibilitate.",
+    "security_administrator": "Incidente, copii de siguranță, limite de autentificare, jurnal de audit."
+  },
+  "session": {
+    "until": "Sesiunea de consolă expiră cel târziu la {time} sau după 30 de minute fără activitate.",
+    "leave": "Ieși din consolă",
+    "leaving": "Se închide sesiunea…"
+  },
+  "noRole": {
+    "title": "Rolurile tale nu acoperă această secțiune",
+    "body": "Este nevoie de unul dintre rolurile: {roles}. Un administrator de platformă îl poate cere în secțiunea Acces."
+  },
+  "singleOperator": {
+    "title": "Mod restricționat: un singur operator",
+    "body": "O singură persoană are rol de personal. Acțiunile care cer a doua persoană rămân în coadă fără niciun efect până când încă cineva primește un rol și le aprobă. Plățile reale către firme sunt blocate în acest mod."
+  },
+  "errors": {
+    "noAccess": "Nu ai acces la consolă în această sesiune.",
+    "roleRequired": "Rolurile tale nu permit această acțiune.",
+    "accountNotFound": "Nu există un cont cu această adresă de email. Persoana trebuie să își creeze mai întâi contul.",
+    "lastAdmin": "Platforma trebuie să aibă cel puțin un administrator de platformă activ.",
+    "unknownApprovalAction": "Acest tip de acțiune nu este cunoscut.",
+    "alreadyDecided": "Cererea a fost deja închisă.",
+    "ownRequest": "Nu poți aproba sau respinge propria cerere. Este nevoie de a doua persoană.",
+    "alreadyApprovedByYou": "Ai aprobat deja această cerere. Mai este nevoie de încă o persoană.",
+    "reasonRequired": "Scrie motivul care va fi comunicat părții afectate (cel puțin 10 caractere)."
+  },
+  "setup": {
+    "title": "Acces la consolă",
+    "twoStep": {
+      "lead": "Contul tău are rol de personal, dar mai este un pas de făcut.",
+      "title": "Activează verificarea în doi pași",
+      "body": "Personalul platformei poate intra în consolă numai cu verificarea în doi pași activă. Până atunci, nicio pagină și nicio acțiune din consolă nu este disponibilă.",
+      "step1": "Deschide setările de securitate ale contului și activează verificarea în doi pași cu o aplicație de autentificare.",
+      "step2": "Păstrează codurile de recuperare într-un loc sigur.",
+      "step3": "Ieși din cont și intră din nou, cu al doilea pas. Apoi revino la consolă.",
+      "action": "Deschide setările de securitate"
+    },
+    "again": {
+      "second_step": {
+        "lead": "Verificarea în doi pași este activă, dar această autentificare a fost făcută fără al doilea pas.",
+        "title": "Intră din nou în cont",
+        "body": "Consola se deschide numai dintr-o sesiune care a trecut prin ambii pași. Ieși din cont și intră din nou."
+      },
+      "absolute": {
+        "lead": "Sesiunea de consolă s-a încheiat.",
+        "title": "Au trecut 12 ore de la autentificare",
+        "body": "O sesiune de consolă durează cel mult 12 ore. Ieși din cont și intră din nou ca să continui."
+      },
+      "idle": {
+        "lead": "Sesiunea de consolă s-a încheiat.",
+        "title": "30 de minute fără activitate",
+        "body": "Consola se închide singură după 30 de minute fără activitate. Ieși din cont și intră din nou ca să continui."
+      },
+      "action": "Ieși din cont",
+      "note": "Nimic din ce ai salvat nu s-a pierdut."
+    }
+  },
+  "dashboard": {
+    "title": "Tablou",
+    "description": "Platforma pe scurt: doar numere și stări generale. Conținutul planificatorilor nu apare aici.",
+    "openApprovals": "Vezi aprobările ({count})",
+    "incidentActive": "Există un incident deschis",
+    "incidentLink": "Deschide incidentele",
+    "incidentSince": "Deschis din {time}. Invitații văd mesajul de stare.",
+    "platform": "Platformă",
+    "accountsLabel": "Conturi · total la {date}",
+    "accountsNote": "{email} cu email · {anonymous} anonime · {deleting} în curs de ștergere",
+    "occasions": "Ocazii",
+    "totalToDate": "total până azi",
+    "pendingApprovals": "Aprobări în așteptare",
+    "now": "acum",
+    "activeStaff": "Personal activ",
+    "occasionsByStatus": "Ocazii după stare · total până azi",
+    "noOccasions": "Nicio ocazie creată încă",
+    "queue": "Coada de lucrări · ultimul instantaneu",
+    "recentRuns": "Ultimele rulări operaționale",
+    "occasionStatus": {
+      "planning": "În planificare",
+      "cancelled": "Anulate",
+      "postponed": "Amânate",
+      "closed": "Încheiate"
+    },
+    "counters": {
+      "businesses": "Firme",
+      "listings": "Listări",
+      "moderationQueue": "Moderare · în așteptare",
+      "enquiries": "Cereri către firme",
+      "discovery": "Descoperire · ciorne",
+      "claims": "Revendicări"
+    }
+  },
+  "ops": {
+    "title": "Operațiuni",
+    "description": "Copii de siguranță, teste de restaurare, starea cozii de lucrări și limitele de autentificare.",
+    "backups": "Copii de siguranță · ultimele 10 rulări",
+    "restoreTests": "Teste de restaurare · ultimele 6 rulări",
+    "queue": {
+      "title": "Coada de lucrări · ultimul instantaneu",
+      "depth": "În așteptare acum",
+      "running": "În lucru",
+      "scheduled": "Programate",
+      "dead": "Eșuate definitiv",
+      "oldest": "Cea mai veche lucrare scadentă",
+      "seconds": "{count} s",
+      "doneLastHour": "Terminate în ultima oră",
+      "failedLastHour": "Eșuate în ultima oră",
+      "errorRate": "Rata de eroare în ultima oră",
+      "snapshot": "Instantaneu luat la",
+      "alerts": "Alerte",
+      "noAlerts": "Nicio alertă",
+      "alertTitle": "Coada are nevoie de atenție",
+      "alert": {
+        "queue_depth": "prea multe lucrări în așteptare",
+        "error_rate": "rată de eroare ridicată",
+        "oldest_due": "o lucrare așteaptă de prea mult timp"
+      },
+      "none": "Niciun instantaneu încă",
+      "noneBody": "Procesul de fundal scrie starea cozii în fiecare minut. Dacă nu apare nimic, verifică dacă acesta rulează."
+    },
+    "runs": {
+      "none": "Nicio rulare înregistrată",
+      "noneBody": "Rulările apar aici după prima execuție programată.",
+      "job": "Lucrare",
+      "status": "Stare",
+      "started": "Început",
+      "finished": "Încheiat",
+      "detail": "Detalii",
+      "statuses": {
+        "ok": "Reușită",
+        "failed": "Eșuată",
+        "skipped": "Sărită"
+      }
+    },
+    "limits": {
+      "title": "Limite de autentificare",
+      "body": "Limitele protejează autentificarea împotriva abuzului. O schimbare se aplică numai după aprobarea unui al doilea administrator de securitate.",
+      "change": "Cere o schimbare",
+      "changeTitle": "Schimbă limitele de autentificare",
+      "requested": "Cererea a fost trimisă la aprobare.",
+      "defaultHint": "Implicit: {value}",
+      "reasonHint": "De ce este nevoie de schimbare. Rămâne în jurnalul de audit.",
+      "limit": "Limită",
+      "current": "Acum",
+      "default": "Implicit",
+      "changed": "modificată",
+      "keys": {
+        "codeRequestPerEmailPerHour": "Coduri cerute pe adresă, pe oră",
+        "codeRequestPerEmailPerDay": "Coduri cerute pe adresă, pe zi",
+        "codeRequestPerIpPerHour": "Coduri cerute pe IP, pe oră",
+        "codeRequestPerDevicePerHour": "Coduri cerute pe dispozitiv, pe oră",
+        "codeAttemptsPerCode": "Încercări pentru un cod",
+        "codeEntryPerIpPerHour": "Coduri introduse pe IP, pe oră",
+        "codeEntryPerDevicePerHour": "Coduri introduse pe dispozitiv, pe oră",
+        "passwordEntryPerUsernamePerHour": "Parole încercate pe nume de utilizator, pe oră"
+      }
+    }
+  },
+  "approvals": {
+    "title": "Aprobări",
+    "description": "Acțiunile ireversibile au nevoie de a doua persoană. Cine a cerut nu poate și aproba.",
+    "filterLabel": "Filtrează cererile după stare",
+    "states": {
+      "pending": "În așteptare",
+      "approved": "Aprobate",
+      "rejected": "Respinse",
+      "cancelled": "Retrase"
+    },
+    "empty": {
+      "pending": "Nicio cerere în așteptare",
+      "approved": "Nicio cerere aprobată",
+      "rejected": "Nicio cerere respinsă",
+      "cancelled": "Nicio cerere retrasă"
+    },
+    "emptyBody": "Cererile apar aici când cineva din personal cere o acțiune care are nevoie de a doua persoană.",
+    "singleOperatorTag": "Cerută în mod cu un singur operator",
+    "requestedBy": "Cerută de",
+    "you": "tine",
+    "requestedAt": "Cerută la",
+    "progress": "Aprobări",
+    "progressValue": "{done} din {needed}",
+    "reason": "Motiv",
+    "decisionReason": "Motivul respingerii",
+    "decidedAt": "Închisă la",
+    "approve": "Aprobă cererea",
+    "approving": "Se aprobă…",
+    "reject": "Respinge cererea",
+    "rejectTitle": "Respinge cererea",
+    "rejectReason": "Motivul respingerii",
+    "rejectReasonHint": "Îl vede cine a făcut cererea și rămâne în jurnalul de audit.",
+    "rejectSubmit": "Respinge cererea",
+    "rejecting": "Se respinge…",
+    "waitingForOther": "Cererea ta așteaptă o altă persoană cu rolul potrivit. Până atunci nu are niciun efect.",
+    "cancel": "Retrage cererea",
+    "cancelling": "Se retrage…",
+    "cannotDecide": "Rolurile tale nu permit aprobarea acestei cereri sau ai aprobat-o deja.",
+    "actions": {
+      "staffSetRoles": "Roluri de personal pentru {who} ({count} roluri)",
+      "staffRemove": "Scoaterea din personal a contului {who}",
+      "signInLimits": "Schimbarea limitelor de autentificare ({count} valori diferite de cele implicite)"
+    }
+  },
+  "audit": {
+    "title": "Jurnal de audit",
+    "description": "Fiecare acțiune, cu cine a făcut-o și când. Intrările nu pot fi modificate sau șterse de nimeni.",
+    "filters": "Filtre",
+    "actorKind": "Tip de actor",
+    "anyActor": "Oricare",
+    "actorKinds": {
+      "account": "Cont",
+      "guest": "Invitat",
+      "staff": "Personal",
+      "mcp": "Asistent extern",
+      "system": "Sistem",
+      "anonymous": "Anonim"
+    },
+    "actorId": "Identificator actor",
+    "action": "Acțiune",
+    "actionHint": "Începutul numelui, de exemplu „approval.”",
+    "objectType": "Tip de obiect",
+    "objectId": "Identificator obiect",
+    "from": "De la data",
+    "to": "Până la data",
+    "apply": "Filtrează jurnalul",
+    "clear": "Șterge filtrele",
+    "badFilter": "Un filtru nu este valid. Verifică datele introduse.",
+    "entries": "Intrări",
+    "export": "Exportă CSV",
+    "exportNote": "Exportul este o copie numai pentru citire a intrărilor filtrate; jurnalul rămâne neschimbat, iar exportul însuși este înregistrat.",
+    "empty": "Nicio intrare",
+    "emptyFiltered": "Nicio intrare nu se potrivește cu filtrele alese.",
+    "when": "Când",
+    "actor": "Actor",
+    "object": "Obiect",
+    "details": "Detalii",
+    "showDetails": "Arată valorile",
+    "detail": {
+      "before": "Înainte",
+      "after": "După",
+      "meta": "Context"
+    },
+    "older": "Intrări mai vechi"
+  },
+  "access": {
+    "title": "Acces",
+    "description": "Cine face parte din personal și cu ce roluri. Orice schimbare trece prin aprobarea unui al doilea administrator de platformă.",
+    "singleOperatorBody": "O singură persoană are rol de personal, așa că nimeni nu poate aproba o schimbare de roluri de aici. A doua persoană se adaugă de pe server, cu scriptul make-staff.",
+    "staff": "Personal",
+    "empty": "Nimeni nu are încă rol de personal",
+    "person": "Persoană",
+    "roles": "Roluri",
+    "twoStep": "Doi pași",
+    "state": "Stare",
+    "since": "Din",
+    "you": "tu",
+    "twoStepOn": "Activă",
+    "twoStepOff": "Inactivă",
+    "active": "Activ",
+    "inactive": "Scos din personal",
+    "twoStepNote": "Fără verificarea în doi pași activă, un membru al personalului nu poate deschide consola.",
+    "change": "Cere o schimbare de roluri",
+    "changeBody": "Alege toate rolurile pe care persoana trebuie să le aibă după schimbare. Cererea merge la aprobări și nu are efect până nu o aprobă alt administrator de platformă.",
+    "requested": "Cererea a fost trimisă la aprobare.",
+    "requestedLink": "Vezi aprobările",
+    "email": "Emailul contului",
+    "emailHint": "Persoana trebuie să aibă deja un cont EventDesk cu această adresă.",
+    "rolesLegend": "Roluri după schimbare",
+    "reason": "Motiv",
+    "reasonHint": "Îl vede cine aprobă și rămâne în jurnalul de audit.",
+    "submit": "Trimite la aprobare",
+    "submitting": "Se trimite…",
+    "removeNote": "Ca să scoți pe cineva din personal, trimite cererea fără niciun rol bifat.",
+    "adminOnly": "Numai un administrator de platformă poate cere schimbări de roluri."
+  },
+  "incidents": {
+    "title": "Incidente",
+    "description": "Jurnalul incidentelor și mesajul de stare pe care îl văd invitații cât timp un incident este deschis.",
+    "activeTitle": "Incident deschis din {time}",
+    "shownToGuests": "Invitații văd:",
+    "defaultMessage": "mesajul implicit „Ceva nu funcționează”",
+    "resolve": "Închide incidentul",
+    "resolving": "Se închide…",
+    "noneActive": "Niciun incident deschis",
+    "open": "Deschide un incident",
+    "openBody": "Mesajul apare imediat pe paginile invitaților, în limba lor. Scrie simplu, fără detalii tehnice. Dacă lași mesajele goale, se afișează textul implicit.",
+    "messageRo": "Mesaj în română",
+    "messageHint": "De exemplu: „Confirmările nu se salvează momentan. Revenim în scurt timp.”",
+    "messageEn": "Mesaj în engleză",
+    "messageEnHint": "Îl văd invitații care folosesc limba engleză.",
+    "internalNote": "Notă internă",
+    "internalNoteHint": "Rămâne numai în consolă. Invitații nu o văd niciodată.",
+    "openSubmit": "Deschide incidentul",
+    "opening": "Se deschide…",
+    "readOnly": "Numai un administrator de securitate poate deschide sau închide incidente.",
+    "log": "Jurnalul incidentelor",
+    "empty": "Niciun incident înregistrat",
+    "emptyBody": "Când ceva nu funcționează, deschide un incident ca invitații să vadă un mesaj clar.",
+    "started": "Deschis",
+    "resolved": "Închis",
+    "message": "Mesaj pentru invitați",
+    "stillOpen": "Deschis"
+  },
+  "reports": {
+    "title": "Rapoarte de conținut",
+    "description": "Sesizări despre conținut ilegal sau listări nelegitime. Fiecare decizie se înregistrează împreună cu motivul comunicat părții afectate.",
+    "decidedNotice": "Decizia a fost înregistrată.",
+    "filterLabel": "Filtrează rapoartele după stare",
+    "tabs": {
+      "open": "Deschise",
+      "actioned": "Cu măsuri",
+      "dismissed": "Respinse"
+    },
+    "empty": {
+      "open": "Niciun raport deschis",
+      "actioned": "Niciun raport cu măsuri",
+      "dismissed": "Niciun raport respins"
+    },
+    "emptyBody": "Rapoartele trimise prin formularul public apar aici.",
+    "reference": "Referință",
+    "received": "Primit",
+    "target": "Ce se raportează",
+    "category": "Motiv",
+    "state": "Stare",
+    "open": "Deschide",
+    "openNamed": "Deschide raportul {reference}",
+    "categories": {
+      "illegal_content": "Conținut ilegal",
+      "fraud": "Înșelăciune sau firmă falsă",
+      "intellectual_property": "Drepturi de autor sau marcă",
+      "privacy": "Date personale publicate fără acord",
+      "false_information": "Informații false",
+      "offensive": "Conținut jignitor",
+      "other": "Altceva"
+    },
+    "states": {
+      "received": "Primit",
+      "reviewing": "În analiză",
+      "actioned": "S-au luat măsuri",
+      "dismissed": "Respins"
+    },
+    "detailTitle": "Raport de conținut",
+    "back": "Înapoi la rapoarte",
+    "detailHeading": "Raportul {reference}",
+    "what": "Sesizarea",
+    "reporter": "Contactul celui care raportează",
+    "reporterErased": "șters după perioada de păstrare",
+    "reporterAnonymous": "nu a lăsat un contact",
+    "repeats": "Alte rapoarte de la același contact",
+    "linkedObject": "Obiect legat",
+    "descriptionLabel": "Descriere",
+    "decide": "Decizie",
+    "startReview": "Marchează „în analiză”",
+    "startingReview": "Se marchează…",
+    "reasonNoticeTitle": "Motivul se comunică părții afectate",
+    "reasonNoticeBody": "Scrie-l clar și la obiect, în română: ce regulă se aplică și ce urmează. Rămâne în jurnalul de audit.",
+    "decision": "Decizia",
+    "decisionActioned": "Se iau măsuri împotriva conținutului raportat",
+    "decisionDismissed": "Raportul este respins; conținutul rămâne",
+    "reasonGiven": "Motivul comunicat părții afectate",
+    "reasonGivenHint": "Cel puțin 10 caractere.",
+    "internalNote": "Notă internă",
+    "internalNoteHint": "Numai pentru personal.",
+    "submitDecision": "Înregistrează decizia",
+    "submittingDecision": "Se înregistrează…",
+    "decisionTaken": "Decizia luată",
+    "decidedAt": "Decisă la"
+  },
+  "launch": {
+    "title": "Lansare",
+    "description": "Obligațiile de lansare LAU1–LAU9. Conținutul aparține operatorului: completezi tu câmpurile, iar un câmp gol înseamnă „neînregistrat”.",
+    "notRecorded": "neînregistrat",
+    "checklist": "Lista de lansare · {done} din {total} încheiate",
+    "owner": "Rol responsabil",
+    "evidence": "Unde se află dovada",
+    "evidenceHint": "Text liber: numele documentului, dosarul sau tichetul.",
+    "recorded": "Înregistrat",
+    "recordedBy": "{time} · personal {staff}",
+    "note": "Notă",
+    "record": "Înregistrează starea pentru {item}",
+    "status": "Stare",
+    "save": "Salvează starea",
+    "statuses": {
+      "open": "Deschis",
+      "in_progress": "În lucru",
+      "done": "Încheiat"
+    },
+    "legal": {
+      "title": "Documente legale publicate",
+      "open": "Crearea de conturi este deschisă",
+      "openBody": "Termenii, politica de confidențialitate și nota despre cookie-uri au versiune și dată de publicare.",
+      "closed": "Crearea de conturi este blocată",
+      "closedBody": "Niciun cont nou nu poate fi creat până când termenii, politica de confidențialitate și nota despre cookie-uri nu au versiune și dată de publicare înregistrate aici.",
+      "docs": {
+        "terms": "Termeni și condiții (planificatori)",
+        "businessTerms": "Termeni pentru firme",
+        "privacy": "Politica de confidențialitate",
+        "cookies": "Nota despre cookie-uri"
+      },
+      "version": "versiunea {version}",
+      "versionOf": "{doc} — versiune",
+      "dateOf": "{doc} — data publicării",
+      "edit": "Modifică versiunile publicate",
+      "editTitle": "Versiuni publicate",
+      "editBody": "Înregistrează aici numai ce este deja publicat pe site-ul public.",
+      "save": "Salvează versiunile"
+    },
+    "items": {
+      "LAU1": {
+        "title": "Documente legale și nota despre cookie-uri",
+        "summary": "Termenii (planificatori și, separat, firme), politica de confidențialitate și nota despre cookie-uri există și sunt legate înainte de crearea oricărui cont."
+      },
+      "LAU2": {
+        "title": "Formalități ANSPDCP și DPIA",
+        "summary": "Evidențele de operator sunt la zi, registrul activităților de prelucrare este început, iar DPIA este efectuată și semnată pentru prelucrările cu risc ridicat."
+      },
+      "LAU3": {
+        "title": "Domeniul de email încălzit",
+        "summary": "SPF, DKIM și DMARC sunt verificate, iar trimiterile de test au ajuns la furnizorii mari înainte de primul email real de autentificare."
+      },
+      "LAU4": {
+        "title": "Test de penetrare extern",
+        "summary": "Suprafețele publice au fost testate, constatările triate, iar cele critice și ridicate remediate înainte de primul link real de invitat."
+      },
+      "LAU5": {
+        "title": "Monitorizare și răspuns la incidente",
+        "summary": "Verificări de sănătate, alerte către un canal urmărit, procedură de recuperare documentată (RTO 4 ore, RPO 24 de ore) și jurnalul incidentelor din consolă."
+      },
+      "LAU6": {
+        "title": "Termeni expliciți pentru firme",
+        "summary": "Faza gratuită, regulile de etichetare „Promovat” și procesul de revendicare și obiecție sunt publicate înainte de înregistrarea primei firme."
+      },
+      "LAU7": {
+        "title": "Runbook pentru ziua lansării",
+        "summary": "Cine este de serviciu, cum se fac lansările și revenirile, cum se retrage un lot de descoperire și regula celor două persoane pentru acțiunile ireversibile."
+      },
+      "LAU8": {
+        "title": "Obligații DSA (ANCOM)",
+        "summary": "Serviciul este înregistrat la ANCOM, punctul de contact este publicat, mecanismul de notificare și acțiune funcționează, iar regulile de moderare sunt în termeni."
+      },
+      "LAU9": {
+        "title": "Declarația de accesibilitate",
+        "summary": "Declarația este publicată în română și engleză, există o cale de feedback, iar data și metoda de evaluare sunt înregistrate mai jos."
+      }
+    },
+    "records": {
+      "title": "Evidențe ANSPDCP, DPIA, ANCOM și accesibilitate",
+      "body": "Referințe către documentele operatorului. Consola nu păstrează documentele, doar unde se găsesc și de când.",
+      "edit": "Modifică evidențele",
+      "save": "Salvează evidențele",
+      "anspdcpReference": "ANSPDCP — referința înregistrării",
+      "anspdcpDate": "ANSPDCP — data",
+      "processingRegistryRef": "Registrul activităților de prelucrare — unde se află",
+      "dpiaReference": "DPIA — referința documentului",
+      "dpiaSignedOn": "DPIA — semnată la",
+      "dpiaSignedBy": "DPIA — semnată de",
+      "dpiaLastReviewedOn": "DPIA — ultima revizuire",
+      "ancomReference": "ANCOM — referința înregistrării",
+      "ancomDate": "ANCOM — data",
+      "dsaContactPoint": "Punctul de contact DSA publicat",
+      "accessibilityStatementDate": "Declarația de accesibilitate — data",
+      "accessibilityEvaluationMethod": "Declarația de accesibilitate — metoda de evaluare"
+    }
+  }
+}

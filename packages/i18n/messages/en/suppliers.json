@@ -1,0 +1,232 @@
+{
+  "title": "Suppliers",
+  "list": {
+    "description": "Everyone working for your occasion: where each booking stands, what you agreed and what is next to pay.",
+    "add": "Add a supplier",
+    "addTitle": "New supplier",
+    "addSubmit": "Add the supplier",
+    "emptyTitle": "No suppliers yet",
+    "emptyBody": "Add your first supplier — the band, the restaurant, the photographer — and follow the booking, the briefing and the payments from here.",
+    "emptyBodyReadOnly": "When the planner adds suppliers, you will see them here.",
+    "noContact": "no contact details",
+    "noBriefing": "No briefing",
+    "briefingAcked": "Briefing v{version} · acknowledged by the supplier",
+    "briefingNotAcked": "Briefing v{version} · not acknowledged yet",
+    "nextPayment": "Next payment: {date}",
+    "paymentOverdue": "Payment overdue since {date}",
+    "allTitle": "All suppliers"
+  },
+  "fields": {
+    "name": "Supplier name",
+    "category": "What they do",
+    "categoryHint": "For example: band, catering, flowers.",
+    "contactName": "Contact person",
+    "contactPhone": "Phone",
+    "contactEmail": "Email",
+    "notes": "Notes"
+  },
+  "states": {
+    "enquired": "Enquired",
+    "quoted": "Quote received",
+    "booked": "Booked",
+    "confirmed": "Confirmed",
+    "delivered": "Delivered",
+    "cancelled": "Cancelled"
+  },
+  "detail": {
+    "metaTitle": "Supplier",
+    "back": "All suppliers",
+    "editTitle": "Edit the supplier's details",
+    "contactTitle": "Contact"
+  },
+  "booking": {
+    "title": "Booking state",
+    "current": "now",
+    "cancel": "Cancel the booking",
+    "reopen": "Reopen the booking",
+    "cancelledNote": "The booking is cancelled. You can reopen it at any time.",
+    "history": "State history ({count})"
+  },
+  "terms": {
+    "title": "What you agreed",
+    "agreed": "Agreed amount",
+    "agreedField": "Agreed amount (RON)",
+    "agreedHint": "Leave it empty if you do not know it yet — it stays “unknown”, not zero.",
+    "quote": "Quote",
+    "noQuote": "No quote uploaded",
+    "notes": "Notes about the agreement",
+    "edit": "Edit the agreement",
+    "editTitle": "What you agreed",
+    "uploadQuote": "Upload the quote",
+    "replaceQuote": "Replace the quote",
+    "uploadHint": "PDF, PNG or JPG. After the upload the booking moves to “Quote received”.",
+    "attaching": "Attaching the quote…",
+    "attached": "The quote has been attached.",
+    "removeQuote": "Remove the quote"
+  },
+  "order": {
+    "title": "Final order",
+    "empty": "You have not fixed a final order yet.",
+    "fixed": "Version {version}, fixed on {date}",
+    "basedOn": "Based on:",
+    "nowConfirmed": "Confirmed right now:",
+    "counts": "{total} people ({adults} adults, {children} children)",
+    "deltaCounts": "{adults} adults, {children} children",
+    "deltasTitle": "Changes after the final order",
+    "noDeltas": "No guest changes since you fixed the order.",
+    "deltasNotice": "Answers changed after the final order: {count}",
+    "householdRemoved": "Household removed from the list",
+    "olderVersions": "Older versions ({count})",
+    "first": "Fix the final order",
+    "firstHint": "Write what you ordered. The number of guests confirmed at this moment is kept beside the order.",
+    "newVersion": "Fix version {version} of the order",
+    "newVersionHint": "The agreed order is not edited: you fix a new version, which also takes in the changes above. Old versions stay.",
+    "item": "Product or service",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "unitHint": "For example: portions, pcs, hours.",
+    "addRow": "Add a line",
+    "removeRow": "Delete line",
+    "submitFirst": "Fix the final order",
+    "submitNext": "Fix version {version}",
+    "done": "The order has been fixed."
+  },
+  "payments": {
+    "title": "Payments",
+    "attentionTitle": "Payments to watch",
+    "empty": "No payment deadlines yet. Add the advance, the instalments and the final balance, each with its date.",
+    "kinds": {
+      "advance": "Advance",
+      "instalment": "Instalment",
+      "final": "Final balance"
+    },
+    "kind": "Kind of payment",
+    "dueOn": "due on {date}",
+    "dueField": "Due on",
+    "newDueOn": "New due date",
+    "amount": "Amount (RON)",
+    "amountHint": "Leave it empty if you do not know it yet.",
+    "note": "Note",
+    "paid": "Paid",
+    "paidOn": "paid on {date}",
+    "overdue": "Overdue",
+    "soon": "Due soon",
+    "add": "Add a payment deadline",
+    "addTitle": "New payment deadline",
+    "addSubmit": "Add the deadline",
+    "markPaid": "Mark as paid",
+    "move": "Move the date",
+    "moveTitle": "Move the payment",
+    "moveIntro": "We first show you what changes — the date, whether the payment becomes overdue and the total due per month. Nothing moves until you confirm.",
+    "moveSubmit": "See what changes",
+    "movePending": "Working it out…",
+    "remove": "Delete the deadline",
+    "unmark": "Correct: not paid",
+    "unmarkTitle": "Correct the payment",
+    "unmarkIntro": "A recorded payment stays in the history. If it was marked by mistake, write why you are correcting it.",
+    "unmarkSubmit": "Mark as not paid",
+    "reason": "Reason for the correction",
+    "reasonHint": "For example: the bank returned the payment."
+  },
+  "link": {
+    "title": "Supplier link",
+    "description": "Through this link the supplier sees only their own booking: the briefing, the final order and the deliveries. They see no prices, guests or other suppliers, and they need no account.",
+    "none": "There is no link yet.",
+    "state": "State",
+    "states": {
+      "active": "Active",
+      "revoked": "Revoked"
+    },
+    "language": "Language",
+    "languageField": "Language of the supplier's page",
+    "lastViewed": "Last opened",
+    "neverViewed": "Not opened yet",
+    "hashedNote": "The link cannot be shown again: we keep it only in hashed form. If you lost it, generate a new one — the old one stops working.",
+    "create": "Generate the link",
+    "regenerate": "Generate a new link",
+    "creating": "Generating…",
+    "onceTitle": "The supplier link is ready",
+    "onceBody": "Copy it now and send it to the supplier. We cannot show it a second time.",
+    "copy": "Copy the link",
+    "copied": "Link copied",
+    "revoke": "Revoke the link",
+    "revokeTitle": "Revoke the supplier link?",
+    "revokeBody": "The link stops working at once. You can generate a new one at any time.",
+    "revokeSubmit": "Revoke the link"
+  },
+  "remove": {
+    "title": "Delete the supplier",
+    "body": "You can delete a supplier added by mistake. If it already has a published briefing, a final order or a payment made, cancel the booking instead of deleting it.",
+    "open": "Delete supplier {name}",
+    "confirmTitle": "Delete the supplier?",
+    "confirmBody": "{name} disappears from the occasion, together with its payment deadlines.",
+    "submit": "Delete the supplier"
+  },
+  "errors": {
+    "nameRequired": "Write the supplier's name.",
+    "email": "Write a valid email address, for example name@company.ro.",
+    "phone": "Write a valid phone number, for example 0722 123 456.",
+    "amount": "Write the amount in digits, for example 1500 or 1.500,50.",
+    "quoteFile": "We could not find the uploaded file. Upload the quote again.",
+    "cannotDelete": "The supplier already has a briefing, a final order or a payment made. Cancel the booking instead of deleting it.",
+    "itemLabel": "Write what you ordered on every line.",
+    "itemQuantity": "Write the quantity in digits, on every line.",
+    "itemsRequired": "Add at least one line to the order.",
+    "itemsTooMany": "The order has too many lines. Group them.",
+    "dueOn": "Choose the due date.",
+    "sameDay": "The payment is already due on this day. Choose another date.",
+    "paidLocked": "The payment is marked as paid. Correct it first if that was a mistake.",
+    "notPaid": "The payment is not marked as paid."
+  },
+  "whatif": {
+    "moveTitle": "You are moving a payment to {supplier}",
+    "dueLabel": "Due date",
+    "what": {
+      "advance": "Advance — {supplier}",
+      "instalment": "Instalment — {supplier}",
+      "final": "Final balance — {supplier}"
+    },
+    "amountUnknown": "The amount of this payment is unknown.",
+    "status": "Payment status",
+    "overdue": "Overdue",
+    "onTime": "On time",
+    "monthLabel": "Total due",
+    "monthTotal": "Month {month}",
+    "monthHasUnknown": "The month also includes payments with an unknown amount."
+  },
+  "alerts": {
+    "title": "Supplier payments",
+    "overdue": "Overdue since {date}: {supplier} — {amount}",
+    "overdueUnknown": "Overdue since {date}: {supplier} — amount unknown",
+    "soon": "Due on {date}: {supplier} — {amount}",
+    "soonUnknown": "Due on {date}: {supplier} — amount unknown",
+    "more": "And {count} more."
+  },
+  "lifecycle": {
+    "bookingKind": "Booking",
+    "toCancel": "To cancel with the supplier",
+    "toNotify": "To be told the new date",
+    "paidKind": "Payment made",
+    "dueKind": "Payment to make",
+    "alreadyPaid": "Already paid (due on {date})",
+    "stillDue": "Still to pay, due on {date}"
+  },
+  "closeout": {
+    "unpaid": "Unpaid supplier balances",
+    "line": {
+      "advance": "Advance — {supplier}, due on {date}",
+      "instalment": "Instalment — {supplier}, due on {date}",
+      "final": "Final balance — {supplier}, due on {date}"
+    }
+  },
+  "exports": {
+    "suppliers": {
+      "title": "Suppliers (CSV)",
+      "description": "The suppliers, their contacts and the state of each booking."
+    },
+    "payments": {
+      "title": "Supplier payments (CSV)",
+      "description": "The payment deadlines, the amounts and what has been paid."
+    }
+  }
+}

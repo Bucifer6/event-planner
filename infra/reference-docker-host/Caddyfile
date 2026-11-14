@@ -1,0 +1,45 @@
+# Ingress for the reference Docker host: TLS + the three host names (INF1, SEC4).
+# Values come from ingress.env (host names are not secrets).
+{
+	email {$ACME_EMAIL}
+}
+
+# app.<domain> — the web app, including /mcp. The app sets its own security headers (strict
+# nonce CSP, HSTS, nosniff…); the ingress adds nothing that could weaken them.
+{$APP_HOST} {
+	encode zstd gzip
+	reverse_proxy web:3000 {
+		header_up X-Forwarded-Host {host}
+	}
+}
+
+# media.<domain> — uploaded PDFs. Same web service, but a DIFFERENT origin than the app, and
+# the app answers only /api/media/* on this host (proxy.ts). As defence in depth every answer
+# is forced to download, never render inline (SEC4).
+{$MEDIA_HOST} {
+	@media path /api/media/*
+	handle @media {
+		header {
+			# only when the app did not set one (it sends "attachment; filename=…" for PDFs)
+			?Content-Disposition "attachment"
+			X-Content-Type-Options "nosniff"
+			defer
+		}
+		reverse_proxy web:3000 {
+			header_up X-Forwarded-Host {host}
+		}
+	}
+	handle {
+		respond 404
+	}
+}
+
+# <domain> and www.<domain> — the static public site (no cookies, D1).
+{$PUBLIC_HOST} {
+	header Strict-Transport-Security "max-age=63072000; includeSubDomains; preload"
+	reverse_proxy public:8080
+}
+
+www.{$PUBLIC_HOST} {
+	redir https://{$PUBLIC_HOST}{uri} permanent
+}

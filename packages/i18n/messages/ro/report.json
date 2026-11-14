@@ -1,0 +1,43 @@
+{
+  "title": "Raportează conținut ilegal",
+  "lead": "Oricine poate semnala conținut ilegal sau o listare nelegitimă de pe EventDesk. Nu ai nevoie de cont.",
+  "rules": "Regulile după care moderăm conținutul sunt scrise pe înțelesul tuturor în <link>regulile de moderare</link>.",
+  "next": {
+    "title": "Ce se întâmplă cu raportul tău",
+    "step1": "Primești pe loc o referință a raportului.",
+    "step2": "O persoană din echipa noastră îl analizează. Nu decidem automat.",
+    "step3": "Înregistrăm decizia și motivul ei și le comunicăm părții afectate. Dacă ne lași un email, îți scriem și ție rezultatul."
+  },
+  "form": {
+    "title": "Raportul tău",
+    "target": "Ce raportezi",
+    "targetHint": "Adresa paginii (linkul) sau numele firmei ori al listării.",
+    "category": "Motivul",
+    "categoryPlaceholder": "Alege motivul",
+    "description": "Ce este în neregulă",
+    "descriptionHint": "Spune pe scurt ce ai văzut și de ce crezi că este ilegal. Cel puțin 10 caractere.",
+    "contact": "Emailul tău",
+    "contactHint": "Îl folosim numai ca să îți comunicăm rezultatul. Poți raporta și fără el.",
+    "optional": "opțional",
+    "trap": "Lasă acest câmp gol",
+    "submit": "Trimite raportul",
+    "submitting": "Se trimite raportul…"
+  },
+  "categories": {
+    "illegal_content": "Conținut ilegal",
+    "fraud": "Înșelăciune sau firmă falsă",
+    "intellectual_property": "Drepturi de autor sau marcă",
+    "privacy": "Date personale publicate fără acord",
+    "false_information": "Informații false",
+    "offensive": "Conținut jignitor",
+    "other": "Altceva"
+  },
+  "done": {
+    "title": "Am primit raportul tău.",
+    "body": "Referința lui este {reference}. Păstreaz-o dacă vrei să revii asupra raportului."
+  },
+  "privacy": "Păstrăm emailul tău cel mult șase luni după decizie și nu îl arătăm firmei raportate.",
+  "errors": {
+    "descriptionTooShort": "Descrie pe scurt problema, în cel puțin 10 caractere."
+  }
+}

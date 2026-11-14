@@ -1,0 +1,134 @@
+{
+  "title": "Deliveries and returns",
+  "description": "What is due to arrive, what you hire and what has to go back. The received quantity is recorded once; after that it changes only through a correction with a reason.",
+  "slotUnknown": "slot not agreed",
+  "kinds": {
+    "delivery": "Delivery",
+    "hire": "Hire",
+    "return": "Return"
+  },
+  "states": {
+    "expected": "Expected",
+    "partial": "Partial",
+    "received": "Received",
+    "returned": "Returned"
+  },
+  "empty": {
+    "title": "No deliveries yet",
+    "body": "Add the first delivery — the hired chairs, the flowers, the cake — with the day, the slot and where it arrives.",
+    "bodyReadOnly": "When the planner adds deliveries, you will see them here and can record what arrived."
+  },
+  "add": {
+    "open": "Add a delivery",
+    "title": "New delivery",
+    "submit": "Add the delivery"
+  },
+  "fields": {
+    "title": "What is delivered",
+    "titleHint": "For example: chairs and tables, flower arrangements.",
+    "kind": "Kind",
+    "supplier": "Supplier",
+    "noSupplier": "No supplier",
+    "day": "Day",
+    "fromTime": "From",
+    "toTime": "Until",
+    "timeHint": "In the format 14:30.",
+    "place": "Where",
+    "placeHint": "For example: the back entrance, at the kitchen.",
+    "itemLabel": "First item",
+    "itemLabelHint": "For example: chairs. You can add more afterwards.",
+    "itemQty": "Expected quantity",
+    "itemUnit": "Unit",
+    "itemUnitHint": "For example: pcs, kg, boxes.",
+    "deposit": "Deposit (RON)",
+    "depositHint": "Only for hired items. Leave it empty if there is none."
+  },
+  "item": {
+    "none": "No items yet.",
+    "add": "Add an item",
+    "addTitle": "New item — {title}",
+    "addSubmit": "Add the item",
+    "remove": "Delete the item",
+    "expected": "Expected",
+    "received": "Received",
+    "returned": "Returned",
+    "deposit": "Deposit",
+    "notRecorded": "Not recorded",
+    "complete": "Complete",
+    "short": "{missing} missing",
+    "receivedAt": "Recorded on {date}",
+    "recordLabel": "How many arrived",
+    "recordHint": "It is recorded once.",
+    "record": "Record the receipt"
+  },
+  "correct": {
+    "open": "Correct the received quantity",
+    "title": "Correct the received quantity",
+    "intro": "{label}: {current} is on record now. The correction keeps the old value, the new value, who corrected it and why.",
+    "quantity": "The correct received quantity",
+    "reason": "Reason for the correction",
+    "reasonHint": "For example: I counted again, two were in the second van.",
+    "submit": "Save the correction",
+    "done": "The correction has been saved.",
+    "history": "Correction history",
+    "openReturn": "Correct the returned quantity",
+    "titleReturn": "Correct the returned quantity",
+    "introReturn": "{label}: {current} is on record as returned. The correction keeps the old value, the new value, who corrected it and why.",
+    "quantityReturn": "The correct returned quantity",
+    "fields": {
+      "receivedQty": "Received quantity",
+      "returnedQty": "Returned quantity",
+      "depositRecoveredAt": "Deposit marked as not recovered"
+    }
+  },
+  "return": {
+    "open": "Record the return",
+    "title": "Record the return",
+    "intro": "{label}: {received} were received. Write how many went back.",
+    "quantity": "How many were returned",
+    "submit": "Record the return"
+  },
+  "deposit": {
+    "recover": "Deposit recovered",
+    "recoveredAt": "Deposit recovered on {date}",
+    "undo": "Correct: deposit not recovered",
+    "undoTitle": "Correct the deposit",
+    "undoIntro": "The recovered deposit stays in the history. Write why you are correcting it.",
+    "undoSubmit": "Mark as not recovered"
+  },
+  "remove": {
+    "open": "Delete the delivery",
+    "title": "Delete the delivery?",
+    "body": "“{title}” disappears from the plan, together with its items.",
+    "submit": "Delete the delivery"
+  },
+  "errors": {
+    "titleRequired": "Write what is delivered.",
+    "labelRequired": "Write the item's name.",
+    "quantity": "Write the quantity in digits, for example 120.",
+    "amount": "Write the amount in digits, for example 500 or 1.500,50.",
+    "supplier": "Choose a supplier of this occasion.",
+    "slotOrder": "The end time must be after the start time.",
+    "day": "Choose a valid day.",
+    "dayForTime": "Choose the day for the times you wrote.",
+    "time": "Write the time in the format 14:30.",
+    "hasFacts": "Quantities have already been recorded. A delivery with recorded receipts can no longer be deleted.",
+    "useCorrection": "The received quantity is already on record. Use “Correct the received quantity”.",
+    "useCorrectionReturn": "The return is already on record. Use “Correct the returned quantity”.",
+    "returnBeforeReceipt": "Record what you received first.",
+    "nothingToCorrect": "Nothing has been recorded yet to correct.",
+    "sameQuantity": "This is already the quantity on record. Write the correct value.",
+    "noDeposit": "The item has no deposit."
+  },
+  "lifecycle": {
+    "kind": "Delivery",
+    "toCancel": "To cancel",
+    "toReschedule": "To reschedule"
+  },
+  "closeout": {
+    "notReturned": "Hired items not returned",
+    "notReturnedLine": "{label} ({delivery}) — {left} still to return",
+    "deposits": "Deposits not recovered",
+    "depositLine": "{label} ({delivery})"
+  }
+}

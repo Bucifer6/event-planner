@@ -1,0 +1,95 @@
+{
+  "label": "generat cu AI",
+  "open": "Cere o sugestie de text",
+  "title": "Sugestie de text",
+  "intro": "Primești o formulare pe care o poți schimba după plac. Nimic nu se folosește până nu apeși „Folosește textul”.",
+  "sent": "Trimitem doar tipul ocaziei, tonul, limba și numele scrise în formular. Nu trimitem lista de invitați, contacte sau adrese.",
+  "toneLegend": "Ton",
+  "tones": {
+    "ceremonious": "Ceremonios",
+    "warm": "Cald",
+    "playful": "Jucăuș"
+  },
+  "hint": "Ce să mai țină minte",
+  "hintHint": "De exemplu „în aer liber, fără formalități”.",
+  "generate": "Generează o sugestie",
+  "generating": "Se scrie sugestia…",
+  "again": "Altă sugestie",
+  "resultLabel": "Sugestia — o poți modifica",
+  "use": "Folosește textul",
+  "discard": "Renunță",
+  "remaining": "Sugestii rămase luna aceasta: {remaining} din {limit}.",
+  "resets": "Numărătoarea pornește din nou la {date}.",
+  "off": "Sugestiile de text nu sunt activate pe această platformă.",
+  "keptLabel": "Textul poartă eticheta „generat cu AI” până îl rescrii în mare parte.",
+  "errors": {
+    "notConfigured": "Sugestiile de text nu sunt activate pe această platformă.",
+    "monthlyLimit": "Ai folosit cele {limit} sugestii de text ale lunii. Numărătoarea pornește din nou la {date}.",
+    "providerFailed": "Sugestia nu a putut fi generată acum și nu a fost numărată. Reîncearcă puțin mai târziu."
+  },
+  "dev": {
+    "who": "noi",
+    "hint": "({hint})",
+    "occasion": {
+      "nunta": "nunta noastră",
+      "botez": "botezul copilului nostru",
+      "aniversare": "aniversarea mea"
+    },
+    "invitation": {
+      "ceremonious": {
+        "a": "Cu aleasă bucurie, {who} vă invităm să ne onorați cu prezența la {occasion}.",
+        "b": "Avem deosebita plăcere de a vă pofti alături de {who} la {occasion}, zi pe care dorim să o împărtășim cu cei dragi."
+      },
+      "warm": {
+        "a": "Ne-ar face mare bucurie să vă avem alături la {occasion}. Vă așteptăm cu drag, {who}.",
+        "b": "Vă invităm cu tot dragul la {occasion}. Fără voi nu ar fi la fel — {who}."
+      },
+      "playful": {
+        "a": "Pregătiți pantofii de dans: {who} vă chemăm la {occasion}!",
+        "b": "Se anunță voie bună, muzică și oameni dragi la {occasion}. Semnat: {who}."
+      }
+    },
+    "save_the_date": {
+      "ceremonious": {
+        "a": "Vă rugăm să păstrați această zi pentru {occasion}.",
+        "b": "Notați data: {who} vă vom trimite în curând invitația la {occasion}."
+      },
+      "warm": {
+        "a": "Păstrați ziua liberă pentru {occasion} — invitația vine în curând.",
+        "b": "O zi de ținut minte: {occasion}. Vă dăm de veste cu toate detaliile."
+      },
+      "playful": {
+        "a": "Nu vă faceți alte planuri: urmează {occasion}!",
+        "b": "Blocați data în calendar — {occasion} nu se ratează."
+      }
+    },
+    "thanks": {
+      "ceremonious": {
+        "a": "Vă mulțumim pentru onoarea de a ne fi fost alături la {occasion} și pentru gândurile frumoase.",
+        "b": "Prezența dumneavoastră la {occasion} a însemnat mult pentru {who}. Vă mulțumim."
+      },
+      "warm": {
+        "a": "Vă mulțumim din suflet că ați fost cu noi la {occasion}. Ne-ați făcut ziua mai frumoasă.",
+        "b": "Ne-am bucurat de fiecare clipă petrecută împreună la {occasion}. Vă mulțumim, {who}."
+      },
+      "playful": {
+        "a": "Ce petrecere! Vă mulțumim că ați dansat cu noi la {occasion}.",
+        "b": "Mulțumim pentru râsete, dans și amintiri de la {occasion}. Mai facem!"
+      }
+    },
+    "promotion": {
+      "ceremonious": {
+        "a": "Vă invităm la {occasion}, un eveniment pregătit cu grijă pentru cei care ne sunt aproape.",
+        "b": "{who} vă așteptăm la {occasion}. Detaliile despre dată și loc sunt mai jos."
+      },
+      "warm": {
+        "a": "Vă așteptăm cu drag la {occasion}. Veniți să ne bucurăm împreună!",
+        "b": "Urmează {occasion} și ne-am bucura să fiți acolo. Data și locul sunt mai jos."
+      },
+      "playful": {
+        "a": "Se apropie {occasion}! Luați-vă buna dispoziție și veniți.",
+        "b": "Muzică, oameni faini și {occasion}: nu lipsiți."
+      }
+    }
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "title": "Calculator dar",
+  "description": "Un ghid al obiceiului, nu o regulă: din trei întrebări despre o familie invitată vezi intervalul de dar în bani care se obișnuiește.",
+  "private": {
+    "title": "Numai pentru tine",
+    "body": "Ce calculezi și ce păstrezi aici vezi doar tu, din contul tău. Nu apare la ceilalți organizatori, la invitați, în exporturi sau la asistenții conectați. Este gratuit și va rămâne așa."
+  },
+  "form": {
+    "relationship": "Cât de apropiați sunteți?",
+    "distance": "De unde vin?",
+    "venue": "Ce fel de loc este?",
+    "adults": "Adulți din familie",
+    "fewer": "Mai puțini adulți",
+    "more": "Mai mulți adulți",
+    "calculate": "Arată intervalul",
+    "calculating": "Se calculează…"
+  },
+  "relationships": {
+    "close_family": "Familie apropiată",
+    "family": "Rude",
+    "close_friend": "Prieteni apropiați",
+    "friend": "Prieteni",
+    "colleague": "Colegi sau cunoștințe"
+  },
+  "distances": {
+    "local": "Din aceeași localitate",
+    "county": "Din același județ",
+    "country": "Din alt județ",
+    "abroad": "Din străinătate"
+  },
+  "venues": {
+    "restaurant": "Restaurant",
+    "ballroom": "Salon de evenimente",
+    "premium": "Locație premium",
+    "home": "Acasă sau în aer liber"
+  },
+  "result": {
+    "label": "Interval obișnuit pentru această familie",
+    "range": "{low} – {high}",
+    "note": "Ghid cultural, nu o regulă. Fiecare dăruiește cât poate și cât simte.",
+    "why": "Cum am ajuns aici",
+    "base": "Pentru „{venue}”, tabelul tău pornește de la {low} – {high} de adult.",
+    "relationship": "„{relationship}” înseamnă {pct} % din acest interval.",
+    "distance": "„{distance}” înseamnă {pct} %: cine vine de departe are și cheltuieli de drum.",
+    "adults": "Înmulțit cu {adults} adulți și rotunjit la 50 de lei.",
+    "adultsOne": "Pentru un adult, rotunjit la 50 de lei.",
+    "empty": "Răspunde la cele trei întrebări",
+    "emptyBody": "Intervalul apare aici, împreună cu felul în care a fost calculat."
+  },
+  "keep": {
+    "title": "Păstrează pentru o familie",
+    "household": "Familia",
+    "none": "Fără familie — scriu eu un nume",
+    "label": "Nume pentru notiță",
+    "save": "Păstrează intervalul",
+    "saving": "Se păstrează…",
+    "saved": "Intervalul a fost păstrat în notițele tale."
+  },
+  "notes": {
+    "title": "Notițele tale",
+    "empty": "Nu ai păstrat nimic încă",
+    "emptyBody": "Când păstrezi un interval pentru o familie, îl găsești aici. Doar tu îl vezi.",
+    "meta": "{relationship} · {distance} · {venue} · adulți: {adults}",
+    "remove": "Șterge notița",
+    "removeFor": "Șterge notița pentru {label}",
+    "removing": "Se șterge…"
+  },
+  "guide": {
+    "title": "Tabelul din care se calculează",
+    "body": "Valorile de pornire sunt orientative și rotunde, puse acolo ca să le potrivești cu obiceiul din zona ta. Le poți schimba oricând; schimbarea este doar a ta.",
+    "isDefault": "Folosești valorile de pornire.",
+    "isOwn": "Folosești propriile valori.",
+    "open": "Vezi și modifică tabelul",
+    "baseTitle": "Interval obișnuit de adult, după loc (lei)",
+    "low": "{venue} — de la",
+    "high": "{venue} — până la",
+    "relationshipTitle": "Apropiere (procent din interval)",
+    "distanceTitle": "Distanță (procent din interval)",
+    "save": "Salvează tabelul",
+    "saving": "Se salvează…",
+    "reset": "Revino la valorile de pornire",
+    "resetting": "Se revine…",
+    "saved": "Tabelul tău a fost salvat."
+  },
+  "errors": {
+    "rangeOrder": "„Până la” trebuie să fie cel puțin cât „de la”.",
+    "labelRequired": "Alege o familie sau scrie un nume pentru notiță.",
+    "number": "Scrie un număr întreg."
+  }
+}

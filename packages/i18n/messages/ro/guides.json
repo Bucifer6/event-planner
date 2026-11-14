@@ -1,0 +1,210 @@
+{
+  "index": {
+    "meta": {
+      "title": "Ghiduri de planificare",
+      "description": "Ghiduri scurte și practice: calendarul unei nunți, lista pentru botez, brieful pentru locație, eticheta confirmărilor, bugetul și călătoriile de grup."
+    },
+    "eyebrow": "Ghiduri",
+    "title": "Lucruri pe care e bine <em>să le știi dinainte</em>.",
+    "lead": "Șase ghiduri scurte, scrise ca să fie folosite: fără povești, cu liste pe care le poți bifa. Se citesc în câteva minute fiecare.",
+    "listLabel": "Toate ghidurile",
+    "kicker": "Ghid",
+    "back": "Toate ghidurile",
+    "next": "Ghidul următor",
+    "closingTitle": "Pune ghidul <em>la treabă</em>.",
+    "closingText": "Listele de mai sus pot deveni sarcini cu responsabili și termene, într-un plan pe care îl vede toată lumea implicată.",
+    "closingCta": "Creează prima ocazie"
+  },
+  "items": {
+    "calendar-nunta": {
+      "title": "Calendarul unei nunți, de la 12 luni la o lună",
+      "summary": "Ce se hotărăște când, ca să nu alergi în ultimele săptămâni după lucruri care trebuiau rezervate din iarnă.",
+      "minutes": "5 minute de citit",
+      "body": {
+        "p1": "O nuntă nu se organizează greu, se organizează în ordine. Aproape toate emoțiile din ultima lună vin de la hotărâri luate prea târziu, nu de la lucruri prea complicate. Calendarul de mai jos pornește cu un an înainte; dacă ai mai puțin timp, păstrează ordinea și strânge intervalele.",
+        "h1": "12–10 luni: hotărârile care le condiționează pe toate",
+        "ul1": {
+          "a": "Stabiliți un buget total și cine contribuie la el. Fără cifra aceasta, orice ofertă pare ori scumpă, ori acceptabilă, la întâmplare.",
+          "b": "Faceți o primă listă de invitați, cu un număr minim și unul maxim. Sala se alege după ea, nu invers.",
+          "c": "Alegeți data și rezervați locația. Sâmbetele din mai până în septembrie se dau primele, uneori cu mai mult de un an înainte.",
+          "d": "Dacă faceți cununie religioasă, vorbiți la biserică înainte să semnați pentru sală, ca orele să se potrivească."
+        },
+        "h2": "9–7 luni: oamenii care nu pot fi în două locuri deodată",
+        "p2": "Formația sau DJ-ul, fotograful și videograful lucrează la un singur eveniment pe zi, așa că cei buni se rezervă devreme. Tot acum merită vorbit cu nașii despre ce rol își asumă și cerute primele oferte pentru flori și decor. La fiecare ofertă, notați ce include și ce nu: ore de program, deplasare, masa echipei.",
+        "h3": "6–4 luni: detaliile care se văd",
+        "ul3": {
+          "a": "Rochia și costumul, cu timp pentru probe și ajustări.",
+          "b": "Invitațiile: textul, numărul de bucăți (una de gospodărie, nu de persoană) și termenul de confirmare.",
+          "c": "Degustarea de meniu și varianta pentru cei care nu mănâncă orice.",
+          "d": "Cazarea pentru invitații din alte orașe și, dacă e cazul, un microbuz între biserică, sală și hotel."
+        },
+        "h4": "3–2 luni: confirmările",
+        "p4": "Trimiteți invitațiile cu un termen de răspuns aflat la cel puțin trei săptămâni înaintea datei la care sala cere numărul final. Depuneți actele pentru cununia civilă în intervalul cerut de primărie — întrebați din timp, pentru că dosarul are un termen fix. Stabiliți cu formația momentele serii: intrarea, dansul mirilor, tortul.",
+        "h5": "Ultima lună: închideți, nu deschideți",
+        "ul5": {
+          "a": "Sunați-i pe cei care n-au răspuns. Un „nu știu încă” se trece ca necunoscut, nu ca „vine”.",
+          "b": "Comunicați sălii numărul final și așezarea la mese.",
+          "c": "Faceți un desfășurător pe ore și dați-l fiecărui furnizor, cu un singur număr de telefon de contact — al altcuiva decât al mirilor.",
+          "d": "Pregătiți plicurile cu restul de plată pentru fiecare furnizor și hotărâți cine le înmânează."
+        },
+        "note1": "Regula care vă scutește de cele mai multe griji: nicio hotărâre nouă în ultima săptămână."
+      }
+    },
+    "lista-botez": {
+      "title": "Lista de verificare pentru botez",
+      "summary": "Tot ce trebuie pregătit pentru biserică și pentru masă, împărțit între părinți și nași, ca să nu rămână nimic „pe ultima zi”.",
+      "minutes": "4 minute de citit",
+      "body": {
+        "p1": "Botezul se pregătește de obicei în șase–opt săptămâni și are o particularitate: treburile se împart între două familii, a părinților și a nașilor. Cele mai multe încurcături apar când fiecare crede că celălalt se ocupă. Lista de mai jos spune limpede cine ce face — iar dacă la voi obiceiul e altul, schimbați rolurile, dar scrieți-le.",
+        "h1": "Cu șase–opt săptămâni înainte",
+        "ul1": {
+          "a": "Vorbiți cu preotul: data, ora și ce acte sunt necesare. De regulă se cere certificatul de naștere al copilului; restul diferă de la o parohie la alta, așa că întrebați.",
+          "b": "Alegeți nașii și stabiliți împreună, fără ocolișuri, ce cumpără fiecare familie.",
+          "c": "Rezervați restaurantul sau hotărâți că faceți masa acasă. Pentru un botez de prânz, sălile mici se ocupă repede.",
+          "d": "Faceți lista de invitați pe gospodării, cu număr de adulți și număr de copii."
+        },
+        "h2": "Ce pregătesc, de obicei, nașii",
+        "ul2": {
+          "a": "trusoul: pânza de mir (crijma), prosoape, săpun, ulei și o sticluță pentru mir, după cum cere parohia;",
+          "b": "lumânarea de botez, împodobită;",
+          "c": "hăinuțele pe care copilul le poartă după botez;",
+          "d": "cruciulița, acolo unde se obișnuiește."
+        },
+        "h3": "Ce pregătesc, de obicei, părinții",
+        "ul3": {
+          "a": "masa: meniu, tort, băuturi, cu o variantă pentru copii;",
+          "b": "mărturiile pentru invitați;",
+          "c": "fotograful — întrebați înainte dacă în biserică are voie cu blitz;",
+          "d": "un colț liniștit pentru copil la restaurant: cărucior, haine de schimb, tot ce ține de masa lui."
+        },
+        "h4": "Cu două săptămâni înainte",
+        "p4": "Cereți confirmările și comunicați restaurantului numărul final, cu scaunele înalte de care e nevoie. Potriviți ora mesei după somnul copilului, nu invers: o slujbă la prânz, urmată de masă imediat după, se dovedește de obicei mai ușoară decât una de seară. Stabiliți cine duce trusoul la biserică și cine rămâne cu copilul cât se fac fotografiile.",
+        "h5": "În ziua botezului",
+        "ul5": {
+          "a": "Ajungeți la biserică mai devreme cu un sfert de oră, cu actele și trusoul într-o singură geantă.",
+          "b": "Luați un rând de haine în plus pentru copil și unul pentru cine îl ține în brațe.",
+          "c": "Rugați pe cineva din familie să primească invitații la restaurant până ajungeți voi."
+        },
+        "note1": "Un botez reușit e unul scurt: copilul nu ține minte petrecerea, dar o simte dacă durează prea mult."
+      }
+    },
+    "brief-locatie": {
+      "title": "Cum scrii un brief pentru o locație",
+      "summary": "Șapte lucruri pe care o sală trebuie să le afle de la tine din primul mesaj, ca să primești o ofertă adevărată, nu un pliant.",
+      "minutes": "4 minute de citit",
+      "body": {
+        "p1": "Când trimiți unei săli mesajul „Bună ziua, cât costă o nuntă la dumneavoastră?”, primești un pliant. Când îi spui exact ce cauți, primești o ofertă pe care o poți compara cu altele. Diferența o face brieful: zece rânduri scrise o singură dată și trimise la fel tuturor locațiilor de pe lista ta.",
+        "h1": "Ce trebuie să conțină",
+        "ol1": {
+          "a": "Felul ocaziei și atmosfera dorită: nuntă cu dans până dimineața, botez de prânz, aniversare cu masă așezată sau cu bufet.",
+          "b": "Data — și cât ești de flexibil. „Orice sâmbătă din septembrie” îți aduce mai multe variante decât o singură zi.",
+          "c": "Numărul de invitați ca interval: minimul de care ești sigur și maximul posibil, cu numărul copiilor separat.",
+          "d": "Intervalul orar, cu tot cu pregătire și strângere. Întreabă până la ce oră se poate cânta.",
+          "e": "Ce aduci tu și ce aștepți de la ei: formație, tort, băuturi, decor, fotograf.",
+          "f": "Bugetul, măcar ca interval. Nu te dezavantajează: te scutește de oferte pe care oricum nu le-ai fi luat în seamă.",
+          "g": "Până când ai nevoie de răspuns și cum preferi să fii contactat."
+        },
+        "h2": "Ce să întrebi",
+        "ul2": {
+          "a": "Ce include prețul pe persoană și ce se plătește separat: băuturi, taxă de dop, prelungirea programului, curățenie.",
+          "b": "Care este numărul minim de meniuri plătite și până când poți comunica numărul final.",
+          "c": "Cât este avansul, când se plătește restul și ce se întâmplă cu avansul dacă evenimentul se amână.",
+          "d": "Dacă în aceeași zi mai are loc un alt eveniment în clădire.",
+          "e": "Câte locuri de parcare sunt și cât e de mers de la parcare până la intrare.",
+          "f": "Dacă există acces fără trepte și un loc liniștit pentru copii mici sau pentru bunici.",
+          "g": "Dacă sala are un plan la scară, cu dimensiunile meselor. Fără el, așezarea se face pe ghicite."
+        },
+        "h3": "Cum compari răspunsurile",
+        "p3": "Pune ofertele una lângă alta, pe aceleași rânduri: preț pe persoană, ce include, minimul de persoane, avans, program. Unde o sală n-a răspuns la o întrebare, scrie „necunoscut” — nu presupune că e inclus. O ofertă cu trei necunoscute nu e mai ieftină, e doar mai puțin clară.",
+        "note1": "Un brief bun arată că știi ce vrei. Sălile serioase răspund mai repede și mai precis celor care întreabă precis."
+      }
+    },
+    "eticheta-rsvp": {
+      "title": "Eticheta confirmărilor: cum ceri un răspuns și cum numeri copiii",
+      "summary": "Cum formulezi invitația ca să primești răspunsuri la timp și de ce copiii se trec ca număr, nu cu numele.",
+      "minutes": "4 minute de citit",
+      "body": {
+        "p1": "Confirmările sunt partea cea mai puțin plăcută a oricărei organizări: tu ai nevoie de un număr până la o dată, iar o parte dintre invitați încă „mai văd ei”. Câteva obiceiuri simple schimbă mult felul în care răspunde lumea.",
+        "h1": "Pune un termen și spune de ce",
+        "p1b": "„Te rugăm să ne răspunzi până la 1 august, pentru că atunci dăm restaurantului numărul final” funcționează mai bine decât „confirmați din timp”. Alege termenul cu două–trei săptămâni înaintea datei cerute de sală, ca să-ți rămână vreme pentru cei care întârzie.",
+        "h2": "Invită gospodării, nu persoane",
+        "p2": "O invitație merge către o familie, iar răspunsul vine pentru toată casa: câți adulți, câți copii. Scrie limpede pe cine inviți — „Familia Ionescu” sau „Maria și un însoțitor” — ca nimeni să nu fie nevoit să ghicească dacă poate veni cu cineva.",
+        "h3": "Copiii se numără, nu se numesc",
+        "p3a": "Pentru organizare ai nevoie de un singur lucru despre copii: câți sunt, ca să știi câte scaune, câte meniuri de copil și, eventual, câți animatori îți trebuie. Nu ai nevoie de numele și de vârstele lor, așa că nu le cere și nu le trece în liste care circulă între furnizori.",
+        "p3b": "Dacă petrecerea e doar pentru adulți, spune-o din invitație, cu blândețe și fără echivoc: „Ne-am dori o seară doar între adulți.” E mult mai politicos decât o lămurire dată la telefon cu o săptămână înainte.",
+        "h4": "Un memento, nu cinci",
+        "p4": "Un memento cu câteva zile înainte de termen e firesc. După termen, sună — un telefon scurt lămurește în două minute ce n-au lămurit trei mesaje. Până atunci, cine n-a răspuns rămâne trecut „fără răspuns”: nici „vine”, nici „nu vine”. Sala primește numărul celor siguri, cu o marjă convenită.",
+        "h5": "Dacă ești tu invitatul",
+        "ul5": {
+          "a": "Răspunde până la termen, chiar dacă răspunsul e „nu”. Un refuz dat la timp e un serviciu făcut gazdei.",
+          "b": "Nu adăuga persoane care nu sunt pe invitație. Întreabă întâi.",
+          "c": "Dacă se schimbă ceva, anunță imediat, nu în ziua evenimentului.",
+          "d": "Spune de la început dacă ai o restricție alimentară; bucătăria are nevoie de zile, nu de ore."
+        },
+        "note1": "O confirmare nu e o formalitate, e o cifră de care depind o comandă, o masă și un buget."
+      }
+    },
+    "buget-categorii-uitate": {
+      "title": "Categoriile de buget pe care le uită toată lumea",
+      "summary": "Paisprezece cheltuieli mărunte care, adunate, pot însemna încă zece–cincisprezece la sută din buget.",
+      "minutes": "4 minute de citit",
+      "body": {
+        "p1": "Bugetul unui eveniment se face de obicei din cinci rânduri mari: sală și meniu, muzică, foto-video, flori, ținute. Depășirile nu vin aproape niciodată de acolo. Vin din rândurile care lipsesc cu totul. Iată-le, grupate, ca să le poți trece de la început — fie și cu suma „necunoscut”.",
+        "h1": "La locație",
+        "ul1": {
+          "a": "Prelungirea programului: ora suplimentară după miezul nopții are un preț, care se află cel mai bine dinainte.",
+          "b": "Taxa de dop, dacă aduci băuturile tale, și gheața, paharele sau personalul aferent.",
+          "c": "Mesele furnizorilor: formația, fotograful și videograful mănâncă și ei, de obicei un meniu separat.",
+          "d": "Curentul, generatorul sau încălzirea, la evenimentele în cort sau în aer liber."
+        },
+        "h2": "În jurul invitaților",
+        "ul2": {
+          "a": "Transportul: microbuz între biserică, sală și hotel, taxi pentru bunici, parcare cu plată.",
+          "b": "Cazarea pentru nași, pentru rudele venite de departe sau pentru voi, în noaptea evenimentului.",
+          "c": "Mărturiile, meniurile tipărite, numerele de masă, plicurile și timbrele.",
+          "d": "Colțul copiilor: animator, scaune înalte, un meniu aparte."
+        },
+        "h3": "Taxe și hârtii",
+        "ul3": {
+          "a": "Taxele pentru cununia civilă în afara programului sau a sediului și contribuția la biserică.",
+          "b": "Drepturile de autor pentru muzică, acolo unde locația le trece în seama organizatorului.",
+          "c": "Avizele sau asigurarea pentru artificii, baloane cu heliu, dronă ori un eveniment în spațiu public."
+        },
+        "h4": "Înainte și după",
+        "ul4": {
+          "a": "Probele: coafură și machiaj de probă, degustări plătite, ajustările la rochie și la costum.",
+          "b": "Bacșișurile pentru ospătari, șoferi și echipa tehnică — hotărâte dinainte și puse în plicuri.",
+          "c": "Ziua de după: curățătoria ținutelor, returnarea obiectelor închiriate, albumul foto, mulțumirile."
+        },
+        "h5": "Cum le ții în frâu",
+        "p5": "Trece fiecare rând în buget chiar dacă nu-i știi încă suma. Un rând cu „necunoscut” îți amintește să întrebi; un rând lipsă îți amintește abia la plată. Păstrează apoi o rezervă de aproximativ zece la sută din total, de care nu te atingi până în ultima lună. Și notează separat ce s-a convenit și ce s-a plătit efectiv: sunt două coloane diferite și se încurcă ușor.",
+        "note1": "Bugetul nu se depășește la sală. Se depășește la lucrurile pe care nu le-a trecut nimeni pe hârtie."
+      }
+    },
+    "calatorie-de-grup": {
+      "title": "Cum plănuiești o călătorie de grup fără certuri",
+      "summary": "Data, bugetul, cine rezervă și cum se împart banii: patru hotărâri care se iau la început, nu pe drum.",
+      "minutes": "5 minute de citit",
+      "body": {
+        "p1": "O călătorie cu prietenii rareori se strică din cauza destinației. Se strică din cauza unei conversații de grup în care opt oameni discută trei săptămâni fără să hotărască nimic, apoi a unei note de plată pe care fiecare a înțeles-o altfel. Ordinea de mai jos scurtează discuția și lămurește banii înainte de plecare.",
+        "h1": "1. Întâi data, cu vot și cu termen",
+        "p1b": "Propune două sau trei perioade și cere un vot până la o dată anume. Nu căuta varianta ideală pentru toți: alege-o pe cea la care pot veni cei mai mulți și anunț-o ca definitivă. Cine nu votează până la termen a ales să se adapteze.",
+        "h2": "2. Apoi bugetul, pe față",
+        "p2": "Înainte de a căuta cazare, întreabă pe fiecare, în privat dacă e nevoie, cât e dispus să cheltuiască de totul: drum, cazare, mâncare, activități. Planul se face după suma cea mai mică la care toată lumea se simte în largul ei. Diferențele de buget nemărturisite sunt motivul cel mai des întâlnit al supărărilor din vacanță.",
+        "h3": "3. Un singur om pentru fiecare rezervare",
+        "ul3": {
+          "a": "Cineva rezervă cazarea, altcineva transportul, altcineva activitățile. Fiecare își trece numele în dreptul sarcinii.",
+          "b": "Înainte de rezervare, fiecare participant confirmă în scris că vine. După plata avansului, o renunțare are un cost, iar regula se stabilește dinainte: cine renunță își acoperă partea sau găsește un înlocuitor.",
+          "c": "Condițiile de anulare se citesc cu voce tare, nu se presupun."
+        },
+        "h4": "4. Banii: o regulă simplă, spusă de la început",
+        "p4": "Hotărâți ce se împarte egal (cazarea, mașina, combustibilul) și ce plătește fiecare pentru sine (mesele în oraș, activitățile la alegere). Notați fiecare cheltuială comună în ziua în care se face, cu cine a plătit și pentru cine. Socoteala se încheie o singură dată, la sfârșit, cu cât mai puține transferuri — nu cu douăzeci de plăți mărunte între toți.",
+        "h5": "5. Un program cu găuri",
+        "p5": "Plănuiți un singur lucru fix pe zi și lăsați restul liber. Un grup nu se mișcă în ritmul celui mai rapid; fiecare oprire durează dublu față de cât ar dura în doi. Stabiliți dinainte că e în regulă ca grupul să se despartă câteva ore: unii la muzeu, alții la plajă, cu toții la cină.",
+        "h6": "6. Ce ia fiecare",
+        "p6": "Lucrurile comune — trusa de prim ajutor, boxa, cafetiera, jocurile, prelungitorul — se împart pe o listă, ca să nu ajungă în bagaje patru boxe și niciun tirbușon. Tot acolo își au locul actele: cine are nevoie de pașaport, de asigurare de călătorie sau de permis valabil.",
+        "note1": "Regula de aur: tot ce ține de bani se hotărăște înainte de prima rezervare, nu după ultima cină."
+      }
+    }
+  }
+}

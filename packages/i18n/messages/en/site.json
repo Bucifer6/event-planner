@@ -1,0 +1,533 @@
+{
+  "meta": {
+    "siteName": "EventDesk.ro",
+    "description": "A free planner for weddings, christenings, birthdays, parties and group trips, with an honest directory of Romanian event businesses."
+  },
+  "nav": {
+    "skip": "Skip to content",
+    "homeLabel": "EventDesk.ro — home page",
+    "primaryLabel": "Main menu",
+    "menu": "Menu",
+    "how": "How it works",
+    "business": "For businesses",
+    "guides": "Guides",
+    "cta": "Start free",
+    "signIn": "Sign in",
+    "languageLabel": "Language",
+    "ro": "Română",
+    "en": "English",
+    "roShort": "RO",
+    "enShort": "EN"
+  },
+  "footer": {
+    "label": "Footer",
+    "about": "Free planning for celebrations, group trips and events, with a business directory where position cannot be bought.",
+    "product": "Product",
+    "legal": "Legal",
+    "help": "Help",
+    "terms": "Terms and conditions",
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "moderation": "Moderation rules",
+    "accessibility": "Accessibility statement",
+    "status": "Service status",
+    "report": "Report content",
+    "noCookies": "This site sets no cookies and loads nothing from third parties: no analytics, no adverts, no external fonts.",
+    "operator": "Operated by [operator — to be completed]."
+  },
+  "home": {
+    "meta": {
+      "title": "Plan any occasion, free",
+      "description": "A wedding, a christening, a birthday, a picnic, New Year’s Eve or a group trip: invite, budget and deliver from one plan. Free for planners, no card."
+    },
+    "hero": {
+      "eyebrow": "Free for planners",
+      "title": "Every occasion, <em>beautifully in order</em>.",
+      "lead": "A wedding, a christening, a birthday, a picnic, New Year’s Eve or a trip with friends. Invite people, keep the budget in hand and see the day through — from one plan, on your phone.",
+      "occasionsLabel": "Kinds of occasion",
+      "occasions": {
+        "wedding": "Wedding",
+        "christening": "Christening",
+        "birthday": "Birthday",
+        "picnic": "Picnic",
+        "newYear": "New Year’s Eve",
+        "trip": "Trip"
+      },
+      "secondary": "See how it works",
+      "note": "Free for planners, for good. No card, no trial period."
+    },
+    "plate": {
+      "label": "A sample invitation made in EventDesk",
+      "kicker": "Together with their families",
+      "first": "Ioana",
+      "second": "Andrei",
+      "line": "invite you to their wedding",
+      "date": "Saturday, 11 September 2027",
+      "time": "at 17:00",
+      "place": "Conacul din Livadă · Cluj",
+      "rsvp": "Kindly reply by 1 August"
+    },
+    "figures": {
+      "label": "EventDesk in four figures",
+      "price": {
+        "label": "For planners",
+        "value": "0",
+        "unit": "lei",
+        "note": "Any number of occasions, always"
+      },
+      "categories": {
+        "label": "Business categories",
+        "value": "21",
+        "note": "From venues to sound and lighting"
+      },
+      "counties": {
+        "label": "Counties in the directory",
+        "value": "41",
+        "unit": "+ Bucharest",
+        "note": "Picked from lists, never typed freely"
+      },
+      "cookies": {
+        "label": "Cookies on this site",
+        "value": "0",
+        "note": "No adverts, no trackers"
+      }
+    },
+    "can": {
+      "eyebrow": "I — What you can do",
+      "title": "From the first list <em>to the last dance</em>.",
+      "lead": "One plan keeps the people, the money and the jobs together. Start simple and add only what you need.",
+      "items": {
+        "plan": {
+          "title": "Plan and invite",
+          "text": "Start from a template or a plain checklist. Share out the tasks, send one link and collect replies per household — guests install nothing."
+        },
+        "budget": {
+          "title": "Budget and deliver",
+          "text": "The budget, shared costs, suppliers and orders live in the same plan. See at any moment what is paid, what is due and what is still unknown."
+        },
+        "day": {
+          "title": "Live the day itself",
+          "text": "A clear run sheet on your phone: what is next, who is on it, what has arrived. Afterwards, settle up without a single stray note."
+        },
+        "find": {
+          "title": "Find businesses",
+          "text": "Venues, bands, caterers, florists and more, in a directory with no advertising. Send a free enquiry straight from your plan and share only what you choose."
+        }
+      }
+    },
+    "plates": {
+      "eyebrow": "II — The plan, up close",
+      "title": "Three pages <em>from the same plan</em>.",
+      "lead": "Examples with sample data. This is what information looks like when it lives in one place rather than five chat threads.",
+      "rsvp": {
+        "caption": "Plate I — Guest replies",
+        "label": "Coming to the wedding",
+        "value": "86",
+        "unit": "of 112 guests",
+        "note": "14 have not replied yet",
+        "adults": "Adults",
+        "adultsValue": "78",
+        "children": "Children",
+        "childrenValue": "8",
+        "childrenNote": "as a number only",
+        "declined": "Cannot come",
+        "declinedValue": "12",
+        "meter": "98 of 112 have replied"
+      },
+      "whatif": {
+        "caption": "Plate II — What if?",
+        "question": "What if two more guests come?",
+        "r1kind": "Catering",
+        "r1what": "Portions ordered",
+        "r1before": "86",
+        "r1after": "88",
+        "r2kind": "Budget",
+        "r2what": "Estimated menu cost",
+        "r2before": "25,800 RON",
+        "r2after": "26,400 RON",
+        "r3kind": "Seating",
+        "r3what": "Table 7",
+        "r3before": "10 of 10 seats",
+        "r3after": "12 of 10 seats",
+        "r3note": "They no longer fit. Choose another table before you confirm.",
+        "footer": "Nothing changes until you confirm."
+      },
+      "tasks": {
+        "caption": "Plate III — Tasks, with what is known and what is not",
+        "t1": "Send the invitations",
+        "t1meta": "Ioana · by 01.06.2027",
+        "t1state": "Done",
+        "t2": "Confirm the menu with the caterer",
+        "t2meta": "Maria · by 20.08.2027",
+        "t2state": "In progress",
+        "t3": "Choose the table flowers",
+        "t3meta": "Andrei · by 05.08.2027",
+        "t3state": "To do",
+        "t4": "Photographer — final price",
+        "t4meta": "Quote requested on 12.05.2027",
+        "t4state": "unknown"
+      }
+    },
+    "principles": {
+      "eyebrow": "III — Principles",
+      "title": "Six rules we <em>do not bend</em>.",
+      "lead": "These are not advertising promises. They are how the product is built.",
+      "items": {
+        "record": {
+          "title": "One record, many views",
+          "text": "A task, a seat or a payment exists once. The list, the calendar, the floor plan and the event-day screen all show that same record, never copies of it."
+        },
+        "preview": {
+          "title": "Preview before applying",
+          "text": "Moving the date, adding guests or swapping a supplier? “What if?” shows the effect on costs, deadlines and commitments first. Then you decide."
+        },
+        "facts": {
+          "title": "Facts stay facts",
+          "text": "Arrivals, payments and received goods are never overwritten. They change only through a correction that stays in the history, so you always know what really happened."
+        },
+        "unknown": {
+          "title": "Unknown stays visible",
+          "text": "A missing price, an unmeasured dimension or a confirmation not yet received is written as “unknown”. We do not guess, we do not show zero, and we do not count it as done."
+        },
+        "private": {
+          "title": "Private by default",
+          "text": "Your guest list, budget and private requests are seen only by the people you have given that specific access."
+        },
+        "paid": {
+          "title": "Paid means position, never preference",
+          "text": "Planning is free and carries no advertising. When paid promotion arrives in the directory it will be plainly labelled, will not change the order of other results, and will never enter your plan."
+        }
+      }
+    },
+    "business": {
+      "eyebrow": "IV — For businesses",
+      "title": "A directory where <em>position is not for sale</em>.",
+      "text": "Venues, bands, caterers, florists, photographers: a listing is free, and so are the enquiries planners send you. During the launch period every business feature is free.",
+      "link": "Learn how listings work",
+      "facts": {
+        "rotate": {
+          "title": "The order rotates daily",
+          "meta": "and cannot be bought"
+        },
+        "badges": {
+          "title": "Factual badges only",
+          "meta": "ONRC registration, insurance seen — no stars, no testimonials"
+        },
+        "moderated": {
+          "title": "Every listing passes a moderator",
+          "meta": "before it appears in public"
+        }
+      }
+    },
+    "closing": {
+      "title": "Your first occasion <em>is waiting</em>.",
+      "text": "Create an account with a code sent to your email. No password, no card, nothing to install.",
+      "cta": "Create your first occasion"
+    }
+  },
+  "how": {
+    "meta": {
+      "title": "How it works",
+      "description": "A planner’s journey through EventDesk, step by step: an emailed sign-in code, tasks, invitations, budget, “What if?” and the day itself."
+    },
+    "eyebrow": "How it works",
+    "title": "From an idea to “that was wonderful”, <em>in seven steps</em>.",
+    "lead": "You do not have to take all of them. A small birthday needs three; a wedding needs all seven. The plan grows with the occasion.",
+    "stepsLabel": "A planner’s steps",
+    "steps": {
+      "account": {
+        "title": "Create an account in under a minute",
+        "text": "Type your email address and receive a six-digit code, together with a link you can simply tap. There are no passwords to remember and we never ask for a card.",
+        "aside": "Emailed code · no password"
+      },
+      "occasion": {
+        "title": "Create the occasion",
+        "text": "Choose its kind — wedding, christening, birthday, party, trip — and start from a template or an empty list. A small occasion stays a simple checklist; a large one gains structure as you need it.",
+        "aside": "Templates · simple checklist"
+      },
+      "tasks": {
+        "title": "Share out the work",
+        "text": "Every task has an owner and a due date. Invite collaborators who see only their part: the godmother looks after flowers, a friend after music, and you see everything.",
+        "aside": "Owners · due dates · reminders"
+      },
+      "invite": {
+        "title": "Invite people",
+        "text": "Send one link. Guests reply for their whole household, vote on the date if you have not fixed it, and can say what they will bring. They install nothing and create no account. Children are recorded as a number only, never by name.",
+        "aside": "Household reply · date poll · contributions"
+      },
+      "budget": {
+        "title": "Keep budget and suppliers together",
+        "text": "Note what each thing costs, who pays and what is already settled. Quotes and conversations with suppliers stay in the plan, beside their orders and deliveries. Whatever you do not know yet stays written as “unknown”.",
+        "aside": "Budget · shared costs · orders"
+      },
+      "whatif": {
+        "title": "Check every change before you make it",
+        "text": "Two more guests after the catering deadline? A new date? “What if?” shows what changes in costs, deadlines and tables. Nothing is applied until you confirm.",
+        "aside": "Preview · confirm"
+      },
+      "day": {
+        "title": "Live the day, then settle up",
+        "text": "On the day, the run sheet is on your phone: what is next, who is on it, what has arrived. Afterwards you close the accounts, export what you want to keep and, if you wish, delete everything — with seven days to change your mind.",
+        "aside": "Run sheet · settling up · export"
+      }
+    },
+    "guest": {
+      "eyebrow": "What a guest sees",
+      "title": "One invitation, <em>one question at a time</em>.",
+      "text": "The guest opens the link and replies in a few taps: coming or not, how many adults, how many children, what they will bring. They can change their reply until the deadline you set, and always see what they promised.",
+      "kicker": "You are invited",
+      "name": "Sofia’s <em>christening</em>",
+      "meta": "Sunday, 16 May 2027 · Brașov",
+      "progress": "Question 2 of 4",
+      "question": "How many of you are coming?",
+      "adults": "Adults",
+      "adultsValue": "2",
+      "children": "Children",
+      "childrenValue": "1",
+      "childrenHint": "The number only. We never ask for names or ages."
+    },
+    "questions": {
+      "eyebrow": "Short questions",
+      "title": "What people ask us <em>first</em>.",
+      "items": {
+        "free": {
+          "q": "Is it really free?",
+          "a": "Yes. Planners never pay, for any occasion. There is no trial period and we do not ask for a card. In future the service will be supported by businesses, through paid options that do not exist yet."
+        },
+        "guests": {
+          "q": "Do guests need an account?",
+          "a": "No. They reply from a link, on any phone, without installing anything."
+        },
+        "privacy": {
+          "q": "Who can see my guest list and budget?",
+          "a": "Only you and the people you give that specific access. A business learns who you are only if you send it an enquiry, and sees only what you chose to share."
+        },
+        "language": {
+          "q": "Can I use the app in English?",
+          "a": "Yes. Romanian is the primary language and English can be chosen at any time, by guests too."
+        }
+      }
+    },
+    "closing": {
+      "title": "The simplest thing is <em>to try it</em>.",
+      "text": "A first occasion takes a few minutes to create, and you can delete it whenever you like.",
+      "cta": "Create your first occasion"
+    }
+  },
+  "business": {
+    "meta": {
+      "title": "For businesses",
+      "description": "A free listing in the EventDesk directory: how it works, what you get, and the rules of a directory where position cannot be bought."
+    },
+    "eyebrow": "For businesses",
+    "title": "Be found exactly when <em>someone is looking</em>.",
+    "lead": "EventDesk has a business directory inside the plan itself. A planner who needs a venue, a band or a florist finds you at the very moment they are working on it. A listing is free. Enquiries are free.",
+    "cta": "List your business free",
+    "launch": {
+      "title": "During the launch period, everything is free.",
+      "text": "For planners, for guests and for businesses — including every Business plan feature. There is no pricing page, no checkout, and we do not ask for a card."
+    },
+    "sample": {
+      "caption": "A sample listing — fictional data",
+      "category": "Event venue",
+      "name": "Conacul din Livadă",
+      "area": "Cluj · Cluj-Napoca, Florești",
+      "fact1": "Verified: ONRC registration",
+      "fact2": "Verified: insurance seen until 31.12.2027",
+      "capacity": "Capacity",
+      "capacityValue": "180 seats",
+      "parking": "Parking",
+      "parkingValue": "40 spaces",
+      "drawing": "Floor plan",
+      "drawingValue": "published, to scale",
+      "price": "Indicative price",
+      "priceValue": "unknown"
+    },
+    "listing": {
+      "eyebrow": "I — The listing",
+      "title": "How <em>a listing</em> works.",
+      "lead": "Four things to know before you begin.",
+      "steps": {
+        "account": {
+          "title": "Create a business account",
+          "text": "One account can hold up to five listings. Each listing picks one to five categories and up to twenty localities, across at most five counties."
+        },
+        "lists": {
+          "title": "Choose from fixed lists",
+          "text": "Categories, counties and localities are picked from lists, never typed freely. A planner searching for “florists in Cluj” is sure to find you, and the directory stays tidy."
+        },
+        "moderation": {
+          "title": "A moderator checks it",
+          "text": "Every revision of a listing is approved by a moderator who is not a member of your business. While an edit is pending, the approved version stays public."
+        },
+        "badges": {
+          "title": "You earn factual badges",
+          "text": "There are only two: “Verified: ONRC registration” and “Verified: insurance seen until” a stated date. The checks are free. There are no stars, scores or testimonials."
+        }
+      }
+    },
+    "categories": {
+      "title": "The 21 categories",
+      "note": "The list is fixed at launch. Geography uses the 41 counties plus Bucharest.",
+      "items": {
+        "c01": "Event venues",
+        "c02": "Catering",
+        "c03": "Cakes and patisserie",
+        "c04": "Mobile bars",
+        "c05": "Bands (including lăutari)",
+        "c06": "Musicians and soloists",
+        "c07": "DJs",
+        "c08": "Photographers",
+        "c09": "Videographers",
+        "c10": "Florists",
+        "c11": "Decoration and styling",
+        "c12": "Marquee hire",
+        "c13": "Party equipment hire",
+        "c14": "Coach and minibus transport",
+        "c15": "Accommodation",
+        "c16": "Entertainers",
+        "c17": "Hair and make-up",
+        "c18": "Invitations and printing",
+        "c19": "Wedding cars",
+        "c20": "Security and event staff",
+        "c21": "Sound, AV and lighting"
+      }
+    },
+    "get": {
+      "eyebrow": "II — What you get",
+      "title": "Working tools, <em>not just a shop window</em>.",
+      "items": {
+        "enquiries": {
+          "title": "Enquiries from planners",
+          "text": "A planner sends you a free enquiry with the kind of occasion, the date, the approximate number of guests, the area and, if they wish, a budget band. You learn about them only what they choose to tell you. You can answer with a PDF quote that they can accept straight into their plan."
+        },
+        "drawings": {
+          "title": "Venue drawings",
+          "text": "If you run a venue, upload its floor plan, calibrate it against a known distance and mark the tables, dance floor, bar, cloakroom and parking. Planners who work with you receive the plan in their occasion, to scale."
+        },
+        "catalogues": {
+          "title": "Flower catalogues",
+          "text": "Florists publish their varieties with an image, season, colours and an indicative price per stem or bunch. Planners can ask for a quote starting from those very items."
+        },
+        "plan": {
+          "title": "Business plan features",
+          "text": "Occasions owned by the business, worked on as a team with owner, admin and staff roles; shared libraries of templates, checklists and contacts; your logo and colour on guest pages; handing the occasion over to the client when it is ready. Free for the whole launch period."
+        },
+        "stats": {
+          "title": "Your own statistics",
+          "text": "See how many views and enquiries your listing has had, as daily totals. We do not track individual visitors — not for you, and not for ourselves."
+        }
+      }
+    },
+    "rules": {
+      "eyebrow": "III — The directory rules",
+      "title": "An honest directory, <em>stated plainly</em>.",
+      "lead": "These rules will also be quoted in the business terms, so you know beforehand what you are signing up to.",
+      "items": {
+        "organic": {
+          "title": "Organic order rotates daily and cannot be bought.",
+          "text": "No payment of any kind changes where a business sits among ordinary results."
+        },
+        "launch": {
+          "title": "While the launch period lasts, there is no pricing.",
+          "text": "There is no pricing page, checkout or card entry anywhere in the product. There is no promoted placement either: the directory shows organic results only."
+        },
+        "notice": {
+          "title": "“Featured — paid placement” will exist only after monetization is switched on.",
+          "text": "We give at least 60 days’ public notice, with reminders at 30 and 7 days. Nothing is charged automatically. A business that does nothing stays on the permanent free tier."
+        },
+        "label": {
+          "title": "The label will be as visible as the business name.",
+          "text": "Featured cards will sit above organic results, three at most, picked at random on every search, with the label set in the same size and weight as the name."
+        },
+        "plans": {
+          "title": "Paid content stays out of plans.",
+          "text": "Featured content never appears in planners’ plans, on guest pages, in emails or in exports. Payment buys position in the directory and nothing else."
+        },
+        "stars": {
+          "title": "No stars, no testimonials, no “recommended”.",
+          "text": "We show verifiable facts and let the planner choose."
+        },
+        "free": {
+          "title": "What stays free for good.",
+          "text": "The account, the listing, enquiries, venue drawings, catalogues and your own statistics. If the Business plan one day becomes paid and you do not take it, the occasions you already created remain fully usable."
+        }
+      }
+    },
+    "unclaimed": {
+      "eyebrow": "IV — Unclaimed listings",
+      "title": "Is your business already listed? <em>You decide what happens next.</em>",
+      "lead": "Some listings are added by EventDesk from public sources — the Trade Register, the business’s own website or public pages — and approved by a moderator. They are minimal, strictly factual and carry the label “Added by EventDesk — not yet claimed”.",
+      "items": {
+        "claim": {
+          "title": "Claim it",
+          "text": "Ask for a code, which we send to the contact address the business has published. If there is no public address, a moderator verifies the request against the public source. Once approved, the listing is yours, with every feature."
+        },
+        "correct": {
+          "title": "Correct it",
+          "text": "If a detail is wrong, tell us which one and where we can find the right version. We correct it within 30 days."
+        },
+        "remove": {
+          "title": "Remove it",
+          "text": "You can ask for the listing to be removed, or object to the processing, at any time. We act within 30 days and keep a record of the request, so the business is not added again."
+        }
+      },
+      "note": "An unclaimed listing shows only the contact route the business itself has published. It cannot receive enquiries through the platform, cannot be featured, and receives nothing from us except a single claim invitation by email — which says who added the listing and how to claim, correct or remove it. We send no marketing to contacts found this way, and we never use contacts entered by planners.",
+      "link": "Claim, correct or remove a listing"
+    },
+    "closing": {
+      "title": "A listing takes <em>a few minutes</em>.",
+      "text": "Create an account with an emailed code, fill in the listing and send it for moderation. We do not ask for a card.",
+      "cta": "List your business free"
+    }
+  },
+  "status": {
+    "meta": {
+      "title": "Service status",
+      "description": "The current state of EventDesk, in plain language."
+    },
+    "eyebrow": "Service status",
+    "title": "Everything <em>is working</em>.",
+    "lead": "We know of no problem at the moment. If one appears, we describe it here in plain language, together with what we are doing to fix it.",
+    "state": "Working",
+    "componentsLabel": "Parts of the service",
+    "components": {
+      "site": {
+        "title": "Public site",
+        "meta": "eventdesk.ro"
+      },
+      "app": {
+        "title": "Planning app",
+        "meta": "accounts, occasions, tasks, budget"
+      },
+      "email": {
+        "title": "Sign-in emails",
+        "meta": "codes and sign-in links"
+      },
+      "guest": {
+        "title": "Guest links",
+        "meta": "invitations and replies"
+      },
+      "directory": {
+        "title": "Business directory",
+        "meta": "listings and enquiries"
+      }
+    },
+    "updated": "This page is kept up to date by the EventDesk team. Last checked: [date — to be completed by the operator].",
+    "trouble": {
+      "title": "Something not working for you?",
+      "p1": "Reload the page and try again. If the email with your sign-in code does not arrive within a few minutes, look in your Spam folder too.",
+      "p2": "For anything else, write to us at [contact address — to be completed]. Nothing you have saved is lost."
+    }
+  },
+  "notFound": {
+    "eyebrow": "Error 404",
+    "title": "This page <em>does not exist</em>.",
+    "text": "It may have moved, or the address may contain a typo. From here you can get back to solid ground.",
+    "home": "Go to the home page",
+    "guides": "Browse the guides",
+    "enTitle": "This page does not exist.",
+    "enText": "It may have moved, or the address may contain a typo.",
+    "enHome": "Go to the English home page"
+  }
+}

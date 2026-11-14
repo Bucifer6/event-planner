@@ -1,0 +1,8 @@
+/* Gift estimator — tokens only. */
+.layout { display: grid; gap: var(--s-5); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); gap: var(--s-6); } }
+.why { display: flex; flex-direction: column; gap: var(--s-2); margin: 0; padding: 0; list-style: none; max-width: var(--measure); color: var(--ink-2); }
+.why li { padding-left: var(--s-3); border-left: var(--hair) solid var(--gilt); }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+.tableTitle { font-size: var(--text-sm); font-weight: 600; margin-top: var(--s-3); }
+.result { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }

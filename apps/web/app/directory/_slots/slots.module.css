@@ -1,0 +1,37 @@
+/* Listing page slots: enquiry action and flower catalogues. Tokens only. */
+.cta { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.cta p { margin: 0; }
+.quietLink { display: inline-flex; align-items: center; min-height: 44px; font-size: var(--text-sm); color: var(--ink-2); }
+
+.catalogue { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.catalogue + .catalogue { margin-top: var(--s-5); }
+.catalogueName { font-family: var(--font-display); font-size: var(--display-sm); font-weight: 400; line-height: 1.2; margin: 0; overflow-wrap: anywhere; }
+.catalogueHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-1) var(--s-3); }
+
+/* A register of varieties: picture, name, then the facts in small labelled lines. */
+.varieties { margin: 0; padding: 0; list-style: none; border-top: var(--hair) solid var(--ink); }
+.variety { display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: var(--s-3); padding: var(--s-3) 0; border-bottom: var(--hair) solid var(--line); min-width: 0; }
+.varietyImage { display: block; width: 72px; height: 72px; object-fit: cover; border: var(--hair) solid var(--line); border-radius: var(--radius); background: var(--sunken); }
+.varietyNoImage { display: flex; align-items: center; justify-content: center; width: 72px; height: 72px; border: var(--hair) dashed var(--line-strong); border-radius: var(--radius); color: var(--ink-3); }
+.varietyMain { display: flex; flex-direction: column; gap: var(--s-1); min-width: 0; }
+.varietyName { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.25; overflow-wrap: anywhere; }
+.varietyFacts { display: grid; grid-template-columns: minmax(0, 1fr); gap: 2px var(--s-4); margin: 0; font-size: var(--text-sm); }
+.varietyFacts > div { display: flex; flex-wrap: wrap; gap: 0 var(--s-2); align-items: baseline; min-width: 0; }
+.varietyFacts dt { color: var(--ink-2); }
+.varietyFacts dd { margin: 0; overflow-wrap: anywhere; }
+.varietyNotes { font-size: var(--text-sm); color: var(--ink-2); margin: 0; overflow-wrap: anywhere; }
+@media (min-width: 720px) {
+  .variety { grid-template-columns: 96px minmax(0, 1fr); gap: var(--s-4); }
+  .varietyImage, .varietyNoImage { width: 96px; height: 96px; }
+  .varietyFacts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* Enquiry form page. */
+.formHead { display: flex; flex-direction: column; gap: var(--s-2); padding-bottom: var(--s-4); border-bottom: var(--hair) solid var(--ink); }
+.formTitle { font-family: var(--font-display); font-size: var(--display-lg); font-weight: 400; line-height: 1.05; letter-spacing: -0.02em; margin: 0; overflow-wrap: anywhere; text-wrap: balance; }
+.pair { display: grid; grid-template-columns: minmax(0, 1fr); gap: var(--s-3); }
+@media (min-width: 560px) { .pair { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.shared { display: flex; flex-direction: column; gap: var(--s-1); padding-top: var(--s-3); border-top: var(--hair) solid var(--line); }
+.shared p { margin: 0; }
+.limits { display: flex; flex-direction: column; gap: 2px; font-size: var(--text-sm); color: var(--ink-2); }
+.backLink { display: inline-flex; align-items: center; gap: var(--s-1); min-height: 44px; font-size: var(--text-sm); }

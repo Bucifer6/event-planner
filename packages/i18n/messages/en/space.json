@@ -1,0 +1,109 @@
+{
+  "title": "Room plan",
+  "description": "The space where the occasion takes place, to scale. Seating and fit checks start from here.",
+  "planLabel": "Plan of the space {name}",
+  "ownMeta": "entered by you",
+  "toSeating": "Arrange tables and guests",
+  "venue": {
+    "title": "Use the venue's plan",
+    "body": "Your venue has published approved plans. The plan enters the occasion at its current version; if the venue changes it later, you receive a proposal you accept or not.",
+    "version": "Version {n}, valid from {date}",
+    "use": "Use the plan “{name}”",
+    "using": "Bringing the plan in…",
+    "notCalibrated": "The venue has not calibrated its drawing yet, so it cannot be used for seating."
+  },
+  "own": {
+    "titleAlso": "Or describe the space yourself",
+    "name": "Name of the space",
+    "nameHint": "For example “Grandparents' garden” or “Hall”.",
+    "width": "Width (m)",
+    "length": "Length (m)",
+    "dimsHint": "Leave empty if you do not know it yet.",
+    "emptyUnknown": "empty = unknown",
+    "create": "Create the space"
+  },
+  "empty": {
+    "title": "No room plan yet",
+    "body": "Describe the space below so you can arrange the tables. If you add the venue from the business list to your suppliers, its approved plans appear here."
+  },
+  "source": {
+    "venue": "Venue's plan",
+    "own": "Space entered by you"
+  },
+  "newer": {
+    "title": "The venue has published version {n} of the plan, valid from {date}",
+    "body": "Your plan stays on version {n} until you accept the change. Nothing changes by itself.",
+    "see": "See what changes",
+    "preparing": "Preparing the comparison…",
+    "notCalibrated": "The new version is not calibrated, so it cannot be used in the plan."
+  },
+  "facts": {
+    "title": "What we know about the space",
+    "space": "Space",
+    "source": "Source",
+    "venueVersion": "Venue's plan, version {n}, valid from {date}",
+    "ownSource": "Entered by you, not by the venue",
+    "stated": "Stated dimensions",
+    "usable": "Usable area",
+    "tablesPlaced": "Tables on the plan",
+    "aisle": "Minimum aisle between tables"
+  },
+  "inventory": {
+    "title": "The venue's tables",
+    "body": "What the venue provides. You can also add tables of your own on the seating page.",
+    "placed": "On the plan / available"
+  },
+  "settings": {
+    "title": "Space settings",
+    "open": "Change the settings",
+    "aisle": "Minimum aisle between tables (cm)",
+    "aisleHint": "Free room between tables with the chairs pulled out. Usually 60 cm.",
+    "save": "Save the settings"
+  },
+  "remove": {
+    "open": "Give up this plan",
+    "title": "Give up the room plan?",
+    "body": "The placed tables, the guests' seats and the stage variants are deleted too. Guests no longer see their seat.",
+    "confirm": "Delete the plan and the seating",
+    "removing": "Deleting…"
+  },
+  "errors": {
+    "noModel": "The occasion has no room plan yet. Choose one first.",
+    "alreadyHasModel": "The occasion already has a room plan. Give it up before choosing another.",
+    "notCalibrated": "This drawing is not calibrated, so it cannot be used for the plan or for fit checks.",
+    "stale": "The proposal is out of date: the plan has changed meanwhile. Discard it and ask for a new one.",
+    "measure": "Type a measure in metres, for example 12 or 8.5."
+  },
+  "whatif": {
+    "updateTitle": "The venue has updated the plan “{name}”",
+    "version": "Plan version",
+    "versionNo": "version {n}",
+    "name": "Name of the space",
+    "width": "Stated width",
+    "length": "Stated length",
+    "usableArea": "Usable area",
+    "tableType": "Table type: {name}",
+    "tableFacts": "{size}, seats: {seats}, pieces: {count}",
+    "added": "New in the venue's plan",
+    "removed": "no longer exists",
+    "fixture": "Fixture: {name}",
+    "placedTable": "Table {label} on your plan",
+    "placedFixture": "“{label}” on your plan",
+    "venueTable": "venue table",
+    "becomesCustom": "becomes a table of your own",
+    "overCount": "The venue now has only {count} “{name}” tables.",
+    "typeGone": "The venue no longer has this table type.",
+    "fitsNow": "fits",
+    "noLongerFits": "no longer fits the usable area",
+    "customTitle": "Own table: {name}",
+    "customTable": "{name} — pieces: {count}",
+    "customNote": "A table of your own, not the venue's. Drawn with a dashed line.",
+    "customSeats": "Seats added"
+  },
+  "guest": {
+    "title": "Room plan",
+    "intro": "Where to find what you need in the room.",
+    "planLabel": "Plan of the room {name}, with its points of interest",
+    "parking": "Parking"
+  }
+}

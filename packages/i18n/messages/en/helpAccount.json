@@ -1,0 +1,120 @@
+{
+  "anonymous-account": {
+    "title": "Anonymous account and recovery codes",
+    "summary": "An account with no email, no phone and no name. You sign in with a generated username and a password you choose.",
+    "keywords": "anonymous account no email username password recovery codes forgot password recover",
+    "where": "Sign in → Use an anonymous account",
+    "body": {
+      "h1": "Create the account",
+      "ol1": {
+        "a": "On the “Sign in” page, press “Use an anonymous account”, then “Create one”.",
+        "b": "Under “Choose a password” type at least 10 characters. A short sentence makes a good password.",
+        "c": "Press “Create the account”.",
+        "d": "Write down the username (it looks like this: ed-k7m2q9xw4p) and save the ten recovery codes with “Copy the codes”.",
+        "e": "Press “I have saved the codes — continue”."
+      },
+      "note1": "The codes are shown once. If you lose both the password and the recovery codes, the account cannot be recovered: we have nowhere to send you anything.",
+      "h2": "What is different",
+      "ul1": {
+        "a": "There is no sign-in by email and you receive no email digests.",
+        "b": "Notifications arrive only in the app.",
+        "c": "You confirm sensitive actions with a recovery code, not with a code by email. A used code cannot be used a second time.",
+        "d": "Otherwise the account has the same features: planning, roles, guest links and external assistants."
+      },
+      "h3": "Forgot the password?",
+      "p1": "On the anonymous sign-in page, press “Use a recovery code”. Type the username, an unused code and a new password, then press “Change the password and sign in”.",
+      "p2": "From “Account” you can generate new codes (the old ones stop working) or add an email address with “Add an email”; the account then becomes an account with email."
+    }
+  },
+  "two-step": {
+    "title": "Two-step sign-in",
+    "summary": "Optional: after the code by email or the password, we also ask for a code from an authenticator app.",
+    "keywords": "two-step two factor 2fa totp authenticator app code qr recovery codes security lost phone",
+    "where": "Account → Sign-in and safety → Two-step sign-in",
+    "need": "Turning it on and off asks you to confirm again that it is you.",
+    "body": {
+      "ol1": {
+        "a": "Open “Account” and, next to “Two-step sign-in”, press “Open settings”.",
+        "b": "Press “Turn on two-step sign-in”.",
+        "c": "Open your authenticator app, add a new account and scan the QR code. If you cannot scan it, use the “Key for typing by hand”.",
+        "d": "Type the “Code from the app” (six digits) and press “Turn on”.",
+        "e": "Save the ten recovery codes and press “I have saved the codes”."
+      },
+      "note1": "It works with any standard authenticator app: six-digit codes that change every 30 seconds.",
+      "h1": "When you sign in",
+      "p1": "After the code by email (or the password), “Second step” appears. Type the code from the app. If you do not have your phone to hand, press “Use a recovery code”; each code can be used once.",
+      "h2": "New codes or turning it off",
+      "p2": "On the same page you see how many unused codes you have left. “Generate new codes” replaces the old ones, which stop working. “Turn off two-step sign-in” switches it off.",
+      "note2": "EventDesk staff cannot enter the console without two-step sign-in. For planners, guests and businesses it stays optional."
+    }
+  },
+  "account-settings": {
+    "title": "Your account: name, language, email and devices",
+    "summary": "The name others see, the app's language, your sign-in address and the devices you are signed in on.",
+    "keywords": "account profile display name language romanian english change email devices sessions sign out confirm it is you",
+    "where": "Account",
+    "body": {
+      "ul1": {
+        "a": "“Display name” — this is how the people you plan with see you, on the team and on tasks. Press “Save the name”.",
+        "b": "“Language” — choose and press “Save language”. It changes the app's wording only, never your data. You can also switch quickly with RO / EN in the top bar.",
+        "c": "“Sign-in email” — press “Change email”, type the new address, press “Send the code to the new address” and then “Confirm the address”."
+      },
+      "note1": "After the email changes, the account is signed out on all other devices and all keys for external assistants are cancelled.",
+      "h1": "Signed-in devices",
+      "p1": "The list shows each device the account is open on and when it was last seen. Press “Sign this device out” next to one you do not recognise. “Sign out on all devices” closes the account everywhere, including here, and cancels all keys for external assistants.",
+      "p2": "“Sign out” signs you out on this device only.",
+      "h2": "“Confirm it is you”",
+      "p3": "Sensitive actions — team roles and access, deletions, creating a token for an assistant — ask for a fresh confirmation. Press “Send me the code”, type the code from the email and press “Confirm”. The confirmation lasts 10 minutes.",
+      "note2": "An anonymous account confirms with a recovery code instead of an email."
+    }
+  },
+  "delete-account": {
+    "title": "Delete your account (with 7 days to change your mind)",
+    "summary": "You ask for deletion, you have 7 days to undo it, then it is final.",
+    "keywords": "delete account deletion undo 7 days personal data what we keep receipts final",
+    "where": "Account → Delete account",
+    "need": "Asks you to confirm again that it is you.",
+    "body": {
+      "ol1": {
+        "a": "Open “Account” and, under “Sign-in and safety”, press “Delete account”.",
+        "b": "Read “What happens” and “What we keep and why”.",
+        "c": "Press “Delete account”. If you have changed your mind, press “Keep the account”."
+      },
+      "h1": "What happens",
+      "ul1": {
+        "a": "For 7 days the account stays unchanged and you can undo the deletion at any time, from the “Account” page, with “Undo the deletion”.",
+        "b": "After that we delete the sign-in details, the sessions and the account's personal data. We cannot recover them.",
+        "c": "All keys for external assistants are deleted together with the account."
+      },
+      "note1": "The law obliges us to keep a few records even after deletion: receipts and invoices, the record of objections and personal-data requests, and the audit log of actions. The deletion page tells you for how many years.",
+      "p1": "While the deletion is scheduled, the “Account” page shows “The account is scheduled for deletion”, with the date until which you can undo it.",
+      "note2": "Deleting a single occasion is something else: you do it from “Settings”, in that occasion, also with 7 days' grace."
+    }
+  },
+  "assistants": {
+    "title": "AI assistants: what they can and cannot do",
+    "summary": "You can connect your own AI assistant. It sees exactly what you see and can at most propose changes.",
+    "keywords": "assistant ai mcp token key connect disconnect proposals read consent data",
+    "where": "Account → AI assistants",
+    "need": "Creating a token asks you to confirm again that it is you.",
+    "body": {
+      "ol1": {
+        "a": "Open “Account” and go to “Connected AI assistants”.",
+        "b": "Under “Connect an assistant”, type the “Connection name” (only for you, so you recognise it).",
+        "c": "Under “What the assistant may do” choose “Read only” or “Read and propose”, then “Continue”.",
+        "d": "Read “Before you create the token”, tick the consent and press “Accept and create the token”.",
+        "e": "Press “Copy the token” and add to your assistant an MCP server (HTTP) with the address and the header shown."
+      },
+      "note1": "You see the token once. After you close the page only its last four characters stay visible.",
+      "h1": "What it can and cannot do",
+      "ul1": {
+        "a": "It can read only what you can see in the app: occasions, tasks, the number of guests, budget totals if you have access to money.",
+        "b": "It can propose task lists, wording, budget estimates or seating. Each proposal appears in “What if?” and is not applied until you confirm it in the app.",
+        "c": "It does not see guests' private requests, other accounts' data, payments or the admin console. Guests' contact details never leave, and children appear only as a count.",
+        "d": "It cannot send enquiries to businesses and it cannot notify anyone."
+      },
+      "note2": "Your occasions' data leaves EventDesk for the provider of the assistant you choose. EventDesk cannot control what that provider does with it.",
+      "p1": "You stop the access at any time with “Disconnect”; it takes effect at once. A token left unused for a long time expires by itself. You can have at most 10 active connections."
+    }
+  }
+}

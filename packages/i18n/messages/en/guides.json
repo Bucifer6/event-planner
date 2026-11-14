@@ -1,0 +1,210 @@
+{
+  "index": {
+    "meta": {
+      "title": "Planning guides",
+      "description": "Short, practical guides: a wedding timeline, a christening checklist, briefing a venue, RSVP etiquette, forgotten budget lines and group trips."
+    },
+    "eyebrow": "Guides",
+    "title": "Things worth <em>knowing beforehand</em>.",
+    "lead": "Six short guides written to be used: no stories, just lists you can tick off. Each reads in a few minutes.",
+    "listLabel": "All guides",
+    "kicker": "Guide",
+    "back": "All guides",
+    "next": "Next guide",
+    "closingTitle": "Put the guide <em>to work</em>.",
+    "closingText": "The lists above can become tasks with owners and due dates, in a plan everyone involved can see.",
+    "closingCta": "Create your first occasion"
+  },
+  "items": {
+    "calendar-nunta": {
+      "title": "A wedding timeline, from twelve months to one",
+      "summary": "What gets decided when, so the last weeks are not spent chasing things that should have been booked in winter.",
+      "minutes": "5 minute read",
+      "body": {
+        "p1": "A wedding is not hard to organise; it has to be organised in order. Nearly all the nerves of the final month come from decisions taken too late, not from things that are too complicated. The timeline below starts a year ahead; if you have less time, keep the order and shorten the gaps.",
+        "h1": "12–10 months: the decisions everything else hangs on",
+        "ul1": {
+          "a": "Agree a total budget and who contributes to it. Without that figure, every quote looks either expensive or acceptable, at random.",
+          "b": "Draft a first guest list, with a minimum and a maximum number. The venue is chosen to fit it, not the other way round.",
+          "c": "Pick the date and book the venue. Saturdays from May to September go first, sometimes more than a year ahead.",
+          "d": "If you are having a church ceremony, speak to the church before you sign for the venue, so the times work together."
+        },
+        "h2": "9–7 months: the people who cannot be in two places at once",
+        "p2": "The band or DJ, the photographer and the videographer work one event a day, so the good ones are booked early. This is also the time to talk with the godparents (nași) about the role they are taking on, and to ask for first quotes for flowers and decoration. For every quote, note what it includes and what it does not: hours of cover, travel, meals for the crew.",
+        "h3": "6–4 months: the details people see",
+        "ul3": {
+          "a": "The dress and the suit, with time for fittings and alterations.",
+          "b": "The invitations: the wording, the number of copies (one per household, not per person) and the reply-by date.",
+          "c": "The menu tasting, and the option for those who do not eat everything.",
+          "d": "Rooms for guests from other towns and, if needed, a minibus between church, venue and hotel."
+        },
+        "h4": "3–2 months: the confirmations",
+        "p4": "Send the invitations with a reply-by date at least three weeks before the day the venue wants the final number. File the papers for the civil ceremony within the window the town hall requires — ask early, because the file has a fixed deadline. Agree the moments of the evening with the band: the entrance, the first dance, the cake.",
+        "h5": "The last month: close things, do not open them",
+        "ul5": {
+          "a": "Ring those who have not replied. A “not sure yet” is recorded as unknown, not as “coming”.",
+          "b": "Give the venue the final number and the seating plan.",
+          "c": "Write an hour-by-hour run sheet and give it to every supplier, with one contact phone number — someone other than the couple.",
+          "d": "Prepare envelopes with the balance for each supplier and decide who hands them over."
+        },
+        "note1": "The rule that spares you most worry: no new decisions in the final week."
+      }
+    },
+    "lista-botez": {
+      "title": "A christening checklist",
+      "summary": "Everything to prepare for the church and for the meal, shared between parents and godparents, so nothing is left for the last day.",
+      "minutes": "4 minute read",
+      "body": {
+        "p1": "A Romanian christening (botez) is usually prepared in six to eight weeks, and it has one peculiarity: the work is shared between two families, the parents’ and the godparents’. Most muddles arise when each believes the other is taking care of something. The list below says plainly who does what — and if your custom differs, swap the roles, but write them down.",
+        "h1": "Six to eight weeks ahead",
+        "ul1": {
+          "a": "Speak to the priest: the date, the time and which papers are needed. The child’s birth certificate is normally required; the rest varies from parish to parish, so ask.",
+          "b": "Choose the godparents and agree together, without hedging, what each family buys.",
+          "c": "Book the restaurant or decide to hold the meal at home. For a lunchtime christening, small rooms fill quickly.",
+          "d": "Draw up the guest list by household, with a number of adults and a number of children."
+        },
+        "h2": "What the godparents usually prepare",
+        "ul2": {
+          "a": "the trousseau: the christening cloth (crijma), towels, soap, oil and a small bottle for the chrism, as the parish asks;",
+          "b": "the decorated christening candle;",
+          "c": "the clothes the child wears after the ceremony;",
+          "d": "a small cross, where that is the custom."
+        },
+        "h3": "What the parents usually prepare",
+        "ul3": {
+          "a": "the meal: menu, cake, drinks, with an option for children;",
+          "b": "the keepsakes (mărturii) for guests;",
+          "c": "the photographer — ask beforehand whether flash is allowed in the church;",
+          "d": "a quiet corner for the child at the restaurant: pram, a change of clothes, everything for feeding."
+        },
+        "h4": "Two weeks ahead",
+        "p4": "Ask for confirmations and give the restaurant the final number, with the high chairs needed. Fit the time of the meal around the child’s sleep, not the reverse: a midday service followed directly by lunch usually proves easier than an evening one. Decide who takes the trousseau to church and who stays with the child while photographs are taken.",
+        "h5": "On the day",
+        "ul5": {
+          "a": "Arrive at church a quarter of an hour early, with the papers and the trousseau in a single bag.",
+          "b": "Bring a spare set of clothes for the child, and one for whoever holds them.",
+          "c": "Ask someone in the family to welcome guests at the restaurant until you arrive."
+        },
+        "note1": "A good christening is a short one: the child will not remember the party, but will feel it if it runs too long."
+      }
+    },
+    "brief-locatie": {
+      "title": "How to brief a venue",
+      "summary": "Seven things a venue needs to hear from you in the first message, so that you get a real quote and not a brochure.",
+      "minutes": "4 minute read",
+      "body": {
+        "p1": "Send a venue the message “Hello, how much is a wedding at yours?” and you receive a brochure. Tell it exactly what you are looking for and you receive a quote you can compare with others. The difference is the brief: ten lines written once and sent, unchanged, to every venue on your list.",
+        "h1": "What it should contain",
+        "ol1": {
+          "a": "The kind of occasion and the mood you want: a wedding with dancing until morning, a lunchtime christening, a birthday with a seated meal or a buffet.",
+          "b": "The date — and how flexible you are. “Any Saturday in September” brings more options than a single day.",
+          "c": "The number of guests as a range: the minimum you are sure of and the possible maximum, with children counted separately.",
+          "d": "The hours, including setting up and clearing away. Ask until what time music may be played.",
+          "e": "What you bring and what you expect from them: band, cake, drinks, decoration, photographer.",
+          "f": "The budget, at least as a range. It does not put you at a disadvantage: it spares you quotes you would never have considered.",
+          "g": "When you need an answer by, and how you prefer to be contacted."
+        },
+        "h2": "What to ask",
+        "ul2": {
+          "a": "What the price per person includes and what is charged separately: drinks, corkage, extra hours, cleaning.",
+          "b": "What the minimum number of paid menus is, and until when you can give the final number.",
+          "c": "How much the deposit is, when the balance is due, and what happens to the deposit if the event is postponed.",
+          "d": "Whether another event is taking place in the building on the same day.",
+          "e": "How many parking spaces there are and how far it is from the car park to the entrance.",
+          "f": "Whether there is step-free access and a quiet place for small children or grandparents.",
+          "g": "Whether the room has a floor plan to scale, with table dimensions. Without it, seating is guesswork."
+        },
+        "h3": "How to compare the answers",
+        "p3": "Set the quotes side by side, on the same rows: price per person, what is included, minimum numbers, deposit, hours. Where a venue did not answer a question, write “unknown” — do not assume it is included. A quote with three unknowns is not cheaper, only less clear.",
+        "note1": "A good brief shows that you know what you want. Serious venues answer faster and more precisely to those who ask precisely."
+      }
+    },
+    "eticheta-rsvp": {
+      "title": "RSVP etiquette: asking for a reply and counting children",
+      "summary": "How to word an invitation so replies arrive on time, and why children are recorded as a number, not by name.",
+      "minutes": "4 minute read",
+      "body": {
+        "p1": "Replies are the least pleasant part of organising anything: you need a number by a date, and some of your guests are still “going to see”. A few simple habits change a great deal about how people respond.",
+        "h1": "Set a deadline and say why",
+        "p1b": "“Please reply by 1 August, because that is when we give the restaurant the final number” works better than “kindly confirm in good time”. Choose a deadline two to three weeks before the date the venue asks for, so you have time for the latecomers.",
+        "h2": "Invite households, not individuals",
+        "p2": "An invitation goes to a family, and the reply comes for the whole house: how many adults, how many children. Write clearly whom you are inviting — “The Ionescu family” or “Maria and a guest” — so nobody has to guess whether they may bring someone.",
+        "h3": "Children are counted, not named",
+        "p3a": "For planning you need just one thing about children: how many there are, so you know how many chairs, children’s menus and perhaps entertainers you need. You do not need their names or ages, so do not ask for them and do not put them in lists that circulate among suppliers.",
+        "p3b": "If the party is for adults only, say so in the invitation, gently and without ambiguity: “We would love this to be an evening for grown-ups.” It is far kinder than an explanation given by phone a week before.",
+        "h4": "One reminder, not five",
+        "p4": "One reminder a few days before the deadline is natural. After the deadline, ring — a short call settles in two minutes what three messages did not. Until then, whoever has not replied stays recorded as “no reply”: neither “coming” nor “not coming”. The venue receives the number of those who are certain, with an agreed margin.",
+        "h5": "If you are the guest",
+        "ul5": {
+          "a": "Reply by the deadline, even if the answer is no. A refusal given in time is a favour to your host.",
+          "b": "Do not add people who are not on the invitation. Ask first.",
+          "c": "If something changes, say so at once, not on the day.",
+          "d": "Mention any dietary restriction from the start; a kitchen needs days, not hours."
+        },
+        "note1": "A reply is not a formality; it is a figure on which an order, a table and a budget depend."
+      }
+    },
+    "buget-categorii-uitate": {
+      "title": "The budget lines everyone forgets",
+      "summary": "Fourteen small expenses that, added together, can amount to another ten to fifteen per cent of the budget.",
+      "minutes": "4 minute read",
+      "body": {
+        "p1": "An event budget is usually built from five big lines: venue and menu, music, photo and video, flowers, outfits. Overruns almost never come from there. They come from the lines that are missing altogether. Here they are, grouped, so you can enter them from the start — even with the amount “unknown”.",
+        "h1": "At the venue",
+        "ul1": {
+          "a": "Extra hours: each hour past midnight has a price, best learned beforehand.",
+          "b": "Corkage, if you bring your own drinks, and the ice, glasses or staff that go with it.",
+          "c": "Supplier meals: the band, the photographer and the videographer eat too, usually a separate menu.",
+          "d": "Power, a generator or heating, for events in a marquee or outdoors."
+        },
+        "h2": "Around the guests",
+        "ul2": {
+          "a": "Transport: a minibus between church, venue and hotel, taxis for grandparents, paid parking.",
+          "b": "Rooms for the godparents, for relatives travelling far, or for yourselves on the night.",
+          "c": "Keepsakes, printed menus, table numbers, envelopes and stamps.",
+          "d": "The children’s corner: an entertainer, high chairs, a separate menu."
+        },
+        "h3": "Fees and paperwork",
+        "ul3": {
+          "a": "Fees for a civil ceremony outside office hours or premises, and the contribution to the church.",
+          "b": "Music royalties, where the venue passes them on to the organiser.",
+          "c": "Permits or insurance for fireworks, helium balloons, a drone or an event in a public space."
+        },
+        "h4": "Before and after",
+        "ul4": {
+          "a": "Trials: a hair and make-up trial, paid tastings, alterations to the dress and the suit.",
+          "b": "Tips for waiters, drivers and the technical crew — decided in advance and put in envelopes.",
+          "c": "The day after: dry-cleaning the outfits, returning hired items, the photo album, the thank-you notes."
+        },
+        "h5": "How to keep them in hand",
+        "p5": "Enter every line in the budget even if you do not know the amount yet. A line marked “unknown” reminds you to ask; a missing line reminds you only when the bill arrives. Then keep a reserve of roughly ten per cent of the total, untouched until the final month. And record separately what was agreed and what was actually paid: they are two different columns and are easily confused.",
+        "note1": "A budget is not broken at the venue. It is broken by the things nobody wrote down."
+      }
+    },
+    "calatorie-de-grup": {
+      "title": "How to plan a group trip without falling out",
+      "summary": "The date, the budget, who books and how money is shared: four decisions to take at the start, not on the road.",
+      "minutes": "5 minute read",
+      "body": {
+        "p1": "A trip with friends is rarely spoiled by the destination. It is spoiled by a group chat in which eight people talk for three weeks without deciding anything, and then by a bill each of them understood differently. The order below shortens the discussion and settles the money before you leave.",
+        "h1": "1. The date first, with a vote and a deadline",
+        "p1b": "Propose two or three periods and ask for a vote by a given day. Do not look for the option that is ideal for everyone: choose the one most people can make and announce it as final. Whoever does not vote by the deadline has chosen to fit in.",
+        "h2": "2. Then the budget, out in the open",
+        "p2": "Before looking for somewhere to stay, ask each person, privately if need be, how much they are willing to spend in total: travel, rooms, food, activities. The plan is built around the lowest amount at which everyone feels at ease. Unspoken differences in budget are the commonest cause of bad feeling on holiday.",
+        "h3": "3. One person for each booking",
+        "ul3": {
+          "a": "Someone books the accommodation, someone else the transport, someone else the activities. Each puts their name against the task.",
+          "b": "Before anything is booked, every participant confirms in writing that they are coming. Once a deposit is paid, dropping out has a cost, and the rule is set beforehand: whoever drops out covers their share or finds a replacement.",
+          "c": "Cancellation terms are read aloud, not assumed."
+        },
+        "h4": "4. Money: one simple rule, stated at the start",
+        "p4": "Decide what is split equally (accommodation, the car, fuel) and what each person pays for themselves (meals out, optional activities). Record every shared expense on the day it is made, with who paid and for whom. Settle up once, at the end, with as few transfers as possible — not with twenty small payments between everybody.",
+        "h5": "5. A programme with gaps",
+        "p5": "Plan one fixed thing a day and leave the rest free. A group does not move at the pace of its fastest member; every stop takes twice as long as it would for two. Agree beforehand that it is fine for the group to split for a few hours: some to the museum, some to the beach, everyone at dinner.",
+        "h6": "6. Who brings what",
+        "p6": "Shared things — the first-aid kit, the speaker, the coffee maker, the games, the extension lead — go on a list, so that four speakers and no corkscrew do not end up in the luggage. Documents belong there too: who needs a passport, travel insurance or a valid driving licence.",
+        "note1": "The golden rule: everything about money is decided before the first booking, not after the last dinner."
+      }
+    }
+  }
+}

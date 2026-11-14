@@ -1,0 +1,45 @@
+{
+  "venue": {
+    "title": "Cum ajungi",
+    "navigate": "Deschide în aplicația de hărți",
+    "navigateNote": "Se deschide în aplicația de hărți a telefonului tău."
+  },
+  "journey": {
+    "title": "Acces și confort",
+    "intro": "Ce știm despre loc. Unde scrie „necunoscut”, încă nu am aflat — întreabă persoana de contact.",
+    "facts": {
+      "stepFree": "Acces fără trepte",
+      "accessibleToilets": "Toalete accesibile",
+      "parking": "Parcare aproape de intrare",
+      "quietRoom": "Cameră liniștită",
+      "seatingHelp": "Ajutor la așezare"
+    },
+    "states": {
+      "yes": "da",
+      "no": "nu",
+      "unknown": "necunoscut"
+    },
+    "contact": "Persoana de contact",
+    "changedNotice": "Informațiile despre acces au fost actualizate."
+  },
+  "editor": {
+    "title": "Traseul accesibil al invitatului",
+    "intro": "Spune ce știi despre acces. Ce lași „necunoscut” apare tot așa invitaților — nu se ascunde și nu se ghicește. Se publică în română și engleză, pe linkul invitaților și pe pagina publică.",
+    "state": "Starea",
+    "stateYes": "Da",
+    "stateNo": "Nu",
+    "stateUnknown": "Necunoscut",
+    "noteRo": "Detalii (română)",
+    "noteEn": "Detalii (engleză)",
+    "noteHint": "De exemplu: rampă la intrarea din curte.",
+    "contactName": "Persoana de contact",
+    "contactRoute": "Telefon sau email afișat invitaților",
+    "published": "Publică traseul",
+    "publishedHint": "Apare pe linkul fiecărui invitat și pe pagina publică.",
+    "save": "Salvează traseul",
+    "saving": "Se salvează…",
+    "saved": "Traseul a fost salvat.",
+    "statusPublished": "Publicat",
+    "statusDraft": "Nepublicat"
+  }
+}

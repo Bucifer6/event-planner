@@ -1,0 +1,27 @@
+{
+  "whatif": {
+    "noDate": "no due date yet",
+    "renamed": "The title becomes “{title}”.",
+    "more": "and {count} more tasks",
+    "skipped": "{count} tasks stay as they are (up to date or already done)",
+    "skipLabel": "Unchanged",
+    "applyTitle": {
+      "picnic": "Applying the “Picnic” template",
+      "aniversare": "Applying the “Birthday” template",
+      "nunta": "Applying the “Wedding” template",
+      "botez": "Applying the “Christening” template",
+      "revelion": "Applying the “New Year's Eve” template",
+      "voiaj_solo": "Applying the “Solo trip” template",
+      "voiaj_grup": "Applying the “Group trip” template",
+      "blank": "Applying a template"
+    }
+  },
+  "rerun": {
+    "open": "Apply a template",
+    "title": "Apply a task template",
+    "body": "See the differences first: which tasks would be added, which would change and which stay as they are. Existing tasks are never duplicated, and finished ones are left alone.",
+    "kindLabel": "Template",
+    "submit": "See the differences",
+    "submitting": "Comparing…"
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "title": "Date poll",
+  "description": "Propose a few days and see which suits your guests. You choose in the end.",
+  "tally": "{yes} yes · {maybe} maybe · {no} no",
+  "leader": "Most “yes”",
+  "noCapacity": "Votes are opinions only: they never reserve a place.",
+  "remove": "Remove day",
+  "add": {
+    "title": "Add a day",
+    "label": "Proposed day",
+    "hint": "Add one day at a time, 12 at most.",
+    "submit": "Add day"
+  },
+  "empty": {
+    "title": "You have not proposed any day yet",
+    "body": "Add the first day. Each household can vote Yes, Maybe or No on its invitation link."
+  },
+  "hero": {
+    "label": "Favourite day so far",
+    "unit": "“yes” for {date}",
+    "voted": "Households that voted: {count}",
+    "noVotes": "Nobody has voted yet"
+  },
+  "confirm": {
+    "title": "Choose the day",
+    "body": "When you choose a day, we first show you what moves with the date. Nothing changes until you confirm.",
+    "button": "Choose this day"
+  },
+  "confirmed": {
+    "title": "The date is set: {date}",
+    "body": "Guests see it on their invitation link."
+  },
+  "closed": {
+    "title": "The poll is closed",
+    "body": "No more votes are taken."
+  },
+  "close": {
+    "button": "Close the poll without choosing"
+  },
+  "again": {
+    "title": "A new poll",
+    "body": "If the date has to be decided again, propose other days."
+  },
+  "errors": {
+    "needDate": "Choose a day.",
+    "tooManyDates": "You can propose 12 days at most.",
+    "closed": "The poll has ended. No more votes are taken."
+  },
+  "guest": {
+    "title": "When suits you?",
+    "intro": "The host is choosing the date together with the guests. Tell us which days work for you — a vote reserves nothing.",
+    "yes": "Yes",
+    "maybe": "Maybe",
+    "no": "No",
+    "send": "Send votes",
+    "sending": "Sending…",
+    "saved": "Your votes are noted. Thank you!"
+  }
+}

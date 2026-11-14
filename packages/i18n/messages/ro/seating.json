@@ -1,0 +1,334 @@
+{
+  "title": "Așezare la mese",
+  "description": "Așază mesele pe plan și invitații la mese. Poți trage cu degetul sau poți folosi butoanele: ambele fac același lucru.",
+  "ownMeta": "introdus de tine",
+  "planLabel": "Planul de așezare pentru {name}",
+  "table": "Masa {label}",
+  "seatsOf": "{taken} din {seats} locuri",
+  "seatsUnknown": "{taken} așezați · locuri necunoscute",
+  "custom": "masă proprie",
+  "venueSupplied": "a locației",
+  "sizeUnknown": "dimensiuni necunoscute",
+  "hasProblem": "are o problemă de așezare",
+  "saving": "Se salvează…",
+  "saved": "Salvat.",
+  "empty": {
+    "title": "Mai întâi alege planul sălii",
+    "body": "Așezarea se face pe planul spațiului: cel al locației sau unul descris de tine.",
+    "action": "Alege planul sălii"
+  },
+  "newerDrawing": {
+    "title": "Locația a publicat o versiune mai nouă a planului",
+    "link": "Vezi ce se schimbă, în Planul sălii"
+  },
+  "publish": {
+    "title": "Ce văd invitații",
+    "tagOn": "Vizibil invitaților",
+    "tagOff": "Ascuns invitaților",
+    "offBody": "Deocamdată invitații nu văd nimic din așezare. După publicare, fiecare își vede doar propria masă pe linkul lui.",
+    "seatedNow": "Persoane așezate până acum: {count}",
+    "show": "Arată invitaților locul lor",
+    "showing": "Se publică…",
+    "onBody": "Publicat la {date}. Fiecare invitat își vede masa (și locul, dacă l-ai ales) pe linkul lui. Nimeni nu vede numele altora.",
+    "hide": "Ascunde din nou așezarea",
+    "hiding": "Se ascunde…"
+  },
+  "changes": {
+    "published": "Îți poți vedea acum masa.",
+    "withdrawn": "Așezarea la mese se mai schimbă."
+  },
+  "stage": {
+    "tabs": "Etapele mesei",
+    "base": "Aranjarea de bază",
+    "manage": "Etape",
+    "hint": "Ești în etapa „{name}”. Ce muți sau scoți aici se aplică doar acestei etape; aranjarea de bază rămâne la fel.",
+    "away": "scoasă în această etapă",
+    "awayNote": "Nu este în sală în etapa „{name}”.",
+    "putAway": "Scoate din această etapă",
+    "bringBack": "Readu în această etapă",
+    "asBase": "Ca în aranjarea de bază",
+    "sheetTitle": "Etapele mesei",
+    "sheetBody": "Fiecare etapă are propria variantă de aranjare și propria verificare de încăpere: de exemplu, la dans scoți câteva mese și întinzi ringul.",
+    "addDefaults": "Adaugă etapele obișnuite",
+    "nameOf": "Etapa {n}",
+    "up": "Mută mai sus etapa „{name}”",
+    "down": "Mută mai jos etapa „{name}”",
+    "remove": "Șterge etapa „{name}”",
+    "newName": "Etapă nouă",
+    "newHint": "De exemplu „Între feluri” sau „Tort”.",
+    "add": "Adaugă etapa",
+    "sameAsBase": "În această etapă este la fel ca în aranjarea de bază."
+  },
+  "stages": {
+    "defaults": {
+      "welcome": "Primire",
+      "starter": "Aperitiv",
+      "main": "Felul principal",
+      "dance": "Dans",
+      "cake": "Tort"
+    }
+  },
+  "fit": {
+    "label": "Verificare de încăpere, aranjarea de bază",
+    "labelStage": "Verificare de încăpere, etapa {name}",
+    "fits": "Încape",
+    "short": {
+      "fits": "încape",
+      "no": "nu încape",
+      "unknown": "necunoscut"
+    },
+    "problemsVerdict": {
+      "one": "Nu încape: o problemă de așezare",
+      "few": "Nu încape: {count} probleme de așezare",
+      "other": "Nu încape: {count} de probleme de așezare"
+    },
+    "missingVerdict": {
+      "one": "Nu încape: lipsește un loc",
+      "few": "Nu încape: lipsesc {count} locuri",
+      "other": "Nu încape: lipsesc {count} de locuri"
+    },
+    "unknownTables": {
+      "one": "Necunoscut: o masă fără dimensiuni",
+      "few": "Necunoscut: {count} mese fără dimensiuni",
+      "other": "Necunoscut: {count} de mese fără dimensiuni"
+    },
+    "unknownItems": {
+      "one": "Necunoscut: un element fără dimensiuni",
+      "few": "Necunoscut: {count} elemente fără dimensiuni",
+      "other": "Necunoscut: {count} de elemente fără dimensiuni"
+    },
+    "unknownFloor": "Necunoscut: nu știm dimensiunile sălii",
+    "unknownSeats": "Necunoscut: unele mese nu au numărul de locuri",
+    "unknownShort": "necunoscut",
+    "missingSeats": "nu încape: locuri lipsă {count}",
+    "problems": "nu încape: probleme de așezare {count}",
+    "seats": "Locuri la mese:",
+    "attending": "confirmați:",
+    "missingAlso": {
+      "one": "lipsește un loc",
+      "few": "lipsesc {count} locuri",
+      "other": "lipsesc {count} de locuri"
+    },
+    "invited": "Invitați în total:",
+    "invitedMissing": {
+      "one": "pentru toți ar mai trebui un loc",
+      "few": "pentru toți ar mai trebui {count} locuri",
+      "other": "pentru toți ar mai trebui {count} de locuri"
+    },
+    "unknownWord": "necunoscut",
+    "area": "Suprafață ocupată:",
+    "of": "din",
+    "details": {
+      "one": "Vezi detaliul",
+      "few": "Vezi cele {count} detalii",
+      "other": "Vezi cele {count} de detalii"
+    },
+    "show": "Arată",
+    "excluded": "{name} ({kind}) nu are dimensiuni: nu intră în verificare.",
+    "seatsUnknownLine": "{name} nu are numărul de locuri: locurile ei nu sunt numărate."
+  },
+  "issues": {
+    "overlap": "{a} se suprapune cu {b}.",
+    "tooClose": "{a} și {b} sunt prea aproape: rămân {gap} cm de trecere, minimul este {min} cm.",
+    "outside": "{a} iese din suprafața utilă.",
+    "overInventory": "Sunt cu {count} mai multe mese „{name}” decât are locația."
+  },
+  "zoom": {
+    "in": "Mărește planul",
+    "out": "Micșorează planul"
+  },
+  "key": {
+    "venue": "masă a locației",
+    "custom": "masă proprie",
+    "fixture": "element (ring, scenă…)",
+    "unknown": "dimensiuni necunoscute"
+  },
+  "bar": {
+    "label": "Acțiuni pentru {name}",
+    "deselect": "Închide acțiunile",
+    "unknownDims": "Nu îi știm dimensiunile, așa că nu intră în verificarea de încăpere. Completează-le din „Modifică”.",
+    "overCapacity": "Sunt cu {over} mai mulți oameni decât locuri.",
+    "placeHint": "Atinge pe plan locul unde vrei să o așezi.",
+    "placeCancel": "Renunță",
+    "move": "Mută",
+    "up": "Mută în sus cu {cm} cm",
+    "down": "Mută în jos cu {cm} cm",
+    "left": "Mută la stânga cu {cm} cm",
+    "right": "Mută la dreapta cu {cm} cm",
+    "stepLabel": "Pas de {cm} cm. Atinge ca să schimbi pasul.",
+    "rotate": "Rotește",
+    "rotateLeft": "Rotește cu 15 grade spre stânga",
+    "rotateRight": "Rotește cu 15 grade spre dreapta",
+    "rotateQuarter": "Rotește cu 90 de grade",
+    "placeHere": "Așază aici",
+    "exact": "Poziție exactă",
+    "guests": "Invitați la masă",
+    "seeGuests": "Vezi cine stă aici",
+    "edit": "Modifică",
+    "remove": "Scoate de pe plan",
+    "step": "Pas {cm} cm",
+    "more": "Mai multe"
+  },
+  "add": {
+    "open": "Adaugă o masă",
+    "title": "Adaugă pe plan",
+    "venueTitle": "Mesele locației",
+    "venueHint": "Din inventarul declarat de locație, cu dimensiunile ei.",
+    "seats": "Locuri: {count}",
+    "seatsUnknown": "locuri necunoscute",
+    "countUnknown": "număr necunoscut",
+    "left": "Rămase: {left} din {count}",
+    "venueAdd": "Adaugă",
+    "venueAddLabel": "Adaugă o masă „{name}”",
+    "allPlaced": "Toate sunt pe plan",
+    "what": "Sau adaugă ceva al tău",
+    "customTable": "Masă proprie",
+    "customFixture": "Element propriu (candy bar, colț foto…)",
+    "customNote": "Ce adaugi tu apare cu linie întreruptă și nu este prezentat ca fiind al locației.",
+    "customDefault": "Masă proprie",
+    "customSubmit": "Adaugă masa",
+    "fixtureSubmit": "Adaugă elementul"
+  },
+  "fields": {
+    "name": "Nume",
+    "tableNameHint": "De exemplu „Masă lungă”. Dacă lași gol, îi spunem „Masă proprie”.",
+    "fixtureNameHint": "De exemplu „Candy bar”.",
+    "shape": "Formă",
+    "diameter": "Diametru (m)",
+    "width": "Lățime (m)",
+    "length": "Lungime (m)",
+    "emptyUnknown": "gol = necunoscut",
+    "seats": "Locuri",
+    "howMany": "Câte mese",
+    "label": "Numărul sau numele mesei",
+    "labelHint": "Apare pe plan și pe linkul invitaților: „3” sau „Miri”."
+  },
+  "shapes": {
+    "round": "Rotundă",
+    "rect": "Dreptunghiulară"
+  },
+  "tables": {
+    "title": "Mese ({count})",
+    "empty": "Nicio masă pe plan. Adaugă prima masă cu butonul de mai sus.",
+    "emptyRead": "Nicio masă pe plan încă.",
+    "over": "prea mulți"
+  },
+  "unseated": {
+    "title": "Neașezați ({count})",
+    "noGuests": "Lista de invitați este goală. Adaugă invitații în „Invitați și răspunsuri”.",
+    "none": "Toți invitații au un loc.",
+    "how": "Atinge o masă din listă sau de pe plan, apoi bifează cine stă la ea."
+  },
+  "people": {
+    "extra": {
+      "one": "+1 adult",
+      "few": "+{count} adulți",
+      "other": "+{count} de adulți"
+    },
+    "children": {
+      "one": "+1 copil",
+      "few": "+{count} copii",
+      "other": "+{count} de copii"
+    },
+    "confirmed": "a confirmat",
+    "notAnswered": "fără răspuns"
+  },
+  "position": {
+    "title": "Poziția pentru {name}",
+    "body": "Centrul, măsurat de la colțul din stânga sus al planului.",
+    "x": "De la stânga (m)",
+    "y": "De sus (m)",
+    "rotation": "Rotire (grade)",
+    "submit": "Mută aici"
+  },
+  "edit": {
+    "title": "Modifică „{name}”",
+    "submit": "Salvează",
+    "venueFacts": "Dimensiunile și locurile sunt cele declarate de locație și nu se pot schimba aici."
+  },
+  "remove": {
+    "title": "Scoți {name} de pe plan?",
+    "body": "O poți adăuga din nou oricând.",
+    "bodySeated": "Persoanele așezate la ea ({count}) se întorc în lista celor neașezați.",
+    "keep": "Păstrează",
+    "confirm": "Scoate {name}"
+  },
+  "assign": {
+    "here": "La această masă",
+    "nobody": "Nimeni încă.",
+    "unseated": "Neașezați",
+    "everyoneSeated": "Toți invitații au deja un loc.",
+    "search": "Caută un invitat",
+    "noMatch": "Niciun invitat cu acest nume.",
+    "submit": "Așază la masă",
+    "submitCount": {
+      "one": "Așază la masă o persoană",
+      "few": "Așază la masă {count} persoane",
+      "other": "Așază la masă {count} de persoane"
+    },
+    "tooMany": "Ai ales {picked} persoane, dar mai sunt doar {left} locuri libere.",
+    "done": "Gata",
+    "remove": "Scoate de la masă",
+    "removeLabel": "Scoate de la masă: {name}",
+    "seatFor": "Locul pentru {name}",
+    "noSeat": "Fără loc",
+    "seat": "Locul {n}"
+  },
+  "export": {
+    "title": "Așezarea la mese",
+    "description": "Lista cu masa și locul fiecărui invitat (CSV)."
+  },
+  "whatif": {
+    "title": "Propunere de așezare — mese: {count}",
+    "table": "Masa {label}",
+    "at": "la {x} m de la stânga, {y} m de sus",
+    "newCustom": "Masă proprie nouă",
+    "newVenue": "Masă nouă din inventarul locației",
+    "seatAt": "Invitați la masa {label}",
+    "people": "persoane sau grupuri adăugate: {count}",
+    "onPlan": "pe plan",
+    "removed": "scoasă de pe plan",
+    "fit": "Verificare de încăpere",
+    "excluded": "Elemente fără dimensiuni, lăsate în afara verificării: {count}"
+  },
+  "guest": {
+    "title": "Locul tău",
+    "tableWord": "Masa",
+    "several": "Familia voastră stă la mai multe mese:",
+    "table": "Masa {label}",
+    "seat": "locul {n}",
+    "extra": {
+      "one": "+1 adult",
+      "few": "+{count} adulți",
+      "other": "+{count} de adulți"
+    },
+    "children": {
+      "one": "+1 copil",
+      "few": "+{count} copii",
+      "other": "+{count} de copii"
+    },
+    "planLabel": "Planul sălii cu masa ta marcată",
+    "planNote": "Masa ta este cea încercuită."
+  },
+  "errors": {
+    "network": "Nu am putut salva. Verifică legătura la internet și încearcă din nou.",
+    "reloaded": "Am reîncărcat aranjarea așa cum este salvată acum.",
+    "measure": "Scrie o măsură în metri, de exemplu 1,8.",
+    "bothSides": "Scrie ambele laturi sau lasă-le pe amândouă goale.",
+    "seats": "Scrie numărul de locuri (cel mult 60).",
+    "count": "Scrie câte mese, între 1 și 40.",
+    "rotation": "Scrie rotirea în grade, între 0 și 360.",
+    "conflict": "Altcineva a mutat între timp masa „{label}”. Am păstrat mutarea lor; verifică și mută din nou dacă e nevoie.",
+    "itemGone": "Acest element nu mai este pe plan. Poate l-a scos altcineva.",
+    "tooManyItems": "Planul poate avea cel mult {max} elemente.",
+    "unknownTableType": "Locația nu are acest tip de masă.",
+    "inventoryExhausted": "Locația are doar {count} mese „{name}” și toate sunt deja pe plan. Adaugă o masă proprie.",
+    "venueFact": "Dimensiunile meselor locației sunt declarate de locație și nu se pot schimba aici.",
+    "tooManyStages": "Poți avea cel mult {max} etape.",
+    "guestGone": "Acest invitat nu mai este în listă.",
+    "tableFull": "Masa {label} mai are {free} locuri libere, iar tu ai ales {wanted}. Alege mai puține persoane sau altă masă.",
+    "pickSomeone": "Bifează cel puțin o persoană.",
+    "seatOutOfRange": "Masa are doar {seats} locuri.",
+    "seatTaken": "Locul {seatNo} este deja al altcuiva de la această masă."
+  }
+}

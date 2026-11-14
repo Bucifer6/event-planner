@@ -1,0 +1,63 @@
+{
+  "what-is-a-guest-link": {
+    "title": "What an invitation link is",
+    "summary": "A link that belongs only to your household. You open it, see the invitation and reply — no account and no password.",
+    "keywords": "link invitation guest account password household what is it how it works qr",
+    "where": "The link you received from the host",
+    "body": {
+      "p1": "The host sent you a link by email, by message or printed as a QR code on the invitation. The link belongs to your household: whoever opens it can see the invitation and reply on your behalf. You do not need an account.",
+      "h1": "What you find on the link",
+      "ul1": {
+        "a": "The invitation: what is being celebrated, when and where, with “See on the map”.",
+        "b": "Your reply, which you can change until the deadline.",
+        "c": "If the host has started them: the “When suits you?” poll, the “Who brings what” list, “Your seat” at the table, the programme and “Getting there”.",
+        "d": "“Private request” — for a dietary or access need, read only by the organisers designated for it."
+      },
+      "note1": "If the host changes something (the date, the deadline, the questions), on your next visit you see the notice “Something changed since your last visit”.",
+      "note2": "Keep the link to yourself and your family. If you lost it or it reached someone else, ask the host for a new one — the old one stops working.",
+      "p2": "You change the page's language with the RO / EN switch."
+    }
+  },
+  "answer-an-invitation": {
+    "title": "How to reply to an invitation",
+    "summary": "One question per screen: whether you are coming, how many of you and what else the host wants to know. At the end you check and send.",
+    "keywords": "reply answer rsvp coming cannot come maybe adults children change reply deadline confirm",
+    "where": "The link you received from the host",
+    "body": {
+      "ol1": {
+        "a": "Open the link. At “Will you join us?” choose “Yes, gladly”, “Maybe — not sure yet” or “I can't make it”.",
+        "b": "If you are coming, answer “How many adults are coming?” and “How many children are coming with you?” with the plus and minus buttons.",
+        "c": "Answer the host's questions, if there are any: menu, allergies, accommodation, transport.",
+        "d": "At “Where can we tell you if something changes?” you can leave an email address. It is not required.",
+        "e": "At “Does everything look right?” look over your answers and press “Send reply”."
+      },
+      "note1": "About children we keep only their number. Please do not type a child's name, age or date of birth in any field.",
+      "h1": "If you change your mind",
+      "p1": "Open the link again and press “Change reply”. You can change it until the deadline shown. After the deadline you see “The reply deadline has passed”: write to the host directly.",
+      "h2": "If the event changes",
+      "p2": "If the host cancels or postpones the event, the link tells you so. If you left an email address, you also receive a message.",
+      "p3": "The message “Too many attempts” means the link was opened too many times in a short while. Try again a little later."
+    }
+  },
+  "guest-privacy": {
+    "title": "What is known about you as a guest",
+    "summary": "We keep your household's reply and, about children, only their number. Other guests do not see your details.",
+    "keywords": "privacy guest personal data children email private who sees other guests suppliers",
+    "where": "The link you received from the host · the event's public page",
+    "body": {
+      "ul1": {
+        "a": "What we keep: the household's reply (whether you are coming and how many), the answers to the host's questions and your email address, if you left one.",
+        "b": "About children: only how many are coming. No names, no ages.",
+        "c": "Who sees the reply: the host and their planning team. Contact details are seen only by the owner and the project manager.",
+        "d": "Other guests do not see the guest list or your reply. At the tables, each person sees only their own seat.",
+        "e": "Suppliers do not receive your name. They receive numbers: how many people, how many menus of one kind."
+      },
+      "h1": "The private request",
+      "p1": "What you write under “Private request” is read only by the organisers specifically designated for it — not other guests and not suppliers. The kitchen learns, for example, only “3 × gluten-free”.",
+      "h2": "The email address",
+      "p2": "We use it only to tell you if something about the event changes. It is not required.",
+      "note1": "On an event's public page you register without an account. If the places are taken, you can join the waiting list and you receive a single email if one frees up.",
+      "p3": "For a request about your data, write to the host or see the “Privacy policy”, in the “Contact and reporting” section."
+    }
+  }
+}

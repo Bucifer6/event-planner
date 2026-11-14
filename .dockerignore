@@ -1,0 +1,25 @@
+# Keep the build context small and free of local state and secrets (SEC13).
+.git
+.github
+**/node_modules
+**/.next
+**/out
+**/dist
+**/coverage
+**/*.tsbuildinfo
+**/next-env.d.ts
+.env
+.env.*
+!.env.example
+*.log
+playwright-report
+test-results
+docs
+infra/terraform
+**/.terraform
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfvars
+!**/*.tfvars.example
+docker-compose*.yml
+.DS_Store

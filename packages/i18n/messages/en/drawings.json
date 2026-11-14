@@ -1,0 +1,336 @@
+{
+  "list": {
+    "title": "Spaces and plans",
+    "description": "Upload the plan of each room, calibrate it and mark what can be used. Planners seat their guests directly on your plan.",
+    "back": "Back to “{name}”",
+    "linkFromListing": "Spaces, plans and parking",
+    "removed": "The space has been withdrawn.",
+    "spaces": "Your spaces",
+    "emptyTitle": "No spaces yet",
+    "emptyBody": "Add the first room: a name, its real dimensions if you know them, and its drawing.",
+    "addFirst": "Add the first space",
+    "add": "Add a space",
+    "addTitle": "New space",
+    "create": "Create the space",
+    "hasDrawing": "Has a drawing",
+    "noDrawing": "no drawing",
+    "calibrated": "Calibrated",
+    "notCalibrated": "not calibrated",
+    "unsent": "Has unsent changes",
+    "open": "Open “{name}”"
+  },
+  "status": {
+    "draft": "Draft",
+    "pending": "In review",
+    "live": "Public",
+    "retired": "Withdrawn",
+    "liveVersion": "Public · v{n} from {date}",
+    "editPending": "Change in review"
+  },
+  "rejected": {
+    "title": "The last submission was not approved",
+    "next": "Correct it and send it for review again."
+  },
+  "sent": {
+    "title": "The plan has been sent for review",
+    "body": "A moderator will check it. Until then, what was approved before stays public."
+  },
+  "pending": {
+    "title": "A version is waiting for review",
+    "bodyNew": "Sent on {date}. It becomes public once approved.",
+    "bodyEdit": "Sent on {date}. The current public version stays visible until approval."
+  },
+  "editor": {
+    "title": "Space plan",
+    "back": "Back to spaces"
+  },
+  "details": {
+    "title": "Name and stated dimensions",
+    "body": "The room's real dimensions, as you state them. If you do not know them, leave them empty: they show as “unknown”.",
+    "change": "Change the name and dimensions",
+    "stated": "Stated dimensions"
+  },
+  "submit": {
+    "title": "Send for review",
+    "bodyNew": "The plan becomes public once a moderator approves it.",
+    "bodyEdit": "The public version stays as it is until a moderator approves the changes. Planners already using the plan receive the new version as a proposal.",
+    "nothingNew": "You have no changes to send.",
+    "send": "Send for review"
+  },
+  "retire": {
+    "open": "Withdraw the space",
+    "title": "Withdraw “{name}”?",
+    "body": "The space disappears from your public page. Planners already using it keep their version.",
+    "confirm": "Withdraw “{name}”",
+    "removing": "Withdrawing…"
+  },
+  "plan": {
+    "label": "Plan of the space {name}",
+    "working": "working copy",
+    "notCalibrated": "not calibrated · no scale"
+  },
+  "drawing": {
+    "title": "1 · The drawing",
+    "none": "You have not uploaded a drawing yet.",
+    "upload": "Upload the room's drawing",
+    "uploadHint": "PNG, JPG or PDF, 10 MB at most. A plan seen from above, with clear walls.",
+    "replace": "Replace the drawing",
+    "replaceHint": "A new drawing voids the calibration and the markings made on the old one.",
+    "attaching": "Preparing the drawing…",
+    "pdfStoredTitle": "We kept the PDF, but cannot display it for calibration",
+    "pdfStoredBody": "Upload the plan as an image (PNG or JPG) so you can calibrate and mark it."
+  },
+  "calibration": {
+    "title": "2 · Calibration",
+    "done": "Calibrated",
+    "needed": "Needs calibration",
+    "why": "Without calibration the drawing is only a picture: it cannot take markings and planners cannot use it for seating.",
+    "scale": "1 pixel = {cm} cm. The drawing covers {width} × {height} m.",
+    "step1": "Touch one end of a distance you know on the drawing (a wall, for example).",
+    "step2": "Touch the other end.",
+    "step3": "Type the real distance between the two points.",
+    "mark": "Mark the two points on the drawing",
+    "markAgain": "Mark the points again",
+    "touchA": "Touch point A on the drawing.",
+    "touchB": "Now touch point B.",
+    "typed": "Or type the positions of the points",
+    "typedHint": "In pixels, from the top-left corner. The drawing is {width} × {height} px.",
+    "fields": {
+      "ax": "Point A — horizontal",
+      "ay": "Point A — vertical",
+      "bx": "Point B — horizontal",
+      "by": "Point B — vertical"
+    },
+    "distance": "Real distance between A and B (m)",
+    "distanceHint": "For example 12 or 8.5. The further apart the points, the more exact the scale.",
+    "submit": "Work out the scale",
+    "redo": "Work out the scale again",
+    "saving": "Working out the scale…",
+    "errors": {
+      "points": "Mark both points on the drawing first.",
+      "distanceMissing": "Type the real distance between the two points."
+    }
+  },
+  "markings": {
+    "title": "3 · Markings",
+    "description": "Every marking can be made by touching the drawing or by typing its position and size. Whatever you do not know stays “unknown”.",
+    "lockedTitle": "Calibrate the drawing to start marking",
+    "lockedBody": "Markings are kept in real metres, so they need a scale."
+  },
+  "place": {
+    "point": "Touch the right place on the drawing.",
+    "rectFirst": "Touch one corner of the rectangle.",
+    "rectSecond": "Now touch the opposite corner.",
+    "outline": "Touch the corners of the outline, one by one. Points: {count}",
+    "closeOutline": "Close the outline",
+    "cancel": "Cancel",
+    "move": "Move on the drawing"
+  },
+  "areas": {
+    "title": "Usable floor areas",
+    "hint": "The zones where tables can stand. Fit checks only look inside them.",
+    "empty": "No area marked.",
+    "add": "Add a usable area",
+    "editTitle": "Usable area",
+    "confirmAdd": "Add the area",
+    "unnamed": "Unnamed area",
+    "redraw": "Draw on the drawing",
+    "outline": "Free outline"
+  },
+  "tables": {
+    "title": "Table inventory",
+    "hint": "The table types you provide, with real dimensions and how many you have.",
+    "empty": "No table type.",
+    "add": "Add a table type",
+    "seatsLabel": "seats:",
+    "seats": "Seats: {count}",
+    "countLabel": "pieces:",
+    "count": "Pieces: {count}"
+  },
+  "tableTypes": {
+    "add": "New table type",
+    "editTitle": "Table type",
+    "confirmAdd": "Add the table type"
+  },
+  "fixtures": {
+    "title": "Fixtures",
+    "hint": "Dance floor, stage, candy bar, photo booth: they have real dimensions and take part in fit checks.",
+    "empty": "No fixture.",
+    "add": "Add a fixture",
+    "editTitle": "Fixture",
+    "confirmAdd": "Add the fixture"
+  },
+  "pois": {
+    "title": "Points of interest",
+    "hint": "Toilets, cloakroom, bar, entrances and exits. Guests see them on the room plan.",
+    "empty": "No point of interest.",
+    "add": "Add a point of interest",
+    "editTitle": "Point of interest",
+    "confirmAdd": "Add the point"
+  },
+  "parkingAreas": {
+    "title": "Parking areas",
+    "hint": "Drawn to scale, with their number of spaces. The number must match the one stated under parking.",
+    "empty": "No parking area drawn.",
+    "add": "Add a parking area",
+    "editTitle": "Parking area",
+    "confirmAdd": "Add the parking area",
+    "unnamed": "Parking",
+    "spacesLabel": "spaces:",
+    "spaces": "Spaces: {count}"
+  },
+  "fixtureKinds": {
+    "dance": "Dance floor",
+    "candybar": "Candy bar",
+    "photobooth": "Photo booth",
+    "stage": "Stage",
+    "bar": "Bar",
+    "other": "Other fixture"
+  },
+  "poiKinds": {
+    "toilets": "Toilets",
+    "cloakroom": "Cloakroom",
+    "bar": "Bar",
+    "entrance": "Entrance",
+    "exit": "Exit",
+    "photo": "Photo corner",
+    "stage": "Stage",
+    "other": "Other point"
+  },
+  "shapes": {
+    "round": "Round",
+    "rect": "Rectangular"
+  },
+  "fields": {
+    "spaceName": "Name of the space",
+    "spaceNameHint": "For example “Main Hall” or “Terrace”.",
+    "statedWidth": "Real width (m)",
+    "statedLength": "Real length (m)",
+    "statedHint": "Leave empty if you do not know it.",
+    "x": "From the left (m)",
+    "xHint": "Distance from the left edge of the drawing.",
+    "y": "From the top (m)",
+    "yHint": "Distance from the top edge.",
+    "areaName": "Name",
+    "spaces": "Number of spaces",
+    "spacesHint": "Leave empty if you do not know it.",
+    "width": "Width (m)",
+    "length": "Length (m)",
+    "rectHint": "The position is that of the top-left corner.",
+    "outlineHint": "A free outline is changed by touching the drawing (“Free outline”).",
+    "tableName": "Name of the table type",
+    "tableNameHint": "For example “Round for 10”.",
+    "shape": "Shape",
+    "diameter": "Diameter (m)",
+    "seats": "Seats at the table",
+    "count": "How many you have",
+    "unknownHint": "What you leave empty shows as “unknown”, and the table stays out of fit checks until its dimensions are known.",
+    "kind": "Kind",
+    "fixtureName": "Name",
+    "rotation": "Rotation (degrees)",
+    "thenPlace": "After adding it, touch its place on the drawing.",
+    "poiName": "Name"
+  },
+  "optionalUnknown": "empty = unknown",
+  "saveChanges": "Save the changes",
+  "saved": "Saved.",
+  "saving": "Saving…",
+  "sending": "Sending…",
+  "withdraw": "Withdraw the submission",
+  "withdrawing": "Withdrawing…",
+  "edit": "Edit",
+  "remove": "Delete",
+  "parking": {
+    "title": "Parking",
+    "publicTitle": "Parking",
+    "description": "Say what you know about parking. Each fact shows as known or “unknown” on your page and on the guests' page. If you have no parking, say so plainly.",
+    "nothingPublic": "You have not stated anything about parking yet.",
+    "mismatchTitle": "The number of spaces shows as “unknown”",
+    "mismatchBody": "You stated {stated} spaces, but the areas drawn add up to {drawn}. Correct one of them or confirm the stated number.",
+    "pendingTitle": "The parking facts are waiting for review",
+    "pendingBody": "Sent on {date}.",
+    "change": "Change the parking facts",
+    "state": "State the parking facts",
+    "formTitle": "Parking",
+    "yes": "Yes",
+    "no": "No",
+    "noneOnSite": "No parking on site",
+    "metres": "{m} m",
+    "options": {
+      "unknown": "I don't know",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "fields": {
+      "onSite": "Parking on site",
+      "spaceCount": "Number of spaces",
+      "onStreet": "On-street parking nearby",
+      "paid": "Paid parking",
+      "accessibleSpaces": "Accessible (blue-badge) spaces",
+      "walkingDistanceM": "From parking to the entrance (m)"
+    },
+    "onSiteHint": "If you choose “No”, the page will plainly say “No parking on site”.",
+    "countHint": "Leave empty if you do not know it.",
+    "countHintDrawn": "The parking areas drawn add up to {drawn} spaces.",
+    "confirmCount": "The stated number is the right one",
+    "confirmCountHint": "Tick only if it differs from the {drawn} spaces drawn and you want the stated one to stand.",
+    "walkingHint": "On foot, in metres. Leave empty if you do not know.",
+    "submit": "Send for review",
+    "sent": "The facts have been sent for review."
+  },
+  "public": {
+    "title": "Spaces and plans",
+    "version": "Version {n}, valid from {date}",
+    "stated": "Stated dimensions",
+    "notCalibrated": "Plan not calibrated: an indicative picture with no scale. It cannot be used for seating.",
+    "pictureAlt": "Drawing of the space {name}",
+    "tablesCaption": "Tables available in {name}",
+    "fixtures": "Fixtures",
+    "cols": {
+      "type": "Table type",
+      "size": "Dimensions",
+      "seats": "Seats",
+      "count": "Pieces"
+    }
+  },
+  "moderation": {
+    "kind": "Space plan",
+    "parkingKind": "Parking facts",
+    "fields": {
+      "name": "Name",
+      "width": "Stated width",
+      "length": "Stated length",
+      "drawing": "Drawing",
+      "calibrated": "Calibrated",
+      "areas": "Usable areas",
+      "tables": "Table inventory",
+      "fixtures": "Fixtures",
+      "pois": "Points of interest",
+      "parkingAreas": "Parking areas"
+    },
+    "parkingFields": {
+      "onSite": "Parking on site",
+      "spaceCount": "Number of spaces",
+      "onStreet": "On-street parking",
+      "paid": "Paid",
+      "accessibleSpaces": "Accessible spaces",
+      "walkingDistanceM": "Distance to the entrance",
+      "countConfirmed": "Count confirmed by the business"
+    }
+  },
+  "errors": {
+    "measure": "Type a measure in metres, for example 12 or 1.8.",
+    "wholeNumber": "Type a whole number.",
+    "bothSides": "Type both sides or leave both empty.",
+    "notCalibrated": "The drawing is not calibrated. Calibrate it before adding markings.",
+    "conflict": "Someone else on the team changed the plan meanwhile. We reloaded their version; make your change again.",
+    "retired": "This space has been withdrawn.",
+    "listingRetired": "The listing has been withdrawn, so it can no longer take plans.",
+    "tooManySpaces": "A listing can have at most {max} spaces.",
+    "noPicture": "The drawing has no picture you can calibrate. Upload the plan as PNG or JPG.",
+    "pointOutside": "The points must be on the drawing.",
+    "pointsTooClose": "The points are too close together. Pick two points further apart.",
+    "distanceTooSmall": "The distance must be at least 10 cm.",
+    "nothingToSubmit": "Add a drawing or the room's dimensions before sending."
+  }
+}

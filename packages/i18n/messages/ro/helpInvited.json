@@ -1,0 +1,63 @@
+{
+  "what-is-a-guest-link": {
+    "title": "Ce este linkul de invitație",
+    "summary": "Un link doar al familiei tale. Îl deschizi, vezi invitația și răspunzi — fără cont și fără parolă.",
+    "keywords": "link invitație invitat cont parolă familie ce este cum funcționează qr",
+    "where": "Linkul primit de la gazdă",
+    "body": {
+      "p1": "Gazda ți-a trimis un link pe e-mail, pe mesaj sau tipărit ca un cod QR pe invitație. Linkul este al familiei tale: cine îl deschide poate vedea invitația și poate răspunde în numele vostru. Nu ai nevoie de cont.",
+      "h1": "Ce găsești pe link",
+      "ul1": {
+        "a": "Invitația: ce se sărbătorește, când și unde, cu „Vezi pe hartă”.",
+        "b": "Răspunsul vostru, pe care îl puteți schimba până la termen.",
+        "c": "Dacă gazda le-a pornit: sondajul „Când ți se potrivește?”, lista „Cine ce aduce”, „Locul tău” la masă, programul și „Cum ajungi”.",
+        "d": "„Cerere privată” — pentru o nevoie alimentară sau de acces, citită doar de organizatorii desemnați pentru asta."
+      },
+      "note1": "Dacă gazda schimbă ceva (data, termenul, întrebările), la următoarea vizită vezi anunțul „S-a schimbat ceva de la ultima ta vizită”.",
+      "note2": "Păstrează linkul pentru tine și ai tăi. Dacă l-ai pierdut sau a ajuns la altcineva, cere-i gazdei unul nou — cel vechi încetează să funcționeze.",
+      "p2": "Limba paginii o schimbi din comutatorul RO / EN."
+    }
+  },
+  "answer-an-invitation": {
+    "title": "Cum răspunzi la o invitație",
+    "summary": "Câte o întrebare pe ecran: dacă vii, câți sunteți și ce mai vrea gazda să știe. La final verifici și trimiți.",
+    "keywords": "răspund răspuns rsvp vin nu pot veni poate adulți copii schimbă răspunsul termen confirm",
+    "where": "Linkul primit de la gazdă",
+    "body": {
+      "ol1": {
+        "a": "Deschide linkul. La „Vii la eveniment?” alege „Da, vin cu drag”, „Poate — încă nu știu” sau „Nu pot veni”.",
+        "b": "Dacă veniți, spune „Câți adulți veniți?” și „Câți copii vin cu voi?” cu butoanele plus și minus.",
+        "c": "Răspunde la întrebările gazdei, dacă există: meniu, alergii, cazare, transport.",
+        "d": "La „Unde te anunțăm dacă se schimbă ceva?” poți lăsa o adresă de e-mail. Nu este obligatoriu.",
+        "e": "La „Totul este în ordine?” aruncă o privire peste răspunsuri și apasă „Trimite răspunsul”."
+      },
+      "note1": "Despre copii păstrăm doar numărul lor. Te rugăm să nu scrii numele, vârsta sau data nașterii unui copil în niciun câmp.",
+      "h1": "Dacă te răzgândești",
+      "p1": "Deschide din nou linkul și apasă „Schimbă răspunsul”. Îl poți schimba până la termenul afișat. După termen apare „Termenul pentru răspuns a trecut”: scrie-i direct gazdei.",
+      "h2": "Dacă evenimentul se schimbă",
+      "p2": "Dacă gazda anulează sau amână evenimentul, linkul îți spune asta. Dacă ai lăsat o adresă de e-mail, primești și un mesaj.",
+      "p3": "Mesajul „Prea multe încercări” înseamnă că linkul a fost deschis de prea multe ori într-un timp scurt. Mai încearcă puțin mai târziu."
+    }
+  },
+  "guest-privacy": {
+    "title": "Ce se știe despre tine ca invitat",
+    "summary": "Păstrăm răspunsul familiei tale și, despre copii, doar numărul lor. Restul invitaților nu îți văd datele.",
+    "keywords": "confidențialitate invitat date personale copii email privat cine vede alți invitați furnizori",
+    "where": "Linkul primit de la gazdă · pagina publică a evenimentului",
+    "body": {
+      "ul1": {
+        "a": "Ce păstrăm: răspunsul familiei (dacă veniți și câți), răspunsurile la întrebările gazdei și adresa de e-mail, dacă ai lăsat una.",
+        "b": "Despre copii: numai câți vin. Niciun nume, nicio vârstă.",
+        "c": "Cine vede răspunsul: gazda și echipa ei de planificare. Datele de contact le văd doar organizatorul și managerul de proiect.",
+        "d": "Ceilalți invitați nu văd lista de invitați și nici răspunsul tău. La mese, fiecare își vede doar propriul loc.",
+        "e": "Furnizorii nu primesc numele tău. Primesc numere: câte persoane, câte meniuri de un fel."
+      },
+      "h1": "Cererea privată",
+      "p1": "Ce scrii la „Cerere privată” citesc doar organizatorii desemnați anume pentru asta — nu ceilalți invitați și nu furnizorii. Bucătăria află, de exemplu, doar „3 × fără gluten”.",
+      "h2": "Adresa de e-mail",
+      "p2": "O folosim numai ca să te anunțăm dacă se schimbă ceva la eveniment. Nu este obligatorie.",
+      "note1": "Pe pagina publică a unui eveniment te înscrii fără cont. Dacă locurile s-au ocupat, te poți înscrie pe lista de așteptare și primești un singur email dacă se eliberează unul.",
+      "p3": "Pentru o cerere privind datele tale, scrie-i gazdei sau vezi „Politica de confidențialitate”, din secțiunea „Contact și raportare”."
+    }
+  }
+}

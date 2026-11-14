@@ -1,0 +1,133 @@
+{
+  "add-guests": {
+    "title": "Add your guests, by household",
+    "summary": "A household gets one link and replies once for everyone in it. You can add them one by one or import a list.",
+    "keywords": "guests household family add import excel csv xlsx list adults children export contact",
+    "where": "Your occasion → Guests and replies",
+    "need": "The owner and project managers. Only they see guests' contact details.",
+    "body": {
+      "h1": "Add a household",
+      "ol1": {
+        "a": "Press “Add a household”.",
+        "b": "Type the “Name on the invitation” (for example “The Popescu family”) and, if you like, the “Contact person”.",
+        "c": "Under “Invited adults” list the adults by name and under “How many people you expect” give the total.",
+        "d": "Optional: “Email”, “Invitation language” and “Notes for you”.",
+        "e": "Press “Add household”."
+      },
+      "note1": "Only adults are listed here. Children appear only as a count, in the household's reply.",
+      "h2": "Import a list",
+      "ol2": {
+        "a": "Press “Import” and choose an Excel (.xlsx) or CSV file of at most 2 MB: one row for each adult, with a column for the household. The first line holds the column names.",
+        "b": "Press “Upload and see the changes”.",
+        "c": "Under “Column matching” check that we guessed right; if you change something, press “Update the preview”.",
+        "d": "Read “What will change”: what is added, what is filled in and what is skipped. Then confirm with “Apply the changes”."
+      },
+      "note2": "We do not import data about children. Columns with ages or dates of birth are left aside, and rows that seem to describe a child are skipped.",
+      "p1": "You can download the list at any time with “Export CSV”. To remove a household, open it and press “See what changes if I remove it”: you first see what happens to the link, to the places it holds and to what it promised to bring."
+    }
+  },
+  "guest-links": {
+    "title": "Invitation links: generate, send, revoke",
+    "summary": "Each household has its own link. You copy it once, or send it by email straight from the app.",
+    "keywords": "link invitation generate copy send email revoke validity expires lost regenerate qr",
+    "where": "Your occasion → Guests and replies → a household → Invitation link",
+    "need": "The owner and project managers.",
+    "body": {
+      "h1": "Copy the link and send it yourself",
+      "ol1": {
+        "a": "Open the household from the list.",
+        "b": "Under “Invitation link”, press “Generate a new link”.",
+        "c": "When “The link is ready” appears, press “Copy link” and send it to the household any way you like."
+      },
+      "note1": "The link is shown once. We do not keep it in readable form, so we cannot show it again. If it is lost, generate a new one — the old one stops working.",
+      "h2": "Send by email from the app",
+      "p1": "For one household, press “Send by email” on its page. For every household that has an email and has not received the invitation yet, press “Send the invitations by email” on the guests page and confirm.",
+      "note2": "Each household receives a new link by email. If you already gave them the link another way, that one stops working. You can send at most 500 emails a day for one occasion.",
+      "h3": "Validity and revoking",
+      "p2": "With “Change validity” you choose: “Never expires”, “Until the reply deadline” or “Until the occasion is closed”. With “Revoke link” you stop it at once; a reply already received stays.",
+      "p3": "On the household's page you see the state of the link (“Active”, “Revoked”, “Expired”) and when it was last opened.",
+      "p4": "For printed invitations, “Print and export” has labels and invitations with a QR code that opens only that household's invitation."
+    }
+  },
+  "rsvp-settings": {
+    "title": "Replies: deadline, places and questions",
+    "summary": "Set the date to reply by, how many places you have and what else you want to learn from your guests.",
+    "keywords": "rsvp reply deadline places capacity questions menu allergies accommodation transport confirmations note phone",
+    "where": "Your occasion → Guests and replies → RSVP settings",
+    "need": "The owner and project managers.",
+    "body": {
+      "ol1": {
+        "a": "From the guests page, press “RSVP settings”.",
+        "b": "Under “Reply deadline”, pick the “Last day to reply” and press “Save deadline”.",
+        "c": "Under “Places”, type the “Total number of places” and press “Save places”. Leave it empty for unlimited places.",
+        "d": "Under “Questions for guests”, press “Add a question”, choose the kind — “Menu choice”, “Allergies and restrictions”, “Accommodation”, “Transport” or “Free answer” — and write the question in Romanian and, if you like, in English.",
+        "e": "Tick “An answer is required” if guests should not go on without it. Change the order with “Move up” and “Move down”."
+      },
+      "note1": "The places are the same for guests with a link and for people who register on the public page. The total cannot be lower than the places already taken.",
+      "note2": "Do not ask for details about children (name, age). We keep only how many children are coming.",
+      "h1": "Follow the replies",
+      "p1": "The guests page shows “People confirmed so far” at the top, with adults and children, and the number of households for each reply: “Yes”, “Maybe”, “No”. You can filter the list by reply or search by name.",
+      "p2": "Received a reply by phone or face to face? Open the household, press “Note a reply” and then “Save reply”.",
+      "p3": "After the deadline, guests can no longer reply on the link and are pointed to write to you directly."
+    }
+  },
+  "contributions": {
+    "title": "Who brings what",
+    "summary": "You say what is needed, and guests and the team pick what they bring. Nothing is promised twice.",
+    "keywords": "who brings what needs contributions list items picnic potluck promised covered",
+    "where": "Your occasion → Who brings what",
+    "need": "The owner and project managers add the needs. The planning team and any guest with a link can take a share.",
+    "body": {
+      "ol1": {
+        "a": "Press “Add a need”.",
+        "b": "Type “What to bring” (for example “Bottles of wine”), “How many” and, if you like, “Details”.",
+        "c": "Press “Add need”.",
+        "d": "Send your guests their links. Each one sees the list, chooses “How many you bring” and presses “Save”.",
+        "e": "If you bring something too, press “I'll bring this” next to the need and then “Save what I bring”."
+      },
+      "p1": "At the top you see “Covered so far” and how much is still missing. Each need shows who brings it and how many; when nothing is missing it says “Fully covered”.",
+      "note1": "Nobody can promise more than is needed. If two people pick the last items at the same moment, the first one gets them and the other sees what is left.",
+      "note2": "If you delete a need, it is deleted together with everything guests promised for it. If you remove a household from the list, what it had promised is needed again."
+    }
+  },
+  "private-requests": {
+    "title": "Guests' private requests",
+    "summary": "Dietary and access needs told in confidence. Only people given this specific access see them.",
+    "keywords": "private requests allergies gluten free access disability diet confidential supplier numbers briefing",
+    "where": "Your occasion → Private requests",
+    "need": "The owner and people given the “Private requests” access in “Team and roles”.",
+    "body": {
+      "p1": "A guest can send a request from their link, in the “Private request” section — for example an allergy or the need for a ramp. The request arrives only here.",
+      "ol1": {
+        "a": "Open “Private requests”. At the top you see how many are “To handle”.",
+        "b": "Read each request and, if it helps, write a “Note for you and others with this access” — for example “spoke to the chef”.",
+        "c": "When you have arranged what was needed, press “Mark as handled” and then “Save as handled”. You can bring it back at any time with “Reopen”."
+      },
+      "h1": "Tell the supplier only what they need",
+      "p2": "Under “Send only numbers to a supplier”, choose the supplier and press “Send the numbers into the briefing”. The supplier receives lines such as “3 × gluten-free”. No name, no household, no text written by the guest.",
+      "note1": "No role sees private requests automatically, apart from the owner. Not even a project manager sees them without the specific access.",
+      "note2": "After you close the occasion, private requests are deleted automatically after a number of days shown on the closeout page."
+    }
+  },
+  "public-event-page": {
+    "title": "The public page and registration",
+    "summary": "A simple page for people without a personal invitation: details, programme, menu and registration.",
+    "keywords": "public page event registration sign up waiting list places open link",
+    "where": "Your occasion → Public page",
+    "need": "The owner and project managers.",
+    "body": {
+      "ol1": {
+        "a": "Open “Public page”.",
+        "b": "Under “What the page shows”, write the title and a few words, in Romanian and, if you like, in English. If you leave the English empty, the Romanian text is used.",
+        "c": "If registration should start later, fill in “Opens on”.",
+        "d": "Under “Registration questions”, press “Add a question”. Keep them few and clear.",
+        "e": "Tick “The page is public” and press “Save the page”. With “Open the page” you see it exactly as others do."
+      },
+      "note1": "While it is not published, the address answers “page not found”.",
+      "h1": "Places and the waiting list",
+      "p1": "Public registrations share the same places with guests who have a link. You set the capacity in “RSVP settings”; without it, places are unlimited.",
+      "p2": "When the places are taken, visitors can join the “Waiting list”. When places free up, the first group that fits gets in automatically and receives a single email.",
+      "note2": "The public page does not show the guest list, guests' replies or the seating."
+    }
+  }
+}

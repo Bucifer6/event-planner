@@ -1,0 +1,45 @@
+{
+  "venue": {
+    "title": "Getting there",
+    "navigate": "Open in your maps app",
+    "navigateNote": "It opens in your phone's maps app."
+  },
+  "journey": {
+    "title": "Access and comfort",
+    "intro": "What we know about the venue. Where it says “unknown”, we have not found out yet — ask the contact person.",
+    "facts": {
+      "stepFree": "Step-free access",
+      "accessibleToilets": "Accessible toilets",
+      "parking": "Parking near the entrance",
+      "quietRoom": "Quiet room",
+      "seatingHelp": "Help with seating"
+    },
+    "states": {
+      "yes": "yes",
+      "no": "no",
+      "unknown": "unknown"
+    },
+    "contact": "Contact person",
+    "changedNotice": "The access information has been updated."
+  },
+  "editor": {
+    "title": "Accessible guest journey",
+    "intro": "Say what you know about access. What you leave “unknown” is shown as such to guests — never hidden, never guessed. Published in Romanian and English, on the guests' link and the public page.",
+    "state": "State",
+    "stateYes": "Yes",
+    "stateNo": "No",
+    "stateUnknown": "Unknown",
+    "noteRo": "Details (Romanian)",
+    "noteEn": "Details (English)",
+    "noteHint": "For example: ramp at the courtyard entrance.",
+    "contactName": "Contact person",
+    "contactRoute": "Phone or email shown to guests",
+    "published": "Publish the journey",
+    "publishedHint": "Shown on each guest's link and on the public page.",
+    "save": "Save the journey",
+    "saving": "Saving…",
+    "saved": "The journey has been saved.",
+    "statusPublished": "Published",
+    "statusDraft": "Not published"
+  }
+}

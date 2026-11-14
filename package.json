@@ -1,0 +1,37 @@
+{
+  "name": "eventdesk",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.28.0",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "typecheck": "pnpm -r --workspace-concurrency=2 run typecheck",
+    "test": "pnpm --filter @ed/i18n run gen && vitest run",
+    "lint": "eslint .",
+    "format": "prettier --write .",
+    "build": "pnpm --filter @ed/web run build && pnpm --filter @ed/public run build && node scripts/check-public-d1.mjs",
+    "db:push": "pnpm --filter @ed/db run db:push",
+    "db:generate": "pnpm --filter @ed/db run db:generate",
+    "db:migrate": "pnpm --filter @ed/db run db:migrate",
+    "db:seed": "pnpm --filter @ed/db run db:seed",
+    "dev:web": "pnpm --filter @ed/web run dev",
+    "dev:public": "pnpm --filter @ed/public run dev",
+    "dev:worker": "pnpm --filter @ed/worker run dev",
+    "check:public-d1": "node scripts/check-public-d1.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@types/node": "22.20.5",
+    "eslint": "10.14.0",
+    "globals": "17.14.0",
+    "prettier": "3.10.1",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.2",
+    "vite": "8.3.8",
+    "vitest": "5.1.0"
+  }
+}

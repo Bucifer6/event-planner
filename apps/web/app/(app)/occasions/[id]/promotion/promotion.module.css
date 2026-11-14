@@ -1,0 +1,7 @@
+/* Promotion exports — tokens only. */
+.layout { display: grid; gap: var(--s-5); grid-template-columns: minmax(0, 1fr); align-items: start; }
+@media (min-width: 960px) { .layout { grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: var(--s-6); } }
+.card { display: block; width: 100%; max-width: 420px; height: auto; border: var(--hair) solid var(--line); }
+.textHead { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+.textBlock { display: flex; flex-direction: column; gap: var(--s-2); min-width: 0; }
+.tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }

@@ -1,0 +1,157 @@
+# CI (R0-01, DEP7). Runs on every pull request, on main, and — through release.yml — on the
+# exact commit of every release tag. A tag is deployable only when this passed on its commit.
+#
+# Order: install → lint → typecheck → unit + integration tests (PostgreSQL 16) → build the
+# apps → D1 gate for the public site → dependency audit (fails on high or critical) →
+# security-header assertions → HTTP smoke. Then the three container images are built (not
+# pushed) so a release that cannot be packaged never becomes deployable.
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_call:
+    inputs:
+      ref:
+        description: Commit to check (release.yml passes the tag's commit)
+        type: string
+        required: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ inputs.ref || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+defaults:
+  run:
+    shell: bash
+
+env:
+  NEXT_TELEMETRY_DISABLED: "1"
+  # CI-only database (service container below). These are not secrets.
+  DATABASE_URL: postgresql://ed:ed@127.0.0.1:5432/eventdesk_ci
+  TEST_DATABASE_ADMIN_URL: postgresql://ed:ed@127.0.0.1:5432/postgres
+  APP_URL: http://127.0.0.1:3000
+  PUBLIC_URL: http://127.0.0.1:3001
+  MEDIA_URL: http://localhost:3000
+  EMAIL_PROVIDER: dev
+
+jobs:
+  verify:
+    name: Lint, types, tests, build, audit, headers, smoke
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          # role "ed" is a superuser: the test harness creates and drops its own databases
+          POSTGRES_USER: ed
+          POSTGRES_PASSWORD: ed
+          POSTGRES_DB: eventdesk_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U ed -d eventdesk_ci"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 20
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Set up Node 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install (frozen lockfile)
+        run: pnpm install --frozen-lockfile
+
+      - name: Throwaway session secret for this run
+        run: echo "SESSION_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Typecheck (all packages, web, public, worker)
+        run: pnpm typecheck
+
+      - name: Unit and integration tests
+        run: pnpm test
+
+      - name: Build the web app
+        run: pnpm --filter @ed/web build
+
+      - name: Build the public site
+        run: pnpm --filter @ed/public build
+
+      - name: D1 gate — public site has no cookies and no third-party origin
+        run: node scripts/check-public-d1.mjs
+
+      - name: Dependency audit (fails on high or critical)
+        run: pnpm audit --audit-level=high
+
+      - name: Prepare the CI database
+        run: |
+          # the committed migrations once they exist; the schema push until then
+          if [ -f packages/db/drizzle/meta/_journal.json ]; then pnpm db:migrate; else pnpm db:push; fi
+          pnpm db:seed
+
+      - name: Security headers and CSP (SEC5)
+        run: node scripts/check-headers.mjs
+
+      - name: Smoke (signed-out journey over HTTP)
+        run: node scripts/smoke.mjs
+
+  images:
+    name: Container images build
+    # not on pull requests: the same Dockerfile is exercised on main and on every release tag
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref || github.sha }}
+          persist-credentials: false
+
+      - name: Set up Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build web
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: web
+          push: false
+          cache-from: type=gha,scope=web
+          cache-to: type=gha,scope=web,mode=max
+
+      - name: Build worker
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: worker
+          push: false
+          cache-from: type=gha,scope=web
+
+      - name: Build public
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          target: public
+          push: false
+          cache-from: type=gha,scope=web

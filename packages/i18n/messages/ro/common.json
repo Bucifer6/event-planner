@@ -1,0 +1,69 @@
+{
+  "appName": "EventDesk",
+  "actions": {
+    "save": "Salvează",
+    "cancel": "Anulează",
+    "back": "Înapoi",
+    "continue": "Continuă",
+    "delete": "Șterge",
+    "keep": "Păstrează",
+    "retry": "Reîncearcă",
+    "close": "Închide",
+    "edit": "Modifică",
+    "add": "Adaugă",
+    "confirm": "Confirmă",
+    "signIn": "Intră în cont"
+  },
+  "status": {
+    "saving": "Se salvează…",
+    "loading": "Se încarcă…",
+    "deleting": "Se șterge…",
+    "sending": "Se trimite…",
+    "saved": "Salvat"
+  },
+  "unknown": "necunoscut",
+  "optional": "opțional",
+  "yes": "Da",
+  "no": "Nu",
+  "languages": {
+    "ro": "Română",
+    "en": "English",
+    "switchTo": "Schimbă limba",
+    "onlyRomanian": "numai în română"
+  },
+  "errors": {
+    "FORBIDDEN": "Nu ai acces la această acțiune.",
+    "NOT_FOUND": "Nu am găsit ce căutai. Este posibil să fi fost șters sau mutat.",
+    "VALIDATION": "Verifică informațiile marcate și încearcă din nou.",
+    "CONFLICT": "Între timp s-a schimbat ceva. Reîncarcă pagina și încearcă din nou.",
+    "RATE_LIMITED": "Prea multe încercări. Mai încearcă puțin mai târziu.",
+    "TAKEN": "Este deja ocupat. Alege altceva.",
+    "LIMIT": "Ai atins limita permisă.",
+    "UNAUTHENTICATED": "Intră în cont ca să continui.",
+    "UNEXPECTED": "Ceva nu funcționează. Nu s-a pierdut nimic din ce ai scris; încearcă din nou.",
+    "retryAt": "Poți încerca din nou după {time}."
+  },
+  "validation": {
+    "required": "Completează acest câmp.",
+    "invalid": "Valoarea nu este validă.",
+    "invalidEmail": "Scrie o adresă de email validă.",
+    "tooShort": "Textul este prea scurt.",
+    "tooLong": "Textul este prea lung.",
+    "tooSmall": "Valoarea este prea mică.",
+    "tooBig": "Valoarea este prea mare."
+  },
+  "health": {
+    "ok": "Totul funcționează.",
+    "down": "Ceva nu funcționează."
+  },
+  "home": {
+    "title": "EventDesk",
+    "tagline": "Planifică evenimente fără bătăi de cap.",
+    "comingSoon": "Lucrăm la aplicație. Revino în curând."
+  },
+  "redirect": {
+    "title": "EventDesk",
+    "message": "Te ducem la pagina în limba română.",
+    "link": "Continuă"
+  }
+}

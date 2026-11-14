@@ -1,0 +1,105 @@
+{
+  "title": "Overview",
+  "more": "and {count} more",
+  "seeAll": "See all",
+  "hero": {
+    "label": "Until the event",
+    "labelPast": "Since the event",
+    "noDate": "no date",
+    "noDateNote": "The date will be decided by poll. Due dates appear once you set it.",
+    "today": "today",
+    "unit": {
+      "one": "day",
+      "few": "days",
+      "other": "days"
+    },
+    "progress": "{done} of {total} tasks done",
+    "noTasks": "The plan has no tasks yet.",
+    "openTasks": "Open the tasks",
+    "addFirstTask": "Add the first task"
+  },
+  "proposals": {
+    "title": {
+      "one": "One proposal is waiting for a decision",
+      "few": "{count} proposals are waiting for a decision",
+      "other": "{count} proposals are waiting for a decision"
+    },
+    "open": "See the proposals",
+    "body": "Nothing changes until someone confirms."
+  },
+  "milestone": {
+    "title": "Next milestone",
+    "empty": "No milestone coming up."
+  },
+  "overdue": {
+    "title": "Overdue",
+    "empty": "Nothing overdue."
+  },
+  "delegations": {
+    "title": "Unaccepted delegations",
+    "empty": "No offers waiting for an answer.",
+    "toYou": "{from} is offering it to you",
+    "waitingFor": "{to} has not answered yet · offered by {from}"
+  },
+  "blockers": {
+    "title": "Blockers",
+    "empty": "No blockers.",
+    "reason": {
+      "waiting": "Someone is waiting for an answer or a delivery.",
+      "blocked": "Due soon, but it depends on an unfinished task.",
+      "outOfOrder": "Marked done before what it depends on."
+    },
+    "tag": {
+      "waiting": "Waiting",
+      "blocked": "Blocked",
+      "outOfOrder": "Out of order"
+    }
+  },
+  "brief": {
+    "title": "In brief",
+    "linked": {
+      "zero": "no open tasks",
+      "one": "{count} open task",
+      "few": "{count} open tasks",
+      "other": "{count} open tasks"
+    },
+    "edit": "Edit the brief",
+    "emptyTitle": "The brief is not written yet",
+    "write": "Write the brief",
+    "emptyBody": "The purpose and two or three priorities help the team choose the way you would."
+  },
+  "print": {
+    "title": "Print and export",
+    "description": "Download the occasion's data or print the plan.",
+    "printPlan": "Print the plan",
+    "downloads": "Downloads",
+    "download": "Download",
+    "ownDataNote": "Exports contain this occasion's data only.",
+    "previewTitle": "The plan, ready to print",
+    "previewBody": "This is how the page looks on paper: no menus, just the plan.",
+    "planEyebrow": "Occasion plan",
+    "date": "Date",
+    "byPoll": "to be decided by poll",
+    "venue": "Venue",
+    "notSet": "not set",
+    "progress": "Progress",
+    "progressValue": "{done} of {total} tasks done",
+    "noTasks": "The plan has no tasks yet.",
+    "col": {
+      "task": "Task",
+      "due": "Due",
+      "owner": "Owner",
+      "status": "Status"
+    }
+  },
+  "exports": {
+    "tasks": {
+      "title": "Tasks (CSV)",
+      "description": "Every task with its status, due date and owner. Opens in Excel or Google Sheets."
+    },
+    "summary": {
+      "title": "Plan summary (CSV)",
+      "description": "Title, date, venue, the brief and how many tasks are done."
+    }
+  }
+}

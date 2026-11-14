@@ -1,0 +1,85 @@
+{
+  "staff-console-access": {
+    "title": "Accesul la consolă",
+    "summary": "Ce trebuie să ai ca să intri în consolă și de ce se încheie sesiunea.",
+    "keywords": "consolă personal acces rol doi pași sesiune 30 minute 12 ore intră din nou",
+    "where": "Consolă",
+    "need": "Un rol de personal activ și verificarea în doi pași.",
+    "body": {
+      "ol1": {
+        "a": "Primește un rol de personal. Rolurile se dau din „Acces”, iar orice schimbare trece prin aprobarea unei a doua persoane.",
+        "b": "Activează verificarea în doi pași din setările de securitate ale contului și păstrează codurile de recuperare într-un loc sigur.",
+        "c": "Ieși din cont și intră din nou, cu al doilea pas. Consola se deschide numai dintr-o sesiune care a trecut prin ambii pași.",
+        "d": "Deschide consola. Vezi doar secțiunile pe care le acoperă rolurile tale."
+      },
+      "note1": "Până când verificarea în doi pași este activă, nicio pagină și nicio acțiune din consolă nu este disponibilă. Pagina „Acces la consolă” îți spune ce pas lipsește.",
+      "h1": "Sesiunea de consolă",
+      "p1": "Sesiunea durează cel mult 12 ore de la intrarea în cont și se încheie după 30 de minute fără activitate în consolă. O sesiune încheiată nu se redeschide: ieși din cont și intră din nou. Ora la care expiră este afișată în meniul consolei.",
+      "note2": "Meniul ascunde doar linkurile. Fiecare pagină și fiecare acțiune își verifică singură rolul, deci un link ghicit nu ajută.",
+      "p2": "Fiecare acțiune din consolă ajunge în „Jurnal audit”, cu cine a făcut-o și când. Intrările nu pot fi modificate sau șterse de nimeni.",
+      "p3": "Nu scrie niciodată în tichete, mesaje sau note coduri de intrare, coduri de recuperare sau tokenuri."
+    }
+  },
+  "staff-approvals": {
+    "title": "Aprobări: a doua persoană și accesul de conformitate",
+    "summary": "Acțiunile ireversibile au nevoie de a doua persoană. Accesul la înregistrările unei persoane are nevoie de trei.",
+    "keywords": "aprobări a doua persoană patru ochi cerere respinge conformitate trei persoane acces date",
+    "where": "Consolă → Aprobări · Consolă → Acces de conformitate",
+    "need": "Personal cu rolul potrivit pentru acțiunea cerută.",
+    "body": {
+      "p1": "Unele acțiuni nu pot fi făcute de o singură persoană: schimbarea rolurilor de personal, publicarea în producție, aprobarea unei revendicări de listare, comutatorul de monetizare, prețurile, rambursările și accesul de conformitate.",
+      "ol1": {
+        "a": "Cineva cere acțiunea din secțiunea ei. Cererea apare în „Aprobări”.",
+        "b": "O a doua persoană deschide „Aprobări”, citește cine a cerut, ce și când.",
+        "c": "Apasă „Aprobă cererea” sau „Respinge cererea”. La respingere scrie „Motivul respingerii”; îl vede cine a făcut cererea și rămâne în jurnalul de audit."
+      },
+      "note1": "Cine a cerut nu poate și aproba. La propria cerere apare „Nu poți aproba sau respinge propria cerere. Este nevoie de a doua persoană.”",
+      "note2": "Dacă o singură persoană are rol de personal, cererile rămân în coadă fără niciun efect până când încă cineva primește un rol și le aprobă.",
+      "h1": "Acces de conformitate",
+      "p2": "Accesul la înregistrările păstrate ale unei persoane se cere numai pentru un motiv legal, de exemplu o cerere de acces la date. Este nevoie de trei persoane: responsabilul pentru confidențialitate cere, iar alți doi membri ai personalului aprobă.",
+      "p3": "Scrie motivul limpede, fără date personale în plus. Cererea, aprobările și fiecare citire rămân în jurnalul de audit."
+    }
+  },
+  "staff-moderation": {
+    "title": "Coada de moderare și rapoartele de conținut",
+    "summary": "Fiecare listare nouă și fiecare modificare așteaptă o decizie. Ce este deja public rămâne neschimbat până atunci.",
+    "keywords": "moderare coadă listare aprobă respinge motiv rapoarte conținut firme suspendare restricție",
+    "where": "Consolă → Moderare · Rapoarte conținut · Firme",
+    "need": "Rolul de moderator de listări sau de administrator al platformei.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Moderare” și alege o trimitere din coadă.",
+        "b": "La „Ce se schimbă” compară versiunea propusă cu cea publică. La „Conținutul propus” citești tot ce ar apărea.",
+        "c": "Verifică textul, fotografiile, categoriile și contactul după regulile de moderare publicate.",
+        "d": "Aprobă sau respinge. La respingere scrie un motiv pe înțelesul firmei: îl primește exact așa și își poate corecta textul."
+      },
+      "note1": "Nu poți decide o trimitere a unei firme din a cărei echipă faci parte. Las-o unui coleg.",
+      "note2": "Versiunea publică rămâne neschimbată până decizi. O respingere nu scoate listarea din director.",
+      "h1": "Ce nu trece",
+      "p1": "Nu trec: laude de la clienți, stele sau note, promisiuni care nu pot fi verificate, date de contact ale altcuiva. Pe o listare apar doar fapte: ONRC și asigurarea văzută de tine, cu data până la care este valabilă.",
+      "h2": "Rapoarte și firme",
+      "p2": "„Rapoarte conținut” adună ce semnalează oricine prin formularul de raportare. Fiecare raport primește o decizie cu motiv. La „Firme” vezi starea fiecărei firme; o restricție sau o suspendare se aplică din pagina firmei, cu motivul înregistrat. Tot acolo sunt listările nerevendicate, adăugate din surse publice."
+    }
+  },
+  "staff-incidents-deploys": {
+    "title": "Incidente și publicări",
+    "summary": "Cum anunți invitații că ceva nu funcționează și cum ajunge o versiune nouă în producție.",
+    "keywords": "incident mesaj de stare publicare deploy versiune etichetă urgență revenire rollback producție",
+    "where": "Consolă → Incidente · Consolă → Publicări",
+    "need": "Rolul de administrator de securitate sau de administrator al platformei.",
+    "body": {
+      "h1": "Incidente",
+      "ol1": {
+        "a": "Deschide „Incidente” și apasă „Deschide un incident”.",
+        "b": "Scrie „Mesaj în română” și „Mesaj în engleză”, simplu, fără detalii tehnice. De exemplu: „Confirmările nu se salvează momentan. Revenim în scurt timp.”",
+        "c": "Apasă „Deschide incidentul”. Mesajul apare imediat pe paginile invitaților, în limba lor.",
+        "d": "Când s-a rezolvat, apasă „Închide incidentul”."
+      },
+      "note1": "Dacă lași mesajele goale, invitații văd textul implicit „Ceva nu funcționează”. Nu promite o oră pe care nu o poți ține.",
+      "h2": "Publicări",
+      "p1": "Se publică întotdeauna o etichetă de versiune din depozitul conectat. Apeși „Cere publicarea”, iar o a doua persoană aprobă în „Aprobări”. Cât timp o publicare este în desfășurare, nu poate porni nicio altă publicare, publicare de urgență sau revenire.",
+      "note2": "„Publicare de urgență” este doar pentru o remediere urgentă de securitate. Pornește imediat, fără a doua persoană, și este marcată ca urgență în jurnalul de audit, împreună cu motivul tău.",
+      "p2": "Pagina arată versiunea activă și istoricul fiecărei publicări. Dacă legătura cu depozitul nu este configurată, pagina spune ce are de setat operatorul pe server; valorile acelea nu se scriu nicăieri în consolă sau în ajutor."
+    }
+  }
+}

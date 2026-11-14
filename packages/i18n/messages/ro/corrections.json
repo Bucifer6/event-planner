@@ -1,0 +1,11 @@
+{
+  "errors": {
+    "reasonRequired": "Scrie pe scurt de ce faci corecția (cel puțin 3 caractere)."
+  },
+  "title": "Corecții",
+  "empty": "Nicio corecție.",
+  "reason": "Motiv",
+  "before": "Înainte",
+  "after": "După",
+  "by": "Corectat pe {date}"
+}

@@ -1,0 +1,33 @@
+# Static public site (apps/public/out) inside the "public" image. TLS ends at the ingress in
+# front of it (infra/reference-docker-host/Caddyfile, or the operator's load balancer).
+# D1: no cookies, nothing from another origin. Same header set as the app (SEC5) with one
+# difference: a static export cannot carry per-request nonces and Next writes its bootstrap
+# as inline <script> blocks, so script-src allows inline scripts — but only this origin's
+# files. The site has no sign-in, no forms and no user content.
+{
+	admin off
+	auto_https off
+}
+
+:8080 {
+	root * /srv
+	encode zstd gzip
+
+	header {
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'"
+		X-Content-Type-Options "nosniff"
+		Referrer-Policy "same-origin"
+		X-Frame-Options "DENY"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), browsing-topics=()"
+		-Server
+	}
+	@immutable path /_next/static/*
+	header @immutable Cache-Control "public, max-age=31536000, immutable"
+
+	handle_errors {
+		@notfound expression {err.status_code} == 404
+		rewrite @notfound /404.html
+		file_server
+	}
+	file_server
+}

@@ -1,0 +1,51 @@
+{
+  "title": "Communications",
+  "description": "Notices to businesses. They reach each business's area and the email of its owner and admins. They cannot be sent to guests or other people entered by planners.",
+  "reach": {
+    "title": "Who can be notified",
+    "businesses": "Businesses",
+    "emails": "Email addresses",
+    "now": "now",
+    "emailsNote": "owners and admins"
+  },
+  "audience": {
+    "all": "All businesses",
+    "category": "Businesses in a category",
+    "county": "Businesses in a county"
+  },
+  "compose": {
+    "title": "New notice",
+    "body": "Keep it short and clear. The notice goes out at once and cannot be taken back.",
+    "subject": "Subject",
+    "text": "The text of the notice",
+    "textHint": "Plain text. Each new line stays a new line.",
+    "audience": "Who it goes to",
+    "category": "Category",
+    "county": "County",
+    "choose": "Choose…",
+    "send": "Send the notice",
+    "sending": "Sending…",
+    "sent": "Notice sent. Businesses: {businesses}. Emails: {emails}."
+  },
+  "log": {
+    "title": "Notices sent",
+    "emptyTitle": "No notices sent",
+    "emptyBody": "Sent notices appear here, with the number of businesses they reached.",
+    "when": "When",
+    "subject": "Subject",
+    "audience": "To",
+    "businesses": "Businesses",
+    "emails": "Emails",
+    "inCategory": "Category {name}",
+    "inCounty": "County {name}"
+  },
+  "email": {
+    "intro": "Hello, {business}. A notice from EventDesk:",
+    "open": "Open the business area",
+    "why": "You receive this message because you are an owner or admin of a business on EventDesk."
+  },
+  "errors": {
+    "bodyRequired": "Write the text of the notice, at least 10 characters.",
+    "nobody": "No business matches the choice made."
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "title": "Furnizori",
+  "list": {
+    "description": "Toți cei care lucrează pentru ocazia ta: în ce stadiu e fiecare rezervare, ce ați stabilit și ce urmează de plătit.",
+    "add": "Adaugă un furnizor",
+    "addTitle": "Furnizor nou",
+    "addSubmit": "Adaugă furnizorul",
+    "emptyTitle": "Încă nu ai niciun furnizor",
+    "emptyBody": "Adaugă primul furnizor — formația, restaurantul, fotograful — și urmărește de aici rezervarea, briefingul și plățile.",
+    "emptyBodyReadOnly": "Când organizatorul adaugă furnizori, îi vezi aici.",
+    "noContact": "fără date de contact",
+    "noBriefing": "Fără briefing",
+    "briefingAcked": "Briefing v{version} · confirmat de furnizor",
+    "briefingNotAcked": "Briefing v{version} · neconfirmat încă",
+    "nextPayment": "Următoarea plată: {date}",
+    "paymentOverdue": "Plată restantă din {date}",
+    "allTitle": "Toți furnizorii"
+  },
+  "fields": {
+    "name": "Numele furnizorului",
+    "category": "Ce face",
+    "categoryHint": "De exemplu: formație, catering, flori.",
+    "contactName": "Persoana de contact",
+    "contactPhone": "Telefon",
+    "contactEmail": "Email",
+    "notes": "Note"
+  },
+  "states": {
+    "enquired": "Întrebat",
+    "quoted": "Ofertă primită",
+    "booked": "Rezervat",
+    "confirmed": "Confirmat",
+    "delivered": "Livrat",
+    "cancelled": "Anulat"
+  },
+  "detail": {
+    "metaTitle": "Furnizor",
+    "back": "Toți furnizorii",
+    "editTitle": "Modifică datele furnizorului",
+    "contactTitle": "Contact"
+  },
+  "booking": {
+    "title": "Starea rezervării",
+    "current": "acum",
+    "cancel": "Anulează rezervarea",
+    "reopen": "Redeschide rezervarea",
+    "cancelledNote": "Rezervarea este anulată. O poți redeschide oricând.",
+    "history": "Istoricul stărilor ({count})"
+  },
+  "terms": {
+    "title": "Ce ați stabilit",
+    "agreed": "Suma convenită",
+    "agreedField": "Suma convenită (RON)",
+    "agreedHint": "Lasă gol dacă nu o știi încă — rămâne „necunoscut”, nu zero.",
+    "quote": "Ofertă",
+    "noQuote": "Nicio ofertă încărcată",
+    "notes": "Note despre înțelegere",
+    "edit": "Modifică înțelegerea",
+    "editTitle": "Ce ați stabilit",
+    "uploadQuote": "Încarcă oferta",
+    "replaceQuote": "Înlocuiește oferta",
+    "uploadHint": "PDF, PNG sau JPG. După încărcare, rezervarea trece la „Ofertă primită”.",
+    "attaching": "Se atașează oferta…",
+    "attached": "Oferta a fost atașată.",
+    "removeQuote": "Scoate oferta"
+  },
+  "order": {
+    "title": "Comanda finală",
+    "empty": "Încă nu ai fixat o comandă finală.",
+    "fixed": "Versiunea {version}, fixată la {date}",
+    "basedOn": "Bazată pe:",
+    "nowConfirmed": "Confirmați acum:",
+    "counts": "{total} persoane ({adults} adulți, {children} copii)",
+    "deltaCounts": "{adults} adulți, {children} copii",
+    "deltasTitle": "Schimbări după comanda finală",
+    "noDeltas": "Nicio schimbare la invitați de când ai fixat comanda.",
+    "deltasNotice": "Răspunsuri schimbate după comanda finală: {count}",
+    "householdRemoved": "Familie scoasă din listă",
+    "olderVersions": "Versiuni mai vechi ({count})",
+    "first": "Fixează comanda finală",
+    "firstHint": "Scrie ce ai comandat. Numărul de invitați confirmați în acest moment se păstrează lângă comandă.",
+    "newVersion": "Fixează versiunea {version} a comenzii",
+    "newVersionHint": "Comanda convenită nu se modifică: fixezi o versiune nouă, care preia și schimbările de mai sus. Versiunile vechi rămân.",
+    "item": "Produs sau serviciu",
+    "quantity": "Cantitate",
+    "unit": "Unitate",
+    "unitHint": "De exemplu: porții, buc, ore.",
+    "addRow": "Adaugă un rând",
+    "removeRow": "Șterge rândul",
+    "submitFirst": "Fixează comanda finală",
+    "submitNext": "Fixează versiunea {version}",
+    "done": "Comanda a fost fixată."
+  },
+  "payments": {
+    "title": "Plăți",
+    "attentionTitle": "Plăți de urmărit",
+    "empty": "Niciun termen de plată încă. Adaugă avansul, ratele și soldul, fiecare cu data lui.",
+    "kinds": {
+      "advance": "Avans",
+      "instalment": "Rată",
+      "final": "Sold final"
+    },
+    "kind": "Fel de plată",
+    "dueOn": "scadentă la {date}",
+    "dueField": "Scadentă la",
+    "newDueOn": "Noua dată scadentă",
+    "amount": "Suma (RON)",
+    "amountHint": "Lasă gol dacă nu o știi încă.",
+    "note": "Notă",
+    "paid": "Plătită",
+    "paidOn": "plătită la {date}",
+    "overdue": "Restantă",
+    "soon": "În curând",
+    "add": "Adaugă un termen de plată",
+    "addTitle": "Termen de plată nou",
+    "addSubmit": "Adaugă termenul",
+    "markPaid": "Marchează ca plătită",
+    "move": "Mută data",
+    "moveTitle": "Mută plata",
+    "moveIntro": "Îți arătăm întâi ce se schimbă — data, dacă plata devine restantă și totalul de plătit pe lună. Nimic nu se mută până nu confirmi.",
+    "moveSubmit": "Vezi ce se schimbă",
+    "movePending": "Se calculează…",
+    "remove": "Șterge termenul",
+    "unmark": "Corectează: nu e plătită",
+    "unmarkTitle": "Corectează plata",
+    "unmarkIntro": "O plată marcată rămâne în istoric. Dacă a fost marcată din greșeală, scrie de ce o corectezi.",
+    "unmarkSubmit": "Marchează ca neplătită",
+    "reason": "Motivul corecției",
+    "reasonHint": "De exemplu: plata a fost returnată de bancă."
+  },
+  "link": {
+    "title": "Link pentru furnizor",
+    "description": "Prin acest link furnizorul își vede doar propria rezervare: briefingul, comanda finală și livrările. Nu vede prețuri, invitați sau alți furnizori și nu are nevoie de cont.",
+    "none": "Încă nu există un link.",
+    "state": "Stare",
+    "states": {
+      "active": "Activ",
+      "revoked": "Revocat"
+    },
+    "language": "Limbă",
+    "languageField": "Limba paginii furnizorului",
+    "lastViewed": "Deschis ultima dată",
+    "neverViewed": "Încă nedeschis",
+    "hashedNote": "Linkul nu poate fi afișat din nou: îl păstrăm doar cifrat. Dacă l-ai pierdut, generează unul nou — cel vechi încetează să funcționeze.",
+    "create": "Generează linkul",
+    "regenerate": "Generează un link nou",
+    "creating": "Se generează…",
+    "onceTitle": "Linkul furnizorului este gata",
+    "onceBody": "Copiază-l acum și trimite-l furnizorului. Nu îl mai putem arăta a doua oară.",
+    "copy": "Copiază linkul",
+    "copied": "Link copiat",
+    "revoke": "Revocă linkul",
+    "revokeTitle": "Revoci linkul furnizorului?",
+    "revokeBody": "Linkul încetează să funcționeze imediat. Poți genera oricând unul nou.",
+    "revokeSubmit": "Revocă linkul"
+  },
+  "remove": {
+    "title": "Șterge furnizorul",
+    "body": "Poți șterge un furnizor adăugat din greșeală. Dacă are deja un briefing publicat, o comandă finală sau o plată făcută, anulează rezervarea în loc să îl ștergi.",
+    "open": "Șterge furnizorul {name}",
+    "confirmTitle": "Ștergi furnizorul?",
+    "confirmBody": "{name} dispare din ocazie, împreună cu termenele lui de plată.",
+    "submit": "Șterge furnizorul"
+  },
+  "errors": {
+    "nameRequired": "Scrie numele furnizorului.",
+    "email": "Scrie o adresă de email validă, de exemplu nume@firma.ro.",
+    "phone": "Scrie un număr de telefon valid, de exemplu 0722 123 456.",
+    "amount": "Scrie suma cu cifre, de exemplu 1500 sau 1.500,50.",
+    "quoteFile": "Nu am găsit fișierul încărcat. Încarcă oferta din nou.",
+    "cannotDelete": "Furnizorul are deja un briefing, o comandă finală sau o plată făcută. Anulează rezervarea în loc să îl ștergi.",
+    "itemLabel": "Scrie ce ai comandat pe fiecare rând.",
+    "itemQuantity": "Scrie cantitatea cu cifre, pe fiecare rând.",
+    "itemsRequired": "Adaugă cel puțin un rând în comandă.",
+    "itemsTooMany": "Comanda are prea multe rânduri. Grupează-le.",
+    "dueOn": "Alege data scadentă.",
+    "sameDay": "Plata este deja scadentă în această zi. Alege altă dată.",
+    "paidLocked": "Plata este marcată ca plătită. Corecteaz-o întâi dacă a fost o greșeală.",
+    "notPaid": "Plata nu este marcată ca plătită."
+  },
+  "whatif": {
+    "moveTitle": "Muți o plată către {supplier}",
+    "dueLabel": "Scadență",
+    "what": {
+      "advance": "Avans — {supplier}",
+      "instalment": "Rată — {supplier}",
+      "final": "Sold final — {supplier}"
+    },
+    "amountUnknown": "Suma acestei plăți este necunoscută.",
+    "status": "Starea plății",
+    "overdue": "Restantă",
+    "onTime": "În termen",
+    "monthLabel": "Total de plătit",
+    "monthTotal": "Luna {month}",
+    "monthHasUnknown": "Luna include și plăți cu sumă necunoscută."
+  },
+  "alerts": {
+    "title": "Plăți către furnizori",
+    "overdue": "Restantă din {date}: {supplier} — {amount}",
+    "overdueUnknown": "Restantă din {date}: {supplier} — sumă necunoscută",
+    "soon": "Scadentă la {date}: {supplier} — {amount}",
+    "soonUnknown": "Scadentă la {date}: {supplier} — sumă necunoscută",
+    "more": "Și încă {count}."
+  },
+  "lifecycle": {
+    "bookingKind": "Rezervare",
+    "toCancel": "De anulat cu furnizorul",
+    "toNotify": "De anunțat noua dată",
+    "paidKind": "Plată făcută",
+    "dueKind": "Plată de făcut",
+    "alreadyPaid": "Deja plătită (scadentă la {date})",
+    "stillDue": "Încă de plătit, scadentă la {date}"
+  },
+  "closeout": {
+    "unpaid": "Plăți neachitate către furnizori",
+    "line": {
+      "advance": "Avans — {supplier}, scadent la {date}",
+      "instalment": "Rată — {supplier}, scadentă la {date}",
+      "final": "Sold final — {supplier}, scadent la {date}"
+    }
+  },
+  "exports": {
+    "suppliers": {
+      "title": "Furnizori (CSV)",
+      "description": "Furnizorii, contactele și starea fiecărei rezervări."
+    },
+    "payments": {
+      "title": "Plăți către furnizori (CSV)",
+      "description": "Termenele de plată, sumele și ce s-a plătit."
+    }
+  }
+}

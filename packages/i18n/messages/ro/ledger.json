@@ -1,0 +1,117 @@
+{
+  "title": "Cheltuieli comune",
+  "description": "Un singur registru: cine a plătit, cine beneficiază și cine cui datorează. Fiecare monedă are propriul sold, fără conversii.",
+  "closedNotice": "Ocazia este închisă. Registrul poate fi doar citit.",
+  "hero": {
+    "label": "Costuri comune până azi, {date}",
+    "settled": "Toată lumea este chit.",
+    "transfers": {
+      "one": "O plată de făcut ca să fiți chit.",
+      "few": "{count} plăți de făcut ca să fiți chit.",
+      "other": "{count} de plăți de făcut ca să fiți chit."
+    },
+    "entries": "Înregistrări: {count}"
+  },
+  "settlement": {
+    "title": "Cine cui datorează",
+    "titleCurrency": "Cine cui datorează · {currency}",
+    "pays": "{from} plătește către {to}",
+    "record": "Înregistrează plata",
+    "recording": "Se înregistrează…",
+    "settledTitle": "Nimeni nu datorează nimic",
+    "settledBody": "Soldurile sunt zero. Când apare un cost nou, îl vezi aici.",
+    "balancesCaption": "Solduri pe participanți, {currency}",
+    "participant": "Participant",
+    "balance": "Sold",
+    "toReceive": "are de primit",
+    "toPay": "are de dat",
+    "even": "chit",
+    "sumNote": "Soldurile însumate dau mereu zero."
+  },
+  "participants": {
+    "title": "Participanți",
+    "add": "Adaugă participant",
+    "addTitle": "Participant nou",
+    "adding": "Se adaugă…",
+    "create": "Adaugă participantul",
+    "kind": "Cine este",
+    "kinds": {
+      "member": "Cineva din echipă",
+      "household": "O familie invitată",
+      "other": "Altcineva (scrii numele)"
+    },
+    "member": "Membru al echipei",
+    "household": "Familie invitată",
+    "name": "Nume",
+    "nameHint": "Așa cum vrei să apară în registru.",
+    "noMembers": "Toți membrii echipei sunt deja participanți.",
+    "noHouseholds": "Nu mai sunt familii de adăugat.",
+    "remove": "Scoate",
+    "removing": "Se scoate…",
+    "removeLabel": "Scoate participantul {name}",
+    "emptyTitle": "Adaugă mai întâi cine împarte costurile",
+    "emptyBody": "Pot fi oameni din echipă, familii invitate sau oricine altcineva, cu numele scris de tine."
+  },
+  "entries": {
+    "title": "Înregistrări",
+    "add": "Adaugă un cost comun",
+    "addTitle": "Cost comun nou",
+    "adding": "Se adaugă…",
+    "create": "Adaugă costul",
+    "needTwo": "Adaugă cel puțin doi participanți ca să poți împărți un cost.",
+    "emptyTitle": "Niciun cost comun înregistrat",
+    "emptyBody": "Adaugă primul cost: cine a plătit și între cine se împarte.",
+    "description": "Pentru ce",
+    "descriptionPlaceholder": "de ex. cabana, două nopți",
+    "amount": "Sumă (RON)",
+    "amountHint": "De exemplu 1.250 sau 1250,50",
+    "date": "Data",
+    "paidBy": "Cine a plătit",
+    "splitMode": "Cum se împarte",
+    "modes": {
+      "even": "În mod egal",
+      "shares": "Pe părți",
+      "exact": "Sume exacte"
+    },
+    "beneficiaries": "Cine beneficiază",
+    "sharesHint": "Scrie câte părți revin fiecăruia (0 = nu participă). De exemplu 2 pentru un cuplu, 1 pentru o persoană.",
+    "exactHint": "Scrie suma fiecăruia. Împreună trebuie să dea exact totalul.",
+    "shareOf": "Părți pentru {name}",
+    "amountOf": "Suma pentru {name} (RON)",
+    "meta": "{date} · a plătit {payer} · împărțit între {count}",
+    "settlementMeta": "{date} · decontare",
+    "settlementTitle": "{from} a plătit către {to}",
+    "voided": "Anulată",
+    "void": "Anulează înregistrarea",
+    "voidTitle": "Anulează înregistrarea",
+    "voidIntro": "O înregistrare este un fapt: nu se șterge și nu se modifică. Anularea o scoate din solduri și păstrează motivul.",
+    "voidReason": "Motivul anulării",
+    "voidSubmit": "Anulează înregistrarea „{name}”",
+    "voidKeep": "Păstrează înregistrarea",
+    "voiding": "Se anulează…",
+    "settlementName": "decontare"
+  },
+  "own": {
+    "title": "Soldul tău la cheltuielile comune",
+    "pay": "Ai de dat {amount} către {name}",
+    "receive": "Ai de primit {amount} de la {name}"
+  },
+  "export": {
+    "title": "Cheltuieli comune (CSV)",
+    "description": "Toate înregistrările, cu împărțirea lor și soldurile pe monedă."
+  },
+  "errors": {
+    "amountRequired": "Scrie o sumă mai mare decât zero, de exemplu 1.250 sau 1250,50.",
+    "noBeneficiaries": "Alege cel puțin o persoană care beneficiază.",
+    "duplicateBeneficiary": "Aceeași persoană apare de două ori în împărțire.",
+    "badShares": "Părțile trebuie să fie numere întregi, cu cel puțin una mai mare decât zero.",
+    "badExact": "Sumele trebuie să fie zero sau mai mari.",
+    "exactShort": "Sumele scrise dau {entered}, cu {difference} mai puțin decât totalul de {total}. Mai adaugă {difference}.",
+    "exactOver": "Sumele scrise dau {entered}, cu {difference} mai mult decât totalul de {total}. Scade {difference}.",
+    "participantMissing": "Participantul ales nu mai există. Alege altul.",
+    "participantExists": "Ai deja un participant cu acest nume.",
+    "participantInUse": "Participantul apare în înregistrări și nu poate fi scos.",
+    "tooManyParticipants": "Poți avea cel mult {limit} participanți.",
+    "sameParticipant": "Cel care plătește și cel care primește trebuie să fie persoane diferite."
+  }
+}

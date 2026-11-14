@@ -1,0 +1,32 @@
+{
+  "layout": {
+    "languageBelow": "English version",
+    "footer": "EventDesk.ro — mesaj trimis automat. Nu răspunde la acest email."
+  },
+  "security": {
+    "staffNeverAsk": "Echipa EventDesk nu îți va cere niciodată acest cod — nici la telefon, nici pe email, nici pe chat. Nu îl da nimănui.",
+    "notRequested": "Dacă nu tu ai cerut codul, cineva îți încearcă adresa de email. Nu trebuie să faci nimic: fără cod, nu poate intra.",
+    "notRequestedAction": "Dacă nu tu ai cerut codul, cineva încearcă să facă o schimbare în contul tău. Nu da codul nimănui și ieși din cont de pe toate dispozitivele din pagina „Cont”."
+  },
+  "signIn": {
+    "subject": "Codul tău de intrare în EventDesk",
+    "intro": "Scrie acest cod în pagina de intrare:",
+    "validity": "Codul este valabil {minutes} minute și poate fi folosit o singură dată.",
+    "linkLabel": "Intră cu o singură atingere",
+    "linkNote": "Butonul face același lucru ca și codul și expiră odată cu el. Dacă butonul spune că a fost deja folosit, scrie codul de mai sus."
+  },
+  "confirm": {
+    "subject": "Confirmă că ești tu — EventDesk",
+    "intro": "Ai cerut o acțiune sensibilă în contul tău. Confirm-o cu acest cod:",
+    "validity": "Codul este valabil {minutes} minute și poate fi folosit o singură dată."
+  },
+  "newEmail": {
+    "subject": "Confirmă noua adresă de email — EventDesk",
+    "intro": "Cineva vrea să folosească această adresă pentru a intra într-un cont EventDesk. Dacă ești tu, scrie acest cod în pagina „Cont”:",
+    "validity": "Codul este valabil {minutes} minute și poate fi folosit o singură dată.",
+    "notRequested": "Dacă nu tu ai cerut asta, ignoră mesajul: fără cod, adresa ta nu va fi folosită."
+  },
+  "errors": {
+    "dailyCap": "Ai atins limita de {limit} de emailuri pe zi pentru această ocazie. Poți trimite din nou mâine."
+  }
+}

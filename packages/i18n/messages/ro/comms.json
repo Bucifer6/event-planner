@@ -1,0 +1,51 @@
+{
+  "title": "Comunicări",
+  "description": "Anunțuri către firme. Ajung în zona fiecărei firme și pe emailul proprietarului și al administratorilor ei. Nu pot fi trimise invitaților sau altor persoane introduse de organizatori.",
+  "reach": {
+    "title": "Cine poate fi anunțat",
+    "businesses": "Firme",
+    "emails": "Adrese de email",
+    "now": "acum",
+    "emailsNote": "proprietari și administratori"
+  },
+  "audience": {
+    "all": "Toate firmele",
+    "category": "Firmele dintr-o categorie",
+    "county": "Firmele dintr-un județ"
+  },
+  "compose": {
+    "title": "Anunț nou",
+    "body": "Scrie scurt și clar. Anunțul pleacă imediat și nu poate fi retras.",
+    "subject": "Subiect",
+    "text": "Textul anunțului",
+    "textHint": "Text simplu. Fiecare rând nou rămâne rând nou.",
+    "audience": "Cui îi trimiți",
+    "category": "Categoria",
+    "county": "Județul",
+    "choose": "Alege…",
+    "send": "Trimite anunțul",
+    "sending": "Se trimite…",
+    "sent": "Anunț trimis. Firme: {businesses}. Emailuri: {emails}."
+  },
+  "log": {
+    "title": "Anunțuri trimise",
+    "emptyTitle": "Niciun anunț trimis",
+    "emptyBody": "Anunțurile trimise apar aici, cu numărul de firme la care au ajuns.",
+    "when": "Când",
+    "subject": "Subiect",
+    "audience": "Către",
+    "businesses": "Firme",
+    "emails": "Emailuri",
+    "inCategory": "Categoria {name}",
+    "inCounty": "Județul {name}"
+  },
+  "email": {
+    "intro": "Bună, {business}. Un anunț de la EventDesk:",
+    "open": "Deschide zona firmei",
+    "why": "Primești acest mesaj pentru că ești proprietar sau administrator al unei firme pe EventDesk."
+  },
+  "errors": {
+    "bodyRequired": "Scrie textul anunțului, cel puțin 10 caractere.",
+    "nobody": "Nicio firmă nu se potrivește cu alegerea făcută."
+  }
+}

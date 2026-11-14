@@ -1,0 +1,200 @@
+{
+  "business-account": {
+    "title": "List your business: the business account",
+    "summary": "Listing is free. You create the business account in a minute, then add your listings.",
+    "keywords": "business company account listing free directory supplier vendor sign up my business",
+    "where": "Business → List your business",
+    "need": "An EventDesk account with an email address. An anonymous account has to add an address first.",
+    "body": {
+      "ol1": {
+        "a": "Sign in and open “Business”.",
+        "b": "On the “List your business” page, fill in “Business account”.",
+        "c": "Press “Create the business account”. You become the owner of the business.",
+        "d": "You land in “My business”, with the tabs “Listings”, “Team”, “Settings”, “Enquiries” and the others."
+      },
+      "h1": "What comes next",
+      "ul1": {
+        "a": "You add up to five listings: categories and localities picked from lists, a description, contact details, photos.",
+        "b": "A moderator with no connection to the business checks every listing and every change.",
+        "c": "After approval the business appears in the directory, in the same daily rotation as all the others."
+      },
+      "note1": "The order in the directory rotates daily and is not for sale. There are no stars and no customer scores; a listing can show only checked facts.",
+      "p1": "If you belong to several businesses, the “Business” page asks you to choose one with “Open”. Under “Updates” you find notices about your listings; once you have read them, press “Mark as read”.",
+      "p2": "If your business is already in the directory marked “Added by EventDesk — not claimed yet”, do not create a new one: claim it."
+    }
+  },
+  "business-listings": {
+    "title": "Create and change a listing",
+    "summary": "You pick from lists what you do and where, write a description and send it for review. Nothing becomes public without approval.",
+    "keywords": "new listing categories counties localities description photos contact send for review withdraw five",
+    "where": "My business → Listings",
+    "need": "Any member of the business team.",
+    "body": {
+      "ol1": {
+        "a": "Under “Listings”, press “Add a listing” (or “Add the first listing”).",
+        "b": "Type the “Listing name” and choose between one and five “Categories”.",
+        "c": "Add the counties you work in with “Add the county” and tick the localities.",
+        "d": "Write the “Description in Romanian”: at least a few sentences about what you offer and for what kind of events. “Description in English” is optional.",
+        "e": "Under “Public contact” fill in only what you want to be public: phone, contact email, website.",
+        "f": "Press “Add a photo” for images, then “Send for review”."
+      },
+      "note1": "If the English description is missing, visitors reading in English see the Romanian text, marked “Romanian only”.",
+      "h1": "Changes",
+      "p1": "Open the listing, change what you want and press “Send for review” again. Until it is approved, the public version stays as it is.",
+      "p2": "A business can have at most five listings. “Withdraw the listing…” takes it out of the directory and frees a slot, but the listing cannot be brought back.",
+      "note2": "Write without promises you cannot keep and without praise from customers: the description says what you do, not what others think of you."
+    }
+  },
+  "business-moderation": {
+    "title": "How listings are checked, and checked facts",
+    "summary": "What happens after you send a listing, what to do if it is not approved and what can be shown on it.",
+    "keywords": "moderation moderator approved rejected suspended reason onrc insurance checked facts badge statistics",
+    "where": "My business → Listings → a listing · My business → Settings",
+    "body": {
+      "p1": "Every new listing and every change (text, photos, plans, catalogues) goes to an EventDesk moderator with no connection to the business. You get a notice under “Updates” and an email when it has been decided.",
+      "ul1": {
+        "a": "Approved — the version you sent becomes public.",
+        "b": "Not approved — you see “The last submission was not approved”, with the moderator's reason. Your text is kept: correct it and send it again.",
+        "c": "Suspended — the listing is not in the directory and cannot be changed until the suspension is lifted."
+      },
+      "note1": "While a submission is waiting, what is already public stays as it is. A rejected change does not take your listing out of the directory.",
+      "h1": "Checked facts",
+      "p2": "A listing can show only two mentions, both plain facts: registration with the trade register (ONRC) and insurance seen by a moderator, with the date it is valid until. The checks are free. For ONRC, fill in the registration number in “Settings”, under “Business details”.",
+      "h2": "Response statistics",
+      "p3": "After ten enquiries you have answered, the listing page shows how often and how quickly you answer. They are calculated daily and cannot be bought or edited. You can hide them from the listing's page or, for all listings, from “Settings”.",
+      "note2": "If someone reports a listing, the report is read by a moderator. If you disagree with a decision, use the report form and mention the listing."
+    }
+  },
+  "business-enquiries": {
+    "title": "Enquiries from planners",
+    "summary": "Enquiries and quote requests arrive in “Enquiries received”. Anyone on the team can answer.",
+    "keywords": "enquiries received inbox reply quote pdf planner message reminder 48 hours close",
+    "where": "My business → Enquiries",
+    "need": "Any member of the business team.",
+    "body": {
+      "ol1": {
+        "a": "Open the “Enquiries” tab. On the “Enquiries received” page, the “Open” tab shows what is waiting, and for how long.",
+        "b": "Press “Open” on an enquiry. Under “What the planner sent” you see the kind of occasion, the date, the approximate number of guests, the area and the indicative budget, if they gave one.",
+        "c": "Write a message and, if you have a quote, attach it under “Quote as a PDF” (at most 10 MB).",
+        "d": "Press “Reply”."
+      },
+      "note1": "You see only what the planner chose to send. You do not see their name, the guest list or the plan. If they did not share their email address, you see “not shared” and you answer here; they read the message in their plan.",
+      "p1": "A quote as a PDF marks the planner's booking as “quote received”. If they accept it, you see “Quote accepted” in the thread.",
+      "h1": "Notices and reminders",
+      "p2": "You receive an email for every new enquiry. After 48 hours without an answer a reminder comes; you can turn it off in “Settings”, under “Reminder after 48 hours for unanswered enquiries”. The notice when an enquiry arrives always stays.",
+      "note2": "A listing receives enquiries through EventDesk only once it has a business behind it. Unclaimed listings show only the public contact."
+    }
+  },
+  "business-drawings": {
+    "title": "Spaces and plans for venues",
+    "summary": "You upload each room's plan, calibrate it and mark what can be used. Planners seat their guests directly on your plan.",
+    "keywords": "plan room drawing calibration space venue tables dimensions parking version send for review",
+    "where": "My business → Listings → a listing → Spaces and plans",
+    "need": "Any member of the business team.",
+    "body": {
+      "ol1": {
+        "a": "Open the listing and go to “Spaces and plans”. Press “Add a space” and then “Create the space”.",
+        "b": "Under “1 · The drawing”, press “Upload the room's drawing”: PNG, JPG or PDF, at most 10 MB, a plan seen from above with clear walls.",
+        "c": "Under “2 · Calibration”, tap on the drawing the two ends of a distance you know (for example a wall) and type the real distance.",
+        "d": "Mark what can be used: areas, tables, points of interest, parking.",
+        "e": "Fill in “Name and stated dimensions”. If you do not know a dimension, leave it empty.",
+        "f": "Press “Send for review”."
+      },
+      "note1": "Without calibration the drawing stays a plain image: it cannot take markings and cannot be used for seating. A PDF is kept, but for calibration you need a PNG or JPG image.",
+      "note2": "Dimensions left empty are shown to planners as “unknown”. We do not guess them and we do not show them as zero.",
+      "p1": "The plan becomes public after a moderator approves it. When you change it, the public version stays visible until approval, and planners using the plan receive a proposal to move to the new version — nothing changes for them by itself.",
+      "p2": "A new drawing cancels the calibration and the markings made on the old one. “Withdraw the space” takes it out of the listing."
+    }
+  },
+  "business-catalogues": {
+    "title": "Flower catalogues",
+    "summary": "For florists: the varieties of flowers and greenery you offer, with season and an indicative price.",
+    "keywords": "catalogue flowers florist varieties season indicative price stem bunch arrangement quote",
+    "where": "My business → Catalogues",
+    "need": "Any member of the business team.",
+    "body": {
+      "ol1": {
+        "a": "Open the “Catalogues” tab and press “New catalogue” (or “Create the first catalogue”), then “Create the catalogue”.",
+        "b": "Press “Add a variety” and fill in the name, the season and, if you like, the indicative price. Under “Notes” you can write, for example, the stem length or the minimum order.",
+        "c": "Repeat for each variety.",
+        "d": "Press “Send for checking”."
+      },
+      "note1": "The catalogue appears on the listing page after a moderator checks it. Until then, what was approved before stays public.",
+      "note2": "Prices are indicative. A price left empty is shown as “unknown”, not as zero.",
+      "h1": "What it is for",
+      "p1": "Planners can browse the catalogue on the listing page and ask you for a quote for an arrangement with “Ask for a flower quote”. You receive the description of the arrangement (and the photo, if they uploaded one), the date, the approximate number of guests and the message — nothing else from their plan.",
+      "p2": "You answer from “Enquiries received”, with a message and a quote as a PDF."
+    }
+  },
+  "claim-listing": {
+    "title": "Claim or remove a listing added by EventDesk",
+    "summary": "Some businesses are added from public information. If it is yours, you can claim it for free or ask for it to be removed.",
+    "keywords": "claim listing unclaimed added by eventdesk remove objection correction public source code",
+    "where": "Businesses → an unclaimed listing → Is this your business?",
+    "need": "To claim: an account with an email address. To ask for removal or a correction: no account needed.",
+    "body": {
+      "p1": "A listing marked “Added by EventDesk — not claimed yet” comes from a public source, shown on its page under “Where this listing comes from”, and was checked by a moderator.",
+      "h1": "Claim the listing",
+      "ol1": {
+        "a": "On the listing page, under “Is this your business?”, open “Claim the listing”. If you are not signed in, you sign in first and we bring you back.",
+        "b": "Type the “Business name” and, optionally, “Your role in the business”, then press “Start the claim”.",
+        "c": "We send a six-digit code to the email address the business publishes. Enter it and press “Confirm the code”.",
+        "d": "A second person on the EventDesk team approves. Then the listing belongs to your business and you can correct it from the business area."
+      },
+      "note1": "The code goes only to the address the business publishes, never to an address you type. It is valid for 15 minutes. If the public source has no email address, a moderator checks the claim against the source.",
+      "h2": "Ask for removal or a correction",
+      "p2": "If you represent the business and do not want the listing, open “Ask for removal or a correction”. You choose “Remove the listing”, “I object to the listing” or “A correction” and press “Send the request”. We answer within 30 days at most.",
+      "note2": "If the listing has already been claimed by someone else and you believe it is your business, write to us through the report form."
+    }
+  },
+  "business-team": {
+    "title": "The business team",
+    "summary": "Invite colleagues, choose who is an admin and remove people who no longer work with you.",
+    "keywords": "business team colleagues invite owner admin staff remove leave role",
+    "where": "My business → Team",
+    "need": "The owner and admins invite people and change roles.",
+    "body": {
+      "ol1": {
+        "a": "Open the “Team” tab.",
+        "b": "Under “Invite a colleague”, type the “Email address” and choose the “Role”.",
+        "c": "Press “Send the invitation”. Your colleague appears under “Invitations sent”, marked “Waiting”.",
+        "d": "Your colleague opens the link in the email, signs in with the same address and presses the button to join the team."
+      },
+      "note1": "The link is valid for 14 days and works only for the address it was sent to. An unanswered invitation can be taken back with “Withdraw invitation”.",
+      "h1": "Roles",
+      "ul1": {
+        "a": "“Owner” — only one; answers for the business.",
+        "b": "“Admin” — runs the team and the settings together with the owner.",
+        "c": "“Staff” — works on listings, catalogues and enquiries."
+      },
+      "p1": "You change a colleague's role with “Make admin” or “Make staff”. You remove them with “Remove from team”; they lose access at once. You can leave at any time with “Leave the team”.",
+      "note2": "Anyone on the team can answer enquiries and work on listings, but every public change still goes through a moderator's check."
+    }
+  },
+  "business-occasions": {
+    "title": "Occasions run for clients: library, branding and handover",
+    "summary": "For businesses that plan events: you create the occasion on the client's behalf, work with your team and hand it over at the end.",
+    "keywords": "occasions business client event planner library templates branding logo colour handover hand over",
+    "where": "My business → Client occasions · Library · Branding",
+    "need": "The business team. Branding is changed by the owner or an admin.",
+    "body": {
+      "ol1": {
+        "a": "Open the “Client occasions” tab, create a “New occasion for a client” and press “Create the occasion”. You can leave the date empty.",
+        "b": "Press “Open the plan” to work in it as in any occasion.",
+        "c": "With “Apply from the library” you bring in task templates, checklists, suppliers and files from your library."
+      },
+      "note1": "Each member of the team works in the business's occasions as an organiser. Under “What the team sees in the business's occasions” you choose whether they also see the money and guests' private requests, then press “Save team access”.",
+      "h1": "How guests see you",
+      "p1": "The name, the logo and an accent colour appear on guest pages in the occasions you run, until each occasion is handed over.",
+      "h2": "Hand the occasion over to the client",
+      "p2": "Invite the client as a member of the occasion. Once they accept, you choose them under “Hand the occasion over to the client”.",
+      "ul1": {
+        "a": "The client becomes the owner of the occasion, with access to the budget and to private requests.",
+        "b": "The whole team's access ends, and so do the business's assistant connections.",
+        "c": "The business's name, logo and colour disappear from guest pages.",
+        "d": "The plan stays whole: tasks, guests, suppliers, money and the shared files."
+      },
+      "note2": "After the handover the occasion belongs to the client. The business keeps only a record under “Handed over to clients”."
+    }
+  }
+}

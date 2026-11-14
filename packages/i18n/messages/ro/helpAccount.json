@@ -1,0 +1,120 @@
+{
+  "anonymous-account": {
+    "title": "Cont anonim și coduri de recuperare",
+    "summary": "Un cont fără email, fără telefon și fără nume. Intri cu un nume de utilizator generat și o parolă aleasă de tine.",
+    "keywords": "cont anonim fără email nume de utilizator parolă coduri de recuperare am uitat parola recuperare",
+    "where": "Intră în cont → Folosește un cont anonim",
+    "body": {
+      "h1": "Creează contul",
+      "ol1": {
+        "a": "Pe pagina „Intră în cont”, apasă „Folosește un cont anonim”, apoi „Creează unul”.",
+        "b": "La „Alege o parolă” scrie cel puțin 10 caractere. O propoziție scurtă este o parolă bună.",
+        "c": "Apasă „Creează contul”.",
+        "d": "Notează numele de utilizator (arată cam așa: ed-k7m2q9xw4p) și salvează cele zece coduri de recuperare cu „Copiază codurile”.",
+        "e": "Apasă „Am salvat codurile — continuă”."
+      },
+      "note1": "Codurile sunt afișate o singură dată. Dacă pierzi și parola, și codurile de recuperare, contul nu mai poate fi recuperat: nu avem unde să îți trimitem nimic.",
+      "h2": "Ce este diferit",
+      "ul1": {
+        "a": "Nu există intrare pe email și nu primești rezumate pe email.",
+        "b": "Notificările ajung doar în aplicație.",
+        "c": "Acțiunile sensibile le confirmi cu un cod de recuperare, nu cu un cod pe email. Codul folosit nu mai poate fi folosit a doua oară.",
+        "d": "În rest, contul are aceleași funcții: planificare, roluri, linkuri pentru invitați și asistenți externi."
+      },
+      "h3": "Ai uitat parola?",
+      "p1": "Pe pagina de intrare în contul anonim, apasă „Folosește un cod de recuperare”. Scrie numele de utilizator, un cod nefolosit și o parolă nouă, apoi apasă „Schimbă parola și intră în cont”.",
+      "p2": "Din „Cont” poți genera coduri noi (cele vechi nu mai funcționează) sau poți adăuga o adresă de email cu „Adaugă un email”; contul devine atunci un cont cu email."
+    }
+  },
+  "two-step": {
+    "title": "Verificarea în doi pași",
+    "summary": "Opțională: după codul de pe email sau parolă, îți cerem și un cod dintr-o aplicație de autentificare.",
+    "keywords": "doi pași 2fa totp aplicație de autentificare cod qr coduri de recuperare securitate telefon pierdut",
+    "where": "Cont → Intrare și siguranță → Verificare în doi pași",
+    "need": "Activarea și dezactivarea cer să confirmi din nou că ești tu.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Cont” și, la „Verificare în doi pași”, apasă „Deschide setările”.",
+        "b": "Apasă „Activează verificarea în doi pași”.",
+        "c": "Deschide aplicația ta de autentificare, adaugă un cont nou și scanează codul QR. Dacă nu îl poți scana, folosește „Cheie pentru introducere manuală”.",
+        "d": "Scrie „Codul din aplicație” (șase cifre) și apasă „Activează”.",
+        "e": "Salvează cele zece coduri de recuperare și apasă „Am salvat codurile”."
+      },
+      "note1": "Funcționează cu orice aplicație de autentificare standard: coduri din șase cifre care se schimbă la 30 de secunde.",
+      "h1": "La intrarea în cont",
+      "p1": "După codul de pe email (sau parolă), apare „Al doilea pas”. Scrie codul din aplicație. Dacă nu ai telefonul la îndemână, apasă „Folosește un cod de recuperare”; fiecare cod poate fi folosit o singură dată.",
+      "h2": "Coduri noi sau dezactivare",
+      "p2": "Pe aceeași pagină vezi câte coduri nefolosite mai ai. „Generează coduri noi” le înlocuiește pe cele vechi, care nu mai funcționează. „Dezactivează verificarea în doi pași” o oprește.",
+      "note2": "Personalul EventDesk nu poate intra în consolă fără verificarea în doi pași. Pentru organizatori, invitați și firme rămâne opțională."
+    }
+  },
+  "account-settings": {
+    "title": "Contul tău: nume, limbă, email și dispozitive",
+    "summary": "Numele cu care te văd ceilalți, limba aplicației, adresa de intrare și dispozitivele pe care ești conectat.",
+    "keywords": "cont profil nume afișat limba română engleză schimbă email dispozitive sesiuni deconectează ieși din cont confirmă că ești tu",
+    "where": "Cont",
+    "body": {
+      "ul1": {
+        "a": "„Numele afișat” — așa te văd oamenii cu care organizezi, în echipă și la sarcini. Apasă „Salvează numele”.",
+        "b": "„Limba” — alege și apasă „Salvează limba”. Schimbă doar textele aplicației, niciodată datele tale. O poți comuta rapid și din RO / EN, în bara de sus.",
+        "c": "„Email de intrare” — apasă „Schimbă emailul”, scrie adresa nouă, apasă „Trimite codul pe adresa nouă” și apoi „Confirmă adresa”."
+      },
+      "note1": "După schimbarea emailului, contul se închide pe toate celelalte dispozitive și toate cheile pentru asistenți externi sunt anulate.",
+      "h1": "Dispozitive conectate",
+      "p1": "Lista arată fiecare dispozitiv pe care contul este deschis și când a fost văzut ultima dată. Apasă „Deconectează dispozitivul” lângă unul pe care nu îl recunoști. „Ieși din cont de pe toate dispozitivele” închide contul peste tot, inclusiv aici, și anulează toate cheile pentru asistenți externi.",
+      "p2": "„Ieși din cont” te scoate doar de pe dispozitivul acesta.",
+      "h2": "„Confirmă că ești tu”",
+      "p3": "Acțiunile sensibile — roluri și acces în echipă, ștergeri, crearea unui token pentru un asistent — cer o confirmare proaspătă. Apasă „Trimite-mi codul”, scrie codul din email și apasă „Confirmă”. Confirmarea este valabilă 10 minute.",
+      "note2": "Un cont anonim confirmă cu un cod de recuperare în loc de email."
+    }
+  },
+  "delete-account": {
+    "title": "Șterge contul (cu 7 zile în care te poți răzgândi)",
+    "summary": "Ceri ștergerea, ai 7 zile să o anulezi, apoi este definitivă.",
+    "keywords": "șterge contul ștergere anulează 7 zile date personale păstrăm chitanțe definitiv",
+    "where": "Cont → Șterge contul",
+    "need": "Cere să confirmi din nou că ești tu.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Cont” și, la „Intrare și siguranță”, apasă „Șterge contul”.",
+        "b": "Citește „Ce se întâmplă” și „Ce păstrăm și de ce”.",
+        "c": "Apasă „Șterge contul”. Dacă te-ai răzgândit, apasă „Păstrează contul”."
+      },
+      "h1": "Ce se întâmplă",
+      "ul1": {
+        "a": "Timp de 7 zile contul rămâne neschimbat și poți anula ștergerea oricând, din pagina „Cont”, cu „Anulează ștergerea”.",
+        "b": "După aceea ștergem datele de intrare, sesiunile și datele personale ale contului. Nu le mai putem recupera.",
+        "c": "Toate cheile pentru asistenți externi sunt șterse odată cu contul."
+      },
+      "note1": "Legea ne obligă să păstrăm câteva înregistrări și după ștergere: chitanțele și facturile, evidența obiecțiilor și a solicitărilor privind datele personale și jurnalul de audit al acțiunilor. Pagina de ștergere îți spune pentru câți ani.",
+      "p1": "Cât timp ștergerea este programată, pagina „Cont” arată „Contul este programat pentru ștergere”, cu data până la care o poți anula.",
+      "note2": "Ștergerea unei singure ocazii este altceva: se face din „Setări”, în ocazia respectivă, tot cu 7 zile de răgaz."
+    }
+  },
+  "assistants": {
+    "title": "Asistenți AI: ce pot și ce nu pot face",
+    "summary": "Îți poți conecta propriul asistent AI. Vede exact ce vezi tu și poate cel mult să propună schimbări.",
+    "keywords": "asistent ai mcp token cheie conectează deconectează propuneri citire acord date",
+    "where": "Cont → Asistenți AI",
+    "need": "Crearea unui token cere să confirmi din nou că ești tu.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Cont” și mergi la „Asistenți AI conectați”.",
+        "b": "La „Conectează un asistent”, scrie „Numele conexiunii” (doar pentru tine, ca să o recunoști).",
+        "c": "La „Ce are voie asistentul” alege „Doar citire” sau „Citire și propuneri”, apoi „Continuă”.",
+        "d": "Citește „Înainte să creezi tokenul”, bifează acordul și apasă „Accept și creez tokenul”.",
+        "e": "Apasă „Copiază tokenul” și adaugă în asistentul tău un server MCP (HTTP) cu adresa și antetul afișate."
+      },
+      "note1": "Tokenul îl vezi o singură dată. După ce închizi pagina mai rămân vizibile doar ultimele patru caractere.",
+      "h1": "Ce poate și ce nu poate",
+      "ul1": {
+        "a": "Poate citi doar ce poți vedea tu în aplicație: ocazii, sarcini, numărul de invitați, totaluri de buget dacă ai acces la bani.",
+        "b": "Poate propune liste de sarcini, texte, estimări de buget sau așezări. Fiecare propunere apare în „Ce-ar fi dacă?” și nu se aplică până nu o confirmi tu în aplicație.",
+        "c": "Nu vede cererile private ale invitaților, datele altor conturi, plățile sau consola de administrare. Datele de contact ale invitaților nu pleacă niciodată, iar copiii apar doar ca număr.",
+        "d": "Nu poate trimite cereri către firme și nu poate anunța pe nimeni."
+      },
+      "note2": "Datele ocaziilor tale pleacă din EventDesk către furnizorul asistentului pe care îl alegi tu. EventDesk nu poate controla ce face acel furnizor cu ele.",
+      "p1": "Oprești accesul oricând cu „Deconectează”; are efect imediat. Un token nefolosit mult timp expiră singur. Poți avea cel mult 10 conexiuni active."
+    }
+  }
+}

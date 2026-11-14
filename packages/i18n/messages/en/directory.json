@@ -1,0 +1,127 @@
+{
+  "eyebrow": "Businesses",
+  "title": "Find businesses for your occasion",
+  "description": "Every listing is checked by a moderator before it appears. The order of results rotates daily and is not for sale.",
+  "signIn": "Sign in",
+  "romanianOnly": "Romanian only",
+  "meta": {
+    "title": "Businesses for events",
+    "description": "Venues, photographers, florists, music and other event businesses, by county. Checked listings, in an order that rotates daily and is not for sale.",
+    "resultsDescription": "{category} in {area}: listings checked by a moderator, in an order rotated daily."
+  },
+  "foot": {
+    "honest": "The order rotates daily. It is not for sale.",
+    "forBusinesses": "Have a business? Listing is free"
+  },
+  "crumbs": {
+    "label": "Where you are",
+    "directory": "Businesses",
+    "listing": "Listing"
+  },
+  "prefill": {
+    "title": "Searching for “{occasion}”",
+    "withArea": "We chose {area} county from the occasion's venue and put its usual categories first. You can change anything.",
+    "noArea": "We put this occasion's usual categories first. Choose the county.",
+    "back": "Back to the occasion"
+  },
+  "search": {
+    "title": "Search",
+    "category": "Category",
+    "county": "County",
+    "locality": "Locality",
+    "choose": "Choose…",
+    "wholeCounty": "Whole county",
+    "optional": "optional",
+    "submit": "Search businesses",
+    "launchGroup": "Launch areas",
+    "otherGroup": "Other counties",
+    "suggestedGroup": "Usual for your occasion",
+    "allGroup": "All categories",
+    "categoryRequired": "Choose a category from the list.",
+    "countyRequired": "Choose a county from the list."
+  },
+  "register": {
+    "title": "Categories",
+    "suggestedFirst": "The usual ones for your occasion come first",
+    "inCounties": "{category} by county"
+  },
+  "counties": {
+    "title": "Other counties",
+    "body": "The directory starts in Bucharest, Ilfov and Cluj. The other counties are open: businesses can list anywhere.",
+    "show": "Show all {count} counties"
+  },
+  "results": {
+    "title": "{category} in {area}",
+    "count": {
+      "zero": "No business listed yet.",
+      "one": "One business listed.",
+      "few": "{count} businesses listed.",
+      "other": "{count} businesses listed."
+    },
+    "rotation": "daily rotation · the order is not for sale",
+    "localities": "Localities",
+    "wholeCounty": "Whole county",
+    "listLabel": "Results",
+    "morePlaces": "{count} more",
+    "emptyTitle": "No business in this area yet",
+    "emptyBody": "The directory is just starting. Businesses list themselves, for free, and every listing is checked by a moderator before it appears here.",
+    "emptyAction": "List your business for free",
+    "truncated": "Showing the first {shown} of {total}.",
+    "elsewhere": "{category} in other areas"
+  },
+  "unclaimed": {
+    "label": "Added by EventDesk — not claimed yet",
+    "contactNote": "The contact is shown as the business publishes it. EventDesk does not mediate contact.",
+    "sourceTitle": "Where this listing comes from",
+    "body": "This listing isn't claimed yet. The details come from a public source and were checked by a moderator. To correct or remove it, use “Report”.",
+    "source": "Public source",
+    "collected": "collected on {date}"
+  },
+  "badges": {
+    "onrc": "Verified: ONRC registration",
+    "insurance": "Verified: insurance seen until {date}"
+  },
+  "listing": {
+    "about": "About",
+    "noDescription": "no description",
+    "photos": "Photos",
+    "photoAlt": "{name} — photo {n}",
+    "facts": "Listing facts",
+    "contact": "Contact",
+    "noContact": "not provided",
+    "areas": "Areas served",
+    "moderated": "Listing checked by an EventDesk moderator before publication.",
+    "report": "Report this listing"
+  },
+  "stats": {
+    "title": "How it responds",
+    "answered": "Answers {count} in 10 enquiries",
+    "replyMinutes": {
+      "one": "usually within a minute",
+      "few": "usually within {count} minutes",
+      "other": "usually within {count} minutes"
+    },
+    "replyHours": {
+      "one": "usually within an hour",
+      "few": "usually within {count} hours",
+      "other": "usually within {count} hours"
+    },
+    "replyDays": {
+      "one": "usually within a day",
+      "few": "usually within {count} days",
+      "other": "usually within {count} days"
+    },
+    "computed": "Computed daily from enquiries received through EventDesk. Last verified: {date}."
+  },
+  "taskLink": {
+    "label": "See {category} businesses in {area}",
+    "labelNoArea": "See {category} businesses",
+    "hide": "Stop showing this",
+    "hiding": "Hiding…",
+    "hideForOccasion": "Hide for this occasion",
+    "hideEverywhere": "Hide on all my occasions",
+    "hidden": "The link to businesses is hidden.",
+    "show": "Show again",
+    "showing": "Showing…"
+  }
+}

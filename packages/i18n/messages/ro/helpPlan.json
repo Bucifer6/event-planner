@@ -1,0 +1,132 @@
+{
+  "occasion-overview": {
+    "title": "Privirea de ansamblu și secțiunile ocaziei",
+    "summary": "Prima pagină a fiecărei ocazii: câte zile mai sunt, ce urmează și ce te ține în loc.",
+    "keywords": "privire de ansamblu tablou zile până la eveniment întârziate blocaje brief secțiuni navigare meniu",
+    "where": "Ocazia ta → Privire de ansamblu",
+    "body": {
+      "p1": "Sus vezi numărul de zile „Până la eveniment” și câte sarcini sunt gata. Butonul „Deschide sarcinile” te duce direct la listă.",
+      "h1": "Ce mai găsești pe pagină",
+      "ul1": {
+        "a": "„Următorul termen” — cea mai apropiată sarcină cu dată.",
+        "b": "„Întârziate” — sarcinile al căror termen a trecut.",
+        "c": "„Delegări neacceptate” — sarcini oferite cuiva care nu a răspuns încă. Dacă oferta este pentru tine, o poți accepta sau refuza chiar de aici.",
+        "d": "„Blocaje” — sarcini în așteptare, sarcini care depind de altele neterminate sau marcate gata în ordine inversă.",
+        "e": "„Pe scurt” — scopul și prioritățile ocaziei. Dacă lipsesc, apasă „Scrie brief-ul”."
+      },
+      "p2": "Când o schimbare importantă așteaptă o decizie, apare un anunț cu butonul „Vezi propunerile”.",
+      "h2": "Secțiunile ocaziei",
+      "p3": "Meniul ocaziei este împărțit pe grupuri: Plan, Invitați, Bani, Furnizori și loc, Călătorie și Altele. Pe telefon, secțiunile apar ca file care se derulează sub titlul ocaziei.",
+      "note1": "Vezi doar secțiunile la care ai acces. „Buget” și „Cheltuieli comune” cer acces la finanțe, iar „Cereri private” cere accesul cu același nume."
+    }
+  },
+  "tasks": {
+    "title": "Sarcini: adaugă, urmărește și dă mai departe",
+    "summary": "Lista de lucruri de făcut, cu termene, responsabili, liste de verificare și delegare.",
+    "keywords": "sarcini task todo termen responsabil listă panou calendar subsarcini dependențe delegare oferă acceptă refuză model",
+    "where": "Ocazia ta → Sarcini",
+    "need": "Organizatorul, managerii de proiect, coordonatorii și ajutoarele pot adăuga sarcini. Furnizorii și invitații din echipă își văd și își actualizează sarcinile primite.",
+    "body": {
+      "ol1": {
+        "a": "Scrie sarcina în câmpul „Sarcină nouă” și apasă „Adaugă sarcina”. Titlul este de ajuns.",
+        "b": "Pentru mai multe detalii, apasă „Adaugă o sarcină cu responsabil, prioritate și note”.",
+        "c": "Schimbă starea direct din listă: „De făcut”, „În lucru”, „În așteptare” sau „Gata”.",
+        "d": "Alege cum vezi sarcinile: „Listă”, „Panou” sau „Calendar”. Cu „Ale mele” le vezi doar pe ale tale."
+      },
+      "h1": "Pe pagina unei sarcini",
+      "ul1": {
+        "a": "„Listă de verificare” — puncte mici de bifat; adaugi cu „Adaugă punctul”.",
+        "b": "„Subsarcini” — sarcini mai mici care fac parte din ea.",
+        "c": "„Depinde de” — alege sarcina după care așteaptă și apasă „Adaugă legătura”."
+      },
+      "h2": "Dă o sarcină altcuiva",
+      "p1": "La „Delegare”, alege un om din echipă și apasă „Oferă sarcina”. Persoana vede oferta și apasă „Acceptă sarcina” sau „Refuză”. Până la răspuns, responsabilul rămâne neschimbat. Dacă refuză, sarcina se întoarce la tine; o ofertă fără răspuns o poți lua înapoi cu „Retrage oferta”.",
+      "note1": "O sarcină marcată „Gata” înaintea celei de care depinde sau cu subsarcini deschise primește o etichetă de atenționare. Nu te blocăm — îți arătăm doar că planul nu se potrivește cu realitatea.",
+      "p2": "Organizatorul și managerii de proiect pot apăsa „Aplică un model” ca să aducă sarcinile unui model. Vezi mai întâi diferențele; sarcinile existente nu se dublează."
+    }
+  },
+  "team-and-roles": {
+    "title": "Echipă și roluri: invită oameni și alege ce văd",
+    "summary": "Cheamă pe cineva să te ajute, dă-i un rol și hotărăște separat dacă vede banii sau cererile private.",
+    "keywords": "echipă roluri invită organizator manager de proiect coordonator ajutor furnizor invitat acces finanțe cereri private predă scoate naș",
+    "where": "Ocazia ta → Echipă și roluri",
+    "need": "Organizatorul și managerii de proiect. Schimbarea rolurilor și a accesului cere să confirmi din nou că ești tu.",
+    "body": {
+      "ol1": {
+        "a": "Apasă „Invită pe cineva”.",
+        "b": "Scrie „Adresa de email” și alege „Rol”: Manager de proiect, Coordonator, Ajutor, Furnizor sau Invitat.",
+        "c": "Dacă vrei, completează „Cum îi spuneți” — de exemplu „nașă” sau „cavaler de onoare”.",
+        "d": "La „Acces separat” bifează „Finanțe” și/sau „Cereri private” numai dacă persoana chiar are nevoie de ele.",
+        "e": "Apasă „Trimite invitația”. Persoana apare la „Invitații trimise” până apasă „Acceptă invitația” din email."
+      },
+      "note1": "Linkul din invitație este valabil 14 zile și poate fi folosit o singură dată. Nu se întâmplă nimic până când persoana nu îl acceptă.",
+      "h1": "Schimbă sau retrage accesul",
+      "p1": "Apasă „Modifică” lângă un om din echipă. De acolo schimbi rolul și accesul („Salvează accesul”), îl poți scoate („Scoate din echipă”) sau îi poți preda ocazia („Predă ocazia”). Cine este scos pierde accesul imediat; sarcinile lui rămân în plan, fără responsabil.",
+      "note2": "Pentru aceste acțiuni apare „Confirmă întâi că ești tu”. Confirmarea se face din pagina contului, cu un cod nou pe email, și este valabilă 10 minute.",
+      "p2": "Dacă predai ocazia, noul organizator primește toate drepturile, inclusiv ștergerea. Tu rămâi manager de proiect, fără acces automat la finanțe și la cererile private."
+    }
+  },
+  "preview-changes": {
+    "title": "„Ce-ar fi dacă?”: vezi schimbările înainte să le aplici",
+    "summary": "Mutarea datei și alte schimbări mari apar întâi ca previzualizare. Nimic nu se aplică până nu confirmi.",
+    "keywords": "ce-ar fi dacă previzualizare propunere mută data aplică renunță schimbări what-if expiră asistent",
+    "where": "Ocazia ta → Ce-ar fi dacă? · Ocazia ta → Setări",
+    "need": "Organizatorul și managerii de proiect pot muta data și pot decide propunerile.",
+    "body": {
+      "p1": "Unele schimbări ating multe lucruri deodată. De aceea EventDesk îți arată mai întâi tot ce s-ar modifica și abia apoi te lasă să hotărăști.",
+      "h1": "Exemplu: muți data ocaziei",
+      "ol1": {
+        "a": "Deschide „Setări” și mergi la „Data ocaziei”.",
+        "b": "Alege noua dată și apasă „Vezi ce se schimbă”.",
+        "c": "Citește previzualizarea: fiecare sarcină al cărei termen se mută apare cu valoarea de dinainte și cea de după.",
+        "d": "Apasă „Aplică schimbările” ca să confirmi sau „Renunță” ca să lași totul cum era."
+      },
+      "h2": "Ce mai trece prin previzualizare",
+      "p2": "Alegerea zilei dintr-un sondaj, aplicarea unui model de sarcini, importul invitaților, scoaterea unei familii, mutarea unei plăți către un furnizor, o propunere de așezare la mese, amânarea, anularea și închiderea ocaziei — și orice propune un asistent AI conectat de tine.",
+      "p3": "Propunerile nedecise stau în „Ce-ar fi dacă?”, la „Așteaptă o decizie”. Cele hotărâte apar la „Decise recent”, cu starea „Aplicată” sau „Respinsă”.",
+      "note1": "O propunere are o dată de expirare. Dacă între timp s-a schimbat ceva în plan, previzualizarea nu mai este la zi și îți cerem să faci din nou schimbarea. Nimic nu se aplică de două ori.",
+      "note2": "Propunerile venite de la un asistent poartă eticheta „creat cu un asistent extern”."
+    }
+  },
+  "date-poll": {
+    "title": "Alege data împreună cu invitații",
+    "summary": "Propui câteva zile, familiile votează pe linkul lor, iar tu alegi la final.",
+    "keywords": "sondaj de date vot zi propusă alege ziua data nu e stabilită",
+    "where": "Ocazia ta → Sondaj de date",
+    "need": "Organizatorul și managerii de proiect.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Sondaj de date”.",
+        "b": "La „Adaugă o zi”, alege „Zi propusă” și apasă „Adaugă ziua”. Adaugi câte o zi pe rând, cel mult 12.",
+        "c": "Trimite invitaților linkurile lor. Fiecare familie votează „Da”, „Poate” sau „Nu” pentru fiecare zi.",
+        "d": "Urmărește „Ziua preferată până acum” și câte familii au votat.",
+        "e": "Când te-ai hotărât, apasă „Alege această zi” lângă ziua dorită."
+      },
+      "note1": "Când alegi o zi, îți arătăm mai întâi ce se mută odată cu data — de exemplu termenele sarcinilor. Nimic nu se schimbă până nu confirmi previzualizarea.",
+      "note2": "Voturile sunt doar păreri: nu rezervă niciun loc și nu țin loc de răspuns la invitație.",
+      "p1": "După ce data este stabilită, invitații o văd pe linkul lor. Dacă nu vrei să alegi nicio zi, apasă „Închide sondajul fără să alegi”. Dacă data trebuie hotărâtă din nou, poți porni un sondaj nou cu alte zile."
+    }
+  },
+  "close-cancel-delete": {
+    "title": "Amână, anulează, încheie sau șterge o ocazie",
+    "summary": "Patru lucruri diferite, fiecare cu previzualizare sau cu zile în care te poți răzgândi.",
+    "keywords": "amână anulează încheie închide șterge ocazia încheiere lecții 7 zile anulare ștergere",
+    "where": "Ocazia ta → Setări",
+    "need": "Organizatorul și managerii de proiect pentru amânare, anulare și încheiere. Aceste acțiuni cer să confirmi din nou că ești tu.",
+    "body": {
+      "h1": "Amână sau anulează",
+      "ol1": {
+        "a": "Deschide „Setări”.",
+        "b": "La „Amână ocazia”, alege „Data nouă” și apasă „Vezi ce se schimbă dacă amâni”. La „Anulează ocazia”, apasă „Vezi ce se întâmplă dacă anulezi”.",
+        "c": "Citește previzualizarea: sarcini, invitați, cheltuieli, furnizori.",
+        "d": "Apasă „Aplică schimbările” numai dacă ești sigur."
+      },
+      "note1": "Invitații care au lăsat o adresă de e-mail sunt anunțați abia după ce confirmi. Planul rămâne pe loc ca să îl poți consulta.",
+      "h2": "Încheie ocazia după eveniment",
+      "p1": "La „Încheiere”, apasă „Deschide lista de încheiere”. Vezi ce a rămas de plătit sau de returnat, îți poți nota „Lecții pentru data viitoare” și poți apăsa „Închide ocazia”. După închidere, datele pot fi citite, dar nu mai pot fi modificate.",
+      "h3": "Șterge ocazia",
+      "p2": "Tot din „Setări”, apasă „Șterge ocazia” și confirmă. Ai 7 zile în care o poți recupera cu tot ce conține, din banda de sus a paginii, cu „Anulează ștergerea”. După aceea se șterge definitiv.",
+      "note2": "Legea ne obligă să păstrăm câteva lucruri și după ștergere: chitanțele și documentele de plată, cererile de opoziție sau de eliminare și jurnalul acțiunilor sensibile."
+    }
+  }
+}

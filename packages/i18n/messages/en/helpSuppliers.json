@@ -1,0 +1,129 @@
+{
+  "suppliers": {
+    "title": "Suppliers: from enquiry to delivery",
+    "summary": "Everyone working for your occasion in one place: the booking state, what you agreed and the payments to watch.",
+    "keywords": "suppliers vendors booking quote contract payments deadline deposit band photographer restaurant final order",
+    "where": "Your occasion → Suppliers",
+    "need": "The planning team sees the suppliers. Amounts and payments are visible only to people with the “Finance” access.",
+    "body": {
+      "ol1": {
+        "a": "Press “Add a supplier”.",
+        "b": "Type the “Supplier name” and “What they do” (for example band, catering, flowers). Contact and notes are optional.",
+        "c": "Press “Add the supplier”, then open it from the list.",
+        "d": "Under “Booking state” you follow how far you have got: “Enquired”, “Quote received”, “Booked”, “Confirmed”, “Delivered”.",
+        "e": "Under “What you agreed” press “Edit the agreement” to enter the “Agreed amount (RON)” and notes, or “Upload the quote” for a PDF, PNG or JPG."
+      },
+      "note1": "If you do not know the amount yet, leave it empty: it stays “unknown”, not zero. The agreed amount enters the budget under “Committed”.",
+      "h1": "Payments and the final order",
+      "p1": "Under “Payments”, press “Add a payment deadline” for each instalment. When you have paid, press “Mark as paid”. If you want to move a payment, “Move the date” first shows you what changes. A payment marked by mistake is put right only with “Correct the payment”.",
+      "p2": "When you have settled the quantities, press “Fix the final order”. The number of guests confirmed at that moment is kept beside the order, and replies that change afterwards appear under “Changes after the final order”.",
+      "note2": "A booking cancelled with “Cancel the booking” can be reopened at any time. A supplier added by mistake can be deleted as long as it has no published briefing, final order or payments."
+    }
+  },
+  "enquiries-and-quotes": {
+    "title": "Find businesses and send an enquiry",
+    "summary": "You search the business directory, write to a business straight from EventDesk and get the answer in your plan.",
+    "keywords": "businesses directory search enquiry quote message supplier florist accept the quote email private",
+    "where": "Businesses → a listing → Send an enquiry · Your occasion → Suppliers",
+    "need": "An account and at least one occasion. The planning team can send enquiries.",
+    "body": {
+      "ol1": {
+        "a": "Open “Businesses”, choose a “Category”, a “County” and, if you like, a “Locality”, then press “Search businesses”.",
+        "b": "Open a listing and press “Send an enquiry”. For florists and decor you can press “Ask for a flower quote”.",
+        "c": "Check the form. We filled in what we knew from your plan: the kind of occasion, the date, the approximate number of guests, the area. You can change anything.",
+        "d": "Write your message. Tick “Send my email address too” only if you also want the answer by email.",
+        "e": "Press “Send the enquiry”."
+      },
+      "note1": "The business receives exactly what you see in the form and nothing else. Your name, the guest list, the plan's budget and the rest of the plan stay private. If you do not tick the email address, the business answers you only here, in EventDesk.",
+      "h1": "Where you see the answer",
+      "p1": "The business appears as a supplier in the occasion's plan, and the enquiry stays with it, under “Enquiries sent”. There you read the messages, answer with “Send the message” and download the quote as a PDF.",
+      "p2": "If the quote suits you, press “Accept the quote”. The booking becomes “Booked”, and the agreed amount enters the budget as committed. If you do not know it yet, leave it empty.",
+      "note2": "You can send at most 10 enquiries for one occasion and 30 a day. An enquiry with no answer after 7 days can be sent again once.",
+      "p3": "A listing marked “Added by EventDesk — not claimed yet” does not receive enquiries through EventDesk; its contact is shown as the business publishes it."
+    }
+  },
+  "supplier-briefing": {
+    "title": "The briefing and the supplier's link",
+    "summary": "You write once what the supplier has to know, send them a link and see when they confirmed they understood.",
+    "keywords": "briefing supplier link version publish acknowledge confirmation access parking notes",
+    "where": "Your occasion → Suppliers → a supplier → Briefing",
+    "need": "The occasion's planning team.",
+    "body": {
+      "ol1": {
+        "a": "Open the supplier and press “Write the briefing”.",
+        "b": "Fill in what they need to know: times, place, what they have to do and “Special notes” (access, parking, restrictions, allergies).",
+        "c": "Press “Publish version 1”.",
+        "d": "Under “Supplier link”, press “Generate the link”, copy it and send it to the supplier.",
+        "e": "The supplier opens the link, reads and presses “I have received and understood the briefing”. You see who confirmed and when."
+      },
+      "note1": "Once published, a version is never changed. If something changes, you publish a new version, and the supplier sees what changed since the version they confirmed.",
+      "h1": "What the supplier sees through the link",
+      "p1": "Only their own booking: the briefing, the final order and their deliveries. They do not see prices, guests or other suppliers, and they do not need an account.",
+      "note2": "The link cannot be shown again, because we keep it only in hashed form. If you lost it, press “Generate a new link” — the old one stops working.",
+      "p2": "Dietary needs reach the briefing only as numbers (for example “3 × gluten-free”), sent from “Private requests”."
+    }
+  },
+  "deliveries": {
+    "title": "Deliveries and returns",
+    "summary": "What is due to arrive, what you rent and what has to go back — with received quantities recorded as facts.",
+    "keywords": "deliveries returns rental chairs received quantity correct partial returned",
+    "where": "Your occasion → Deliveries and returns",
+    "need": "The planning team adds deliveries. The planning team records what arrived.",
+    "body": {
+      "ol1": {
+        "a": "Press “Add a delivery” and type “What is delivered”, the day, the time window and the place it goes to.",
+        "b": "Press “Add the delivery”.",
+        "c": "In the delivery, press “Add an item” for each thing you expect, with its quantity.",
+        "d": "When the goods arrive, fill in “How many arrived” and press “Record the receipt”."
+      },
+      "p1": "The delivery's state changes by itself: “Expected”, “Partial”, “Received” and, for rented things, “Returned”.",
+      "note1": "The received quantity is a fact. If you made a mistake, press “Correct the received quantity”, type the correct quantity and the “Reason for the correction”, then “Save the correction”. The old value stays under “Correction history”. A returned quantity is corrected the same way.",
+      "p2": "Deliveries on the day of the event also appear in “Event day”, under “Deliveries today”. The supplier sees their deliveries through their link."
+    }
+  },
+  "event-day": {
+    "title": "The event day",
+    "summary": "One page for the big day: the clock, the programme, deliveries, contacts and the “are we ready?” decision.",
+    "keywords": "event day programme moment start done waiting contacts readiness decision proceed hold clock",
+    "where": "Your occasion → Event day",
+    "need": "The planning team sees the page. The readiness decision is recorded by the owner or project managers.",
+    "body": {
+      "p1": "The page has a dark background, so it reads well outdoors and in the evening, and it refreshes by itself every 30 seconds.",
+      "ol1": {
+        "a": "Under “Programme of the day” you see the moments in time order. Add one with “Add a moment”.",
+        "b": "As the day goes on, press “Start”, “Waiting” or “Done” on each moment. “Reopen” brings it back.",
+        "c": "Under “Deliveries today” you see what is due to arrive, and under “Contacts” the numbers of the people you need."
+      },
+      "note1": "A moment is an ordinary task with a due time on this day: it also appears in the task list.",
+      "h1": "The readiness decision",
+      "p2": "Before the event, press “Record a decision”. Under “Are we ready?” you choose “Proceed”, “Proceed with conditions” or “Hold” and note what you base it on. For “Proceed with conditions” you write what has to be true.",
+      "note2": "The decision stays in the history with the name of the person who took it and the date. If the situation changes you record a new decision; the old one is not deleted.",
+      "p3": "For guests arriving, go to “Rehearsal and arrivals”."
+    }
+  },
+  "check-in": {
+    "title": "Rehearsal and arrivals (check-in)",
+    "summary": "You step through the day before the event, then record arrivals with one tap or with the QR code.",
+    "keywords": "check-in arrivals rehearsal qr scan arrived correct my checklist ticks sustainability",
+    "where": "Your occasion → Rehearsal and arrivals",
+    "need": "The occasion's planning team. Each person ticks their own tasks.",
+    "body": {
+      "h1": "Before: the rehearsal",
+      "p1": "“Rehearse the day” takes you through everything that has a time on that day and shows you what collides, without changing anything.",
+      "h2": "On the day: check-in",
+      "ol1": {
+        "a": "Open “Check-in”.",
+        "b": "Type in “Search the household by name” or press “Scan the QR code” and hold the code from the invitation in front of the camera.",
+        "c": "Press “Arrived”. One tap records the arrival, with its time."
+      },
+      "p2": "If the device cannot read codes with the camera, type “The code on the invitation” by hand and press “Record”. At the top you always see how many people and how many households have arrived.",
+      "note1": "An arrival is a fact. You can change it only with “Correct”: you choose the adults and children who arrived, or “Did not actually arrive (undo the arrival)”, type the “Reason for the correction” and press “Save the correction”. The old value stays in the history.",
+      "h3": "Also here",
+      "ul1": {
+        "a": "“My checklist” — the ticks of the tasks you are responsible for. It works without internet too.",
+        "b": "“Sync” — what is waiting on this device and what needs your decision.",
+        "c": "“Sustainability” — goals followed with measured quantities. What was not measured stays “Unknown”."
+      }
+    }
+  }
+}

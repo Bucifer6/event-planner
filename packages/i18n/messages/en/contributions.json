@@ -1,0 +1,69 @@
+{
+  "title": "Who brings what",
+  "description": "Say what is needed, and guests and the team pick what they bring.",
+  "fields": {
+    "title": "What to bring",
+    "titleHint": "For example: Bottles of wine",
+    "units": "How many",
+    "unitsHint": "For example: 12",
+    "note": "Details",
+    "noteHint": "For example: dry red, if possible"
+  },
+  "add": {
+    "button": "Add a need",
+    "title": "A new need",
+    "submit": "Add need"
+  },
+  "edit": {
+    "title": "Edit need"
+  },
+  "remove": {
+    "button": "Delete",
+    "title": "Delete “{title}”?",
+    "body": "The need is deleted together with everything guests promised for it.",
+    "submit": "Delete need"
+  },
+  "empty": {
+    "title": "You have not asked for anything yet",
+    "body": "Add the first need — for example “Bottles of wine, 12”. Guests see it on their link and pick their part."
+  },
+  "hero": {
+    "label": "Covered so far",
+    "unit": "of {needed} items",
+    "left": "Still needed: {count}",
+    "done": "Everything is covered"
+  },
+  "list": {
+    "title": "Needs",
+    "count": "{claimed} of {needed}",
+    "covered": "Fully covered",
+    "left": "Still missing: {count}",
+    "claim": "{by}: {units}",
+    "noClaims": "Nobody has offered yet."
+  },
+  "mine": {
+    "claim": "I'll bring this",
+    "change": "You bring {count} — change",
+    "intro": "You can take {left} at most.",
+    "units": "How many you bring",
+    "unitsHint": "Write 0 if you can no longer bring any.",
+    "save": "Save what I bring"
+  },
+  "errors": {
+    "taken": "Someone else offered in the meantime. Still left to bring: {left}.",
+    "belowClaimed": "Guests have already promised {claimed}. You cannot ask for less than that."
+  },
+  "guest": {
+    "title": "Who brings what",
+    "intro": "If you would like to help, pick what you bring. You can change or withdraw at any time.",
+    "meter": "{left} of {needed} still needed",
+    "stepper": "How many you bring",
+    "decrease": "One fewer",
+    "increase": "One more",
+    "save": "Save",
+    "saving": "Saving…",
+    "saved": "Noted. Thank you!",
+    "full": "Everything is covered here. Thank you!",
+    "mine": "You now bring: {count}."
+  }
+}

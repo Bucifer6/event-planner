@@ -1,0 +1,135 @@
+{
+  "status": {
+    "planning": "în pregătire",
+    "postponed": "amânată",
+    "cancelled": "anulată",
+    "closed": "închisă"
+  },
+  "settings": {
+    "postponeTitle": "Amână ocazia",
+    "postponeIntro": "Alegi o dată nouă și vezi mai întâi tot ce se schimbă: sarcinile care se mută, invitații care au confirmat, banii. Nimic nu se aplică până nu confirmi.",
+    "newDate": "Data nouă",
+    "currentDate": "Data de acum: {date}",
+    "noDate": "Ocazia nu are încă o dată.",
+    "postponeSubmit": "Vezi ce se schimbă dacă amâni",
+    "postponeSubmitting": "Se pregătește previzualizarea…",
+    "cancelTitle": "Anulează ocazia",
+    "cancelIntro": "Vezi mai întâi tot ce este afectat: sarcini, invitați, cheltuieli, furnizori. Invitații care au lăsat o adresă de e-mail sunt anunțați abia după ce confirmi.",
+    "cancelSubmit": "Vezi ce se întâmplă dacă anulezi",
+    "cancelSubmitting": "Se pregătește previzualizarea…",
+    "closeoutTitle": "Încheiere",
+    "closeoutIntro": "După eveniment: ce a rămas de plătit sau de returnat, ce ai învățat și închiderea ocaziei.",
+    "closeoutLink": "Deschide lista de încheiere",
+    "freshTitle": "Confirmă că ești tu",
+    "freshBody": "Amânarea, anularea și închiderea cer o confirmare recentă.",
+    "freshLink": "Confirmă din pagina contului",
+    "alreadyCancelled": "Ocazia este anulată.",
+    "alreadyClosed": "Ocazia este închisă și nu mai poate fi amânată sau anulată."
+  },
+  "whatif": {
+    "cancelTitle": "Anulezi „{title}”",
+    "postponeTitle": "Amâni „{title}” pe {date}",
+    "closeTitle": "Închizi „{title}”",
+    "statusRow": "Starea ocaziei",
+    "notifyLabel": "Anunț",
+    "notifyRow": "Familii anunțate prin e-mail: {count}",
+    "notifyNobody": "Nicio familie nu a lăsat o adresă de e-mail",
+    "notifyNote": "Fiecare primește un singur e-mail, după ce confirmi. Ceilalți văd schimbarea pe pagina invitației.",
+    "notifyPageNote": "Invitații văd schimbarea pe pagina invitației.",
+    "readOnlyRow": "Ocazia devine doar pentru citit",
+    "retentionRow": "Cererile private se șterg după {days} de zile",
+    "retentionNote": "Chitanțele și evidențele financiare se păstrează 7 ani.",
+    "openItemsRow": "Rămân deschise în lista de încheiere: {count}",
+    "openItemsNote": "Le poți vedea în continuare, dar nu le mai poți modifica."
+  },
+  "impact": {
+    "tasksLabel": "Sarcini",
+    "tasksOpen": "Sarcini neterminate: {count}",
+    "tasksCancelNote": "Rămân în listă, neschimbate.",
+    "tasksCloseNote": "Rămân neterminate.",
+    "guestsLabel": "Invitați",
+    "guestsYes": "Au confirmat: {people} persoane din {households} familii",
+    "guestsCancelNote": "Vor vedea anularea pe pagina invitației.",
+    "guestsPostponeNote": "Vor vedea data nouă pe pagina invitației. Răspunsurile lor rămân.",
+    "moneyLabel": "Bani",
+    "expensesPaid": "Cheltuieli deja plătite: {count}, în total {amount}",
+    "expensesPaidCancelNote": "Rămân înregistrate. Verifică ce se poate recupera de la furnizori.",
+    "expensesPaidNote": "Rămân înregistrate.",
+    "expensesUnpaid": "Cheltuieli neplătite: {count}, în total {amount}",
+    "expensesUnpaidNote": "Rămân de plătit sau de lămurit.",
+    "ledgerLabel": "Cheltuieli comune",
+    "ledgerOwes": "{from} are de dat {amount} către {to}",
+    "ledgerNote": "Datoria rămâne până o decontați."
+  },
+  "guest": {
+    "cancelled": "Ocazia a fost anulată.",
+    "postponed": "Ocazia a fost amânată. Vezi data nouă mai jos."
+  },
+  "email": {
+    "greeting": "Bună, {household},",
+    "cancelled": {
+      "subject": "{occasion} a fost anulată",
+      "bodyNoDate": "Te anunțăm că „{occasion}” a fost anulată. Ne pare rău pentru schimbare."
+    },
+    "postponed": {
+      "subject": "{occasion} a fost amânată",
+      "body": "Te anunțăm că „{occasion}” a fost amânată. Data nouă este {date}.",
+      "bodyNoDate": "Te anunțăm că „{occasion}” a fost amânată. Data nouă va fi anunțată."
+    },
+    "where": "Detaliile la zi sunt pe pagina invitației tale, la linkul pe care l-ai primit.",
+    "why": "Primești acest mesaj o singură dată, pentru că ai lăsat adresa de e-mail când ai răspuns la invitație."
+  },
+  "closeout": {
+    "title": "Încheiere",
+    "description": "Ce a rămas deschis după eveniment, ce ai învățat și închiderea ocaziei.",
+    "back": "Înapoi la setări",
+    "hero": {
+      "label": "Rămase de rezolvat, azi {date}",
+      "none": "Nu a rămas nimic deschis.",
+      "some": "Rezolvă-le sau închide ocazia așa cum este."
+    },
+    "sections": {
+      "expensesUnpaid": "Cheltuieli neplătite",
+      "ledgerUnsettled": "Cheltuieli comune nedecontate"
+    },
+    "sectionEmpty": "Nimic deschis aici.",
+    "notes": {
+      "approvedUnpaid": "aprobată, neplătită",
+      "pendingUnpaid": "neaprobată, neplătită"
+    },
+    "ledgerOwes": "{from} are de dat către {to}",
+    "noSections": "Nu ai acces la datele financiare, așa că sumele rămase nu apar aici.",
+    "closeTitle": "Închide ocazia",
+    "closeIntro": "Închiderea face ocazia doar pentru citit și pornește termenele de păstrare: cererile private se șterg după {days} de zile, iar chitanțele se păstrează 7 ani. Vezi mai întâi o previzualizare.",
+    "closeSubmit": "Închide ocazia",
+    "closeSubmitting": "Se pregătește previzualizarea…",
+    "closedTitle": "Ocazia este închisă",
+    "closedBody": "Închisă pe {date}. Datele pot fi citite, dar nu mai pot fi modificate.",
+    "managersOnly": "Doar organizatorul sau managerul de proiect poate închide ocazia."
+  },
+  "lessons": {
+    "title": "Ce ai învățat",
+    "intro": "Notițele rămân în contul tău și ți le arătăm când planifici următoarea ocazie.",
+    "label": "Lecții pentru data viitoare",
+    "hint": "De exemplu: „rezervă formația cu 9 luni înainte”, „mai puține feluri la meniu”.",
+    "save": "Salvează notițele",
+    "saving": "Se salvează…",
+    "saved": "Notițele au fost salvate în contul tău.",
+    "overviewTitle": "Lecții de la ocaziile trecute",
+    "pastTitle": "Din ocaziile tale trecute",
+    "pastEmpty": "Nu ai încă notițe de la alte ocazii."
+  },
+  "errors": {
+    "closed": "Ocazia este închisă și nu mai poate fi modificată.",
+    "already": {
+      "cancelled": "Ocazia este deja anulată.",
+      "closed": "Ocazia este deja închisă.",
+      "planning": "Ocazia este în pregătire.",
+      "postponed": "Ocazia este deja amânată."
+    },
+    "dateRequired": "Alege data nouă.",
+    "sameDate": "Aceasta este data de acum. Alege o altă zi.",
+    "dateInPast": "Data nouă trebuie să fie în viitor.",
+    "dateEarlier": "Amânarea înseamnă o dată mai târzie. Pentru o dată mai devreme folosește „Mută data”."
+  }
+}

@@ -1,0 +1,153 @@
+{
+  "title": "Team and roles",
+  "description": "Who is helping and what each person can see. Access to finance and to private requests is granted separately, person by person.",
+  "you": "you",
+  "roles": {
+    "owner": "Owner",
+    "pm": "Project manager",
+    "workstream_lead": "Workstream lead",
+    "contributor": "Contributor",
+    "supplier": "Supplier",
+    "guest": "Guest"
+  },
+  "roleHelp": {
+    "owner": "Decides everything: the team, access, the date and deleting the occasion.",
+    "pm": "Runs the plan with the owner: tasks, team, date.",
+    "workstream_lead": "Leads one part of the plan and can hand out tasks.",
+    "contributor": "Adds tasks and looks after the ones they accept.",
+    "supplier": "Sees the plan and updates the tasks given to them.",
+    "guest": "Sees the plan and the tasks given to them."
+  },
+  "labels": {
+    "nas": "godfather (naș)",
+    "nasa": "godmother (nașă)",
+    "nasCununie": "wedding godfather (naș de cununie)",
+    "nasaCununie": "wedding godmother (nașă de cununie)",
+    "domnisoaraOnoare": "bridesmaid",
+    "cavalerOnoare": "groomsman"
+  },
+  "fields": {
+    "label": "What you call them",
+    "labelHint": "A free label shown beside the role.",
+    "labelSuggestions": "Suggested labels",
+    "role": "Role",
+    "grants": "Separate access",
+    "grantsHint": "These do not come with the role. Tick only what the person needs to see.",
+    "email": "Email address",
+    "emailHint": "We send an invitation link that is valid for 14 days."
+  },
+  "grants": {
+    "finance": "Finance",
+    "financeHint": "Sees and changes the budget and shared costs.",
+    "privateRequests": "Private requests",
+    "privateRequestsHint": "Sees guests' private requests (allergies, special needs).",
+    "financeShort": "Finance",
+    "privateRequestsShort": "Private requests"
+  },
+  "fresh": {
+    "title": "First confirm it is you",
+    "body": "Roles, access to finance and private requests, removing someone and handing over the occasion all need a fresh confirmation.",
+    "link": "Confirm from your account page"
+  },
+  "invite": {
+    "open": "Invite someone",
+    "title": "Invite to the team",
+    "sentTitle": "The invitation is on its way",
+    "sentBody": "The person is listed under “Invitations sent” until they accept. You can invite someone else below.",
+    "suppressedTitle": "The invitation is saved, but the email was not sent",
+    "suppressedBody": "That address no longer receives email from us. Check it or use another one.",
+    "submit": "Send the invitation",
+    "submitting": "Sending…"
+  },
+  "label": {
+    "title": "Label",
+    "saved": "Label saved.",
+    "submit": "Save the label"
+  },
+  "access": {
+    "title": "Role and access",
+    "saved": "Role and access saved.",
+    "submit": "Save access"
+  },
+  "remove": {
+    "sectionTitle": "Remove from the team",
+    "sectionTitleInvite": "Cancel the invitation",
+    "intro": "The person loses access to the occasion at once. Their tasks stay in the plan without an owner, and unanswered offers are withdrawn.",
+    "introInvite": "The link in the email will stop working.",
+    "open": "Remove from the team",
+    "openInvite": "Cancel the invitation",
+    "title": "Remove this person from the team?",
+    "titleInvite": "Cancel this invitation?",
+    "body": "{name} will no longer see the occasion. Their tasks have no owner until you give them to someone else.",
+    "bodyInvite": "The invitation for {name} can no longer be accepted.",
+    "keep": "Keep on the team",
+    "keepInvite": "Keep the invitation",
+    "submit": "Remove {name}",
+    "submitInvite": "Cancel the invitation",
+    "submitting": "Removing…"
+  },
+  "transfer": {
+    "sectionTitle": "Hand over the occasion",
+    "intro": "The new owner gets every right, including deleting the occasion. You stay on the team as project manager.",
+    "open": "Hand over the occasion",
+    "title": "Hand over the occasion?",
+    "body": "{name} becomes the owner. You stay as project manager, without automatic access to finance or private requests.",
+    "keep": "Stay the owner",
+    "submit": "Hand over to {name}",
+    "submitting": "Handing over…"
+  },
+  "members": {
+    "title": "On the team",
+    "edit": "Edit",
+    "editFor": "Edit role and access for {name}",
+    "alone": "It is just you for now. Invite someone to share the tasks."
+  },
+  "invited": {
+    "title": "Invitations sent",
+    "expired": "Expired",
+    "waiting": "Waiting for an answer",
+    "empty": "No invitations waiting."
+  },
+  "rolesGuide": {
+    "title": "What each role can do",
+    "grantsNote": "The budget, shared costs and guests' private requests are not visible from any role except the owner. They are granted separately, to each person."
+  },
+  "member": {
+    "title": "Team member",
+    "back": "Team and roles",
+    "pending": "Invited as {role} — has not accepted yet"
+  },
+  "accept": {
+    "metaTitle": "Team invitation",
+    "goneTitle": "This invitation is no longer valid",
+    "goneBody": "The link has already been used, was cancelled or is not correct. Ask the owner for a new invitation.",
+    "toOccasions": "Go to your occasions",
+    "signIn": "Sign in",
+    "eyebrow": "You have been invited to the team",
+    "body": "You are invited to help plan, as {role}.",
+    "label": "Your label: {label}.",
+    "expiredTitle": "The invitation has expired",
+    "expiredBody": "Ask the owner to send it again.",
+    "submit": "Accept the invitation",
+    "submitting": "Accepting…",
+    "signInTitle": "Sign in first",
+    "signInBody": "After you sign in we bring you back here to accept the invitation."
+  },
+  "email": {
+    "subject": "Invitation to the team of “{occasion}”",
+    "intro": "You have been invited to help plan “{occasion}”, as: {role}.",
+    "button": "See the invitation",
+    "validity": "The link is valid for {days} days and can be used once.",
+    "notExpected": "If you were not expecting this invitation you can ignore it. Nothing happens until you accept."
+  },
+  "errors": {
+    "ownerOnly": "Only the owner can change roles, grant access or appoint project managers.",
+    "alreadyMember": "This person is already on the team.",
+    "inviteGone": "This invitation is no longer valid. Ask for a new one.",
+    "inviteExpired": "The invitation has expired. Ask the owner to send it again.",
+    "ownerRoleFixed": "The owner role only changes through “Hand over the occasion”.",
+    "ownerCannotLeave": "The owner cannot be removed. Hand the occasion over to someone else first.",
+    "alreadyOwner": "You are already the owner.",
+    "notJoined": "The person has to accept the invitation first."
+  }
+}

@@ -1,0 +1,232 @@
+{
+  "title": "Publicări",
+  "description": "Versiunile din depozitul conectat, ce este activ acum și istoricul fiecărei publicări. Se publică întotdeauna o etichetă de versiune și este nevoie de o a doua persoană.",
+  "refreshing": "Pagina se reîmprospătează singură cât timp o publicare este în desfășurare.",
+  "config": {
+    "title": "Legătura cu GitHub nu este configurată",
+    "body": "Consola publică dintr-un singur depozit GitHub privat, printr-o aplicație GitHub. Operatorul trebuie să seteze pe server aceste variabile de mediu (în seiful de secrete, niciodată în depozit):",
+    "steps": "Pașii sunt în docs/build/14-deploy-runbook.md, secțiunea „Before the first deployment”. Până atunci nu se poate publica nimic de aici.",
+    "recordToken": "DEPLOY_RECORD_TOKEN nu este setat (sau are mai puțin de 32 de caractere). Procesul de publicare nu își poate raporta progresul, așa că o publicare ar fi refuzată de la primul pas.",
+    "repo": "Depozit conectat",
+    "githubDown": "GitHub nu a putut fi contactat sau a refuzat cererea. Istoricul de mai jos rămâne corect; versiunile și modificările nu pot fi afișate acum.",
+    "githubDownTitle": "Versiunile nu sunt disponibile acum"
+  },
+  "live": {
+    "title": "Versiunea activă",
+    "none": "Încă nu s-a făcut nicio publicare din consolă",
+    "noneBody": "Prima publicare înregistrată aici devine versiunea activă.",
+    "tag": "Versiune",
+    "hash": "Commit",
+    "at": "Publicată",
+    "running": "Versiunea raportată de acest server",
+    "runningUnknown": "neraportată",
+    "mismatch": "Serverul raportează altă versiune decât ultima publicare reușită. Verifică istoricul publicărilor și găzduirea înainte de a publica din nou."
+  },
+  "active": {
+    "title": "Publicare în desfășurare",
+    "body": "Se publică versiunea {tag}. Până se încheie nu poate porni nicio altă publicare, publicare de urgență sau revenire.",
+    "waiting": "Aprobată. Se așteaptă pornirea procesului.",
+    "stage": "Pasul curent",
+    "started": "Pornită",
+    "progress": "Progres",
+    "abandon": "Închide ca eșuată",
+    "abandonTitle": "Închide o publicare care nu mai raportează",
+    "abandonBody": "Folosește doar când procesul s-a oprit și nu va mai raporta (posibil la 90 de minute de la ultimul lui mesaj). Schimbă doar înregistrarea — verifică întâi în găzduire ce versiune rulează de fapt.",
+    "abandonReason": "Ce s-a întâmplat",
+    "abandonSubmit": "Închide ca eșuată",
+    "abandoning": "Se închide…",
+    "abandoned": "Publicarea a fost închisă ca eșuată."
+  },
+  "stages": {
+    "verify": "Verificarea etichetei și a CI",
+    "build": "Construirea imaginilor",
+    "backup": "Copia de siguranță a bazei de date",
+    "migrate": "Migrarea bazei de date",
+    "roll": "Trecerea la versiunea nouă",
+    "health": "Verificări de sănătate",
+    "rollback": "Revenire",
+    "done": "Gata"
+  },
+  "states": {
+    "requested": "Așteaptă aprobarea",
+    "approved": "Aprobată, pornește",
+    "running": "În desfășurare",
+    "succeeded": "Reușită",
+    "failed": "Eșuată",
+    "rolled_back": "Anulată prin revenire",
+    "cancelled": "Nepornită"
+  },
+  "kinds": {
+    "deploy": "Publicare",
+    "rollback": "Revenire"
+  },
+  "ci": {
+    "success": "CI trecut",
+    "failure": "CI eșuat",
+    "pending": "CI în curs",
+    "unknown": "CI nu a rulat"
+  },
+  "events": {
+    "requested": "Cerută",
+    "approved": "Aprobată de a doua persoană",
+    "emergency_requested": "Publicare de urgență pornită",
+    "rollback_requested": "Revenire pornită",
+    "start": "Procesul a pornit",
+    "stage": "Pas",
+    "succeeded": "Încheiată cu succes",
+    "failed": "Eșuată",
+    "rolled_back": "S-a revenit la versiunea anterioară",
+    "rollback_blocked": "Revenirea s-a oprit",
+    "abandoned": "Închisă ca eșuată de personal"
+  },
+  "pending": {
+    "title": "Așteaptă a doua persoană",
+    "body": "Versiunea {tag}, cerută de {who}.",
+    "open": "Deschide aprobările",
+    "singleOperator": "O singură persoană are rol în personal, deci nimeni nu poate aproba. Cererea rămâne în așteptare, fără niciun efect."
+  },
+  "releases": {
+    "title": "Versiuni",
+    "none": "Încă nu există etichete de versiune",
+    "noneBody": "Versiunile sunt etichete adnotate cu numele vX.Y.Z, create din ramura principală protejată.",
+    "tag": "Versiune",
+    "hash": "Commit",
+    "ci": "CI pe acest commit",
+    "isLive": "activă",
+    "view": "Examinează",
+    "viewing": "selectată"
+  },
+  "candidate": {
+    "title": "Versiunea {tag}",
+    "commits": "Modificări față de versiunea activă",
+    "commitsNone": "Nu există modificări între versiunea activă și aceasta.",
+    "firstDeploy": "Nu există o versiune activă cu care să se compare: aceasta ar fi prima publicare înregistrată aici.",
+    "more": "Se afișează cele mai noi {shown} din {total} modificări.",
+    "commit": "Commit",
+    "change": "Modificare",
+    "date": "Data",
+    "isLive": "Această versiune este activă.",
+    "ciRefused": "Această versiune nu poate fi publicată: CI nu a trecut pe commitul ei. Rezolvă problema și creează o versiune nouă.",
+    "noRole": "Publicările sunt cerute de un administrator al platformei sau de un administrator de securitate."
+  },
+  "request": {
+    "reason": "De ce se publică această versiune acum",
+    "reasonHint": "A doua persoană citește motivul înainte să aprobe.",
+    "submit": "Cere publicarea",
+    "submitting": "Se trimite cererea…",
+    "requested": "Cerere trimisă. O a doua persoană trebuie să o aprobe —",
+    "requestedLink": "deschide aprobările"
+  },
+  "emergency": {
+    "open": "Publicare de urgență",
+    "title": "Publicare de urgență pentru {tag}",
+    "body": "Doar pentru o remediere urgentă de securitate. Pornește imediat, fără a doua persoană, și este marcată ca urgență în jurnalul de audit, împreună cu motivul tău.",
+    "ciWarning": "CI nu a trecut pe acest commit. Publicarea în aceste condiții se consemnează în jurnalul de audit ca ocolire a CI.",
+    "reason": "Motivul urgenței",
+    "reasonHint": "Cel puțin 10 caractere. Rămâne în jurnalul de audit.",
+    "submit": "Publică acum, fără a doua persoană",
+    "submitting": "Pornește publicarea…",
+    "started": "Publicarea de urgență a pornit."
+  },
+  "rollback": {
+    "title": "Revenire",
+    "body": "Readuce producția la versiunea {tag}. Schimbă doar versiunea și nu șterge niciodată date. Dacă o migrare făcută între timp nu poate fi inversată, revenirea se oprește și spune acest lucru.",
+    "none": "Nu există o versiune anterioară la care să se revină. Pentru a schimba ce este activ, publică o versiune.",
+    "open": "Revino la {tag}",
+    "sheetTitle": "Revenire la {tag}",
+    "reason": "De ce este nevoie de revenire",
+    "reasonHint": "O singură persoană poate face acest lucru. Motivul rămâne în jurnalul de audit.",
+    "submit": "Revino",
+    "submitting": "Pornește revenirea…",
+    "started": "Revenirea a pornit."
+  },
+  "history": {
+    "title": "Istoric",
+    "none": "Încă nu există publicări",
+    "when": "Cerută",
+    "kind": "Tip",
+    "release": "Versiune",
+    "requester": "Cerută de",
+    "approver": "Aprobată de",
+    "result": "Rezultat",
+    "duration": "Durată",
+    "note": "Observații",
+    "emergency": "urgență",
+    "nobody": "nimeni (acțiune a unei singure persoane)",
+    "rolledBackTo": "S-a revenit la {tag}.",
+    "durationValue": "{minutes} min {seconds} s"
+  },
+  "approvals": {
+    "deploy": "Publică versiunea {tag} ({hash}) în producție",
+    "complianceAccess": "Acces de conformitate la înregistrările persoanei vizate {subject}, timp de {hours} ore"
+  },
+  "errors": {
+    "notConfigured": "Legătura cu GitHub nu este configurată pe server.",
+    "badKey": "Cheia aplicației GitHub de pe server nu poate fi folosită. Operatorul trebuie să o verifice.",
+    "github": "GitHub a refuzat cererea sau a dat eroare (cod {status}). Nu s-a schimbat nimic.",
+    "notATag": "Se publică o etichetă de versiune, de exemplu v1.4.0, care există în depozit — niciodată o ramură sau un commit.",
+    "ciNotGreen": "Versiunea {tag} nu poate fi publicată: CI nu a trecut exact pe commitul ei.",
+    "running": "O publicare este deja în desfășurare. Așteaptă să se încheie.",
+    "alreadyRequested": "Versiunea {tag} are deja o cerere care așteaptă aprobarea.",
+    "notRequested": "Această cerere de publicare nu mai este deschisă.",
+    "tagMoved": "Eticheta {tag} nu mai indică commitul pentru care s-a făcut cererea. Fă o cerere nouă.",
+    "emergencyReason": "Scrie motivul urgenței (cel puțin 10 caractere).",
+    "noPrevious": "Nu există o versiune anterioară la care să se revină.",
+    "notActive": "Această publicare nu este în desfășurare.",
+    "notStale": "Procesul ar putea încă lucra. O publicare poate fi închisă manual abia la 90 de minute de la ultimul ei mesaj.",
+    "notApproved": "Această publicare nu a fost aprobată în consolă pentru această versiune.",
+    "notRunning": "Această publicare nu este în desfășurare.",
+    "finished": "Această publicare s-a încheiat deja."
+  },
+  "compliance": {
+    "title": "Acces de conformitate",
+    "description": "Acces la înregistrările păstrate ale unei persoane, pentru un motiv legal, de exemplu o cerere de acces la date. Este nevoie de trei persoane: responsabilul pentru confidențialitate cere, iar alți doi membri ai personalului aprobă. Accesul durează un timp limitat și fiecare citire se scrie în jurnalul de audit.",
+    "threePeople": "Cererile se aprobă în Aprobări de două persoane, altele decât solicitantul.",
+    "singleOperator": "Acum pot participa mai puțin de trei persoane, așa că o cerere ar rămâne în așteptare, fără niciun efect.",
+    "request": {
+      "title": "Cere acces",
+      "email": "Emailul persoanei la care se referă înregistrările",
+      "emailHint": "Emailul de autentificare al contului său.",
+      "reason": "Motivul legal",
+      "reasonHint": "De exemplu: cerere de acces în temeiul art. 15 GDPR, primită la 03.02.2027. Cei care aprobă citesc acest text.",
+      "hours": "Cât timp este nevoie de acces",
+      "hoursOption": "{hours} ore",
+      "submit": "Cere acces",
+      "submitting": "Se trimite cererea…",
+      "requested": "Cerere trimisă. Alte două persoane trebuie să o aprobe —",
+      "requestedLink": "deschide aprobările",
+      "ownerOnly": "Doar responsabilul pentru confidențialitate poate cere acces de conformitate. Poți vedea cererile și le poți aproba în Aprobări."
+    },
+    "list": {
+      "title": "Cereri și accesuri",
+      "none": "Nu s-a cerut niciun acces de conformitate",
+      "subject": "Persoana vizată",
+      "reason": "Motivul legal",
+      "requester": "Cerut de",
+      "requested": "Cerut",
+      "status": "Stare",
+      "until": "Acces până la",
+      "approvals": "{done} din {needed} aprobări",
+      "you": "tu",
+      "export": "Descarcă înregistrările (JSON)",
+      "exportHint": "Profilul contului și identificatorii evenimentelor pe care le deține. Descărcarea se scrie în jurnalul de audit.",
+      "revoke": "Încheie accesul acum",
+      "revoking": "Se încheie…"
+    },
+    "statuses": {
+      "pending": "Așteaptă aprobările",
+      "live": "Acces deschis",
+      "expired": "Expirat",
+      "revoked": "Încheiat mai devreme",
+      "rejected": "Respins",
+      "cancelled": "Retras"
+    },
+    "errors": {
+      "reason": "Scrie motivul legal (cel puțin 10 caractere).",
+      "subjectNotFound": "Nu există un cont pentru această persoană.",
+      "noGrant": "Nu ai un acces de conformitate deschis la aceste înregistrări.",
+      "notPending": "Această cerere de acces nu mai este deschisă.",
+      "notLive": "Acest acces nu este deschis."
+    }
+  }
+}

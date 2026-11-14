@@ -1,0 +1,117 @@
+{
+  "title": "Shared costs",
+  "description": "One ledger: who paid, who benefits and who owes whom. Each currency has its own balance, with no conversion.",
+  "closedNotice": "The occasion is closed. The ledger is read-only.",
+  "hero": {
+    "label": "Shared costs to date, {date}",
+    "settled": "Everyone is settled up.",
+    "transfers": {
+      "one": "One payment to make to settle up.",
+      "few": "{count} payments to make to settle up.",
+      "other": "{count} payments to make to settle up."
+    },
+    "entries": "Entries: {count}"
+  },
+  "settlement": {
+    "title": "Who owes whom",
+    "titleCurrency": "Who owes whom · {currency}",
+    "pays": "{from} pays {to}",
+    "record": "Record the payment",
+    "recording": "Recording…",
+    "settledTitle": "Nobody owes anything",
+    "settledBody": "All balances are zero. When a new cost appears, you will see it here.",
+    "balancesCaption": "Balances by participant, {currency}",
+    "participant": "Participant",
+    "balance": "Balance",
+    "toReceive": "is owed",
+    "toPay": "owes",
+    "even": "settled",
+    "sumNote": "The balances always add up to zero."
+  },
+  "participants": {
+    "title": "Participants",
+    "add": "Add participant",
+    "addTitle": "New participant",
+    "adding": "Adding…",
+    "create": "Add participant",
+    "kind": "Who it is",
+    "kinds": {
+      "member": "Someone on the team",
+      "household": "An invited household",
+      "other": "Someone else (type the name)"
+    },
+    "member": "Team member",
+    "household": "Invited household",
+    "name": "Name",
+    "nameHint": "As you want it to appear in the ledger.",
+    "noMembers": "Every team member is already a participant.",
+    "noHouseholds": "There are no more households to add.",
+    "remove": "Remove",
+    "removing": "Removing…",
+    "removeLabel": "Remove participant {name}",
+    "emptyTitle": "First add the people who share the costs",
+    "emptyBody": "They can be people on the team, invited households or anyone else, with a name you type."
+  },
+  "entries": {
+    "title": "Entries",
+    "add": "Add a shared cost",
+    "addTitle": "New shared cost",
+    "adding": "Adding…",
+    "create": "Add cost",
+    "needTwo": "Add at least two participants to be able to split a cost.",
+    "emptyTitle": "No shared costs recorded",
+    "emptyBody": "Add the first cost: who paid and who it is split between.",
+    "description": "What for",
+    "descriptionPlaceholder": "e.g. the cabin, two nights",
+    "amount": "Amount (RON)",
+    "amountHint": "For example 1,250 or 1250.50",
+    "date": "Date",
+    "paidBy": "Who paid",
+    "splitMode": "How it is split",
+    "modes": {
+      "even": "Evenly",
+      "shares": "By shares",
+      "exact": "Exact amounts"
+    },
+    "beneficiaries": "Who benefits",
+    "sharesHint": "Enter how many shares each person has (0 = not taking part). For example 2 for a couple, 1 for one person.",
+    "exactHint": "Enter each person's amount. Together they must add up exactly to the total.",
+    "shareOf": "Shares for {name}",
+    "amountOf": "Amount for {name} (RON)",
+    "meta": "{date} · paid by {payer} · split between {count}",
+    "settlementMeta": "{date} · settlement",
+    "settlementTitle": "{from} paid {to}",
+    "voided": "Voided",
+    "void": "Void entry",
+    "voidTitle": "Void entry",
+    "voidIntro": "An entry is a fact: it is not deleted or edited. Voiding takes it out of the balances and keeps the reason.",
+    "voidReason": "Reason for voiding",
+    "voidSubmit": "Void the entry “{name}”",
+    "voidKeep": "Keep entry",
+    "voiding": "Voiding…",
+    "settlementName": "settlement"
+  },
+  "own": {
+    "title": "Your balance in the shared costs",
+    "pay": "You owe {amount} to {name}",
+    "receive": "You are owed {amount} by {name}"
+  },
+  "export": {
+    "title": "Shared costs (CSV)",
+    "description": "Every entry with its split, and the balances per currency."
+  },
+  "errors": {
+    "amountRequired": "Enter an amount greater than zero, for example 1,250 or 1250.50.",
+    "noBeneficiaries": "Choose at least one person who benefits.",
+    "duplicateBeneficiary": "The same person appears twice in the split.",
+    "badShares": "Shares must be whole numbers, with at least one above zero.",
+    "badExact": "Amounts must be zero or more.",
+    "exactShort": "The amounts add up to {entered}, {difference} less than the total of {total}. Add {difference} more.",
+    "exactOver": "The amounts add up to {entered}, {difference} more than the total of {total}. Take off {difference}.",
+    "participantMissing": "The chosen participant no longer exists. Choose another.",
+    "participantExists": "You already have a participant with this name.",
+    "participantInUse": "The participant appears in entries and cannot be removed.",
+    "tooManyParticipants": "You can have at most {limit} participants.",
+    "sameParticipant": "The person paying and the person receiving must be different people."
+  }
+}

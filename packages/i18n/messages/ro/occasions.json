@@ -1,0 +1,166 @@
+{
+  "list": {
+    "eyebrow": "Planurile tale",
+    "title": "Ocazii",
+    "description": "Cele mai apropiate sunt primele.",
+    "new": "Ocazie nouă",
+    "emptyTitle": "Nicio ocazie încă",
+    "emptyBody": "Începe cu un titlu și o dată. Poți porni de la un model cu sarcini pregătite sau de la zero.",
+    "noDateShort": "fără dată",
+    "openTasks": {
+      "zero": "nicio sarcină deschisă",
+      "one": "{count} sarcină deschisă",
+      "few": "{count} sarcini deschise",
+      "other": "{count} de sarcini deschise"
+    }
+  },
+  "kinds": {
+    "picnic": "Picnic",
+    "aniversare": "Aniversare",
+    "nunta": "Nuntă",
+    "botez": "Botez",
+    "revelion": "Revelion",
+    "voiaj_solo": "Voiaj solo",
+    "voiaj_grup": "Voiaj de grup",
+    "blank": "Ocazie"
+  },
+  "date": {
+    "byPoll": "Data se decide prin sondaj",
+    "legend": "Când are loc?",
+    "mode": {
+      "date": "Într-o zi",
+      "range": "Mai multe zile",
+      "poll": "Decidem prin sondaj"
+    },
+    "pollHint": "Poți crea ocazia fără dată. Sarcinile din model își primesc termenele când stabilești data.",
+    "startsOn": "Data",
+    "startsOnRange": "Prima zi",
+    "endsOn": "Ultima zi"
+  },
+  "countdown": {
+    "today": "astăzi",
+    "inDays": {
+      "one": "mâine",
+      "few": "în {count} zile",
+      "other": "în {count} de zile"
+    },
+    "past": "a trecut"
+  },
+  "status": {
+    "planning": "În pregătire",
+    "pendingDeletion": "Se șterge",
+    "cancelled": "Anulată",
+    "postponed": "Amânată",
+    "closed": "Încheiată"
+  },
+  "new": {
+    "back": "Ocazii",
+    "title": "Ocazie nouă",
+    "description": "Un titlu, un model și o dată sunt de ajuns ca să începi. Restul se poate schimba oricând.",
+    "templateLegend": "Pornește de la un model",
+    "templateNote": {
+      "one": "{description} {count} sarcină pregătită, programată în funcție de dată.",
+      "few": "{description} {count} sarcini pregătite, programate în funcție de dată.",
+      "other": "{description} {count} de sarcini pregătite, programate în funcție de dată."
+    },
+    "templateBlank": "Fără sarcini pregătite: le adaugi tu, pe rând.",
+    "briefToggle": "Adaugă scopul și prioritățile",
+    "submit": "Creează ocazia",
+    "submitting": "Se creează…",
+    "cancel": "Renunță",
+    "freeNote": "Crearea unei ocazii este gratuită.",
+    "lessonsTitle": "Lecții de la ocaziile trecute",
+    "lessonsIntro": "Notițele tale de la ocaziile pe care le-ai încheiat."
+  },
+  "fields": {
+    "title": "Titlul ocaziei",
+    "titleHint": "De exemplu „Nunta Ioanei și a lui Andrei”.",
+    "venueName": "Locul",
+    "venueAddress": "Adresa"
+  },
+  "brief": {
+    "title": "Pe scurt",
+    "intro": "De ce are loc ocazia și ce contează cel mai mult. Sarcinile se pot lega de aceste priorități.",
+    "purpose": "Scopul",
+    "purposeHint": "O frază sau două, pe înțelesul tuturor celor din echipă.",
+    "priority": "Prioritatea {number}"
+  },
+  "deletion": {
+    "bannerTitle": "Ocazia urmează să fie ștearsă",
+    "bannerBody": "Până pe {date} o poți recupera cu tot ce conține. După aceea se șterge definitiv.",
+    "undo": "Anulează ștergerea",
+    "undoing": "Se anulează…",
+    "title": "Ștergerea ocaziei",
+    "pendingHere": "Ștergerea este programată. Poți renunța la ea până pe {date}, din banda de sus a paginii.",
+    "intro": "După ce ceri ștergerea ai {days} zile în care o poți anula. În acest timp ocazia rămâne vizibilă echipei, cu un anunț. Apoi sarcinile, echipa, invitații și fișierele ocaziei se șterg definitiv.",
+    "retainedIntro": "Legea ne obligă să păstrăm câteva lucruri și după ștergere:",
+    "retainedReceipts": "chitanțele și documentele de plată — {years} ani, pentru contabilitate;",
+    "retainedObjections": "cererile de opoziție sau de eliminare — {years} ani, ca să le putem respecta;",
+    "retainedAudit": "jurnalul acțiunilor sensibile — {years} ani, pentru securitate.",
+    "freshTitle": "Confirmă întâi că ești tu",
+    "freshBody": "Ștergerea unei ocazii cere o confirmare proaspătă. O poți face aici sau din pagina contului.",
+    "freshLink": "Deschide pagina contului",
+    "open": "Șterge ocazia",
+    "confirmTitle": "Ștergi ocazia?",
+    "confirmBody": "„{title}” va fi ștearsă peste {days} zile. Până atunci o poți recupera oricând.",
+    "keep": "Păstrează ocazia",
+    "submit": "Șterge ocazia"
+  },
+  "statusBanner": {
+    "cancelled": {
+      "title": "Ocazia a fost anulată",
+      "body": "Planul rămâne aici ca să îl poți consulta."
+    },
+    "postponed": {
+      "title": "Ocazia a fost amânată",
+      "body": "Când stabilești noua dată, termenele sarcinilor se mută odată cu ea."
+    },
+    "closed": {
+      "title": "Ocazia s-a încheiat",
+      "body": "Planul rămâne aici ca să îl poți consulta."
+    }
+  },
+  "proposals": {
+    "title": "Ce-ar fi dacă?",
+    "description": "Schimbările importante apar mai întâi aici, cu tot ce ar modifica. Nimic nu se aplică până nu confirmă cineva.",
+    "pendingTitle": "Așteaptă o decizie",
+    "emptyTitle": "Nicio propunere în așteptare",
+    "emptyBody": "Când muți data sau aplici din nou un model, previzualizarea apare aici.",
+    "historyTitle": "Decise recent",
+    "historyEmpty": "Încă nu s-a decis nimic.",
+    "state": {
+      "applied": "Aplicată",
+      "discarded": "Respinsă"
+    }
+  },
+  "settings": {
+    "title": "Setări",
+    "description": "Detaliile ocaziei, data și ștergerea.",
+    "saved": "Am salvat detaliile.",
+    "save": "Salvează detaliile",
+    "detailsTitle": "Detalii și brief",
+    "readOnlyTitle": "Setările sunt ale organizatorului",
+    "readOnlyBody": "Doar organizatorul și managerii de proiect pot schimba detaliile ocaziei.",
+    "tripZoneNote": "Data ocaziei este în ora României. Etapele călătoriei își păstrează fiecare fusul orar al locului."
+  },
+  "move": {
+    "title": "Data ocaziei",
+    "intro": "Alege noua dată și vezi mai întâi ce se schimbă: fiecare sarcină al cărei termen se mută apare într-o previzualizare. Nimic nu se aplică până nu confirmi.",
+    "submit": "Vezi ce se schimbă",
+    "submitting": "Se calculează…"
+  },
+  "errors": {
+    "dateRequired": "Alege data sau treci pe „Decidem prin sondaj”.",
+    "endRequired": "Alege și ultima zi.",
+    "endBeforeStart": "Ultima zi nu poate fi înaintea primei zile.",
+    "sameDate": "Aceasta este deja data ocaziei. Alege altă dată."
+  },
+  "whatif": {
+    "byPoll": "se decide prin sondaj",
+    "dateRow": "Data ocaziei",
+    "taskLabel": "Termen",
+    "moreTasks": "și încă {count} sarcini își mută termenul",
+    "noTasksMove": "Niciun termen de sarcină nu se schimbă.",
+    "moveTitle": "Mutarea datei ocaziei"
+  }
+}

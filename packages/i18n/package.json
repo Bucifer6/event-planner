@@ -1,0 +1,25 @@
+{
+  "name": "@ed/i18n",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts",
+    "./config": "./src/config.ts",
+    "./load": "./src/load.ts",
+    "./format": "./src/format.ts"
+  },
+  "scripts": {
+    "gen": "node scripts/gen-messages.mjs",
+    "typecheck": "node scripts/gen-messages.mjs && tsc --noEmit",
+    "test": "node scripts/gen-messages.mjs && vitest run"
+  },
+  "dependencies": {
+    "@ed/shared": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "22.20.5",
+    "typescript": "5.9.3",
+    "vitest": "5.1.0"
+  }
+}

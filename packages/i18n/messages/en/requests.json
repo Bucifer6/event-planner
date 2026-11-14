@@ -1,0 +1,93 @@
+{
+  "title": "Private requests",
+  "description": "Dietary and access needs told in confidence. Only people given this specific access see them.",
+  "kinds": {
+    "dietary": "Dietary",
+    "access": "Access",
+    "other": "Other"
+  },
+  "status": {
+    "open": "To handle",
+    "handled": "Handled"
+  },
+  "hero": {
+    "label": "Requests to handle now",
+    "note": "Out of {total} received in total"
+  },
+  "retention": "Requests delete themselves 30 days after the occasion is closed out.",
+  "empty": {
+    "title": "No private requests",
+    "body": "Guests can send one from their link, in the “Private request” section. Send them their invitations from the Guests page.",
+    "action": "Open Guests"
+  },
+  "list": {
+    "title": "Requests",
+    "from": "From {name}",
+    "fromPublic": "From {name} (public page)",
+    "received": "received on {date}",
+    "noText": "No text — only the tag.",
+    "note": "Your note: {note}",
+    "handle": "Mark as handled",
+    "reopen": "Reopen",
+    "handleTitle": "The request from {name}",
+    "noteLabel": "Note for you and others with this access",
+    "noteHint": "For example: spoke with the chef.",
+    "saveHandled": "Save as handled",
+    "saveOpen": "Save as not handled"
+  },
+  "counts": {
+    "title": "In brief, in numbers",
+    "access": "access needs",
+    "other": "other requests",
+    "untagged": "dietary without a tag"
+  },
+  "share": {
+    "title": "Send only numbers to a supplier",
+    "intro": "The supplier gets lines such as “3 × gluten-free” in the briefing. No name, no household, no text written by guests.",
+    "booking": "Supplier",
+    "tags": "Which numbers to send",
+    "tagLine": "{count} × {tag}",
+    "access": "{count} × access needs",
+    "accessLine": "access needs (details with the organiser)",
+    "submit": "Send the numbers into the briefing",
+    "sending": "Publishing…",
+    "sent": "Published as version {version} of the briefing.",
+    "nothing": "There are no numbers to send yet: the requests have no dietary tags and there are no access needs.",
+    "noSuppliers": "This occasion has no suppliers yet.",
+    "managersOnly": "Only the organisers can publish into a supplier's briefing."
+  },
+  "guest": {
+    "title": "Private request",
+    "intro": "Do you have a dietary or access need? Tell us here. Only the organisers appointed for this read it — not other guests, not suppliers.",
+    "kind": "What is it about",
+    "kindDietary": "Food",
+    "kindAccess": "Access",
+    "kindOther": "Something else",
+    "dietTag": "Diet",
+    "dietTagNone": "Other / not applicable",
+    "body": "Details",
+    "bodyHint": "For example: nut allergy; I need a ramp at the entrance.",
+    "childWarningTitle": "It looks like you wrote details about a child",
+    "childWarningBody": "A child's name or age is not needed — the need itself is enough (“one gluten-free meal”). You can remove the details or send as it is.",
+    "sendAnyway": "Send as it is",
+    "send": "Send the request",
+    "sending": "Sending…",
+    "sent": "Your request has reached the organisers.",
+    "sentBefore": "You have already sent:",
+    "sentRow": "{kind} — on {date}",
+    "sentNote": "For discretion, the text is not shown here again after sending.",
+    "another": "Send another request",
+    "honeypot": "Leave this field empty"
+  },
+  "export": {
+    "title": "Private requests (CSV)",
+    "description": "Only for people with access to private requests."
+  },
+  "errors": {
+    "kind": "Choose what the request is about.",
+    "empty": "Write a few words or choose a diet.",
+    "tooMany": "You have already sent several requests. For anything else, write to the organisers directly.",
+    "nothingToShare": "Tick at least one number to send.",
+    "alreadyShared": "The briefing already has these numbers."
+  }
+}

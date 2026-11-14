@@ -1,0 +1,336 @@
+{
+  "list": {
+    "title": "Spații și planuri",
+    "description": "Încarcă planul fiecărei săli, calibrează-l și marchează ce e de folosit. Organizatorii își așază invitații direct pe planul tău.",
+    "back": "Înapoi la „{name}”",
+    "linkFromListing": "Spații, planuri și parcare",
+    "removed": "Spațiul a fost retras.",
+    "spaces": "Spațiile tale",
+    "emptyTitle": "Niciun spațiu încă",
+    "emptyBody": "Adaugă prima sală: un nume, dimensiunile reale dacă le știi și desenul ei.",
+    "addFirst": "Adaugă primul spațiu",
+    "add": "Adaugă un spațiu",
+    "addTitle": "Spațiu nou",
+    "create": "Creează spațiul",
+    "hasDrawing": "Are desen",
+    "noDrawing": "fără desen",
+    "calibrated": "Calibrat",
+    "notCalibrated": "necalibrat",
+    "unsent": "Are modificări netrimise",
+    "open": "Deschide „{name}”"
+  },
+  "status": {
+    "draft": "Ciornă",
+    "pending": "În verificare",
+    "live": "Public",
+    "retired": "Retras",
+    "liveVersion": "Public · v{n} din {date}",
+    "editPending": "Modificare în verificare"
+  },
+  "rejected": {
+    "title": "Ultima trimitere nu a fost aprobată",
+    "next": "Corectează și trimite din nou spre verificare."
+  },
+  "sent": {
+    "title": "Am trimis planul spre verificare",
+    "body": "Un moderator îl verifică. Până atunci rămâne public ce era aprobat înainte."
+  },
+  "pending": {
+    "title": "O versiune așteaptă verificarea",
+    "bodyNew": "Trimisă la {date}. Devine publică după aprobare.",
+    "bodyEdit": "Trimisă la {date}. Versiunea publică de acum rămâne vizibilă până la aprobare."
+  },
+  "editor": {
+    "title": "Planul spațiului",
+    "back": "Înapoi la spații"
+  },
+  "details": {
+    "title": "Nume și dimensiuni declarate",
+    "body": "Dimensiunile reale ale sălii, așa cum le declari tu. Dacă nu le știi, lasă-le necompletate: apar ca „necunoscut”.",
+    "change": "Modifică numele și dimensiunile",
+    "stated": "Dimensiuni declarate"
+  },
+  "submit": {
+    "title": "Trimite spre verificare",
+    "bodyNew": "Planul devine public după ce îl aprobă un moderator.",
+    "bodyEdit": "Versiunea publică rămâne neschimbată până când un moderator aprobă modificările. Organizatorii care folosesc deja planul primesc noua versiune ca propunere.",
+    "nothingNew": "Nu ai modificări de trimis.",
+    "send": "Trimite spre verificare"
+  },
+  "retire": {
+    "open": "Retrage spațiul",
+    "title": "Retragi „{name}”?",
+    "body": "Spațiul dispare de pe pagina ta publică. Organizatorii care îl folosesc deja își păstrează versiunea.",
+    "confirm": "Retrage „{name}”",
+    "removing": "Se retrage…"
+  },
+  "plan": {
+    "label": "Planul spațiului {name}",
+    "working": "copie de lucru",
+    "notCalibrated": "necalibrat · fără scară"
+  },
+  "drawing": {
+    "title": "1 · Desenul",
+    "none": "Încă nu ai încărcat un desen.",
+    "upload": "Încarcă desenul sălii",
+    "uploadHint": "PNG, JPG sau PDF, cel mult 10 MB. Un plan văzut de sus, cu pereții clari.",
+    "replace": "Înlocuiește desenul",
+    "replaceHint": "Un desen nou anulează calibrarea și marcajele făcute pe cel vechi.",
+    "attaching": "Se pregătește desenul…",
+    "pdfStoredTitle": "Am păstrat PDF-ul, dar nu îl putem afișa pentru calibrare",
+    "pdfStoredBody": "Încarcă planul ca imagine (PNG sau JPG) ca să îl poți calibra și marca."
+  },
+  "calibration": {
+    "title": "2 · Calibrarea",
+    "done": "Calibrat",
+    "needed": "De calibrat",
+    "why": "Fără calibrare desenul rămâne o simplă imagine: nu poate primi marcaje și nu poate fi folosit de organizatori pentru așezarea la mese.",
+    "scale": "1 pixel = {cm} cm. Desenul acoperă {width} × {height} m.",
+    "step1": "Atinge pe desen primul capăt al unei distanțe pe care o știi (de exemplu un perete).",
+    "step2": "Atinge al doilea capăt.",
+    "step3": "Scrie distanța reală dintre cele două puncte.",
+    "mark": "Marchează cele două puncte pe desen",
+    "markAgain": "Marchează din nou punctele",
+    "touchA": "Atinge pe desen punctul A.",
+    "touchB": "Acum atinge punctul B.",
+    "typed": "Sau scrie pozițiile punctelor",
+    "typedHint": "În pixeli, de la colțul din stânga sus. Desenul are {width} × {height} px.",
+    "fields": {
+      "ax": "Punctul A — orizontal",
+      "ay": "Punctul A — vertical",
+      "bx": "Punctul B — orizontal",
+      "by": "Punctul B — vertical"
+    },
+    "distance": "Distanța reală dintre A și B (m)",
+    "distanceHint": "De exemplu 12 sau 8,5. Cu cât punctele sunt mai depărtate, cu atât scara e mai exactă.",
+    "submit": "Calculează scara",
+    "redo": "Recalculează scara",
+    "saving": "Se calculează scara…",
+    "errors": {
+      "points": "Marchează mai întâi ambele puncte pe desen.",
+      "distanceMissing": "Scrie distanța reală dintre cele două puncte."
+    }
+  },
+  "markings": {
+    "title": "3 · Marcajele",
+    "description": "Fiecare marcaj se poate face atingând desenul sau scriind poziția și dimensiunile. Tot ce nu știi rămâne „necunoscut”.",
+    "lockedTitle": "Calibrează desenul ca să poți marca",
+    "lockedBody": "Marcajele se păstrează în metri reali, așa că au nevoie de scară."
+  },
+  "place": {
+    "point": "Atinge pe desen locul potrivit.",
+    "rectFirst": "Atinge un colț al dreptunghiului.",
+    "rectSecond": "Acum atinge colțul opus.",
+    "outline": "Atinge colțurile conturului, pe rând. Puncte: {count}",
+    "closeOutline": "Închide conturul",
+    "cancel": "Renunță",
+    "move": "Mută pe desen"
+  },
+  "areas": {
+    "title": "Suprafețe utile",
+    "hint": "Zonele în care se pot așeza mese. Verificările de încăpere se fac doar în interiorul lor.",
+    "empty": "Nicio suprafață marcată.",
+    "add": "Adaugă o suprafață utilă",
+    "editTitle": "Suprafață utilă",
+    "confirmAdd": "Adaugă suprafața",
+    "unnamed": "Suprafață fără nume",
+    "redraw": "Trasează pe desen",
+    "outline": "Contur liber"
+  },
+  "tables": {
+    "title": "Inventarul de mese",
+    "hint": "Tipurile de mese pe care le pui la dispoziție, cu dimensiuni reale și câte ai.",
+    "empty": "Niciun tip de masă.",
+    "add": "Adaugă un tip de masă",
+    "seatsLabel": "locuri:",
+    "seats": "Locuri: {count}",
+    "countLabel": "bucăți:",
+    "count": "Bucăți: {count}"
+  },
+  "tableTypes": {
+    "add": "Tip de masă nou",
+    "editTitle": "Tip de masă",
+    "confirmAdd": "Adaugă tipul de masă"
+  },
+  "fixtures": {
+    "title": "Elemente fixe",
+    "hint": "Ring de dans, scenă, candy bar, cabină foto: au dimensiuni reale și intră în verificările de încăpere.",
+    "empty": "Niciun element.",
+    "add": "Adaugă un element",
+    "editTitle": "Element fix",
+    "confirmAdd": "Adaugă elementul"
+  },
+  "pois": {
+    "title": "Puncte de interes",
+    "hint": "Toalete, garderobă, bar, intrări și ieșiri. Invitații le văd pe planul sălii.",
+    "empty": "Niciun punct de interes.",
+    "add": "Adaugă un punct de interes",
+    "editTitle": "Punct de interes",
+    "confirmAdd": "Adaugă punctul"
+  },
+  "parkingAreas": {
+    "title": "Zone de parcare",
+    "hint": "Desenate la scară, cu numărul de locuri. Numărul trebuie să se potrivească cu cel declarat la parcare.",
+    "empty": "Nicio zonă de parcare desenată.",
+    "add": "Adaugă o zonă de parcare",
+    "editTitle": "Zonă de parcare",
+    "confirmAdd": "Adaugă zona de parcare",
+    "unnamed": "Parcare",
+    "spacesLabel": "locuri:",
+    "spaces": "Locuri: {count}"
+  },
+  "fixtureKinds": {
+    "dance": "Ring de dans",
+    "candybar": "Candy bar",
+    "photobooth": "Cabină foto",
+    "stage": "Scenă",
+    "bar": "Bar",
+    "other": "Alt element"
+  },
+  "poiKinds": {
+    "toilets": "Toalete",
+    "cloakroom": "Garderobă",
+    "bar": "Bar",
+    "entrance": "Intrare",
+    "exit": "Ieșire",
+    "photo": "Colț foto",
+    "stage": "Scenă",
+    "other": "Alt punct"
+  },
+  "shapes": {
+    "round": "Rotundă",
+    "rect": "Dreptunghiulară"
+  },
+  "fields": {
+    "spaceName": "Numele spațiului",
+    "spaceNameHint": "De exemplu „Sala Mare” sau „Terasa”.",
+    "statedWidth": "Lățimea reală (m)",
+    "statedLength": "Lungimea reală (m)",
+    "statedHint": "Lasă gol dacă nu o știi.",
+    "x": "De la stânga (m)",
+    "xHint": "Distanța față de marginea stângă a desenului.",
+    "y": "De sus (m)",
+    "yHint": "Distanța față de marginea de sus.",
+    "areaName": "Nume",
+    "spaces": "Număr de locuri",
+    "spacesHint": "Lasă gol dacă nu îl știi.",
+    "width": "Lățime (m)",
+    "length": "Lungime (m)",
+    "rectHint": "Poziția este a colțului din stânga sus.",
+    "outlineHint": "Conturul liber se modifică atingând desenul („Contur liber”).",
+    "tableName": "Numele tipului de masă",
+    "tableNameHint": "De exemplu „Rotundă de 10”.",
+    "shape": "Formă",
+    "diameter": "Diametru (m)",
+    "seats": "Locuri la masă",
+    "count": "Câte ai",
+    "unknownHint": "Ce lași gol apare ca „necunoscut”, iar masa nu intră în verificările de încăpere până nu îi știm dimensiunile.",
+    "kind": "Fel",
+    "fixtureName": "Nume",
+    "rotation": "Rotire (grade)",
+    "thenPlace": "După ce îl adaugi, atinge pe desen locul lui.",
+    "poiName": "Nume"
+  },
+  "optionalUnknown": "gol = necunoscut",
+  "saveChanges": "Salvează modificările",
+  "saved": "Salvat.",
+  "saving": "Se salvează…",
+  "sending": "Se trimite…",
+  "withdraw": "Retrage trimiterea",
+  "withdrawing": "Se retrage…",
+  "edit": "Modifică",
+  "remove": "Șterge",
+  "parking": {
+    "title": "Parcare",
+    "publicTitle": "Parcare",
+    "description": "Spune ce știi despre parcare. Fiecare informație apare ca știută sau „necunoscut” pe pagina ta și pe pagina invitaților. Dacă nu ai parcare, spune asta clar.",
+    "nothingPublic": "Încă nu ai declarat nimic despre parcare.",
+    "mismatchTitle": "Numărul de locuri apare ca „necunoscut”",
+    "mismatchBody": "Ai declarat {stated} locuri, dar zonele desenate au în total {drawn}. Corectează unul dintre ele sau confirmă numărul declarat.",
+    "pendingTitle": "Informațiile despre parcare așteaptă verificarea",
+    "pendingBody": "Trimise la {date}.",
+    "change": "Modifică informațiile despre parcare",
+    "state": "Declară informațiile despre parcare",
+    "formTitle": "Parcare",
+    "yes": "Da",
+    "no": "Nu",
+    "noneOnSite": "Fără parcare pe loc",
+    "metres": "{m} m",
+    "options": {
+      "unknown": "Nu știu",
+      "yes": "Da",
+      "no": "Nu"
+    },
+    "fields": {
+      "onSite": "Parcare pe loc",
+      "spaceCount": "Număr de locuri",
+      "onStreet": "Parcare pe stradă în apropiere",
+      "paid": "Parcare cu plată",
+      "accessibleSpaces": "Locuri pentru persoane cu dizabilități",
+      "walkingDistanceM": "De la parcare la intrare (m)"
+    },
+    "onSiteHint": "Dacă alegi „Nu”, pagina va spune clar „Fără parcare pe loc”.",
+    "countHint": "Lasă gol dacă nu îl știi.",
+    "countHintDrawn": "Zonele de parcare desenate au în total {drawn} locuri.",
+    "confirmCount": "Numărul declarat este cel corect",
+    "confirmCountHint": "Bifează numai dacă diferă de cele {drawn} locuri desenate și vrei să rămână cel declarat.",
+    "walkingHint": "Mersul pe jos, în metri. Lasă gol dacă nu știi.",
+    "submit": "Trimite spre verificare",
+    "sent": "Am trimis informațiile spre verificare."
+  },
+  "public": {
+    "title": "Spații și planuri",
+    "version": "Versiunea {n}, valabilă din {date}",
+    "stated": "Dimensiuni declarate",
+    "notCalibrated": "Plan necalibrat: imagine orientativă, fără scară. Nu poate fi folosit pentru așezarea la mese.",
+    "pictureAlt": "Desenul spațiului {name}",
+    "tablesCaption": "Mesele disponibile în {name}",
+    "fixtures": "Elemente",
+    "cols": {
+      "type": "Tip de masă",
+      "size": "Dimensiuni",
+      "seats": "Locuri",
+      "count": "Bucăți"
+    }
+  },
+  "moderation": {
+    "kind": "Plan de spațiu",
+    "parkingKind": "Informații despre parcare",
+    "fields": {
+      "name": "Nume",
+      "width": "Lățime declarată",
+      "length": "Lungime declarată",
+      "drawing": "Desen",
+      "calibrated": "Calibrat",
+      "areas": "Suprafețe utile",
+      "tables": "Inventar de mese",
+      "fixtures": "Elemente fixe",
+      "pois": "Puncte de interes",
+      "parkingAreas": "Zone de parcare"
+    },
+    "parkingFields": {
+      "onSite": "Parcare pe loc",
+      "spaceCount": "Număr de locuri",
+      "onStreet": "Parcare pe stradă",
+      "paid": "Cu plată",
+      "accessibleSpaces": "Locuri pentru persoane cu dizabilități",
+      "walkingDistanceM": "Distanța până la intrare",
+      "countConfirmed": "Număr confirmat de firmă"
+    }
+  },
+  "errors": {
+    "measure": "Scrie o măsură în metri, de exemplu 12 sau 1,8.",
+    "wholeNumber": "Scrie un număr întreg.",
+    "bothSides": "Scrie ambele laturi sau lasă-le pe amândouă goale.",
+    "notCalibrated": "Desenul nu este calibrat. Calibrează-l înainte de a adăuga marcaje.",
+    "conflict": "Altcineva din echipă a modificat planul între timp. Am reîncărcat versiunea lor; fă din nou schimbarea ta.",
+    "retired": "Acest spațiu a fost retras.",
+    "listingRetired": "Profilul a fost retras, deci nu mai poate primi planuri.",
+    "tooManySpaces": "Un profil poate avea cel mult {max} spații.",
+    "noPicture": "Desenul nu are o imagine pe care să o poți calibra. Încarcă planul ca PNG sau JPG.",
+    "pointOutside": "Punctele trebuie să fie pe desen.",
+    "pointsTooClose": "Punctele sunt prea apropiate. Alege două puncte mai depărtate.",
+    "distanceTooSmall": "Distanța trebuie să fie de cel puțin 10 cm.",
+    "nothingToSubmit": "Adaugă un desen sau dimensiunile sălii înainte de a trimite."
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "title": "Livrări și retururi",
+  "description": "Ce urmează să sosească, ce închiriezi și ce trebuie dus înapoi. Cantitatea primită se înregistrează o singură dată; după aceea se schimbă doar printr-o corecție cu motiv.",
+  "slotUnknown": "interval nestabilit",
+  "kinds": {
+    "delivery": "Livrare",
+    "hire": "Închiriere",
+    "return": "Retur"
+  },
+  "states": {
+    "expected": "Așteptată",
+    "partial": "Parțială",
+    "received": "Primită",
+    "returned": "Returnată"
+  },
+  "empty": {
+    "title": "Încă nu ai nicio livrare",
+    "body": "Adaugă prima livrare — scaunele închiriate, florile, tortul — cu ziua, intervalul și locul unde ajunge.",
+    "bodyReadOnly": "Când organizatorul adaugă livrări, le vezi aici și poți înregistra ce a sosit."
+  },
+  "add": {
+    "open": "Adaugă o livrare",
+    "title": "Livrare nouă",
+    "submit": "Adaugă livrarea"
+  },
+  "fields": {
+    "title": "Ce se livrează",
+    "titleHint": "De exemplu: scaune și mese, aranjamente florale.",
+    "kind": "Fel",
+    "supplier": "Furnizor",
+    "noSupplier": "Fără furnizor",
+    "day": "Ziua",
+    "fromTime": "De la ora",
+    "toTime": "Până la ora",
+    "timeHint": "În formatul 14:30.",
+    "place": "Unde",
+    "placeHint": "De exemplu: intrarea din spate, la bucătărie.",
+    "itemLabel": "Primul articol",
+    "itemLabelHint": "De exemplu: scaune. Poți adăuga și altele după aceea.",
+    "itemQty": "Cantitate așteptată",
+    "itemUnit": "Unitate",
+    "itemUnitHint": "De exemplu: buc, kg, cutii.",
+    "deposit": "Garanție (RON)",
+    "depositHint": "Doar pentru articole închiriate. Lasă gol dacă nu există."
+  },
+  "item": {
+    "none": "Niciun articol încă.",
+    "add": "Adaugă un articol",
+    "addTitle": "Articol nou — {title}",
+    "addSubmit": "Adaugă articolul",
+    "remove": "Șterge articolul",
+    "expected": "Așteptat",
+    "received": "Primit",
+    "returned": "Returnat",
+    "deposit": "Garanție",
+    "notRecorded": "Neînregistrat",
+    "complete": "Complet",
+    "short": "Lipsesc {missing}",
+    "receivedAt": "Înregistrat la {date}",
+    "recordLabel": "Câte au sosit",
+    "recordHint": "Se înregistrează o singură dată.",
+    "record": "Înregistrează primirea"
+  },
+  "correct": {
+    "open": "Corectează cantitatea primită",
+    "title": "Corectează cantitatea primită",
+    "intro": "{label}: acum este înregistrat {current}. Corecția păstrează vechea valoare, noua valoare, cine a corectat și de ce.",
+    "quantity": "Cantitatea primită corectă",
+    "reason": "Motivul corecției",
+    "reasonHint": "De exemplu: am numărat din nou, două erau în al doilea transport.",
+    "submit": "Salvează corecția",
+    "done": "Corecția a fost salvată.",
+    "history": "Istoricul corecțiilor",
+    "openReturn": "Corectează cantitatea returnată",
+    "titleReturn": "Corectează cantitatea returnată",
+    "introReturn": "{label}: acum este înregistrat ca returnat {current}. Corecția păstrează vechea valoare, noua valoare, cine a corectat și de ce.",
+    "quantityReturn": "Cantitatea returnată corectă",
+    "fields": {
+      "receivedQty": "Cantitate primită",
+      "returnedQty": "Cantitate returnată",
+      "depositRecoveredAt": "Garanție marcată ca nerecuperată"
+    }
+  },
+  "return": {
+    "open": "Înregistrează returul",
+    "title": "Înregistrează returul",
+    "intro": "{label}: au fost primite {received}. Scrie câte au fost duse înapoi.",
+    "quantity": "Câte s-au returnat",
+    "submit": "Înregistrează returul"
+  },
+  "deposit": {
+    "recover": "Garanție recuperată",
+    "recoveredAt": "Garanție recuperată la {date}",
+    "undo": "Corectează: garanția nu e recuperată",
+    "undoTitle": "Corectează garanția",
+    "undoIntro": "Recuperarea garanției rămâne în istoric. Scrie de ce o corectezi.",
+    "undoSubmit": "Marchează ca nerecuperată"
+  },
+  "remove": {
+    "open": "Șterge livrarea",
+    "title": "Ștergi livrarea?",
+    "body": "„{title}” dispare din plan, împreună cu articolele ei.",
+    "submit": "Șterge livrarea"
+  },
+  "errors": {
+    "titleRequired": "Scrie ce se livrează.",
+    "labelRequired": "Scrie numele articolului.",
+    "quantity": "Scrie cantitatea cu cifre, de exemplu 120.",
+    "amount": "Scrie suma cu cifre, de exemplu 500 sau 1.500,50.",
+    "supplier": "Alege un furnizor al acestei ocazii.",
+    "slotOrder": "Ora de sfârșit trebuie să fie după ora de început.",
+    "day": "Alege o zi validă.",
+    "dayForTime": "Alege ziua pentru orele scrise.",
+    "time": "Scrie ora în formatul 14:30.",
+    "hasFacts": "Există deja cantități înregistrate. O livrare cu primiri înregistrate nu se mai șterge.",
+    "useCorrection": "Cantitatea primită este deja înregistrată. Folosește „Corectează cantitatea primită”.",
+    "useCorrectionReturn": "Returul este deja înregistrat. Folosește „Corectează cantitatea returnată”.",
+    "returnBeforeReceipt": "Înregistrează întâi ce ai primit.",
+    "nothingToCorrect": "Nu există încă nimic înregistrat de corectat.",
+    "sameQuantity": "Aceasta este deja cantitatea înregistrată. Scrie valoarea corectă.",
+    "noDeposit": "Articolul nu are o garanție."
+  },
+  "lifecycle": {
+    "kind": "Livrare",
+    "toCancel": "De anulat",
+    "toReschedule": "De reprogramat"
+  },
+  "closeout": {
+    "notReturned": "Articole închiriate nereturnate",
+    "notReturnedLine": "{label} ({delivery}) — mai sunt de returnat {left}",
+    "deposits": "Garanții nerecuperate",
+    "depositLine": "{label} ({delivery})"
+  }
+}

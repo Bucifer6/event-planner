@@ -1,0 +1,32 @@
+{
+  "layout": {
+    "languageBelow": "English version",
+    "footer": "EventDesk.ro — sent automatically. Please do not reply to this email."
+  },
+  "security": {
+    "staffNeverAsk": "EventDesk staff will never ask you for this code — not by phone, email or chat. Do not share it with anyone.",
+    "notRequested": "If you did not request this code, someone is probing your email address. You do not need to do anything: without the code they cannot get in.",
+    "notRequestedAction": "If you did not request this code, someone is trying to change something in your account. Do not share the code, and sign out of all devices from the “Account” page."
+  },
+  "signIn": {
+    "subject": "Your EventDesk sign-in code",
+    "intro": "Type this code on the sign-in page:",
+    "validity": "The code is valid for {minutes} minutes and can be used once.",
+    "linkLabel": "Sign in with one tap",
+    "linkNote": "The button does the same as the code and expires with it. If the button says it was already used, type the code above."
+  },
+  "confirm": {
+    "subject": "Confirm it is you — EventDesk",
+    "intro": "You asked for a sensitive action in your account. Confirm it with this code:",
+    "validity": "The code is valid for {minutes} minutes and can be used once."
+  },
+  "newEmail": {
+    "subject": "Confirm your new email address — EventDesk",
+    "intro": "Someone wants to use this address to sign in to an EventDesk account. If that is you, type this code on the “Account” page:",
+    "validity": "The code is valid for {minutes} minutes and can be used once.",
+    "notRequested": "If you did not ask for this, ignore this message: without the code your address will not be used."
+  },
+  "errors": {
+    "dailyCap": "You have reached the limit of {limit} emails a day for this occasion. You can send again tomorrow."
+  }
+}

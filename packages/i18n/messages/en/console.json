@@ -1,0 +1,502 @@
+{
+  "title": "EventDesk console",
+  "badge": "Console",
+  "navLabel": "Console sections",
+  "close": "Close",
+  "saved": "Saved.",
+  "nav": {
+    "dashboard": "Dashboard",
+    "approvals": "Approvals",
+    "audit": "Audit log",
+    "access": "Access",
+    "incidents": "Incidents",
+    "operations": "Operations",
+    "reports": "Content reports",
+    "launch": "Launch",
+    "moderation": "Moderation",
+    "businesses": "Businesses",
+    "directory": "Directory",
+    "deploys": "Deployments",
+    "complianceAccess": "Compliance access",
+    "commercial": "Commercial",
+    "communications": "Communications",
+    "discovery": "Discovery",
+    "help": "Help for the team"
+  },
+  "roles": {
+    "platform_admin": "Platform admin",
+    "content_editor": "Content editor",
+    "listing_moderator": "Listing moderator",
+    "commercial_manager": "Commercial manager",
+    "privacy_owner": "Privacy owner",
+    "security_administrator": "Security administrator"
+  },
+  "roleHints": {
+    "platform_admin": "Access, roles, launch, DSA duties.",
+    "content_editor": "Public pages and guides.",
+    "listing_moderator": "Moderation of listings, drawings and catalogues; content reports.",
+    "commercial_manager": "Monetization, prices, refunds, business terms.",
+    "privacy_owner": "Legal documents, ANSPDCP, DPIA, accessibility statement.",
+    "security_administrator": "Incidents, backups, sign-in limits, audit log."
+  },
+  "session": {
+    "until": "The console session ends at {time} at the latest, or after 30 minutes without activity.",
+    "leave": "Leave the console",
+    "leaving": "Ending the session…"
+  },
+  "noRole": {
+    "title": "Your roles do not cover this section",
+    "body": "One of these roles is needed: {roles}. A platform admin can request it in the Access section."
+  },
+  "singleOperator": {
+    "title": "Restricted mode: single operator",
+    "body": "Only one person holds a staff role. Actions that need a second person stay queued with no effect until someone else receives a role and approves them. Live payments to businesses are blocked in this mode."
+  },
+  "errors": {
+    "noAccess": "You have no console access in this session.",
+    "roleRequired": "Your roles do not allow this action.",
+    "accountNotFound": "There is no account with this email address. The person must create their account first.",
+    "lastAdmin": "The platform must keep at least one active platform admin.",
+    "unknownApprovalAction": "This kind of action is not known.",
+    "alreadyDecided": "This request has already been closed.",
+    "ownRequest": "You cannot approve or reject your own request. A second person is needed.",
+    "alreadyApprovedByYou": "You have already approved this request. One more person is needed.",
+    "reasonRequired": "Write the reason that will be given to the affected party (at least 10 characters)."
+  },
+  "setup": {
+    "title": "Console access",
+    "twoStep": {
+      "lead": "Your account holds a staff role, but one step is left.",
+      "title": "Turn on two-step sign-in",
+      "body": "Platform staff can enter the console only with two-step sign-in turned on. Until then no console page or action is available.",
+      "step1": "Open your account's security settings and turn on two-step sign-in with an authenticator app.",
+      "step2": "Keep the recovery codes somewhere safe.",
+      "step3": "Sign out and sign in again, with the second step. Then come back to the console.",
+      "action": "Open security settings"
+    },
+    "again": {
+      "second_step": {
+        "lead": "Two-step sign-in is on, but this sign-in was made without the second step.",
+        "title": "Sign in again",
+        "body": "The console opens only from a session that passed both steps. Sign out and sign in again."
+      },
+      "absolute": {
+        "lead": "The console session has ended.",
+        "title": "12 hours have passed since sign-in",
+        "body": "A console session lasts at most 12 hours. Sign out and sign in again to continue."
+      },
+      "idle": {
+        "lead": "The console session has ended.",
+        "title": "30 minutes without activity",
+        "body": "The console closes by itself after 30 minutes without activity. Sign out and sign in again to continue."
+      },
+      "action": "Sign out",
+      "note": "Nothing you saved was lost."
+    }
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "description": "The platform at a glance: counts and broad status only. Planner content never appears here.",
+    "openApprovals": "Open approvals ({count})",
+    "incidentActive": "An incident is open",
+    "incidentLink": "Open incidents",
+    "incidentSince": "Open since {time}. Guests see the status message.",
+    "platform": "Platform",
+    "accountsLabel": "Accounts · total on {date}",
+    "accountsNote": "{email} with email · {anonymous} anonymous · {deleting} being deleted",
+    "occasions": "Occasions",
+    "totalToDate": "total to date",
+    "pendingApprovals": "Pending approvals",
+    "now": "now",
+    "activeStaff": "Active staff",
+    "occasionsByStatus": "Occasions by status · total to date",
+    "noOccasions": "No occasions created yet",
+    "queue": "Job queue · latest snapshot",
+    "recentRuns": "Latest operational runs",
+    "occasionStatus": {
+      "planning": "Planning",
+      "cancelled": "Cancelled",
+      "postponed": "Postponed",
+      "closed": "Closed"
+    },
+    "counters": {
+      "businesses": "Businesses",
+      "listings": "Listings",
+      "moderationQueue": "Moderation · waiting",
+      "enquiries": "Enquiries to businesses",
+      "discovery": "Discovery · drafts",
+      "claims": "Claims"
+    }
+  },
+  "ops": {
+    "title": "Operations",
+    "description": "Backups, restore tests, job queue health and sign-in limits.",
+    "backups": "Backups · last 10 runs",
+    "restoreTests": "Restore tests · last 6 runs",
+    "queue": {
+      "title": "Job queue · latest snapshot",
+      "depth": "Waiting now",
+      "running": "Running",
+      "scheduled": "Scheduled",
+      "dead": "Failed for good",
+      "oldest": "Oldest due job",
+      "seconds": "{count} s",
+      "doneLastHour": "Done in the last hour",
+      "failedLastHour": "Failed in the last hour",
+      "errorRate": "Error rate in the last hour",
+      "snapshot": "Snapshot taken at",
+      "alerts": "Alerts",
+      "noAlerts": "No alerts",
+      "alertTitle": "The queue needs attention",
+      "alert": {
+        "queue_depth": "too many jobs waiting",
+        "error_rate": "high error rate",
+        "oldest_due": "a job has been waiting too long"
+      },
+      "none": "No snapshot yet",
+      "noneBody": "The worker writes the queue state every minute. If nothing appears, check that it is running."
+    },
+    "runs": {
+      "none": "No runs recorded",
+      "noneBody": "Runs appear here after the first scheduled execution.",
+      "job": "Job",
+      "status": "Status",
+      "started": "Started",
+      "finished": "Finished",
+      "detail": "Details",
+      "statuses": {
+        "ok": "Succeeded",
+        "failed": "Failed",
+        "skipped": "Skipped"
+      }
+    },
+    "limits": {
+      "title": "Sign-in limits",
+      "body": "The limits protect sign-in against abuse. A change applies only after a second security administrator approves it.",
+      "change": "Request a change",
+      "changeTitle": "Change the sign-in limits",
+      "requested": "The request was sent for approval.",
+      "defaultHint": "Default: {value}",
+      "reasonHint": "Why the change is needed. It stays in the audit log.",
+      "limit": "Limit",
+      "current": "Current",
+      "default": "Default",
+      "changed": "changed",
+      "keys": {
+        "codeRequestPerEmailPerHour": "Codes requested per address, per hour",
+        "codeRequestPerEmailPerDay": "Codes requested per address, per day",
+        "codeRequestPerIpPerHour": "Codes requested per IP, per hour",
+        "codeRequestPerDevicePerHour": "Codes requested per device, per hour",
+        "codeAttemptsPerCode": "Attempts per code",
+        "codeEntryPerIpPerHour": "Codes entered per IP, per hour",
+        "codeEntryPerDevicePerHour": "Codes entered per device, per hour",
+        "passwordEntryPerUsernamePerHour": "Passwords tried per username, per hour"
+      }
+    }
+  },
+  "approvals": {
+    "title": "Approvals",
+    "description": "Irreversible actions need a second person. Whoever asked cannot also approve.",
+    "filterLabel": "Filter requests by state",
+    "states": {
+      "pending": "Pending",
+      "approved": "Approved",
+      "rejected": "Rejected",
+      "cancelled": "Withdrawn"
+    },
+    "empty": {
+      "pending": "No pending requests",
+      "approved": "No approved requests",
+      "rejected": "No rejected requests",
+      "cancelled": "No withdrawn requests"
+    },
+    "emptyBody": "Requests appear here when a staff member asks for an action that needs a second person.",
+    "singleOperatorTag": "Requested in single-operator mode",
+    "requestedBy": "Requested by",
+    "you": "you",
+    "requestedAt": "Requested at",
+    "progress": "Approvals",
+    "progressValue": "{done} of {needed}",
+    "reason": "Reason",
+    "decisionReason": "Reason for rejection",
+    "decidedAt": "Closed at",
+    "approve": "Approve the request",
+    "approving": "Approving…",
+    "reject": "Reject the request",
+    "rejectTitle": "Reject the request",
+    "rejectReason": "Reason for rejection",
+    "rejectReasonHint": "The requester sees it and it stays in the audit log.",
+    "rejectSubmit": "Reject the request",
+    "rejecting": "Rejecting…",
+    "waitingForOther": "Your request is waiting for another person with the right role. Until then it has no effect.",
+    "cancel": "Withdraw the request",
+    "cancelling": "Withdrawing…",
+    "cannotDecide": "Your roles do not allow approving this request, or you have already approved it.",
+    "actions": {
+      "staffSetRoles": "Staff roles for {who} ({count} roles)",
+      "staffRemove": "Removing {who} from the staff",
+      "signInLimits": "Changing the sign-in limits ({count} values different from the defaults)"
+    }
+  },
+  "audit": {
+    "title": "Audit log",
+    "description": "Every action, with who did it and when. Entries cannot be edited or deleted by anyone.",
+    "filters": "Filters",
+    "actorKind": "Actor kind",
+    "anyActor": "Any",
+    "actorKinds": {
+      "account": "Account",
+      "guest": "Guest",
+      "staff": "Staff",
+      "mcp": "External assistant",
+      "system": "System",
+      "anonymous": "Anonymous"
+    },
+    "actorId": "Actor id",
+    "action": "Action",
+    "actionHint": "The beginning of the name, for example “approval.”",
+    "objectType": "Object type",
+    "objectId": "Object id",
+    "from": "From date",
+    "to": "To date",
+    "apply": "Filter the log",
+    "clear": "Clear filters",
+    "badFilter": "A filter is not valid. Check what you entered.",
+    "entries": "Entries",
+    "export": "Export CSV",
+    "exportNote": "The export is a read-only copy of the filtered entries; the log stays unchanged, and the export itself is recorded.",
+    "empty": "No entries",
+    "emptyFiltered": "No entry matches the chosen filters.",
+    "when": "When",
+    "actor": "Actor",
+    "object": "Object",
+    "details": "Details",
+    "showDetails": "Show values",
+    "detail": {
+      "before": "Before",
+      "after": "After",
+      "meta": "Context"
+    },
+    "older": "Older entries"
+  },
+  "access": {
+    "title": "Access",
+    "description": "Who is on the staff and with which roles. Every change goes through a second platform admin's approval.",
+    "singleOperatorBody": "Only one person holds a staff role, so nobody can approve a role change from here. The second person is added from the server, with the make-staff script.",
+    "staff": "Staff",
+    "empty": "Nobody holds a staff role yet",
+    "person": "Person",
+    "roles": "Roles",
+    "twoStep": "Two-step",
+    "state": "State",
+    "since": "Since",
+    "you": "you",
+    "twoStepOn": "On",
+    "twoStepOff": "Off",
+    "active": "Active",
+    "inactive": "Removed from staff",
+    "twoStepNote": "Without two-step sign-in turned on, a staff member cannot open the console.",
+    "change": "Request a role change",
+    "changeBody": "Tick every role the person should hold after the change. The request goes to approvals and has no effect until another platform admin approves it.",
+    "requested": "The request was sent for approval.",
+    "requestedLink": "Open approvals",
+    "email": "Account email",
+    "emailHint": "The person must already have an EventDesk account with this address.",
+    "rolesLegend": "Roles after the change",
+    "reason": "Reason",
+    "reasonHint": "The approver sees it and it stays in the audit log.",
+    "submit": "Send for approval",
+    "submitting": "Sending…",
+    "removeNote": "To remove someone from the staff, send the request with no role ticked.",
+    "adminOnly": "Only a platform admin can request role changes."
+  },
+  "incidents": {
+    "title": "Incidents",
+    "description": "The incident log and the status message guests see while an incident is open.",
+    "activeTitle": "Incident open since {time}",
+    "shownToGuests": "Guests see:",
+    "defaultMessage": "the default “Something is not working” message",
+    "resolve": "Resolve the incident",
+    "resolving": "Resolving…",
+    "noneActive": "No open incident",
+    "open": "Open an incident",
+    "openBody": "The message appears at once on guest pages, in their language. Write plainly, with no technical detail. If you leave the messages empty, the default text is shown.",
+    "messageRo": "Message in Romanian",
+    "messageHint": "For example: “Confirmările nu se salvează momentan. Revenim în scurt timp.”",
+    "messageEn": "Message in English",
+    "messageEnHint": "Shown to guests using English.",
+    "internalNote": "Internal note",
+    "internalNoteHint": "Stays in the console only. Guests never see it.",
+    "openSubmit": "Open the incident",
+    "opening": "Opening…",
+    "readOnly": "Only a security administrator can open or resolve incidents.",
+    "log": "Incident log",
+    "empty": "No incidents recorded",
+    "emptyBody": "When something is not working, open an incident so guests see a clear message.",
+    "started": "Opened",
+    "resolved": "Resolved",
+    "message": "Message for guests",
+    "stillOpen": "Open"
+  },
+  "reports": {
+    "title": "Content reports",
+    "description": "Reports of illegal content or unlawful listings. Every decision is recorded with the reason given to the affected party.",
+    "decidedNotice": "The decision was recorded.",
+    "filterLabel": "Filter reports by state",
+    "tabs": {
+      "open": "Open",
+      "actioned": "Actioned",
+      "dismissed": "Dismissed"
+    },
+    "empty": {
+      "open": "No open reports",
+      "actioned": "No actioned reports",
+      "dismissed": "No dismissed reports"
+    },
+    "emptyBody": "Reports sent through the public form appear here.",
+    "reference": "Reference",
+    "received": "Received",
+    "target": "What is reported",
+    "category": "Reason",
+    "state": "State",
+    "open": "Open",
+    "openNamed": "Open report {reference}",
+    "categories": {
+      "illegal_content": "Illegal content",
+      "fraud": "Fraud or fake business",
+      "intellectual_property": "Copyright or trademark",
+      "privacy": "Personal data published without consent",
+      "false_information": "False information",
+      "offensive": "Offensive content",
+      "other": "Something else"
+    },
+    "states": {
+      "received": "Received",
+      "reviewing": "Under review",
+      "actioned": "Action taken",
+      "dismissed": "Dismissed"
+    },
+    "detailTitle": "Content report",
+    "back": "Back to reports",
+    "detailHeading": "Report {reference}",
+    "what": "The report",
+    "reporter": "Reporter's contact",
+    "reporterErased": "erased after the retention period",
+    "reporterAnonymous": "left no contact",
+    "repeats": "Other reports from the same contact",
+    "linkedObject": "Linked object",
+    "descriptionLabel": "Description",
+    "decide": "Decision",
+    "startReview": "Mark as under review",
+    "startingReview": "Marking…",
+    "reasonNoticeTitle": "The reason is given to the affected party",
+    "reasonNoticeBody": "Write it clearly and to the point, in Romanian: which rule applies and what follows. It stays in the audit log.",
+    "decision": "The decision",
+    "decisionActioned": "Action is taken against the reported content",
+    "decisionDismissed": "The report is dismissed; the content stays",
+    "reasonGiven": "Reason given to the affected party",
+    "reasonGivenHint": "At least 10 characters.",
+    "internalNote": "Internal note",
+    "internalNoteHint": "For staff only.",
+    "submitDecision": "Record the decision",
+    "submittingDecision": "Recording…",
+    "decisionTaken": "Decision taken",
+    "decidedAt": "Decided at"
+  },
+  "launch": {
+    "title": "Launch",
+    "description": "Launch obligations LAU1–LAU9. The content belongs to the operator: you fill in the fields, and an empty field means “not recorded”.",
+    "notRecorded": "not recorded",
+    "checklist": "Launch checklist · {done} of {total} done",
+    "owner": "Owning role",
+    "evidence": "Where the evidence is",
+    "evidenceHint": "Free text: the document name, folder or ticket.",
+    "recorded": "Recorded",
+    "recordedBy": "{time} · staff {staff}",
+    "note": "Note",
+    "record": "Record the state of {item}",
+    "status": "Status",
+    "save": "Save the state",
+    "statuses": {
+      "open": "Open",
+      "in_progress": "In progress",
+      "done": "Done"
+    },
+    "legal": {
+      "title": "Published legal documents",
+      "open": "Account creation is open",
+      "openBody": "The terms, the privacy policy and the cookie notice have a version and a publication date.",
+      "closed": "Account creation is blocked",
+      "closedBody": "No new account can be created until the terms, the privacy policy and the cookie notice have a version and a publication date recorded here.",
+      "docs": {
+        "terms": "Terms and conditions (planners)",
+        "businessTerms": "Business terms",
+        "privacy": "Privacy policy",
+        "cookies": "Cookie notice"
+      },
+      "version": "version {version}",
+      "versionOf": "{doc} — version",
+      "dateOf": "{doc} — publication date",
+      "edit": "Edit the published versions",
+      "editTitle": "Published versions",
+      "editBody": "Record here only what is already published on the public site.",
+      "save": "Save the versions"
+    },
+    "items": {
+      "LAU1": {
+        "title": "Legal documents and cookie notice",
+        "summary": "The terms (planners and, separately, businesses), the privacy policy and the cookie notice exist and are linked before any account can be created."
+      },
+      "LAU2": {
+        "title": "ANSPDCP formalities and DPIA",
+        "summary": "Operator records are current, the registry of processing activities is started, and the DPIA is performed and signed for the highest-risk processing."
+      },
+      "LAU3": {
+        "title": "Email domain warmed up",
+        "summary": "SPF, DKIM and DMARC are verified, and test sends reached the major providers before the first real sign-in email."
+      },
+      "LAU4": {
+        "title": "External penetration test",
+        "summary": "The public surfaces were tested, findings triaged, and critical and high findings fixed before the first real guest link."
+      },
+      "LAU5": {
+        "title": "Monitoring and incident response",
+        "summary": "Health checks, alerts to a monitored channel, a documented recovery procedure (RTO 4 hours, RPO 24 hours) and the console incident log."
+      },
+      "LAU6": {
+        "title": "Explicit business terms",
+        "summary": "The free phase, the “Featured” labelling rules and the claim and objection process are published before the first business registers."
+      },
+      "LAU7": {
+        "title": "Launch-day runbook",
+        "summary": "Who is on call, how deploys and rollbacks are run, how a discovery batch is pulled back, and the two-person rule for irreversible actions."
+      },
+      "LAU8": {
+        "title": "DSA duties (ANCOM)",
+        "summary": "The service is registered with ANCOM, the point of contact is published, the notice-and-action mechanism works, and the moderation rules are in the terms."
+      },
+      "LAU9": {
+        "title": "Accessibility statement",
+        "summary": "The statement is published in Romanian and English, a feedback route exists, and its date and evaluation method are recorded below."
+      }
+    },
+    "records": {
+      "title": "ANSPDCP, DPIA, ANCOM and accessibility records",
+      "body": "References to the operator's documents. The console does not hold the documents, only where they are and since when.",
+      "edit": "Edit the records",
+      "save": "Save the records",
+      "anspdcpReference": "ANSPDCP — registration reference",
+      "anspdcpDate": "ANSPDCP — date",
+      "processingRegistryRef": "Registry of processing activities — where it is",
+      "dpiaReference": "DPIA — document reference",
+      "dpiaSignedOn": "DPIA — signed on",
+      "dpiaSignedBy": "DPIA — signed by",
+      "dpiaLastReviewedOn": "DPIA — last reviewed on",
+      "ancomReference": "ANCOM — registration reference",
+      "ancomDate": "ANCOM — date",
+      "dsaContactPoint": "Published DSA point of contact",
+      "accessibilityStatementDate": "Accessibility statement — date",
+      "accessibilityEvaluationMethod": "Accessibility statement — evaluation method"
+    }
+  }
+}

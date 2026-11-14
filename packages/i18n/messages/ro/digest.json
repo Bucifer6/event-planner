@@ -1,0 +1,36 @@
+{
+  "subject": "Rezumatul zilei — {occasion}",
+  "intro": "Bună dimineața! Iată ce are nevoie de atenție la „{occasion}”. {countdown}",
+  "countdown": {
+    "days": "Zile rămase: {count}.",
+    "today": "Evenimentul este astăzi.",
+    "past": "Evenimentul a trecut.",
+    "noDate": "Data nu este stabilită încă."
+  },
+  "sections": {
+    "milestone": "Următorul termen",
+    "overdue": "Sarcini întârziate",
+    "delegations": "Delegări neacceptate",
+    "blockers": "Blocaje"
+  },
+  "empty": {
+    "milestone": "Niciun termen în perioada următoare.",
+    "overdue": "Nimic întârziat.",
+    "delegations": "Nicio ofertă fără răspuns.",
+    "blockers": "Niciun blocaj.",
+    "other": "Nimic de semnalat."
+  },
+  "lines": {
+    "task": "{title} — până pe {date}",
+    "offerToYou": "{title} — ți-a fost oferită de {from}; acceptă sau refuză",
+    "offerWaiting": "{title} — {to} nu a răspuns încă",
+    "blocker": {
+      "waiting": "{title} — în așteptare",
+      "blocked": "{title} — depinde de o sarcină neterminată",
+      "outOfOrder": "{title} — marcată gata înaintea celor de care depinde"
+    }
+  },
+  "more": "și încă {count}",
+  "button": "Deschide ocazia",
+  "why": "Primești acest rezumat cel mult o dată pe zi, pentru că faci parte din echipa ocaziei."
+}

@@ -1,0 +1,29 @@
+{
+  "eyebrow": "Preview",
+  "defaultTitle": "Proposed changes",
+  "intro": "Look at what changes. Nothing is applied until you confirm.",
+  "external": "created with an external assistant",
+  "apply": "Apply the changes",
+  "applying": "Applying…",
+  "discard": "Discard",
+  "discarding": "Discarding…",
+  "applied": "The changes have been applied.",
+  "alreadyApplied": "The changes had already been applied. Nothing was applied a second time.",
+  "discarded": "The changes were discarded. Nothing was modified.",
+  "noEffects": "This change has no other effects.",
+  "expires": "The proposal expires on {date}.",
+  "kinds": {
+    "added": "Added",
+    "removed": "Removed",
+    "changed": "Changed",
+    "moved": "Moved",
+    "affected": "Affected"
+  },
+  "errors": {
+    "unknownKind": "This kind of change cannot be previewed.",
+    "discarded": "This proposal was already discarded. Nothing was modified.",
+    "expired": "The proposal has expired. Make the change again to see an up-to-date preview.",
+    "alreadyApplied": "The changes have already been applied and can no longer be undone from here.",
+    "stale": "Something changed in the meantime and the preview is out of date. Make the change again."
+  }
+}

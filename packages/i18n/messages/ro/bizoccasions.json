@@ -1,0 +1,296 @@
+{
+  "tabs": {
+    "occasions": "Ocaziile clienților",
+    "library": "Bibliotecă",
+    "branding": "Identitate",
+    "reports": "Rapoarte",
+    "plan": "Plan"
+  },
+  "optional": "opțional",
+  "choose": "Alege…",
+  "saving": "Se salvează…",
+  "saved": "Am salvat.",
+  "status": {
+    "planning": "În lucru",
+    "postponed": "Amânată",
+    "cancelled": "Anulată",
+    "closed": "Încheiată"
+  },
+  "list": {
+    "title": "Ocaziile pe care le organizați",
+    "emptyTitle": "Nicio ocazie încă",
+    "emptyBody": "Creează mai jos prima ocazie pentru un client. Toată echipa o vede și poate lucra în ea.",
+    "emptyBodyNoCreate": "Aici apar ocaziile pe care firma le organizează pentru clienți.",
+    "noDate": "fără dată",
+    "manage": "Gestionează",
+    "manageNamed": "Gestionează „{title}”",
+    "openTasks": {
+      "zero": "nicio sarcină deschisă",
+      "one": "o sarcină deschisă",
+      "few": "{count} sarcini deschise",
+      "other": "{count} de sarcini deschise"
+    }
+  },
+  "create": {
+    "title": "Ocazie nouă pentru un client",
+    "name": "Numele ocaziei",
+    "nameHint": "De exemplu „Nunta Mara și Vlad”.",
+    "kind": "Felul ocaziei",
+    "date": "Data",
+    "dateHint": "O poți lăsa goală și o stabilești mai târziu.",
+    "submit": "Creează ocazia",
+    "pending": "Se creează…",
+    "lapsed": "Planul firmei a expirat: ocaziile existente merg mai departe, dar nu se pot crea altele noi.",
+    "notActive": "Firma este restricționată, așa că aici nu se pot face schimbări acum."
+  },
+  "handedOver": {
+    "title": "Predate clienților",
+    "body": "După predare, ocazia aparține clientului. Firma păstrează doar această evidență.",
+    "on": "Predată pe {date}"
+  },
+  "grants": {
+    "title": "Ce vede echipa în ocaziile firmei",
+    "body": "Fiecare membru al echipei lucrează în ocaziile firmei ca organizator. Tu alegi dacă vede și banii, și cererile private ale invitaților.",
+    "legend": "Echipa poate vedea",
+    "finance": "Bugetul și plățile",
+    "financeHint": "Sume, facturi, scadențe.",
+    "privateRequests": "Cererile private ale invitaților",
+    "privateRequestsHint": "De exemplu alergii sau nevoi de acces.",
+    "save": "Salvează accesul echipei",
+    "freshTitle": "Confirmă că ești tu",
+    "freshBody": "Accesul echipei la bani și la cererile private se schimbă numai după o confirmare recentă.",
+    "freshLink": "Confirmă din contul tău"
+  },
+  "manage": {
+    "title": "Ocazie a firmei",
+    "back": "Înapoi la ocaziile clienților",
+    "openPlan": "Deschide planul",
+    "previewTitle": "Ce se schimbă"
+  },
+  "apply": {
+    "title": "Aplică din bibliotecă",
+    "emptyTitle": "Biblioteca este goală",
+    "emptyBody": "Adaugă în bibliotecă șabloane de sarcini, liste de verificare sau furnizori, apoi aplică-le aici.",
+    "openLibrary": "Deschide biblioteca",
+    "item": "Ce aplici",
+    "itemHint": "Îți arătăm întâi ce s-ar adăuga. Nimic nu se schimbă până nu confirmi.",
+    "preview": "Vezi ce se adaugă",
+    "previewing": "Se pregătește…"
+  },
+  "files": {
+    "title": "Fișiere partajate cu ocazia",
+    "body": "Fișierele partajate pot fi deschise de toți membrii ocaziei și rămân la ei și după predare.",
+    "sharedOn": "Partajat pe {date}",
+    "item": "Fișier din bibliotecă",
+    "share": "Partajează fișierul",
+    "shared": "Fișierul este acum vizibil în ocazie.",
+    "none": "Niciun fișier partajat încă. Adaugă fișiere în bibliotecă și le poți partaja de aici.",
+    "lapsed": "Planul firmei a expirat: fișierele deja partajate rămân, dar nu se pot partaja altele."
+  },
+  "handover": {
+    "title": "Predă ocazia clientului",
+    "body": "Când evenimentul devine al clientului, îi predai ocazia. Iată ce se întâmplă:",
+    "ends1": "Clientul ales devine proprietarul ocaziei, cu acces la buget și la cererile private.",
+    "ends2": "Accesul întregii echipe se încheie, la fel și conexiunile asistenților firmei.",
+    "ends3": "Numele, sigla și culoarea firmei dispar de pe paginile invitaților.",
+    "stays": "Planul rămâne întreg: sarcini, invitați, furnizori, bani și fișierele partajate.",
+    "noClientTitle": "Clientul nu este încă în ocazie",
+    "noClientBody": "Invită clientul ca membru al ocaziei. După ce acceptă, îl poți alege aici.",
+    "inviteClient": "Invită clientul",
+    "freshTitle": "Pentru predare confirmi că ești tu",
+    "freshBody": "Poți vedea ce se schimbă, dar aplicarea cere o confirmare recentă.",
+    "freshLink": "Confirmă din contul tău",
+    "to": "Cui predai",
+    "toHint": "Doar membrii ocaziei care nu fac parte din echipa firmei.",
+    "preview": "Vezi ce se încheie"
+  },
+  "library": {
+    "kindsLabel": "Feluri de elemente",
+    "kinds": {
+      "template": "Șabloane de sarcini",
+      "checklist": "Liste de verificare",
+      "contact": "Furnizori",
+      "asset": "Fișiere"
+    },
+    "kindOne": {
+      "template": "Șablon",
+      "checklist": "Listă",
+      "contact": "Furnizor",
+      "asset": "Fișier"
+    },
+    "about": {
+      "template": "Un șablon este o listă de sarcini pe care o aplici unei ocazii. Fiecare sarcină primește termenul calculat față de data evenimentului.",
+      "checklist": "O listă de verificare devine, în ocazie, o singură sarcină cu pașii ei.",
+      "contact": "Furnizorii cu care lucrați des. Aplicat unei ocazii, un contact apare în lista ei de furnizori.",
+      "asset": "Imagini sau PDF-uri pe care le partajați cu ocaziile: planuri, meniuri, oferte-tip."
+    },
+    "emptyTitle": {
+      "template": "Niciun șablon încă",
+      "checklist": "Nicio listă încă",
+      "contact": "Niciun furnizor încă",
+      "asset": "Niciun fișier încă"
+    },
+    "emptyBody": "Adaugă primul element mai jos. Îl va putea folosi toată echipa.",
+    "lapsed": "Planul firmei a expirat: biblioteca rămâne de citit și de aplicat, dar nu mai poate fi modificată.",
+    "editNamed": "Modifică „{title}”",
+    "save": "Salvează modificările",
+    "archive": "Scoate din bibliotecă",
+    "archiving": "Se scoate…",
+    "archiveHint": "Ce a fost deja aplicat sau partajat rămâne în ocazii.",
+    "added": "Am adăugat în bibliotecă.",
+    "file": "Fișierul",
+    "titleLabel": {
+      "template": "Numele șablonului",
+      "checklist": "Numele listei",
+      "contact": "Numele furnizorului",
+      "asset": "Numele fișierului"
+    },
+    "linesLabel": {
+      "template": "Sarcinile, câte una pe rând",
+      "checklist": "Pașii, câte unul pe rând"
+    },
+    "linesHint": {
+      "template": "Pentru un termen, adaugă la sfârșit „; ” și numărul de luni înainte de eveniment. Exemplu: „Alege locația; 6”.",
+      "checklist": "Exemplu: „Confirmă florile”."
+    },
+    "addTitle": {
+      "template": "Șablon nou",
+      "checklist": "Listă nouă",
+      "contact": "Furnizor nou",
+      "asset": "Fișier nou"
+    },
+    "add": {
+      "template": "Adaugă șablonul",
+      "checklist": "Adaugă lista",
+      "contact": "Adaugă furnizorul",
+      "asset": "Adaugă fișierul"
+    },
+    "count": {
+      "tasks": {
+        "one": "o sarcină",
+        "few": "{count} sarcini",
+        "other": "{count} de sarcini"
+      },
+      "steps": {
+        "one": "un pas",
+        "few": "{count} pași",
+        "other": "{count} de pași"
+      }
+    },
+    "fileKind": {
+      "image": "Imagine",
+      "pdf": "PDF"
+    },
+    "contact": {
+      "category": "Ce oferă",
+      "person": "Persoana de contact",
+      "email": "Email",
+      "phone": "Telefon",
+      "notes": "Note",
+      "noDetails": "fără detalii de contact"
+    }
+  },
+  "branding": {
+    "title": "Cum vă văd invitații",
+    "body": "Numele, sigla și o culoare de accent apar pe paginile invitaților din ocaziile pe care le organizați, până la predarea fiecărei ocazii.",
+    "staffOnly": "Identitatea poate fi schimbată de proprietar sau de un administrator.",
+    "lapsed": "Planul firmei a expirat: identitatea aleasă rămâne pe paginile invitaților, dar nu mai poate fi schimbată.",
+    "name": "Numele afișat invitaților",
+    "nameHint": "Dacă îl lași gol, apare „{name}”.",
+    "logo": "Sigla",
+    "logoReplace": "Înlocuiește sigla",
+    "logoNow": "Sigla actuală",
+    "removeLogo": "Scoate sigla",
+    "useAccent": "Folosește o culoare de accent proprie",
+    "useAccentHint": "Altfel rămâne culoarea EventDesk.",
+    "accent": "Culoarea de accent",
+    "accentDefault": "culoarea EventDesk",
+    "save": "Salvează identitatea",
+    "previewLabel": "Așa arată pe pagina unui invitat",
+    "previewTitle": "Nunta Mara și Vlad",
+    "previewButton": "Răspunde la invitație",
+    "previewLink": "Vezi locația pe hartă"
+  },
+  "guest": {
+    "organisedBy": "Organizat de"
+  },
+  "banner": {
+    "title": "Ocazie organizată de {business}",
+    "team": "Lucrezi aici ca membru al echipei, cu drepturi de organizator.",
+    "client": "Echipa firmei are acces de organizator până când ocazia îți este predată.",
+    "join": "Alătură-te ocaziei",
+    "joining": "Se adaugă…",
+    "joinHint": "Ca să ți se poată atribui sarcini.",
+    "handover": "Predă clientului",
+    "files": "Fișiere primite de la organizator: {count}"
+  },
+  "reports": {
+    "title": "Ocaziile firmei",
+    "inWork": "Ocazii în lucru acum",
+    "inWorkNote": "din {total} în total, cu cele predate",
+    "overdue": "Sarcini întârziate",
+    "openTasks": "Sarcini deschise",
+    "handedOver": "Predate clienților",
+    "enquiries": "Cereri primite",
+    "enquiriesNote": "ultimele {days} de zile · fără răspuns: {unanswered}",
+    "lastDays": "ultimele {days} de zile",
+    "today": "azi",
+    "allTime": "de la început",
+    "byStatus": "După stare",
+    "status": "Stare",
+    "occasions": "Ocazii",
+    "upcoming": "Date care urmează",
+    "upcomingEmpty": "Nicio ocazie cu dată stabilită în perioada următoare.",
+    "todayShort": "azi",
+    "inDays": {
+      "one": "mâine",
+      "few": "în {count} zile",
+      "other": "în {count} de zile"
+    },
+    "assetUse": "Folosirea bibliotecii, ultimele {days} de zile",
+    "assetUseBody": "Totaluri pe zi. Nu se reține cine a folosit ce.",
+    "assetUseEmpty": "Nimic din bibliotecă nu a fost folosit în această perioadă.",
+    "byDay": "Pe zile",
+    "day": "Ziua",
+    "uses": "Folosiri",
+    "assetKinds": {
+      "library_template": "Șabloane aplicate",
+      "library_checklist": "Liste aplicate",
+      "library_contact": "Furnizori adăugați",
+      "library_asset": "Fișiere partajate",
+      "drawing": "Planuri folosite",
+      "catalogue": "Articole de catalog alese"
+    }
+  },
+  "whatif": {
+    "applyTitle": {
+      "template": "Aplici șablonul „{title}”",
+      "checklist": "Aplici lista „{title}”",
+      "contact": "Adaugi furnizorul „{title}”"
+    },
+    "supplierAdded": "furnizor nou",
+    "noContact": "fără contact",
+    "steps": "pași: {count}",
+    "alreadyThere": "Deja în plan, rămân neschimbate: {count}",
+    "handoverTitle": "Predai „{title}” clientului",
+    "owner": "Proprietarul ocaziei",
+    "teamAccess": "Accesul echipei firmei",
+    "teamCount": "membri: {count}",
+    "branding": "Identitatea firmei pe paginile invitaților",
+    "assistants": "Conexiunile asistenților firmei",
+    "assistantCount": "conexiuni active: {count}",
+    "none": "se încheie",
+    "ends": "se încheie",
+    "planStays": "Sarcini, invitați, furnizori, bani, fișiere partajate",
+    "stays": "rămâne"
+  },
+  "errors": {
+    "accentFormat": "Alege o culoare din selector.",
+    "logoInvalid": "Sigla trebuie să fie o imagine încărcată de firmă.",
+    "fileInvalid": "Încarcă întâi fișierul.",
+    "linesRequired": "Scrie cel puțin un rând.",
+    "tooManyLines": "Sunt prea multe rânduri. Împarte în două elemente.",
+    "libraryFull": "Biblioteca a ajuns la limită. Scoate un element ca să adaugi altul.",
+    "handoverTarget": "Alege un membru al ocaziei care nu face parte din echipa firmei."
+  }
+}

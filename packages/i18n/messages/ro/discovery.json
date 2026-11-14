@@ -1,0 +1,287 @@
+{
+  "title": "Descoperire",
+  "description": "Firme găsite în surse publice legale. Nimic nu devine public până când un moderator aprobă. Fiecare rulare este înregistrată.",
+  "tabsLabel": "Secțiuni",
+  "tabs": {
+    "sources": "Surse",
+    "drafts": "Ciorne",
+    "runs": "Rulări",
+    "objections": "Eliminări și obiecții",
+    "claims": "Revendicări"
+  },
+  "figures": {
+    "pending": "Ciorne de verificat",
+    "duplicates": "Posibile dubluri",
+    "objections": "Cereri de eliminare deschise",
+    "claims": "Revendicări deschise",
+    "now": "acum",
+    "overdue": "{n} peste 30 de zile",
+    "onTime": "toate în termen"
+  },
+  "kinds": {
+    "onrc_public": "Date publice ONRC",
+    "business_page": "Pagini proprii ale firmelor",
+    "licensed_dataset": "Set de date licențiat"
+  },
+  "sources": {
+    "add": "Adaugă o sursă",
+    "addFirst": "Adaugă prima sursă",
+    "emptyTitle": "Nicio sursă configurată",
+    "emptyBody": "O sursă este un set de date sub contract, o listă de pagini publice ale firmelor sau adaptorul ONRC. Pornește oprită.",
+    "cols": {
+      "name": "Sursă",
+      "kind": "Tip",
+      "terms": "Temei",
+      "rate": "Limită",
+      "state": "Stare",
+      "lastRun": "Ultima rulare",
+      "actions": "Acțiuni"
+    },
+    "rate": "{n} cereri/oră",
+    "enabled": "Activă",
+    "paused": "Oprită",
+    "neverRun": "niciodată",
+    "lastRunSummary": "{date} · {seen} văzute · {drafts} ciorne · {duplicates} dubluri",
+    "run": "Rulează acum",
+    "running": "Se pune în coadă…",
+    "queued": "Rularea a fost pusă în coadă. Apare în jurnal când pornește.",
+    "alreadyQueued": "O rulare a acestei surse este deja în coadă.",
+    "enable": "Pornește sursa",
+    "pause": "Oprește sursa",
+    "switching": "Se schimbă…",
+    "edit": "Configurează",
+    "editNamed": "Configurează sursa {name}",
+    "pendingDrafts": "{n} ciorne în așteptare"
+  },
+  "sourceForm": {
+    "newTitle": "Sursă nouă",
+    "editTitle": "Configurează sursa",
+    "back": "Înapoi la surse",
+    "name": "Nume",
+    "kind": "Tip",
+    "kindLocked": "Tipul unei surse nu se mai schimbă după creare.",
+    "terms": "Temeiul de utilizare",
+    "termsHint": "Numărul contractului, licența sau termenii care permit folosirea sursei.",
+    "rate": "Limită de cereri pe oră",
+    "rateHint": "Câte cereri HTTP poate face sursa într-o oră, cu tot cu robots.txt.",
+    "format": "Formatul setului de date",
+    "formats": {
+      "csv": "CSV",
+      "json": "JSON"
+    },
+    "url": "Adresa fișierului (https)",
+    "urlHint": "Opțional dacă lipești conținutul mai jos.",
+    "inline": "Conținutul fișierului",
+    "inlineHint": "Coloane: name, category, county, locality, contact, email, phone, identifier, website, url. Cel mult 2 MB.",
+    "urls": "Pagini publice ale firmelor",
+    "urlsHint": "Câte o adresă https pe rând, cel mult 200. Se citesc doar datele schema.org și etichetele meta ale paginii.",
+    "defaultCategory": "Categorie implicită",
+    "defaultCategoryHint": "Pentru rândurile care nu numesc o categorie.",
+    "none": "Niciuna",
+    "targetCategories": "Doar aceste categorii",
+    "targetCategoriesHint": "ID-uri de categorii separate prin virgulă. Gol = toate.",
+    "targetCounties": "Doar aceste județe",
+    "targetCountiesHint": "Coduri de județ separate prin virgulă, de exemplu CJ, B, IF. Gol = toate.",
+    "onrcNote": "Sursa ONRC folosește un adaptor instalat de operator. Fără adaptor, rularea se înregistrează și nu produce nimic.",
+    "create": "Adaugă sursa",
+    "save": "Salvează configurarea",
+    "saving": "Se salvează…",
+    "saved": "Configurare salvată.",
+    "created": "Sursă adăugată. Este oprită până o pornești.",
+    "optional": "opțional"
+  },
+  "drafts": {
+    "filterLabel": "Stare",
+    "states": {
+      "pending": "De verificat",
+      "duplicate_review": "Posibile dubluri",
+      "approved": "Aprobate",
+      "rejected": "Respinse"
+    },
+    "emptyTitle": "Nicio ciornă aici",
+    "emptyBody": "Ciornele apar după rularea unei surse.",
+    "emptyAction": "Vezi sursele",
+    "cols": {
+      "select": "Alege",
+      "name": "Firmă",
+      "category": "Categorie",
+      "area": "Zonă",
+      "contact": "Contact public",
+      "source": "Sursă",
+      "collected": "Culeasă"
+    },
+    "selectNamed": "Alege {name}",
+    "guessMissing": "de completat",
+    "emailYes": "email public: da",
+    "emailNo": "email public: nu",
+    "sourceLink": "pagina sursă",
+    "duplicateOfListing": "Seamănă cu listarea „{name}”",
+    "duplicateOfDraft": "Seamănă cu ciorna „{name}”",
+    "fix": "Corectează",
+    "fixNamed": "Corectează categoria și localitatea pentru {name}",
+    "batchTitle": "Decizie pentru ciornele alese",
+    "batchBody": "O singură decizie și un singur motiv pentru tot lotul. Aprobarea publică o listare minimă, marcată „Adăugat de EventDesk — nefiind revendicat încă”.",
+    "action": "Decizie",
+    "actions": {
+      "approve": "Aprobă și publică",
+      "reject": "Respinge",
+      "discard": "Elimină (dublură sau zgomot)"
+    },
+    "reason": "Motivul lotului",
+    "reasonHint": "Se păstrează în jurnal și în înregistrarea de moderare.",
+    "submit": "Aplică decizia",
+    "submitting": "Se aplică…",
+    "done": {
+      "approve": "Lot aprobat: listările sunt publice.",
+      "reject": "Lot respins.",
+      "discard": "Lot eliminat."
+    },
+    "needModerator": "Aprobarea cere rolul de moderator de listări.",
+    "fixTitle": "Categorie și localitate",
+    "fixBody": "Corectezi doar încadrarea ghicită. Numele, contactul și sursa rămân cum au fost culese.",
+    "category": "Categorie",
+    "locality": "Localitate",
+    "choose": "Alege…",
+    "saveFix": "Salvează încadrarea",
+    "savingFix": "Se salvează…",
+    "savedFix": "Încadrare salvată.",
+    "back": "Înapoi la ciorne",
+    "decidedOn": "Decisă {date}",
+    "listing": "Vezi listarea",
+    "invited": "Invitație trimisă {date}",
+    "notInvited": "Fără invitație: sursa nu are email"
+  },
+  "runs": {
+    "emptyTitle": "Nicio rulare încă",
+    "emptyBody": "Jurnalul arată fiecare rulare: sursa, ce a văzut, ce ciorne a creat și ce dubluri a pus deoparte.",
+    "cols": {
+      "started": "Pornită",
+      "source": "Sursă",
+      "seen": "Văzute",
+      "drafts": "Ciorne",
+      "duplicates": "Dubluri",
+      "skipped": "Sărite",
+      "outcome": "Rezultat",
+      "by": "Pornită de"
+    },
+    "finished": "Încheiată",
+    "running": "În curs",
+    "stopped": {
+      "kill_switch": "Oprită: sursa a fost oprită",
+      "rate_limit": "Oprită: limita orară"
+    },
+    "errors": "{n} erori",
+    "schedule": "program",
+    "staff": "personal"
+  },
+  "objections": {
+    "tabs": {
+      "open": "Deschise",
+      "handled": "Rezolvate"
+    },
+    "emptyTitle": "Nicio cerere deschisă",
+    "emptyBody": "Cererile de eliminare, obiecțiile și corecturile trimise pentru listările nerevendicate apar aici, cu termenul de 30 de zile.",
+    "emptyHandled": "Nicio cerere rezolvată",
+    "kinds": {
+      "removal": "Eliminare",
+      "objection": "Obiecție",
+      "correction": "Corectură"
+    },
+    "received": "Primită {date}",
+    "due": "Termen: {date}",
+    "daysLeft": "{n} zile rămase",
+    "overdue": "Termen depășit",
+    "viaInvitation": "prin linkul din invitație",
+    "contact": "Răspuns la: {email}",
+    "noMessage": "fără mesaj",
+    "decision": "Decizie",
+    "decisions": {
+      "honour": "Dă curs cererii",
+      "decline": "Refuză"
+    },
+    "honourNote": "La eliminare sau obiecție, listarea se retrage pe loc și firma nu mai este descoperită.",
+    "note": "Ce s-a făcut și de ce",
+    "noteHint": "Dovada rezolvării, păstrată 3 ani.",
+    "submit": "Înregistrează decizia",
+    "submitting": "Se înregistrează…",
+    "done": "Decizie înregistrată.",
+    "states": {
+      "received": "Deschisă",
+      "honoured": "Onorată",
+      "declined": "Refuzată"
+    },
+    "handled": "Rezolvată {date}"
+  },
+  "claims": {
+    "tabs": {
+      "open": "Deschise",
+      "decided": "Încheiate"
+    },
+    "emptyTitle": "Nicio revendicare deschisă",
+    "emptyBody": "Când cineva revendică o listare nerevendicată, cererea apare aici după dovadă.",
+    "emptyDecided": "Nicio revendicare încheiată",
+    "states": {
+      "code_sent": "Cod trimis, neconfirmat",
+      "verified": "Cod confirmat",
+      "needs_check": "De verificat manual",
+      "in_approval": "La aprobare",
+      "approved": "Aprobată",
+      "rejected": "Respinsă",
+      "cancelled": "Anulată"
+    },
+    "methods": {
+      "code": "Cod la adresa publicată",
+      "moderator": "Verificare de către moderator"
+    },
+    "claimant": "Solicitant: {email}",
+    "business": "Firma: {name}",
+    "existingBusiness": "firmă existentă",
+    "statement": "Declarația solicitantului: {text}",
+    "source": "Sursa publică",
+    "contactRoute": "Contact public: {route}",
+    "check": "Verificarea față de sursa publică",
+    "checkHint": "Ce ai comparat și cu ce: de exemplu numele administratorului din registru cu actul trimis.",
+    "checkHintCode": "Opțional: codul trimis la adresa publicată a fost confirmat.",
+    "submit": "Trimite la aprobare",
+    "submitting": "Se trimite…",
+    "submitted": "Trimisă la aprobare. O a doua persoană o aprobă din „Aprobări”.",
+    "reject": "Respinge revendicarea",
+    "rejectReason": "Motivul, pentru solicitant",
+    "rejecting": "Se respinge…",
+    "rejected": "Revendicare respinsă.",
+    "inApproval": "Așteaptă o a doua persoană în „Aprobări”.",
+    "approvals": "Deschide aprobările",
+    "recorded": "Verificare înregistrată: {note}"
+  },
+  "errors": {
+    "termsRequired": "Scrie temeiul care permite folosirea sursei.",
+    "urlHttps": "Folosește adrese https publice, fără utilizator și parolă.",
+    "datasetRequired": "Dă adresa fișierului sau lipește conținutul.",
+    "urlsRequired": "Scrie cel puțin o adresă.",
+    "tooManyUrls": "Cel mult 200 de adrese pe sursă.",
+    "inlineTooLarge": "Conținutul depășește 2 MB.",
+    "nameTaken": "Există deja o sursă cu acest nume.",
+    "paused": "Sursa este oprită. Pornește-o înainte să o rulezi.",
+    "alreadyDecided": "A fost deja decisă.",
+    "nothingSelected": "Alege cel puțin o ciornă.",
+    "reasonRequired": "Scrie motivul, cel puțin 10 caractere.",
+    "draftIncomplete": "„{name}” nu are încă o categorie și o localitate din liste. Corecteaz-o, apoi aprobă.",
+    "listingClaimed": "Listarea a fost revendicată între timp; nu mai poate fi retrasă de aici."
+  },
+  "email": {
+    "invitation": {
+      "subject": "„{listing}” apare în directorul EventDesk",
+      "who": "EventDesk, o aplicație românească de planificare a evenimentelor, a adăugat în directorul său o listare minimă pentru „{listing}”, din informații publice ({source}, culese la {date}).",
+      "what": "Listarea arată doar numele, categoria, zona și contactul public. Este marcată „Adăugat de EventDesk — nefiind revendicat încă” și nu primește cereri prin platformă.",
+      "claim": "Revendică listarea",
+      "correct": "După revendicare o poți corecta și completa. Revendicarea este gratuită și se verifică printr-un cod trimis la această adresă.",
+      "remove": "Dacă vrei să fie eliminată sau ai o obiecție, folosește acest link: {url} — listarea se retrage pe loc.",
+      "once": "Acesta este singurul mesaj pe care îl primești de la EventDesk pentru această listare. Nu trimitem publicitate."
+    }
+  },
+  "kindHelp": {
+    "licensed_dataset": "Un fișier CSV sau JSON primit sub contract: îl lipești aici sau dai adresa lui https.",
+    "business_page": "O listă de pagini publice ale firmelor. Se citesc doar datele schema.org și etichetele meta ale fiecărei pagini.",
+    "onrc_public": "Datele publice ale Registrului Comerțului, printr-un adaptor instalat de operator."
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "code-not-arrived": {
+    "title": "The sign-in code did not arrive",
+    "summary": "A few things to check when the email with the six-digit code is slow to come.",
+    "keywords": "code not arrived email not received spam wrong code expired too many attempts",
+    "where": "The “Sign in” page",
+    "body": {
+      "ol1": {
+        "a": "Wait a minute or two and look in your Spam or Promotions folders as well.",
+        "b": "Check the address shown under “Check your email”. If one letter is wrong, press “Use a different email address”.",
+        "c": "If the email arrived but the code no longer works, ask for a new one. The code is valid for 15 minutes.",
+        "d": "If you see “Too many attempts”, wait until the time shown and ask for a new code."
+      },
+      "note1": "For safety, the page says the same thing (if the address is correct, you have received a code) whatever address was typed. We cannot confirm whether an address has an account.",
+      "h1": "Other situations",
+      "ul1": {
+        "a": "“The code is not correct or has expired” — check the digits; use the code from the newest email.",
+        "b": "“This link was already used” — sometimes the email program opens the link before you do. Type the code from the same email.",
+        "c": "“Sign-up opens soon” — for now only people who already have an account can sign in.",
+        "d": "You have an anonymous account — it does not receive codes by email. Sign in with your username and password."
+      },
+      "p1": "If your address no longer receives any email from us, write to the address under “Contact and reporting”, if one is shown."
+    }
+  },
+  "link-expired": {
+    "title": "The link has expired or is no longer valid",
+    "summary": "What the message means, depending on the kind of link: sign-in, guest, team or supplier.",
+    "keywords": "link expired no longer valid invalid revoked used invitation supplier team",
+    "where": "The page the link took you to",
+    "body": {
+      "h1": "Sign-in link",
+      "p1": "The link and the code in the email are valid for 15 minutes and can be used once. At “This link has expired”, type a newer code or press “Send me a new code”. At “This link is not valid”, press “Back to the sign-in page” and ask for a new code.",
+      "h2": "Guest link",
+      "p2": "“This link is no longer valid” means the host replaced it, revoked it or its validity ran out. Ask the host for a new link. The reply you already gave stays.",
+      "note1": "If the host sent you the invitation both by email and another way, only the newest link works.",
+      "h3": "Team invitation",
+      "p3": "“The invitation is no longer valid” or “The invitation has expired”: the link was already used, was cancelled, or the 14 days have passed. Ask the organiser to send it again.",
+      "h4": "Supplier link",
+      "p4": "“This link is not valid”: it was replaced or withdrawn. Ask the organiser for a new link.",
+      "note2": "We cannot show a lost link again, because we do not keep it in readable form. The organiser generates a new one from the household's or the supplier's page, and the old one stops working."
+    }
+  },
+  "last-place-taken": {
+    "title": "“The last place was taken just now”",
+    "summary": "Why the message appears when you reply to an invitation or register, and what you can do.",
+    "keywords": "last place taken places capacity full waiting list no places left",
+    "where": "The guest link · the event's public page",
+    "body": {
+      "p1": "The event has a total number of places. If someone else confirmed a moment before you, the places left are no longer enough for the number you entered. The message tells you how many places are left.",
+      "h1": "If you are a guest",
+      "ol1": {
+        "a": "Look at the places left shown in the message.",
+        "b": "If there are still places, lower the number of people and send the reply again.",
+        "c": "If there are none, write to the host directly: they can raise the number of places."
+      },
+      "h2": "If you are registering on the public page",
+      "p2": "When the places are taken, you can join the waiting list. You see your position, and if places free up you get in automatically and receive an email.",
+      "note1": "A place is never given twice. That is why, when two people press at the same moment, only the first gets it — the second sees this message instead of a wrong confirmation.",
+      "h3": "If you are the host",
+      "p3": "Raise the number in “RSVP settings”, under “Places”, or leave the field empty for unlimited places. Guests with a link and people on the public page share the same places.",
+      "note2": "A vote in a date poll does not hold a place. Only a “Yes” reply to the invitation takes places."
+    }
+  },
+  "upload-refused": {
+    "title": "My file was refused",
+    "summary": "What each message means when you upload a receipt, a photo or a plan.",
+    "keywords": "upload file refused too large type png jpg pdf virus limit storage image",
+    "where": "Anywhere you upload a file",
+    "body": {
+      "ul1": {
+        "a": "“The file is too large. The limit is 10 MiB per file.” — make the image smaller or export the PDF at a lower quality.",
+        "b": "“We only accept PNG or JPG images.” (sometimes PDF documents too) — save the file in one of these formats. HEIC photos from a phone have to be converted to JPG.",
+        "c": "“We could not read the image.” — the file is damaged or is in a different format than its name says. Save it again as PNG or JPG.",
+        "d": "“The file was rejected by the security check and was not saved.” — the file looked dangerous. Use another copy, made on a device you trust.",
+        "e": "“We cannot check files right now, so nothing was saved.” — try again in a few minutes.",
+        "f": "A message that you have reached the limit for files — it tells you which of your files is the largest. Delete that one or another, then upload again. We do not delete anything for you.",
+        "g": "“The file is empty.” — choose another file."
+      },
+      "note1": "Every file is checked before it is saved. If the check cannot run, we prefer to save nothing rather than save something unchecked.",
+      "h1": "Special limits",
+      "ul2": {
+        "a": "A guest list to import: Excel (.xlsx) or CSV, at most 2 MB.",
+        "b": "An .ics file for the itinerary: under 300 KB.",
+        "c": "A room plan: a PDF is kept, but for calibration you need a PNG or JPG."
+      },
+      "p1": "Nothing you typed in the form is lost when a file is refused: you choose another file and send again."
+    }
+  },
+  "offline-check-in": {
+    "title": "Check-in without internet",
+    "summary": "On the day of the event you can record arrivals and your own ticks without a connection. They are sent once, when the internet comes back.",
+    "keywords": "offline no internet connection check-in arrivals sync ticks conflict signal",
+    "where": "Your occasion → Rehearsal and arrivals → Sync",
+    "need": "People on the planning team who do check-in or have tasks that day.",
+    "body": {
+      "p1": "Without internet you can do only two things: record arrivals and tick your tasks in “My checklist”. The rest of the app needs a connection.",
+      "ol1": {
+        "a": "While you still have internet, open “Rehearsal and arrivals”, then “Check-in” and “My checklist”, on the device you will use.",
+        "b": "If you lose the connection, you see “You are offline now”. You can carry on: arrivals and ticks are kept on this device.",
+        "c": "When the connection comes back, open “Sync” and press “Sync now”, if it has not already been sent by itself.",
+        "d": "Read the result: how many were applied and how many had already been recorded by someone else."
+      },
+      "note1": "An arrival recorded by two people, on two devices, is counted once.",
+      "h1": "“To decide”",
+      "p2": "If one of your ticks changed on the server in the meantime, it appears under “To decide”. You choose “Keep what the server has” or apply your version. If the item no longer exists, the tick has nowhere to go and we show it to you as such.",
+      "note2": "Do not close the tab or clear the browser's data before syncing: what is waiting exists only on that device.",
+      "p3": "The camera for scanning QR codes depends on the device. If it does not work, search the household by name or type the code by hand."
+    }
+  }
+}

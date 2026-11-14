@@ -1,0 +1,53 @@
+{
+  "exports": {
+    "qrLabels": {
+      "title": "Coduri QR pentru invitațiile tipărite",
+      "description": "Etichete cu numele familiei și codul care deschide doar invitația ei (PDF, A4)."
+    },
+    "qrInvitations": {
+      "title": "Invitații cu cod QR",
+      "description": "Invitația verificată, câte o foaie pentru fiecare familie, cu codul ei (PDF pentru tipar)."
+    },
+    "tableCards": {
+      "title": "Carduri de masă",
+      "description": "Numărul sau numele fiecărei mese, cu un cod QR către pagina evenimentului, dacă este publicată (PDF pentru tipar)."
+    },
+    "roomPlan": {
+      "title": "Planul sălii, la scară",
+      "description": "Planul cu mesele, desenat vectorial la o scară standard, cu bară de scară și cartuș (PDF, A4)."
+    }
+  },
+  "notice": {
+    "eyebrow": "Încă nu se poate genera"
+  },
+  "errors": {
+    "noTables": "Planul de așezare nu are încă nicio masă. Adaugă mesele în „Așezare la mese”, apoi descarcă din nou cardurile.",
+    "noSpace": "Ocazia nu are încă un plan al sălii. Alege planul locației sau desenează unul în „Planul sălii”, apoi descarcă din nou.",
+    "noStationery": "Încă nu există o invitație. Creeaz-o în „Invitații”, marchează proba ca verificată, apoi descarcă din nou.",
+    "qrOff": "Invitația nu are codul QR activat. Bifează „Tipărește pe invitație codul QR al fiecărei familii” în „Invitații”, salvează și verifică proba."
+  },
+  "labels": {
+    "docTitle": "Coduri QR — {title}",
+    "subject": "Etichete cu coduri QR pentru invitațiile tipărite",
+    "caption": "Invitația dumneavoastră",
+    "foot": "{title} · coduri QR pentru invitații · pagina {page} din {pages} · {date}",
+    "emptyTitle": "Încă nu ai invitați",
+    "emptyBody": "Adaugă familiile în „Invitați și răspunsuri”; fiecare primește un cod."
+  },
+  "tables": {
+    "docTitle": "Carduri de masă — {title}",
+    "subject": "Carduri de masă pentru tipar",
+    "qrCaption": "Program, meniu și plan",
+    "slug": "card de masă {label}"
+  },
+  "plan": {
+    "docTitle": "Planul sălii — {title}",
+    "subject": "Planul sălii la scara 1:{scale}",
+    "eyebrow": "Planul sălii",
+    "scale": "Scara 1:{scale}",
+    "seats": "{taken} din {total} locuri ocupate",
+    "printNote": "Tipărește pe A4 la 100 %, fără „potrivire în pagină”, ca scara să rămână corectă.",
+    "unpublished": "Așezarea nu este încă publicată pentru invitați.",
+    "made": "Generat la {date}"
+  }
+}
