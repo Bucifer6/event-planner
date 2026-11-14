@@ -175,8 +175,8 @@ const VOICES: Layout["voice"][] = ["roman", "italic", "caps", "sans"];
 
 /** The fixed set of templates of one occasion kind (the same every time). */
 function templatesFor(kind: string): TemplateSpec[] {
-  const family = FAMILY[KIND_FAMILY[kind] ?? "party"]!;
-  const specials = KIND_SPECIALS[kind] ?? [];
+  const family = FAMILY[Object.hasOwn(KIND_FAMILY, kind) ? KIND_FAMILY[kind]! : "party"]!;
+  const specials = (Object.hasOwn(KIND_SPECIALS, kind) ? KIND_SPECIALS[kind] : undefined) ?? [];
   const styles = [...new Set([...specials, ...family.styles])];
   const palettes = Object.keys(TEMPLATE_PALETTES).filter((p) => family.moods.includes(TEMPLATE_PALETTES[p]!.mood));
   const rnd = rngOf(hash(kind));
@@ -1108,7 +1108,7 @@ const STYLES: Record<TemplateStyle, StyleFn> = {
 
 /** Draws a template on a sheet W × H (points). `motif` is the occasion's 80 × 64 line drawing. */
 export function drawTemplate(spec: TemplateSpec, paletteKey: string, W: number, H: number, motif: string): { nodes: ArtNode[]; result: ArtResult } {
-  const pal = TEMPLATE_PALETTES[paletteKey] ?? TEMPLATE_PALETTES[spec.palettes[0]]!;
+  const pal = (Object.hasOwn(TEMPLATE_PALETTES, paletteKey) ? TEMPLATE_PALETTES[paletteKey] : undefined) ?? TEMPLATE_PALETTES[spec.palettes[0]]!;
   const pen = new Pen(W, H, pal, rngOf(spec.seed), motif);
   const result = STYLES[spec.style](pen);
   return { nodes: pen.nodes, result };

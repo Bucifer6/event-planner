@@ -226,7 +226,15 @@
     },
     "payments": {
       "title": "Plăți către furnizori (CSV)",
-      "description": "Termenele de plată, sumele și ce s-a plătit."
+      "description": "Termenele de plată, sumele și ce s-a plătit.",
+      "columns": {
+        "supplier": "Furnizor",
+        "kind": "Tip",
+        "dueOn": "Scadență",
+        "amount": "Sumă",
+        "currency": "Monedă",
+        "paidAt": "Plătit la"
+      }
     }
   }
 }

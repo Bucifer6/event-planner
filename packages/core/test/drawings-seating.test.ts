@@ -744,7 +744,10 @@ describe("seating (C-01, C-08)", () => {
 
     const csv = await runExport(s.planner.ctx, s.occ, "seating");
     expect(csv.content).toContain("Nași");
-    expect(csv.content).toContain("+2 children");
+    // children appear only as a count, in the occasion's language, and without a formula-guard apostrophe
+    expect(csv.content).toContain("Copii: 2");
+    expect(csv.content).not.toContain("'");
+    expect(csv.content.split("\r\n")[0]).toBe("\ufeffMasa,Locul,Familia,Invitat,Locuri,Răspuns");
     const stranger = await mkAccount();
     expect(await code(runExport(stranger.ctx, s.occ, "seating"))).toBe("NOT_FOUND");
   });

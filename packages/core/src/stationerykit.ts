@@ -663,6 +663,15 @@ const HOUSE_DESIGNS: Record<HouseDesignKey, Design> = {
 
 /* ── Collection designs (the invitation collections) ───────────────────── */
 
+/** An own entry of a data table, or undefined — never an inherited property ("constructor", "__proto__"). */
+function own<T>(table: Record<string, T>, key: string | null | undefined): T | undefined {
+  return key && Object.hasOwn(table, key) ? table[key] : undefined;
+}
+/** The occasion kind's motif (the general one for an unknown kind). */
+function motifFor(kind: string | null | undefined): string {
+  return own(KIND_MOTIFS, kind) ?? KIND_MOTIFS.blank!;
+}
+
 /** Mixes two #rrggbb colours: `t` of `b` into `a`. */
 export function mixColour(a: string, b: string, t: number): string {
   const p = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
@@ -899,7 +908,7 @@ export function getDesign(key: string): Design {
 /** The colourways a design offers for an occasion kind, in order (kind palettes first, then the studio palettes). */
 export function colourwaysFor(design: Design, occasionKind?: string | null): string[] {
   if (!design.kindColourways) return design.colourways;
-  const kind = (occasionKind && KIND_PALETTES[occasionKind]) || KIND_PALETTES.blank!;
+  const kind = own(KIND_PALETTES, occasionKind) ?? KIND_PALETTES.blank!;
   const first = kind[design.kindColourways.openOn % kind.length]!;
   return [...new Set([first, ...kind, ...STUDIO_PALETTES])];
 }
@@ -1294,7 +1303,7 @@ export function layoutPiece(input: LayoutInput): Scene {
   if (design.art) drawCollectionArt(design, W, H, cw, input.occasionKind ?? undefined, nodes);
   if (design.template) {
     // an occasion template: its artwork, then the text box (and alignment) the style asks for
-    const motif = KIND_MOTIFS[design.forKind ?? ""] ?? KIND_MOTIFS.blank!;
+    const motif = motifFor(design.forKind);
     const art = drawTemplate(design.template, cw.key.replace(/^tp-/, ""), W, H, motif);
     for (const n of art.nodes) nodes.push({ t: "path", d: n.d, tx: 0, ty: 0, s: 1, paint: n.paint, color: n.color, sw: n.sw, ...(n.plate ? { plate: true } : {}), ...(n.frame ? { frame: true } : {}), box: n.box });
     design = { ...design, textBox: art.result.box, align: art.result.align ?? design.align, valign: art.result.valign };
@@ -1816,13 +1825,13 @@ function drawCollectionArt(design: Design, W: number, H: number, cw: Colourway, 
     k: Math.min(W, H) / 400,
     E: mm(BLEED_MM + 1),
     cw,
-    motif: KIND_MOTIFS[occasionKind ?? ""] ?? KIND_MOTIFS.blank!,
+    motif: motifFor(occasionKind),
     stroke: (d, color, sw) => nodes.push({ t: "path", d, tx: 0, ty: 0, s: 1, paint: "stroke", color, sw }),
     fill: (d, color) => nodes.push({ t: "path", d, tx: 0, ty: 0, s: 1, paint: "fill", color, sw: 0 }),
     tint: (t) => mixColour(cw.paper, cw.accent, t),
     sheet: (d) => transformPath(d, W / 100, H / 100),
   };
-  const chart = STITCH_CHARTS[key];
+  const chart = own(STITCH_CHARTS, key);
   if (chart) {
     // Romanian embroidery: linen with a faint weave, a hairline edge, the chart as the border
     g.stroke(box(0.6, 0.6, W - 1.2, H - 1.2), g.tint(0.25), 0.6);
@@ -1842,8 +1851,8 @@ function drawCollectionArt(design: Design, W: number, H: number, cw: Colourway, 
     }
     return;
   }
-  COLLECTION_ART[key]?.(g);
-  const edition = EDITION_ART[key];
+  own(COLLECTION_ART, key)?.(g);
+  const edition = own(EDITION_ART, key);
   if (edition) {
     const strength = EDITION_STRENGTH[key] ?? 1;
     g.stroke(g.sheet(edition.d), strength < 1 ? g.tint(strength) : cw.accent, 0.8);
@@ -1853,7 +1862,7 @@ function drawCollectionArt(design: Design, W: number, H: number, cw: Colourway, 
 
 /** The occasion kind's motif as an opening mark: plain, in a ring, or in a shield. */
 function motifOrnament(kind: string | undefined, variant: "plain" | "ring" | "shield"): Ornament {
-  const d = KIND_MOTIFS[kind ?? ""] ?? KIND_MOTIFS.blank!;
+  const d = motifFor(kind);
   if (variant === "plain") return { w: 80, h: 64, paths: [{ d, paint: "stroke", role: "accent", sw: 0.9 }] };
   if (variant === "ring") {
     return {

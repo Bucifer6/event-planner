@@ -60,7 +60,8 @@ describe("occasion templates", () => {
       for (const p of Object.keys(TEMPLATE_PALETTES)) expect(translate(locale, `stationery.palettes.${p}`), p).not.toMatch(/^stationery\./);
     }
     const t = occasionTemplates("nunta")[0]!;
-    expect(stationeryDesignName(t.key, "en")).toMatch(/ · /);
+    expect(stationeryDesignName(t.key, "en")).toBe(`${translate("en", `stationery.styles.${t.style}`)} no. 1`);
+    expect(stationeryDesignName(t.key, "ro")).toMatch(/ nr\. 1$/);
   });
 
   it("every template palette reads: ink and muted meet AA on the paper (and the accent on a dark sheet)", () => {
@@ -137,5 +138,14 @@ describe("occasion templates", () => {
       }
     }
     expect(off).toEqual([]);
+  });
+
+  it("an occasion kind from outside never reaches an inherited property (constructor, __proto__)", () => {
+    for (const kind of ["constructor", "__proto__", "toString", "hasOwnProperty"]) {
+      for (const design of ["seal", "postcard", "maramures-gate", occasionTemplates("blank")[0]!.key]) {
+        expect(() => layoutPiece({ design, piece: "invitation", texts: TEXTS, occasionKind: kind }), `${design}/${kind}`).not.toThrow();
+      }
+      expect(colourwaysFor(getDesign("frame"), kind)).toEqual(colourwaysFor(getDesign("frame"), "blank"));
+    }
   });
 });

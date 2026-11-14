@@ -1561,11 +1561,11 @@ registerExport({
     const rows: Array<Array<string | number | null>> = [];
     for (const h of roster) {
       for (const a of h.adults) rows.push([a.tableItemId ? (label.get(a.tableItemId) ?? "") : "", a.seatNo, h.name, a.name, 1, h.attending ?? ""]);
-      if (h.extra) rows.push([h.extra.tableItemId ? (label.get(h.extra.tableItemId) ?? "") : "", null, h.name, `+${h.extra.count} adults`, h.extra.count, h.attending ?? ""]);
-      if (h.children) rows.push([h.children.tableItemId ? (label.get(h.children.tableItemId) ?? "") : "", null, h.name, `+${h.children.count} children`, h.children.count, h.attending ?? ""]);
+      if (h.extra) rows.push([h.extra.tableItemId ? (label.get(h.extra.tableItemId) ?? "") : "", null, h.name, translate(ctx.locale, "seating.export.extraAdults", { count: h.extra.count }), h.extra.count, h.attending ?? ""]);
+      if (h.children) rows.push([h.children.tableItemId ? (label.get(h.children.tableItemId) ?? "") : "", null, h.name, translate(ctx.locale, "seating.export.extraChildren", { count: h.children.count }), h.children.count, h.attending ?? ""]);
     }
     rows.sort((a, b) => String(a[0]).localeCompare(String(b[0]), "ro", { numeric: true }) || String(a[2]).localeCompare(String(b[2]), "ro"));
-    return { filename: "seating.csv", mime: "text/csv; charset=utf-8", content: toCsv(["table", "seat", "household", "guest", "places", "rsvp"], rows) };
+    return { filename: "seating.csv", mime: "text/csv; charset=utf-8", content: toCsv((["table", "seat", "household", "guest", "places", "rsvp"] as const).map((c) => translate(ctx.locale, `seating.export.columns.${c}`)), rows) };
   },
 });
 

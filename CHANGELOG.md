@@ -112,6 +112,22 @@ The first complete build of the product, made on 13–14 November 2026 on the br
 - Limited offline capture of arrivals and checklist ticks.
 - Optional sustainability goals.
 
+### Fixed — quality and security check (14 November 2026)
+
+- Every page sent the browser the whole message catalogue (about 640 KB of Romanian, admin
+  console and help articles included). It now sends only what client components read
+  (`apps/web/lib/client-messages.ts`, guarded by a test): the sign-in page goes from 524 KB to
+  341 KB.
+- The seating and supplier-payment CSV exports had English column names and English
+  "+2 children" rows in a Romanian app; they are now in the occasion's language, and the extra
+  guests are written so spreadsheets do not prefix them with an apostrophe.
+- An occasion kind such as "constructor" sent with a live invitation preview could reach an
+  inherited JavaScript property and crash that request; table lookups now accept only their
+  own entries (tested).
+- Occasion templates were named after their first palette ("Scalloped frame · Cotton candy"),
+  which contradicted the colours once another colourway was chosen; they are now named by style
+  and number ("Scalloped frame no. 8").
+
 ### Added — after the main build (14 November 2026)
 
 - Four more looks for the app — Atelier, Riviera, Jardin and Studio — beside the house look

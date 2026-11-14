@@ -1,3 +1,4 @@
+import { translate } from "@ed/i18n";
 import {
   and,
   asc,
@@ -576,10 +577,10 @@ registerExport({
   run: async (ctx, occasionId) => {
     const rows = await listPaymentDeadlines(ctx, occasionId);
     const csv = toCsv(
-      ["supplier", "kind", "due_on", "amount", "currency", "paid_at"],
+      (["supplier", "kind", "dueOn", "amount", "currency", "paidAt"] as const).map((c) => translate(ctx.locale, `suppliers.exports.payments.columns.${c}`)),
       rows.map((p) => [
         p.supplierName,
-        p.kind,
+        translate(ctx.locale, `suppliers.payments.kinds.${p.kind}`),
         p.dueOn,
         p.amountMinor === null ? "" : (p.amountMinor / 100).toFixed(2),
         p.currency,

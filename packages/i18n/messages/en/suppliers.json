@@ -226,7 +226,15 @@
     },
     "payments": {
       "title": "Supplier payments (CSV)",
-      "description": "The payment deadlines, the amounts and what has been paid."
+      "description": "The payment deadlines, the amounts and what has been paid.",
+      "columns": {
+        "supplier": "Supplier",
+        "kind": "Kind",
+        "dueOn": "Due on",
+        "amount": "Amount",
+        "currency": "Currency",
+        "paidAt": "Paid on"
+      }
     }
   }
 }

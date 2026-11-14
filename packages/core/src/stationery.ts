@@ -199,10 +199,13 @@ const presetKindFor = (occasionKind: string): StationeryWordingKind => (WEDDING_
 const designFor = (occasionKind: string): DesignKey =>
   WEDDING_LIKE.has(occasionKind) ? "classic" : CHRISTENING_LIKE.has(occasionKind) ? "botez" : PARTY_LIKE.has(occasionKind) ? "petrecere" : FORMAL.has(occasionKind) ? "modern" : "minimal";
 
-/** A design's display name: its own name, or for an occasion template "<style> · <palette>". */
+/**
+ * A design's display name: its own name, or for an occasion template "<style> no. N" — never
+ * its colours, which the planner may change (the colourway has a name of its own).
+ */
 export function stationeryDesignName(designKey: string, locale: StationeryLocale): string {
   const d = (DESIGN_KEYS as readonly string[]).includes(designKey) ? getDesign(designKey) : null;
-  if (d?.template) return `${translate(locale, `stationery.styles.${d.template.style}`)} · ${translate(locale, `stationery.palettes.${d.template.palettes[0]}`)}`;
+  if (d?.template) return translate(locale, "stationery.templateName", { style: translate(locale, `stationery.styles.${d.template.style}`), number: Number(d.template.key.split(".").pop()) });
   return translate(locale, `stationery.designs.${designKey}.name`);
 }
 

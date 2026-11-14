@@ -719,7 +719,7 @@ describe("the invitation builder (list_invitation_designs, get_invitation_previe
     expect(list.isError).toBe(false);
     expect(list.data.collection).toBe("occasion");
     expect(list.data.total).toBeGreaterThanOrEqual(50);
-    expect(list.data.designs[0]).toMatchObject({ key: expect.stringMatching(/^t\.blank\./), name: expect.stringContaining(" · ") });
+    expect(list.data.designs[0]).toMatchObject({ key: expect.stringMatching(/^t\.blank\./), name: expect.stringMatching(/ nr\. \d+$/) });
     expect(list.data.designs[0].colourways).toHaveLength(3);
     expect(list.data.fields.find((f: { field: string }) => f.field === "names")).toMatchObject({ required: true, maxLength: 90 });
     expect(list.data.starterWordings).toHaveLength(10);
