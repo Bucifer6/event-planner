@@ -11,6 +11,7 @@ import "./tools-money";
 import "./tools-space";
 import "./tools-directory";
 import "./tools-arrangements"; // release C: propose_arrangement_design (arrangements domain)
+import "./tools-stationery"; // the invitation builder
 
 export const MCP_TOOL_CATALOGUE = [
   { name: "whoami", scope: "read" },
@@ -36,4 +37,7 @@ export const MCP_TOOL_CATALOGUE = [
   { name: "propose_seating_layout", scope: "propose" },
   { name: "propose_custom_table", scope: "propose" },
   { name: "propose_arrangement_design", scope: "propose" },
+  { name: "list_invitation_designs", scope: "read" },
+  { name: "get_invitation_preview", scope: "read" },
+  { name: "propose_invitation_design", scope: "propose" },
 ] as const satisfies ReadonlyArray<{ name: string; scope: "read" | "propose" }>;

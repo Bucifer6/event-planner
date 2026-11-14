@@ -60,6 +60,8 @@ export const MCP_CONSENT_DATA_CLASSES = [
   "suppliers",
   "planNotes",
   "proposals",
+  // the invitation builder (tools-stationery.ts)
+  "invitations",
 ] as const;
 
 export type McpTokenRow = typeof mcpTokens.$inferSelect;
