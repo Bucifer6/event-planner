@@ -5,7 +5,11 @@ import {
   buildPlanScene,
   calibrationScale,
   insideAreas,
+  danceFloorCapacity,
+  doorClearance,
   findFreeSpot,
+  FIXTURE_KIND_VALUES,
+  FIXTURE_PRESETS,
   itemFootprint,
   itemHasDims,
   mmToPx,
@@ -15,13 +19,19 @@ import {
   planToSvgString,
   polygonSelfIntersects,
   pxToMm,
+  resolveDoors,
   roomDrawingProblems,
+  roomFeatureProblems,
   setWallLength,
+  snapToEdges,
   shapeGap,
   snapPosition,
   TABLE_PRESETS,
   wallLengths,
   type DrawingSnapshot,
+  type FloorArea,
+  type Pillar,
+  type RoomDoor,
   type PlanItem,
   type PlanModel,
 } from "../src/spacemodel";
@@ -384,5 +394,78 @@ describe("placing new tables", () => {
     // a sixth 1.8 m table with chairs and aisles no longer fits in 90 m²
     expect(findFreeSpot(model, t, { x: 9000, y: 2500 }, placed)).toBeNull();
     expect(findFreeSpot(model, { ...t, diameterMm: null }, { x: 0, y: 0 })).toBeNull();
+  });
+});
+
+describe("doors, pillars, dance floors and measuring", () => {
+  const room: FloorArea = { id: "hall", name: null, points: [{ x: 0, y: 0 }, { x: 10_000, y: 0 }, { x: 10_000, y: 8000 }, { x: 0, y: 8000 }] };
+  const door: RoomDoor = { id: "d1", areaId: "hall", wall: 0, offsetMm: 5000, widthMm: 900, kind: "single", swing: "in", hinge: "start" };
+  const base: PlanModel = { name: "R", source: "own", versionNo: null, effectiveAt: null, widthMm: 10_000, lengthMm: 8000, backdrop: null, areas: [room], tableTypes: [], items: [], pois: [], parkingAreas: [], aisleMm: 600 };
+  const table = (x: number, y: number): PlanItem => ({ id: `t${x}-${y}`, kind: "table", source: "custom", name: "T", label: "1", shape: "round", diameterMm: 1500, widthMm: null, lengthMm: null, seats: 8, x, y, rotation: 0 });
+
+  it("a door sits on its wall, opens into the room, and keeps the floor in front of it clear", () => {
+    const [d] = resolveDoors([room], [door]);
+    expect(d!.a).toEqual({ x: 4550, y: 0 });
+    expect(d!.b).toEqual({ x: 5450, y: 0 });
+    expect(d!.inward).toEqual({ x: -0, y: 1 });
+    const zone = doorClearance(d!);
+    expect(Math.max(...zone.map((p) => p.y))).toBe(900);
+    // a door on a wall that no longer exists is left out
+    expect(resolveDoors([room], [{ ...door, wall: 9 }])).toEqual([]);
+    const blocked = checkFit({ ...base, doors: [d!], items: [table(5000, 1200)] }, { needed: 8 });
+    expect(blocked.issues.map((i) => i.type)).toContain("door");
+    const clear = checkFit({ ...base, doors: [d!], items: [table(5000, 4000)] }, { needed: 8 });
+    expect(clear.status).toBe("fits");
+  });
+
+  it("pillars block tables and their chairs, and take floor out of the usable area", () => {
+    const pillar: Pillar = { id: "p1", shape: "square", sizeMm: 400, x: 5000, y: 4000 };
+    const r = checkFit({ ...base, pillars: [pillar], items: [table(5000, 5000)] }, { needed: 8 });
+    expect(r.issues).toEqual([expect.objectContaining({ type: "pillar", value: 1 })]);
+    expect(r.area.usableMm2).toBe(80_000_000 - 160_000);
+    expect(checkFit({ ...base, pillars: [pillar], items: [table(2000, 2000)] }, { needed: 8 }).status).toBe("fits");
+  });
+
+  it("finds doors that no longer fit their wall and pillars outside the room", () => {
+    expect(roomFeatureProblems([room], { doors: [door], pillars: [] })).toEqual([]);
+    expect(roomFeatureProblems([room], { doors: [{ ...door, offsetMm: 9900 }], pillars: [] })).toEqual([{ kind: "door", index: 0, problem: "offWall" }]);
+    expect(roomFeatureProblems([room], { doors: [{ ...door, wall: 1, widthMm: 9000, offsetMm: 4000 }], pillars: [] })).toEqual([{ kind: "door", index: 0, problem: "tooWide" }]);
+    expect(roomFeatureProblems([room], { doors: [], pillars: [{ id: "p", shape: "round", sizeMm: 300, x: 20_000, y: 0 }] })).toEqual([{ kind: "pillar", index: 0, problem: "outside" }]);
+  });
+
+  it("doors and pillars are drawn on every plan (screen, SVG, PDF scene)", () => {
+    const model = { ...base, doors: resolveDoors([room], [door, { ...door, id: "d2", wall: 2, kind: "double" as const, widthMm: 1600 }]), pillars: [{ id: "p", shape: "round" as const, sizeMm: 400, x: 3000, y: 3000 }] };
+    const scene = buildPlanScene(model, { width: 600 });
+    const roles = scene.under.map((n) => n.role);
+    expect(roles.filter((r) => r === "door-gap")).toHaveLength(2);
+    expect(roles.filter((r) => r === "door")).toHaveLength(3); // one leaf + two leaves
+    expect(roles).toContain("pillar");
+    expect(planToSvgString(model, { width: 400 })).toContain('stroke-dasharray="2 2"');
+  });
+
+  it("knows how many can dance on the dance floor, and every ready-made item is well formed", () => {
+    const floor: PlanItem = { id: "f", kind: "fixture", source: "custom", name: "Ring", label: "Ring", shape: "rect", diameterMm: null, widthMm: 6000, lengthMm: 6000, seats: null, x: 5000, y: 4000, rotation: 0, fixtureKind: "dance" };
+    expect(danceFloorCapacity(base)).toBeNull();
+    expect(danceFloorCapacity({ ...base, items: [floor] })).toEqual({ areaMm2: 36_000_000, packed: 85, comfortable: 48, count: 1 });
+    expect(new Set(FIXTURE_PRESETS.map((p) => p.key)).size).toBe(FIXTURE_PRESETS.length);
+    for (const p of FIXTURE_PRESETS) expect(FIXTURE_KIND_VALUES).toContain(p.kind);
+  });
+
+  it("measurements stick to table edges, chair edges and walls", () => {
+    const model = { ...base, items: [table(5000, 4000)] };
+    expect(snapToEdges(model, { x: 5000 + 760, y: 4000 }, 50)).toEqual({ point: { x: 5750, y: 4000 }, on: "item" });
+    expect(snapToEdges(model, { x: 5000 + 1190, y: 4000 }, 50)).toEqual({ point: { x: 6200, y: 4000 }, on: "chairs" });
+    expect(snapToEdges(model, { x: 9980, y: 1000 }, 50)).toEqual({ point: { x: 10_000, y: 1000 }, on: "wall" });
+    expect(snapToEdges(model, { x: 2500, y: 2500 }, 50)).toBeNull();
+  });
+
+  it("new tables are placed off pillars and out of the way of doors", () => {
+    const [d] = resolveDoors([room], [door]);
+    const model = { ...base, doors: [d!], pillars: [{ id: "p", shape: "round" as const, sizeMm: 600, x: 5000, y: 4000 }] };
+    const t = { kind: "table" as const, shape: "round" as const, diameterMm: 1500, widthMm: null, lengthMm: null, seats: 8, rotation: 0 };
+    for (const near of [{ x: 5000, y: 600 }, { x: 5000, y: 4000 }]) {
+      const at = findFreeSpot(model, t, near)!;
+      expect(checkFit({ ...model, items: [{ ...t, id: "n", source: "custom", name: "", label: "1", ...at }] }, { needed: 8 }).status).toBe("fits");
+    }
   });
 });

@@ -131,7 +131,9 @@
     "overlap": "{a} overlaps {b}.",
     "tooClose": "{a} and {b} are too close: {gap} cm of passage is left, the minimum is {min} cm.",
     "outside": "{a} goes outside the usable area.",
-    "overInventory": "There are {count} more “{name}” tables than the venue has."
+    "overInventory": "There are {count} more “{name}” tables than the venue has.",
+    "pillar": "{a} runs into pillar {n}.",
+    "door": "{a} is in front of door {n}: keep the way through clear."
   },
   "zoom": {
     "in": "Zoom in",
@@ -191,7 +193,11 @@
     "preset": "Ready-made table",
     "presetHint": "Common hire sizes. You can change anything after choosing.",
     "presetCustom": "I'll set the size myself",
-    "standing": "standing"
+    "standing": "standing",
+    "fixturePreset": "Ready-made item",
+    "fixturePresetHint": "Stages, dance floors, equipment and service in usual sizes.",
+    "fixtureKind": "What it is",
+    "fixtureKindHint": "A dance floor counts towards the dancers check."
   },
   "fields": {
     "name": "Name",
@@ -227,18 +233,10 @@
     "how": "Touch a table in the list or on the plan, then tick who sits at it."
   },
   "people": {
-    "extra": {
-      "one": "+1 adult",
-      "few": "+{count} adults",
-      "other": "+{count} adults"
-    },
-    "children": {
-      "one": "+1 child",
-      "few": "+{count} children",
-      "other": "+{count} children"
-    },
-    "confirmed": "confirmed",
-    "notAnswered": "no reply"
+    "hint": "Tap the plan to place a person to scale (50 × 30 cm). Drag to move; double-click removes. People are not saved.",
+    "count": "People on the plan: {count}",
+    "fill": "Fill the dance floor with dancers",
+    "clear": "Remove people"
   },
   "position": {
     "title": "Position of {name}",
@@ -355,5 +353,64 @@
     "oval": "Oval table",
     "halfmoon": "Half-moon table",
     "cocktail": "Cocktail table"
+  },
+  "modes": {
+    "label": "What you're doing on the plan",
+    "arrange": "Arrange",
+    "measure": "Measure",
+    "people": "Reference people"
+  },
+  "measure": {
+    "first": "Tap the first point. It sticks to the edges of tables, chairs, walls and pillars.",
+    "second": "Tap the second point.",
+    "item": "Measurement {n}: {length} m ({dx} m across, {dy} m down)",
+    "clear": "Clear measurements"
+  },
+  "dance": {
+    "summary": "The dance floor is {area} m²: about {comfortable} people dance comfortably ({packed} packed).",
+    "small": "If half of the {attending} who said yes dance ({half}), the floor is small.",
+    "ok": "Enough for half of the {attending} who said yes ({half})."
+  },
+  "fixtureGroups": {
+    "stage": "Stage and equipment",
+    "dance": "Dance floor",
+    "music": "Music",
+    "service": "Service and more"
+  },
+  "fixturePresets": {
+    "stage-4x3": "Stage 4 × 3 m",
+    "stage-6x4": "Stage 6 × 4 m",
+    "stage-8x5": "Stage 8 × 5 m",
+    "dance-4x4": "Dance floor 4 × 4 m",
+    "dance-5x5": "Dance floor 5 × 5 m",
+    "dance-6x6": "Dance floor 6 × 6 m",
+    "dance-8x8": "Dance floor 8 × 8 m",
+    "dj-booth": "DJ booth",
+    "band-riser": "Drum / band riser",
+    "speaker": "Speaker",
+    "subwoofer": "Subwoofer",
+    "light-stand": "Lighting stand",
+    "truss-3m": "Lighting truss 3 m",
+    "screen-3m": "Screen 3 m",
+    "bar-3m": "Bar 3 m",
+    "buffet-4m": "Buffet 4 m",
+    "cake-table": "Cake table",
+    "candybar": "Candy bar",
+    "photobooth": "Photo booth"
+  },
+  "fixtureKinds": {
+    "dance": "Dance floor",
+    "candybar": "Candy bar",
+    "photobooth": "Photo booth",
+    "stage": "Stage",
+    "bar": "Bar",
+    "other": "Other item",
+    "dj": "DJ booth",
+    "band": "Band riser",
+    "speaker": "Speaker",
+    "lighting": "Lighting",
+    "screen": "Screen",
+    "buffet": "Buffet",
+    "cake": "Cake table"
   }
 }

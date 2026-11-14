@@ -71,9 +71,14 @@ const zPoint = z.object({ x: z.number().int(), y: z.number().int() });
 
 /** The drawing tool's save: the room's floor outlines in mm (validated again in core). */
 export const saveRoomDrawingAction = action(
-  z.object({ occasionId: zId, areas: z.array(z.object({ id: z.string().max(40), name: z.string().max(80).nullable(), points: z.array(zPoint).max(100) })).max(40) }),
+  z.object({
+    occasionId: zId,
+    areas: z.array(z.object({ id: z.string().max(40), name: z.string().max(80).nullable(), points: z.array(zPoint).max(100) })).max(40),
+    // shape-checked again in core (zRoomFeatures)
+    features: z.object({ doors: z.array(z.record(z.string(), z.unknown())).max(100), pillars: z.array(z.record(z.string(), z.unknown())).max(200) }).optional(),
+  }),
   async (ctx, input) => {
-    await saveOwnRoomDrawing(ctx, input);
+    await saveOwnRoomDrawing(ctx, input as Parameters<typeof saveOwnRoomDrawing>[1]);
     refresh(input.occasionId);
     return { saved: true };
   },

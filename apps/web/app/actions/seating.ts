@@ -18,7 +18,7 @@ import {
   unpublishSeating,
   updateItem,
 } from "@ed/core/seating";
-import { TABLE_SHAPE_VALUES } from "@ed/core/spacemodel";
+import { FIXTURE_KIND_VALUES, TABLE_SHAPE_VALUES } from "@ed/core/spacemodel";
 import { zId } from "@ed/shared/zod";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -42,7 +42,7 @@ export const addTableAction = action(
   },
 );
 
-export const addFixtureAction = action(z.object({ occasionId: zId, id: zId.optional(), name: z.string().max(200), widthMm: optMm, lengthMm: optMm, x: mm.optional(), y: mm.optional() }), async (ctx, input) => {
+export const addFixtureAction = action(z.object({ occasionId: zId, id: zId.optional(), name: z.string().max(200), kind: z.enum(FIXTURE_KIND_VALUES).optional(), widthMm: optMm, lengthMm: optMm, x: mm.optional(), y: mm.optional() }), async (ctx, input) => {
   const item = await addFixture(ctx, input);
   done(input.occasionId);
   return item;

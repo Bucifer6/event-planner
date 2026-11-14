@@ -47,7 +47,7 @@ export default async function DrawRoomPage({ params }: Props) {
       <PageHeader level={2} title={t("title")} description={t("description", { name: space.name })} />
       <HelpLink topic="space-draw" />
       <Section>
-        <RoomDrawer occasionId={id} locale={ctx.locale} initial={initial} items={space.model.items} backHref={back} />
+        <RoomDrawer occasionId={id} locale={ctx.locale} initial={initial} initialFeatures={space.features} items={space.model.items} backHref={back} />
       </Section>
     </>
   );

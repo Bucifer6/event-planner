@@ -31,7 +31,7 @@ export type TableType = {
   count: number | null;
 };
 
-export const FIXTURE_KINDS = ["dance", "candybar", "photobooth", "stage", "bar", "other"] as const;
+export const FIXTURE_KINDS = ["dance", "candybar", "photobooth", "stage", "bar", "other", "dj", "band", "speaker", "lighting", "screen", "buffet", "cake"] as const;
 export type FixtureKind = (typeof FIXTURE_KINDS)[number];
 
 /** A named fixture with real dimensions (V8): takes part in fit checks. x/y = its centre. */

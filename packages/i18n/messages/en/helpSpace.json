@@ -2,7 +2,7 @@
   "room-plan": {
     "title": "The room plan",
     "summary": "The space where the occasion takes place, to scale. Seating and the fit checks start from here. You can also draw it exactly, with walls and corners to scale.",
-    "keywords": "room plan floor plan space dimensions venue drawing scale width length version cad walls corners snap grid angle rectangle L-shape",
+    "keywords": "room plan floor plan space dimensions venue drawing scale width length version cad walls corners snap grid angle rectangle L-shape door pillar measure stage dance floor dancers",
     "where": "Your occasion → Room plan",
     "need": "The owner and project managers.",
     "body": {
@@ -30,7 +30,8 @@
         "c": "“Select”: drag corners, or type a wall's exact length. “Add a corner in the middle” makes an L-shaped room."
       },
       "noteDraw1": "Snapping to the grid, corners and 15° angles can be turned off. The keys are listed under the drawing.",
-      "pDraw2": "Press “Save drawing”. Tables stay where they were; the fit check shows if any ended up outside the room."
+      "pDraw2": "Press “Save drawing”. Tables stay where they were; the fit check shows if any ended up outside the room.",
+      "noteDraw3": "“Door” and “Pillar” place doors and pillars; the floor in front of a door stays clear. “Measure” shows the distance between two points."
     }
   },
   "seating": {
@@ -54,7 +55,8 @@
       "p2": "Under “What guests see”, press “Show guests their seat”. Each guest sees their table (and seat, if you chose one) on their link. “Hide the seating again” takes it back.",
       "note2": "Nobody sees other people's names. Until you publish, guests see nothing of the seating.",
       "p3": "A seating layout proposed by an AI assistant appears first as a preview in “What if?”.",
-      "noteTables": "Under “Add a table”, pick a “Ready-made table”: round, square, rectangular, oval, half-moon or cocktail, in common hire sizes with the number of chairs filled in. You can change anything afterwards."
+      "noteTables": "Under “Add a table”, pick a “Ready-made table”: round, square, rectangular, oval, half-moon or cocktail, in common hire sizes with the number of chairs filled in. You can change anything afterwards.",
+      "noteTools": "“Measure” shows the distance between tables. “Reference people” puts people to scale on the plan; “Fill the dance floor with dancers” shows a full floor. “Ready-made item” has stages, dance floors, speakers and lighting."
     }
   },
   "stationery": {

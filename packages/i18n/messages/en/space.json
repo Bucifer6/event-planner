@@ -124,7 +124,10 @@
       "label": "Tool",
       "select": "Select",
       "line": "Walls",
-      "rect": "Rectangle"
+      "rect": "Rectangle",
+      "door": "Door",
+      "pillar": "Pillar",
+      "measure": "Measure"
     },
     "history": "History",
     "undo": "Undo (Ctrl+Z)",
@@ -148,7 +151,7 @@
       "angleHint": "Hold Shift to switch it for one move."
     },
     "canvas": "Room drawing. Outlines: {count}.",
-    "keys": "Keys: V select, W walls, R rectangle, Enter closes the outline, Backspace removes the last corner or the selection, arrows move the selection (Shift = 10×), Esc cancels, + and − zoom, F fits.",
+    "keys": "Keys: V select, W walls, R rectangle, D door, P pillar, M measure, Enter closes the outline, Backspace removes the last corner or the selection, arrows move the selection (Shift = 10×), Esc cancels, + and − zoom, F fits.",
     "line": {
       "live": "Wall of {length} m at {angle}°. Click to fix the corner.",
       "start": "Click where the first wall starts, or type the start point below.",
@@ -195,7 +198,9 @@
     },
     "limits": {
       "areas": "You can draw at most {max} outlines.",
-      "corners": "An outline can have at most {max} corners."
+      "corners": "An outline can have at most {max} corners.",
+      "doors": "You can place at most {max} doors.",
+      "pillars": "You can place at most {max} pillars."
     },
     "areaM2": "{n} m²",
     "list": {
@@ -218,7 +223,16 @@
       "crossing": "Area {n} has walls that cross.",
       "tooSmall": "Area {n} is under half a square metre.",
       "ownOnly": "Only a space you described yourself can be drawn.",
-      "drawnSize": "The room is drawn: change its size in the drawing."
+      "drawnSize": "The room is drawn: change its size in the drawing.",
+      "door": {
+        "offWall": "Door {n} no longer fits on its wall: move it or make it narrower.",
+        "tooWide": "Door {n} is wider than its wall."
+      },
+      "pillar": {
+        "outside": "Pillar {n} is outside the room."
+      },
+      "doorWidth": "Type a width between 0.5 and 6 m.",
+      "pillarSize": "Type a size between 0.1 and 3 m."
     },
     "fields": {
       "x": "x (m)",
@@ -235,6 +249,66 @@
     "save": "Save drawing",
     "saveClear": "Delete drawing",
     "leaveConfirm": "You have unsaved changes. Leave without saving?",
-    "unsaved": "Unsaved"
+    "unsaved": "Unsaved",
+    "door": {
+      "tooShort": "The wall is shorter than the door.",
+      "onWall": "Click a wall to place the door.",
+      "hint": "Click a wall to place a door. You can then drag it along the wall.",
+      "newTitle": "The door you're placing",
+      "kind": "Type",
+      "kinds": {
+        "single": "Single door",
+        "double": "Double door",
+        "exit": "Emergency exit",
+        "opening": "Opening, no door"
+      },
+      "width": "Width (m)",
+      "typedHint": "From the keyboard: select a wall and press “Put a door here”.",
+      "addHere": "Put a door here",
+      "name": "Door {n}",
+      "facts": "{kind} · {width} m",
+      "swing": "How it opens",
+      "swings": {
+        "in": "Inwards",
+        "out": "Outwards",
+        "sliding": "Sliding"
+      },
+      "offset": "Distance from the corner (m)",
+      "offsetHint": "From the wall's first corner to the edge of the door.",
+      "flipHinge": "Move the hinges to the other side",
+      "clearNote": "The shaded floor in front of the door stays clear; the fit check tells you if a table is on it.",
+      "remove": "Delete door"
+    },
+    "pillar": {
+      "live": "Pillar at x {x} m, y {y} m. Click to place it.",
+      "hint": "Click where the pillar stands, or type its position below.",
+      "newTitle": "The pillar you're placing",
+      "shape": "Shape",
+      "shapes": {
+        "round": "Round",
+        "square": "Square"
+      },
+      "diameter": "Diameter (m)",
+      "side": "Side (m)",
+      "add": "Place pillar",
+      "name": "Pillar {n}",
+      "facts": {
+        "round": "round, ⌀ {size} m",
+        "square": "square, {size} m"
+      },
+      "remove": "Delete pillar"
+    },
+    "measure": {
+      "live": "{length} m. Click to fix the end.",
+      "first": "Click the first point to measure from.",
+      "second": "Click the second point.",
+      "title": "Measurements",
+      "none": "No measurements yet. Measurements are not saved.",
+      "item": "Measurement {n}: {length} m ({dx} m across, {dy} m down)",
+      "clear": "Clear measurements"
+    },
+    "features": {
+      "title": "Doors and pillars"
+    }
   }
 }

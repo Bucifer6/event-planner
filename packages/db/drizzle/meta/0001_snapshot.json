@@ -1,5 +1,5 @@
 {
-  "id": "5c2448b1-f745-4953-8a03-0496c1796e1a",
+  "id": "53d6eef0-70b3-4f84-b22e-ea45113e4015",
   "prevId": "b8096ba2-3879-4a01-a5ec-9d62186a03bd",
   "version": "7",
   "dialect": "postgresql",
@@ -11499,6 +11499,12 @@
           "primaryKey": false,
           "notNull": true
         },
+        "fixture_kind": {
+          "name": "fixture_kind",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
         "diameter_mm": {
           "name": "diameter_mm",
           "type": "integer",
@@ -12022,6 +12028,12 @@
         },
         "own_areas": {
           "name": "own_areas",
+          "type": "jsonb",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "own_features": {
+          "name": "own_features",
           "type": "jsonb",
           "primaryKey": false,
           "notNull": false

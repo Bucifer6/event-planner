@@ -2,7 +2,7 @@
   "room-plan": {
     "title": "Planul sălii",
     "summary": "Spațiul în care are loc ocazia, la scară. De aici pornesc așezarea la mese și verificările de încăpere. Îl poți și desena exact, cu pereți și colțuri la scară.",
-    "keywords": "planul sălii spațiu dimensiuni locație desen scară lățime lungime versiune cad pereți colțuri aliniere grilă unghi dreptunghi formă L",
+    "keywords": "planul sălii spațiu dimensiuni locație desen scară lățime lungime versiune cad pereți colțuri aliniere grilă unghi dreptunghi formă L ușă stâlp măsurare scenă ring dansatori",
     "where": "Ocazia ta → Planul sălii",
     "need": "Organizatorul și managerii de proiect.",
     "body": {
@@ -30,7 +30,8 @@
         "c": "„Selectează”: trage colțurile sau scrie lungimea exactă a unui perete. „Adaugă un colț la mijloc” face o sală în L."
       },
       "noteDraw1": "Alinierea la grilă, la colțuri și la unghiuri din 15° se poate opri. Tastele sunt scrise sub desen.",
-      "pDraw2": "Apasă „Salvează desenul”. Mesele rămân unde erau; verificarea de încăpere arată dacă vreuna a ieșit din sală."
+      "pDraw2": "Apasă „Salvează desenul”. Mesele rămân unde erau; verificarea de încăpere arată dacă vreuna a ieșit din sală.",
+      "noteDraw3": "„Ușă” și „Stâlp” pun uși și stâlpi; locul din fața ușii rămâne liber. „Măsoară” arată distanța dintre două puncte."
     }
   },
   "seating": {
@@ -54,7 +55,8 @@
       "p2": "La „Ce văd invitații”, apasă „Arată invitaților locul lor”. Fiecare invitat își vede masa (și locul, dacă l-ai ales) pe linkul lui. Cu „Ascunde din nou așezarea” o retragi.",
       "note2": "Nimeni nu vede numele altora. Până la publicare, invitații nu văd nimic din așezare.",
       "p3": "O așezare propusă de un asistent AI apare întâi ca previzualizare în „Ce-ar fi dacă?”.",
-      "noteTables": "La „Adaugă o masă”, alege o „Masă gata făcută”: rotundă, pătrată, dreptunghiulară, ovală, semilună sau de cocteil, în mărimile obișnuite la închirieri și cu numărul de scaune completat. Poți schimba orice după."
+      "noteTables": "La „Adaugă o masă”, alege o „Masă gata făcută”: rotundă, pătrată, dreptunghiulară, ovală, semilună sau de cocteil, în mărimile obișnuite la închirieri și cu numărul de scaune completat. Poți schimba orice după.",
+      "noteTools": "„Măsoară” arată distanța dintre mese. „Persoane de referință” pune oameni la scară pe plan; „Umple ringul cu dansatori” arată cum arată ringul plin. La „Element gata făcut” găsești scene, ringuri de dans, boxe și lumini."
     }
   },
   "stationery": {

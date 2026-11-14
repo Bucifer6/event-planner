@@ -1,5 +1,7 @@
 import {
   CHAIR_ZONE_MM,
+  doorClearance,
+  pillarFootprint,
   footprintArea,
   insideAreas,
   itemFootprint,
@@ -21,6 +23,8 @@ import {
 //   · tooClose: tables whose chairs leave less than the aisle (default 60 cm) between them, or
 //     a table whose chairs run into a fixture
 //   · outside: an item not fully on usable floor
+//   · pillar: an item (a table with its chairs) standing on a pillar of a drawn room
+//   · door: an item (a table with its chairs) in the clear floor in front of a door
 //   · overInventory: more venue tables of a type placed than the venue says it has
 //   · area: floor covered (tables with their chairs + fixtures) vs usable floor
 //
@@ -28,13 +32,13 @@ import {
 // answer can then never be "fits" — at best "unknown". A space without usable floor areas
 // gives "unknown" too. A definite problem among the known items is still a definite "no".
 
-export type FitIssueType = "overlap" | "tooClose" | "outside" | "overInventory";
+export type FitIssueType = "overlap" | "tooClose" | "outside" | "overInventory" | "pillar" | "door";
 export type FitIssue = {
   type: FitIssueType;
   itemIds: string[];
   /** Labels of the items, for the sentence ("Masa 3 și Masa 4"). */
   labels: string[];
-  /** tooClose: the free passage found, in mm. overInventory: how many too many. */
+  /** tooClose: the free passage found, in mm. overInventory: how many too many. pillar / door: its number. */
   value?: number;
 };
 
@@ -116,8 +120,19 @@ export function checkFit(model: PlanModel, input: FitInput): FitResult {
     }
   }
 
-  // usable floor
-  const usable = model.areas.length > 0 ? model.areas.reduce((s, a) => s + polygonArea(a.points), 0) : null;
+  // pillars stand in the way of tables, chairs and fixtures; the floor in front of a door stays clear
+  const pillars = (model.pillars ?? []).map(pillarFootprint);
+  const doors = (model.doors ?? []).map((d) => ({ index: d.index, zone: { type: "poly" as const, points: doorClearance(d) } }));
+  for (const k of known) {
+    pillars.forEach((f, i) => {
+      if (shapeGap(k.zone, f) < -0.5) issues.push({ type: "pillar", itemIds: [k.item.id], labels: [itemLabel(k.item)], value: i + 1 });
+    });
+    for (const d of doors) if (shapeGap(k.zone, d.zone) < -0.5) issues.push({ type: "door", itemIds: [k.item.id], labels: [itemLabel(k.item)], value: d.index });
+  }
+
+  // usable floor (less what the pillars stand on)
+  const pillarArea = pillars.reduce((s, f) => s + footprintArea(f), 0);
+  const usable = model.areas.length > 0 ? Math.max(0, model.areas.reduce((s, a) => s + polygonArea(a.points), 0) - pillarArea) : null;
   if (usable !== null) {
     for (const k of known) {
       if (!insideAreas(k.body, model.areas)) issues.push({ type: "outside", itemIds: [k.item.id], labels: [itemLabel(k.item)] });

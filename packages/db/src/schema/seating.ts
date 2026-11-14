@@ -2,12 +2,27 @@ import { sql } from "drizzle-orm";
 import { boolean, check, index, integer, jsonb, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
 import { createdAt, id, ref, timestamptz, updatedAt } from "./_helpers";
 import { accounts } from "./accounts";
-import { drawingVersions, spaces, type FloorArea, type TableShape } from "./drawings";
+import { drawingVersions, spaces, type FixtureKind, type FloorArea, type TableShape } from "./drawings";
 import { guests, households } from "./guests";
 import { occasions } from "./occasions";
 
 // The occasion's space model, the layout on it and who sits where (P-06 V4–V6, C-01, C-02,
 // C-08). Measures are integer millimetres; unknown = NULL, never 0.
+
+export const DOOR_KINDS = ["single", "double", "exit", "opening"] as const;
+export type DoorKind = (typeof DOOR_KINDS)[number];
+export const DOOR_SWINGS = ["in", "out", "sliding"] as const;
+export type DoorSwing = (typeof DOOR_SWINGS)[number];
+
+/**
+ * A door in a drawn room, attached to one wall so it follows the wall when the room is
+ * reshaped: wall `wall` of outline `areaId` runs from corner `wall` to corner `wall + 1`;
+ * `offsetMm` is the distance from that first corner to the middle of the door.
+ */
+export type RoomDoor = { id: string; areaId: string; wall: number; offsetMm: number; widthMm: number; kind: DoorKind; swing: DoorSwing; hinge: "start" | "end" };
+/** A pillar or post standing in the room; x/y = its centre. Tables must stand clear of it. */
+export type Pillar = { id: string; shape: "round" | "square"; sizeMm: number; x: number; y: number };
+export type RoomFeatures = { doors: RoomDoor[]; pillars: Pillar[] };
 
 export const SPACE_MODEL_SOURCES = ["venue", "own"] as const;
 export type SpaceModelSource = (typeof SPACE_MODEL_SOURCES)[number];
@@ -39,6 +54,8 @@ export const spaceModels = pgTable(
      * in mm. NULL = not drawn, the typed rectangle is used.
      */
     ownAreas: jsonb("own_areas").$type<FloorArea[]>(),
+    /** Doors and pillars of the drawn room (source "own"). NULL = none. */
+    ownFeatures: jsonb("own_features").$type<RoomFeatures>(),
     /** Minimum free passage between tables, chairs included (C-01). */
     aisleMm: integer("aisle_mm").notNull().default(600),
     createdAt: createdAt(),
@@ -78,6 +95,8 @@ export const planItems = pgTable(
     /** What is written on the plan and on the guest's link: "1", "Masa mirilor". */
     label: text("label").notNull(),
     shape: text("shape").$type<TableShape>().notNull(),
+    /** Fixtures: what it is (stage, dance floor, speaker…), so checks can tell a dance floor. NULL = not said. */
+    fixtureKind: text("fixture_kind").$type<FixtureKind>(),
     diameterMm: integer("diameter_mm"),
     widthMm: integer("width_mm"),
     lengthMm: integer("length_mm"),

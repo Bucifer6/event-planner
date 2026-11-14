@@ -1,8 +1,15 @@
 "use client";
 
 import {
+  DOOR_KIND_VALUES,
+  DOOR_SWING_VALUES,
+  doorClearance,
+  FEATURE_LIMITS,
   itemFootprint,
   mmToMetresText,
+  pillarFootprint,
+  resolveDoors,
+  roomFeatureProblems,
   parseMetres,
   polygonArea,
   roomDrawingProblems,
@@ -10,8 +17,12 @@ import {
   SPACE_LIMITS,
   wallLengths,
   type FloorArea,
+  type Pillar,
+  type PlacedDoor,
   type PlanItem,
   type PlanPoint,
+  type RoomDoor,
+  type RoomFeatures,
 } from "@ed/core/spacemodel";
 import { Button, Checkbox, IconButton, Notice, SelectField, Tag, TextField } from "@ed/ui";
 import { IconMinus, IconPlus, IconTrash, IconUndo } from "@ed/ui/icons";
@@ -36,11 +47,15 @@ import styles from "./room.module.css";
 // Coordinates are integer millimetres, y pointing down (as on the seating plan). Saving goes
 // through saveRoomDrawingAction → core saveOwnRoomDrawing, which validates again.
 
-type Tool = "select" | "line" | "rect";
+type Tool = "select" | "line" | "rect" | "door" | "pillar" | "measure";
 type Sel = { area: number; corner?: number; wall?: number } | null;
+type FeatSel = { kind: "door" | "pillar"; index: number } | null;
+type Room = { areas: FloorArea[]; features: RoomFeatures };
 type Drag =
   | { kind: "corner"; area: number; corner: number; start: FloorArea[] }
   | { kind: "area"; area: number; from: PlanPoint; start: FloorArea[] }
+  | { kind: "pillar"; index: number; start: Room }
+  | { kind: "door"; index: number; start: Room }
   | { kind: "pan"; fromClient: { x: number; y: number }; startView: View };
 type View = { cx: number; cy: number; mmPerPx: number };
 
@@ -51,6 +66,7 @@ const HANDLE_PX = 7;
 
 let seq = 0;
 const newAreaId = () => `r${Date.now().toString(36)}${(seq++).toString(36)}`;
+const newFeatureId = (p: string) => `${p}${Date.now().toString(36)}${(seq++).toString(36)}`;
 const roundTo = (v: number, step: number) => Math.round(v / step) * step;
 const same = (a: PlanPoint, b: PlanPoint) => a.x === b.x && a.y === b.y;
 
@@ -111,47 +127,54 @@ function angleOf(a: PlanPoint, b: PlanPoint): number {
   return (((Math.atan2(b.y - a.y, b.x - a.x) * 180) / Math.PI) % 360 + 360) % 360;
 }
 
-export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; initial: FloorArea[]; items: PlanItem[]; backHref: string }) {
+export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; initial: FloorArea[]; initialFeatures: RoomFeatures; items: PlanItem[]; backHref: string }) {
   const t = useTranslations("space.draw");
   const tc = useTranslations("common");
   const router = useRouter();
   const formId = useId();
   const m = (mm: number) => mmToMetresText(Math.round(mm), props.locale);
 
-  /* ── the drawing and its history ── */
-  const [areas, setAreas] = useState<FloorArea[]>(props.initial);
-  const [past, setPast] = useState<FloorArea[][]>([]);
-  const [future, setFuture] = useState<FloorArea[][]>([]);
+  /* ── the drawing (outlines + doors + pillars) and its history ── */
+  const [room, setRoom] = useState<Room>({ areas: props.initial, features: props.initialFeatures });
+  const [past, setPast] = useState<Room[]>([]);
+  const [future, setFuture] = useState<Room[]>([]);
   const [dirty, setDirty] = useState(false);
-  const commit = useCallback(
-    (next: FloorArea[], before: FloorArea[] = areas) => {
+  const areas = room.areas;
+  const features = room.features;
+  /** A live preview while dragging; the history gets one entry when the drag ends. */
+  const setAreas = (next: FloorArea[]) => setRoom((r) => ({ ...r, areas: next }));
+  const commitRoom = useCallback(
+    (next: Room, before: Room = room) => {
       setPast((p) => [...p.slice(-99), before]);
       setFuture([]);
-      setAreas(next);
+      setRoom(next);
       setDirty(true);
     },
-    [areas],
+    [room],
   );
+  const commit = useCallback((next: FloorArea[], before?: FloorArea[]) => commitRoom({ ...room, areas: next }, before ? { ...room, areas: before } : room), [room, commitRoom]);
   const undo = useCallback(() => {
     setPast((p) => {
       if (p.length === 0) return p;
-      setFuture((f) => [areas, ...f]);
-      setAreas(p[p.length - 1]!);
+      setFuture((f) => [room, ...f]);
+      setRoom(p[p.length - 1]!);
       setDirty(true);
       return p.slice(0, -1);
     });
     setSel(null);
-  }, [areas]);
+    setFeatSel(null);
+  }, [room]);
   const redo = useCallback(() => {
     setFuture((f) => {
       if (f.length === 0) return f;
-      setPast((p) => [...p, areas]);
-      setAreas(f[0]!);
+      setPast((p) => [...p, room]);
+      setRoom(f[0]!);
       setDirty(true);
       return f.slice(1);
     });
     setSel(null);
-  }, [areas]);
+    setFeatSel(null);
+  }, [room]);
 
   /* ── tools and snapping ── */
   const [tool, setTool] = useState<Tool>(props.initial.length === 0 ? "rect" : "select");
@@ -159,6 +182,13 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
   const [rectStart, setRectStart] = useState<PlanPoint | null>(null);
   const [cursor, setCursor] = useState<{ p: PlanPoint; how: "grid" | "corner" | "angle" | "free" } | null>(null);
   const [sel, setSel] = useState<Sel>(null);
+  const [featSel, setFeatSel] = useState<FeatSel>(null);
+  const [doorKind, setDoorKind] = useState<RoomDoor["kind"]>("single");
+  const [doorWidth, setDoorWidth] = useState(900);
+  const [pillarShape, setPillarShape] = useState<Pillar["shape"]>("round");
+  const [pillarSize, setPillarSize] = useState(400);
+  const [measures, setMeasures] = useState<Array<{ a: PlanPoint; b: PlanPoint }>>([]);
+  const [measureFrom, setMeasureFrom] = useState<PlanPoint | null>(null);
   const [snapGrid, setSnapGrid] = useState(true);
   const [snapCorners, setSnapCorners] = useState(true);
   const [snapAngle, setSnapAngle] = useState(true);
@@ -172,7 +202,9 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     setTool(next);
     setDraft([]);
     setRectStart(null);
+    setMeasureFrom(null);
     setSel(null);
+    setFeatSel(null);
     setMessage(null);
   };
 
@@ -191,7 +223,7 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
   }, []);
   const fitView = useCallback(
     (list: FloorArea[] = areas): View => {
-      const pts = [...list.flatMap((a) => a.points), ...props.items.map((i) => ({ x: i.x, y: i.y }))];
+      const pts = [...list.flatMap((a) => a.points), ...props.items.map((i) => ({ x: i.x, y: i.y })), ...features.pillars.map((p) => ({ x: p.x, y: p.y }))];
       if (pts.length === 0) return { cx: 6000, cy: 4500, mmPerPx: 14000 / size.w };
       const minX = Math.min(...pts.map((p) => p.x));
       const maxX = Math.max(...pts.map((p) => p.x));
@@ -201,7 +233,7 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       const spanY = Math.max(2000, maxY - minY);
       return { cx: (minX + maxX) / 2, cy: (minY + maxY) / 2, mmPerPx: Math.max(spanX / (size.w - 80), spanY / (size.h - 80)) };
     },
-    [areas, props.items, size],
+    [areas, features.pillars, props.items, size],
   );
   const [view, setView] = useState<View | null>(null);
   const v = view ?? fitView();
@@ -308,6 +340,63 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     ];
   };
 
+  /* ── doors and pillars ── */
+  const placedDoors = useMemo(() => resolveDoors(areas, features.doors), [areas, features.doors]);
+  const setFeatures = (next: RoomFeatures, before: Room = room) => commitRoom({ ...room, features: next }, before);
+  /** The wall nearest to a point (within `tol` mm), with where along it the point falls. */
+  const nearestWall = (p: PlanPoint, tol: number) => {
+    let best: { areaId: string; wall: number; along: number; len: number } | null = null;
+    let bestD = tol;
+    for (const a of areas)
+      for (let i = 0; i < a.points.length; i++) {
+        const u = a.points[i]!;
+        const w = a.points[(i + 1) % a.points.length]!;
+        const d = segDist(p, u, w);
+        if (d < bestD) {
+          const len = Math.hypot(w.x - u.x, w.y - u.y);
+          bestD = d;
+          best = { areaId: a.id, wall: i, len, along: len === 0 ? 0 : ((p.x - u.x) * (w.x - u.x) + (p.y - u.y) * (w.y - u.y)) / len };
+        }
+      }
+    return best;
+  };
+  const clampOffset = (along: number, width: number, len: number) => Math.round(Math.max(width / 2, Math.min(len - width / 2, snapGrid ? roundTo(along, Math.min(step, 100)) : along)));
+  const addDoorAt = (areaId: string, wall: number, along: number, len: number) => {
+    if (features.doors.length >= FEATURE_LIMITS.doors) return setMessage(t("limits.doors", { max: FEATURE_LIMITS.doors }));
+    const width = doorKind === "double" ? Math.max(doorWidth, 1400) : doorWidth;
+    if (len < width) return setMessage(t("door.tooShort"));
+    const door: RoomDoor = { id: newFeatureId("d"), areaId, wall, offsetMm: clampOffset(along, width, len), widthMm: width, kind: doorKind, swing: doorKind === "opening" ? "in" : "in", hinge: "start" };
+    setFeatures({ ...features, doors: [...features.doors, door] });
+    setFeatSel({ kind: "door", index: features.doors.length });
+    setSel(null);
+    setMessage(null);
+  };
+  const addPillarAt = (p: PlanPoint) => {
+    if (features.pillars.length >= FEATURE_LIMITS.pillars) return setMessage(t("limits.pillars", { max: FEATURE_LIMITS.pillars }));
+    setFeatures({ ...features, pillars: [...features.pillars, { id: newFeatureId("p"), shape: pillarShape, sizeMm: pillarSize, x: p.x, y: p.y }] });
+    setFeatSel({ kind: "pillar", index: features.pillars.length });
+    setSel(null);
+  };
+  const hitFeature = (p: PlanPoint): FeatSel => {
+    const tol = HANDLE_PX * 1.6 * px;
+    for (let i = features.pillars.length - 1; i >= 0; i--) {
+      const f = pillarFootprint(features.pillars[i]!);
+      const c = f.type === "circle" ? { x: f.cx, y: f.cy } : { x: features.pillars[i]!.x, y: features.pillars[i]!.y };
+      const r = f.type === "circle" ? f.r : features.pillars[i]!.sizeMm / 2;
+      if (Math.hypot(p.x - c.x, p.y - c.y) <= r + tol) return { kind: "pillar", index: i };
+    }
+    for (const d of placedDoors) if (segDist(p, d.a, d.b) <= tol) return { kind: "door", index: d.index - 1 };
+    return null;
+  };
+  /** Splitting wall `w` at `at` mm from its start: doors further along move to the new wall. */
+  const doorsAfterSplit = (areaId: string, w: number, at: number): RoomDoor[] =>
+    features.doors.map((d) => (d.areaId !== areaId ? d : d.wall > w ? { ...d, wall: d.wall + 1 } : d.wall === w && d.offsetMm > at ? { ...d, wall: d.wall + 1, offsetMm: d.offsetMm - at } : d));
+  /** Removing corner `c` of an outline with `n` corners merges two walls: their doors go, later walls shift down. */
+  const doorsAfterRemoveCorner = (areaId: string, c: number, n: number): RoomDoor[] =>
+    features.doors
+      .filter((d) => d.areaId !== areaId || (d.wall !== c && d.wall !== (c - 1 + n) % n))
+      .map((d) => (d.areaId === areaId && d.wall > c ? { ...d, wall: d.wall - 1 } : d));
+
   /* ── pointer ── */
   const drag = useRef<Drag | null>(null);
   const downAt = useRef<{ x: number; y: number } | null>(null);
@@ -334,8 +423,18 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     svgRef.current?.focus({ preventScroll: true });
     e.currentTarget.setPointerCapture(e.pointerId);
     downAt.current = { x: e.clientX, y: e.clientY };
+    if (e.button === 0 && tool === "select") {
+      const fh = hitFeature(raw);
+      if (fh) {
+        setFeatSel(fh);
+        setSel(null);
+        drag.current = { kind: fh.kind, index: fh.index, start: room };
+        return;
+      }
+    }
     if (e.button === 1 || tool === "select") {
       const hit = e.button === 1 ? null : hitTest(raw);
+      if (hit) setFeatSel(null);
       if (hit && hit.corner !== undefined) {
         setSel(hit);
         drag.current = { kind: "corner", area: hit.area, corner: hit.corner, start: areas };
@@ -358,6 +457,22 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       setView({ ...d.startView, cx: d.startView.cx - (e.clientX - d.fromClient.x) * d.startView.mmPerPx, cy: d.startView.cy - (e.clientY - d.fromClient.y) * d.startView.mmPerPx });
       return;
     }
+    if (d?.kind === "pillar") {
+      const s = snap(raw, null);
+      setRoom({ ...d.start, features: { ...d.start.features, pillars: d.start.features.pillars.map((q, i) => (i === d.index ? { ...q, x: s.p.x, y: s.p.y } : q)) } });
+      return;
+    }
+    if (d?.kind === "door") {
+      const door = d.start.features.doors[d.index]!;
+      const area = d.start.areas.find((a) => a.id === door.areaId);
+      if (!area) return;
+      const u = area.points[door.wall]!;
+      const w = area.points[(door.wall + 1) % area.points.length]!;
+      const len = Math.hypot(w.x - u.x, w.y - u.y);
+      const along = len === 0 ? 0 : ((raw.x - u.x) * (w.x - u.x) + (raw.y - u.y) * (w.y - u.y)) / len;
+      setRoom({ ...d.start, features: { ...d.start.features, doors: d.start.features.doors.map((q, i) => (i === d.index ? { ...q, offsetMm: clampOffset(along, q.widthMm, len) } : q)) } });
+      return;
+    }
     if (d?.kind === "corner") {
       const pts = d.start[d.area]!.points;
       const prev = pts[(d.corner - 1 + pts.length) % pts.length]!;
@@ -374,8 +489,12 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       return;
     }
     if (tool === "line") setCursor(snap(raw, draft.length > 0 ? draft[draft.length - 1]! : null));
-    else if (tool === "rect") setCursor(snap(raw, null));
-    else setCursor(null);
+    else if (tool === "rect" || tool === "pillar") setCursor(snap(raw, null));
+    else if (tool === "measure") setCursor(snap(raw, measureFrom));
+    else if (tool === "door") {
+      const nw = nearestWall(raw, 24 * px);
+      setCursor(nw ? { p: { x: Math.round(raw.x), y: Math.round(raw.y) }, how: "corner" } : null);
+    } else setCursor(null);
   };
 
   const onPointerUp = (e: PointerEvent<SVGSVGElement>) => {
@@ -388,9 +507,33 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       else setAreas(d.start);
       return;
     }
+    if (d?.kind === "pillar" || d?.kind === "door") {
+      if (moved && room !== d.start) commitRoom(room, d.start);
+      else setRoom(d.start);
+      return;
+    }
     if (d?.kind === "pan") return;
     const raw = toMm(e.clientX, e.clientY);
     if (!raw) return;
+    if (tool === "door") {
+      const nw = nearestWall(raw, 24 * px);
+      if (!nw) return setMessage(t("door.onWall"));
+      addDoorAt(nw.areaId, nw.wall, nw.along, nw.len);
+      return;
+    }
+    if (tool === "pillar") {
+      addPillarAt(snap(raw, null).p);
+      return;
+    }
+    if (tool === "measure") {
+      const p = snap(raw, measureFrom).p;
+      if (!measureFrom) setMeasureFrom(p);
+      else {
+        if (!same(p, measureFrom)) setMeasures((m) => [...m.slice(-9), { a: measureFrom, b: p }]);
+        setMeasureFrom(null);
+      }
+      return;
+    }
     if (tool === "line") {
       addDraftPoint(snap(raw, draft.length > 0 ? draft[draft.length - 1]! : null).p);
     } else if (tool === "rect") {
@@ -422,6 +565,21 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
 
   /* ── keyboard ── */
   const nudge = (dx: number, dy: number) => {
+    if (featSel?.kind === "pillar") {
+      setFeatures({ ...features, pillars: features.pillars.map((q, i) => (i === featSel.index ? { ...q, x: q.x + dx, y: q.y + dy } : q)) });
+      return;
+    }
+    if (featSel?.kind === "door") {
+      const door = features.doors[featSel.index]!;
+      const pd = placedDoors.find((x) => x.index === featSel.index + 1);
+      const area = areas.find((x) => x.id === door.areaId);
+      if (!pd || !area) return;
+      const len = wallLengths(area.points)[door.wall]!;
+      // along the wall: right/down = further from its first corner
+      const delta = dx + dy;
+      setFeatures({ ...features, doors: features.doors.map((q, i) => (i === featSel.index ? { ...q, offsetMm: clampOffset(q.offsetMm + delta, q.widthMm, len) } : q)) });
+      return;
+    }
     if (!sel) return;
     const next = areas.map((a, ai) => {
       if (ai !== sel.area) return a;
@@ -431,15 +589,25 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     commit(next);
   };
   const removeSelected = () => {
+    if (featSel) {
+      setFeatures(
+        featSel.kind === "door" ? { ...features, doors: features.doors.filter((_, i) => i !== featSel.index) } : { ...features, pillars: features.pillars.filter((_, i) => i !== featSel.index) },
+      );
+      setFeatSel(null);
+      return;
+    }
     if (!sel) return;
     const a = areas[sel.area]!;
     if (sel.corner !== undefined) {
       if (a.points.length <= 3) return setMessage(t("select.minCorners"));
-      commit(areas.map((x, ai) => (ai === sel.area ? { ...x, points: x.points.filter((_, ci) => ci !== sel.corner) } : x)));
+      commitRoom({
+        areas: areas.map((x, ai) => (ai === sel.area ? { ...x, points: x.points.filter((_, ci) => ci !== sel.corner) } : x)),
+        features: { ...features, doors: doorsAfterRemoveCorner(a.id, sel.corner, a.points.length) },
+      });
       setSel({ area: sel.area });
       return;
     }
-    commit(areas.filter((_, ai) => ai !== sel.area));
+    commitRoom({ areas: areas.filter((_, ai) => ai !== sel.area), features: { ...features, doors: features.doors.filter((d) => d.areaId !== a.id) } });
     setSel(null);
   };
   const onKeyDown = (e: KeyboardEvent<SVGSVGElement>) => {
@@ -459,7 +627,9 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     if (e.key === "Escape") {
       setDraft([]);
       setRectStart(null);
+      setMeasureFrom(null);
       setSel(null);
+      setFeatSel(null);
       return;
     }
     if (e.key === "Enter" && tool === "line") {
@@ -475,7 +645,7 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     }
     const arrows: Record<string, [number, number]> = { ArrowLeft: [-1, 0], ArrowRight: [1, 0], ArrowUp: [0, -1], ArrowDown: [0, 1] };
     const a = arrows[e.key];
-    if (a && sel) {
+    if (a && (sel || featSel)) {
       e.preventDefault();
       const k = (snapGrid ? step : 10) * (e.shiftKey ? 10 : 1);
       nudge(a[0] * k, a[1] * k);
@@ -486,6 +656,9 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       if (key === "v") changeTool("select");
       else if (key === "w") changeTool("line");
       else if (key === "r") changeTool("rect");
+      else if (key === "d") changeTool("door");
+      else if (key === "p") changeTool("pillar");
+      else if (key === "m") changeTool("measure");
       else if (key === "+" || key === "=") zoom(1 / 1.25);
       else if (key === "-") zoom(1.25);
       else if (key === "f") setView(null);
@@ -494,12 +667,13 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
 
   /* ── saving ── */
   const problems = useMemo(() => roomDrawingProblems(areas), [areas]);
+  const featureProblems = useMemo(() => roomFeatureProblems(areas, features), [areas, features]);
   async function save() {
-    if (problems.length > 0) return;
+    if (problems.length > 0 || featureProblems.length > 0) return;
     setSaving(true);
     setSaveError(null);
     try {
-      const res = await saveRoomDrawingAction({ occasionId: props.occasionId, areas });
+      const res = await saveRoomDrawingAction({ occasionId: props.occasionId, areas, features });
       if (!res.ok) {
         setSaveError(res.error.message);
         return;
@@ -566,6 +740,12 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
       if (rectLive) return t("rect.live", { w: m(rectLive[1]!.x - rectLive[0]!.x), l: m(rectLive[2]!.y - rectLive[1]!.y) });
       return rectStart ? t("rect.second") : t("rect.first");
     }
+    if (tool === "door") return t("door.hint");
+    if (tool === "pillar") return cursor ? t("pillar.live", { x: m(cursor.p.x), y: m(cursor.p.y) }) : t("pillar.hint");
+    if (tool === "measure") {
+      if (measureFrom && cursor) return t("measure.live", { length: m(Math.hypot(cursor.p.x - measureFrom.x, cursor.p.y - measureFrom.y)) });
+      return measureFrom ? t("measure.second") : t("measure.first");
+    }
     if (cursor && drag.current?.kind === "corner") return t("select.corner", { x: m(cursor.p.x), y: m(cursor.p.y) });
     return areas.length === 0 ? t("select.empty") : t("select.hint");
   })();
@@ -574,7 +754,7 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
     <div className="ed-stack" data-gap="3">
       <div className={styles.toolbar} role="toolbar" aria-label={t("toolbar")}>
         <div className={styles.group} role="group" aria-label={t("tools.label")}>
-          {(["select", "line", "rect"] as const).map((k) => (
+          {(["select", "line", "rect", "door", "pillar", "measure"] as const).map((k) => (
             <Button key={k} size="sm" variant={tool === k ? "secondary" : "quiet"} aria-pressed={tool === k} onClick={() => changeTool(k)}>
               {t(`tools.${k}`)}
             </Button>
@@ -641,7 +821,8 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
           onPointerCancel={() => {
             const d = drag.current;
             drag.current = null;
-            if (d && d.kind !== "pan") setAreas(d.start);
+            if (d?.kind === "corner" || d?.kind === "area") setAreas(d.start);
+            else if (d?.kind === "pillar" || d?.kind === "door") setRoom(d.start);
           }}
           onWheel={onWheel}
           onKeyDown={onKeyDown}
@@ -693,6 +874,27 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
             return f.type === "circle" ? <circle key={it.id} className={styles.item} cx={f.cx} cy={f.cy} r={f.r} /> : <polygon key={it.id} className={styles.item} points={f.points.map((p) => `${p.x},${p.y}`).join(" ")} />;
           })}
 
+          {features.pillars.map((pl, i) => {
+            const f = pillarFootprint(pl);
+            const selected = featSel?.kind === "pillar" && featSel.index === i;
+            return f.type === "circle" ? (
+              <circle key={pl.id} className={styles.pillar} data-selected={selected || undefined} cx={f.cx} cy={f.cy} r={f.r} />
+            ) : (
+              <polygon key={pl.id} className={styles.pillar} data-selected={selected || undefined} points={f.points.map((q) => `${q.x},${q.y}`).join(" ")} />
+            );
+          })}
+          {placedDoors.map((d) => (
+            <DoorShape key={d.id} d={d} px={px} selected={featSel?.kind === "door" && featSel.index === d.index - 1} />
+          ))}
+          {[...measures, ...(measureFrom && cursor && tool === "measure" ? [{ a: measureFrom, b: cursor.p }] : [])].map((ms, i) => (
+            <g key={`m${i}`} className={styles.measure}>
+              <line x1={ms.a.x} y1={ms.a.y} x2={ms.b.x} y2={ms.b.y} />
+              <circle cx={ms.a.x} cy={ms.a.y} r={3 * px} />
+              <circle cx={ms.b.x} cy={ms.b.y} r={3 * px} />
+              {dimLabel(ms.a, ms.b, `ml${i}`, null)}
+            </g>
+          ))}
+          {measureFrom && tool === "measure" && !cursor ? <circle className={styles.draftPoint} cx={measureFrom.x} cy={measureFrom.y} r={4 * px} /> : null}
           {draft.length > 0 ? <polyline className={styles.draft} points={draft.map((p) => `${p.x},${p.y}`).join(" ")} /> : null}
           {draft.slice(0, -1).map((p, i) => dimLabel(p, draft[i + 1]!, `d${i}`, null))}
           {draft.map((p, i) => (
@@ -738,6 +940,77 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
           }}
         />
       ) : null}
+      {tool === "door" ? (
+        <div className={styles.entry}>
+          <h3 className={styles.listTitle}>{t("door.newTitle")}</h3>
+          <div className={styles.fields}>
+            <SelectField id={`${formId}-dkind`} label={t("door.kind")} value={doorKind} onChange={(e) => setDoorKind(e.target.value as RoomDoor["kind"])}>
+              {DOOR_KIND_VALUES.map((k) => (
+                <option key={k} value={k}>
+                  {t(`door.kinds.${k}`)}
+                </option>
+              ))}
+            </SelectField>
+            <SelectField id={`${formId}-dwidth`} label={t("door.width")} value={String(doorWidth)} onChange={(e) => setDoorWidth(Number(e.target.value))}>
+              {[800, 900, 1000, 1200, 1600, 1800, 2400, 3000].map((w) => (
+                <option key={w} value={w}>
+                  {m(w)} m
+                </option>
+              ))}
+            </SelectField>
+          </div>
+          <p className="ed-small ed-muted">{t("door.typedHint")}</p>
+        </div>
+      ) : null}
+      {tool === "pillar" ? <PillarEntry t={t} shape={pillarShape} size={pillarSize} locale={props.locale} onShape={setPillarShape} onSize={setPillarSize} onAdd={addPillarAt} /> : null}
+      {tool === "measure" ? (
+        <div className={styles.entry} aria-live="polite">
+          <h3 className={styles.listTitle}>{t("measure.title")}</h3>
+          {measures.length === 0 ? (
+            <p className="ed-small ed-muted">{t("measure.none")}</p>
+          ) : (
+            <ol className={styles.walls}>
+              {measures.map((ms, i) => (
+                <li key={i}>{t("measure.item", { n: i + 1, length: m(Math.hypot(ms.b.x - ms.a.x, ms.b.y - ms.a.y)), dx: m(Math.abs(ms.b.x - ms.a.x)), dy: m(Math.abs(ms.b.y - ms.a.y)) })}</li>
+              ))}
+            </ol>
+          )}
+          {measures.length > 0 ? (
+            <div className="ed-cluster">
+              <Button size="sm" variant="quiet" onClick={() => setMeasures([])}>
+                {t("measure.clear")}
+              </Button>
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+      {tool === "select" && featSel?.kind === "door" && features.doors[featSel.index] ? (
+        <DoorPanel
+          key={features.doors[featSel.index]!.id}
+          t={t}
+          locale={props.locale}
+          door={features.doors[featSel.index]!}
+          index={featSel.index}
+          wallLength={(() => {
+            const d = features.doors[featSel.index]!;
+            const a = areas.find((x) => x.id === d.areaId);
+            return a && d.wall < a.points.length ? wallLengths(a.points)[d.wall]! : null;
+          })()}
+          onChange={(next) => setFeatures({ ...features, doors: features.doors.map((q, i) => (i === featSel.index ? next : q)) })}
+          onRemove={removeSelected}
+        />
+      ) : null}
+      {tool === "select" && featSel?.kind === "pillar" && features.pillars[featSel.index] ? (
+        <PillarPanel
+          key={features.pillars[featSel.index]!.id}
+          t={t}
+          locale={props.locale}
+          pillar={features.pillars[featSel.index]!}
+          index={featSel.index}
+          onChange={(next) => setFeatures({ ...features, pillars: features.pillars.map((q, i) => (i === featSel.index ? next : q)) })}
+          onRemove={removeSelected}
+        />
+      ) : null}
       {tool === "select" && selArea && sel ? (
         <SelectionPanel
           key={`${selArea.id}-${sel.corner ?? "w"}-${sel.wall ?? "a"}`}
@@ -747,6 +1020,20 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
           index={sel.area}
           sel={sel}
           onChange={(next) => commit(areas.map((a, ai) => (ai === sel.area ? next : a)))}
+          onSplit={(wall) => {
+            const a = selArea;
+            if (a.points.length >= SPACE_LIMITS.areaPoints) return;
+            const u = a.points[wall]!;
+            const w = a.points[(wall + 1) % a.points.length]!;
+            const pts = [...a.points];
+            pts.splice(wall + 1, 0, { x: Math.round((u.x + w.x) / 2), y: Math.round((u.y + w.y) / 2) });
+            commitRoom({ areas: areas.map((x, ai) => (ai === sel.area ? { ...x, points: pts } : x)), features: { ...features, doors: doorsAfterSplit(a.id, wall, Math.hypot(w.x - u.x, w.y - u.y) / 2) } });
+            setSel({ area: sel.area, corner: wall + 1 });
+          }}
+          onAddDoor={(wall) => {
+            const len = wallLengths(selArea.points)[wall]!;
+            addDoorAt(selArea.id, wall, len / 2, len);
+          }}
           onSelect={(s) => setSel(s)}
           onRemove={removeSelected}
         />
@@ -793,11 +1080,49 @@ export function RoomDrawer(props: { occasionId: string; locale: "ro" | "en"; ini
           {t("problems.body")}
         </Notice>
       ) : null}
+      {featureProblems.length > 0 ? (
+        <Notice tone="danger" title={t("problems.title")}>
+          <ul>
+            {featureProblems.map((fp) => (
+              <li key={`${fp.kind}${fp.index}`}>{t(`errors.${fp.kind}.${fp.problem}`, { n: fp.index + 1 })}</li>
+            ))}
+          </ul>
+        </Notice>
+      ) : null}
       {saveError ? <Notice tone="danger">{saveError}</Notice> : null}
+      {features.doors.length + features.pillars.length > 0 ? (
+        <section className="ed-stack" data-gap="2" aria-labelledby={`${formId}-feat`}>
+          <h3 id={`${formId}-feat`} className={styles.listTitle}>
+            {t("features.title")}
+          </h3>
+          <ul className={styles.list}>
+            {features.doors.map((d, i) => (
+              <li key={d.id}>
+                <span>
+                  <strong>{t("door.name", { n: i + 1 })}</strong> <span className="ed-small ed-muted">{t("door.facts", { kind: t(`door.kinds.${d.kind}`), width: m(d.widthMm) })}</span>
+                </span>
+                <Button size="sm" variant="quiet" onClick={() => (changeTool("select"), setFeatSel({ kind: "door", index: i }))}>
+                  {t("list.select")}
+                </Button>
+              </li>
+            ))}
+            {features.pillars.map((pl, i) => (
+              <li key={pl.id}>
+                <span>
+                  <strong>{t("pillar.name", { n: i + 1 })}</strong> <span className="ed-small ed-muted">{t(`pillar.facts.${pl.shape}`, { size: m(pl.sizeMm) })}</span>
+                </span>
+                <Button size="sm" variant="quiet" onClick={() => (changeTool("select"), setFeatSel({ kind: "pillar", index: i }))}>
+                  {t("list.select")}
+                </Button>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ) : null}
       {props.items.length > 0 ? <p className="ed-small ed-muted">{t("itemsNote")}</p> : null}
 
       <div className="ed-cluster">
-        <Button variant="primary" onClick={save} disabled={saving || problems.length > 0 || (!dirty && props.initial.length > 0)}>
+        <Button variant="primary" onClick={save} disabled={saving || problems.length > 0 || featureProblems.length > 0 || (!dirty && props.initial.length > 0)}>
           {saving ? tc("status.saving") : areas.length === 0 && props.initial.length > 0 ? t("saveClear") : t("save")}
         </Button>
         <Button
@@ -956,7 +1281,29 @@ function RectEntry({ t, onAdd }: { t: T; onAdd: (pts: PlanPoint[]) => void }) {
 }
 
 /** The selected outline: its name, exact wall lengths, exact corners, delete. */
-function SelectionPanel({ t, locale, area, index, sel, onChange, onSelect, onRemove }: { t: T; locale: "ro" | "en"; area: FloorArea; index: number; sel: NonNullable<Sel>; onChange: (a: FloorArea) => void; onSelect: (s: Sel) => void; onRemove: () => void }) {
+function SelectionPanel({
+  t,
+  locale,
+  area,
+  index,
+  sel,
+  onChange,
+  onSplit,
+  onAddDoor,
+  onSelect,
+  onRemove,
+}: {
+  t: T;
+  locale: "ro" | "en";
+  area: FloorArea;
+  index: number;
+  sel: NonNullable<Sel>;
+  onChange: (a: FloorArea) => void;
+  onSplit: (wall: number) => void;
+  onAddDoor: (wall: number) => void;
+  onSelect: (s: Sel) => void;
+  onRemove: () => void;
+}) {
   const id = useId();
   const fm = (mm: number) => mmToMetresText(Math.round(mm), locale);
   const lengths = wallLengths(area.points);
@@ -991,16 +1338,6 @@ function SelectionPanel({ t, locale, area, index, sel, onChange, onSelect, onRem
     if (Object.keys(errors).length) return;
     onChange({ ...area, points: area.points.map((p, i) => (i === sel.corner ? { x: x as number, y: y as number } : p)) });
   };
-  const splitWall = () => {
-    if (sel.wall === undefined || area.points.length >= SPACE_LIMITS.areaPoints) return;
-    const a = area.points[sel.wall]!;
-    const b = area.points[(sel.wall + 1) % area.points.length]!;
-    const pts = [...area.points];
-    pts.splice(sel.wall + 1, 0, { x: Math.round((a.x + b.x) / 2), y: Math.round((a.y + b.y) / 2) });
-    onChange({ ...area, points: pts });
-    onSelect({ area: index, corner: sel.wall + 1 });
-  };
-
   return (
     <div className={styles.entry}>
       <h3 className={styles.listTitle}>{area.name || t("list.unnamed", { n: index + 1 })}</h3>
@@ -1017,8 +1354,11 @@ function SelectionPanel({ t, locale, area, index, sel, onChange, onSelect, onRem
           <Button type="submit" size="sm">
             {t("select.apply")}
           </Button>
-          <Button size="sm" variant="quiet" onClick={splitWall}>
+          <Button size="sm" variant="quiet" onClick={() => onSplit(sel.wall!)}>
             {t("select.split")}
+          </Button>
+          <Button size="sm" variant="quiet" onClick={() => onAddDoor(sel.wall!)}>
+            {t("door.addHere")}
           </Button>
         </form>
       ) : null}
@@ -1059,5 +1399,193 @@ function SelectionPanel({ t, locale, area, index, sel, onChange, onSelect, onRem
         </Button>
       </div>
     </div>
+  );
+}
+
+/** A door as the drawing tool draws it: the gap, the leaf (or leaves), the swing, and its clear floor when selected. */
+function DoorShape({ d, px, selected }: { d: PlacedDoor; px: number; selected: boolean }) {
+  const dir = d.swing === "out" ? { x: -d.inward.x, y: -d.inward.y } : d.inward;
+  const leaf = (hinge: PlanPoint, free: PlanPoint, key: string) => {
+    const w = Math.hypot(free.x - hinge.x, free.y - hinge.y);
+    const open = { x: hinge.x + dir.x * w, y: hinge.y + dir.y * w };
+    // sweep flag: which way round the arc goes from the closed to the open position
+    const cross = (free.x - hinge.x) * (open.y - hinge.y) - (free.y - hinge.y) * (open.x - hinge.x);
+    return (
+      <g key={key}>
+        <line className={styles.doorLeaf} x1={hinge.x} y1={hinge.y} x2={open.x} y2={open.y} />
+        <path className={styles.doorSwing} d={`M ${free.x} ${free.y} A ${w} ${w} 0 0 ${cross > 0 ? 1 : 0} ${open.x} ${open.y}`} />
+      </g>
+    );
+  };
+  const mid = { x: (d.a.x + d.b.x) / 2, y: (d.a.y + d.b.y) / 2 };
+  return (
+    <g data-selected={selected || undefined} className={styles.door}>
+      {selected ? <polygon className={styles.doorClear} points={doorClearance(d).map((q) => `${q.x},${q.y}`).join(" ")} /> : null}
+      <line className={styles.doorGap} x1={d.a.x} y1={d.a.y} x2={d.b.x} y2={d.b.y} />
+      <circle className={styles.doorJamb} cx={d.a.x} cy={d.a.y} r={2.5 * px} />
+      <circle className={styles.doorJamb} cx={d.b.x} cy={d.b.y} r={2.5 * px} />
+      {d.kind === "opening" ? null : d.swing === "sliding" ? (
+        <line className={styles.doorLeaf} x1={d.a.x + d.inward.x * 80} y1={d.a.y + d.inward.y * 80} x2={d.b.x + d.inward.x * 80} y2={d.b.y + d.inward.y * 80} />
+      ) : d.kind === "double" ? (
+        <>
+          {leaf(d.a, mid, "l")}
+          {leaf(d.b, mid, "r")}
+        </>
+      ) : (
+        leaf(d.a, d.b, "s")
+      )}
+    </g>
+  );
+}
+
+/** The selected door: kind, width, where along its wall, which way it opens, which side the hinges are. */
+function DoorPanel({ t, locale, door, index, wallLength, onChange, onRemove }: { t: T; locale: "ro" | "en"; door: RoomDoor; index: number; wallLength: number | null; onChange: (d: RoomDoor) => void; onRemove: () => void }) {
+  const id = useId();
+  const fm = (mm: number) => mmToMetresText(Math.round(mm), locale);
+  const [width, setWidth] = useState(fm(door.widthMm));
+  const [offset, setOffset] = useState(fm(door.offsetMm - door.widthMm / 2));
+  const [err, setErr] = useState<Record<string, string>>({});
+  const apply = (e: FormEvent) => {
+    e.preventDefault();
+    const w = metresField(width);
+    const o = metresField(offset);
+    const errors: Record<string, string> = {};
+    if (w === null || w === "bad" || w < FEATURE_LIMITS.minDoorMm || w > FEATURE_LIMITS.maxDoorMm) errors.width = t("errors.doorWidth");
+    if (o === null || o === "bad" || o < 0) errors.offset = t("errors.measure");
+    if (!errors.width && wallLength !== null && (w as number) > wallLength) errors.width = t("door.tooShort");
+    if (!errors.width && !errors.offset && wallLength !== null && (o as number) + (w as number) > wallLength + 1) errors.offset = t("errors.door.offWall", { n: index + 1 });
+    setErr(errors);
+    if (Object.keys(errors).length) return;
+    onChange({ ...door, widthMm: w as number, offsetMm: Math.round((o as number) + (w as number) / 2) });
+  };
+  return (
+    <div className={styles.entry}>
+      <h3 className={styles.listTitle}>{t("door.name", { n: index + 1 })}</h3>
+      <div className={styles.fields}>
+        <SelectField id={`${id}-kind`} label={t("door.kind")} value={door.kind} onChange={(e) => onChange({ ...door, kind: e.target.value as RoomDoor["kind"] })}>
+          {DOOR_KIND_VALUES.map((k) => (
+            <option key={k} value={k}>
+              {t(`door.kinds.${k}`)}
+            </option>
+          ))}
+        </SelectField>
+        {door.kind !== "opening" ? (
+          <SelectField id={`${id}-swing`} label={t("door.swing")} value={door.swing} onChange={(e) => onChange({ ...door, swing: e.target.value as RoomDoor["swing"] })}>
+            {DOOR_SWING_VALUES.map((k) => (
+              <option key={k} value={k}>
+                {t(`door.swings.${k}`)}
+              </option>
+            ))}
+          </SelectField>
+        ) : null}
+      </div>
+      <form onSubmit={apply} noValidate className="ed-stack" data-gap="2">
+        <div className={styles.fields}>
+          <TextField id={`${id}-width`} label={t("door.width")} inputMode="decimal" value={width} onChange={(e) => setWidth(e.target.value)} error={err.width} autoComplete="off" />
+          <TextField id={`${id}-offset`} label={t("door.offset")} hint={t("door.offsetHint")} inputMode="decimal" value={offset} onChange={(e) => setOffset(e.target.value)} error={err.offset} autoComplete="off" />
+        </div>
+        <div className="ed-cluster">
+          <Button type="submit" size="sm">
+            {t("select.apply")}
+          </Button>
+          {door.kind !== "opening" && door.swing !== "sliding" ? (
+            <Button size="sm" variant="quiet" onClick={() => onChange({ ...door, hinge: door.hinge === "start" ? "end" : "start" })}>
+              {t("door.flipHinge")}
+            </Button>
+          ) : null}
+        </div>
+      </form>
+      <p className="ed-small ed-muted">{t("door.clearNote")}</p>
+      <div className="ed-cluster">
+        <Button size="sm" variant="danger-quiet" onClick={onRemove}>
+          <IconTrash size={16} /> {t("door.remove")}
+        </Button>
+      </div>
+    </div>
+  );
+}
+
+/** New pillars: their shape and size, and a typed position for the keyboard. */
+function PillarEntry({ t, shape, size, locale, onShape, onSize, onAdd }: { t: T; shape: Pillar["shape"]; size: number; locale: "ro" | "en"; onShape: (s: Pillar["shape"]) => void; onSize: (n: number) => void; onAdd: (p: PlanPoint) => void }) {
+  const id = useId();
+  const [x, setX] = useState("");
+  const [y, setY] = useState("");
+  const [err, setErr] = useState<Record<string, string>>({});
+  const submit = (e: FormEvent) => {
+    e.preventDefault();
+    const px = metresField(x);
+    const py = metresField(y);
+    const errors: Record<string, string> = {};
+    if (px === null || px === "bad") errors.x = t("errors.measure");
+    if (py === null || py === "bad") errors.y = t("errors.measure");
+    setErr(errors);
+    if (Object.keys(errors).length) return;
+    onAdd({ x: px as number, y: py as number });
+  };
+  return (
+    <form className={styles.entry} onSubmit={submit} noValidate aria-labelledby={`${id}-h`}>
+      <h3 id={`${id}-h`} className={styles.listTitle}>
+        {t("pillar.newTitle")}
+      </h3>
+      <div className={styles.fields}>
+        <SelectField id={`${id}-shape`} label={t("pillar.shape")} value={shape} onChange={(e) => onShape(e.target.value as Pillar["shape"])}>
+          <option value="round">{t("pillar.shapes.round")}</option>
+          <option value="square">{t("pillar.shapes.square")}</option>
+        </SelectField>
+        <SelectField id={`${id}-size`} label={shape === "round" ? t("pillar.diameter") : t("pillar.side")} value={String(size)} onChange={(e) => onSize(Number(e.target.value))}>
+          {[100, 200, 300, 400, 500, 600, 800, 1000].map((n) => (
+            <option key={n} value={n}>
+              {mmToMetresText(n, locale)} m
+            </option>
+          ))}
+        </SelectField>
+        <TextField id={`${id}-x`} label={t("fields.x")} inputMode="decimal" value={x} onChange={(e) => setX(e.target.value)} error={err.x} autoComplete="off" />
+        <TextField id={`${id}-y`} label={t("fields.y")} inputMode="decimal" value={y} onChange={(e) => setY(e.target.value)} error={err.y} autoComplete="off" />
+      </div>
+      <Button type="submit">{t("pillar.add")}</Button>
+    </form>
+  );
+}
+
+/** The selected pillar: shape, exact size and position. */
+function PillarPanel({ t, locale, pillar, index, onChange, onRemove }: { t: T; locale: "ro" | "en"; pillar: Pillar; index: number; onChange: (p: Pillar) => void; onRemove: () => void }) {
+  const id = useId();
+  const fm = (mm: number) => mmToMetresText(Math.round(mm), locale);
+  const [v, setV] = useState({ size: fm(pillar.sizeMm), x: fm(pillar.x), y: fm(pillar.y) });
+  const [err, setErr] = useState<Record<string, string>>({});
+  const apply = (e: FormEvent) => {
+    e.preventDefault();
+    const size = metresField(v.size);
+    const x = metresField(v.x);
+    const y = metresField(v.y);
+    const errors: Record<string, string> = {};
+    if (size === null || size === "bad" || size < FEATURE_LIMITS.minPillarMm || size > FEATURE_LIMITS.maxPillarMm) errors.size = t("errors.pillarSize");
+    if (x === null || x === "bad") errors.x = t("errors.measure");
+    if (y === null || y === "bad") errors.y = t("errors.measure");
+    setErr(errors);
+    if (Object.keys(errors).length) return;
+    onChange({ ...pillar, sizeMm: size as number, x: x as number, y: y as number });
+  };
+  return (
+    <form className={styles.entry} onSubmit={apply} noValidate>
+      <h3 className={styles.listTitle}>{t("pillar.name", { n: index + 1 })}</h3>
+      <div className={styles.fields}>
+        <SelectField id={`${id}-shape`} label={t("pillar.shape")} value={pillar.shape} onChange={(e) => onChange({ ...pillar, shape: e.target.value as Pillar["shape"] })}>
+          <option value="round">{t("pillar.shapes.round")}</option>
+          <option value="square">{t("pillar.shapes.square")}</option>
+        </SelectField>
+        <TextField id={`${id}-size`} label={pillar.shape === "round" ? t("pillar.diameter") : t("pillar.side")} inputMode="decimal" value={v.size} onChange={(e) => setV((s) => ({ ...s, size: e.target.value }))} error={err.size} autoComplete="off" />
+        <TextField id={`${id}-x`} label={t("fields.x")} inputMode="decimal" value={v.x} onChange={(e) => setV((s) => ({ ...s, x: e.target.value }))} error={err.x} autoComplete="off" />
+        <TextField id={`${id}-y`} label={t("fields.y")} inputMode="decimal" value={v.y} onChange={(e) => setV((s) => ({ ...s, y: e.target.value }))} error={err.y} autoComplete="off" />
+      </div>
+      <div className="ed-cluster">
+        <Button type="submit" size="sm">
+          {t("select.apply")}
+        </Button>
+        <Button size="sm" variant="danger-quiet" onClick={onRemove}>
+          <IconTrash size={16} /> {t("pillar.remove")}
+        </Button>
+      </div>
+    </form>
   );
 }

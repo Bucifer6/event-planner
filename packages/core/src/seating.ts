@@ -59,7 +59,13 @@ import {
   modelBounds,
   modelFromSnapshot,
   ownSpaceAreas,
+  resolveDoors,
   roomDrawingProblems,
+  roomFeatureProblems,
+  zRoomFeatures,
+  FIXTURE_KIND_VALUES,
+  type FloorArea,
+  type RoomFeatures,
   shapeDims,
   zFloorArea,
   shapeUsesDiameter,
@@ -147,6 +153,7 @@ function rowToItem(r: PlanItemRow, seated?: number): PlanItem {
     rotation: r.rotation,
     version: r.version,
     seated,
+    fixtureKind: r.kind === "fixture" ? (r.fixtureKind ?? null) : null,
   };
 }
 
@@ -166,13 +173,20 @@ function buildModel(row: SpaceModelRow, snapshot: DrawingSnapshot | null, items:
     widthMm: row.ownWidthMm,
     lengthMm: row.ownLengthMm,
     backdrop: null,
-    areas: row.ownAreas && row.ownAreas.length > 0 ? row.ownAreas : ownSpaceAreas(row.ownWidthMm, row.ownLengthMm),
+    areas: drawnAreas(row) ?? ownSpaceAreas(row.ownWidthMm, row.ownLengthMm),
     tableTypes: [],
     items,
     pois: [],
     parkingAreas: [],
     aisleMm: row.aisleMm,
+    // doors and pillars belong to a drawn room only
+    doors: drawnAreas(row) ? resolveDoors(row.ownAreas!, row.ownFeatures?.doors ?? []) : [],
+    pillars: drawnAreas(row) ? (row.ownFeatures?.pillars ?? []) : [],
   };
+}
+
+function drawnAreas(row: SpaceModelRow): FloorArea[] | null {
+  return row.source === "own" && row.ownAreas && row.ownAreas.length > 0 ? row.ownAreas : null;
 }
 
 /** NO access check. `lock` takes the model row FOR UPDATE (serialises layout writers of one occasion). */
@@ -240,6 +254,7 @@ function fixtureItemValues(occasionId: string, modelId: string, snapshot: Drawin
     name: f.name,
     label: f.name,
     shape: "rect" as const,
+    fixtureKind: f.kind,
     widthMm: f.widthMm,
     lengthMm: f.lengthMm,
     x: f.x,
@@ -346,7 +361,7 @@ export async function removeSpaceModel(ctx: Ctx, input: { occasionId: string }):
   });
 }
 
-const roomInput = z.object({ occasionId: zId, areas: z.array(zFloorArea).max(SPACE_LIMITS.areas) });
+const roomInput = z.object({ occasionId: zId, areas: z.array(zFloorArea).max(SPACE_LIMITS.areas), features: zRoomFeatures.optional() });
 export type RoomDrawingInput = z.input<typeof roomInput>;
 
 /**
@@ -363,10 +378,16 @@ export async function saveOwnRoomDrawing(ctx: Ctx, input: RoomDrawingInput): Pro
     throw new AppError("VALIDATION", `space.draw.errors.${p.problem}`, { params: { n: p.index + 1 } });
   }
   if (new Set(data.areas.map((a) => a.id)).size !== data.areas.length) throw new AppError("VALIDATION", "common.validation.invalid");
+  const features: RoomFeatures = data.areas.length > 0 ? (data.features ?? { doors: [], pillars: [] }) : { doors: [], pillars: [] };
+  const fp = roomFeatureProblems(data.areas, features);
+  if (fp.length > 0) throw new AppError("VALIDATION", `space.draw.errors.${fp[0]!.kind}.${fp[0]!.problem}`, { params: { n: fp[0]!.index + 1 } });
   return inTx(ctx, async (tx) => {
     const { row } = await requireModel(tx, data.occasionId, { lock: true });
     if (row.source !== "own") throw new AppError("CONFLICT", "space.draw.errors.ownOnly");
-    const set: Partial<typeof spaceModels.$inferInsert> = { ownAreas: data.areas.length > 0 ? data.areas : null };
+    const set: Partial<typeof spaceModels.$inferInsert> = {
+      ownAreas: data.areas.length > 0 ? data.areas : null,
+      ownFeatures: features.doors.length + features.pillars.length > 0 ? features : null,
+    };
     if (data.areas.length > 0) {
       const xs = data.areas.flatMap((a) => a.points.map((p) => p.x));
       const ys = data.areas.flatMap((a) => a.points.map((p) => p.y));
@@ -378,7 +399,7 @@ export async function saveOwnRoomDrawing(ctx: Ctx, input: RoomDrawingInput): Pro
       action: "space.roomDrawn",
       objectType: "space_model",
       objectId: row.id,
-      after: { outlines: data.areas.length, corners: data.areas.reduce((n, a) => n + a.points.length, 0) },
+      after: { outlines: data.areas.length, corners: data.areas.reduce((n, a) => n + a.points.length, 0), doors: features.doors.length, pillars: features.pillars.length },
     });
     return updated!;
   });
@@ -405,6 +426,8 @@ export type SpaceModelView = {
   canManage: boolean;
   /** Own spaces: the planner drew the room with the drawing tool (not just typed two sides). */
   drawn: boolean;
+  /** Own spaces: the drawn room's doors (as stored, on their walls) and pillars. */
+  features: RoomFeatures;
 };
 
 /**
@@ -449,6 +472,7 @@ export async function getSpaceModel(ctx: Ctx, occasionId: string): Promise<Space
     parking: version ? await readListingParking(ctx, version.listingId) : null,
     canManage: isManager(member),
     drawn: row.source === "own" && !!row.ownAreas && row.ownAreas.length > 0,
+    features: row.ownFeatures ?? { doors: [], pillars: [] },
   };
 }
 
@@ -575,6 +599,7 @@ const addFixtureInput = z.object({
   occasionId: zId,
   id: zId.optional(),
   name: text(80),
+  kind: z.enum(FIXTURE_KIND_VALUES).optional(),
   widthMm: optMm,
   lengthMm: optMm,
   x: zCoordMm.optional(),
@@ -607,6 +632,7 @@ export async function addFixture(ctx: Ctx, input: z.input<typeof addFixtureInput
         name: data.name,
         label: data.name,
         shape: "rect",
+        fixtureKind: data.kind ?? null,
         widthMm: both ? data.widthMm! : null,
         lengthMm: both ? data.lengthMm! : null,
         ...at,

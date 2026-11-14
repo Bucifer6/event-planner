@@ -1,7 +1,11 @@
 import type {
   Calibration,
   DrawingSnapshot,
+  FixtureKind,
   FloorArea,
+  Pillar,
+  RoomDoor,
+  RoomFeatures,
   ParkingArea,
   PlanItemKind,
   PlanItemSource,
@@ -32,8 +36,14 @@ import { z } from "zod";
 
 export type {
   Calibration,
+  DoorKind,
+  DoorSwing,
   DrawingSnapshot,
+  FixtureKind,
   FloorArea,
+  Pillar,
+  RoomDoor,
+  RoomFeatures,
   ParkingArea,
   PlanPoint,
   SpaceMarkings,
@@ -43,7 +53,7 @@ export type {
   VenuePoi,
 } from "@ed/db";
 
-export const FIXTURE_KIND_VALUES = ["dance", "candybar", "photobooth", "stage", "bar", "other"] as const;
+export const FIXTURE_KIND_VALUES = ["dance", "candybar", "photobooth", "stage", "bar", "other", "dj", "band", "speaker", "lighting", "screen", "buffet", "cake"] as const;
 export const POI_KIND_VALUES = ["toilets", "cloakroom", "bar", "entrance", "exit", "photo", "stage", "other"] as const;
 export const TABLE_SHAPE_VALUES = ["round", "rect", "oval", "halfmoon"] as const;
 
@@ -100,6 +110,49 @@ export const TABLE_PRESETS: readonly TablePreset[] = [
   round("cocktail-60", 600, 0, "cocktail"),
   round("cocktail-80", 800, 0, "cocktail"),
 ];
+
+/* ── Ready-made stage, dance floor and equipment ──────────────────────────────────────── */
+
+export type FixturePreset = { key: string; kind: FixtureKind; widthMm: number; lengthMm: number };
+const fx = (key: string, kind: FixtureKind, w: number, l: number): FixturePreset => ({ key, kind, widthMm: w, lengthMm: l });
+
+/** Usual sizes from event-hire catalogues: modular stage decks, dance floor panels, PA and lighting. */
+export const FIXTURE_PRESETS: readonly FixturePreset[] = [
+  fx("stage-4x3", "stage", 4000, 3000),
+  fx("stage-6x4", "stage", 6000, 4000),
+  fx("stage-8x5", "stage", 8000, 5000),
+  fx("dance-4x4", "dance", 4000, 4000),
+  fx("dance-5x5", "dance", 5000, 5000),
+  fx("dance-6x6", "dance", 6000, 6000),
+  fx("dance-8x8", "dance", 8000, 8000),
+  fx("dj-booth", "dj", 2000, 800),
+  fx("band-riser", "band", 2400, 2400),
+  fx("speaker", "speaker", 600, 600),
+  fx("subwoofer", "speaker", 800, 800),
+  fx("light-stand", "lighting", 800, 800),
+  fx("truss-3m", "lighting", 3000, 300),
+  fx("screen-3m", "screen", 3000, 400),
+  fx("bar-3m", "bar", 3000, 1000),
+  fx("buffet-4m", "buffet", 4000, 1000),
+  fx("cake-table", "cake", 1200, 800),
+  fx("candybar", "candybar", 2000, 800),
+  fx("photobooth", "photobooth", 2500, 2500),
+];
+
+/**
+ * Floor per dancer: about 0.42 m² packed (the common "4.5 sq ft a dancer" rule) and 0.75 m²
+ * to dance comfortably. Planners usually reckon a third to a half of the guests dance at once.
+ */
+export const DANCER_AREA_MM2 = { packed: 420_000, comfortable: 750_000 } as const;
+
+/** A standing adult seen from above, for the reference people: shoulders and depth. */
+export const REFERENCE_PERSON_MM = { width: 500, depth: 300 } as const;
+
+/* ── Doors and pillars of a drawn room ─────────────────────────────────────────────────── */
+
+export const DOOR_KIND_VALUES = ["single", "double", "exit", "opening"] as const;
+export const DOOR_SWING_VALUES = ["in", "out", "sliding"] as const;
+export const FEATURE_LIMITS = { doors: 60, pillars: 100, minDoorMm: 500, maxDoorMm: 6000, minPillarMm: 100, maxPillarMm: 3000 } as const;
 
 /** Limits of one drawing / one plan (kept generous; they bound JSON size and render cost). */
 export const SPACE_LIMITS = {
@@ -170,6 +223,29 @@ export const zSpaceMarkings = z.object({
   parkingAreas: z.array(zParkingArea).max(SPACE_LIMITS.parkingAreas).default([]),
 });
 
+export const zRoomDoor = z.object({
+  id: shortId,
+  areaId: shortId,
+  wall: z.number().int().min(0).max(200),
+  offsetMm: z.number().int().min(0).max(SPACE_LIMITS.maxCoordMm),
+  widthMm: z.number().int().min(FEATURE_LIMITS.minDoorMm, "common.validation.tooSmall").max(FEATURE_LIMITS.maxDoorMm, "common.validation.tooBig"),
+  kind: z.enum(DOOR_KIND_VALUES),
+  swing: z.enum(DOOR_SWING_VALUES),
+  hinge: z.enum(["start", "end"]),
+});
+export const zPillar = z.object({
+  id: shortId,
+  shape: z.enum(["round", "square"]),
+  sizeMm: z.number().int().min(FEATURE_LIMITS.minPillarMm, "common.validation.tooSmall").max(FEATURE_LIMITS.maxPillarMm, "common.validation.tooBig"),
+  x: coord,
+  y: coord,
+});
+export const zRoomFeatures = z.object({
+  doors: z.array(zRoomDoor).max(FEATURE_LIMITS.doors).default([]),
+  pillars: z.array(zPillar).max(FEATURE_LIMITS.pillars).default([]),
+});
+export const EMPTY_FEATURES: RoomFeatures = { doors: [], pillars: [] };
+
 export function markingsEmpty(m: SpaceMarkings): boolean {
   return m.areas.length + m.tableTypes.length + m.fixtures.length + m.pois.length + m.parkingAreas.length === 0;
 }
@@ -215,6 +291,8 @@ export type PlanItem = {
   version?: number;
   /** Places taken at this table (planner views only). */
   seated?: number;
+  /** Fixtures: what it is (stage, dance floor…); null/absent = not said. */
+  fixtureKind?: FixtureKind | null;
 };
 
 export type PlanModel = {
@@ -235,7 +313,13 @@ export type PlanModel = {
   pois: VenuePoi[];
   parkingAreas: ParkingArea[];
   aisleMm: number;
+  /** Drawn rooms: doors placed on their walls, and pillars. Absent = none. */
+  doors?: PlacedDoor[];
+  pillars?: Pillar[];
 };
+
+/** A door resolved onto its wall: `a` is the hinge jamb, `b` the other; `inward` points into the room. */
+export type PlacedDoor = { id: string; index: number; kind: RoomDoor["kind"]; swing: RoomDoor["swing"]; widthMm: number; a: PlanPoint; b: PlanPoint; inward: PlanPoint };
 
 /** The plan a drawing snapshot describes (no placed tables — venue fixtures sit where the venue drew them). */
 export function modelFromSnapshot(
@@ -274,6 +358,7 @@ export function fixtureToItem(f: VenueFixture): PlanItem {
     name: f.name,
     label: f.name,
     shape: "rect",
+    fixtureKind: f.kind,
     diameterMm: null,
     widthMm: f.widthMm,
     lengthMm: f.lengthMm,
@@ -569,7 +654,7 @@ export function setWallLength(points: PlanPoint[], wall: number, lengthMm: numbe
 
 /**
  * The nearest place to `near` where a new item stands on the floor with its chairs and an aisle
- * clear of everything already placed (searched outwards on a 50 cm grid, up to 40 m away).
+ * clear of everything already placed, off the pillars and out of the way of the doors (searched outwards on a 50 cm grid, up to 40 m away).
  * null = no such place, or the item's size is unknown.
  */
 export function findFreeSpot(model: PlanModel, item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm" | "rotation" | "seats" | "kind">, near: PlanPoint, others: PlanItem[] = model.items): PlanPoint | null {
@@ -579,6 +664,8 @@ export function findFreeSpot(model: PlanModel, item: Pick<PlanItem, "shape" | "d
   const placed = others
     .map((o) => itemFootprint(o, o.kind === "table" ? CHAIR_ZONE_MM : 0))
     .filter((f): f is Footprint => f !== null);
+  // pillars and the clear floor in front of doors, as the fit check sees them
+  const blockers: Footprint[] = [...(model.pillars ?? []).map(pillarFootprint), ...(model.doors ?? []).map((d) => ({ type: "poly" as const, points: doorClearance(d) }))];
   const step = 500;
   const cx = Math.round(near.x / 100) * 100;
   const cy = Math.round(near.y / 100) * 100;
@@ -590,11 +677,115 @@ export function findFreeSpot(model: PlanModel, item: Pick<PlanItem, "shape" | "d
         const f = itemFootprint({ ...item, ...at }, pad);
         if (!f) return null;
         if (model.areas.length > 0 && !insideAreas(f, model.areas)) continue;
-        if (placed.every((o) => shapeGap(f, o) >= model.aisleMm)) return at;
+        if (!placed.every((o) => shapeGap(f, o) >= model.aisleMm)) continue;
+        if (blockers.some((o) => shapeGap(f, o) < 0)) continue;
+        return at;
       }
     }
   }
   return null;
+}
+
+/** Where each door sits, from the wall it hangs on; doors whose wall no longer exists are left out. */
+export function resolveDoors(areas: FloorArea[], doors: RoomDoor[]): PlacedDoor[] {
+  const out: PlacedDoor[] = [];
+  doors.forEach((d, i) => {
+    const area = areas.find((a) => a.id === d.areaId);
+    if (!area || d.wall >= area.points.length) return;
+    const p = area.points[d.wall]!;
+    const q = area.points[(d.wall + 1) % area.points.length]!;
+    const len = Math.hypot(q.x - p.x, q.y - p.y);
+    if (len === 0) return;
+    const ux = (q.x - p.x) / len;
+    const uy = (q.y - p.y) / len;
+    const half = d.widthMm / 2;
+    const mid = Math.max(half, Math.min(len - half, d.offsetMm));
+    const j1 = { x: p.x + ux * (mid - half), y: p.y + uy * (mid - half) };
+    const j2 = { x: p.x + ux * (mid + half), y: p.y + uy * (mid + half) };
+    let n = { x: -uy, y: ux };
+    const probe = { x: p.x + ux * mid + n.x * 50, y: p.y + uy * mid + n.y * 50 };
+    if (!pointInPolygon(probe, area.points)) n = { x: uy, y: -ux };
+    const [a, b] = d.hinge === "start" ? [j1, j2] : [j2, j1];
+    out.push({ id: d.id, index: i + 1, kind: d.kind, swing: d.swing, widthMm: d.widthMm, a, b, inward: n });
+  });
+  return out;
+}
+
+/** The floor in front of a door that must stay clear: as deep as the door is wide (at least 90 cm), inside the room. */
+export function doorClearance(d: PlacedDoor): PlanPoint[] {
+  const depth = Math.max(900, d.kind === "double" ? d.widthMm / 2 : d.widthMm);
+  return [d.a, d.b, { x: d.b.x + d.inward.x * depth, y: d.b.y + d.inward.y * depth }, { x: d.a.x + d.inward.x * depth, y: d.a.y + d.inward.y * depth }];
+}
+
+export function pillarFootprint(p: Pillar): Footprint {
+  if (p.shape === "round") return { type: "circle", cx: p.x, cy: p.y, r: p.sizeMm / 2 };
+  const h = p.sizeMm / 2;
+  return { type: "poly", points: [{ x: p.x - h, y: p.y - h }, { x: p.x + h, y: p.y - h }, { x: p.x + h, y: p.y + h }, { x: p.x - h, y: p.y + h }] };
+}
+
+export type FeatureProblem = { kind: "door" | "pillar"; index: number; problem: "offWall" | "tooWide" | "outside" };
+
+/** Doors that no longer sit on a wall (or are wider than it) and pillars outside every outline. */
+export function roomFeatureProblems(areas: FloorArea[], features: RoomFeatures): FeatureProblem[] {
+  const out: FeatureProblem[] = [];
+  features.doors.forEach((d, index) => {
+    const area = areas.find((a) => a.id === d.areaId);
+    if (!area || d.wall >= area.points.length) return out.push({ kind: "door", index, problem: "offWall" });
+    const len = wallLengths(area.points)[d.wall]!;
+    if (d.widthMm > len) out.push({ kind: "door", index, problem: "tooWide" });
+    else if (d.offsetMm < d.widthMm / 2 - 1 || d.offsetMm > len - d.widthMm / 2 + 1) out.push({ kind: "door", index, problem: "offWall" });
+  });
+  features.pillars.forEach((p, index) => {
+    if (!areas.some((a) => pointInPolygon({ x: p.x, y: p.y }, a.points))) out.push({ kind: "pillar", index, problem: "outside" });
+  });
+  return out;
+}
+
+/** Floor of the dance floors in a layout and how many can dance on it; null = no dance floor of known size. */
+export function danceFloorCapacity(model: PlanModel): { areaMm2: number; packed: number; comfortable: number; count: number } | null {
+  const floors = model.items.filter((i) => i.kind === "fixture" && i.fixtureKind === "dance" && itemHasDims(i));
+  if (floors.length === 0) return null;
+  const areaMm2 = floors.reduce((s, f) => s + f.widthMm! * f.lengthMm!, 0);
+  return { areaMm2, packed: Math.floor(areaMm2 / DANCER_AREA_MM2.packed), comfortable: Math.floor(areaMm2 / DANCER_AREA_MM2.comfortable), count: floors.length };
+}
+
+function nearestOnSegment(p: PlanPoint, a: PlanPoint, b: PlanPoint): PlanPoint {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const l2 = dx * dx + dy * dy;
+  const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / l2));
+  return { x: a.x + t * dx, y: a.y + t * dy };
+}
+
+/**
+ * For the measuring tool: the nearest edge point within `tolMm` — a table's top, the edge of
+ * its chairs, a fixture, a wall, a pillar or a door — so a measurement runs edge to edge.
+ */
+export function snapToEdges(model: PlanModel, p: PlanPoint, tolMm: number): { point: PlanPoint; on: "item" | "chairs" | "wall" | "pillar" } | null {
+  let best: { point: PlanPoint; on: "item" | "chairs" | "wall" | "pillar" } | null = null;
+  let bestD = tolMm;
+  const consider = (q: PlanPoint, on: "item" | "chairs" | "wall" | "pillar") => {
+    const d = Math.hypot(q.x - p.x, q.y - p.y);
+    if (d < bestD) {
+      bestD = d;
+      best = { point: { x: Math.round(q.x), y: Math.round(q.y) }, on };
+    }
+  };
+  const outline = (f: Footprint, on: "item" | "chairs" | "pillar") => {
+    if (f.type === "circle") {
+      const d = Math.hypot(p.x - f.cx, p.y - f.cy) || 1;
+      consider({ x: f.cx + ((p.x - f.cx) / d) * f.r, y: f.cy + ((p.y - f.cy) / d) * f.r }, on);
+    } else for (let i = 0; i < f.points.length; i++) consider(nearestOnSegment(p, f.points[i]!, f.points[(i + 1) % f.points.length]!), on);
+  };
+  for (const it of model.items) {
+    const body = itemFootprint(it);
+    if (!body) continue;
+    outline(body, "item");
+    if (it.kind === "table" && (it.seats ?? 0) > 0) outline(itemFootprint(it, CHAIR_ZONE_MM)!, "chairs");
+  }
+  for (const pl of model.pillars ?? []) outline(pillarFootprint(pl), "pillar");
+  for (const a of model.areas) for (let i = 0; i < a.points.length; i++) consider(nearestOnSegment(p, a.points[i]!, a.points[(i + 1) % a.points.length]!), "wall");
+  return best;
 }
 
 export type Bounds = { minX: number; minY: number; maxX: number; maxY: number };
@@ -748,7 +939,11 @@ export type SceneRole =
   | "title-name"
   | "title-meta"
   | "calibration"
-  | "highlight";
+  | "highlight"
+  | "pillar"
+  | "door-gap"
+  | "door"
+  | "door-swing";
 
 export type SceneNode =
   | { t: "line"; role: SceneRole; x1: number; y1: number; x2: number; y2: number }
@@ -874,6 +1069,39 @@ function seatPositions(item: PlanItem): PlanPoint[] {
   return out;
 }
 
+/** A door as drawn on a plan: the gap in the wall, the leaf (or leaves) and the dotted swing. */
+function doorNodes(d: PlacedDoor, X: (mm: number) => number, Y: (mm: number) => number, r2: (n: number) => number): SceneNode[] {
+  const out: SceneNode[] = [{ t: "line", role: "door-gap", x1: r2(X(d.a.x)), y1: r2(Y(d.a.y)), x2: r2(X(d.b.x)), y2: r2(Y(d.b.y)) }];
+  if (d.kind === "opening") return out;
+  const dir = d.swing === "out" ? { x: -d.inward.x, y: -d.inward.y } : d.inward;
+  if (d.swing === "sliding") {
+    const off = 80;
+    out.push({ t: "line", role: "door", x1: r2(X(d.a.x + d.inward.x * off)), y1: r2(Y(d.a.y + d.inward.y * off)), x2: r2(X(d.b.x + d.inward.x * off)), y2: r2(Y(d.b.y + d.inward.y * off)) });
+    return out;
+  }
+  const leaf = (hinge: PlanPoint, free: PlanPoint) => {
+    const w = Math.hypot(free.x - hinge.x, free.y - hinge.y);
+    const open = { x: hinge.x + dir.x * w, y: hinge.y + dir.y * w };
+    out.push({ t: "line", role: "door", x1: r2(X(hinge.x)), y1: r2(Y(hinge.y)), x2: r2(X(open.x)), y2: r2(Y(open.y)) });
+    const a0 = Math.atan2(free.y - hinge.y, free.x - hinge.x);
+    let a1 = Math.atan2(open.y - hinge.y, open.x - hinge.x);
+    while (a1 - a0 > Math.PI) a1 -= 2 * Math.PI;
+    while (a0 - a1 > Math.PI) a1 += 2 * Math.PI;
+    const arc: Array<[number, number]> = [[r2(X(hinge.x)), r2(Y(hinge.y))]];
+    for (let i = 0; i <= 12; i++) {
+      const a = a0 + ((a1 - a0) * i) / 12;
+      arc.push([r2(X(hinge.x + w * Math.cos(a))), r2(Y(hinge.y + w * Math.sin(a)))]);
+    }
+    out.push({ t: "polygon", role: "door-swing", points: arc });
+  };
+  if (d.kind === "double") {
+    const mid = { x: (d.a.x + d.b.x) / 2, y: (d.a.y + d.b.y) / 2 };
+    leaf(d.a, mid);
+    leaf(d.b, mid);
+  } else leaf(d.a, d.b);
+  return out;
+}
+
 function clip(text: string, maxChars: number): string {
   return text.length <= maxChars ? text : `${text.slice(0, Math.max(1, maxChars - 1)).trimEnd()}…`;
 }
@@ -931,6 +1159,13 @@ export function buildPlanScene(model: PlanModel, opts: PlanSceneOptions = {}): P
       under.push({ t: "text", role: "area-label", x: r2(X(minX) + 6), y: r2(Y(minY) + 14), text: clip(a.name.toUpperCase(), 28), anchor: "start" });
     }
   }
+
+  for (const p of model.pillars ?? []) {
+    const f = pillarFootprint(p);
+    if (f.type === "circle") under.push({ t: "circle", role: "pillar", cx: r2(X(f.cx)), cy: r2(Y(f.cy)), r: r2(Math.max(1.5, f.r * scale)) });
+    else under.push({ t: "polygon", role: "pillar", points: pts(f.points) });
+  }
+  for (const d of model.doors ?? []) under.push(...doorNodes(d, X, Y, r2));
 
   const only = opts.onlyItemIds ? new Set(opts.onlyItemIds) : null;
   const items: SceneItem[] = [];
@@ -1069,6 +1304,10 @@ const PRINT_STYLE: Record<SceneRole, string> = {
   "title-meta": `fill="${INK2}" font-size="8.5" font-weight="500" letter-spacing="0.3"`,
   calibration: `stroke="${GILT}" stroke-width="1.5" fill="none"`,
   highlight: `fill="none" stroke="${INK}" stroke-width="2.4"`,
+  pillar: `fill="${INK2}" stroke="${INK}" stroke-width="1"`,
+  "door-gap": `stroke="${PAPER}" stroke-width="4" fill="none"`,
+  door: `stroke="${INK}" stroke-width="1.2" fill="none"`,
+  "door-swing": `fill="none" stroke="${INK2}" stroke-width="0.7" stroke-dasharray="2 2"`,
 };
 
 function esc(s: string): string {

@@ -209,6 +209,10 @@ const PLAN_PAINT: Record<SceneRole, Paint | null> = {
   "title-meta": { fill: INK2, font: "sans", size: 7.6, spacing: 0.2 },
   calibration: { stroke: GILT, sw: 1.5 },
   highlight: { stroke: INK, sw: 2.4 },
+  pillar: { fill: INK2, stroke: INK, sw: 1 },
+  "door-gap": { stroke: "#fffdf8", sw: 4 },
+  door: { stroke: INK, sw: 1.2 },
+  "door-swing": { stroke: INK2, sw: 0.7, dash: [2, 2] },
 };
 
 function paintShape(doc: PDFKit.PDFDocument, p: Paint): void {
