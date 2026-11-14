@@ -1,0 +1,71 @@
+{
+  "room-plan": {
+    "title": "The room plan",
+    "summary": "The space where the occasion takes place, to scale. Seating and the fit checks start from here.",
+    "keywords": "room plan floor plan space dimensions venue drawing scale width length version",
+    "where": "Your occasion → Room plan",
+    "need": "The owner and project managers.",
+    "body": {
+      "h1": "Use the venue's plan",
+      "p1": "If you added the venue from the business directory to your suppliers and it has published approved plans, you see them here.",
+      "ol1": {
+        "a": "Open “Room plan”.",
+        "b": "Under “Use the venue's plan”, press the button with the name of the plan you want.",
+        "c": "The plan enters the occasion at its current version, together with the venue's tables."
+      },
+      "note1": "If the venue changes its plan later, you receive a proposal. Your plan stays at its version until you accept the change. Nothing changes by itself.",
+      "h2": "Or describe the space yourself",
+      "ol2": {
+        "a": "Type the “Name of the space”, for example “Grandparents' courtyard”.",
+        "b": "Fill in “Width (m)” and “Length (m)”. Leave them empty if you do not know them yet.",
+        "c": "Press “Create the space”."
+      },
+      "note2": "Missing dimensions are shown as “unknown” and are not guessed. Without them, the fit check tells you honestly that it does not know whether the tables fit.",
+      "p2": "Under “What we know about the space” you find what the venue has stated. The plan to scale can be printed from “Print and export”."
+    }
+  },
+  "seating": {
+    "title": "Seating at tables",
+    "summary": "You put tables on the plan and guests at tables. You can drag with a finger or use the buttons: both do the same thing.",
+    "keywords": "seating tables seats plan guests not seated fits stages dancing publish your seat",
+    "where": "Your occasion → Seating",
+    "need": "The owner and project managers. You need a room plan first.",
+    "body": {
+      "ol1": {
+        "a": "Open “Seating”. If you have no plan yet, you are sent to “Room plan”.",
+        "b": "Press “Add a table” and choose one of the venue's tables or describe one of your own.",
+        "c": "Move the table by dragging it on the plan or, without dragging, open it and type the position, then press “Move here”.",
+        "d": "Tap a table in the list or on the plan, tick who sits at it and press “Seat at the table”.",
+        "e": "Watch the “Not seated” list until it reaches zero."
+      },
+      "note1": "The fit check says “It fits”, that it does not fit, or “Unknown”. If we do not know the room's dimensions or how many seats a table has, we do not guess.",
+      "h1": "Stages of the meal",
+      "p1": "Under “Stages” you can press “Add the usual stages”. Each stage has its own arrangement and its own check: for example, for dancing you take a few tables out with “Put away in this stage”. The base arrangement stays the same.",
+      "h2": "Show guests their seat",
+      "p2": "Under “What guests see”, press “Show guests their seat”. Each guest sees their table (and seat, if you chose one) on their link. “Hide the seating again” takes it back.",
+      "note2": "Nobody sees other people's names. Until you publish, guests see nothing of the seating.",
+      "p3": "A seating layout proposed by an AI assistant appears first as a preview in “What if?”."
+    }
+  },
+  "stationery": {
+    "title": "Invitations and stationery",
+    "summary": "You choose a design, adjust the wording and see the proof at once. What you see is exactly what gets printed.",
+    "keywords": "invitations stationery design proof pdf print printer version bleed crop marks digital",
+    "where": "Your occasion → Invitations",
+    "need": "The planning team can work on the wording. Only the organisers can mark the proof as checked.",
+    "body": {
+      "ol1": {
+        "a": "Open “Invitations”, choose a design and adjust the wording. The proof changes at once, before you save.",
+        "b": "Press “Save version”. Every save is a new version.",
+        "c": "Press “Download the proof (PDF)” and read it word by word: names, date, time, address.",
+        "d": "If everything is correct, press “I have checked the proof”.",
+        "e": "Press “Download the print PDF” and send the file to the printer. If they ask for it, tick “Add crop marks”."
+      },
+      "note1": "The print PDF can be made only for a version you have read and marked as checked. If you change one word, you save a new version and check it again.",
+      "p1": "The file has the exact format, 3 mm bleed, vector text and embedded fonts. Colours are RGB; the printer converts to CMYK.",
+      "h1": "The digital invitation",
+      "p2": "Under “The digital invitation”, press “Use on the guests' link” so that each household's link carries the same words and the same colours as the printed invitation. “Go back to the standard invitation” undoes it.",
+      "p3": "“Print and export” also has invitations with a QR code, one sheet per household, labels with codes and table cards."
+    }
+  }
+}

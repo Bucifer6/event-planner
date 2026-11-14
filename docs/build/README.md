@@ -1,109 +1,109 @@
-# EventDesk.ro — Build Plan (agent-ready)
+# EventDesk.ro — build documentation (index)
 
-This directory turns `docs/PRD.md` (v4.9) into a build plan that coding agents can execute
-without making assumptions. The PRD's own reviews (sections 14, 18, 19) established that the PRD
-leaves no silent assumptions; this plan preserves that property: every requirement ID from the PRD
-maps to exactly one or more work items here (see `09-traceability.md`), and every work item has
-testable acceptance criteria.
+**What this folder is, in plain English.** These files describe the EventDesk.ro product as it
+is built in this repository: how it is put together, what data it keeps, what has and has not
+been checked, how to deploy and run it, and how each requirement of the product document
+(`../PRD.md`, v4.9) was met. Start with `13-implementation-log.md` for the status and
+`09-traceability.md` for the honest requirement-by-requirement verdict.
 
-Nothing in this plan overrides the PRD. If a conflict is found, the PRD wins and the conflict is
-reported, not resolved silently.
+Nothing here overrides the PRD. If a conflict is found, the PRD wins and the conflict is
+reported, not resolved silently. Known places where the code and the PRD differ are listed at
+the end of `09-traceability.md`.
+
+## How these documents relate to the code
+
+The documents were first written as a **plan**, before any code existed. The product has since
+been built (Releases 0, A, B, P, C, D and E, on 13–14 November 2026), and the documents now
+fall into three groups:
+
+| Group | Files | Status |
+| --- | --- | --- |
+| **The record of scope** | `04`–`08` | The original work-item specifications, kept as written so the scope and acceptance criteria stay on record. They describe intent, not the final shape: where they say *Prisma*, *Playwright*, *k6*, *axe* or *Garden Soirée*, read the note at the top of each file |
+| **As built** | `01`, `02`, `03`, `09`, `10`, `11`, `13`, `14`, `19`, `20` | Rewritten against the code. Statements are verified against source files; anything that has not been verified by running it says so |
+| **How the code is organised** | `15`, `16`, `17`, `18` | The binding conventions, the design language, the UI checklist and the reference of what each package offers |
+
+`12-security-review.md` is owned by the security review and is maintained separately.
+
+Three deviations from the original plan were decided during the build (details at the top of
+`15-conventions.md`): the database layer is **Drizzle ORM** (the plan said Prisma, whose
+engine binaries could not be downloaded in the build environment); the look is **"Maison"**
+instead of the PRD's "Garden Soirée" (owner's decision; the behavioural design gates still
+apply); and translations are **one file per namespace** instead of one file per language.
 
 ## Document map
 
 | File | What it contains | Read it when |
 | --- | --- | --- |
-| `README.md` (this file) | How to use the plan, invariants, agent workflow, definition of done, gates | Always, first |
-| `01-architecture.md` | Stack, repo layout, domains, environments, secrets, CI/CD, deployment pipeline | Before touching code or infra |
-| `02-data-model.md` | Prisma model dictionary per aggregate, key enums, ID conventions | Before any schema change |
-| `03-cross-cutting.md` | Auth/security/privacy/i18n/quality/INF specs that every work item must satisfy | Before implementing any user-facing feature |
-| `04-foundation-release-0.md` | Release 0 (platform foundation) work items R0-01…R0-18 | First sprint; everything depends on these |
-| `05-release-A.md` | Release A work items (plan and invite) | After Release 0 merges |
-| `06-release-B.md` | Release B work items (budget and deliver) | After Release A ships |
-| `07-release-P.md` | Release P work items (business module, directory, console, MCP, dormant monetization) | After A+B; depends only on A and B (PRD section 6) |
-| `08-releases-C-D-E.md` | Release C, D, E work items (each needs its own go-ahead per PRD section 6/9) | Later; not gated by business income |
-| `09-traceability.md` | PRD requirement ID → work item mapping (coverage proof) | When picking up or reviewing a work item |
-| `10-operator-decisions.md` | Decisions only the operator may make; agents must not guess these | When a work item says "operator-configurable" |
-| `11-testing-and-qa.md` | Test layers, per-release automated test plans, bug-check/release-blocker checklist | Before and during every release |
-| `12-security-review.md` | Brief for a cybersecurity agent: scope, checklist mapped to SEC/S/D/MCP/DEP, severity triage, finding template | Before security review and before LAU4 pen test |
+| [`README.md`](README.md) (this file) | Index, the twelve invariants and where each is enforced, release and gate map | First |
+| [`01-architecture.md`](01-architecture.md) | The real architecture: stack and versions, packages, request flow, sign-in model, worker, storage, MCP, console, CI and deployment | Before touching code or infrastructure |
+| [`02-data-model.md`](02-data-model.md) | All 167 tables by domain, the database guards, conventions, retention and deletion as implemented | Before any schema change; when answering "what do we keep?" |
+| [`03-cross-cutting.md`](03-cross-cutting.md) | Sign-in, links, rate limits, uploads, email, dormant payments, AI text, languages, accessibility — as implemented, with what was not built | Before changing any user-facing feature |
+| [`04-foundation-release-0.md`](04-foundation-release-0.md) | Original work items R0-01…R0-18 | To see the intended scope of Release 0 |
+| [`05-release-A.md`](05-release-A.md) | Original work items A-01…A-12 | Scope of Release A (plan and invite) |
+| [`06-release-B.md`](06-release-B.md) | Original work items B-01…B-12 | Scope of Release B (budget and deliver) |
+| [`07-release-P.md`](07-release-P.md) | Original work items P-01…P-15 | Scope of Release P (businesses, directory, console, MCP) |
+| [`08-releases-C-D-E.md`](08-releases-C-D-E.md) | Original work items C-01…C-13, D-01…D-05, E-01…E-04 | Scope of Releases C, D, E |
+| [`09-traceability.md`](09-traceability.md) | Every PRD requirement id: status, where it lives, which test covers it; the gap list | To judge completeness |
+| [`10-operator-decisions.md`](10-operator-decisions.md) | Every decision left to the operator, the setting that carries it, its placeholder and where the code reads it | Before a deployment; when a value needs choosing |
+| [`11-testing-and-qa.md`](11-testing-and-qa.md) | The test layers that exist, the test inventory, what is not covered, a manual checklist per release, the evidence people must gather | Before a release |
+| [`12-security-review.md`](12-security-review.md) | The security review | Before a release and before the penetration test (LAU4) |
+| [`13-implementation-log.md`](13-implementation-log.md) | Status page: what is built, what was verified, what was not | Always, for the current state |
+| [`14-deploy-runbook.md`](14-deploy-runbook.md) | Deploy, rollback, first installation, backups and restore, secrets, launch day | Before and during any deployment |
+| [`15-conventions.md`](15-conventions.md) | Binding code conventions and the deviations from the plan | Before writing code |
+| [`16-design.md`](16-design.md) | The "Maison" design language: rules, tokens, components | Before building a screen |
+| [`17-ui-rules.md`](17-ui-rules.md) | The checklist every screen is built to | Before building or reviewing a screen |
+| [`18-contracts.md`](18-contracts.md) | Reference by area of what each package exports and the registries that connect them | When using or extending a package |
+| [`19-operations.md`](19-operations.md) | Day-to-day guide for the people who run the platform | When operating the live service |
+| [`20-glossary.md`](20-glossary.md) | Product and code terms in plain English with the Romanian on-screen term | Whenever a word is unclear |
 
-## Non-negotiable invariants (enforce in code and tests)
+Repository-level documents: [`../../README.md`](../../README.md) (run it locally),
+[`../../CHANGELOG.md`](../../CHANGELOG.md), [`../../CONTRIBUTING.md`](../../CONTRIBUTING.md),
+[`../../SECURITY.md`](../../SECURITY.md).
 
-These come from PRD section 5 (principles) and the security review. Every PR that touches the
-relevant area must include a test that would fail if the invariant were broken.
+## The twelve invariants, and where each is enforced
 
-1. **Free and frictionless for planners** — no payment, trial, card, or mandatory two-step anywhere
-   in planner flows (principle 1, MON1).
-2. **One record, many views** — a task, seat or payment exists once; all views read the same row
-   (principle 2).
-3. **Preview before applying** — changes to dates, guests, suppliers, payments and external-AI
-   proposals are shown as a "What if?" delta and applied only on explicit confirmation
-   (principle 3, R0-16, MCP3).
-4. **Facts stay facts** — arrivals, payments and received stock change only via an audited
-   correction record, never an overwrite (principle 4; see `03-cross-cutting.md`).
-5. **Unknown stays visible** — missing price/dimension/confirmation renders as *unknown* (italic
-   grey, never zero, never an estimate) and is excluded from fit checks (principle 5, V6).
-6. **Private by default** — guests, budgets, private requests visible only via the specific grant
-   (principle 6, D2).
-7. **Paid means position, never preference** — payment never changes organic directory order and
-   never leaks into plans, guest pages, emails or exports; Featured cards are honestly labelled
-   (principle 7, P13–P16). While monetization is OFF, Featured does not exist at all (MON5).
-8. **A lapse never blocks an event** — when a business plan lapses, its clients' occasions and
-   already-used drawings/catalogues stay fully readable (principle 8, P23).
-9. **Children are never persons** — only an attending count per household, no child data anywhere,
-   free-text warning included (A6).
-10. **External AI proposes, never applies** — MCP write tools create proposals that enter the
-    What if? flow; nothing is applied silently (MCP3, SEC15).
-11. **No third-party scripts on the public site; no visitor identifiers anywhere** (D1, D4, INF11).
-12. **Append-only audit log** — no role, including PlatformAdmin, can edit or delete audit entries
-    (SEC10).
+These come from PRD section 5 (principles) and the security requirements. Each row names the
+code that enforces the rule and the automated check that would fail if it were broken. Every
+file named here exists in the repository; none of these checks has been run in CI on GitHub
+(see `13-implementation-log.md`).
 
-## Agent workflow
+| # | Invariant | Enforced by | Check |
+| --- | --- | --- | --- |
+| 1 | **Free and frictionless for planners** — no payment, trial or card anywhere in planner flows; two-step sign-in never required of planners (principle 1, MON1) | No pricing or checkout route exists outside the dormant business plan screen; `isMonetizationOn` in `packages/core/src/monetization.ts` gates everything paid | `apps/web/test/monetization-off.test.ts` (scans routes and sources); `packages/core/test/billing.test.ts` |
+| 2 | **One record, many views** — a task, seat or payment exists once | `queryTasks` is the single source for list, board, calendar and the event-day view (`packages/core/src/tasks.ts`, `eventday.ts`); a packing list is a task (`packing.ts`) | `packages/core/test/planning.test.ts` ("one record, three views"); `eventday.test.ts`; `travel.test.ts` |
+| 3 | **Preview before applying** — date, guest, supplier, payment and assistant-proposed changes are shown as a "What if?" preview and applied only on confirmation | `packages/core/src/whatif.ts` (20 registered kinds); only account or staff actors can confirm | `packages/core/test/whatif.test.ts`; `planning.test.ts` (date move); `lifecycle.test.ts`; `packages/mcp/test/tools.test.ts` |
+| 4 | **Facts stay facts** — arrivals, payments and received quantities change only through a recorded correction | Database triggers in `packages/db/src/sql/` (`010`, `020_finance_fact_guards`, `020_suppliers_guards`, `021`, `040_operate_guards`) plus `packages/core/src/corrections.ts` | `packages/core/test/money.test.ts`, `deliveries.test.ts`, `suppliers.test.ts`, `operate.test.ts` |
+| 5 | **Unknown stays visible** — a missing price, dimension or confirmation is shown as unknown, never zero, and is left out of fit checks | `NULL` in the database; `Unknown`/`ValueOrUnknown` in `@ed/ui`; `formatUnknown` in `@ed/i18n/format`; `packages/core/src/fitcheck.ts` | `packages/core/test/spacemodel.test.ts`, `drawings-seating.test.ts` (V6, V11); `packages/i18n/test/format.test.ts` |
+| 6 | **Private by default** — guests, budgets and private requests only through the specific grant | `requireMember` in `packages/core/src/access.ts`, `requireFinance` in `budget.ts`; every read in core checks it | `packages/core/test/planning.test.ts` (A5, D2), `money.test.ts`, `requests.test.ts`, `guests-rsvp.test.ts` |
+| 7 | **Paid means position, never preference** — payment never changes organic order and never leaks into plans, guest pages, emails or exports; while monetisation is OFF Featured does not exist | `organicOrder` in `packages/core/src/directory.ts`; `packages/core/src/featured.ts` returns nothing while OFF | `packages/core/test/directory.test.ts` (rotation; source scan for ratings), `featured.test.ts`, `planning.test.ts` (exports, P16), `printpack.test.ts` |
+| 8 | **A lapse never blocks an event** — when a business plan lapses its clients' occasions and already-used drawings and catalogues stay readable | `isBusinessLapsed` / `assertBusinessCanCreate` in `packages/core/src/business.ts`; library links in `bizoccasions.ts` | `packages/core/test/business-listings.test.ts` ("lapse groundwork"), `bizoccasions.test.ts`, `billing.test.ts`, `catalogues.test.ts` |
+| 9 | **Children are never persons** — only a count per household | No child columns exist in `packages/db/src/schema/guests.ts`; `detectChildDetails` in `packages/core/src/guests.ts` warns on free text | `packages/core/test/guests-rsvp.test.ts` ("schema — children are never persons") |
+| 10 | **External AI proposes, never applies** | Read tools run in a read-only database transaction; propose tools only create previews (`packages/mcp/src/server.ts`, `registry.ts`) | `packages/mcp/test/mcp.test.ts`, `tools.test.ts` |
+| 11 | **No third-party scripts on the public site; no visitor identifiers anywhere** | `apps/public` is a static export; `stats_daily` has no column that could hold a visitor; `recordEvent` rejects identifier-like dimensions (`packages/core/src/stats.ts`) | `scripts/check-public-d1.mjs` (run by `pnpm build`); `packages/core/test/stats.test.ts` |
+| 12 | **Append-only audit log** — no role can edit or delete entries | Trigger `packages/db/src/sql/001_audit_append_only.sql`; `packages/core/src/auditview.ts` exports no write path | `packages/db/test/audit-append-only.test.ts`; `packages/core/test/staff.test.ts` |
 
-1. Pick the next unblocked work item from the current release file (dependencies listed per item
-   must already be merged on `main`).
-2. Create a branch `feat/<work-item-id>-<short-slug>` from `main`.
-3. Implement with tests. Update `09-traceability.md` if you split or add work items.
-4. Open a PR to `main` using this checklist (put it in the PR body):
-   - [ ] All acceptance criteria of the work item pass (tests linked)
-   - [ ] CI green: lint, typecheck, unit + integration tests, build of all apps, dependency audit, e2e smoke, a11y (axe) on touched flows
-   - [ ] Every user-facing string externalized in **both** `ro.json` and `en.json`; default locale `ro-RO` (L1, L2)
-   - [ ] Works at 320px width, all touch targets ≥44px, WCAG 2.2 AA contrast (A12, Q2); every drag action has an equal tap path (Q8, Q10)
-   - [ ] Security checklist applies (see `03-cross-cutting.md` §Security review): CSRF, headers, token hashing, rate limits, upload handling as relevant
-   - [ ] No secrets in repo, logs or build output (SEC13); no third-party script added to the public site (D1)
-   - [ ] Mutating endpoints idempotent / double-submit safe (Q4)
-   - [ ] PRD requirement IDs listed in the PR description; traceability updated
-5. Merge only after review (another agent or the operator) and green CI. Releases are cut as
-   annotated tags `vX.Y.Z` from protected `main`; a tag is deployable only when CI passed on that
-   exact commit (DEP7). Never force-push `main` or a release tag.
-6. Console-driven deploys follow `01-architecture.md` §Deployment (W10, DEP1–DEP7).
+## Working on the code
 
-## Definition of done per release
-
-A release is done when: every work item of the release is merged with its acceptance tests green;
-the release-level quality gates pass (Q1–Q6: 320px/AA, guest page <2.5s content and <200ms
-interaction, idempotency, 1,000-attendee / 50-operator / 10,000-task qualification via load test,
-fair-use limits enforced); the security review items listed in the release file are implemented and
-tested; the launch obligations (LAU1–LAU9) that gate this release have a named owner and are
-done or scheduled; pilot measures (PRD section 12) are recorded; and the PRD traceability shows
-no unmapped Must requirement for the release.
-
-A release is **blocked** by any unresolved unauthorised access, duplicate money posting, unexplained
-overbooking, lost approved records, or wrongly reversed facts (PRD section 12).
+The workflow, the pull-request checklist and the definition of done are in
+[`../../CONTRIBUTING.md`](../../CONTRIBUTING.md). The rules for how code is written are in
+`15-conventions.md`; what already exists to build on is in `18-contracts.md`.
 
 ## Release and gate map (PRD sections 6 and 12)
 
-| Stage | Contents | Gate exit |
-| --- | --- | --- |
-| Release 0 (foundation) | `04-foundation-release-0.md` | M0: free activation works; separate public/app sites; no third-party script on either (D1) |
-| Release A | `05-release-A.md` | Usable private/shared occasion on a phone (A1–A13) |
-| Release B | `06-release-B.md` | Budgeted, delivered occasion incl. event-day view and installable app (B1–B12) |
-| Release P | `07-release-P.md` | M2: business module live, billing in test mode, monetization switch OFF (MON1–MON5) |
-| Free phase live | Launch areas (Bucharest/Ilfov, Cluj proposed) | M3: 20 approved listings per promoted pair; enquiries measured |
-| Monetization ON | Console switch, 60-day notice | M4: M2/M3 plus terms, tax setup, keys approved; 30 days no grant errors |
-| Releases C, D, E | `08-releases-C-D-E.md`, each with its own go-ahead | M5: three consecutive months income ≥ 1.2× costs |
+The software for every release exists. The **gates** are about people and evidence, and none
+of them is met by code alone.
 
-Pilot note (PRD section 12, M1): before building P, run A+B with pilot planners — 5 users per
-journey, 4 of 5 completing unaided; 20 public guides; 10 business interviews, of which 5 must agree
-to list in a completely free product and 3 must state in writing they would pay once monetization is
-enabled. Otherwise revise the offer before P.
+| Stage | Software | Gate (PRD §12) — still to be met by people |
+| --- | --- | --- |
+| Release 0 (foundation) | Built | **M0**: free activation works; separate public and app sites; no third-party script on either. The automated side exists (`check-public-d1.mjs`, `monetization-off.test.ts`); confirm it on the deployed sites |
+| Releases A and B | Built | **M1**: pilot with planners — five users per journey, four of five completing unaided; 20 public guides; 10 business interviews, of which 5 agree to list in a free product and 3 state in writing they would pay later |
+| Release P | Built; monetisation OFF | **M2**: acceptance tests pass; business terms published; fiscal invoicing tested end to end in a sandbox — the invoicing and payment adapters here are seams, so this needs a real sandbox account |
+| Free phase live | — | **M3**: 20 approved listings per promoted category and county; enquiries measured monthly; a recorded decision on when to enable monetisation |
+| Monetisation ON | Switch built, dormant | **M4**: terms, tax set-up and keys approved; 30 days with no duplicate or missing feature grants; 60-day notice given |
+| Releases C, D, E | Built | Each needs its own go-ahead under the PRD; **M5**: three consecutive months with income after fees at 1.2× costs or more |
+
+The PRD defines gates M0 to M5. (Earlier notes in this folder mentioned "M1–M7"; there is no
+M6 or M7 in PRD v4.9.)
+
+A release is **blocked** by any unresolved unauthorised access, duplicate money posting,
+unexplained overbooking, lost approved records or wrongly reversed facts (PRD section 12).

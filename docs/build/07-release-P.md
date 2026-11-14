@@ -1,5 +1,14 @@
 # 07 — Release P: serve businesses (work items)
 
+> **How to read this file (added after the build).** This is the original work-item
+> specification, written as a plan before any code existed and kept as the record of scope.
+> The work described here has since been built; it is not a description of the final code.
+> Where it names a tool that was not used in the end, read it like this: *Prisma* → Drizzle ORM
+> (`15-conventions.md`); *Playwright*, *axe* and *k6* → not set up, see what is and is not
+> tested in `11-testing-and-qa.md`; *Garden Soirée* → the "Maison" design language
+> (`16-design.md`). What was actually built and verified: `13-implementation-log.md`;
+> requirement by requirement: `09-traceability.md`.
+
 Outcome (PRD section 6): business accounts, directory and listings, discovery and admin console,
 venue drawings and flower catalogues, enquiries, dormant monetization switch. P depends only on
 A and B. Gate M2: acceptance tests pass, billing in test mode, monetization switch OFF, business

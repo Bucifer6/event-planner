@@ -187,13 +187,25 @@ const g = globalThis as unknown as { __edPdfRasteriser?: PdfRasteriser; __edDraw
  * is not installed the PDF is still stored — the business is told to upload a picture to
  * calibrate (operator note: install poppler-utils on web hosts to enable PDF drawings).
  */
+/** Long side of the picture made from a PDF drawing, in pixels. */
+export const PDF_RASTER_LONG_SIDE_PX = 3000;
+
+/**
+ * Arguments for pdftoppm: first page only, as PNG, with its long side FIXED in pixels. The
+ * size must not follow the page's own dimensions: a PDF of a few hundred bytes can declare a
+ * page 200 inches wide, and rendering that at a fixed resolution takes gigabytes of memory.
+ */
+export function pdfRasteriserArgs(input: string, outputBase: string): string[] {
+  return ["-png", "-scale-to", String(PDF_RASTER_LONG_SIDE_PX), "-f", "1", "-l", "1", "-singlefile", input, outputBase];
+}
+
 async function pdftoppmRasteriser(pdf: Buffer): Promise<Buffer | null> {
   const bin = process.env.PDF_RASTERISER_BIN || "pdftoppm";
   const dir = await mkdtemp(join(tmpdir(), "ed-drawing-"));
   try {
     await writeFile(join(dir, "in.pdf"), pdf);
     await new Promise<void>((resolve, reject) => {
-      execFile(bin, ["-png", "-r", "110", "-f", "1", "-l", "1", "-singlefile", join(dir, "in.pdf"), join(dir, "page")], { timeout: 30_000 }, (err) => (err ? reject(err) : resolve()));
+      execFile(bin, pdfRasteriserArgs(join(dir, "in.pdf"), join(dir, "page")), { timeout: 30_000 }, (err) => (err ? reject(err) : resolve()));
     });
     return await readFile(join(dir, "page.png"));
   } catch {

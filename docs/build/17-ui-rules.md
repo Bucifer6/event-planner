@@ -1,5 +1,12 @@
 # 17 — UI rules (checklist for every screen)
 
+**What this is, in plain English.** Eleven short rules that every screen is built to, so the
+app is easy to read and to use with one hand on a phone. They are a checklist for the people
+building the screens. They are built into the shared components in `packages/ui`
+(`16-design.md`), which is how most screens follow them without extra work. Following them
+has not been confirmed by an accessibility audit or by testing on real phones — see
+`11-testing-and-qa.md`.
+
 Defaults for how we build the apps. They govern our build, not what users do in the app: never add
 warnings or nudges that push users (e.g. a business picking a brand colour) to follow them.
 Many users are on a phone with one hand — the mobile rules are essential.

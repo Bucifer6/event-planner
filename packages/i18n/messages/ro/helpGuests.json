@@ -1,0 +1,133 @@
+{
+  "add-guests": {
+    "title": "Adaugă invitații, pe familii",
+    "summary": "O familie primește un singur link și răspunde o singură dată pentru toți ai ei. Poți adăuga pe rând sau importa o listă.",
+    "keywords": "invitați familie adaugă importă excel csv xlsx listă adulți copii export contact",
+    "where": "Ocazia ta → Invitați și răspunsuri",
+    "need": "Organizatorul și managerii de proiect. Datele de contact ale invitaților le văd doar ei.",
+    "body": {
+      "h1": "Adaugă o familie",
+      "ol1": {
+        "a": "Apasă „Adaugă o familie”.",
+        "b": "Scrie „Numele de pe invitație” (de exemplu „Familia Popescu”) și, dacă vrei, „Persoana de contact”.",
+        "c": "Trece la „Adulții invitați” numele adulților și la „Câte persoane aștepți” numărul total.",
+        "d": "Opțional: „E-mail”, „Limba invitației” și „Note pentru tine”.",
+        "e": "Apasă „Adaugă familia”."
+      },
+      "note1": "Aici trecem doar adulții. Copiii apar numai ca număr, în răspunsul familiei.",
+      "h2": "Importă o listă",
+      "ol2": {
+        "a": "Apasă „Importă” și alege un fișier Excel (.xlsx) sau CSV de cel mult 2 MB: un rând pentru fiecare adult, cu o coloană pentru familie. Prima linie conține numele coloanelor.",
+        "b": "Apasă „Încarcă și vezi schimbările”.",
+        "c": "La „Potrivirea coloanelor” verifică dacă am ghicit bine; dacă schimbi ceva, apasă „Actualizează previzualizarea”.",
+        "d": "Citește „Ce se va schimba”: ce se adaugă, ce se completează și ce se sare. Apoi confirmă cu „Aplică schimbările”."
+      },
+      "note2": "Nu importăm date despre copii. Coloanele cu vârste sau date de naștere sunt lăsate deoparte, iar rândurile care par să descrie un copil sunt sărite.",
+      "p1": "Lista o poți descărca oricând cu „Exportă CSV”. Ca să scoți o familie, deschide-o și apasă „Vezi ce se schimbă dacă o scot”: vezi întâi ce se întâmplă cu linkul, cu locurile ocupate și cu ce a promis să aducă."
+    }
+  },
+  "guest-links": {
+    "title": "Linkurile de invitație: generează, trimite, revocă",
+    "summary": "Fiecare familie are propriul link. Îl copiezi o singură dată sau îl trimiți pe e-mail direct din aplicație.",
+    "keywords": "link invitație generează copiază trimite email revocă valabilitate expiră pierdut regenerare qr",
+    "where": "Ocazia ta → Invitați și răspunsuri → o familie → Linkul de invitație",
+    "need": "Organizatorul și managerii de proiect.",
+    "body": {
+      "h1": "Copiază linkul și trimite-l tu",
+      "ol1": {
+        "a": "Deschide familia din listă.",
+        "b": "La „Linkul de invitație”, apasă „Generează un link nou”.",
+        "c": "Când apare „Linkul este gata”, apasă „Copiază linkul” și trimite-l familiei pe ce cale vrei."
+      },
+      "note1": "Linkul se vede o singură dată. Nu îl păstrăm în clar, așa că nu îl putem afișa din nou. Dacă s-a pierdut, generează unul nou — cel vechi nu va mai funcționa.",
+      "h2": "Trimite pe e-mail din aplicație",
+      "p1": "Pentru o singură familie, apasă „Trimite pe e-mail” pe pagina ei. Pentru toate familiile care au e-mail și nu au primit încă invitația, apasă „Trimite invitațiile pe e-mail” în pagina de invitați și confirmă.",
+      "note2": "Fiecare familie primește pe e-mail un link nou. Dacă i-ai dat deja linkul pe altă cale, acela nu va mai funcționa. Poți trimite cel mult 500 de e-mailuri pe zi pentru o ocazie.",
+      "h3": "Valabilitate și revocare",
+      "p2": "Cu „Schimbă valabilitatea” alegi: „Nu expiră”, „Până la termenul de răspuns” sau „Până la încheierea ocaziei”. Cu „Revocă linkul” îl oprești pe loc; răspunsul deja primit rămâne.",
+      "p3": "Pe pagina familiei vezi starea linkului („Activ”, „Revocat”, „Expirat”) și când a fost deschis ultima dată.",
+      "p4": "Pentru invitații tipărite, în „Tipărire și export” găsești etichete și invitații cu un cod QR care deschide doar invitația familiei respective."
+    }
+  },
+  "rsvp-settings": {
+    "title": "Răspunsuri: termen, locuri și întrebări",
+    "summary": "Stabilește până când se răspunde, câte locuri ai și ce mai vrei să afli de la invitați.",
+    "keywords": "rsvp răspuns termen locuri capacitate întrebări meniu alergii cazare transport confirmări notează telefon",
+    "where": "Ocazia ta → Invitați și răspunsuri → Setări RSVP",
+    "need": "Organizatorul și managerii de proiect.",
+    "body": {
+      "ol1": {
+        "a": "Din pagina de invitați, apasă „Setări RSVP”.",
+        "b": "La „Termen de răspuns”, alege „Ultima zi pentru răspuns” și apasă „Salvează termenul”.",
+        "c": "La „Locuri”, scrie „Număr total de locuri” și apasă „Salvează locurile”. Lasă gol pentru locuri nelimitate.",
+        "d": "La „Întrebări pentru invitați”, apasă „Adaugă o întrebare”, alege tipul — „Alegerea meniului”, „Alergii și restricții”, „Cazare”, „Transport” sau „Răspuns liber” — și scrie întrebarea în română și, dacă vrei, în engleză.",
+        "e": "Bifează „Răspunsul este obligatoriu” dacă nu se poate trece mai departe fără el. Ordinea o schimbi cu „Mută mai sus” și „Mută mai jos”."
+      },
+      "note1": "Locurile sunt aceleași pentru invitații cu link și pentru cei care se înscriu pe pagina publică. Numărul total nu poate fi mai mic decât locurile deja ocupate.",
+      "note2": "Nu cere detalii despre copii (nume, vârstă). Păstrăm doar câți copii vin.",
+      "h1": "Urmărește răspunsurile",
+      "p1": "Pagina de invitați arată sus „Persoane confirmate până acum”, cu adulți și copii, și numărul de familii pe fiecare răspuns: „Da”, „Poate”, „Nu”. Poți filtra lista după răspuns sau căuta după nume.",
+      "p2": "Ai primit un răspuns la telefon sau față în față? Deschide familia, apasă „Notează un răspuns” și apoi „Salvează răspunsul”.",
+      "p3": "După termen, invitații nu mai pot răspunde pe link și sunt îndrumați să îți scrie direct."
+    }
+  },
+  "contributions": {
+    "title": "Cine ce aduce",
+    "summary": "Spui de ce este nevoie, iar invitații și echipa își aleg ce aduc. Nimic nu se promite de două ori.",
+    "keywords": "cine ce aduce nevoi contribuții listă bucăți picnic promis acoperit",
+    "where": "Ocazia ta → Cine ce aduce",
+    "need": "Organizatorul și managerii de proiect adaugă nevoile. Oricine din echipă și orice invitat cu link își poate alege o parte.",
+    "body": {
+      "ol1": {
+        "a": "Apasă „Adaugă o nevoie”.",
+        "b": "Scrie „Ce este de adus” (de exemplu „Sticle de vin”), „Câte bucăți” și, dacă vrei, „Detalii”.",
+        "c": "Apasă „Adaugă nevoia”.",
+        "d": "Trimite invitaților linkurile lor. Fiecare vede lista și alege „Câte aduci”, apoi „Salvează”.",
+        "e": "Dacă aduci și tu ceva, apasă „Aduc eu” lângă nevoie și apoi „Salvează ce aduc”."
+      },
+      "p1": "Sus vezi „Acoperit până acum” și cât mai lipsește. La fiecare nevoie scrie cine aduce și câte bucăți; când nu mai lipsește nimic apare „Acoperit complet”.",
+      "note1": "Nu se poate promite mai mult decât este nevoie. Dacă doi oameni aleg ultimele bucăți în același timp, le primește primul, iar celălalt vede cât a rămas.",
+      "note2": "Dacă ștergi o nevoie, se șterge împreună cu tot ce au promis invitații pentru ea. Dacă scoți o familie din listă, ce promisese ea rămâne din nou de adus."
+    }
+  },
+  "private-requests": {
+    "title": "Cereri private ale invitaților",
+    "summary": "Nevoi alimentare și de acces spuse în încredere. Le văd doar cei cărora li s-a dat anume acest acces.",
+    "keywords": "cereri private alergii fără gluten acces dizabilitate dietă confidențial furnizor numere briefing",
+    "where": "Ocazia ta → Cereri private",
+    "need": "Organizatorul și persoanele care au primit accesul „Cereri private” din „Echipă și roluri”.",
+    "body": {
+      "p1": "Un invitat poate trimite o cerere de pe linkul lui, din secțiunea „Cerere privată” — de exemplu o alergie sau nevoia unei rampe. Cererea ajunge numai aici.",
+      "ol1": {
+        "a": "Deschide „Cereri private”. Sus vezi câte sunt „De rezolvat”.",
+        "b": "Citește fiecare cerere și, dacă te ajută, scrie o „Notă pentru tine și ceilalți cu acest acces” — de exemplu „am vorbit cu bucătarul”.",
+        "c": "Când ai aranjat ce trebuia, apasă „Marchează rezolvată” și apoi „Salvează ca rezolvată”. O poți redeschide oricând cu „Redeschide”."
+      },
+      "h1": "Spune-i furnizorului doar cât trebuie",
+      "p2": "La „Trimite doar numere unui furnizor”, alege furnizorul și apasă „Trimite numerele în briefing”. Furnizorul primește rânduri ca „3 × fără gluten”. Niciun nume, nicio familie, niciun text scris de invitat.",
+      "note1": "Niciun rol nu vede cererile private în mod automat, în afară de organizator. Nici managerul de proiect nu le vede fără accesul dat anume.",
+      "note2": "După ce închizi ocazia, cererile private se șterg singure după un număr de zile afișat pe pagina de încheiere."
+    }
+  },
+  "public-event-page": {
+    "title": "Pagina publică și înscrierea",
+    "summary": "O pagină simplă pentru cei care nu au o invitație personală: detalii, program, meniu și înregistrare.",
+    "keywords": "pagină publică eveniment înregistrare înscriere listă de așteptare locuri public link deschis",
+    "where": "Ocazia ta → Pagina publică",
+    "need": "Organizatorul și managerii de proiect.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Pagina publică”.",
+        "b": "La „Ce arată pagina”, scrie titlul și câteva cuvinte, în română și, dacă vrei, în engleză. Dacă lași engleza goală, se folosește textul în română.",
+        "c": "Dacă vrei ca înscrierile să pornească mai târziu, completează „Se deschide pe”.",
+        "d": "La „Întrebări la înregistrare”, apasă „Adaugă o întrebare”. Păstrează-le puține și clare.",
+        "e": "Bifează „Pagina este publică” și apasă „Salvează pagina”. Cu „Deschide pagina” o vezi exact cum o văd ceilalți."
+      },
+      "note1": "Cât timp nu este publicată, adresa răspunde „pagina nu există”.",
+      "h1": "Locuri și lista de așteptare",
+      "p1": "Înscrierile publice împart aceleași locuri cu invitații cu link. Capacitatea o stabilești în „Setări RSVP”; fără ea, locurile sunt nelimitate.",
+      "p2": "Când locurile s-au ocupat, vizitatorii se pot înscrie pe „Lista de așteptare”. Când se eliberează locuri, primul grup care încape intră automat și primește un singur email.",
+      "note2": "Pagina publică nu arată lista invitaților, răspunsurile lor sau așezarea la mese."
+    }
+  }
+}

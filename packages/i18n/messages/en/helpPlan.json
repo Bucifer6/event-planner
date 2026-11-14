@@ -1,0 +1,132 @@
+{
+  "occasion-overview": {
+    "title": "The overview and the sections of an occasion",
+    "summary": "The first page of every occasion: how many days are left, what comes next and what is holding you up.",
+    "keywords": "overview dashboard days until the event overdue blockers brief sections navigation menu",
+    "where": "Your occasion → Overview",
+    "body": {
+      "p1": "At the top you see the number of days “Until the event” and how many tasks are done. The “Open the tasks” button takes you straight to the list.",
+      "h1": "What else is on the page",
+      "ul1": {
+        "a": "“Next milestone” — the nearest task with a date.",
+        "b": "“Overdue” — tasks whose due date has passed.",
+        "c": "“Unaccepted delegations” — tasks offered to someone who has not answered yet. If the offer is for you, you can accept or decline it right here.",
+        "d": "“Blockers” — tasks that are waiting, tasks that depend on unfinished ones, or tasks marked done out of order.",
+        "e": "“In brief” — the purpose and priorities of the occasion. If they are missing, press “Write the brief”."
+      },
+      "p2": "When an important change is waiting for a decision, a notice appears with the “See the proposals” button.",
+      "h2": "The sections of an occasion",
+      "p3": "The occasion menu is split into groups: Plan, Guests, Money, Suppliers and venue, Travel and More. On a phone the sections appear as scrolling tabs under the occasion title.",
+      "note1": "You only see the sections you have access to. “Budget” and “Shared costs” need finance access, and “Private requests” needs the access of the same name."
+    }
+  },
+  "tasks": {
+    "title": "Tasks: add, follow and hand on",
+    "summary": "The list of things to do, with due dates, owners, checklists and delegation.",
+    "keywords": "tasks todo due date owner list board calendar child tasks subtasks dependencies delegation offer accept decline template",
+    "where": "Your occasion → Tasks",
+    "need": "The owner, project managers, workstream leads and contributors can add tasks. Suppliers and guests on the team see and update the tasks given to them.",
+    "body": {
+      "ol1": {
+        "a": "Type the task in the “New task” field and press “Add the task”. The title is enough.",
+        "b": "For more detail, press “Add a task with an owner, a priority and notes”.",
+        "c": "Change the status straight from the list: “To do”, “In progress”, “Waiting” or “Done”.",
+        "d": "Choose how you see the tasks: “List”, “Board” or “Calendar”. With “Mine” you see only your own."
+      },
+      "h1": "On a task's page",
+      "ul1": {
+        "a": "“Checklist” — small items to tick off; add one with “Add the item”.",
+        "b": "“Child tasks” — smaller tasks that are part of it.",
+        "c": "“Depends on” — choose the task it waits for and press “Add the link”."
+      },
+      "h2": "Give a task to someone else",
+      "p1": "Under “Delegation”, choose a person on the team and press “Offer the task”. They see the offer and press “Accept the task” or “Decline”. Until they answer, the owner stays the same. If they decline, the task comes back to you; an unanswered offer can be taken back with “Withdraw the offer”.",
+      "note1": "A task marked “Done” before the one it depends on, or with open child tasks, gets a warning tag. We do not block you — we only show that the plan does not match reality.",
+      "p2": "The owner and project managers can press “Apply a template” to bring in a template's tasks. You see the differences first; existing tasks are not duplicated."
+    }
+  },
+  "team-and-roles": {
+    "title": "Team and roles: invite people and choose what they see",
+    "summary": "Ask someone to help, give them a role and decide separately whether they see the money or the private requests.",
+    "keywords": "team roles invite owner project manager workstream lead contributor supplier guest access finance private requests hand over remove godparent",
+    "where": "Your occasion → Team and roles",
+    "need": "The owner and project managers. Changing roles and access asks you to confirm again that it is you.",
+    "body": {
+      "ol1": {
+        "a": "Press “Invite someone”.",
+        "b": "Type the “Email address” and choose the “Role”: Project manager, Workstream lead, Contributor, Supplier or Guest.",
+        "c": "If you like, fill in “What you call them” — for example “godmother” or “groomsman”.",
+        "d": "Under “Separate access” tick “Finance” and/or “Private requests” only if the person really needs them.",
+        "e": "Press “Send the invitation”. The person appears under “Invitations sent” until they press “Accept the invitation” from the email."
+      },
+      "note1": "The link in the invitation is valid for 14 days and can be used once. Nothing happens until the person accepts it.",
+      "h1": "Change or withdraw access",
+      "p1": "Press “Edit” next to a person on the team. From there you change the role and access (“Save access”), remove them (“Remove from the team”) or hand the occasion over to them (“Hand over the occasion”). Someone who is removed loses access at once; their tasks stay in the plan, without an owner.",
+      "note2": "For these actions you see “First confirm it is you”. You confirm from the account page, with a fresh code by email, and the confirmation lasts 10 minutes.",
+      "p2": "If you hand the occasion over, the new owner gets every right, including deletion. You stay on as project manager, without automatic access to finance or to private requests."
+    }
+  },
+  "preview-changes": {
+    "title": "“What if?”: see changes before you apply them",
+    "summary": "Moving the date and other big changes appear first as a preview. Nothing is applied until you confirm.",
+    "keywords": "what if preview proposal move the date apply discard changes what-if expires assistant",
+    "where": "Your occasion → What if? · Your occasion → Settings",
+    "need": "The owner and project managers can move the date and decide proposals.",
+    "body": {
+      "p1": "Some changes touch many things at once. That is why EventDesk first shows you everything that would change, and only then lets you decide.",
+      "h1": "Example: you move the date of the occasion",
+      "ol1": {
+        "a": "Open “Settings” and go to “Occasion date”.",
+        "b": "Choose the new date and press “See what changes”.",
+        "c": "Read the preview: every task whose due date moves is shown with its value before and after.",
+        "d": "Press “Apply the changes” to confirm, or “Discard” to leave everything as it was."
+      },
+      "h2": "What else goes through a preview",
+      "p2": "Choosing the day from a poll, applying a task template, importing guests, removing a household, moving a payment to a supplier, a proposed seating layout, postponing, cancelling and closing the occasion — and anything proposed by an AI assistant you connected.",
+      "p3": "Undecided proposals wait in “What if?”, under “Waiting for a decision”. Decided ones appear under “Decided recently”, as “Applied” or “Discarded”.",
+      "note1": "A proposal has an expiry date. If something in the plan changed in the meantime, the preview is no longer current and we ask you to make the change again. Nothing is ever applied twice.",
+      "note2": "Proposals that come from an assistant carry the label “created with an external assistant”."
+    }
+  },
+  "date-poll": {
+    "title": "Choose the date together with your guests",
+    "summary": "You propose a few days, households vote on their link, and you choose at the end.",
+    "keywords": "date poll vote proposed day choose the day date not set",
+    "where": "Your occasion → Date poll",
+    "need": "The owner and project managers.",
+    "body": {
+      "ol1": {
+        "a": "Open “Date poll”.",
+        "b": "Under “Add a day”, pick the “Proposed day” and press “Add day”. You add one day at a time, at most 12.",
+        "c": "Send your guests their links. Each household votes “Yes”, “Maybe” or “No” for each day.",
+        "d": "Watch the “Favourite day so far” and how many households have voted.",
+        "e": "When you have decided, press “Choose this day” next to the day you want."
+      },
+      "note1": "When you choose a day we first show you what moves with the date — for example task due dates. Nothing changes until you confirm the preview.",
+      "note2": "Votes are only opinions: they do not hold a place and they are not a reply to the invitation.",
+      "p1": "Once the date is set, guests see it on their link. If you do not want to choose any day, press “Close the poll without choosing”. If the date has to be decided again, you can start a new poll with other days."
+    }
+  },
+  "close-cancel-delete": {
+    "title": "Postpone, cancel, close or delete an occasion",
+    "summary": "Four different things, each with a preview or with days in which you can change your mind.",
+    "keywords": "postpone cancel close delete occasion closeout lessons 7 days undo deletion",
+    "where": "Your occasion → Settings",
+    "need": "The owner and project managers for postponing, cancelling and closing. These actions ask you to confirm again that it is you.",
+    "body": {
+      "h1": "Postpone or cancel",
+      "ol1": {
+        "a": "Open “Settings”.",
+        "b": "Under “Postpone the occasion”, pick the “New date” and press “See what changes if you postpone”. Under “Cancel the occasion”, press “See what happens if you cancel”.",
+        "c": "Read the preview: tasks, guests, expenses, suppliers.",
+        "d": "Press “Apply the changes” only if you are sure."
+      },
+      "note1": "Guests who left an email address are told only after you confirm. The plan stays in place so you can still consult it.",
+      "h2": "Close the occasion after the event",
+      "p1": "Under “Closeout”, press “Open the closeout list”. You see what is still to be paid or returned, you can write down “Lessons for next time” and you can press “Close the occasion”. After closing, the data can be read but no longer changed.",
+      "h3": "Delete the occasion",
+      "p2": "Also in “Settings”, press “Delete the occasion” and confirm. You have 7 days in which you can recover it with everything in it, from the band at the top of the page, with “Cancel the deletion”. After that it is deleted for good.",
+      "note2": "The law obliges us to keep a few things even after deletion: receipts and payment documents, objection or removal requests, and the log of sensitive actions."
+    }
+  }
+}

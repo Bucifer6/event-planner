@@ -81,7 +81,10 @@
       "share": "Expected share of views",
       "searches": "Searches in the last 30 days",
       "buy": "Buy"
-    }
+    },
+    "freshTitle": "Confirm it is you",
+    "freshBody": "A purchase needs a recent confirmation.",
+    "freshLink": "Confirm in your account"
   },
   "console": {
     "title": "Commercial",

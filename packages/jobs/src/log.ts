@@ -1,3 +1,5 @@
+import { describeError } from "@ed/shared/errors";
+
 // Structured JSON logs, one object per line (R0-12). Never log payloads or secrets: pass
 // ids, names, counts and durations only.
 
@@ -20,11 +22,11 @@ export const jsonLogger: Logger = (level, msg, fields) => {
 
 export const silentLogger: Logger = () => {};
 
-/** Error name + message, trimmed; never the stack (it can carry values). */
+/**
+ * What failed, without the values involved: a database error's message carries the failed
+ * statement's parameters (addresses, names, message text), so it is never logged or stored
+ * as it is — see describeError. Never the stack either.
+ */
 export function errorText(e: unknown): string {
-  const err = e as { name?: unknown; message?: unknown };
-  const text = `${typeof err?.name === "string" ? err.name : "Error"}: ${
-    typeof err?.message === "string" ? err.message : String(e)
-  }`;
-  return text.slice(0, 500);
+  return describeError(e, { maxLength: 500 });
 }

@@ -1,4 +1,5 @@
 import { createHash } from "node:crypto";
+import { inflateRawSync } from "node:zlib";
 import { asc, eq, guests, households, type WhatIfDeltaRow } from "@ed/db";
 import { AppError } from "@ed/shared/errors";
 import { z } from "zod";
@@ -118,12 +119,100 @@ function toTable(raw: unknown[][]): ImportTable {
   };
 }
 
+/* ── Unpacked-size guard for .xlsx (decompression bomb) ──────────────────── */
+
+/** An .xlsx may unpack to at most this much in total — a 1,000-row guest list is far below. */
+export const IMPORT_MAX_UNPACKED_BYTES = 24 * 1024 * 1024;
+const IMPORT_MAX_ZIP_ENTRIES = 500;
+
+/**
+ * An .xlsx is a zip, and two megabytes of zip can unpack to gigabytes: handing such a file to
+ * the spreadsheet reader would exhaust the server's memory. So before anything else reads
+ * it, every entry is unpacked HERE with a hard output cap, and the archive must be plain:
+ *   - no zip64, no encryption, stored or deflated entries only, a bounded number of them
+ *   - the entries listed in the directory tile the file exactly from its first byte to the
+ *     directory — so a reader that walks the file front to back sees the same entries this
+ *     check measured (nothing hidden between or after them)
+ *   - each deflate stream uses exactly the bytes the directory says it does
+ * Anything else is refused as unreadable; over the cap is refused as too big.
+ */
+export function assertXlsxWithinLimits(bytes: Uint8Array): void {
+  const unreadable = () => new AppError("VALIDATION", "guests.import.errors.unreadable");
+  const buf = Buffer.from(bytes.buffer, bytes.byteOffset, bytes.byteLength);
+  // end-of-central-directory record: 22 bytes + a comment of at most 65,535
+  let eocd = -1;
+  for (let i = buf.length - 22; i >= Math.max(0, buf.length - 22 - 0xffff); i--) {
+    if (buf.readUInt32LE(i) === 0x06054b50) {
+      eocd = i;
+      break;
+    }
+  }
+  if (eocd < 0) throw unreadable();
+  const count = buf.readUInt16LE(eocd + 10);
+  const dirSize = buf.readUInt32LE(eocd + 12);
+  const dirOffset = buf.readUInt32LE(eocd + 16);
+  if (buf.readUInt16LE(eocd + 4) !== 0 || buf.readUInt16LE(eocd + 8) !== count) throw unreadable(); // multi-disk
+  if (count === 0 || count === 0xffff || count > IMPORT_MAX_ZIP_ENTRIES || dirOffset === 0xffffffff) throw unreadable();
+  if (dirOffset + dirSize !== eocd) throw unreadable();
+
+  type Entry = { method: number; flags: number; compressed: number; offset: number };
+  const entries: Entry[] = [];
+  let at = dirOffset;
+  for (let i = 0; i < count; i++) {
+    if (at + 46 > eocd || buf.readUInt32LE(at) !== 0x02014b50) throw unreadable();
+    const flags = buf.readUInt16LE(at + 8);
+    const compressed = buf.readUInt32LE(at + 20);
+    const declared = buf.readUInt32LE(at + 24);
+    const offset = buf.readUInt32LE(at + 42);
+    if (compressed === 0xffffffff || declared === 0xffffffff || offset === 0xffffffff) throw unreadable(); // zip64
+    if (flags & 0x1) throw unreadable(); // encrypted
+    entries.push({ method: buf.readUInt16LE(at + 10), flags, compressed, offset });
+    at += 46 + buf.readUInt16LE(at + 28) + buf.readUInt16LE(at + 30) + buf.readUInt16LE(at + 32);
+  }
+  if (at !== eocd) throw unreadable();
+
+  entries.sort((a, b) => a.offset - b.offset);
+  let expected = 0;
+  let total = 0;
+  for (const e of entries) {
+    // a data descriptor (12 or 16 bytes) may sit between one entry's data and the next header
+    const gap = e.offset - expected;
+    if (gap !== 0 && !(expected > 0 && (gap === 12 || gap === 16))) throw unreadable();
+    if (e.offset + 30 > dirOffset || buf.readUInt32LE(e.offset) !== 0x04034b50) throw unreadable();
+    const start = e.offset + 30 + buf.readUInt16LE(e.offset + 26) + buf.readUInt16LE(e.offset + 28);
+    const end = start + e.compressed;
+    if (end > dirOffset) throw unreadable();
+    if (e.method === 0) {
+      total += e.compressed;
+    } else if (e.method === 8) {
+      if (e.compressed > 0) {
+        let out: { buffer: Buffer; engine: { bytesWritten: number } };
+        try {
+          out = inflateRawSync(buf.subarray(start, end), { maxOutputLength: IMPORT_MAX_UNPACKED_BYTES - total + 1, info: true }) as unknown as typeof out;
+        } catch (err) {
+          if ((err as { code?: string }).code === "ERR_BUFFER_TOO_LARGE") throw new AppError("VALIDATION", "guests.import.errors.tooBig");
+          throw unreadable();
+        }
+        if (out.engine.bytesWritten !== e.compressed) throw unreadable();
+        total += out.buffer.length;
+      }
+    } else {
+      throw unreadable();
+    }
+    if (total > IMPORT_MAX_UNPACKED_BYTES) throw new AppError("VALIDATION", "guests.import.errors.tooBig");
+    expected = end;
+  }
+  const tail = dirOffset - expected;
+  if (tail !== 0 && tail !== 12 && tail !== 16) throw unreadable();
+}
+
 /** Reads a .csv or .xlsx upload into a plain table. Throws VALIDATION with a clear reason. */
 export async function parseGuestFile(file: { name: string; bytes: Uint8Array }): Promise<ImportTable> {
   if (file.bytes.byteLength === 0) throw new AppError("VALIDATION", "guests.import.errors.empty");
   if (file.bytes.byteLength > IMPORT_MAX_BYTES) throw new AppError("VALIDATION", "guests.import.errors.tooBig");
   const zip = file.bytes[0] === 0x50 && file.bytes[1] === 0x4b; // "PK": an .xlsx is a zip
   if (zip) {
+    assertXlsxWithinLimits(file.bytes); // before the spreadsheet reader unpacks anything
     try {
       const { readSheet } = await import("read-excel-file/node");
       const data = await readSheet(Buffer.from(file.bytes));

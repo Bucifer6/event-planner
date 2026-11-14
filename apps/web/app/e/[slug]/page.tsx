@@ -13,6 +13,7 @@ import { EventBlock, JourneyFacts, MenuCard, ProgrammeList, VenueLines } from ".
 import styles from "../_components/event.module.css";
 import { RegistrationForm, type RegistrationLabels, type RegistrationQuestion } from "../_components/forms";
 import { PUBLIC_LANG_PARAM, publicCtx, publicHref, publicLocale } from "../_lib/public";
+import { HelpFootLink } from "@/components/help/HelpFootLink";
 
 // The public event page (C-06, C-10, SEC7, SEC11, Q3). No account, no cookie: anyone with the
 // address reads what the planner published. Server-rendered; the only client code is the
@@ -174,6 +175,7 @@ export default async function PublicEventPage({ params, searchParams }: Props) {
 
       <footer className="ed-solo__foot">
         <p>{t("public.foot")}</p>
+        <HelpFootLink section="invited" />
       </footer>
     </div>
   );

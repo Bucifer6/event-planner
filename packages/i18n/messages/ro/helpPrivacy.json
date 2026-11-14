@@ -1,0 +1,117 @@
+{
+  "private-by-default": {
+    "title": "Privat din start: cine ce vede",
+    "summary": "Planul îl văd doar oamenii din echipă. Banii și cererile private se văd numai cu acces dat separat, om cu om.",
+    "keywords": "privat confidențial cine vede acces roluri finanțe cereri private date de contact echipă",
+    "where": "Ocazia ta → Echipă și roluri",
+    "body": {
+      "p1": "O ocazie nu este vizibilă nimănui în afara echipei ei. Nu există linkuri publice către plan, iar rolul spune ce poate face fiecare, nu tot ce poate vedea.",
+      "h1": "Trei niveluri",
+      "ul1": {
+        "a": "Planul (sarcini, program, furnizori, livrări) — îl vede toată echipa, după rol.",
+        "b": "Finanțele („Buget”, „Cheltuieli comune”, sumele furnizorilor) — doar organizatorul și cei cu accesul „Finanțe”.",
+        "c": "„Cereri private” ale invitaților — doar organizatorul și cei cu accesul „Cereri private”."
+      },
+      "note1": "Bugetul, cheltuielile comune și cererile private nu se văd din niciun rol în afară de organizator. Se acordă separat, fiecărei persoane în parte, din „Echipă și roluri”. Nici managerul de proiect nu le primește automat.",
+      "h2": "Ce nu pleacă din plan",
+      "ul2": {
+        "a": "Datele de contact ale invitaților le văd doar organizatorul și managerul de proiect.",
+        "b": "Invitații nu văd lista celorlalți invitați. La mese, fiecare își vede doar propriul loc.",
+        "c": "Un furnizor cu link își vede doar propria rezervare — fără prețuri, invitați sau alți furnizori.",
+        "d": "O firmă căreia îi scrii primește exact ce vezi în formularul cererii și nimic altceva.",
+        "e": "„Calculator dar” este numai al tău: ce calculezi acolo nu apare la ceilalți organizatori, la invitați, în exporturi sau la asistenți."
+      },
+      "note2": "Schimbarea rolurilor și a accesului cere să confirmi din nou că ești tu, iar fiecare schimbare rămâne în jurnalul acțiunilor."
+    }
+  },
+  "children-count-only": {
+    "title": "Despre copii păstrăm doar numărul",
+    "summary": "Niciun nume, nicio vârstă, nicio dată de naștere. Peste tot în EventDesk, copiii apar numai ca un număr.",
+    "keywords": "copii număr minori vârstă nume data nașterii protecție import răspuns",
+    "where": "Ocazia ta → Invitați și răspunsuri",
+    "body": {
+      "p1": "Când o familie răspunde la invitație, spune câți adulți și câți copii vin. Atât. Lista de invitați conține doar adulții, pe nume; copiii apar ca „+2 copii”.",
+      "h1": "Unde se vede regula",
+      "ul1": {
+        "a": "La adăugarea unei familii: treci doar adulții invitați.",
+        "b": "La import: coloanele cu vârste sau date de naștere sunt lăsate deoparte, iar rândurile care par să descrie un copil sunt sărite.",
+        "c": "La întrebările pentru invitați: nu cere detalii despre copii.",
+        "d": "Pe linkul invitatului: dacă scrie numele sau vârsta unui copil într-un câmp, îl rugăm să le șteargă.",
+        "e": "La cererile private: ajunge nevoia în sine („un meniu fără gluten”), fără numele sau vârsta copilului.",
+        "f": "La check-in: înregistrezi câți adulți și câți copii au sosit.",
+        "g": "La asistenții AI și în exporturi: copiii apar doar ca număr."
+      },
+      "note1": "Dacă ai nevoie de un meniu pentru copii sau de un scaun înalt, numărul este de ajuns pentru furnizor: „4 meniuri de copii”.",
+      "p2": "Regula este aceeași pentru toate ocaziile și nu poate fi schimbată din setări."
+    }
+  },
+  "facts-and-corrections": {
+    "title": "Faptele rămân fapte: cum corectezi o plată sau o sosire",
+    "summary": "Ce s-a întâmplat deja nu se suprascrie. Se corectează cu un motiv, iar valoarea veche rămâne în istoric.",
+    "keywords": "corecție corectează fapt plată sosire cantitate primită motiv istoric greșeală anulează",
+    "where": "Buget · Furnizori · Livrări și retururi · Check-in · Cheltuieli comune",
+    "body": {
+      "p1": "Un plan se schimbă mereu; un fapt nu. Dacă o plată a fost făcută, o livrare a sosit sau o familie a ajuns, înregistrarea rămâne. Dacă ai greșit, nu o ștergi, ci o corectezi.",
+      "h1": "Unde găsești corecția",
+      "ul1": {
+        "a": "O cheltuială plătită — pe pagina ei, „Corectează plata”.",
+        "b": "O plată către un furnizor marcată din greșeală — „Corectează plata”, la „Plăți”.",
+        "c": "O cantitate primită sau returnată — „Corectează cantitatea primită”, în „Livrări și retururi”.",
+        "d": "O sosire — „Corectează”, în „Check-in”.",
+        "e": "Un cost comun — „Anulează înregistrarea”; rămâne în listă, marcat „Anulată”."
+      },
+      "ol1": {
+        "a": "Apasă butonul de corecție de lângă înregistrare.",
+        "b": "Scrie valoarea corectă.",
+        "c": "Scrie motivul, pe scurt (cel puțin 3 caractere).",
+        "d": "Salvează corecția."
+      },
+      "note1": "Corecția păstrează valoarea veche, valoarea nouă, motivul, cine a făcut-o și când. Le vezi la „Corecții” sau la „Istoricul corecțiilor”.",
+      "note2": "Tot din același motiv, un briefing publicat și o comandă finală fixată nu se modifică: publici sau fixezi o versiune nouă, iar cea veche rămâne."
+    }
+  },
+  "honest-directory": {
+    "title": "Lista de firme: ordinea nu se vinde",
+    "summary": "Fiecare listare este verificată de un moderator, iar ordinea rezultatelor se rotește zilnic. O plasare plătită arată poziția, niciodată o preferință.",
+    "keywords": "director firme ordine rotație promovat plasare plătită fără stele fără recenzii fapte verificate nerevendicat",
+    "where": "Firme",
+    "body": {
+      "ul1": {
+        "a": "Fiecare listare este verificată de un moderator înainte să apară.",
+        "b": "Ordinea rezultatelor se rotește zilnic. Nu se vinde.",
+        "c": "Nu există stele, note sau păreri ale clienților. Nimeni nu poate cumpăra o imagine mai bună.",
+        "d": "Pe o listare pot apărea doar două fapte verificate: înregistrarea la ONRC și asigurarea văzută de un moderator.",
+        "e": "Statisticile de răspuns (cât de des și cât de repede răspunde firma) apar abia după zece cereri cu răspuns, sunt calculate zilnic și nu pot fi cumpărate."
+      },
+      "h1": "Plasarea plătită",
+      "p1": "Dacă o firmă plătește pentru o poziție, listarea poartă eticheta „Promovat — plasare plătită”, scrisă la fel de vizibil ca numele firmei. Eticheta spune un singur lucru: că poziția a fost plătită. Nu spune că firma este mai bună și nu schimbă ce afli despre ea.",
+      "note1": "Pentru organizatori, EventDesk este gratuit. Nu primim comision din ce plătești furnizorilor.",
+      "h2": "Listări nerevendicate",
+      "p2": "O listare cu mențiunea „Adăugat de EventDesk — nefiind revendicat încă” provine dintr-o sursă publică, arătată pe pagina ei. Contactul apare așa cum îl publică firma; EventDesk nu mijlocește legătura.",
+      "p3": "Dacă vezi ceva greșit sau nelegitim pe o listare, folosește „Raportează” de pe pagina ei."
+    }
+  },
+  "report-content": {
+    "title": "Raportează conținut ilegal sau o listare nelegitimă",
+    "summary": "Oricine poate semnala o problemă. Nu ai nevoie de cont și primești o referință a raportului.",
+    "keywords": "raportează raport conținut ilegal listare nelegitimă abuz reclamație referință moderator",
+    "where": "Pagina „Raportează conținut ilegal”",
+    "body": {
+      "ol1": {
+        "a": "Deschide formularul de raportare din „Contact și raportare” sau din linkul „Raportează” de pe pagina unei listări (atunci listarea este completată deja).",
+        "b": "Alege ce fel de problemă este.",
+        "c": "La „Ce este în neregulă”, spune pe scurt ce ai văzut și de ce crezi că este ilegal, în cel puțin 10 caractere.",
+        "d": "Apasă „Trimite raportul”.",
+        "e": "Notează referința afișată. Păstreaz-o dacă vrei să revii asupra raportului."
+      },
+      "p1": "Raportul este citit de un moderator EventDesk. Pagina formularului îți spune, pas cu pas, ce se întâmplă cu el și te trimite la regulile de moderare.",
+      "note1": "Nu ai nevoie de cont ca să raportezi.",
+      "h1": "Când folosești altceva",
+      "ul1": {
+        "a": "Ești firma dintr-o listare nerevendicată și vrei să fie eliminată sau corectată: folosește „Cere eliminarea sau corectarea” de pe pagina ei.",
+        "b": "Ai o problemă cu o invitație sau cu un eveniment: scrie-i gazdei.",
+        "c": "Ceva nu funcționează în aplicație: verifică „Starea serviciului” din „Contact și raportare”."
+      }
+    }
+  }
+}

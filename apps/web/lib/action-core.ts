@@ -1,5 +1,5 @@
 import { actorAccountId, type Ctx } from "@ed/core/context";
-import { isAppError, type AppErrorCode } from "@ed/shared/errors";
+import { describeError, isAppError, type AppErrorCode } from "@ed/shared/errors";
 import { z } from "zod";
 
 // Framework-free core of action() so it can be unit-tested (test/action.test.ts).
@@ -163,7 +163,9 @@ export async function runAction<S extends z.ZodType, R>(args: {
     }
     // Unexpected: log server-side with a reference, tell the user nothing internal.
     const ref = Math.random().toString(36).slice(2, 10);
-    (args.log ?? ((m, err) => console.error(m, err)))(`[action] unexpected error ref=${ref}`, e);
+    // describeError: what failed and where, never the values (a database error's own message
+    // carries the statement's parameters — addresses, names, typed text).
+    (args.log ?? ((m, err) => console.error(m, describeError(err, { frames: true }))))(`[action] unexpected error ref=${ref}`, e);
     return fail("UNEXPECTED", tr, { values });
   }
 }

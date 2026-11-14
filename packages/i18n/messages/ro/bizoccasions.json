@@ -56,7 +56,10 @@
     "financeHint": "Sume, facturi, scadențe.",
     "privateRequests": "Cererile private ale invitaților",
     "privateRequestsHint": "De exemplu alergii sau nevoi de acces.",
-    "save": "Salvează accesul echipei"
+    "save": "Salvează accesul echipei",
+    "freshTitle": "Confirmă că ești tu",
+    "freshBody": "Accesul echipei la bani și la cererile private se schimbă numai după o confirmare recentă.",
+    "freshLink": "Confirmă din contul tău"
   },
   "manage": {
     "title": "Ocazie a firmei",

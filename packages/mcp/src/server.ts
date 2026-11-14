@@ -3,7 +3,7 @@ import type { Ctx } from "@ed/core/context";
 import { enforceRateLimit } from "@ed/core/ratelimit";
 import { and, eq, mcpCallLog, sql, whatifPreviews, type Db } from "@ed/db";
 import { translate } from "@ed/i18n";
-import { isAppError } from "@ed/shared/errors";
+import { describeError, isAppError } from "@ed/shared/errors";
 import { z } from "zod";
 import "./builtin";
 import {
@@ -171,19 +171,26 @@ export async function handleMcpRequest(request: Request, opts: McpServerOptions)
   const ctx: McpCtx = { db: opts.db, actor: auth.actor, now, ip: opts.ip, locale: auth.locale };
 
   // MCP6 fair use: every request of a token counts (per minute and per day).
-  try {
-    await enforceRateLimit(ctx, {
+  const countCall = () =>
+    enforceRateLimit(ctx, {
       scope: "mcp.call",
       rules: [
         { axis: "key", key: auth.actor.tokenId, limit: limitOf(env, "MCP_CALLS_PER_MINUTE", 60), windowSeconds: 60 },
         { axis: "key", key: auth.actor.tokenId, limit: limitOf(env, "MCP_CALLS_PER_DAY", 2000), windowSeconds: 86_400 },
       ],
     });
+  try {
+    await countCall();
   } catch (e) {
     if (isAppError(e) && e.code === "RATE_LIMITED") return rateLimited(null, e.details?.retryAt, now);
     throw e;
   }
 
+  // An oversized body is refused by its declared length, before any of it is read.
+  const declaredLength = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_BYTES) {
+    return json(413, rpcError(null, MCP_ERRORS.invalidRequest, "Request body too large."));
+  }
   let raw: string;
   try {
     raw = await request.text();
@@ -204,6 +211,15 @@ export async function handleMcpRequest(request: Request, opts: McpServerOptions)
   const messages: unknown[] = isBatch ? (body as unknown[]) : [body];
   if (messages.length === 0 || messages.length > MAX_BATCH) {
     return json(400, rpcError(null, MCP_ERRORS.invalidRequest, "Invalid request: empty or oversized batch."));
+  }
+
+  // A batch is not a way around the fair-use limits: every message after the first counts as
+  // a call of its own (the first was counted above), before any of the batch runs.
+  try {
+    for (let i = 1; i < messages.length; i++) await countCall();
+  } catch (e) {
+    if (isAppError(e) && e.code === "RATE_LIMITED") return rateLimited(null, e.details?.retryAt, now);
+    throw e;
   }
 
   const responses: JsonRpcResponse[] = [];
@@ -261,7 +277,7 @@ async function dispatch(
         return rpcError(id, MCP_ERRORS.methodNotFound, `Method not found: ${method.slice(0, 80)}`);
     }
   } catch (e) {
-    console.error("[mcp] internal error", e instanceof Error ? e.message : e);
+    console.error("[mcp] internal error", describeError(e));
     return rpcError(id, MCP_ERRORS.internal, "Internal error.");
   }
 }
@@ -392,7 +408,7 @@ async function callTool(ctx: McpCtx, id: string | number, params: unknown, appUr
       return done(toolError(translate(ctx.locale, key, e.details?.params)), e.code);
     }
     if (e instanceof z.ZodError) return done(toolError(`Invalid arguments for ${tool.name}.`), "invalid_input");
-    console.error(`[mcp] tool ${tool.name} failed`, e instanceof Error ? e.message : e);
+    console.error(`[mcp] tool ${tool.name} failed`, describeError(e, { frames: true }));
     return done(toolError(translate(ctx.locale, "common.errors.UNEXPECTED")), "UNEXPECTED");
   }
 }

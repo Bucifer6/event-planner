@@ -1,0 +1,67 @@
+{
+  "budget": {
+    "title": "The budget: five amounts, always separate",
+    "summary": "For each category you see what you estimated, what you committed, what was invoiced, what you paid and where you think you will end up.",
+    "keywords": "budget categories estimate committed invoiced paid forecast money finance overrun",
+    "where": "Your occasion → Budget",
+    "need": "The owner and people with the “Finance” access. Without it the section does not appear.",
+    "body": {
+      "ol1": {
+        "a": "Open “Budget”. If you have no category yet, under “Add categories” tick the usual ones for this kind of occasion and press “Add the chosen categories”.",
+        "b": "For one of your own, press “New category”, type the “Category name”, then “Estimate (RON)” and, if you like, “Forecast (RON)”. Press “Add category”.",
+        "c": "Change the amounts at any time with “Edit” in the “By category” table."
+      },
+      "h1": "What the five columns mean",
+      "ul1": {
+        "a": "“Estimate” — what you think at the start it will cost. You fill it in.",
+        "b": "“Committed” — approved expenses and contracts with suppliers.",
+        "c": "“Invoiced” — what has been invoiced to date.",
+        "d": "“Paid” — what you have actually paid. This is the large number at the top, paid to date.",
+        "e": "“Forecast” — where you now think you will end up. You fill it in."
+      },
+      "note1": "You fill in Estimate and Forecast. Committed, Invoiced and Paid are calculated from expenses and supplier bookings — they cannot be typed by hand.",
+      "note2": "A category without an estimate is shown as “unknown” and counted separately as having no estimate. We do not treat it as zero, so the total does not look smaller than it is.",
+      "p1": "If you delete a category, its expenses stay and move to “No category”. Once the occasion is closed, the budget can only be read."
+    }
+  },
+  "expenses": {
+    "title": "Expenses, receipts and payments",
+    "summary": "You add an expense, attach the receipt, and then approval and payment are tracked separately.",
+    "keywords": "expense receipt invoice approve reject paid mark correct the payment amount",
+    "where": "Your occasion → Budget → Expenses",
+    "need": "The owner and people with the “Finance” access.",
+    "body": {
+      "ol1": {
+        "a": "In “Budget”, press “Add an expense”.",
+        "b": "Type “What you bought”, the “Amount (RON)” and the “Date on the receipt”. Choose a “Category” and, if you like, a “Supplier”.",
+        "c": "Under “Receipt or invoice” you can attach a PNG or JPG image or a PDF.",
+        "d": "Press “Add expense”.",
+        "e": "Open the expense from the list. Under “Approval” press “Approve” or “Reject”.",
+        "f": "When it has been paid, fill in the “Payment date” and press “Mark as paid”."
+      },
+      "note1": "A payment is a fact: it is not overwritten. The amount of a paid expense changes only with “Correct the payment”, where you type the correct amount and the reason. The correction keeps the old value, the new value, the reason and who made it.",
+      "p1": "Before payment you can change the details with “Edit details” or delete the expense. An approved expense counts under “Committed”; a paid one under “Paid”.",
+      "note2": "Receipts and invoices are kept even after the occasion is closed or deleted, for as long as accounting rules require.",
+      "p2": "If the file is refused, see the article about refused uploads."
+    }
+  },
+  "shared-costs": {
+    "title": "Shared costs: who owes whom",
+    "summary": "One ledger for costs you split: who paid, who benefits and how you settle up.",
+    "keywords": "shared costs split owes balance settlement ledger cabin participants currency",
+    "where": "Your occasion → Shared costs",
+    "need": "The owner and people with the “Finance” access.",
+    "body": {
+      "ol1": {
+        "a": "Open “Shared costs” and press “Add participant”. It can be “Someone on the team”, “An invited household” or “Someone else (type the name)”.",
+        "b": "Press “Add a shared cost”. Type “What for” (for example “the cabin, two nights”), the amount, “Who paid” and “How it is split”.",
+        "c": "Look at “Who owes whom”: the shortest list of payments that brings everyone to zero.",
+        "d": "When someone has paid their share, press “Record the payment” next to that line."
+      },
+      "note1": "Each currency has its own reckoning: amounts in lei and in euro are not mixed and are not converted.",
+      "note2": "A wrong entry is not deleted; it is voided with “Void entry”. It stays in the list, marked “Voided”, so that what happened remains visible.",
+      "p1": "The balances always add up to zero: what some owe is exactly what the others are due. When nobody owes anything any more, you see “Nobody owes anything”.",
+      "p2": "For trips, the same ledger also appears in “Itinerary and rooms”, under “Settlement”."
+    }
+  }
+}

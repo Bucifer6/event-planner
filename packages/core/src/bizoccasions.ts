@@ -24,6 +24,7 @@ import { zId } from "@ed/shared/zod";
 import { getAsset, getAssetUrl, registerUploadPurpose } from "@ed/storage";
 import { z } from "zod";
 import { getMember } from "./access";
+import { requireFreshAuth } from "./accounts";
 import { audit } from "./audit";
 import { assertBusinessCanCreate, isBusinessLapsed, requireBusinessMember, type Business } from "./business";
 import { requireAccount, requireWriteCapable, systemCtx, type Ctx } from "./context";
@@ -318,6 +319,8 @@ export async function saveTeamGrants(ctx: Ctx, input: z.input<typeof teamGrantsI
   requireWriteCapable(ctx);
   const data = teamGrantsInput.parse(input);
   await requireBusinessMember(ctx, data.businessId, { roles: ["owner"] });
+  // S4: this hands money and private-request access to the whole team — a capability grant
+  await requireFreshAuth(ctx);
   const before = await loadProfile(ctx, data.businessId);
   await inTx(ctx, async (tx) => {
     const set = { teamGrantFinance: data.finance, teamGrantPrivateRequests: data.privateRequests };

@@ -1,0 +1,67 @@
+{
+  "budget": {
+    "title": "Bugetul: cinci sume, mereu separate",
+    "summary": "Pe fiecare categorie vezi cât ai estimat, cât ai angajat, cât s-a facturat, cât ai plătit și unde crezi că ajungi.",
+    "keywords": "buget categorii estimat angajat facturat plătit prognoză bani finanțe depășire",
+    "where": "Ocazia ta → Buget",
+    "need": "Organizatorul și persoanele cu accesul „Finanțe”. Fără el, secțiunea nu apare.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Buget”. Dacă nu ai încă nicio categorie, la „Adaugă categorii” bifează-le pe cele obișnuite pentru tipul ocaziei și apasă „Adaugă categoriile alese”.",
+        "b": "Pentru una a ta, apasă „Categorie nouă”, scrie „Numele categoriei”, apoi „Estimat (RON)” și, dacă vrei, „Prognoză (RON)”. Apasă „Adaugă categoria”.",
+        "c": "Schimbă sumele oricând cu „Modifică” din tabelul „Pe categorii”."
+      },
+      "h1": "Ce înseamnă cele cinci coloane",
+      "ul1": {
+        "a": "„Estimat” — cât crezi la început că va costa. Completezi tu.",
+        "b": "„Angajat” — cheltuieli aprobate și contracte cu furnizorii.",
+        "c": "„Facturat” — ce s-a facturat până azi.",
+        "d": "„Plătit” — ce ai plătit efectiv. Este numărul mare de sus, „Plătit până azi”.",
+        "e": "„Prognoză” — unde crezi acum că ajungi. Completezi tu."
+      },
+      "note1": "Estimat și Prognoză le completezi tu. Angajat, Facturat și Plătit se calculează din cheltuieli și din rezervările furnizorilor — nu se pot scrie de mână.",
+      "note2": "O categorie fără estimare apare ca „necunoscut” și este numărată separat („fără estimare”). Nu o socotim drept zero, ca totalul să nu pară mai mic decât este.",
+      "p1": "Dacă ștergi o categorie, cheltuielile ei rămân și trec la „Fără categorie”. După ce ocazia este închisă, bugetul poate fi doar citit."
+    }
+  },
+  "expenses": {
+    "title": "Cheltuieli, chitanțe și plăți",
+    "summary": "Adaugi o cheltuială, atașezi chitanța, apoi aprobarea și plata se țin separat.",
+    "keywords": "cheltuială chitanță factură aprobă respinge plătită marchează corectează plata sumă",
+    "where": "Ocazia ta → Buget → Cheltuieli",
+    "need": "Organizatorul și persoanele cu accesul „Finanțe”.",
+    "body": {
+      "ol1": {
+        "a": "În „Buget”, apasă „Adaugă o cheltuială”.",
+        "b": "Scrie „Ce ai cumpărat”, „Sumă (RON)” și „Data de pe chitanță”. Alege „Categorie” și, dacă vrei, „Furnizor”.",
+        "c": "La „Chitanță sau factură” poți atașa o imagine PNG sau JPG ori un PDF.",
+        "d": "Apasă „Adaugă cheltuiala”.",
+        "e": "Deschide cheltuiala din listă. La „Aprobare” apasă „Aprobă” sau „Respinge”.",
+        "f": "Când s-a plătit, completează „Data plății” și apasă „Marchează ca plătită”."
+      },
+      "note1": "O plată este un fapt: nu se suprascrie. Suma unei cheltuieli plătite se schimbă doar cu „Corectează plata”, unde scrii suma corectă și motivul. Corecția păstrează valoarea veche, valoarea nouă, motivul și cine a făcut-o.",
+      "p1": "Înainte de plată poți schimba detaliile cu „Modifică detaliile” sau poți șterge cheltuiala. O cheltuială aprobată apare la „Angajat”; una plătită, la „Plătit”.",
+      "note2": "Chitanțele și facturile se păstrează și după închiderea sau ștergerea ocaziei, cât cer regulile contabile.",
+      "p2": "Dacă fișierul este refuzat, vezi articolul despre încărcări refuzate."
+    }
+  },
+  "shared-costs": {
+    "title": "Cheltuieli comune: cine cui datorează",
+    "summary": "Un singur registru pentru costurile împărțite: cine a plătit, cine beneficiază și cum vă socotiți.",
+    "keywords": "cheltuieli comune costuri împărțite datorează sold decontare registru cabană participanți monedă",
+    "where": "Ocazia ta → Cheltuieli comune",
+    "need": "Organizatorul și persoanele cu accesul „Finanțe”.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Cheltuieli comune” și apasă „Adaugă participant”. Poate fi „Cineva din echipă”, „O familie invitată” sau „Altcineva (scrii numele)”.",
+        "b": "Apasă „Adaugă un cost comun”. Scrie „Pentru ce” (de exemplu „cabana, două nopți”), suma, „Cine a plătit” și „Cum se împarte”.",
+        "c": "Uită-te la „Cine cui datorează”: lista cea mai scurtă de plăți care aduce pe toată lumea la zero.",
+        "d": "Când cineva și-a plătit partea, apasă „Înregistrează plata” lângă rândul respectiv."
+      },
+      "note1": "Fiecare monedă are propria socoteală: sumele în lei și cele în euro nu se amestecă și nu se convertesc.",
+      "note2": "O înregistrare greșită nu se șterge, ci se anulează cu „Anulează înregistrarea”. Rămâne în listă, marcată „Anulată”, ca să se vadă ce s-a întâmplat.",
+      "p1": "Soldurile însumate dau mereu zero: ce datorează unii este exact ce au de primit ceilalți. Când nimeni nu mai datorează nimic, apare „Nimeni nu datorează nimic”.",
+      "p2": "Pentru voiaje, același registru apare și în „Itinerar și cazare”, la „Decontare”."
+    }
+  }
+}

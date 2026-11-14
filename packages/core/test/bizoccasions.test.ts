@@ -137,6 +137,11 @@ describe("business occasions (P17, P18)", () => {
 
     // the owner changes what the team path carries
     expect(await code(saveTeamGrants(team.admin.ctx, { businessId: team.business.id, finance: false, privateRequests: true }))).toBe("FORBIDDEN");
+    // S4 (security review 14 Nov 2026, F-08): a capability grant needs a FRESH confirmation — an hour-old one is refused
+    const staleOwner = { ...team.owner.ctx, now: new Date(T0.getTime() + 60 * 60_000) };
+    const stale = await saveTeamGrants(staleOwner, { businessId: team.business.id, finance: false, privateRequests: true }).catch((e) => e);
+    expect(stale).toMatchObject({ code: "FORBIDDEN", messageKey: "account.errors.freshAuthRequired" });
+    expect((await requireMember(team.admin.ctx, occ.id)).grants).toEqual({ finance: true, privateRequests: false });
     await saveTeamGrants(team.owner.ctx, { businessId: team.business.id, finance: false, privateRequests: true });
     expect((await requireMember(team.admin.ctx, occ.id)).grants).toEqual({ finance: false, privateRequests: true });
 

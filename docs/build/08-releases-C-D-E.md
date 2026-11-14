@@ -1,5 +1,14 @@
 # 08 — Releases C, D, E (work items)
 
+> **How to read this file (added after the build).** This is the original work-item
+> specification, written as a plan before any code existed and kept as the record of scope.
+> The work described here has since been built; it is not a description of the final code.
+> Where it names a tool that was not used in the end, read it like this: *Prisma* → Drizzle ORM
+> (`15-conventions.md`); *Playwright*, *axe* and *k6* → not set up, see what is and is not
+> tested in `11-testing-and-qa.md`; *Garden Soirée* → the "Maison" design language
+> (`16-design.md`). What was actually built and verified: `13-implementation-log.md`;
+> requirement by requirement: `09-traceability.md`.
+
 Per PRD sections 6 and 9, each of these releases needs its own go-ahead once the earlier releases are
 in use; they are not gated by business income, but spending on them is reviewed at each gate. The
 flower arrangement designer sits at the C/P boundary: the quote flow ships with P (P-07), the visual

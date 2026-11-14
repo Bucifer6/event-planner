@@ -56,7 +56,10 @@
     "financeHint": "Amounts, invoices, due dates.",
     "privateRequests": "Guests' private requests",
     "privateRequestsHint": "For example allergies or access needs.",
-    "save": "Save team access"
+    "save": "Save team access",
+    "freshTitle": "Confirm it is you",
+    "freshBody": "The team's access to money and private requests changes only after a recent confirmation.",
+    "freshLink": "Confirm in your account"
   },
   "manage": {
     "title": "Business occasion",

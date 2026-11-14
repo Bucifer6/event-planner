@@ -1,5 +1,6 @@
+import { requireMember } from "@ed/core/access";
 import { IMPORT_MAX_BYTES, parseGuestFile, proposeGuestImport, suggestMapping } from "@ed/core/guestimport";
-import { isAppError } from "@ed/shared/errors";
+import { describeError, isAppError } from "@ed/shared/errors";
 import { sameOriginOr403 } from "@/lib/csrf";
 import { getCtx } from "@/lib/ctx";
 
@@ -25,6 +26,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
 
   try {
     const ctx = await getCtx();
+    // Who may import is decided BEFORE the upload is read or parsed: a stranger (or a member
+    // who may not manage the guest list) must not be able to make the server unpack a file.
+    await requireMember(ctx, id, { manage: true });
     const form = await request.formData();
     const file = form.get("file");
     if (!(file instanceof File) || file.size === 0) return back(request, id, { error: "empty" });
@@ -45,7 +49,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
       const key = e.messageKey.startsWith("guests.import.errors.") ? e.messageKey.slice("guests.import.errors.".length) : e.code;
       return back(request, id, { error: key });
     }
-    console.error("[guests.import.upload]", e);
+    console.error("[guests.import.upload]", describeError(e, { frames: true }));
     return back(request, id, { error: "unreadable" });
   }
 }

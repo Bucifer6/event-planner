@@ -14,6 +14,7 @@ import { StatusSelect } from "../../_components/StatusSelect";
 import { QuickAddTask, TemplateRerun } from "../../_components/TaskForms";
 import { TaskLine } from "../../_components/TaskLine";
 import { dayKey, monthKey, orNotFound, parseMonth } from "../../_lib/load";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("tasks"))("title") };
@@ -246,6 +247,7 @@ export default async function TasksPage({ params, searchParams }: { params: Prom
           ) : undefined
         }
       />
+      <HelpLink topic="tasks" />
 
       {canAdd ? (
         <div className="ed-stack" data-gap="2">

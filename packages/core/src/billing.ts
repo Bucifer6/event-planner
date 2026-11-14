@@ -22,6 +22,7 @@ import { AppError } from "@ed/shared/errors";
 import { addDays } from "@ed/shared/time";
 import { zId } from "@ed/shared/zod";
 import { z } from "zod";
+import { requireFreshAuth } from "./accounts";
 import { registerApprovalAction, requestApproval, type ApprovalRequest } from "./approvals";
 import { audit } from "./audit";
 import { requireBusinessMember } from "./business";
@@ -237,6 +238,7 @@ export async function createCheckoutSession(ctx: Ctx, input: CheckoutInput, opts
   await assertMonetizationOn(ctx);
   const data = checkoutInput.parse(input);
   await requireBusinessMember(ctx, data.businessId, { roles: ["owner", "admin"] });
+  await requireFreshAuth(ctx); // S4: a business purchase
   return openCheckout(ctx, data, opts, false);
 }
 

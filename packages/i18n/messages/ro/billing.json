@@ -81,7 +81,10 @@
       "share": "Cotă estimată din afișări",
       "searches": "Căutări în ultimele 30 de zile",
       "buy": "Cumpără"
-    }
+    },
+    "freshTitle": "Confirmă că ești tu",
+    "freshBody": "O cumpărare cere o confirmare recentă.",
+    "freshLink": "Confirmă din contul tău"
   },
   "console": {
     "title": "Comercial",

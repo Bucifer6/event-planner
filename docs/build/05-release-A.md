@@ -1,5 +1,14 @@
 # 05 — Release A: plan and invite (work items)
 
+> **How to read this file (added after the build).** This is the original work-item
+> specification, written as a plan before any code existed and kept as the record of scope.
+> The work described here has since been built; it is not a description of the final code.
+> Where it names a tool that was not used in the end, read it like this: *Prisma* → Drizzle ORM
+> (`15-conventions.md`); *Playwright*, *axe* and *k6* → not set up, see what is and is not
+> tested in `11-testing-and-qa.md`; *Garden Soirée* → the "Maison" design language
+> (`16-design.md`). What was actually built and verified: `13-implementation-log.md`;
+> requirement by requirement: `09-traceability.md`.
+
 Outcome (PRD section 6): create, delegate and track a private or shared occasion — complete and
 usable on a phone before release B starts. All items depend on Release 0 being merged.
 

@@ -1,0 +1,71 @@
+{
+  "room-plan": {
+    "title": "Planul sălii",
+    "summary": "Spațiul în care are loc ocazia, la scară. De aici pornesc așezarea la mese și verificările de încăpere.",
+    "keywords": "planul sălii spațiu dimensiuni locație desen scară lățime lungime versiune",
+    "where": "Ocazia ta → Planul sălii",
+    "need": "Organizatorul și managerii de proiect.",
+    "body": {
+      "h1": "Folosește planul locației",
+      "p1": "Dacă ai adăugat locația din lista de firme la furnizori și ea a publicat planuri aprobate, le vezi aici.",
+      "ol1": {
+        "a": "Deschide „Planul sălii”.",
+        "b": "La „Folosește planul locației”, apasă butonul cu numele planului dorit.",
+        "c": "Planul intră în ocazie la versiunea de acum, împreună cu mesele locației."
+      },
+      "note1": "Dacă locația își schimbă planul mai târziu, primești o propunere. Planul tău rămâne la versiunea lui până când accepți schimbarea. Nimic nu se modifică singur.",
+      "h2": "Sau descrie tu spațiul",
+      "ol2": {
+        "a": "Scrie „Numele spațiului”, de exemplu „Curtea bunicilor”.",
+        "b": "Completează „Lățime (m)” și „Lungime (m)”. Lasă gol dacă nu le știi încă.",
+        "c": "Apasă „Creează spațiul”."
+      },
+      "note2": "Dimensiunile lipsă apar ca „necunoscut” și nu sunt ghicite. Fără ele, verificarea de încăpere îți spune cinstit că nu știe dacă mesele încap.",
+      "p2": "La „Ce știm despre spațiu” găsești ce a declarat locația. Planul la scară se poate tipări din „Tipărire și export”."
+    }
+  },
+  "seating": {
+    "title": "Așezarea la mese",
+    "summary": "Pui mesele pe plan și invitații la mese. Poți trage cu degetul sau poți folosi butoanele: ambele fac același lucru.",
+    "keywords": "așezare mese locuri plan invitați neașezați încape etape dans publică locul tău",
+    "where": "Ocazia ta → Așezare la mese",
+    "need": "Organizatorul și managerii de proiect. Ai nevoie mai întâi de un plan al sălii.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Așezare la mese”. Dacă nu ai încă un plan, ești trimis la „Planul sălii”.",
+        "b": "Apasă „Adaugă o masă” și alege una dintre mesele locației sau descrie una a ta.",
+        "c": "Mută masa trăgând-o pe plan sau, fără tras, deschide-o și scrie poziția, apoi apasă „Mută aici”.",
+        "d": "Atinge o masă din listă sau de pe plan, bifează cine stă la ea și apasă „Așază la masă”.",
+        "e": "Urmărește lista „Neașezați” până ajunge la zero."
+      },
+      "note1": "Verificarea de încăpere spune „Încape”, că nu încape sau „Necunoscut”. Dacă nu știm dimensiunile sălii ori locurile unei mese, nu ghicim.",
+      "h1": "Etapele mesei",
+      "p1": "La „Etape” poți apăsa „Adaugă etapele obișnuite”. Fiecare etapă are propria aranjare și propria verificare: de exemplu, la dans scoți câteva mese cu „Scoate din această etapă”. Aranjarea de bază rămâne la fel.",
+      "h2": "Arată invitaților locul lor",
+      "p2": "La „Ce văd invitații”, apasă „Arată invitaților locul lor”. Fiecare invitat își vede masa (și locul, dacă l-ai ales) pe linkul lui. Cu „Ascunde din nou așezarea” o retragi.",
+      "note2": "Nimeni nu vede numele altora. Până la publicare, invitații nu văd nimic din așezare.",
+      "p3": "O așezare propusă de un asistent AI apare întâi ca previzualizare în „Ce-ar fi dacă?”."
+    }
+  },
+  "stationery": {
+    "title": "Invitații și papetărie",
+    "summary": "Alegi un design, potrivești textele și vezi proba pe loc. Ce vezi este exact ce se tipărește.",
+    "keywords": "invitații papetărie design probă pdf tipar tipografie versiune bleed semne de tăiere digitală",
+    "where": "Ocazia ta → Invitații",
+    "need": "Echipa de planificare poate lucra la texte. Numai organizatorii pot marca proba ca verificată.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Invitații”, alege un design și potrivește textele. Proba se schimbă pe loc, înainte să salvezi.",
+        "b": "Apasă „Salvează versiunea”. Fiecare salvare este o versiune nouă.",
+        "c": "Apasă „Descarcă proba (PDF)” și citește-o cuvânt cu cuvânt: nume, dată, oră, adresă.",
+        "d": "Dacă totul este corect, apasă „Am verificat proba”.",
+        "e": "Apasă „Descarcă PDF-ul pentru tipar” și trimite fișierul tipografiei. Dacă ți se cere, bifează „Adaugă semne de tăiere”."
+      },
+      "note1": "PDF-ul pentru tipar se poate face numai pentru o versiune pe care ai citit-o și ai marcat-o ca verificată. Dacă schimbi un cuvânt, salvezi o versiune nouă și o verifici din nou.",
+      "p1": "Fișierul are format exact, 3 mm bleed, text vectorial și fonturi incluse. Culorile sunt RGB; conversia în CMYK o face tipografia.",
+      "h1": "Invitația digitală",
+      "p2": "La „Invitația digitală”, apasă „Folosește pe linkul invitaților” ca linkul fiecărei familii să poarte aceleași cuvinte și aceleași culori ca invitația tipărită. Cu „Revino la invitația standard” renunți.",
+      "p3": "În „Tipărire și export” găsești și invitații cu cod QR, câte o foaie pentru fiecare familie, etichete cu coduri și carduri de masă."
+    }
+  }
+}

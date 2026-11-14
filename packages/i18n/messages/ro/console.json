@@ -20,7 +20,8 @@
     "complianceAccess": "Acces de conformitate",
     "commercial": "Comercial",
     "communications": "Comunicări",
-    "discovery": "Descoperire"
+    "discovery": "Descoperire",
+    "help": "Ajutor pentru echipă"
   },
   "roles": {
     "platform_admin": "Administrator platformă",

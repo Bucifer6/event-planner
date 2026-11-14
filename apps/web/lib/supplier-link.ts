@@ -9,6 +9,7 @@ import { unstable_rethrow } from "next/navigation";
 import { cache } from "react";
 import { z } from "zod";
 import { formDataToObject, runAction, type ActionResult, type Translator } from "./action-core";
+import { clientIpFrom } from "./client-ip";
 import { guestTranslator } from "./guest";
 
 // The scoped supplier link /s/[token] (S6, SEC2): no account, no cookie. The token alone
@@ -19,8 +20,7 @@ export const SUPPLIER_LANG_PARAM = "lang";
 
 async function clientIp(): Promise<string | undefined> {
   const h = await headers();
-  const name = (process.env.TRUSTED_IP_HEADER ?? "x-forwarded-for").toLowerCase();
-  return h.get(name)?.split(",")[0]?.trim() || undefined;
+  return clientIpFrom((name) => h.get(name));
 }
 
 export type SupplierRequest =

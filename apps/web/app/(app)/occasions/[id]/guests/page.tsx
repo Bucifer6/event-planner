@@ -10,6 +10,7 @@ import { createHouseholdAction, sendInvitationEmailsAction } from "@/app/actions
 import { requireCtx } from "@/lib/ctx";
 import { FormSheet, type FieldSpec } from "./_components/form";
 import styles from "./_components/guests.module.css";
+import { HelpLink } from "@/components/help/HelpLink";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -122,6 +123,7 @@ export default async function GuestsPage({ params, searchParams }: Props) {
           ) : null
         }
       />
+      <HelpLink topic="guests" />
 
       <Section>
         <div className={styles.hero}>

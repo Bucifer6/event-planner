@@ -1,0 +1,69 @@
+{
+  "metaTitle": "Help",
+  "eyebrow": "Help centre",
+  "title": "How can we help?",
+  "lead": "Short step-by-step guides for planners, guests and businesses. Buttons are named exactly as they appear in the app.",
+  "toc": "Help centre sections",
+  "search": {
+    "label": "Search help",
+    "hint": "Type a word or two, for example “budget”, “link expired” or “code”. Results appear as you type.",
+    "submit": "Search",
+    "clear": "Clear search",
+    "resultsTitle": "Search results",
+    "count": {
+      "one": "{count} article found",
+      "few": "{count} articles found",
+      "other": "{count} articles found"
+    },
+    "emptyTitle": "No article matches",
+    "emptyBody": "Try a simpler word, or clear the search and pick a section from the list."
+  },
+  "sections": {
+    "start": { "title": "Start here", "intro": "First steps: how EventDesk works, how to sign in and how to create your first occasion." },
+    "plan": { "title": "Plan an occasion", "intro": "Tasks, team, date and everything that keeps the plan current." },
+    "guests": { "title": "Guests and replies", "intro": "The households you invite, their links and what they answer." },
+    "money": { "title": "Money", "intro": "Budget, expenses and shared costs. Only people with finance access see them." },
+    "suppliers": { "title": "Suppliers and the event day", "intro": "From the first enquiry to the guests arriving." },
+    "space": { "title": "Room, tables and stationery", "intro": "The room plan to scale, the seating and the invitations." },
+    "travel": { "title": "Trips", "intro": "For journeys: legs, groups, transport and rooms." },
+    "invited": { "title": "For guests", "intro": "Received an invitation link? Here is what it is and how to answer." },
+    "business": { "title": "For businesses", "intro": "The business account, listings, how they are checked and the enquiries you receive." },
+    "account": { "title": "Account and safety", "intro": "Signing in, devices, deleting your account and AI assistants." },
+    "privacy": { "title": "Privacy and rules", "intro": "What each person sees, what we do not keep and how to report a problem." },
+    "trouble": { "title": "Troubleshooting", "intro": "When something does not go as you expect." },
+    "staff": { "title": "For the EventDesk team", "intro": "The working rules of the console. This section is shown to platform staff only." }
+  },
+  "article": {
+    "metaTitle": "{title} — Help",
+    "back": "All articles",
+    "where": "Where to find it",
+    "need": "Who can",
+    "goodToKnow": "Good to know:",
+    "seeAlso": "See also",
+    "open": {
+      "occasions": "Open your occasions",
+      "business": "Open “My business”",
+      "account": "Open the account page",
+      "console": "Open the console",
+      "directory": "Open the business directory",
+      "report": "Open the report form",
+      "signIn": "Open the sign-in page"
+    }
+  },
+  "contact": {
+    "title": "Contact and reporting",
+    "intro": "If the articles did not answer your question, here is where to go next.",
+    "report": "Report illegal content",
+    "reportBody": "For illegal content or an unlawful listing. You do not need an account and you receive a reference for your report.",
+    "status": "Service status",
+    "statusBody": "The public page where we announce when something is not working.",
+    "privacy": "Privacy policy",
+    "privacyBody": "What data we keep, why and for how long.",
+    "terms": "Terms and conditions",
+    "termsBody": "The rules for using the platform.",
+    "supportBody": "Email us about anything else. Never send passwords, sign-in codes or recovery codes."
+  },
+  "link": {
+    "label": "Help: {title}"
+  }
+}

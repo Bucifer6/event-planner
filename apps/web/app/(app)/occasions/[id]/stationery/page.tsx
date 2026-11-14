@@ -11,6 +11,7 @@ import { orNotFound } from "../../_lib/load";
 import { StationeryDesigner, type DesignerDraft, type DesignOption } from "./Designer";
 import { DigitalToggle, MarkProofed } from "./ProofActions";
 import styles from "./stationery.module.css";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("stationery"))("title") };
@@ -49,6 +50,7 @@ export default async function StationeryPage({ params, searchParams }: { params:
   return (
     <>
       <PageHeader level={2} title={t("title")} description={t("description")} />
+      <HelpLink topic="stationery" />
       {blocked ? <Notice tone="attention">{blocked}</Notice> : null}
       {ed.fontFamily === "fallback" ? <Notice tone="attention">{t("proof.fallbackFonts")}</Notice> : null}
       <Section>

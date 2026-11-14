@@ -10,6 +10,7 @@ import { ActionForm } from "@/app/(auth)/_components/forms";
 import { requireCtx } from "@/lib/ctx";
 import { FreshGate } from "../_components/fresh-gate";
 import { CreateAssistant } from "./_components/create-assistant";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("mcp"))("title") };
@@ -26,6 +27,7 @@ export default async function AssistantsPage() {
   return (
     <Page narrow>
       <PageHeader eyebrow={<Link href="/account">{t("back")}</Link>} title={t("title")} description={t("description")} />
+      <HelpLink topic="assistants" />
 
       <Section title={t("list.title")}>
         {tokens.length === 0 ? (

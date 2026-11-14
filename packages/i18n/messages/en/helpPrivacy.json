@@ -1,0 +1,117 @@
+{
+  "private-by-default": {
+    "title": "Private from the start: who sees what",
+    "summary": "Only the people on the team see the plan. Money and private requests are visible only with access granted separately, person by person.",
+    "keywords": "private confidential who sees access roles finance private requests contact details team",
+    "where": "Your occasion → Team and roles",
+    "body": {
+      "p1": "An occasion is not visible to anyone outside its team. There are no public links to the plan, and a role says what each person can do, not everything they can see.",
+      "h1": "Three levels",
+      "ul1": {
+        "a": "The plan (tasks, programme, suppliers, deliveries) — the whole team sees it, according to role.",
+        "b": "Finance (“Budget”, “Shared costs”, supplier amounts) — only the owner and people with the “Finance” access.",
+        "c": "Guests' “Private requests” — only the owner and people with the “Private requests” access."
+      },
+      "note1": "The budget, shared costs and private requests are not visible from any role apart from the owner. They are granted separately, to each person, from “Team and roles”. Not even a project manager gets them automatically.",
+      "h2": "What does not leave the plan",
+      "ul2": {
+        "a": "Guests' contact details are seen only by the owner and the project manager.",
+        "b": "Guests do not see the list of other guests. At the tables, each person sees only their own seat.",
+        "c": "A supplier with a link sees only their own booking — no prices, guests or other suppliers.",
+        "d": "A business you write to receives exactly what you see in the enquiry form and nothing else.",
+        "e": "The “Gift estimator” is yours alone: what you work out there does not appear to other organisers, to guests, in exports or to assistants."
+      },
+      "note2": "Changing roles and access asks you to confirm again that it is you, and every change stays in the log of actions."
+    }
+  },
+  "children-count-only": {
+    "title": "About children we keep only a count",
+    "summary": "No names, no ages, no dates of birth. Everywhere in EventDesk children appear only as a number.",
+    "keywords": "children count minors age name date of birth protection import reply",
+    "where": "Your occasion → Guests and replies",
+    "body": {
+      "p1": "When a household replies to the invitation, it says how many adults and how many children are coming. That is all. The guest list holds only the adults, by name; children appear as “+2 children”.",
+      "h1": "Where you see the rule",
+      "ul1": {
+        "a": "When adding a household: you list only the invited adults.",
+        "b": "On import: columns with ages or dates of birth are left aside, and rows that seem to describe a child are skipped.",
+        "c": "In the questions for guests: do not ask for details about children.",
+        "d": "On the guest's link: if they type a child's name or age in a field, we ask them to remove it.",
+        "e": "In private requests: the need itself is enough (“a gluten-free menu”), without the child's name or age.",
+        "f": "At check-in: you record how many adults and how many children arrived.",
+        "g": "For AI assistants and in exports: children appear only as a count."
+      },
+      "note1": "If you need a children's menu or a high chair, the number is enough for the supplier: “4 children's menus”.",
+      "p2": "The rule is the same for every occasion and cannot be changed in settings."
+    }
+  },
+  "facts-and-corrections": {
+    "title": "Facts stay facts: how to correct a payment or an arrival",
+    "summary": "What has already happened is not overwritten. It is corrected with a reason, and the old value stays in the history.",
+    "keywords": "correction correct fact payment arrival received quantity reason history mistake void",
+    "where": "Budget · Suppliers · Deliveries and returns · Check-in · Shared costs",
+    "body": {
+      "p1": "A plan changes all the time; a fact does not. If a payment was made, a delivery arrived or a household turned up, the record stays. If you made a mistake, you do not delete it — you correct it.",
+      "h1": "Where to find the correction",
+      "ul1": {
+        "a": "A paid expense — on its page, “Correct the payment”.",
+        "b": "A supplier payment marked by mistake — “Correct the payment”, under “Payments”.",
+        "c": "A received or returned quantity — “Correct the received quantity”, in “Deliveries and returns”.",
+        "d": "An arrival — “Correct”, in “Check-in”.",
+        "e": "A shared cost — “Void entry”; it stays in the list, marked “Voided”."
+      },
+      "ol1": {
+        "a": "Press the correction button next to the record.",
+        "b": "Type the correct value.",
+        "c": "Type the reason, briefly (at least 3 characters).",
+        "d": "Save the correction."
+      },
+      "note1": "The correction keeps the old value, the new value, the reason, who made it and when. You see them under “Corrections” or “Correction history”.",
+      "note2": "For the same reason a published briefing and a fixed final order are never edited: you publish or fix a new version, and the old one stays."
+    }
+  },
+  "honest-directory": {
+    "title": "The business directory: the order is not for sale",
+    "summary": "Every listing is checked by a moderator, and the order of results rotates daily. A paid placement shows position, never preference.",
+    "keywords": "directory businesses order rotation featured paid placement no stars no reviews checked facts unclaimed",
+    "where": "Businesses",
+    "body": {
+      "ul1": {
+        "a": "Every listing is checked by a moderator before it appears.",
+        "b": "The order of results rotates daily. It is not for sale.",
+        "c": "There are no stars, no scores and no customer opinions. Nobody can buy a better image.",
+        "d": "A listing can show only two checked facts: registration with the trade register (ONRC) and insurance seen by a moderator.",
+        "e": "Response statistics (how often and how quickly the business answers) appear only after ten answered enquiries, are calculated daily and cannot be bought."
+      },
+      "h1": "Paid placement",
+      "p1": "If a business pays for a position, the listing carries the label “Featured — paid placement”, written as visibly as the business name. The label says one thing only: that the position was paid for. It does not say the business is better and it does not change what you learn about it.",
+      "note1": "For planners EventDesk is free. We take no commission on what you pay suppliers.",
+      "h2": "Unclaimed listings",
+      "p2": "A listing marked “Added by EventDesk — not claimed yet” comes from a public source, shown on its page. Its contact is shown as the business publishes it; EventDesk does not broker the contact.",
+      "p3": "If you see something wrong or unlawful on a listing, use “Report” on its page."
+    }
+  },
+  "report-content": {
+    "title": "Report illegal content or an unlawful listing",
+    "summary": "Anyone can flag a problem. You do not need an account and you receive a reference for your report.",
+    "keywords": "report illegal content unlawful listing abuse complaint reference moderator",
+    "where": "The “Report illegal content” page",
+    "body": {
+      "ol1": {
+        "a": "Open the report form from “Contact and reporting” or from the “Report” link on a listing's page (the listing is then filled in already).",
+        "b": "Choose what kind of problem it is.",
+        "c": "Under “What is wrong”, say briefly what you saw and why you think it is illegal, in at least 10 characters.",
+        "d": "Press “Send the report”.",
+        "e": "Write down the reference shown. Keep it if you want to come back to the report."
+      },
+      "p1": "The report is read by an EventDesk moderator. The form's page tells you, step by step, what happens to it and points you to the moderation rules.",
+      "note1": "You do not need an account to report.",
+      "h1": "When to use something else",
+      "ul1": {
+        "a": "You are the business in an unclaimed listing and want it removed or corrected: use “Ask for removal or a correction” on its page.",
+        "b": "You have a problem with an invitation or an event: write to the host.",
+        "c": "Something is not working in the app: check “Service status” under “Contact and reporting”."
+      }
+    }
+  }
+}

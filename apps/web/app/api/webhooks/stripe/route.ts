@@ -1,7 +1,7 @@
 import { handleStripeWebhook, stripeConfig } from "@ed/core/billing";
 import { systemCtx } from "@ed/core/context";
 import { getDb } from "@ed/db";
-import { isAppError } from "@ed/shared/errors";
+import { describeError, isAppError } from "@ed/shared/errors";
 
 export const dynamic = "force-dynamic";
 
@@ -19,6 +19,9 @@ const STATUS: Record<string, number> = { UNAUTHENTICATED: 401, VALIDATION: 400, 
  */
 export async function POST(request: Request): Promise<Response> {
   if (!stripeConfig().webhookSecret) return new Response(null, { status: 404 });
+  // refuse an oversized body by its declared length, before any of it is read
+  const declared = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > 1_000_000) return Response.json({ ok: false }, { status: 413 });
   const rawBody = await request.text();
   if (rawBody.length > 1_000_000) return Response.json({ ok: false }, { status: 413 });
   try {
@@ -26,7 +29,7 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ ok: true, status: result.status });
   } catch (e) {
     if (isAppError(e)) return Response.json({ ok: false }, { status: STATUS[e.code] ?? 400 });
-    console.error("[billing] webhook failed", e instanceof Error ? e.message : e);
+    console.error("[billing] webhook failed", describeError(e));
     return Response.json({ ok: false }, { status: 500 });
   }
 }

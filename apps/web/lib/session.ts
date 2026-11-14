@@ -3,6 +3,7 @@ import { DEVICE_COOKIE, resolveSession, safeNextPath, SESSION_COOKIE, withNext, 
 import { makeCtx, type AccountActor, type Actor } from "@ed/core/context";
 import { getDb } from "@ed/db";
 import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE_SECONDS, toLocale } from "@ed/i18n/config";
+import { describeError } from "@ed/shared/errors";
 import { randomToken } from "@ed/shared/ids";
 import { cookies, headers } from "next/headers";
 import { cache } from "react";
@@ -44,7 +45,7 @@ export const getCurrentSession = cache(async (): Promise<SessionInfo | null> => 
     const ctx = makeCtx(getDb(), { kind: "anonymous" });
     return await resolveSession(ctx, token, { allowPending: true });
   } catch (e) {
-    console.error("[session] could not resolve the session", e instanceof Error ? e.message : e);
+    console.error("[session] could not resolve the session", describeError(e));
     return null;
   }
 });

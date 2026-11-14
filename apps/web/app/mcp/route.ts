@@ -1,5 +1,6 @@
 import { getDb } from "@ed/db";
 import { handleMcpRequest } from "@ed/mcp";
+import { clientIpFrom } from "@/lib/client-ip";
 
 // The MCP endpoint (MCP8): APP_URL/mcp, Streamable HTTP, stateless.
 // It authenticates ONLY with `Authorization: Bearer <personal token>` and never reads the
@@ -10,8 +11,7 @@ export const dynamic = "force-dynamic";
 export const runtime = "nodejs";
 
 function clientIp(request: Request): string | undefined {
-  const name = (process.env.TRUSTED_IP_HEADER ?? "x-forwarded-for").toLowerCase();
-  return request.headers.get(name)?.split(",")[0]?.trim() || undefined;
+  return clientIpFrom((name) => request.headers.get(name));
 }
 
 function handle(request: Request): Promise<Response> {

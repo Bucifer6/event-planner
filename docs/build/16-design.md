@@ -1,12 +1,19 @@
 # 16 — "Maison": the EventDesk design language
 
+**What this is, in plain English.** The look and feel of EventDesk, written down so every
+screen is built the same way: the few rules behind the style, the fixed list of sizes and
+colours, and the ready-made building blocks (buttons, forms, cards) that all screens use. If
+you are not building a screen you only need the first section.
+
 EventDesk should feel like stationery from a couture house, not like software: ivory paper,
 midnight ink, a single hairline of gilt. It replaces the PRD §21 "Garden Soirée" look (owner's
 decision). The behavioural gates of §21 remain: AA contrast, 44px targets, phone first, honest paid
 label, "unknown" never shown as zero.
 
 Everything lives in `packages/ui` (`@ed/ui`): `tokens.css`, `base.css`, `components.css`,
-`shell.css`, `components.tsx` (server-safe), `client.tsx` (interactive), `icons.tsx`.
+`shell.css` (all four bundled by `styles.css`), `components.tsx` (server-safe), `client.tsx`
+(interactive), `icons.tsx`, and the two typefaces as self-hosted `.woff2` files in `fonts/`
+with their licence texts (SIL Open Font License 1.1). Nothing is loaded from another site.
 
 ## The idea in five rules
 
@@ -34,6 +41,9 @@ Everything lives in `packages/ui` (`@ed/ui`): `tokens.css`, `base.css`, `compone
   --attention(-tint)`. Dark mode ("Minuit") is automatic via `prefers-color-scheme`; force it on a
   subtree with `data-theme="dark"` (event-day view does this).
 - `--tap` 48px controls · `--measure` 65ch text column · `--page` 1120px · `--page-narrow` 640px.
+- Also defined: `--radius` (2px) · `--hair` (hairline width) · `--focus` (focus ring) ·
+  `--overlay` (behind sheets) · `--font-display`, `--font-text` · motion `--t-in`, `--t-out`,
+  `--ease`.
 
 Contrast pairs (WCAG 2.2 AA, all ≥ 4.5:1): ink/paper 16.3 · ink-2/paper 8.0 · ink-3/paper 5.3 ·
 on-accent/accent 13.6 · danger/paper 7.0 · success/paper 6.6 · attention/paper 6.0 · gilt-ink/paper
@@ -64,7 +74,15 @@ Status and data: `Tag` (tone neutral|success|danger|attention|accent), `Fact`, `
 Overlays: `Sheet`, `SheetTrigger` (bottom sheet on phones, side panel ≥720px; never a centred
 dialog). Put the primary button last in `footer`.
 
-Brand and guest: `Wordmark`, `Seal`, `Invitation`, `StepProgress`, `Ornament` (icons).
+Brand and guest: `Wordmark`, `Seal`, `Invitation`, `StepProgress`; `Ornament` and 59 line
+icons (`IconPlus`, `IconCalendar`, `IconGuests`, `IconQr`…) from `@ed/ui/icons`.
+
+Also exported: `VisuallyHidden` (text for screen readers only) and the bare controls `Input`,
+`Select`, `Textarea` for building a custom `Field`.
+
+Classes without a component: `.ed-tabs`/`.ed-tab`, `.ed-bars`, `.ed-tablewrap` (scrolling
+tables), `.ed-chips`/`.ed-chip`, `.ed-topnav`, `.ed-navlink`, `.ed-skip` (skip link),
+`.ed-spinner`, `.ed-input--code` (the six-digit code box), `.ed-hide-sm`, `.ed-vh`.
 
 Frames (classes in `shell.css`): `.ed-topbar`, `.ed-bottomnav`, `.ed-masthead`, `.ed-rail`,
 `.ed-solo` (auth and guest pages), `.ed-console`, public site `.ed-hero`, `.ed-plate`, `.ed-band`,
@@ -72,6 +90,33 @@ Frames (classes in `shell.css`): `.ed-topbar`, `.ed-bottomnav`, `.ed-masthead`, 
 
 Special surfaces: `.ed-board` (columns), `.ed-plan` (blueprint: venue tables solid, custom tables
 dashed, POIs gilt), `.ed-now` + `.ed-clock` (event day).
+
+## Surfaces built on top of the system
+
+These live outside `packages/ui` but follow its tokens.
+
+- **The plan surface** (`apps/web/components/plan/`): `PlanSvg` (server-rendered, read-only),
+  `PlanView` (read-only, interactive) and `SeatingEditor` (the layout and seating editor).
+  The drawing is a blueprint: venue tables solid, the planner's own tables dashed, points of
+  interest in gilt, unknown dimensions marked rather than guessed. In the editor a dragged
+  item is magnified and lifted above the finger, has a grip of at least 44 px, snaps to a
+  10 cm grid and to walls and neighbours, and is cancelled by dropping it back; every move can
+  also be made by selecting the item and using on-screen controls. Geometry comes from
+  `@ed/core/spacemodel`, which can also draw the same scene into a PDF.
+- **The stationery kit** (`packages/core/src/stationerykit.ts`): eight original typographic
+  designs, each with colourways, for invitation (A5 and square), save-the-date, menu, table
+  card, place card and thank-you card. One layout engine feeds two renderers — an SVG proof
+  on screen and live vector text in the print PDF — measured with the same font files, so the
+  proof is the print. It uses Bodoni Moda and Hanken Grotesk as TrueType files and falls back
+  to DejaVu when they cannot be found. No stock art or imagery.
+- **The arrangement sketch** (`packages/core/src/arrangementkit.ts`): a stylised preview of a
+  flower arrangement, labelled as a sketch of proportions and colours, never as a picture of
+  the final result.
+- **Shell and shared pieces** (`apps/web/components/`): `shell/AppShell`, `shell/OccasionFrame`,
+  `whatif/PreviewPanel`, `upload/FileField`, `cookie-notice`, `incident-banner`, `pwa`,
+  `offline`, and `help` (the help centre).
+- **The public site** (`apps/public/components/`): `site-shell`, `legal-page`, `doc`,
+  `vignettes`, built from the frame classes below.
 
 ## Screen recipes
 

@@ -3,7 +3,7 @@ import { audit } from "@ed/core/audit";
 import { requireAccount, type Ctx } from "@ed/core/context";
 import { enforceRateLimit, limitCodeEntry } from "@ed/core/ratelimit";
 import { inTx } from "@ed/core/tx";
-import { accounts, and, count, eq, isNotNull, isNull, passkeyCredentials, recoveryCodes, sessions, totpSecrets } from "@ed/db";
+import { accounts, and, count, eq, isNotNull, isNull, lt, or, passkeyCredentials, recoveryCodes, sessions, totpSecrets } from "@ed/db";
 import { AppError } from "@ed/shared/errors";
 import { hashToken } from "@ed/shared/ids";
 import * as OTPAuth from "otpauth";
@@ -124,8 +124,14 @@ async function checkTotp(ctx: Ctx, accountId: string, code: string, requireEnabl
   if (delta === null) return false;
   const step = Math.floor(ctx.now.getTime() / 1000 / PERIOD) + delta;
   if (row.lastUsedStep !== null && step <= row.lastUsedStep) return false;
-  await ctx.db.update(totpSecrets).set({ lastUsedStep: step }).where(eq(totpSecrets.id, row.id));
-  return true;
+  // Claim the step in one conditional UPDATE: of two requests carrying the same code at the
+  // same moment, only one finds the step still unused.
+  const claimed = await ctx.db
+    .update(totpSecrets)
+    .set({ lastUsedStep: step })
+    .where(and(eq(totpSecrets.id, row.id), or(isNull(totpSecrets.lastUsedStep), lt(totpSecrets.lastUsedStep, step))))
+    .returning({ id: totpSecrets.id });
+  return claimed.length === 1;
 }
 
 /**

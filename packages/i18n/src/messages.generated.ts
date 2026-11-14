@@ -32,6 +32,20 @@ import ro_gifts from "../messages/ro/gifts.json";
 import ro_guestevent from "../messages/ro/guestevent.json";
 import ro_guests from "../messages/ro/guests.json";
 import ro_guides from "../messages/ro/guides.json";
+import ro_help from "../messages/ro/help.json";
+import ro_helpAccount from "../messages/ro/helpAccount.json";
+import ro_helpBusiness from "../messages/ro/helpBusiness.json";
+import ro_helpGuests from "../messages/ro/helpGuests.json";
+import ro_helpInvited from "../messages/ro/helpInvited.json";
+import ro_helpMoney from "../messages/ro/helpMoney.json";
+import ro_helpPlan from "../messages/ro/helpPlan.json";
+import ro_helpPrivacy from "../messages/ro/helpPrivacy.json";
+import ro_helpSpace from "../messages/ro/helpSpace.json";
+import ro_helpStaff from "../messages/ro/helpStaff.json";
+import ro_helpStart from "../messages/ro/helpStart.json";
+import ro_helpSuppliers from "../messages/ro/helpSuppliers.json";
+import ro_helpTravel from "../messages/ro/helpTravel.json";
+import ro_helpTrouble from "../messages/ro/helpTrouble.json";
 import ro_ledger from "../messages/ro/ledger.json";
 import ro_legal from "../messages/ro/legal.json";
 import ro_lifecycle from "../messages/ro/lifecycle.json";
@@ -93,6 +107,20 @@ import en_gifts from "../messages/en/gifts.json";
 import en_guestevent from "../messages/en/guestevent.json";
 import en_guests from "../messages/en/guests.json";
 import en_guides from "../messages/en/guides.json";
+import en_help from "../messages/en/help.json";
+import en_helpAccount from "../messages/en/helpAccount.json";
+import en_helpBusiness from "../messages/en/helpBusiness.json";
+import en_helpGuests from "../messages/en/helpGuests.json";
+import en_helpInvited from "../messages/en/helpInvited.json";
+import en_helpMoney from "../messages/en/helpMoney.json";
+import en_helpPlan from "../messages/en/helpPlan.json";
+import en_helpPrivacy from "../messages/en/helpPrivacy.json";
+import en_helpSpace from "../messages/en/helpSpace.json";
+import en_helpStaff from "../messages/en/helpStaff.json";
+import en_helpStart from "../messages/en/helpStart.json";
+import en_helpSuppliers from "../messages/en/helpSuppliers.json";
+import en_helpTravel from "../messages/en/helpTravel.json";
+import en_helpTrouble from "../messages/en/helpTrouble.json";
 import en_ledger from "../messages/en/ledger.json";
 import en_legal from "../messages/en/legal.json";
 import en_lifecycle from "../messages/en/lifecycle.json";
@@ -157,6 +185,20 @@ export const messagesByLocale = {
     "guestevent": ro_guestevent,
     "guests": ro_guests,
     "guides": ro_guides,
+    "help": ro_help,
+    "helpAccount": ro_helpAccount,
+    "helpBusiness": ro_helpBusiness,
+    "helpGuests": ro_helpGuests,
+    "helpInvited": ro_helpInvited,
+    "helpMoney": ro_helpMoney,
+    "helpPlan": ro_helpPlan,
+    "helpPrivacy": ro_helpPrivacy,
+    "helpSpace": ro_helpSpace,
+    "helpStaff": ro_helpStaff,
+    "helpStart": ro_helpStart,
+    "helpSuppliers": ro_helpSuppliers,
+    "helpTravel": ro_helpTravel,
+    "helpTrouble": ro_helpTrouble,
     "ledger": ro_ledger,
     "legal": ro_legal,
     "lifecycle": ro_lifecycle,
@@ -220,6 +262,20 @@ export const messagesByLocale = {
     "guestevent": en_guestevent,
     "guests": en_guests,
     "guides": en_guides,
+    "help": en_help,
+    "helpAccount": en_helpAccount,
+    "helpBusiness": en_helpBusiness,
+    "helpGuests": en_helpGuests,
+    "helpInvited": en_helpInvited,
+    "helpMoney": en_helpMoney,
+    "helpPlan": en_helpPlan,
+    "helpPrivacy": en_helpPrivacy,
+    "helpSpace": en_helpSpace,
+    "helpStaff": en_helpStaff,
+    "helpStart": en_helpStart,
+    "helpSuppliers": en_helpSuppliers,
+    "helpTravel": en_helpTravel,
+    "helpTrouble": en_helpTrouble,
     "ledger": en_ledger,
     "legal": en_legal,
     "lifecycle": en_lifecycle,

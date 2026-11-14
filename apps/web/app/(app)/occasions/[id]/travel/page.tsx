@@ -13,6 +13,7 @@ import { orNotFound } from "../../_lib/load";
 import { duration } from "./_components/LegTimes";
 import { Tabs, travelTabs } from "./_components/Tabs";
 import styles from "./_components/travel.module.css";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("travel"))("title") };
@@ -39,6 +40,7 @@ export default async function TravelHub({ params }: { params: Promise<{ id: stri
   return (
     <div className={styles.stack}>
       <PageHeader level={2} eyebrow={t("eyebrow")} title={t("title")} description={t("description")} />
+      <HelpLink topic="travel" />
       {next ? (
         <Card framed>
           <div className={styles.heroBody}>

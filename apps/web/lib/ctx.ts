@@ -7,6 +7,7 @@ import { getLocale } from "next-intl/server";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { cache } from "react";
+import { clientIpFrom } from "./client-ip";
 import { resolveActor } from "./session";
 
 export const SIGN_IN_PATH = "/sign-in";
@@ -14,13 +15,12 @@ export const SIGN_IN_PATH = "/sign-in";
 /**
  * Client IP as reported by the reverse proxy. Which header is trustworthy depends on the
  * hosting vendor (operator decision, INF9): TRUSTED_IP_HEADER names it, default
- * x-forwarded-for (first hop).
+ * x-forwarded-for — the entry our own ingress appended, never one the client sent
+ * (see lib/client-ip.ts).
  */
 async function clientIp(): Promise<string | undefined> {
   const h = await headers();
-  const name = (process.env.TRUSTED_IP_HEADER ?? "x-forwarded-for").toLowerCase();
-  const value = h.get(name)?.split(",")[0]?.trim();
-  return value || undefined;
+  return clientIpFrom((name) => h.get(name));
 }
 
 /**

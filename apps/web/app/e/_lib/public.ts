@@ -5,6 +5,7 @@ import { headers } from "next/headers";
 import { unstable_rethrow } from "next/navigation";
 import type { z } from "zod";
 import { formDataToObject, runAction, type ActionResult, type Translator } from "@/lib/action-core";
+import { clientIpFrom } from "@/lib/client-ip";
 import { guestTranslator } from "@/lib/guest";
 
 // The public event page (/e/<slug>) never depends on an account or a cookie: the visitor is
@@ -21,8 +22,7 @@ export function publicLocale(requested: string | string[] | undefined): Locale {
 
 async function clientIp(): Promise<string | undefined> {
   const h = await headers();
-  const name = (process.env.TRUSTED_IP_HEADER ?? "x-forwarded-for").toLowerCase();
-  return h.get(name)?.split(",")[0]?.trim() || undefined;
+  return clientIpFrom((name) => h.get(name));
 }
 
 export async function publicCtx(locale: Locale): Promise<Ctx> {

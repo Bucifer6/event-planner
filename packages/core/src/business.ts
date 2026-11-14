@@ -20,7 +20,7 @@ import {
 } from "@ed/db";
 import { registerTemplate, sendEmail } from "@ed/email";
 import { defineJob, enqueue } from "@ed/jobs";
-import { AppError } from "@ed/shared/errors";
+import { AppError, describeError } from "@ed/shared/errors";
 import { hashToken, randomToken } from "@ed/shared/ids";
 import { addDays, bucharestDateKey } from "@ed/shared/time";
 import { zEmail, zId } from "@ed/shared/zod";
@@ -320,7 +320,7 @@ export async function emailBusinessOwner(
     });
   } catch (e) {
     // the in-app notice is the record; a suppressed or failing address must not loop the job
-    console.error("[business] notice email failed", e instanceof Error ? e.message : e);
+    console.error("[business] notice email failed", describeError(e));
   }
 }
 

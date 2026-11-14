@@ -1,0 +1,45 @@
+{
+  "itinerary": {
+    "title": "Itinerarul unui voiaj",
+    "summary": "Etapele drumului, fiecare cu ora locului și, alături, ora României. Poți importa o rezervare în loc să o scrii.",
+    "keywords": "itinerar voiaj călătorie etapă zbor fus orar import rezervare ics confirmare",
+    "where": "Ocazia ta → Itinerar și cazare → Itinerar",
+    "need": "Echipa de planificare a ocaziei.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Itinerar și cazare” și mergi la „Itinerar”.",
+        "b": "Apasă „Adaugă o etapă” și scrie ce este, de unde, până unde și la ce ore.",
+        "c": "Repetă pentru fiecare zbor, tren, drum sau cazare."
+      },
+      "note1": "Fiecare oră apare în fusul locului și, alături, în ora României. Data ocaziei este în ora României; etapele își păstrează fiecare fusul orar al locului.",
+      "h1": "Importă o rezervare",
+      "ol2": {
+        "a": "Apasă „Importă o rezervare”.",
+        "b": "Lipește confirmarea primită sau alege fișierul .ics (sub 300 KB). Fișierul este citit pe dispozitivul tău.",
+        "c": "Apasă „Arată ce s-ar adăuga”.",
+        "d": "Verifică previzualizarea și confirm-o."
+      },
+      "note2": "Citim doar ce e sigur — date, ore, numere de zbor, codul rezervării. Ce nu putem citi cu siguranță rămâne de completat de tine, nu ghicim.",
+      "p1": "Pagina principală „Itinerar și cazare” îți arată etapa următoare sau pe cea în desfășurare, cu ambele ore."
+    }
+  },
+  "trip-groups-rooms": {
+    "title": "Grupuri, bagaje, transport și camere",
+    "summary": "Împarți oamenii pe grupuri, pe mașini și pe camere, fără ca un loc sau un pat să fie dat de două ori.",
+    "keywords": "grupuri activități bagaje listă transport mașini microbuz locuri camere cazare paturi decontare",
+    "where": "Ocazia ta → Itinerar și cazare",
+    "need": "Echipa de planificare a ocaziei. „Decontare” cere accesul „Finanțe”.",
+    "body": {
+      "ul1": {
+        "a": "„Grupuri și activități” — apasă „Adaugă un grup” ca să împarți oamenii pe grupuri mai mici și „Adaugă o activitate” pentru lucruri la care se înscrie cine vrea.",
+        "b": "„Bagaje” — apasă „Listă nouă”. Fiecare listă este o sarcină cu bife: o găsești și la „Sarcini”, cu aceleași bife.",
+        "c": "„Transport” — apasă „Adaugă un vehicul” pentru mașini, microbuze sau transferuri și vezi cine merge cu ce.",
+        "d": "„Camere” — apasă „Adaugă o cameră”, apoi alege camera, bifează oamenii și apasă „Cazează aici”.",
+        "e": "„Decontare” — cine a plătit, cine datorează și cine cui dă, separat pe fiecare monedă."
+      },
+      "note1": "Un loc în mașină este luat o singură dată, chiar dacă doi apasă în același timp. La fel, un pat nu poate fi dat de două ori: al doilea vede câte au rămas libere.",
+      "p1": "Dacă bifezi la o cameră pe cineva cazat deja în alta, îl muți în camera nouă.",
+      "note2": "Decontarea folosește același registru ca „Cheltuieli comune”. Sumele în monede diferite nu se amestecă."
+    }
+  }
+}

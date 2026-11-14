@@ -1,4 +1,5 @@
 import { createHmac, timingSafeEqual } from "node:crypto";
+import { isIP } from "node:net";
 import {
   and,
   eq,
@@ -87,8 +88,37 @@ export function backoffExtraMs(strikes: number): number {
   return Math.min(BACKOFF_CAP_MS, BACKOFF_STEP_MS * 2 ** (strikes - 2));
 }
 
+/**
+ * The unit one visitor is counted under on the IP axis. An IPv4 address is itself; an IPv6
+ * address is its /64 — the block a single subscriber is handed, inside which they can pick
+ * 2^64 different addresses at will. Counting each one separately would make every per-IP
+ * limit (SEC11, SEC16) free to step around. IPv4-mapped IPv6 counts as the IPv4 address.
+ */
+export function ipRateLimitKey(ip: string): string {
+  const v = ip.trim().toLowerCase().replace(/^\[|\]$/g, "").split("%")[0] ?? "";
+  if (isIP(v) !== 6) return v;
+  const mapped = /^::ffff:(\d{1,3}(?:\.\d{1,3}){3})$/.exec(v);
+  if (mapped) return mapped[1]!;
+  const dotted = /^(.*:)(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/.exec(v);
+  const hex = dotted
+    ? `${dotted[1]}${((Number(dotted[2]) << 8) | Number(dotted[3])).toString(16)}:${((Number(dotted[4]) << 8) | Number(dotted[5])).toString(16)}`
+    : v;
+  const [head = "", tail] = hex.split("::");
+  const left = head === "" ? [] : head.split(":");
+  const right = tail === undefined || tail === "" ? [] : tail.split(":");
+  const fill = tail === undefined ? 0 : Math.max(0, 8 - left.length - right.length);
+  const groups = [...left, ...Array<string>(fill).fill("0"), ...right].map((g) => parseInt(g, 16));
+  if (groups.length !== 8 || groups.some((g) => !Number.isInteger(g) || g < 0 || g > 0xffff)) return v;
+  if (groups.slice(0, 5).every((g) => g === 0) && groups[5] === 0xffff) {
+    return `${groups[6]! >> 8}.${groups[6]! & 0xff}.${groups[7]! >> 8}.${groups[7]! & 0xff}`;
+  }
+  return `${groups.slice(0, 4).map((g) => g.toString(16)).join(":")}::/64`;
+}
+
 function normaliseKey(axis: RateLimitAxis, key: string): string {
-  return axis === "email" ? key.trim().toLowerCase() : key.trim();
+  if (axis === "email") return key.trim().toLowerCase();
+  if (axis === "ip") return ipRateLimitKey(key);
+  return key.trim();
 }
 
 function rateLimited(retryAt: Date): AppError {

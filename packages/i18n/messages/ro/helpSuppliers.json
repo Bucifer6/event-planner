@@ -1,0 +1,129 @@
+{
+  "suppliers": {
+    "title": "Furnizori: de la întrebare la livrare",
+    "summary": "Toți cei care lucrează pentru ocazia ta într-un singur loc: starea rezervării, ce ați stabilit și plățile de urmărit.",
+    "keywords": "furnizori rezervare ofertă contract plăți termen de plată avans formație fotograf restaurant comandă finală",
+    "where": "Ocazia ta → Furnizori",
+    "need": "Echipa de planificare vede furnizorii. Sumele și plățile le văd doar cei cu accesul „Finanțe”.",
+    "body": {
+      "ol1": {
+        "a": "Apasă „Adaugă un furnizor”.",
+        "b": "Scrie „Numele furnizorului” și „Ce face” (de exemplu formație, catering, flori). Contactul și notele sunt opționale.",
+        "c": "Apasă „Adaugă furnizorul”, apoi deschide-l din listă.",
+        "d": "La „Starea rezervării” urmărești unde ați ajuns: „Întrebat”, „Ofertă primită”, „Rezervat”, „Confirmat”, „Livrat”.",
+        "e": "La „Ce ați stabilit” apasă „Modifică înțelegerea” ca să scrii „Suma convenită (RON)” și notele, sau „Încarcă oferta” pentru un PDF, PNG ori JPG."
+      },
+      "note1": "Dacă nu știi încă suma, las-o goală: rămâne „necunoscut”, nu zero. Suma convenită intră în buget la „Angajat”.",
+      "h1": "Plăți și comanda finală",
+      "p1": "La „Plăți”, apasă „Adaugă un termen de plată” pentru fiecare tranșă. Când ai plătit, apasă „Marchează ca plătită”. Dacă vrei să muți o plată, „Mută data” îți arată întâi ce se schimbă. O plată marcată din greșeală se îndreaptă doar cu „Corectează plata”.",
+      "p2": "Când ați bătut palma pe cantități, apasă „Fixează comanda finală”. Numărul de invitați confirmați în acel moment se păstrează lângă comandă, iar răspunsurile schimbate ulterior apar la „Schimbări după comanda finală”.",
+      "note2": "O rezervare anulată cu „Anulează rezervarea” poate fi redeschisă oricând. Un furnizor adăugat din greșeală poate fi șters cât timp nu are un briefing publicat, o comandă finală sau plăți."
+    }
+  },
+  "enquiries-and-quotes": {
+    "title": "Găsește firme și trimite o cerere",
+    "summary": "Cauți în lista de firme, scrii unei firme direct din EventDesk și primești răspunsul în planul tău.",
+    "keywords": "firme director caută cerere ofertă mesaj furnizor florărie acceptă oferta email privat",
+    "where": "Firme → o listare → Trimite o cerere · Ocazia ta → Furnizori",
+    "need": "Un cont și cel puțin o ocazie. Echipa de planificare poate trimite cereri.",
+    "body": {
+      "ol1": {
+        "a": "Deschide „Firme”, alege „Categorie”, „Județ” și, dacă vrei, „Localitate”, apoi apasă „Caută firme”.",
+        "b": "Deschide o listare și apasă „Trimite o cerere”. La florării și decor poți apăsa „Cere o ofertă pentru flori”.",
+        "c": "Verifică formularul. Am completat ce știam din planul tău: tipul ocaziei, data, numărul aproximativ de invitați, zona. Poți schimba orice.",
+        "d": "Scrie mesajul. Bifează „Trimite și adresa mea de email” doar dacă vrei să primești răspunsul și pe email.",
+        "e": "Apasă „Trimite cererea”."
+      },
+      "note1": "Firma primește exact ce vezi în formular și nimic altceva. Numele tău, lista de invitați, bugetul planului și restul planului rămân private. Dacă nu bifezi adresa de email, firma îți răspunde doar aici, în EventDesk.",
+      "h1": "Unde vezi răspunsul",
+      "p1": "Firma apare ca furnizor în planul ocaziei, iar cererea stă la ea, în „Cereri trimise”. Acolo citești mesajele, răspunzi cu „Trimite mesajul” și descarci oferta în PDF.",
+      "p2": "Dacă oferta îți convine, apasă „Acceptă oferta”. Rezervarea devine „Rezervat”, iar suma convenită intră în buget ca angajată. Dacă nu o știi încă, las-o goală.",
+      "note2": "Poți trimite cel mult 10 cereri pentru o ocazie și 30 pe zi. O cerere fără răspuns după 7 zile poate fi retrimisă o singură dată.",
+      "p3": "O listare marcată „Adăugat de EventDesk — nefiind revendicat încă” nu primește cereri prin EventDesk; contactul apare așa cum îl publică firma."
+    }
+  },
+  "supplier-briefing": {
+    "title": "Briefingul și linkul furnizorului",
+    "summary": "Scrii o dată ce trebuie să știe furnizorul, îi trimiți un link și vezi când a confirmat că a înțeles.",
+    "keywords": "briefing furnizor link versiune publică confirmă confirmare acces parcare mențiuni",
+    "where": "Ocazia ta → Furnizori → un furnizor → Briefing",
+    "need": "Organizatorul, managerii de proiect și coordonatorii.",
+    "body": {
+      "ol1": {
+        "a": "Deschide furnizorul și apasă „Scrie briefingul”.",
+        "b": "Completează ce trebuie să știe: ore, loc, ce are de făcut și „Mențiuni speciale” (acces, parcare, restricții, alergii).",
+        "c": "Apasă „Publică versiunea 1”.",
+        "d": "La „Link pentru furnizor”, apasă „Generează linkul”, copiază-l și trimite-l furnizorului.",
+        "e": "Furnizorul deschide linkul, citește și apasă „Am primit și am înțeles briefingul”. Tu vezi cine a confirmat și când."
+      },
+      "note1": "După publicare, versiunea nu se mai modifică. Dacă se schimbă ceva, publici o versiune nouă, iar furnizorul vede ce s-a schimbat față de versiunea pe care a confirmat-o.",
+      "h1": "Ce vede furnizorul prin link",
+      "p1": "Doar propria rezervare: briefingul, comanda finală și livrările lui. Nu vede prețuri, invitați sau alți furnizori și nu are nevoie de cont.",
+      "note2": "Linkul nu poate fi afișat din nou, fiindcă îl păstrăm doar cifrat. Dacă l-ai pierdut, apasă „Generează un link nou” — cel vechi încetează să funcționeze.",
+      "p2": "Nevoile alimentare ajung în briefing doar ca numere (de exemplu „3 × fără gluten”), trimise din „Cereri private”."
+    }
+  },
+  "deliveries": {
+    "title": "Livrări și retururi",
+    "summary": "Ce urmează să sosească, ce închiriezi și ce trebuie dus înapoi — cu cantitățile primite înregistrate ca fapte.",
+    "keywords": "livrări retururi închiriere scaune primit cantitate corectează parțială returnată",
+    "where": "Ocazia ta → Livrări și retururi",
+    "need": "Echipa de planificare adaugă livrări. Oricine din echipă poate înregistra ce a sosit.",
+    "body": {
+      "ol1": {
+        "a": "Apasă „Adaugă o livrare” și scrie „Ce se livrează”, ziua, intervalul și locul unde ajunge.",
+        "b": "Apasă „Adaugă livrarea”.",
+        "c": "În livrare, apasă „Adaugă un articol” pentru fiecare lucru așteptat, cu cantitatea lui.",
+        "d": "Când sosește marfa, scrie la „Câte au sosit” și apasă „Înregistrează primirea”."
+      },
+      "p1": "Starea livrării se schimbă singură: „Așteptată”, „Parțială”, „Primită” și, pentru lucrurile închiriate, „Returnată”.",
+      "note1": "Cantitatea primită este un fapt. Dacă ai greșit, apasă „Corectează cantitatea primită”, scrie cantitatea corectă și „Motivul corecției”, apoi „Salvează corecția”. Vechea valoare rămâne la „Istoricul corecțiilor”. La fel se corectează și cantitatea returnată.",
+      "p2": "Livrările din ziua evenimentului apar și în „Ziua evenimentului”, la „Livrări azi”. Furnizorul își vede livrările prin linkul lui."
+    }
+  },
+  "event-day": {
+    "title": "Ziua evenimentului",
+    "summary": "O singură pagină pentru ziua cea mare: ceasul, programul, livrările, contactele și decizia „suntem gata?”.",
+    "keywords": "ziua evenimentului program moment începe gata așteptare contacte decizie pregătire continuăm amânăm ceas",
+    "where": "Ocazia ta → Ziua evenimentului",
+    "need": "Oricine din echipă vede pagina. Decizia de pregătire o înregistrează organizatorul sau managerii de proiect.",
+    "body": {
+      "p1": "Pagina are fundal închis, ca să se vadă bine afară și seara, și se reîmprospătează singură la fiecare 30 de secunde.",
+      "ol1": {
+        "a": "La „Programul zilei” vezi momentele în ordinea orelor. Adaugi unul cu „Adaugă un moment”.",
+        "b": "Pe măsură ce ziua înaintează, apasă „Începe”, „În așteptare” sau „Gata” la fiecare moment. Cu „Redeschide” îl aduci înapoi.",
+        "c": "La „Livrări azi” vezi ce trebuie să sosească, iar la „Contacte” numerele oamenilor de care ai nevoie."
+      },
+      "note1": "Un moment este o sarcină obișnuită, cu termen în această zi: apare și în lista de sarcini.",
+      "h1": "Decizia de pregătire",
+      "p2": "Înainte de eveniment, apasă „Înregistrează o decizie”. La „Suntem gata?” alegi „Continuăm”, „Continuăm cu condiții” sau „Amânăm” și notezi pe ce te bazezi. Pentru „Continuăm cu condiții” scrii ce trebuie să fie adevărat.",
+      "note2": "Decizia rămâne în istoric cu numele celui care a luat-o și data. Dacă situația se schimbă, înregistrezi o decizie nouă; cea veche nu se șterge.",
+      "p3": "Pentru sosirea invitaților, mergi la „Repetiție și sosiri”."
+    }
+  },
+  "check-in": {
+    "title": "Repetiție și sosiri (check-in)",
+    "summary": "Parcurgi ziua pas cu pas înainte de eveniment, apoi înregistrezi sosirile cu o atingere sau cu codul QR.",
+    "keywords": "check-in sosiri repetiție qr scanează a sosit corectează lista mea bife sustenabilitate",
+    "where": "Ocazia ta → Repetiție și sosiri",
+    "need": "Oricine din echipă poate înregistra sosiri și își poate bifa propriile sarcini.",
+    "body": {
+      "h1": "Înainte: repetiția",
+      "p1": "„Repetiția zilei” te trece prin tot ce are oră în acea zi și îți arată ce se suprapune, fără să schimbe nimic.",
+      "h2": "În ziua evenimentului: check-in",
+      "ol1": {
+        "a": "Deschide „Check-in”.",
+        "b": "Scrie în „Caută familia după nume” sau apasă „Scanează codul QR” și ține codul de pe invitație în fața camerei.",
+        "c": "Apasă „A sosit”. O atingere înregistrează sosirea, cu ora ei."
+      },
+      "p2": "Dacă dispozitivul nu poate citi coduri cu camera, scrie „Codul de pe invitație” de mână și apasă „Înregistrează”. Sus vezi mereu câte persoane și câte familii au sosit.",
+      "note1": "O sosire este un fapt. O poți schimba doar cu „Corectează”: alegi adulții și copiii sosiți sau „Nu a sosit de fapt (anulează sosirea)”, scrii „Motivul corecturii” și apeși „Salvează corectura”. Vechea valoare rămâne în istoric.",
+      "h3": "Tot aici",
+      "ul1": {
+        "a": "„Lista mea” — bifele sarcinilor de care răspunzi tu. Merge și fără internet.",
+        "b": "„Sincronizare” — ce așteaptă pe acest dispozitiv și ce are nevoie de decizia ta.",
+        "c": "„Sustenabilitate” — obiective urmărite cu cantități măsurate. Ce nu s-a măsurat rămâne „Necunoscut”."
+      }
+    }
+  }
+}

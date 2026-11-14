@@ -250,6 +250,10 @@ describe("dormant billing with the switch forced ON in a test database (P24–P2
       return { ok: true, status: 200, json: async () => ({ id: "cs_test_1", url: "https://checkout.stripe.test/c/cs_test_1" }) };
     };
     const on = at(owner.ctx, ON_AT);
+    // S4 (security review 14 Nov 2026, F-09): a purchase needs a fresh confirmation — the owner's is months old by now
+    expect(await code(createCheckoutSession(on, { businessId: business.id, plan: "business_monthly" }, { config, fetcher }))).toBe("FORBIDDEN:account.errors.freshAuthRequired");
+    expect(calls).toHaveLength(0);
+    await t.db.insert(sessions).values({ accountId: owner.id, tokenHash: newId(), lastSeenAt: ON_AT, expiresAt: new Date(ON_AT.getTime() + 30 * DAY), freshAuthAt: ON_AT });
     expect(await code(createCheckoutSession(on, { businessId: business.id, plan: "business_monthly" }, { config: { ...config, secretKey: null }, fetcher }))).toBe("CONFLICT:billing.errors.notConfigured");
     const outsider = await mkAccount();
     expect(await code(createCheckoutSession(at(outsider.ctx, ON_AT), { businessId: business.id, plan: "business_monthly" }, { config, fetcher }))).toBe("NOT_FOUND:common.errors.NOT_FOUND");

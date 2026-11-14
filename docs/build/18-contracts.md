@@ -1,233 +1,417 @@
-# 18 — Code contracts (what exists; use these, do not re-invent)
+# 18 — Code contracts: what exists, by area
 
-## Test DB — `import { setupTestDb } from "@ed/db/testing"`
-`setupTestDb(): Promise<{ db, url, name, close() }>` — call in `beforeAll`, `close()` in `afterAll`.
-Each call clones a private DB from a template keyed by a hash of schema + sql files (parallel-safe).
+**What this is, in plain English.** A reference for people (and AI agents) writing code in
+this repository: for each area, which package and file to import from and what it offers, so
+nobody re-invents something that already exists. If you are not writing code you do not need
+this file — `01-architecture.md` explains the same system in words.
 
-## DB — `import { getDb, createDb, type Db, type Tx, eq, and, sql, … } from "@ed/db"`
-Tables and drizzle operators are re-exported from `@ed/db` (import from there, not `drizzle-orm`).
-Column helpers in `packages/db/src/schema/_helpers.ts`: `id()`, `ref(name)`, `timestamptz(name)`,
-`createdAt()`, `updatedAt()`, `moneyMinor(name)`, `moneyMinorBig(name)`, `currency()`.
-Platform tables: `auditLog`, `idempotencyKeys`, `platformSettings`.
-- New schema file: `src/schema/<aggregate>.ts` + append `export * from "./<aggregate>";` to `schema/index.ts`.
-- Seed: `src/seed/<name>.ts` exporting `Seed = { name, run(db) }`, append to `seeds` in `src/seed/index.ts` (idempotent).
-- SQL guard: `src/sql/NNN_name.sql`, idempotent (`CREATE OR REPLACE`, `DROP TRIGGER IF EXISTS`).
+**How it is kept honest.** Import paths were checked against the `exports` of each
+`packages/*/package.json`, and function names against the source files on 14 November 2026.
+Function lists name what matters most, not every export; the source file is the authority.
+Signatures are given only where the exact shape is the contract.
 
-## Core
-- `@ed/core/context`: `Actor` (kinds: account, guest, staff, mcp, system, anonymous), `Ctx = { db, actor, now, ip?, locale }`,
-  `makeCtx(db, actor, opts?)`, `systemCtx(db)`, `accountCtx(db, accountId)`, `anonymousCtx(db)`,
-  `requireAccount(ctx): string`, `actorAccountId(actor)`, `requireSystem(ctx)`, `requireWriteCapable(ctx)`, `actorRef(actor)`.
-- `@ed/core/audit`: `audit(ctx, { action, objectType, objectId?, before?, after?, meta? })`.
-- `@ed/core/idempotency`: `withIdempotency(ctx, scope, key, fn(txCtx))` — result must be JSON-serialisable.
-- `@ed/core/tx`: `inTx(ctx, fn(txCtx))` (nesting = savepoint).
-- New domain: `packages/core/src/<domain>.ts` + one `"./<domain>": "./src/<domain>.ts"` line in `packages/core/package.json` exports. No `"."` export.
+## Ground rules
 
-## Shared — `@ed/shared`
-`AppError(code, messageKey?, details?)` (details understood by the action wrapper: `fieldErrors`, `retryAt` ISO, `params`),
-`isAppError`, `newId`, `randomToken`, `hashToken`, `hashEquals`, `sixDigitCode`, money (`toMinor`, `toMajor`, `splitEvenly`,
-`splitByWeights`, `percentOf`, `sumMinor`), time (`addMonths`, `zonedParts`, `zonedToUtc`, `bucharestToUtc`,
-`startOfBucharestDay`, `bucharestDateKey`), zod helpers (`zId`, `zText`, `zOptionalText`, `zEmail`, `zMinor`, `zCurrency`,
-`zIdempotencyKey`, `zDate`, `zFormBoolean`). Subpaths: `@ed/shared/env`, `@ed/shared/ssrf` (`assertSafeUrl`, `safeFetch`).
-**Client Components import subpaths** (`@ed/shared/errors`, `/money`, `/time`, `/zod`), never the barrel (it pulls `node:crypto`).
+- **Web, worker and MCP never hold business rules or access checks; they call `@ed/core`.**
+- A core function is `fn(ctx, input)`. It validates `input` with zod, checks access, writes
+  an audit entry for a change, and throws `AppError(code, messageKey?, details?)`.
+- `@ed/core` has **no root export**: import a domain by subpath, `@ed/core/<domain>`. Every
+  file in `packages/core/src/` is exported under its own name.
+- Packages are TypeScript source; there is no build step.
+- Client Components import client-safe subpaths only (`@ed/shared/errors`, `/money`, `/time`,
+  `/zod`; `@ed/core/spacemodel`, `/arrangementkit`, `/cookies`). The `@ed/shared` barrel pulls
+  in `node:crypto`.
 
-## Web (`apps/web`, alias `@/` = `apps/web/`)
-- `@/lib/ctx`: `getCtx()` (anonymous actor when signed out), `requireCtx()` (redirects to `/sign-in`; returns `Ctx & { accountId }`).
-- `@/lib/session`: `resolveActor()` — the auth seam.
-- `@/lib/action`: `action(schema, async (ctx, input) => data, { auth?: "account" | "public" })` → `{ ok: true, data } |
-  { ok: false, error: { code, message, fieldErrors?, retryAt?, values? } }`; works with objects, `FormData` and
-  `useActionState(fn, null)`. `error.values` echoes typed input so it is never lost. Zod messages that are i18n keys are translated.
-- `app/api/health/route.ts`.
+Versions: next 16.4.6, react 19.3.1, next-intl 4.15.1, drizzle-orm 0.45.4, zod 4.6.7,
+vitest 5.1.0, typescript 5.9.3. In Next 16 the middleware file is `proxy.ts`.
 
-## i18n — `@ed/i18n`
-`loadMessages(locale)`, `translate(locale, "ns.key", params?)`, `locales`, `defaultLocale`, `LOCALE_COOKIE = "ed_lang"`.
-`@ed/i18n/format`: `formatMoney(minor, currency, locale)`, `formatMoneyOrUnknown`, `formatUnknown`, `formatInteger`, `formatDate`,
-`formatTime`, `formatDateTime`, `formatWeekdayDate`, `formatInZone(date, tz, locale)`, `formatMonthYear`.
-Add a namespace: create `messages/ro/<ns>.json` and `messages/en/<ns>.json` (alphanumeric name) — nothing else.
-Parity gate: `pnpm --filter @ed/i18n test`. A bare `tsc -p` needs `pnpm --filter @ed/i18n gen` first.
-`common` namespace already has generic actions, `common.errors.<CODE>`, `common.unknown`.
+Commands: `pnpm --filter @ed/core typecheck` · `pnpm exec vitest run
+packages/core/test/x.test.ts` · `pnpm exec vitest run --project @ed/core` ·
+`pnpm --filter @ed/web exec next dev --port N` (the `dev` script fixes port 3000).
 
-## Public site
-Routes under `apps/public/app/[locale]/`; every page calls `setRequestLocale(locale)`; no next-intl navigation helpers (they set a cookie).
+## 1. Shared helpers — `@ed/shared`
 
-## Worker
-`startRunner(ctx)` in `apps/worker/src/index.ts` is the jobs seam.
+Exports: `.`, `./errors`, `./ids`, `./money`, `./time`, `./env`, `./ssrf`, `./zod`.
 
-## Commands
-`pnpm --filter @ed/core typecheck` · `pnpm exec vitest run packages/core/test/x.test.ts` · `pnpm exec vitest run --project @ed/core`.
-Versions: next 16.4.6, react 19.3.1, next-intl 4.15.1, drizzle-orm 0.45.4, zod 4.6.7, vitest 5.1.0, typescript 5.9.3.
-(Next 16: middleware file is `proxy.ts`.)
+| Subpath | Offers |
+| --- | --- |
+| `errors` | `AppError`, `isAppError`, `APP_ERROR_CODES` (`FORBIDDEN NOT_FOUND VALIDATION CONFLICT RATE_LIMITED TAKEN LIMIT UNAUTHENTICATED`). `details` understood by the web action wrapper: `fieldErrors`, `retryAt` (ISO), `params` |
+| `ids` | `newId` (cuid2), `randomToken`, `hashToken` (SHA-256), `hashEquals`, `sixDigitCode` |
+| `money` | `toMinor`, `toMajor`, `sumMinor`, `splitEvenly`, `splitByWeights`, `percentOf`, `minorDigits`, `DEFAULT_CURRENCY` |
+| `time` | `addSeconds/Minutes/Hours/Days/Months`, `zonedParts`, `zonedToUtc`, `zonedDateKey`, `startOfZonedDay`, `bucharestToUtc`, `bucharestDateKey`, `startOfBucharestDay`, `APP_TIME_ZONE` |
+| `zod` | `zId`, `zText`, `zOptionalText`, `zEmail`, `zMinor`, `zMinorNonNegative`, `zCurrency`, `zLocale`, `zIdempotencyKey`, `zDate`, `zFormBoolean`, `zEnum`. Custom messages are translation keys |
+| `env` | `assertBootEnv`, `parseEnv`, `bootEnvSchema` — refuses to boot on a bad environment, printing names only |
+| `ssrf` | `assertSafeUrl`, `safeFetch`, `isBlockedAddress` — use for **every** server-side fetch of a web- or user-supplied address |
 
----
+## 2. Database — `@ed/db`
 
-# Wave 1 additions
+Exports: `.`, `./client`, `./schema`, `./testing`, `./seed`.
 
-## Auth / sessions
-- Web `@/lib/session`: `resolveActor()` → `{ kind:"account", accountId, sessionId }`; `getCurrentSession()`, `ensureDeviceId()` (actions/route handlers only), `getDeviceId()`, `setLanguageCookie`. After sign-in users land on `/occasions`.
-- `@ed/auth`: `createSession(ctx, { accountId, userAgent?, fresh? })` → `{ token, sessionId, expiresAt }`, `signOutEverywhere(ctx)`, `onSignOutEverywhere(fn(ctx, accountId))` (MCP must register: revoke tokens).
-- `@ed/core/accounts`: `requireFreshAuth(ctx, minutes = 10)` (throws FORBIDDEN `account.errors.freshAuthRequired`, `details.freshAuthRequired = true`) — every S4 sensitive action in any domain (ownership transfer, deletion, grants, member changes) must call it; `isFreshAuth`, `getOwnAccount(ctx)`, `onAccountPurge(fn)`, `purgeDueAccounts(systemCtx)`.
-  The account page (`/account`) has the fresh-code UI; on `freshAuthRequired` show a Notice linking to `/account#fresh`.
-- Tests: insert an `accounts` row, then `accountCtx(db, id)`. For `requireFreshAuth` to pass insert a `sessions` row with `freshAuthAt` within 10 minutes (see `packages/core/test/deletion.test.ts`).
-- Local smoke: `EMAIL_PROVIDER=dev`; code is in `select body_text from email_outbox order by created_at desc limit 1`; or `/sign-in/anonymous/new`. `AUTH_TIMING_FLOOR_MS=0` skips the timing pad.
-- Reusable client form: `@/app/(auth)/_components/forms` → `ActionForm`, `FormError`.
+- `import { getDb, createDb, type Db, type Tx, eq, and, sql, … } from "@ed/db"` — tables and
+  Drizzle operators are re-exported; import from here, not from `drizzle-orm`.
+- Column helpers (`packages/db/src/schema/_helpers.ts`): `id()`, `ref(name)`,
+  `timestamptz(name)`, `createdAt()`, `updatedAt()`, `moneyMinor(name)`, `moneyMinorBig(name)`,
+  `currency()`.
+- **New schema file:** `src/schema/<aggregate>.ts` plus one `export * from "./<aggregate>";`
+  line in `schema/index.ts`; then `pnpm db:generate` and commit the migration.
+- **Seed:** `src/seed/<name>.ts` exporting `Seed = { name, run(db) }`, appended to `seeds` in
+  `src/seed/index.ts`. Seeds must be safe to run twice.
+- **SQL guard:** `src/sql/NNN_name.sql`, safe to re-apply (`CREATE OR REPLACE`,
+  `DROP TRIGGER IF EXISTS`). Applied by `db:migrate`, `db:push` and the test harness.
+- **Tests:** `import { setupTestDb } from "@ed/db/testing"` →
+  `setupTestDb(): Promise<{ db, url, name, close() }>`. Call it in `beforeAll`, `close()` in
+  `afterAll`. Each call clones a private database from a template keyed by a hash of the
+  schema and SQL files.
 
-## Rate limiting and bot guard — `@ed/core/ratelimit`
-`enforceRateLimit(ctx, { scope, rules: [{ axis: "email"|"ip"|"device"|"key", key, limit, windowSeconds, backoff? }] })` (throws RATE_LIMITED + `details.retryAt`),
-`checkPublicForm(ctx, { formKey, linkKey?, honeypot, renderedAt, minSeconds?, perIpPerHour?, perLinkPerHour? })`, `issueFormStamp(now?)`,
-field names `HONEYPOT_FIELD = "website"`, `FORM_STAMP_FIELD = "ed_rendered"`, `logSecurityEvent(ctx, …)`.
-Call these with the request ctx BEFORE opening a transaction (or the counters roll back).
+## 3. Core foundations
 
-## Deletion — `@ed/core/deletion`
-`requestDeletion(ctx, { targetType, targetId, retainedNote? })`, `undoDeletion`, `getOpenDeletion`, `listDue(systemCtx, …)`, `completeDeletion`, `DELETION_UNDO_DAYS`, `RETAINED_AFTER_DELETION`.
+| Module | Offers |
+| --- | --- |
+| `@ed/core/context` | `Actor` (kinds `account`, `guest`, `staff`, `mcp`, `system`, `anonymous`), `Ctx = { db, actor, now, ip?, locale }`, `makeCtx`, `systemCtx`, `accountCtx`, `anonymousCtx`, `requireAccount`, `actorAccountId`, `requireSystem`, `requireWriteCapable`, `actorRef` |
+| `@ed/core/tx` | `inTx(ctx, fn(txCtx))` — nesting is a savepoint |
+| `@ed/core/audit` | `audit(ctx, { action, objectType, objectId?, before?, after?, meta? })` |
+| `@ed/core/idempotency` | `withIdempotency(ctx, scope, key, fn(txCtx))` — the result must be JSON-serialisable |
+| `@ed/core/corrections` | `recordCorrection(ctx, { occasionId?, targetTable, targetId, field, before, after, reason })` inside the fact-changing transaction (the guards look for the flag `ed.correction`); `listCorrections` |
+| `@ed/core/retention` | `registerRetentionRule({ name, run(ctx): Promise<number> })`, `runRetention` |
+| `@ed/core/stats` | `recordEvent(ctx, metric, dims?, by = 1)` (identifier-like dimension names throw; at most 4 dimensions), `registerStatCollector`, `readDailyStats` (no access check — call from checked code) |
+| `@ed/core/deletion` | `requestDeletion`, `undoDeletion`, `getOpenDeletion`, `listDue`, `completeDeletion`, `DELETION_UNDO_DAYS`, `RETAINED_AFTER_DELETION` |
+| `@ed/core/incidents` | `createIncident`, `resolveIncident`, `listIncidents`, `getActiveIncident` |
+| `@ed/core/fetching` | `fetchRobotsAllowed(url, ua?)`, `DISCOVERY_USER_AGENT` |
+| `@ed/core/cookies` | `APP_COOKIES`, `COOKIE_SET_SIGNATURE` (client-safe) |
+| `@ed/core/all` | Imports every core module so every registration exists in the process. Imported by `apps/web/instrumentation-node.ts` and `packages/jobs/src/registry.ts`. **A new module must be added to it** — `packages/core/test/all.test.ts` fails otherwise |
+| `@ed/core/wiring` | Connects domains that must not import each other: enquiry counts for the business report and the free-phase dashboard; console counters for enquiries, discovery and claims |
+| `@ed/core/wiring-programme` | Registers the programme (Release C) as a rehearsal timeline source (Release E) |
 
-## Email — `@ed/email`
-`sendEmail(ctx, { to, template, params, locale?, occasionId?, bilingual? })` → `{ status: "sent"|"suppressed", outboxId }` (LIMIT `emails.errors.dailyCap` over 500/day/occasion);
-`registerTemplate(name, (params, { locale, t }) => ({ subject, blocks }))` — blocks: `text | code | button | note`; `t` takes full i18n keys (put strings in YOUR namespace); bilingual RO-first by default.
+**New domain:** `packages/core/src/<domain>.ts`, one `"./<domain>": "./src/<domain>.ts"` line
+in `packages/core/package.json`, one `import "./<domain>";` line in `all.ts`, tests in
+`packages/core/test/<domain>.test.ts`.
 
-## Jobs — `@ed/jobs`
-`defineJob(name, zodSchema, handler(ctx, payload, meta), opts?)` → `.enqueue(ctx, payload, opts)`; `enqueue(ctx, name, payload, { runAt?, uniqueKey? })` (transactional on `ctx.db`);
-`defineSchedule({ name, job, every: {kind:"hourly",minute?}|{kind:"daily",at:"HH:MM"}|{kind:"monthly",day,at} })`; `runOnce(ctx, { names? })` for tests.
-Registration: your domain exports `registerJobs(): void`; append one import + one array entry in `packages/jobs/src/registry.ts`.
-`uniqueKey` dedupes while the row exists — repeating jobs need a time bucket in the key.
+### The What-if engine — `@ed/core/whatif`
 
-## Retention / stats
-`@ed/core/retention`: `registerRetentionRule({ name, run(ctx): Promise<number> })`.
-`@ed/core/stats`: `recordEvent(ctx, metric, dims?, by = 1)` (daily counter; identifier-like dim names throw; ≤4 dims), `registerStatCollector`, `readDailyStats(ctx, { metric, from, to, dims? })` (no access check — call from checked core code).
+- `registerWhatIf(kind, { input?: zod, authorize(ctx, subject, action), compute?(ctx, input,
+  subject), apply(txCtx, preview) })` — `action` is `create | read | confirm | discard`;
+  `authorize` throws.
+- `createPreview(ctx, { kind, occasionId?, subjectType, subjectId, input, delta?, title?,
+  source? })`, `confirmPreview(ctx, id)` → `{ preview, appliedNow }`, `discardPreview`,
+  `listPending(ctx, occasionId)`, `getPreview`, `toPreviewView(preview)`.
+- A delta row is `{ key, what, kindLabelKey?, before?, after?, noteKey?, noteParams? }`;
+  `what/before/after` are a string or `{ key, params }`; `null` means unknown.
+- Only account and staff actors confirm; an MCP token with `read_propose` only proposes.
+- Web: `<PreviewPanel preview={toPreviewView(p)} appliedHref? discardedHref? />` from
+  `@/components/whatif/PreviewPanel`; actions `confirmWhatIf`, `discardWhatIf` in
+  `@/app/actions/whatif`. The occasion's page is `/occasions/[id]/proposals`.
+- Registered kinds (20): `occasion.moveDate`, `occasion.cancel`, `occasion.postpone`,
+  `occasion.close`, `tasks.applyTemplate`, `tasks.proposeList`, `guests.import`,
+  `guests.removeHousehold`, `guests.invitationText`, `payment.move`, `budget.proposeEstimates`,
+  `budget.proposeNote`, `plan.shortlistNote`, `space.updateDrawing`, `space.addCustomTable`,
+  `seating.applyLayout`, `arrangement.applyDesign`, `itinerary.import`, `bizlibrary.apply`,
+  `bizoccasion.handover`.
 
-## What-if — `@ed/core/whatif`
-`registerWhatIf(kind, { input?: zod, authorize(ctx, subject, action), compute?(ctx, input, subject), apply(txCtx, preview) })` (`action`: create|read|confirm|discard; authorize throws),
-`createPreview(ctx, { kind, occasionId?, subjectType, subjectId, input, delta?, title?, source? })`, `confirmPreview(ctx, id)` → `{ preview, appliedNow }`, `discardPreview`, `listPending(ctx, occasionId)`, `getPreview`, `toPreviewView(preview)`.
-Delta row: `{ key, what, kindLabelKey?, before?, after?, noteKey?, noteParams? }`; `what/before/after` = string or `{ key, params }`; `null` = unknown.
-Only account/staff actors confirm; MCP `read_propose` tokens only propose (`proposedByKind: "mcp"`).
-Web: `<PreviewPanel preview={toPreviewView(p)} appliedHref? discardedHref? />` from `@/components/whatif/PreviewPanel`; actions `confirmWhatIf`, `discardWhatIf` in `@/app/actions/whatif`.
-The occasion "Ce-ar fi dacă?" page is `/occasions/[id]/proposals`.
+## 4. Accounts, sign-in and limits
 
-## Storage — `@ed/storage`
-`uploadAsset(ctx, { ownerType: "occasion"|"business"|"account", ownerId, file: { name, bytes, mime? }, allowPdf? })`, `getAssetUrl(ctx, assetId)`, `getAsset`, `listAssets`, `getUsage`, `deleteAsset`;
-`registerAssetAccess(ownerType, { canRead(ctx, asset), canWrite(ctx, owner) })` — `occasion` and `business` are system-only until their domain registers a rule;
-`registerUploadPurpose(name, { ownerType, allowPdf })` for the web route. Web: `<FileField label purpose ownerId allowPdf? name? onUploaded? />` from `@/components/upload/FileField`; `POST /api/uploads`.
+**`@ed/auth`** (single export): `requestSignInCode`, `verifySignInCode`, `consumeMagicLink`,
+`getMagicLinkStatus`, `requestCodeFromLink`; `createAnonymousAccount`, `signInAnonymous`,
+`recoverAnonymousAccount`; `createSession(ctx, { accountId, userAgent?, fresh? })` →
+`{ token, sessionId, expiresAt }`, `resolveSession`, `listSessions`, `revokeSession`,
+`signOutEverywhere`, `onSignOutEverywhere(fn(ctx, accountId))`; `requestFreshAuthCode`,
+`confirmFreshAuth`; `beginTotpEnrolment`, `confirmTotpEnrolment`, `disableTotp`,
+`verifySecondFactor`, `regenerateRecoveryCodes`; `requestNewEmailCode`, `confirmNewEmail`,
+`removeEmail`; `isSignupOpen`, `assertSignupOpen`; `safeNextPath`, `signInPathFor`;
+`purgeExpiredAuthRows`; `PASSKEYS_AVAILABLE` (false — passkeys are a seam).
 
-## Security / misc
-`@/lib/csrf`: `assertSameOrigin(request)` / `sameOriginOr403(request)` in every state-changing Route Handler (not webhooks/MCP). CSP is strict nonce-based: no inline scripts/styles handlers; `img-src` allows `data:`.
-`@ed/core/incidents`: `createIncident`, `resolveIncident`, `listIncidents` (staff), `getActiveIncident(ctx)` (public). `<IncidentBanner />` from `@/components/incident-banner/IncidentBanner` on guest-facing layouts.
-`@ed/core/fetching`: `fetchRobotsAllowed(url, ua?, { fetcher? })`. `@ed/core/cookies`: cookie set constants.
+**`@ed/core/accounts`**: `requireFreshAuth(ctx, minutes = 10)` — throws `FORBIDDEN`
+`account.errors.freshAuthRequired` with `details.freshAuthRequired = true`; **every sensitive
+action in any domain must call it**; `isFreshAuth`, `getOwnAccount`, `setDisplayName`,
+`setAccountLocale`, `requestAccountDeletion`, `undoAccountDeletion`, `onAccountPurge(fn)`,
+`purgeDueAccounts`.
 
-## Shell (apps/web)
-`(app)/layout.tsx` wraps signed-in pages in the AppShell (top bar + bottom nav). Pages render `<Page>` content.
-Occasion pages live at `/occasions/[id]/<slug>` with slugs fixed in `apps/web/lib/occasion-nav.ts`; the frame is
-`<OccasionFrame occasionId eyebrow title meta? hiddenKeys? banner?>` from `@/components/shell/OccasionFrame` (used once, in `occasions/[id]/layout.tsx`).
-Inside the frame, pages do NOT wrap in `<Page>`; start with `<PageHeader level={2} …>`-style sections (use `Section`/`PageHeader`).
+**`@ed/core/ratelimit`**: `enforceRateLimit(ctx, { scope, rules: [{ axis: "email" | "ip" |
+"device" | "key", key, limit, windowSeconds, backoff? }] })` (throws `RATE_LIMITED` with
+`details.retryAt`); `checkPublicForm(ctx, { formKey, linkKey?, honeypot, renderedAt,
+minSeconds?, perIpPerHour?, perLinkPerHour? })`; `issueFormStamp`; `getSignInLimits`;
+`logSecurityEvent`. **Call these with the request ctx before opening a transaction**, or the
+counters roll back with it.
 
----
+Tests: insert an `accounts` row, then `accountCtx(db, id)`. For `requireFreshAuth` to pass,
+insert a `sessions` row with `freshAuthAt` within ten minutes (see
+`packages/core/test/deletion.test.ts`). `AUTH_TIMING_FLOOR_MS=0` skips the timing pad.
 
-# Wave 2 additions
+## 5. Occasions and planning
 
-## Guests — core
-- `@ed/core/invitations`: `resolveGuestLink(ctx, token, { rateLimit? })` → `{ actor: GuestActor, invitationId, householdId, occasionId, language, linkKey } | null` (null for unknown/revoked/expired alike);
-  `getGuestView(ctx)` (guest actor) → `{ occasion, household, invitation, rsvp: { deadline, open, questions, response }, changed, sections[] }`;
-  `registerGuestSection({ key, order, load(ctx, view) })` — built-ins `polls` (20), `contributions` (40). To add a guest-page section: register in your core module, import that module in `apps/web/lib/guest.ts`, add one renderer entry in `apps/web/app/g/[token]/sections.tsx`.
-  `bumpGuestRevision(ctx, occasionId, reasonKey)` (reasonKey = full i18n key), `requireGuest`, `guestLinkPath`, `regenerateInvitation`, `revokeInvitation`.
-  `invitations.qrId` column exists as a placeholder for the print-pack QR.
-- `@ed/core/capacity`: `claimPlaces(ctx, occasionId, { key, places })`, `adjustPlaces`, `releasePlaces(ctx, occasionId, { key })` — idempotent per key, NO access check (call from checked code), join the caller's tx; loser gets `AppError("TAKEN", "rsvp.errors.lastPlaceTaken", { params: { left } })`. `readCapacity`, `getCapacity`, `setCapacityTotal`. Keys: `rsvp:<householdId>`, suggest `public:<registrationId>`.
-- `@ed/core/guests`: `createHousehold`, `updateHousehold`, `addGuest`, `removeGuest`, `listHouseholds(ctx, { occasionId, q?, status? })`, `getHousehold`, `exportGuestsCsv`, `detectChildDetails(text)`, `assertNoChildDetails`.
-- `@ed/core/rsvp`: `getRsvpSummary(ctx, occasionId)` → `{ households: { total, yes, maybe, no, pending }, attending: { adults, children, total }, maybe, invited, capacity, rsvpDeadline }` (counts only); `submitRsvp`, `recordRsvp`, `getRsvpSettings`.
-- `@ed/core/polls`, `@ed/core/contributions`, `@ed/core/guestimport`. What-if kinds: `guests.import`, `guests.removeHousehold`.
-- Web guest helpers `@/lib/guest`: `resolveGuestRequest(token, lang?)`, `runGuestAction(args, { schema, formKey, handler })`, `guestFormFields`, `guestTranslator(locale, ns?)` (guest pages use the LINK language, not the cookie), `guestHref`.
-- i18n parity test rejects ICU plurals whose branches differ between ro and en — use count-neutral wording ("Locuri rămase: {left}").
-- Occasion dates are day-anchored at noon; show a time only when it is not 12:00/00:00.
+| Module | Offers |
+| --- | --- |
+| `@ed/core/access` | `Member`, `getMember`, `requireMember(ctx, occasionId, { roles?, grant?, manage? })` (grants `finance`, `privateRequests`), `isManager`, `hasGrant`. Live members of a business get a synthetic `Member` (id `bm_<businessMemberId>`, `viaBusiness`) on that business's occasions until handover — **never store a synthetic id in a foreign key**; use `ensureBusinessSeat` |
+| `@ed/core/occasions` | `getOccasion`, `getOccasionView`, `listOccasions`, `createOccasion`, `updateOccasion`, `proposeMoveDate`, `requestOccasionDeletion`, `undoOccasionDeletion`, **`onOccasionPurge(fn(tx, occasionId))`** — every domain holding occasion data registers its clean-up. Status: `planning | cancelled | postponed | closed` |
+| `@ed/core/lifecycle` | `registerLifecycleImpact`, `registerCloseoutSection`, **`assertOccasionWritable(ctx, occasionId)`** — call it in writes; it refuses a closed occasion |
+| `@ed/core/closeout` | `proposeCancel`, `proposePostpone`, `proposeClose`, `getCloseout`, `saveLesson`, `listLessons` |
+| `@ed/core/templates` | `listTemplates`, `proposeTemplate`, `getTemplateDiff`; day helpers `zDay`, `dayToInstant`, `instantToDay`, `shiftDay`, `daysBetween`, `formatDay` (a day is noon local in the occasion's zone) |
+| `@ed/core/tasks` | `queryTasks(ctx, occasionId, filter)` (the single source), `toListView`, `toBoardView`, `toCalendarView`, `getTask`, `createTask`, `updateTask`, `setTaskStatus`, `deleteTask`, checklist and dependency functions, `listAssignableMembers`. Status: `todo | doing | waiting | done` |
+| `@ed/core/delegations` | `offerTask`, `acceptOffer`, `declineOffer`, `withdrawOffer`, `listOpenOffers` |
+| `@ed/core/members` | `listMembers`, `inviteMember`, `acceptInvite`, `updateMember`, `removeMember`, `transferOwnership`, `suggestedLabelKeys` |
+| `@ed/core/overview` | `getOverview`, `registerOverviewSection({ key, forMember(ctx, member, occasionId) → { titleKey, lines, slug? } \| null })` |
+| `@ed/core/digest` | `registerDigestSection({ key, titleKey, forMember })` — runs as the member; a `FORBIDDEN` section is left out, so gate with `requireMember(…, { grant })` |
+| `@ed/core/exports` | `registerExport({ key, titleKey, descriptionKey?, grant?, manageOnly?, run })` — appears on `/occasions/[id]/print`, downloads from `/occasions/[id]/print/<key>`; `toCsv`, `csvCell` |
+| `@ed/core/plannotes`, `tasks-proposals`, `invitationtext` | The What-if kinds behind the MCP propose tools |
 
-## Staff / console
-- `@ed/core/staff`: `getConsoleAccess(ctx)`, `resolveStaff(ctx)` (actor `{ kind:"staff", accountId, staffId, roles, sessionId }`), `requireStaffRole(ctx, ...roles)`, `hasStaffRole`, `isSingleOperatorMode(ctx)` (payment code must check, M4), `registerDashboardCounter({ key, count(ctx) → { total, byStatus? } })` (label `console.dashboard.counters.<key>`), `readSetting(ctx, key)`, `writeSetting(ctx, key, value)`.
-- Web: `requireConsole()` → `{ ctx, staffId, roles, expiresAt, has(...roles) }` and `staffAction(schema, handler)` in `apps/web/app/console/_lib.ts` — every console page/action uses them.
-- Console nav: append `{ key, href, roles?, exact? }` to `apps/web/app/console/_nav.ts` + `console.nav.<key>` in ro/en (the `console` namespace is shared: add your keys under your own sub-object, e.g. `console.moderation.*`, or use your own namespace).
-- Staff roles: platform_admin, content_editor, listing_moderator, commercial_manager, privacy_owner, security_administrator.
-- `@ed/core/approvals`: `registerApprovalAction(action, { roles, approverRoles?, approvalsNeeded? (approvers other than requester; default 1; three-person rule = 2), input?, describe(payload) → { key, params? }, execute(ctx, payload, { id, requesterStaffId }) })`; `requestApproval(ctx, { action, payload, reason })`, `approveRequest`, `rejectRequest`, `cancelRequest`, `listApprovals`. Approvals UI is `/console/approvals`.
-- `@ed/core/auditview`: `listAudit`, `exportAuditCsv` (no mutation path).
-- `@ed/core/reports` (content reports, LAU8): `submitContentReport`, `listContentReports`, `getContentReport`, `listContentReportsForTarget(ctx, { targetType, targetId })`, `decideContentReport`, `onContentReportDecided(fn(txCtx, { report, decision, reasonGivenToAffected }))`. In-app report link: `/report?ref=<text>&type=listing&id=<id>`.
-- `@ed/core/compliance`: `areLegalDocsPublished(ctx)`, launch checklist + records.
-- Bootstrap staff: `node scripts/make-staff.mjs`.
+Occasion dates are anchored at noon; show a time only when it is not 12:00 or 00:00.
 
-## MCP — `@ed/mcp`
-`registerMcpTool({ name, version, scope: "read"|"propose", title, description, inputSchema (zod), handler(ctx, input, call) })`; `ctx.actor = { kind:"mcp", accountId, tokenId, scope }`.
-Names: read tools `get_*`/`list_*`/`search_*`, propose tools `propose_*`; denylisted words throw at registration.
-READ tools run inside a READ ONLY DB transaction — handlers must not write (no audit, no stats).
-Propose tools: call `createPreview` from `@ed/core/whatif`, then `return mcpProposal(preview, summary?)`.
-`setOccasionLister(fn(ctx) → [{ id, title }])`; `revokeBusinessMcpTokens(systemCtx, businessId)` (MCP7 handover); `MCP_CONSENT_DATA_CLASSES` (add a class + i18n line before a tool returns a new kind of data).
+## 6. Guests
 
-## Planning core (Release A)
-- `@ed/core/access`: `Member`, `getMember`, `requireMember(ctx, occasionId, { roles?, grant?, manage? })`, `isManager`, `hasGrant`.
-- `@ed/core/occasions`: `getOccasion`, `getOccasionView`, `listOccasions`, `daysUntil`, `createOccasion`, `updateOccasion`, `proposeMoveDate(ctx, { occasionId, dateMode, startsOn?, endsOn? })`, deletion fns, and **`onOccasionPurge(fn(tx, occasionId))`** — every domain holding occasion data registers its cleanup here.
-  `occasions.status`: planning|cancelled|postponed|closed (banners exist; cancel/postpone/close ACTIONS belong to Release B). `occasions.businessId` nullable exists for business-owned occasions.
-- `@ed/core/templates`: day helpers `zDay`, `dayToInstant`, `instantToDay`, `shiftDay`, `daysBetween`, `formatDay` (a "day" = 12:00 local in the occasion zone).
-- `@ed/core/tasks`: `queryTasks(ctx, occasionId, filter)` (single source), `queryTasksUnchecked`, `countTasks`, `toListView/toBoardView/toCalendarView`, `getTask`, `createTask`, `updateTask`, `setTaskStatus`, `deleteTask`, checklist + dependency fns, `listAssignableMembers`. Task status: todo|doing|waiting|done.
-- `@ed/core/delegations`, `@ed/core/members` (`listMembers`, `inviteMember`, `updateMember`, `removeMember`, `transferOwnership`).
-- `@ed/core/overview`: `getOverview`, `registerOverviewSection({ key, forMember(ctx, member, occasionId) → { titleKey, lines, slug? } | null })`.
-- `@ed/core/digest`: `registerDigestSection({ key, titleKey, forMember(ctx, member, occasionId) → lines[] })` (ctx acts as the member; FORBIDDEN sections are omitted — use `requireMember(..., { grant: "finance" })` to gate).
-- `@ed/core/exports`: `registerExport({ key, titleKey, descriptionKey?, grant?, manageOnly?, run })` → appears on `/occasions/[id]/print`, downloads from `/occasions/[id]/print/<key>`; `toCsv`, `csvCell`.
-- What-if kinds: `occasion.moveDate`, `tasks.applyTemplate`.
-- Web helpers: `orNotFound` in `(app)/occasions/_lib/load.ts`, `plural()` in `_lib/plural.ts`. NO ICU plurals in messages: one key per form (`.zero/.one/.few/.other`) chosen by `plural()`.
-- Fresh auth in UI: pre-check `isFreshAuth`, render the existing `FreshGate` (see team/settings pages) linking to `/account#fresh`.
-- `.ed-vh` inside a horizontally scrolling container needs a `position: relative` ancestor.
-- `next dev` cannot run twice inside `apps/web`: to smoke-test, copy the repo's apps/web to a temp dir or coordinate; always use your own port + private database, and clean up.
+| Module | Offers |
+| --- | --- |
+| `@ed/core/guests` | `createHousehold`, `updateHousehold`, `addGuest`, `removeGuest`, `listHouseholds(ctx, { occasionId, q?, status? })`, `getHousehold`, `exportGuestsCsv`, `detectChildDetails`, `assertNoChildDetails` |
+| `@ed/core/invitations` | `resolveGuestLink(ctx, token, { rateLimit? })` → guest actor or `null` (unknown, revoked and expired alike); `getGuestView(ctx)`; **`registerGuestSection({ key, order, load(ctx, view) })`**; `bumpGuestRevision(ctx, occasionId, reasonKey)`; `requireGuest`; `guestLinkPath`; `regenerateInvitation`; `revokeInvitation`; `setInvitationExpiry`; `sendInvitationEmails` |
+| `@ed/core/rsvp` | `submitRsvp`, `recordRsvp`, `getRsvpSummary` (counts only), `getRsvpSettings`, question functions |
+| `@ed/core/capacity` | `claimPlaces(ctx, occasionId, { key, places })`, `adjustPlaces`, `releasePlaces` — once per key, **no access check** (call from checked code), join the caller's transaction; the loser gets `AppError("TAKEN", "rsvp.errors.lastPlaceTaken")`. Keys: `rsvp:<householdId>`, `public:<registrationId>` |
+| `@ed/core/polls`, `contributions`, `guestimport` | Date polls; "who brings what"; CSV and XLSX import as a preview |
+| `@ed/core/qr` | `ensureQrIds`, `rotateQrId`, `resolveQrLink`, `qrMatrix`, `drawQrOnPdf` |
 
----
+Guest-page sections registered (key, order): `polls` 20, `seat` 30, `programme` 32, `menu` 34,
+`contributions` 40, `venue` 58, `spaceView` 60, `privateRequest` 70. To add one: register it
+in your core module and add one renderer entry in `apps/web/app/g/[token]/sections.tsx`.
 
-# Wave 3 additions (Release B)
+Web helpers `@/lib/guest`: `resolveGuestRequest(token, lang?)`, `runGuestAction(args, { schema,
+formKey, handler })`, `guestFormFields`, `guestTranslator(locale, ns?)` (guest pages use the
+link's language, not the cookie), `guestHref`. Supplier links: `@/lib/supplier-link`
+(`resolveSupplierRequest`, `runSupplierAction`).
 
-- `@ed/core/corrections`: `recordCorrection(ctx, { occasionId?, targetTable, targetId, field, before, after, reason })` (inside the fact-changing tx; DB guards use GUC `ed.correction`), `listCorrections`.
-- `@ed/core/lifecycle`: `registerLifecycleImpact`, `registerCloseoutSection`, **`assertOccasionWritable(ctx, occasionId)`** (CONFLICT when closed — call it in your writes).
-- `@ed/core/budget`: `registerBudgetSource`, `getBudget`, `requireFinance(ctx, occasionId, { manage? })`. `@ed/core/expenses`: `createExpense(ctx, { occasionId, categoryId?, description, amountMinor, currency?, spentOn, supplierLabel?, bookingId?, receiptAssetId?, idempotencyKey })`, `listExpenses`, `expenseTotalsByBooking`. `@ed/core/ledger`: `getLedger`, `addLedgerEntry`, `getOwnBalance` (per-currency settlement already exists).
-- `@ed/core/closeout`: what-if kinds `occasion.cancel|postpone|close`, `getCloseout`, `getClosedOccasionsOlderThan(systemCtx, days)`, `listLessons(ctx, kind?)`.
-- `@ed/core/suppliers`: `listSuppliers`, `getSupplier`, `createSupplier`, **`findOrCreateSupplierForListing(ctx, { occasionId, listingId, name, categoryLabel })`**, **`ensureBooking(ctx, supplierId)`** (store the returned `booking.id` on your enquiry row), supplier link helpers, `PLANNING_ROLES`, `supplierAccess`.
-- `@ed/core/bookings`: `setBookingState`, `attachQuote` (PDF quote, purpose `occasion.quote`), `updateBookingTerms`. `@ed/core/briefings`: `publishBriefing`, `listBriefingVersions`, `acknowledgeBriefing`. `@ed/core/orders`: `createOrderSnapshot(ctx, { bookingId, items })`, `getOrderState` (post-snapshot RSVP changes become `order_deltas` via a DB trigger).
-- `@ed/core/deliveries`, `@ed/core/payments` (finance; what-if `payment.move`).
-- `@ed/core/eventday`: `getDayView(ctx, occasionId, { day? })`, `setDayState`, `addDayItem`; `task_day_state` holds time of day for a task. `@ed/core/readiness`.
-- `@ed/core/briefingpdf` (PDF toolkit for other PDFs): `newPdfDocument({ title, lang, createdAt })` → `{ doc, done() }` with fonts `serif`, `serif-bold`, `serif-italic`, `sans`, `sans-bold` (DejaVu, Romanian diacritics OK), `PDF_COLORS`, `PDF_MARGIN`, `pdfFontDir()`. Binary exports cast bytes to `ExportFile.content` (see briefingpdf export).
-- Purge of immutable rows: set GUC `ed.purge` in the purge hook (see `020_suppliers_guards.sql`).
-- Modules that register things at import time (exports, overview sections, what-if kinds) must be imported in `apps/web/instrumentation-node.ts` (one line) and, if they have jobs/digest sections, `packages/jobs/src/registry.ts`.
-- Never `require.resolve` font/binary files with a literal path in code Turbopack bundles — walk the filesystem at run time.
-- Web dev server: `pnpm --filter @ed/web exec next dev --port N` (the `dev` script hardcodes 3000).
+## 7. Money
 
----
+| Module | Offers |
+| --- | --- |
+| `@ed/core/budget` | `requireFinance(ctx, occasionId, { manage? })`, `getBudget`, `registerBudgetSource`, category functions, `exportBudgetCsv` |
+| `@ed/core/expenses` | `createExpense(ctx, { occasionId, categoryId?, description, amountMinor, currency?, spentOn, supplierLabel?, bookingId?, receiptAssetId?, idempotencyKey })`, `listExpenses`, `setExpenseApproval`, `markExpensePaid`, `correctExpense`, `expenseTotalsByBooking` |
+| `@ed/core/ledger` | `getLedger`, `addLedgerEntry`, `recordSettlement`, `voidLedgerEntry`, `getOwnBalance`, `settleUp` |
+| `@ed/core/payments` | `listPaymentDeadlines`, `addPaymentDeadline`, `markPaymentPaid`, `correctPaymentPaid`, `proposeMovePayment` |
+| `@ed/core/gifts` | `estimateGift`, `getGiftGuide`, `saveGiftGuide`, `DEFAULT_GIFT_GUIDE` |
 
-# Wave 3 additions (Release P: business, listings, moderation, directory)
+## 8. Suppliers and delivery
 
-- `@ed/core/business`: `requireBusinessMember(ctx, businessId, { roles? })` → `{ business, member, role }` (roles owner|admin|staff), `isAccountBusinessMember`, `listMyBusinesses`, `getBusinessView`, `canManageRole`, `isBusinessLapsed(business)`, `assertBusinessCanCreate(ctx, businessId)`, `setBusinessStatus(staffCtx, …)`, `addBusinessNotice(txCtx, …)`, `queueBusinessEmail(txCtx, { businessId, headlineKey, reason })`, `getBusinessBadges`. Upload purpose `business.photo`. `businesses` has `planLapsedAt`, `nudge48h`, `hideStats`, `status`.
-- `@ed/core/listings`: `createListing`, `saveListingDraft`, `submitListing`, `requireListingMember`, `getLivePayload`, **`createUnclaimedListing(ctx, { name, descriptionRo?, categoryIds, localityIds, publicContactRoute, sourceUrl, collectedAt?, sourceNote? })`** → `{ listingId, revisionId }` (discovery), **`convertListingToClaimed(ctx, { listingId, businessId })`** (claiming), `suspendListing`, `restoreListing`.
-- `@ed/core/moderation` (ONE generic queue): `registerModerationKind(kind, { labelKey, describe(ctx, rev) → { title, fields[{ key, labelKey, before, after }], imageAssetIds? }, apply(txCtx, rev), onRejected?, onWithdrawn? })`, `submitForModeration(ctx, { kind, subjectId, payload, basePayload?, listingId?, businessId?, sourceNote? })`, `decideRevision`, `listModerationQueue`. Pages/actions using a kind must import its domain module. Approver must not be a member of the business.
-- `@ed/core/directory`: `getDirectoryResults(ctx, { categoryId, countyCode, localityId?, day?, limit?, offset? })` → `{ featured: [] (P13 goes here), organic, total, day }` (pure read), `organicOrder`, `getPublicListing(ctx, id)` (`acceptsEnquiries`, `unclaimed`, …), `getDirectoryPrefill(ctx, occasionId)`, `suggestDirectoryLink`, `getDirectoryStats(staffCtx, { days })`, `recordDirectorySearch`.
-- `@ed/core/listingstats`: `setEnquiryStatsProvider(async (ctx, { listingIds, until }) => Map<listingId, { received, answered, medianReplyMinutes }>)`, `getPublishedListingStats`.
-- `@ed/core/geography`: `getPicklists(ctx)`, `listCategories`, `listCounties`, `listLocalities({ countyCode? })`, `getCategoryBySlug`, `localName(row, locale)`.
-- Slots to fill in `apps/web/app/directory/_slots/`: `EnquiryCta.tsx` (`{ listing, occasionId? }`; keep the `acceptsEnquiries` guard), `ListingExtras.tsx` (drawings, catalogues).
-- Business area routes: `/business`, `/business/[businessId]` (+ `/listings/[listingId]`, `/team`, `/settings`). Console: `/console/moderation`, `/console/businesses`, `/console/directory`.
-- Source-scan test: any source line containing "rating", "testimonial", "stele", "★" etc. without a negation fails `directory.test.ts`.
+| Module | Offers |
+| --- | --- |
+| `@ed/core/suppliers` | `listSuppliers`, `getSupplier`, `createSupplier`, **`findOrCreateSupplierForListing(ctx, { occasionId, listingId, name, categoryLabel })`**, **`ensureBooking(ctx, supplierId)`**, supplier-link functions, `supplierAccess` |
+| `@ed/core/bookings` | `setBookingState`, `attachQuote` (upload purpose `occasion.quote`), `updateBookingTerms`, `listBookingEvents` |
+| `@ed/core/briefings` | `publishBriefing`, `listBriefingVersions`, `acknowledgeBriefing`, `getSupplierLinkView` |
+| `@ed/core/orders` | `createOrderSnapshot(ctx, { bookingId, items })`, `getOrderState` — changes to replies after a snapshot become `order_deltas` through a database trigger |
+| `@ed/core/deliveries` | `createDelivery`, `recordReceipt`, `recordReturn`, `correctReceivedQty`, `correctReturnedQty`, `markDepositRecovered` |
+| `@ed/core/eventday` | `getDayView(ctx, occasionId, { day? })`, `setDayState`, `addDayItem` |
+| `@ed/core/readiness` | `recordReadinessDecision`, `getReadiness` |
+| `@ed/core/briefingpdf` | The PDF toolkit for every other PDF: `newPdfDocument({ title, lang, createdAt })` → `{ doc, done() }` with fonts `serif`, `serif-bold`, `serif-italic`, `sans`, `sans-bold` (DejaVu; Romanian diacritics work), `PDF_COLORS`, `PDF_MARGIN`, `pdfFontDir()` |
 
----
+Purging immutable rows: set the flag `ed.purge` in your purge hook (see
+`packages/db/src/sql/020_suppliers_guards.sql`). Never resolve font or binary files with a
+literal path in code the bundler processes — find them on the file system at run time.
 
-# Wave 4 additions
+## 9. Businesses, listings, moderation and the directory
 
-## Monetization / billing / Featured / business occasions
-- `@ed/core/monetization`: `isMonetizationOn(ctx)`, `getMonetizationState(ctx)`, `assertMonetizationOn(ctx)`, `PERMANENT_FREE_TIER`.
-- `@ed/core/directory`: `setFeaturedProvider`, `FeaturedCard = DirectoryCard & { featured: true; labelKey: "featured.label" }`. `@ed/core/featured` registers the provider (returns [] while OFF).
-- `@ed/core/access`: live members of a business get a synthetic `Member` (role pm, id `bm_<businessMemberId>`, `viaBusiness`) on business-owned occasions until handover. NEVER store a synthetic member id in an FK column — use `ensureBusinessSeat(ctx, occasionId)` for a real row.
-- `@ed/core/bizoccasions`: `getOccasionBranding(ctx, occasionId)` → `{ businessId, name, logoUrl, accent, onAccent } | null` (use on guest/public pages; see `apps/web/app/g/[token]/Branding.tsx`), `recordAssetUse(ctx, { businessId, kind, itemId? })`, `setBusinessEnquiryProvider(fn)`.
-- `@ed/core/handover`: `onOccasionHandover(fn)`. `@ed/core/library`. `@ed/core/billing`: `setPlatformEnquiryCounter(fn)`. `@ed/core/comms`.
-- Approval actions: `monetization.enable|disable`, `billing.prices.set`, `billing.refund`, `deploy.production`, `compliance.access`, `listing.claim`.
+| Module | Offers |
+| --- | --- |
+| `@ed/core/business` | `requireBusinessMember(ctx, businessId, { roles? })` → `{ business, member, role }` (roles `owner | admin | staff`), `listMyBusinesses`, `getBusinessView`, `canManageRole`, `isBusinessLapsed`, `assertBusinessCanCreate`, `setBusinessStatus` (staff), `addBusinessNotice`, `queueBusinessEmail`, `getBusinessBadges`, `recordFactCheck` |
+| `@ed/core/listings` | `createListing`, `saveListingDraft`, `submitListing`, `requireListingMember`, `getLivePayload`, `createUnclaimedListing` (discovery), `convertListingToClaimed` (claims), `suspendListing`, `restoreListing` |
+| `@ed/core/moderation` | **One queue for everything a business publishes.** `registerModerationKind(kind, { labelKey, describe, apply(txCtx, rev), onRejected?, onWithdrawn? })`, `submitForModeration`, `decideRevision`, `listModerationQueue`, `getModerationTargetHours`. Kinds: `listing`, `drawing`, `parking`, `catalogue`. The approver must not be a member of the business |
+| `@ed/core/directory` | `getDirectoryResults(ctx, { categoryId, countyCode, localityId?, day?, limit?, offset? })` → `{ featured, organic, total, day }`, `organicOrder`, `getPublicListing`, `getDirectoryPrefill`, `suggestDirectoryLink`, `getDirectoryStats`, `setFeaturedProvider` |
+| `@ed/core/listingstats` | `setEnquiryStatsProvider`, `getPublishedListingStats` |
+| `@ed/core/geography` | `getPicklists`, `listCategories`, `listCounties`, `listLocalities`, `localName(row, locale)`, and the console's create, update, merge functions |
+| `@ed/core/enquiries` | `sendEnquiry`, `sendQuoteRequest` (listing must be a florist or styling category), `replyAsPlanner`, `replyAsBusiness`, `closeEnquiry`, `reportEnquiry`, `resendEnquiry`, `acceptQuote`, `getQuoteLink`, `listOccasionEnquiries`, `listBusinessEnquiries`, `enquiryNumbers`. Limits: 10 per occasion, 30 per account per day. **No tool or API lets an assistant send an enquiry** |
+| `@ed/core/catalogues` | `listPublicCatalogues`, `getCatalogueItem`, the editor functions, `submitCatalogue` |
+| `@ed/core/drawings` | `createSpace`, `attachDrawing`, `calibrateSpace`, `assertCalibrated`, `saveMarkings`, `submitSpace`, `submitParking`, `getListingSpaces`, `onDrawingVersionPublished`, `setPdfRasteriser` |
+| `@ed/core/discovery` | `createDiscoverySource`, `requestDiscoveryRun`, `runDiscoverySource`, `decideDiscoveryDrafts`, `sendClaimInvitation`, `submitObjection`, `decideObjection`, **`registerOnrcAdapter`** (seam) |
+| `@ed/core/claims` | `startClaim`, `verifyClaimCode`, `submitClaimForApproval`, `rejectClaim` |
+| `@ed/core/bizoccasions` | `createBusinessOccasion`, `ensureBusinessSeat`, `getOccasionBranding` (use on guest and public pages), `saveBranding`, `recordAssetUse`, `getBusinessReport`, `setBusinessEnquiryProvider` |
+| `@ed/core/library`, `handover` | Business library and `proposeLibraryApply`; `proposeHandover`, `onOccasionHandover(fn)` |
+| `@ed/core/reports` | Content reports: `submitContentReport`, `decideContentReport`, `onContentReportDecided(fn)`. In-app link: `/report?ref=<text>&type=listing&id=<id>` |
 
-## Deploys / compliance
-- `@ed/core/deploys`, `@ed/core/complianceaccess` (`assertComplianceAccess(staffCtx, { subjectType: "account", subjectId }, "what")`).
-- A migration that older code cannot live with needs a line in `scripts/deploy/irreversible.txt`. Adding a workspace package needs a `COPY` line in the Dockerfile `deps` stage.
+Slots in `apps/web/app/directory/_slots/`: `EnquiryCta`, `ListingExtras`, `ListingDrawings`,
+`ListingCatalogues`, `ListingStatsBlock`, `ParkingFacts`. A source-scan test fails on any
+source line containing rating, testimonial or star wording without a negation
+(`packages/core/test/directory.test.ts`). Uploads larger than 1 MB go through a Route
+Handler, not a Server Action.
 
-## Enquiries / catalogues / discovery / claims
-- `@ed/core/enquiries`: `sendEnquiry(ctx, { occasionId, listingId, occasionKind, date, guests, countyCode?, localityId?, budgetBand?, message, shareEmail?, idempotencyKey })`, `sendQuoteRequest(ctx, { occasionId, listingId, arrangement: { description, imageAssetId?, designRef?: { designId, version } }, date, guests, message, shareEmail?, idempotencyKey })` → `{ enquiryId, bookingId, supplierId }` (listing must be in `floristi` or `decoratiuni-si-styling`); `acceptQuote`, `getQuoteLink(ctx, { enquiryId } | { bookingId })` → `{ current, versions[], changes[], designChangedSinceQuote } | null`; `listOccasionEnquiries`, `listBusinessEnquiries`, `enquiryNumbers`. Limits: 10/occasion, 30/account/day. There is NO tool/API for an assistant to send enquiries (MCP6).
-- `@ed/core/catalogues`: `listPublicCatalogues(ctx, { listingId?, businessId?, q? })`, `getCatalogueItem(ctx, id)` (stable ids; indicative prices per stem/bunch, nullable = unknown).
-- `@ed/core/discovery`, `@ed/core/claims` (claim page `/claim/[listingId]`).
-- Uploads larger than 1 MB must go through a Route Handler, not a Server Action.
+## 10. Monetisation, billing and Featured (dormant)
 
-## Drawings / space model / seating
-- `@ed/core/spacemodel` (pure, client-safe): `PlanModel`, `PlanItem`, `applyStage`, `buildPlanScene`, **`planToSvgString(model, { width?, title?, highlightIds?, showTables?, showPois?, onlyItemIds? })`**, geometry helpers, `mmToMetresText`.
-- `@ed/core/fitcheck`: `checkFit(model, { needed: number | null })` → `{ status: "fits"|"no"|"unknown", seats, area, issues, excluded, … }`.
-- `@ed/core/drawings`: `getListingSpaces(ctx, listingId)`, `onDrawingVersionPublished(fn)`.
-- `@ed/core/seating`: `getSpaceModel(ctx, occasionId)`, `getSeatingSummary(ctx, occasionId)` (counts only), `getFitChecks`, `getGuestSeat(ctx)`, `getGuestSpaceView(ctx)`, `listMealStages(ctx, occasionId)` → `[{ id, name, position, states }]`, `addMealStage` ….
-  What-if kinds: `space.updateDrawing`, `space.addCustomTable` (input `{ name, shape: "round"|"rect", diameterMm?, widthMm?, lengthMm?, seats, count = 1, x?, y? }`), `seating.applyLayout` (input `{ mode: "merge"|"replace", tables: [{ itemId | tableTypeId | custom{…}, label?, x, y, rotation?, guestIds?, groups? }] }`).
-- Web: `@/components/plan/PlanView` (read-only client), `PlanSvg` (server-safe), `@/app/directory/_slots/ParkingFacts`.
-- Guest sections so far: `polls` (20), `seat` (30), `contributions` (40), `spaceView` (60).
+| Module | Offers |
+| --- | --- |
+| `@ed/core/monetization` | `isMonetizationOn(ctx)`, `getMonetizationState`, `assertMonetizationOn`, `recordBillingAcceptance`, `requestMonetizationEnable`, `requestMonetizationDisable` |
+| `@ed/core/billing` | `getPrices`, `priceWithTva`, `requestPriceChange`, `createCheckoutSession`, `handleStripeWebhook`, `verifyStripeSignature`, `runBillingSweep`, `requestRefund`, `getPlanView`, `getFreePhaseDashboard`, `getMonthlyCost`, `setMonthlyCost` |
+| `@ed/core/invoicing` | `registerInvoicingProvider` (seam), `issueInvoice`, `handleInvoicingWebhook` |
+| `@ed/core/featured` | The only source of Featured cards; returns none while off. `expectedShare(n)`. `FeaturedCard = DirectoryCard & { featured: true; labelKey: "featured.label" }` |
+| `@ed/core/comms` | `previewAudience`, `sendPlatformNotice`, `listPlatformNotices` — to businesses only |
+
+Payment code must check `isSingleOperatorMode(ctx)` where a second person is required.
+
+## 11. Staff, approvals and compliance
+
+| Module | Offers |
+| --- | --- |
+| `@ed/core/staff` | `getConsoleAccess(ctx)`, `resolveStaff(ctx)`, `requireStaffRole(ctx, ...roles)`, `hasStaffRole`, `isSingleOperatorMode(ctx)`, `registerDashboardCounter({ key, count(ctx) → { total, byStatus? } })`, `readSetting(ctx, key)`, `writeSetting(ctx, key, value)`, `grantStaffBootstrap`. Roles: `platform_admin`, `content_editor`, `listing_moderator`, `commercial_manager`, `privacy_owner`, `security_administrator` |
+| `@ed/core/approvals` | `registerApprovalAction(action, { roles, approverRoles?, approvalsNeeded?, input?, describe(payload), execute(ctx, payload, { id, requesterStaffId }) })`, `requestApproval(ctx, { action, payload, reason })`, `approveRequest`, `rejectRequest`, `cancelRequest`, `listApprovals`. `approvalsNeeded` counts approvers other than the requester (default 1; the three-person rule is 2) |
+| `@ed/core/auditview` | `listAudit`, `exportAuditCsv` — no write path |
+| `@ed/core/compliance` | `areLegalDocsPublished`, launch checklist and records, `setLegalPublished` |
+| `@ed/core/complianceaccess` | `requestComplianceAccess`, `assertComplianceAccess(staffCtx, { subjectType: "account", subjectId }, "what")`, `revokeComplianceAccess`, `exportDataSubject` |
+| `@ed/core/deploys` | `getDeployOverview`, `requestDeploy`, `requestEmergencyDeploy`, `requestRollback`, `abandonDeploy`, `recordDeployStage`, `verifyDeployRecordToken`, `configureDeploys` |
+
+Approval actions registered: `staff.set_roles`, `security.sign_in_limits.set`,
+`compliance.access`, `deploy.production`, `monetization.enable`, `monetization.disable`,
+`billing.prices.set`, `billing.refund`, `listing.claim`.
+
+Web: `requireConsole()` → `{ ctx, staffId, roles, expiresAt, has(...roles) }` and
+`staffAction(schema, handler)` in `apps/web/app/console/_lib.ts` — every console page and
+action uses them. Console navigation: append `{ key, href, roles?, exact? }` to
+`apps/web/app/console/_nav.ts` and add `console.nav.<key>` in both languages. First staff
+member: `node scripts/make-staff.mjs`. A migration that older code cannot live with needs a
+line in `scripts/deploy/irreversible.txt`; a new workspace package needs a `COPY` line in the
+Dockerfile's `deps` stage.
+
+## 12. Releases C, D and E
+
+| Module | Offers |
+| --- | --- |
+| `@ed/core/spacemodel` | Pure and client-safe: `PlanModel`, `PlanItem`, `applyStage`, `buildPlanScene`, `planToSvgString(model, { width?, title?, highlightIds?, showTables?, showPois?, onlyItemIds? })`, `snapPosition`, geometry helpers, `mmToMetresText` |
+| `@ed/core/fitcheck` | `checkFit(model, { needed: number \| null })` → `{ status: "fits" \| "no" \| "unknown", seats, area, issues, excluded, … }` |
+| `@ed/core/seating` | `getSpaceModel`, `attachVenueSpace`, `createOwnSpace`, `addTable`, `addFixture`, `moveItem`, `assignSeats`, `publishSeating`, `getSeatingSummary` (counts only), `getFitChecks`, `getGuestSeat`, `getGuestSpaceView`, `listMealStages`, `addMealStage`, `proposeDrawingUpdate` |
+| `@ed/core/programme` | `listProgramme`, `saveProgrammeItem`, `saveCueList`, `getGuestProgramme`, `notifyProgrammeChange` |
+| `@ed/core/stationery`, `stationerykit` | Versions and proofs; the kit: `layoutPiece`, `sceneToSvg`, `drawSceneOnPdf`, `stationeryFontFamily()` |
+| `@ed/core/menus` | `getMenus`, `saveMenu`, `saveMenuItem`, `setMealChoices`, `getMenuQuantities`, `pushMenuToOrder` |
+| `@ed/core/publicpage`, `registrations` | `savePublicPage`, `getPublicEvent`; `registerForEvent`, `cancelOwnRegistration`, `promoteWaitlist` |
+| `@ed/core/requests`, `guestevent` | Private requests (own grant); venue link and the accessible guest journey |
+| `@ed/core/printpack` | `buildQrLabelsPdf`, `buildQrInvitationsPdf`, `buildTableCardsPdf`, `buildRoomPlanPdf`, `setEventPageUrlProvider` |
+| `@ed/core/promotion` | `getPromotionPage`, `buildPromotionCard`, `buildPromotionIcs`, `buildPromotionPoster` |
+| `@ed/core/arrangements`, `arrangementkit` | `saveArrangementDesign`, `requestArrangementQuote`, `proposeArrangementDesign`; the kit is pure and client-safe (`indicativeCost`, `arrangementToSvg`) |
+| `@ed/core/aitext` | `getAiTextStatus`, `suggestText`, `markAiTextAccepted`, `getAiTextConfig`, `AI_TEXT_LABEL` |
+| `@ed/core/itinerary` | `getItinerary`, `createLeg`, `parseIcs`, `parseBooking`, `proposeItineraryImport`, `localToInstant` |
+| `@ed/core/subgroups`, `packing`, `transport`, `rooms` | Subgroups and activities, `getTripSettlement`; packing lists (a task with check items); seats and beds claimed atomically |
+| `@ed/core/rehearsal` | `simulateDay` (reads only), `findConflicts`, **`registerTimelineSource({ key, list(ctx, occasionId, day) })`** |
+| `@ed/core/checkin` | `checkInHousehold`, `checkInByQr`, `correctCheckIn`, `getGuestFlow` |
+| `@ed/core/offline` | `submitOfflineItems`, `listOfflineConflicts`, `resolveOfflineConflict`, `getOfflineBundle` |
+| `@ed/core/sustainability` | `createSustainabilityGoal`, `recordMeasurement`, `getSustainability` |
+
+Web: `@/components/plan/PlanView` (read-only, client), `PlanSvg` (server-safe),
+`SeatingEditor`.
+
+## 13. Email — `@ed/email`
+
+- `sendEmail(ctx, { to, template, params, locale?, occasionId?, bilingual? })` →
+  `{ status: "sent" | "suppressed", outboxId }`; throws `LIMIT` `emails.errors.dailyCap` over
+  500 a day per occasion.
+- `registerTemplate(name, (params, { locale, t }) => ({ subject, blocks }))` — blocks are
+  `text | code | button | note`; `t` takes full translation keys (keep strings in your own
+  namespace); Romanian first by default.
+- `registerEmailProvider(name, factory)`; built in: `dev`, `http`. `suppressEmail`,
+  `isSuppressed`, `applyEmailEvents` (the bounce webhook).
+
+## 14. Storage — `@ed/storage`
+
+- `uploadAsset(ctx, { ownerType: "occasion" | "business" | "account", ownerId, file: { name,
+  bytes, mime? }, allowPdf? })`, `createSignedUpload`, `completeSignedUpload`,
+  `getAssetUrl(ctx, assetId)`, `getAsset`, `listAssets`, `getUsage`, `deleteAsset`,
+  `deleteOwnerAssets`.
+- `registerAssetAccess(ownerType, { canRead(ctx, asset), canWrite(ctx, owner) })`.
+- `registerUploadPurpose(name, { ownerType, allowPdf })` — what the web route accepts.
+  Registered: `account.image`, `business.photo`, `business.drawing`, the business logo and
+  library file purposes, `occasion.receipt`, `occasion.quote`, the enquiry attachment purpose.
+- `setScanner`, `getScanner`, `setStorageTransport`, `signAssetLink`, `verifyAssetLink`.
+- Web: `<FileField label purpose ownerId allowPdf? name? onUploaded? />` from
+  `@/components/upload/FileField`; `POST /api/uploads`.
+
+## 15. Jobs — `@ed/jobs`
+
+- `defineJob(name, zodSchema, handler(ctx, payload, meta), opts?)` → `.enqueue(ctx, payload,
+  opts)`; `enqueue(ctx, name, payload, { runAt?, uniqueKey? })` joins the caller's
+  transaction. `uniqueKey` de-duplicates while the row exists — a repeating job needs a time
+  bucket in the key.
+- `defineSchedule({ name, job, every: { kind: "hourly", minute? } | { kind: "daily", at:
+  "HH:MM" } | { kind: "monthly", day, at } })`. `runOnce(ctx, { names? })` for tests.
+- `recordJobRun`, `listJobRuns`; `readQueueMetrics`.
+- Registration: your domain exports `registerJobs(): void`; append one import and one array
+  entry in `packages/jobs/src/registry.ts` (`@ed/jobs/registry`, imported by the worker only).
+  Handlers get a system actor and must be safe to run twice.
+
+## 16. MCP — `@ed/mcp`
+
+- `registerMcpTool({ name, version, scope: "read" | "propose", title, description, inputSchema
+  (zod), handler(ctx, input, call) })`; `ctx.actor = { kind: "mcp", accountId, tokenId, scope }`.
+- Names: read tools `get_*`, `list_*`, `search_*`; propose tools `propose_*`; forbidden words
+  throw at registration.
+- **Read tools run inside a read-only database transaction** — handlers must not write (no
+  audit, no statistics). Propose tools call `createPreview` and `return mcpProposal(preview,
+  summary?)`.
+- A new tool is a new platform release: add it in a `tools-*.ts` file, add its line to
+  `MCP_TOOL_CATALOGUE` in `packages/mcp/src/tools.ts`, add `mcp.tools.<name>` in both
+  languages, and — before it returns a new kind of data — add the class to
+  `MCP_CONSENT_DATA_CLASSES`.
+- `createMcpToken`, `listMcpTokens`, `revokeMcpToken`, `revokeAllMcpTokens`,
+  `revokeBusinessMcpTokens`, `authenticateMcpToken`, `handleMcpRequest(request, { db, ip })`,
+  `setOccasionLister`.
+
+## 17. Languages — `@ed/i18n`
+
+Exports: `.`, `./config`, `./load`, `./format`.
+
+- `loadMessages(locale)`, `translate(locale, "ns.key", params?)`, `locales`, `defaultLocale`,
+  `LOCALE_COOKIE = "ed_lang"`.
+- `@ed/i18n/format`: `formatMoney(minor, currency, locale)`, `formatMoneyOrUnknown`,
+  `formatUnknown`, `formatInteger`, `formatDate`, `formatTime`, `formatDateTime`,
+  `formatWeekdayDate`, `formatInZone(date, tz, locale)`, `formatMonthYear`.
+- **Add a namespace:** create `messages/ro/<ns>.json` and `messages/en/<ns>.json` (alphanumeric
+  name) — nothing else. Parity gate: `pnpm --filter @ed/i18n test`. A bare `tsc -p` needs
+  `pnpm --filter @ed/i18n gen` first.
+- **No ICU plurals**: one key per form (`.zero/.one/.few/.other`) chosen by `plural()` in
+  `apps/web/app/(app)/occasions/_lib/plural.ts`.
+- `common` has generic actions, `common.errors.<CODE>` and `common.unknown`.
+
+## 18. The web app — `apps/web` (alias `@/` = `apps/web/`)
+
+| Helper | Offers |
+| --- | --- |
+| `@/lib/ctx` | `getCtx()` (anonymous actor when signed out), `requireCtx()` (redirects to `/sign-in`, keeping an allow-listed return path; returns `Ctx & { accountId }`) |
+| `@/lib/session` | `resolveActor()`, `getCurrentSession()`, `ensureDeviceId()` (actions and route handlers only), `getDeviceId()`, `setLanguageCookie`, `applySignIn`. After sign-in people land on `/occasions` |
+| `@/lib/action` | `action(schema, async (ctx, input) => data, { auth?: "account" \| "public" })` → `{ ok: true, data } \| { ok: false, error: { code, message, fieldErrors?, retryAt?, values? } }`. Works with objects, `FormData` and `useActionState(fn, null)`; `error.values` echoes typed input |
+| `@/lib/csrf` | `assertSameOrigin(request)`, `sameOriginOr403(request)` — in every state-changing Route Handler (not webhooks, not `/mcp`) |
+| `@/lib/security` | `buildCsp`, `securityHeaders`, `generateNonce` — used by `proxy.ts`. No inline scripts or style handlers; `img-src` allows `data:` |
+| `@/lib/occasion-nav` | The fixed list of occasion sections and their slugs |
+| `@/components/shell/OccasionFrame` | The occasion frame, used once in `occasions/[id]/layout.tsx`. Pages inside it do not wrap in `<Page>` |
+| `@/components/incident-banner/IncidentBanner` | On guest-facing layouts |
+| `@/app/(auth)/_components/forms` | `ActionForm`, `FormError` |
+| `@/app/(app)/occasions/_lib/load` | `orNotFound` |
+
+Mutations are Server Actions in `apps/web/app/actions/<domain>.ts`. Forms use
+`useActionState` and `<SubmitButton pendingLabel=…>`. Fresh confirmation in the UI: pre-check
+`isFreshAuth` and render the existing `FreshGate` linking to `/account#fresh`.
+
+`next dev` cannot run twice inside `apps/web`: to try something in parallel, use your own
+port and a private database, and clean up.
+
+### Help centre — `apps/web/app/help`, `apps/web/components/help`
+
+Added on 14 November 2026, in parallel with this reference; check the files for the current
+state.
+
+- Routes: `/help` (index with search, by section) and `/help/[slug]` (one article).
+- Structure: `components/help/registry.ts` — `helpSections` (thirteen sections; `staff` is
+  listed only to staff) and the article definitions `{ slug, section, routes, related }`,
+  where `routes` are the app screens an article describes.
+- Wording: the `help` namespace (the chrome of `/help`) and one namespace per section
+  (`helpStart`, `helpPlan`, `helpGuests`, `helpMoney`, `helpSuppliers`, `helpSpace`,
+  `helpTravel`, `helpInvited`, `helpBusiness`, `helpAccount`, `helpPrivacy`, `helpTrouble`,
+  `helpStaff`), each article keyed by its slug: `{ title, summary, keywords, where, need?,
+  body }`. Read by `components/help/content.ts` (`listHelpEntries`, article blocks).
+- Components: `HelpLink` (contextual "Ajutor: …" link for a screen), `HelpSearch`
+  (diacritics-insensitive), `HelpArticleBody`, `HelpIcon`; `staff.ts` (`isStaffReader` — a
+  read-only check that does not open a console session).
+- To add an article: add its definition to `registry.ts` and its text under the same slug in
+  both languages.
+- The contact line on `/help` shows `SUPPORT_EMAIL` when the operator has set it.
+
+## 19. The public site and the worker
+
+- **Public site** — routes under `apps/public/app/[locale]/`; every page calls
+  `setRequestLocale(locale)`; do not use next-intl navigation helpers (they set a cookie).
+  `pnpm build` runs `scripts/check-public-d1.mjs` afterwards.
+- **Worker** — `startRunner(ctx)` in `apps/worker/src/index.ts` registers all jobs and starts
+  the runner.
+
+## 20. UI — `@ed/ui`
+
+Exports: `.`, `./icons`, `./styles.css`. Components and tokens are listed in `16-design.md`;
+the rules every screen follows are in `17-ui-rules.md`. `.ed-vh` inside a horizontally
+scrolling container needs a `position: relative` ancestor.

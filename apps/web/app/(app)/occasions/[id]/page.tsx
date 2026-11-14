@@ -13,6 +13,7 @@ import styles from "../_components/planning.module.css";
 import { TaskLine } from "../_components/TaskLine";
 import { orNotFound } from "../_lib/load";
 import { plural } from "../_lib/plural";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("overview"))("title") };
@@ -59,6 +60,7 @@ export default async function OverviewPage({ params }: { params: Promise<{ id: s
   return (
     <>
       <h1 className="ed-vh">{t("title")}</h1>
+      <HelpLink topic="overview" />
       <Card framed>
         <div className={styles.hero}>
           {hero}

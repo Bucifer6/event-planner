@@ -1,0 +1,110 @@
+{
+  "code-not-arrived": {
+    "title": "Nu a sosit codul de intrare",
+    "summary": "Câteva lucruri de verificat când emailul cu codul din șase cifre întârzie.",
+    "keywords": "cod nu a sosit email nu primesc spam cod greșit expirat prea multe încercări",
+    "where": "Pagina „Intră în cont”",
+    "body": {
+      "ol1": {
+        "a": "Așteaptă un minut-două și uită-te și în dosarele Spam sau Promoții.",
+        "b": "Verifică adresa afișată la „Verifică-ți emailul”. Dacă ai greșit o literă, apasă „Folosește altă adresă de email”.",
+        "c": "Dacă emailul a sosit, dar codul nu mai merge, cere unul nou. Codul este valabil 15 minute.",
+        "d": "Dacă apare „Prea multe încercări”, așteaptă până la ora afișată și cere un cod nou."
+      },
+      "note1": "Din motive de siguranță, pagina spune același lucru („Dacă adresa este corectă, ai primit un cod…”) oricare ar fi adresa scrisă. Nu îți putem confirma dacă o adresă are cont.",
+      "h1": "Alte situații",
+      "ul1": {
+        "a": "„Codul nu este corect sau a expirat” — verifică cifrele; folosește codul din cel mai nou email.",
+        "b": "„Linkul a fost deja folosit” — uneori programul de email deschide linkul înaintea ta. Scrie codul din același email.",
+        "c": "„Înregistrările se deschid în curând” — deocamdată pot intra doar cei care au deja un cont.",
+        "d": "Ai un cont anonim — acela nu primește coduri pe email. Intră cu numele de utilizator și parola."
+      },
+      "p1": "Dacă adresa ta nu mai primește deloc emailuri de la noi, scrie-ne la adresa din „Contact și raportare”, dacă este afișată."
+    }
+  },
+  "link-expired": {
+    "title": "Linkul a expirat sau nu mai este valabil",
+    "summary": "Ce înseamnă mesajul, în funcție de felul linkului: de intrare, de invitat, de echipă sau de furnizor.",
+    "keywords": "link expirat nu mai este valabil invalid revocat folosit invitație furnizor echipă",
+    "where": "Pagina pe care te-a dus linkul",
+    "body": {
+      "h1": "Link de intrare în cont",
+      "p1": "Linkul și codul din email sunt valabile 15 minute și pot fi folosite o singură dată. La „Linkul a expirat”, scrie un cod mai nou sau apasă „Trimite-mi un cod nou”. La „Linkul nu este valid”, apasă „Înapoi la pagina de intrare” și cere un cod nou.",
+      "h2": "Link de invitat",
+      "p2": "„Acest link nu mai este valabil” înseamnă că gazda l-a înlocuit, l-a revocat sau i-a expirat valabilitatea. Cere-i gazdei un link nou. Răspunsul pe care l-ai dat deja rămâne.",
+      "note1": "Dacă gazda ți-a trimis invitația și pe e-mail, și pe altă cale, funcționează doar linkul cel mai nou.",
+      "h3": "Invitație în echipă",
+      "p3": "„Invitația nu mai este valabilă” sau „Invitația a expirat”: linkul a fost deja folosit, a fost anulat sau au trecut cele 14 zile. Cere-i organizatorului să ți-o trimită din nou.",
+      "h4": "Link de furnizor",
+      "p4": "„Linkul nu este valabil”: a fost înlocuit sau retras. Cere organizatorului un link nou.",
+      "note2": "Nu putem reafișa un link pierdut, pentru că nu îl păstrăm în clar. Organizatorul generează unul nou din pagina familiei sau a furnizorului, iar cel vechi încetează să funcționeze."
+    }
+  },
+  "last-place-taken": {
+    "title": "„Ultimul loc a fost ocupat chiar acum”",
+    "summary": "De ce apare mesajul când răspunzi la o invitație sau te înscrii și ce poți face.",
+    "keywords": "ultimul loc ocupat locuri capacitate plin listă de așteptare nu mai sunt locuri",
+    "where": "Linkul de invitat · pagina publică a evenimentului",
+    "body": {
+      "p1": "Evenimentul are un număr total de locuri. Dacă altcineva a confirmat cu o clipă înaintea ta, locurile rămase nu mai ajung pentru câți ați scris. Mesajul îți spune câte locuri au mai rămas.",
+      "h1": "Dacă ești invitat",
+      "ol1": {
+        "a": "Uită-te la „Locuri rămase” din mesaj.",
+        "b": "Dacă mai sunt locuri, micșorează numărul de persoane și trimite din nou răspunsul.",
+        "c": "Dacă nu mai este niciunul, scrie-i direct gazdei: ea poate mări numărul de locuri."
+      },
+      "h2": "Dacă te înscrii pe pagina publică",
+      "p2": "Când locurile s-au ocupat, te poți înscrie pe lista de așteptare. Vezi poziția ta, iar dacă se eliberează locuri intri automat și primești un email.",
+      "note1": "Un loc nu se dă niciodată de două ori. De aceea, când doi oameni apasă în același timp, doar primul îl primește — al doilea vede acest mesaj în loc de o confirmare greșită.",
+      "h3": "Dacă ești gazdă",
+      "p3": "Mărește numărul în „Setări RSVP”, la „Locuri”, sau lasă câmpul gol pentru locuri nelimitate. Invitații cu link și cei de pe pagina publică împart aceleași locuri.",
+      "note2": "Votul într-un sondaj de date nu rezervă niciun loc. Numai răspunsul „Da” la invitație ocupă locuri."
+    }
+  },
+  "upload-refused": {
+    "title": "Fișierul meu a fost refuzat",
+    "summary": "Ce înseamnă fiecare mesaj la încărcarea unei chitanțe, a unei fotografii sau a unui plan.",
+    "keywords": "încărcare upload fișier refuzat prea mare tip png jpg pdf virus limită spațiu imagine",
+    "where": "Oriunde încarci un fișier",
+    "body": {
+      "ul1": {
+        "a": "„Fișierul este prea mare. Limita este de 10 MiB pe fișier.” — micșorează imaginea sau exportă PDF-ul la o calitate mai mică.",
+        "b": "„Acceptăm doar imagini PNG sau JPG” (uneori și documente PDF) — salvează fișierul în unul dintre aceste formate. Fotografiile HEIC de pe telefon trebuie convertite în JPG.",
+        "c": "„Nu am putut citi imaginea.” — fișierul este deteriorat sau are alt format decât spune numele. Salveaz-o din nou ca PNG sau JPG.",
+        "d": "„Fișierul a fost respins la verificarea de securitate și nu a fost salvat.” — fișierul a părut periculos. Folosește altă copie, făcută pe un dispozitiv de încredere.",
+        "e": "„Nu putem verifica fișierele în acest moment, așa că nu am salvat nimic.” — încearcă din nou peste câteva minute.",
+        "f": "„Ai atins limita… pentru fișiere.” — mesajul îți spune care este cel mai mare fișier al tău. Șterge-l pe acela sau pe altul, apoi încarcă din nou. Nu ștergem nimic în locul tău.",
+        "g": "„Fișierul este gol.” — alege alt fișier."
+      },
+      "note1": "Fiecare fișier este verificat înainte să fie salvat. Dacă verificarea nu poate rula, preferăm să nu salvăm nimic decât să salvăm ceva neverificat.",
+      "h1": "Limite speciale",
+      "ul2": {
+        "a": "Lista de invitați de importat: Excel (.xlsx) sau CSV, cel mult 2 MB.",
+        "b": "Fișier .ics pentru itinerar: sub 300 KB.",
+        "c": "Planul unei săli: un PDF se păstrează, dar pentru calibrare ai nevoie de PNG sau JPG."
+      },
+      "p1": "Nimic din ce ai scris în formular nu se pierde când un fișier este refuzat: alegi alt fișier și trimiți din nou."
+    }
+  },
+  "offline-check-in": {
+    "title": "Check-in fără internet",
+    "summary": "În ziua evenimentului poți înregistra sosiri și bifele tale și fără conexiune. Se trimit o singură dată, când revine internetul.",
+    "keywords": "offline fără internet conexiune check-in sosiri sincronizare bife conflict semnal",
+    "where": "Ocazia ta → Repetiție și sosiri → Sincronizare",
+    "need": "Oricine din echipă care face check-in sau are sarcini în acea zi.",
+    "body": {
+      "p1": "Fără internet poți face doar două lucruri: să înregistrezi sosiri și să îți bifezi sarcinile din „Lista mea”. Restul aplicației are nevoie de conexiune.",
+      "ol1": {
+        "a": "Cât ai încă internet, deschide „Repetiție și sosiri”, apoi „Check-in” și „Lista mea”, pe dispozitivul pe care îl vei folosi.",
+        "b": "Dacă pierzi conexiunea, apare „Nu ai internet acum”. Poți continua: sosirile și bifele se păstrează pe acest dispozitiv.",
+        "c": "Când revine conexiunea, deschide „Sincronizare” și apasă „Sincronizează acum”, dacă nu s-a trimis deja singură.",
+        "d": "Citește rezultatul: câte au fost aplicate și câte erau deja înregistrate de altcineva."
+      },
+      "note1": "O sosire înregistrată de două persoane, pe două dispozitive, se numără o singură dată.",
+      "h1": "„De decis”",
+      "p2": "Dacă o bifă a ta s-a schimbat pe server între timp, apare la „De decis”. Alegi „Păstrează ce e pe server” sau aplici varianta ta. Dacă punctul nu mai există, bifa nu mai are unde să ajungă și ți-o arătăm ca atare.",
+      "note2": "Nu închide fila și nu șterge datele browserului înainte de sincronizare: ce așteaptă există doar pe acel dispozitiv.",
+      "p3": "Camera pentru scanarea codurilor QR depinde de dispozitiv. Dacă nu merge, caută familia după nume sau scrie codul de mână."
+    }
+  }
+}

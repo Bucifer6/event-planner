@@ -12,6 +12,7 @@ import { FormSheet } from "../guests/_components/form";
 import { orNotFound } from "../../_lib/load";
 import styles from "./_components/suppliers.module.css";
 import { STATE_TONE } from "./_components/tones";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("suppliers"))("title") };
@@ -58,6 +59,7 @@ export default async function SuppliersPage({ params }: { params: Promise<{ id: 
   return (
     <>
       <PageHeader level={2} title={t("title")} description={t("list.description")} actions={list.items.length > 0 ? add : null} />
+      <HelpLink topic="suppliers" />
 
       {payments.length > 0 ? (
         <Section title={t("payments.attentionTitle")} level={3}>

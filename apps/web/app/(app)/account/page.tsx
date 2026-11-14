@@ -10,6 +10,7 @@ import { saveDisplayName } from "@/app/actions/integration";
 import { ActionForm } from "@/app/(auth)/_components/forms";
 import { requireCtx } from "@/lib/ctx";
 import { LanguageForm } from "./_components/language-form";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("account"))("title") };
@@ -29,6 +30,7 @@ export default async function AccountPage() {
   return (
     <Page narrow>
       <PageHeader title={t("title")} description={t("description")} />
+      <HelpLink topic="account" />
 
       {account.deletion ? (
         <Notice tone="attention" title={t("delete.pendingTitle")}>

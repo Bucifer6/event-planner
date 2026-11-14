@@ -1,7 +1,7 @@
 import { businesses, eq, invoices, subscriptions } from "@ed/db";
 import { defineJob } from "@ed/jobs";
 import { AppError } from "@ed/shared/errors";
-import { hashEquals } from "@ed/shared/ids";
+import { hashEquals, hashToken } from "@ed/shared/ids";
 import { z } from "zod";
 import { audit } from "./audit";
 import { requireSystem, type Ctx } from "./context";
@@ -116,11 +116,21 @@ const inboundSchema = z.object({
  * Inbound provider webhook: the e-Factura outcome of an invoice. Authenticated by the shared
  * secret INVOICING_WEBHOOK_SECRET (constant-time compare). NOT_FOUND when none is configured.
  */
+/**
+ * True when `presented` is the configured webhook secret. Both sides are hashed first, so the
+ * comparison takes the same time whatever was sent — including its length.
+ */
+export function verifyInvoicingWebhookSecret(presented: string | null | undefined, env: Record<string, string | undefined> = process.env): boolean {
+  const expected = env.INVOICING_WEBHOOK_SECRET?.trim();
+  if (!expected || !presented) return false;
+  return hashEquals(hashToken(presented), hashToken(expected));
+}
+
 export async function handleInvoicingWebhook(ctx: Ctx, input: { secret: string | null | undefined; body: unknown }, env: Record<string, string | undefined> = process.env): Promise<{ invoiceId: string; status: string }> {
   requireSystem(ctx);
   const expected = env.INVOICING_WEBHOOK_SECRET?.trim();
   if (!expected) throw new AppError("NOT_FOUND", "common.errors.NOT_FOUND");
-  if (!input.secret || !hashEquals(input.secret, expected)) throw new AppError("UNAUTHENTICATED", "billing.errors.signature");
+  if (!verifyInvoicingWebhookSecret(input.secret, env)) throw new AppError("UNAUTHENTICATED", "billing.errors.signature");
   const data = inboundSchema.parse(input.body);
   if (!data.invoiceId && !data.fiscalRef) throw new AppError("VALIDATION", "common.validation.required");
   const [inv] = await ctx.db

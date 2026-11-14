@@ -1,6 +1,6 @@
 import { exportGuestsCsv, type GuestCsvLabels } from "@ed/core/guests";
 import { formatDateTime } from "@ed/i18n/format";
-import { isAppError } from "@ed/shared/errors";
+import { describeError, isAppError } from "@ed/shared/errors";
 import { getTranslations } from "next-intl/server";
 import { getCtx } from "@/lib/ctx";
 
@@ -40,7 +40,7 @@ export async function GET(_request: Request, { params }: { params: Promise<{ id:
     });
   } catch (e) {
     const status = isAppError(e) ? (e.code === "FORBIDDEN" ? 403 : e.code === "UNAUTHENTICATED" ? 401 : 404) : 500;
-    if (status === 500) console.error("[guests.export]", e);
+    if (status === 500) console.error("[guests.export]", describeError(e, { frames: true }));
     return new Response(null, { status, headers: { "Cache-Control": "no-store" } });
   }
 }

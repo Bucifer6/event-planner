@@ -28,4 +28,5 @@ export const consoleNav: ConsoleNavItem[] = [
   { key: "commercial", href: "/console/commercial", roles: ["commercial_manager", "platform_admin"] },
   { key: "communications", href: "/console/communications", roles: ["commercial_manager", "content_editor"] },
   { key: "discovery", href: "/console/discovery", roles: ["listing_moderator", "platform_admin"] },
+  { key: "help", href: "/help#staff" },
 ];

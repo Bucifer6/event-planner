@@ -1,5 +1,14 @@
 # 04 — Release 0: platform foundation (work items)
 
+> **How to read this file (added after the build).** This is the original work-item
+> specification, written as a plan before any code existed and kept as the record of scope.
+> The work described here has since been built; it is not a description of the final code.
+> Where it names a tool that was not used in the end, read it like this: *Prisma* → Drizzle ORM
+> (`15-conventions.md`); *Playwright*, *axe* and *k6* → not set up, see what is and is not
+> tested in `11-testing-and-qa.md`; *Garden Soirée* → the "Maison" design language
+> (`16-design.md`). What was actually built and verified: `13-implementation-log.md`;
+> requirement by requirement: `09-traceability.md`.
+
 Everything else depends on this release. Gate M0 (PRD section 12): free activation works; public
 and app sites are separate; no third-party script on either site.
 
@@ -35,8 +44,9 @@ Work item format: **PRD** refs → **Depends on** → **Scope** → **Acceptance
 ### R0-03 — Database core, audit log, backups, retention
 - **PRD:** SEC10, INF10, INF6, D5, Q7
 - **Depends on:** R0-01, R0-02
-- **Scope:** Prisma + PostgreSQL; base models from `02-data-model.md` (accounts/session/audit/retention
-  subset); migrations via `prisma migrate deploy`; append-only `AuditLog` (app role has INSERT
+- **Scope:** Prisma + PostgreSQL *(as built: Drizzle ORM)*; base models from `02-data-model.md`
+  (accounts/session/audit/retention subset); migrations via `prisma migrate deploy` *(as built:
+  `pnpm db:migrate`)*; append-only `AuditLog` (app role has INSERT
   only; trigger blocks UPDATE/DELETE); backup job (daily, encrypted, 30-day retention) + monthly
   logged restore test; retention job per INF6 table.
 - **Acceptance:**

@@ -1,8 +1,9 @@
+import { isFreshAuth } from "@ed/core/accounts";
 import { getBusinessProfile, listBusinessOccasions } from "@ed/core/bizoccasions";
 import { getBusinessView } from "@ed/core/business";
 import { OCCASION_KINDS } from "@ed/db";
 import { formatDate } from "@ed/i18n/format";
-import { buttonClassName, EmptyState, List, Section, Tag } from "@ed/ui";
+import { buttonClassName, EmptyState, List, Notice, Section, Tag } from "@ed/ui";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
@@ -28,10 +29,11 @@ export default async function BusinessOccasionsPage({ params }: { params: Promis
   const ctx = await requireCtx();
   const t = await getTranslations("bizoccasions");
   const o = await getTranslations("occasions");
-  const [view, list, profile] = await Promise.all([
+  const [view, list, profile, fresh] = await Promise.all([
     orNotFound(getBusinessView(ctx, businessId)),
     orNotFound(listBusinessOccasions(ctx, businessId)),
     orNotFound(getBusinessProfile(ctx, businessId)),
+    isFreshAuth(ctx),
   ]);
   const canCreate = view.business.status === "active" && !view.lapsed;
   const base = `/business/${businessId}/occasions`;
@@ -106,6 +108,12 @@ export default async function BusinessOccasionsPage({ params }: { params: Promis
         <Section title={t("grants.title")} level={2}>
           <div className={biz.narrow}>
             <p className="ed-muted">{t("grants.body")}</p>
+            {/* S4: a capability grant needs a fresh confirmation — enforced in @ed/core, said here first */}
+            {!fresh ? (
+              <Notice title={t("grants.freshTitle")}>
+                {t("grants.freshBody")} <Link href="/account#fresh">{t("grants.freshLink")}</Link>
+              </Notice>
+            ) : null}
             <SpecForm
               action={saveTeamGrantsAction}
               hidden={{ businessId }}

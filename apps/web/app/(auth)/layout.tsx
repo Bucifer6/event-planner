@@ -1,4 +1,5 @@
 import { Cluster, ExternalLink, Wordmark } from "@ed/ui";
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { LanguageSwitch } from "@/components/shell/LanguageSwitch";
@@ -28,6 +29,7 @@ export default async function AuthLayout({ children }: { children: ReactNode }) 
           <ExternalLink href={terms}>{t("terms")}</ExternalLink>
           <ExternalLink href={privacy}>{t("privacy")}</ExternalLink>
           <ExternalLink href={cookies}>{t("cookies")}</ExternalLink>
+          <Link href="/help">{nav("help")}</Link>
         </Cluster>
       </footer>
     </div>

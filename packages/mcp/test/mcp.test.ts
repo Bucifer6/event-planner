@@ -326,6 +326,26 @@ describe("protocol (MCP8)", () => {
     const other = await mkToken();
     expect((await rpc(other.token, ping, { env, now: at(100) })).status).toBe(200);
   });
+
+  // Security review 14 Nov 2026 (F-07): a batch is not a way around the fair-use limits.
+  it("every message of a batch counts as a call: a batch over the limit runs nothing", async () => {
+    const tok = await mkToken();
+    const env = { MCP_CALLS_PER_MINUTE: "5" };
+    const whoami = (id: number) => ({ jsonrpc: "2.0", id, method: "tools/call", params: { name: "whoami", arguments: {} } });
+    const before = (await t.db.select().from(mcpCallLog).where(eq(mcpCallLog.tokenId, tok.id))).length;
+    // 4 messages: within the limit, all answered
+    const ok = await rpc(tok.token, [1, 2, 3, 4].map(whoami), { env, now: at(200) });
+    expect(ok.status).toBe(200);
+    expect(ok.body).toHaveLength(4);
+    // 4 more in the same minute would make 8 > 5: refused as a whole, no tool runs
+    const limited = await rpc(tok.token, [5, 6, 7, 8].map(whoami), { env, now: at(200) });
+    expect(limited.status).toBe(429);
+    expect(limited.body.error.code).toBe(MCP_ERRORS.rateLimited);
+    expect((await t.db.select().from(mcpCallLog).where(eq(mcpCallLog.tokenId, tok.id))).length).toBe(before + 4);
+    // an oversized declared body is refused before it is read
+    const big = await rpc(tok.token, { jsonrpc: "2.0", id: 1, method: "ping" }, { env: {}, now: at(300), headers: { "content-length": String(10 * 1024 * 1024) } });
+    expect(big.status).toBe(413);
+  });
 });
 
 describe("tools (MCP1, MCP2, MCP3, MCP5, MCP6, SEC15)", () => {

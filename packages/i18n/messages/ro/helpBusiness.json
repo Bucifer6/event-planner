@@ -1,0 +1,200 @@
+{
+  "business-account": {
+    "title": "Listează-ți firma: contul firmei",
+    "summary": "Listarea este gratuită. Creezi contul firmei într-un minut, apoi adaugi listările.",
+    "keywords": "firmă afacere cont listare gratuit director furnizor înscriere afacerea mea",
+    "where": "Afacere → Listează-ți firma",
+    "need": "Un cont EventDesk cu adresă de email. Un cont anonim trebuie să adauge mai întâi o adresă.",
+    "body": {
+      "ol1": {
+        "a": "Intră în cont și deschide „Afacere”.",
+        "b": "Pe pagina „Listează-ți firma”, completează „Contul firmei”.",
+        "c": "Apasă „Creează contul firmei”. Devii proprietarul firmei.",
+        "d": "Ajungi în „Afacerea mea”, cu filele „Listări”, „Echipă”, „Setări”, „Cereri” și celelalte."
+      },
+      "h1": "Ce urmează",
+      "ul1": {
+        "a": "Adaugi până la cinci listări: categorii și localități alese din liste, descriere, contact, fotografii.",
+        "b": "Un moderator care nu are legătură cu firma verifică fiecare listare și fiecare modificare.",
+        "c": "După aprobare, firma apare în lista de firme, în aceeași rotație zilnică cu toate celelalte."
+      },
+      "note1": "Ordinea din lista de firme se rotește zilnic și nu se vinde. Nu există stele sau note date de clienți; pe o listare pot apărea doar fapte verificate.",
+      "p1": "Dacă faci parte din mai multe firme, pagina „Afacere” îți cere să alegi una cu „Deschide”. La „Noutăți” găsești anunțurile despre listările tale; după ce le citești, apasă „Am citit”.",
+      "p2": "Dacă firma ta apare deja în listă cu mențiunea „Adăugat de EventDesk — nefiind revendicat încă”, nu crea una nouă: revendic-o."
+    }
+  },
+  "business-listings": {
+    "title": "Creează și modifică o listare",
+    "summary": "Alegi din liste ce faci și unde, scrii o descriere și trimiți spre verificare. Nimic nu devine public fără aprobare.",
+    "keywords": "listare nouă categorii județe localități descriere fotografii contact trimite spre verificare retrage cinci",
+    "where": "Afacerea mea → Listări",
+    "need": "Orice membru al echipei firmei.",
+    "body": {
+      "ol1": {
+        "a": "În „Listări”, apasă „Adaugă o listare” (sau „Adaugă prima listare”).",
+        "b": "Scrie „Numele listării” și alege între una și cinci „Categorii”.",
+        "c": "Adaugă județele în care lucrezi cu „Adaugă județul” și bifează localitățile.",
+        "d": "Scrie „Descriere în română”: cel puțin câteva propoziții despre ce oferi și pentru ce fel de evenimente. „Descriere în engleză” este opțională.",
+        "e": "La „Contact public” completează doar ce vrei să fie public: telefon, email de contact, site web.",
+        "f": "Apasă „Adaugă o fotografie” pentru imagini, apoi „Trimite spre verificare”."
+      },
+      "note1": "Dacă lipsește descrierea în engleză, vizitatorii care citesc în engleză văd textul în română, cu mențiunea „numai în română”.",
+      "h1": "Modificări",
+      "p1": "Deschide listarea, schimbă ce vrei și apasă din nou „Trimite spre verificare”. Până la aprobare, versiunea publică rămâne neschimbată.",
+      "p2": "O firmă poate avea cel mult cinci listări. „Retrage listarea…” o scoate din director și eliberează un loc, dar listarea nu poate fi readusă.",
+      "note2": "Scrie fără promisiuni pe care nu le poți ține și fără laude de la clienți: descrierea spune ce faci, nu ce cred alții despre tine."
+    }
+  },
+  "business-moderation": {
+    "title": "Verificarea listărilor și faptele verificate",
+    "summary": "Ce se întâmplă după ce trimiți o listare, ce faci dacă nu este aprobată și ce mențiuni pot apărea pe ea.",
+    "keywords": "moderare moderator aprobată respinsă suspendată motiv onrc asigurare fapte verificate insignă statistici",
+    "where": "Afacerea mea → Listări → o listare · Afacerea mea → Setări",
+    "body": {
+      "p1": "Fiecare listare nouă și fiecare modificare (text, fotografii, planuri, cataloage) ajunge la un moderator EventDesk care nu are legătură cu firma. Primești un anunț la „Noutăți” și un email când s-a decis.",
+      "ul1": {
+        "a": "Aprobată — versiunea trimisă devine publică.",
+        "b": "Neaprobată — apare „Ultima trimitere nu a fost aprobată”, cu motivul moderatorului. Textul tău este păstrat: corectează și trimite din nou.",
+        "c": "Suspendată — listarea nu apare în director și nu poate fi modificată până la ridicarea suspendării."
+      },
+      "note1": "Cât timp o trimitere așteaptă, ce este deja public rămâne neschimbat. O modificare respinsă nu îți scoate listarea din director.",
+      "h1": "Fapte verificate",
+      "p2": "Pe listări pot apărea doar două mențiuni, ambele simple fapte: înregistrarea la ONRC și asigurarea văzută de un moderator, cu data până la care este valabilă. Verificările sunt gratuite. Pentru ONRC, completează numărul de înregistrare în „Setări”, la „Datele firmei”.",
+      "h2": "Statistici de răspuns",
+      "p3": "După zece cereri la care ai răspuns, pagina listării arată cât de des și cât de repede răspunzi. Sunt calculate zilnic și nu pot fi cumpărate sau modificate. Le poți ascunde din pagina listării sau, pentru toate listările, din „Setări”.",
+      "note2": "Dacă cineva raportează o listare, raportul este citit de un moderator. Pentru o decizie cu care nu ești de acord, folosește formularul de raportare și menționează listarea."
+    }
+  },
+  "business-enquiries": {
+    "title": "Cereri primite de la organizatori",
+    "summary": "Cererile și cererile de ofertă ajung în „Cereri primite”. Oricine din echipă poate răspunde.",
+    "keywords": "cereri primite inbox răspunde ofertă pdf organizator mesaj memento 48 ore închide",
+    "where": "Afacerea mea → Cereri",
+    "need": "Orice membru al echipei firmei.",
+    "body": {
+      "ol1": {
+        "a": "Deschide fila „Cereri”. Pe pagina „Cereri primite”, fila „Deschise” arată ce așteaptă, cu de cât timp așteaptă fiecare.",
+        "b": "Apasă „Deschide” la o cerere. La „Ce a trimis organizatorul” vezi tipul ocaziei, data, numărul aproximativ de invitați, zona și bugetul orientativ, dacă l-a spus.",
+        "c": "Scrie un mesaj și, dacă ai o ofertă, atașeaz-o la „Ofertă în PDF” (cel mult 10 MB).",
+        "d": "Apasă „Răspunde”."
+      },
+      "note1": "Vezi doar ce a ales organizatorul să trimită. Nu vezi numele lui, lista de invitați sau planul. Dacă nu și-a trimis adresa de email, apare „nepartajat” și îi răspunzi aici; el citește mesajul în planul lui.",
+      "p1": "O ofertă în PDF marchează rezervarea organizatorului drept „ofertă primită”. Dacă o acceptă, vezi „Ofertă acceptată” în discuție.",
+      "h1": "Anunțuri și mementouri",
+      "p2": "Primești un email la fiecare cerere nouă. După 48 de ore fără răspuns vine un memento; îl poți opri din „Setări”, la „Reamintire după 48 de ore pentru cererile fără răspuns”. Anunțul la sosirea unei cereri rămâne mereu.",
+      "note2": "O listare primește cereri prin EventDesk numai după ce are o firmă în spate. Listările nerevendicate arată doar contactul public."
+    }
+  },
+  "business-drawings": {
+    "title": "Spații și planuri pentru locații",
+    "summary": "Încarci planul fiecărei săli, îl calibrezi și marchezi ce e de folosit. Organizatorii își așază invitații direct pe planul tău.",
+    "keywords": "plan sală desen calibrare spațiu locație mese dimensiuni parcare versiune trimite spre verificare",
+    "where": "Afacerea mea → Listări → o listare → Spații și planuri",
+    "need": "Orice membru al echipei firmei.",
+    "body": {
+      "ol1": {
+        "a": "Deschide listarea și mergi la „Spații și planuri”. Apasă „Adaugă un spațiu” și apoi „Creează spațiul”.",
+        "b": "La „1 · Desenul”, apasă „Încarcă desenul sălii”: PNG, JPG sau PDF, cel mult 10 MB, un plan văzut de sus, cu pereții clari.",
+        "c": "La „2 · Calibrarea”, atinge pe desen cele două capete ale unei distanțe pe care o știi (de exemplu un perete) și scrie distanța reală.",
+        "d": "Marchează ce e de folosit: zone, mese, puncte de interes, parcare.",
+        "e": "Completează „Nume și dimensiuni declarate”. Dacă nu știi o dimensiune, las-o necompletată.",
+        "f": "Apasă „Trimite spre verificare”."
+      },
+      "note1": "Fără calibrare desenul rămâne o simplă imagine: nu poate primi marcaje și nu poate fi folosit pentru așezarea la mese. Un PDF se păstrează, dar pentru calibrare ai nevoie de o imagine PNG sau JPG.",
+      "note2": "Dimensiunile necompletate apar organizatorilor ca „necunoscut”. Nu le ghicim și nu le afișăm ca zero.",
+      "p1": "Planul devine public după ce îl aprobă un moderator. La o modificare, versiunea publică rămâne vizibilă până la aprobare, iar organizatorii care folosesc planul primesc o propunere de trecere la versiunea nouă — nimic nu li se schimbă singur.",
+      "p2": "Un desen nou anulează calibrarea și marcajele făcute pe cel vechi. Cu „Retrage spațiul” îl scoți din listare."
+    }
+  },
+  "business-catalogues": {
+    "title": "Cataloage de flori",
+    "summary": "Pentru florării: soiurile de flori și verdeață pe care le oferi, cu sezon și preț orientativ.",
+    "keywords": "catalog flori florărie soiuri sezon preț orientativ fir buchet aranjament ofertă",
+    "where": "Afacerea mea → Cataloage",
+    "need": "Orice membru al echipei firmei.",
+    "body": {
+      "ol1": {
+        "a": "Deschide fila „Cataloage” și apasă „Catalog nou” (sau „Creează primul catalog”), apoi „Creează catalogul”.",
+        "b": "Apasă „Adaugă un soi” și completează numele, sezonul și, dacă vrei, prețul orientativ. La „Observații” poți scrie, de exemplu, lungimea tijei sau comanda minimă.",
+        "c": "Repetă pentru fiecare soi.",
+        "d": "Apasă „Trimite spre verificare”."
+      },
+      "note1": "Catalogul apare pe pagina listării după ce un moderator îl verifică. Până atunci rămâne public ce era aprobat înainte.",
+      "note2": "Prețurile sunt orientative. Un preț necompletat apare ca „necunoscut”, nu ca zero.",
+      "h1": "La ce folosește",
+      "p1": "Organizatorii pot răsfoi catalogul pe pagina listării și îți pot cere o ofertă pentru un aranjament cu „Cere o ofertă pentru flori”. Primești descrierea aranjamentului (și fotografia, dacă au încărcat una), data, numărul aproximativ de invitați și mesajul — nimic altceva din planul lor.",
+      "p2": "Răspunzi din „Cereri primite”, cu un mesaj și o ofertă în PDF."
+    }
+  },
+  "claim-listing": {
+    "title": "Revendică sau elimină o listare adăugată de EventDesk",
+    "summary": "Unele firme sunt adăugate din informații publice. Dacă este firma ta, o poți revendica gratuit sau poți cere eliminarea ei.",
+    "keywords": "revendică listare nerevendicată adăugat de eventdesk elimină obiecție corectură sursă publică cod",
+    "where": "Firme → o listare nerevendicată → Este firma ta?",
+    "need": "Pentru revendicare: un cont cu adresă de email. Pentru eliminare sau corectură: nu ai nevoie de cont.",
+    "body": {
+      "p1": "O listare cu mențiunea „Adăugat de EventDesk — nefiind revendicat încă” provine dintr-o sursă publică, arătată pe pagina ei la „De unde vine listarea”, și a fost verificată de un moderator.",
+      "h1": "Revendică listarea",
+      "ol1": {
+        "a": "Pe pagina listării, la „Este firma ta?”, deschide „Revendică listarea”. Dacă nu ești în cont, intri întâi și te aducem înapoi.",
+        "b": "Scrie „Numele firmei” și, opțional, „Rolul tău în firmă”, apoi apasă „Începe revendicarea”.",
+        "c": "Trimitem un cod din șase cifre la adresa de email publicată de firmă. Introdu-l și apasă „Confirmă codul”.",
+        "d": "O a doua persoană din echipa EventDesk aprobă. Apoi listarea devine a firmei tale și o poți corecta din zona firmei."
+      },
+      "note1": "Codul pleacă doar la adresa publicată de firmă, niciodată la o adresă scrisă de tine. Este valabil 15 minute. Dacă sursa publică nu are o adresă de email, un moderator verifică revendicarea față de sursă.",
+      "h2": "Cere eliminarea sau o corectură",
+      "p2": "Dacă reprezinți firma și nu vrei listarea, deschide „Cere eliminarea sau corectarea”. Alegi „Eliminarea listării”, „Obiectez față de listare” sau „O corectură” și apeși „Trimite cererea”. Răspundem în cel mult 30 de zile.",
+      "note2": "Dacă listarea a fost deja revendicată de altcineva și crezi că este firma ta, scrie-ne prin formularul de raportare."
+    }
+  },
+  "business-team": {
+    "title": "Echipa firmei",
+    "summary": "Invită colegi, alege cine este administrator și scoate pe cine nu mai lucrează cu voi.",
+    "keywords": "echipa firmei colegi invită proprietar administrator membru elimină părăsește rol",
+    "where": "Afacerea mea → Echipă",
+    "need": "Proprietarul și administratorii invită și schimbă roluri.",
+    "body": {
+      "ol1": {
+        "a": "Deschide fila „Echipă”.",
+        "b": "La „Invită un coleg”, scrie „Adresa de email” și alege „Rol”.",
+        "c": "Apasă „Trimite invitația”. Colegul apare la „Invitații trimise”, cu „Așteaptă răspuns”.",
+        "d": "Colegul deschide linkul din email, intră în cont cu aceeași adresă și apasă butonul de intrare în echipă."
+      },
+      "note1": "Linkul este valabil 14 zile și funcționează doar pentru adresa la care a fost trimis. O invitație fără răspuns o poți lua înapoi cu „Retrage invitația”.",
+      "h1": "Roluri",
+      "ul1": {
+        "a": "„Proprietar” — unul singur; răspunde de firmă.",
+        "b": "„Administrator” — conduce echipa și setările împreună cu proprietarul.",
+        "c": "„Membru” — lucrează la listări, cataloage și cereri."
+      },
+      "p1": "Schimbi rolul unui coleg cu „Fă administrator” sau „Fă membru”. Îl scoți cu „Elimină din echipă”; pierde accesul pe loc. Tu poți pleca oricând cu „Părăsește echipa”.",
+      "note2": "Oricine din echipă poate răspunde la cereri și poate lucra la listări, dar fiecare modificare publică trece tot prin verificarea unui moderator."
+    }
+  },
+  "business-occasions": {
+    "title": "Ocazii organizate pentru clienți: bibliotecă, identitate și predare",
+    "summary": "Pentru firmele care planifică evenimente: creezi ocazia în numele clientului, lucrezi cu echipa ta și i-o predai la final.",
+    "keywords": "ocazii firmă client organizator de evenimente bibliotecă șabloane identitate siglă culoare predare predă branding",
+    "where": "Afacerea mea → Ocaziile clienților · Bibliotecă · Identitate",
+    "need": "Echipa firmei. Identitatea o schimbă proprietarul sau un administrator.",
+    "body": {
+      "ol1": {
+        "a": "Deschide fila „Ocaziile clienților”, creează o „Ocazie nouă pentru un client” și apasă „Creează ocazia”. Data o poți lăsa goală.",
+        "b": "Apasă „Deschide planul” ca să lucrezi în ea ca în orice ocazie.",
+        "c": "Cu „Aplică din bibliotecă” aduci din bibliotecă șabloane de sarcini, liste de verificare, furnizori și fișiere."
+      },
+      "note1": "Fiecare membru al echipei lucrează în ocaziile firmei ca organizator. La „Ce vede echipa în ocaziile firmei” alegi dacă vede și banii, și cererile private ale invitaților, apoi apeși „Salvează accesul echipei”.",
+      "h1": "Cum vă văd invitații",
+      "p1": "Numele, sigla și o culoare de accent apar pe paginile invitaților din ocaziile pe care le organizați, până la predarea fiecărei ocazii.",
+      "h2": "Predă ocazia clientului",
+      "p2": "Invită clientul ca membru al ocaziei. După ce acceptă, îl alegi la „Predă ocazia clientului”.",
+      "ul1": {
+        "a": "Clientul devine proprietarul ocaziei, cu acces la buget și la cererile private.",
+        "b": "Accesul întregii echipe se încheie, la fel și conexiunile asistenților firmei.",
+        "c": "Numele, sigla și culoarea firmei dispar de pe paginile invitaților.",
+        "d": "Planul rămâne întreg: sarcini, invitați, furnizori, bani și fișierele partajate."
+      },
+      "note2": "După predare, ocazia aparține clientului. Firma păstrează doar o evidență la „Predate clienților”."
+    }
+  }
+}

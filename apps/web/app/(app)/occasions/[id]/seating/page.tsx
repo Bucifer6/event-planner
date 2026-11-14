@@ -9,6 +9,7 @@ import { ActionForm } from "@/app/(auth)/_components/forms";
 import { SeatingEditor } from "@/components/plan/SeatingEditor";
 import { requireCtx } from "@/lib/ctx";
 import { orNotFound } from "../../_lib/load";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("seating"))("title") };
@@ -64,6 +65,7 @@ export default async function SeatingPage({ params }: { params: Promise<{ id: st
         description={t("description")}
         actions={ed.publishedAt ? <Tag tone="success">{t("publish.tagOn")}</Tag> : <Tag>{t("publish.tagOff")}</Tag>}
       />
+      <HelpLink topic="seating" />
       {space.newerVersion ? (
         <Notice tone="attention" title={t("newerDrawing.title")}>
           <Link href={`/occasions/${id}/space`}>{t("newerDrawing.link")}</Link>

@@ -1,9 +1,11 @@
+import { isFreshAuth } from "@ed/core/accounts";
 import type { PlanView, PriceBreakdown } from "@ed/core/billing";
 import { getFeaturedPreview } from "@ed/core/featured";
 import { listBusinessListings } from "@ed/core/listings";
 import { formatDate, formatInteger, formatMoney } from "@ed/i18n/format";
 import { List, Notice, Section, Table, Tag } from "@ed/ui";
 import { getLocale, getTranslations } from "next-intl/server";
+import Link from "next/link";
 import { cancelSubscriptionAction, startCheckoutAction } from "@/app/actions/billing";
 import { ActionForm } from "@/app/(auth)/_components/forms";
 import { requireCtx } from "@/lib/ctx";
@@ -32,6 +34,8 @@ export async function PaidPlan({ businessId, paid, lapsed, returned }: { busines
   const hasPlan = live.some((s) => s.plan !== "featured_monthly");
   // P15: what a business sees BEFORE buying Featured — numbers, no promise
   const ctx = await requireCtx();
+  // S4: a purchase needs a fresh confirmation — enforced in @ed/core/billing, said here first
+  const fresh = await isFreshAuth(ctx);
   const listings = (await listBusinessListings(ctx, businessId)).filter((l) => l.listing.status === "live");
   const previews = await Promise.all(listings.map(async (l) => ({ listing: l.listing, rows: await getFeaturedPreview(ctx, { listingId: l.listing.id }) })));
 
@@ -40,6 +44,12 @@ export async function PaidPlan({ businessId, paid, lapsed, returned }: { busines
       {returned ? (
         <Notice title={t("paid.returnedTitle")} role="status">
           {t("paid.returnedBody")}
+        </Notice>
+      ) : null}
+
+      {paid.canBuy && paid.checkoutConfigured && !fresh ? (
+        <Notice title={t("paid.freshTitle")}>
+          {t("paid.freshBody")} <Link href="/account#fresh">{t("paid.freshLink")}</Link>
         </Notice>
       ) : null}
 

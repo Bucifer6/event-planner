@@ -12,6 +12,7 @@ import { plural } from "../../_lib/plural";
 import { formatDayKey, moneyParts } from "../budget/_lib/format";
 import styles from "../budget/money.module.css";
 import { AddParticipant, AddSharedCost, RecordTransfer, RemoveParticipant, VoidEntry } from "./LedgerForms";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("ledger"))("title") };
@@ -51,6 +52,7 @@ export default async function LedgerPage({ params }: { params: Promise<{ id: str
   return (
     <>
       <PageHeader level={2} title={t("title")} description={t("description")} actions={addCost("primary")} />
+      <HelpLink topic="ledger" />
       {closed ? <Notice>{t("closedNotice")}</Notice> : null}
 
       {people.length === 0 ? (

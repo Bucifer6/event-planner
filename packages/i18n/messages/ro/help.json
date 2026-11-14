@@ -1,0 +1,69 @@
+{
+  "metaTitle": "Ajutor",
+  "eyebrow": "Centrul de ajutor",
+  "title": "Cu ce te putem ajuta?",
+  "lead": "Ghiduri scurte, pas cu pas, pentru organizatori, invitați și firme. Butoanele sunt numite exact cum apar în aplicație.",
+  "toc": "Secțiunile centrului de ajutor",
+  "search": {
+    "label": "Caută în ajutor",
+    "hint": "Scrie un cuvânt sau două, de exemplu „buget”, „link expirat” sau „cod”. Rezultatele apar pe măsură ce scrii.",
+    "submit": "Caută",
+    "clear": "Șterge căutarea",
+    "resultsTitle": "Rezultatele căutării",
+    "count": {
+      "one": "{count} articol găsit",
+      "few": "{count} articole găsite",
+      "other": "{count} de articole găsite"
+    },
+    "emptyTitle": "Niciun articol nu se potrivește",
+    "emptyBody": "Încearcă un cuvânt mai simplu sau șterge căutarea și alege o secțiune din listă."
+  },
+  "sections": {
+    "start": { "title": "Începe aici", "intro": "Primii pași: cum funcționează EventDesk, cum intri în cont și cum creezi prima ocazie." },
+    "plan": { "title": "Planifică o ocazie", "intro": "Sarcini, echipă, dată și tot ce ține planul la zi." },
+    "guests": { "title": "Invitați și răspunsuri", "intro": "Familiile invitate, linkurile lor și ce îți răspund." },
+    "money": { "title": "Bani", "intro": "Bugetul, cheltuielile și costurile împărțite. Le văd doar cei cu acces la finanțe." },
+    "suppliers": { "title": "Furnizori și ziua evenimentului", "intro": "De la prima cerere până la sosirea invitaților." },
+    "space": { "title": "Sala, mesele și papetăria", "intro": "Planul sălii la scară, așezarea la mese și invitațiile." },
+    "travel": { "title": "Călătorii", "intro": "Pentru voiaje: etape, grupuri, transport și camere." },
+    "invited": { "title": "Pentru invitați", "intro": "Ai primit un link de invitație? Aici afli ce este și cum răspunzi." },
+    "business": { "title": "Pentru firme", "intro": "Contul firmei, listările, verificarea lor și cererile primite." },
+    "account": { "title": "Cont și siguranță", "intro": "Intrarea în cont, dispozitivele, ștergerea contului și asistenții AI." },
+    "privacy": { "title": "Confidențialitate și reguli", "intro": "Ce vede fiecare, ce nu păstrăm și cum raportezi ceva în neregulă." },
+    "trouble": { "title": "Depanare", "intro": "Când ceva nu merge cum te aștepți." },
+    "staff": { "title": "Pentru echipa EventDesk", "intro": "Regulile de lucru din consolă. Secțiunea apare doar personalului platformei." }
+  },
+  "article": {
+    "metaTitle": "{title} — Ajutor",
+    "back": "Toate articolele",
+    "where": "Unde găsești",
+    "need": "Cine poate",
+    "goodToKnow": "Bine de știut:",
+    "seeAlso": "Vezi și",
+    "open": {
+      "occasions": "Deschide ocaziile tale",
+      "business": "Deschide „Afacerea mea”",
+      "account": "Deschide pagina din cont",
+      "console": "Deschide consola",
+      "directory": "Deschide lista de firme",
+      "report": "Deschide formularul de raportare",
+      "signIn": "Deschide pagina de intrare"
+    }
+  },
+  "contact": {
+    "title": "Contact și raportare",
+    "intro": "Dacă nu ai găsit răspunsul în articole, iată unde poți merge mai departe.",
+    "report": "Raportează conținut ilegal",
+    "reportBody": "Pentru conținut ilegal sau o listare nelegitimă. Nu ai nevoie de cont și primești o referință a raportului.",
+    "status": "Starea serviciului",
+    "statusBody": "Pagina publică pe care anunțăm dacă ceva nu funcționează.",
+    "privacy": "Politica de confidențialitate",
+    "privacyBody": "Ce date păstrăm, de ce și cât timp.",
+    "terms": "Termeni și condiții",
+    "termsBody": "Regulile de folosire a platformei.",
+    "supportBody": "Scrie-ne pe email pentru orice altceva. Nu trimite parole, coduri de intrare sau coduri de recuperare."
+  },
+  "link": {
+    "label": "Ajutor: {title}"
+  }
+}

@@ -1,7 +1,10 @@
+import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { Wordmark } from "@ed/ui";
 import { IconBuilding, IconDirectory, IconOccasion, IconPerson } from "@ed/ui/icons";
+import { HelpIcon } from "@/components/help/HelpIcon";
+import help from "@/components/help/help.module.css";
 import { BottomNav, TopNav, type NavEntry } from "./NavLinks";
 import { LanguageSwitch } from "./LanguageSwitch";
 
@@ -19,11 +22,14 @@ export async function AppShell({ children }: { children: ReactNode }) {
       <a className="ed-skip" href="#main">
         {t("skip")}
       </a>
-      <header className="ed-topbar">
+      <header className={`ed-topbar ${help.topbar}`}>
         <div className="ed-topbar__inner">
           <Wordmark href="/occasions" label={t("home")} />
           <TopNav entries={entries} label={t("primary")} />
           <div className="ed-topbar__end">
+            <Link href="/help" className="ed-btn ed-btn--icon" aria-label={t("help")} title={t("help")}>
+              <HelpIcon />
+            </Link>
             <LanguageSwitch />
           </div>
         </div>

@@ -1,8 +1,10 @@
 # 14 — Deploy runbook (R0-14, DEP1–DEP7, W10, INF10, SEC9, SEC13, LAU5, LAU7)
 
-How production is deployed, rolled back and recovered, what the operator must set up before
-the first deployment, and the launch-day runbook. It describes what is in this repository;
-where a choice is still the operator's, it says so instead of guessing.
+**What this is, in plain English.** The instructions for putting EventDesk.ro on a real
+server and keeping it there: what has to be set up once, how a new version is released and
+taken back, how backups are made and restored, where the secrets live, and what to do on
+launch day. Sections 4.5 and 9 are checklists you can tick through. It describes what is in
+this repository; where a choice is still the operator's, it says so instead of guessing.
 
 **Not verified in the build environment:** the workflows have not run on GitHub, the images
 have not been built, the Terraform has not been validated or applied, and the deploy scripts
@@ -165,8 +167,66 @@ tags. **Deploy the same tag once through the console**: it is harmless (same ima
 pending migrations) and it records the live release, which is what rollbacks and the
 "commits since live" view are measured against.
 
-`pnpm db:migrate` needs the committed migrations in `packages/db/drizzle/`; they are
-generated once, at integration, with `pnpm db:generate`.
+`pnpm db:migrate` applies the committed migrations in `packages/db/drizzle/` (the initial one,
+`0000_eminent_the_stranger.sql`, creates 167 tables) and then the database guards in
+`packages/db/src/sql/`. Later schema changes add a migration file with `pnpm db:generate`,
+committed in the same pull request. Never use `pnpm db:push` on a server.
+
+### 4.5 First-deploy checklist, in order
+
+Everything above, as one list. Do not open the service to real people before the last line.
+
+- [ ] **Decide** the items in `10-operator-decisions.md` that block a deployment: hosting,
+      secret store, registry, email provider, malware scanner, alert channel, second and
+      third staff person.
+- [ ] **GitHub** set up as in 4.1 (private organisation repository, protections, GitHub App,
+      `production` environment with its variables and secrets).
+- [ ] **Hosting** set up as in 4.2 (database, three buckets, DNS for the three names,
+      registry, host reachable by the deploy runner).
+- [ ] **Generate the secrets** — each on a trusted machine, straight into the secret store,
+      never into a file in the repository:
+      `SESSION_SECRET` — `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"`;
+      `DEPLOY_RECORD_TOKEN` — `node -e "console.log(require('crypto').randomBytes(32).toString('base64url'))"`
+      (same value in the GitHub environment secret); `EMAIL_WEBHOOK_SECRET` the same way;
+      the backup key pair with `age-keygen` on a machine that is **not** the server.
+- [ ] **Fill the application environment** (4.3) using the names in `.env.example`:
+      core addresses, database, **email** (`EMAIL_PROVIDER`, `EMAIL_FROM`, provider URL and
+      key), **storage** (`S3_*` buckets), **scanner** (`MALWARE_SCANNER` — production refuses
+      uploads without one), **backups** (`BACKUP_*`, `BACKUP_COMMAND`, `RESTORE_TEST_COMMAND`),
+      alerts (`OPS_ALERT_WEBHOOK_URL`), the deploy console (`GITHUB_*`), and
+      `TRUSTED_IP_HEADER` if the ingress uses a different header.
+- [ ] **Tag a release** on `main` and wait for a green `release-ci`.
+- [ ] **First installation by hand** (4.4): build and push the images, then
+      `scripts/deploy/migrate.sh` (this runs **`pnpm db:migrate`**), `roll.sh`, `health.sh`.
+- [ ] **Seed the reference data**: `pnpm db:seed` in the `tools` container (categories,
+      counties and localities, templates, the monetisation switch in its OFF state).
+- [ ] **Create two staff members**: each person signs in once, then
+      `node scripts/make-staff.mjs <email> <roles>` for each; each turns on two-step sign-in
+      and signs in again. Check that `/console` opens for both and that the banner for
+      single-operator mode is gone. Add a third person if compliance access will be needed.
+- [ ] **Deploy the same tag once through the console**, so the live release is recorded.
+- [ ] **Publish the legal documents** (LAU1): console → *Lansare* → record the version and
+      publication date of the terms, the privacy policy and the cookie notice. Until all
+      three are recorded, nobody can create an account — check that the sign-in page says
+      "Înregistrările se deschid în curând" before, and accepts a new address after.
+- [ ] **Prove email works**: request a sign-in code to a mailbox outside your own domain and
+      receive it. Check SPF, DKIM and DMARC pass in the received message (LAU3).
+- [ ] **Prove uploads work**: upload a photo to an occasion (for example a receipt) and open
+      it. Check in the scanner's own log that the file was scanned.
+- [ ] **Prove backups work**: after the first 02:30 run, see the backup listed as *ok* on
+      `/console/operations` (there is no button to start it from the console; to run one
+      sooner, run `bash scripts/deploy/container-backup.sh daily` in the `tools` container —
+      that manual run is not listed in the console). Then **run the restore test** by hand
+      (`bash scripts/deploy/container-restore-test.sh`, with the private key mounted only for
+      the test) and see it succeed — before launch, not on the 1st of next month.
+- [ ] **Prove alerts work**: someone actually receives a test alert on the watched channel;
+      an outside monitor is pointed at `/api/health`.
+- [ ] **Check the look of generated PDFs** (briefing, stationery) on the server: if stationery
+      comes out in the fallback typeface, set `STATIONERY_FONT_DIR` (see
+      `10-operator-decisions.md`).
+- [ ] **Launch checklist** on `/console/launch` complete (LAU1–LAU9), including the
+      penetration test (LAU4).
+- [ ] **Launch day**: section 9.
 
 ## 5. Day-to-day
 
@@ -216,8 +276,9 @@ errors and the console print variable *names* only). Rotate at least yearly and 
 staff member with access leaves: `SESSION_SECRET` (signs everyone out),
 `GITHUB_APP_PRIVATE_KEY` (generate a new key in the App, delete the old), `DEPLOY_RECORD_TOKEN`
 (change it in the secret store **and** the GitHub environment together), email and object
-store keys, `DEPLOY_SSH_KEY`, the registry credentials. Record each rotation date on
-`/console/launch`. After changing a value, roll the release (the reference host re-reads the
+store keys, `DEPLOY_SSH_KEY`, the registry credentials. **The console has no field for
+rotation dates** (a gap against SEC13, see `09-traceability.md`): keep them in your own
+operations log, or as a note on the LAU5 item of the launch checklist. After changing a value, roll the release (the reference host re-reads the
 secret store at each roll).
 
 ## 7. Backups, restore, key rotation (INF10, SEC9, LAU5)

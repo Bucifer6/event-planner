@@ -8,6 +8,7 @@ import { redirect } from "next/navigation";
 import { createBusinessAction } from "@/app/actions/business";
 import { SpecForm } from "@/app/console/_components/SpecForm";
 import { requireCtx } from "@/lib/ctx";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("business"))("title") };
@@ -54,6 +55,7 @@ export default async function BusinessHomePage() {
   return (
     <Page narrow>
       <PageHeader eyebrow={t("eyebrow")} title={t("start.title")} description={t("start.description")} />
+      <HelpLink topic="business" />
       <Section title={t("start.howTitle")}>
         <ol className="ed-prose">
           <li>{t("start.step1")}</li>

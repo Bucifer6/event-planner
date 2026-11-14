@@ -17,6 +17,7 @@ import styles from "./guest.module.css";
 import { RsvpWizard, type WizardLabels, type WizardQuestion } from "./rsvp-wizard";
 import type { GuestFormBase } from "./section-forms";
 import { GuestSections } from "./sections";
+import { HelpFootLink } from "@/components/help/HelpFootLink";
 
 // The guest link (A6, S6, SEC2, SEC7, L2, INF5, Q3) — the most-seen page of the product.
 // Public: no account, no cookie. The token decides the household; the invitation decides the
@@ -333,6 +334,7 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
 
       <footer className="ed-solo__foot">
         <p>{t("foot.privacy")}</p>
+        <HelpFootLink section="invited" />
       </footer>
     </div>
   );

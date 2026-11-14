@@ -14,6 +14,7 @@ import { AddExpense, CategorySheet, PresetChips } from "./BudgetForms";
 import { formatDayKey, moneyParts } from "./_lib/format";
 import { amountFieldValue } from "./_lib/money";
 import styles from "./money.module.css";
+import { HelpLink } from "@/components/help/HelpLink";
 
 export async function generateMetadata(): Promise<Metadata> {
   return { title: (await getTranslations("budget"))("title") };
@@ -108,6 +109,7 @@ export default async function BudgetPage({ params }: { params: Promise<{ id: str
   return (
     <>
       <PageHeader level={2} title={t("title")} description={t("description")} actions={addExpense("primary")} />
+      <HelpLink topic="budget" />
       {closed ? <Notice>{t("closedNotice")}</Notice> : null}
 
       <Card framed className={styles.hero}>

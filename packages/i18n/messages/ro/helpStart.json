@@ -1,0 +1,58 @@
+{
+  "how-eventdesk-works": {
+    "title": "Cum funcționează EventDesk",
+    "summary": "Cele câteva reguli simple după care merge toată aplicația, ca să știi la ce să te aștepți.",
+    "keywords": "principii reguli gratuit previzualizare necunoscut privat fapte corecție început",
+    "where": "Peste tot în aplicație",
+    "body": {
+      "p1": "EventDesk te ajută să planifici o ocazie — un picnic, o aniversare, o nuntă, un botez, un revelion sau un voiaj — împreună cu oamenii care te ajută. Pentru organizatori este gratuit: crearea unei ocazii nu costă nimic.",
+      "h1": "Cinci lucruri de ținut minte",
+      "ul1": {
+        "a": "Vezi înainte să aplici. Schimbările importante (mutarea datei, scoaterea unei familii, amânarea) apar întâi ca previzualizare. Nimic nu se aplică până nu apeși „Aplică schimbările”.",
+        "b": "Faptele rămân fapte. O plată făcută, o cantitate primită sau o sosire nu se suprascriu. Se pot doar corecta, cu un motiv, iar valoarea veche rămâne în istoric.",
+        "c": "Ce nu se știe rămâne la vedere. Un preț, o dimensiune sau o estimare lipsă apar cu cuvântul „necunoscut”, niciodată ca zero.",
+        "d": "Privat din start. Planul îl văd doar oamenii din echipă. Banii și cererile private ale invitaților se văd numai cu acces dat separat, om cu om.",
+        "e": "Despre copii păstrăm doar numărul. Niciun nume, nicio vârstă, nicio dată de naștere."
+      },
+      "note1": "În lista de firme, ordinea se rotește zilnic și nu se vinde. O plasare plătită, dacă există, este etichetată ca atare și nu spune nimic despre calitate.",
+      "p2": "Aplicația are două limbi, română și engleză. Comutatorul RO / EN din bara de sus schimbă doar textele, niciodată datele tale."
+    }
+  },
+  "sign-in-with-code": {
+    "title": "Intră în cont cu un cod pe email",
+    "summary": "Fără parole: scrii adresa de email, primești un cod din șase cifre și ai intrat.",
+    "keywords": "autentificare login logare cod email parolă cont nou înregistrare buton",
+    "where": "Pagina „Intră în cont”",
+    "body": {
+      "ol1": {
+        "a": "Deschide pagina „Intră în cont” și scrie adresa în câmpul „Adresa de email”.",
+        "b": "Apasă „Trimite-mi codul”. Dacă nu ai încă un cont, se creează acum.",
+        "c": "Deschide emailul primit. Găsești un cod din șase cifre și un buton de intrare — fac același lucru.",
+        "d": "Scrie codul în câmpul „Codul din email” și apasă „Intră în cont”, sau apasă butonul din email.",
+        "e": "Dacă ai activat verificarea în doi pași, mai scrii și „Codul din aplicație”."
+      },
+      "note1": "Codul și butonul sunt valabile 15 minute și pot fi folosite o singură dată. Dacă programul tău de email deschide linkul înaintea ta, apare mesajul „Linkul a fost deja folosit”: scrie codul din același email și intri la fel.",
+      "p1": "Ai greșit adresa? Apasă „Folosește altă adresă de email”. Nu vrei să folosești un email? Sub formular găsești „Folosește un cont anonim”.",
+      "p2": "După ce intri în cont, te ducem înapoi la pagina de unde ai venit — de exemplu la o invitație în echipă."
+    }
+  },
+  "create-occasion": {
+    "title": "Creează prima ta ocazie",
+    "summary": "Un titlu, un model și o dată sunt de ajuns ca să începi. Restul se poate schimba oricând.",
+    "keywords": "ocazie nouă eveniment model șablon nuntă botez picnic aniversare revelion voiaj dată sondaj brief priorități",
+    "where": "Ocazii → Ocazie nouă",
+    "body": {
+      "ol1": {
+        "a": "Din „Ocazii”, apasă „Ocazie nouă”.",
+        "b": "Scrie „Titlul ocaziei”, de exemplu „Nunta Ioanei și a lui Andrei”.",
+        "c": "La „Pornește de la un model” alege tipul: Picnic, Aniversare, Nuntă, Botez, Revelion, Voiaj solo sau Voiaj de grup. Modelul aduce sarcini pregătite, programate în funcție de dată. Dacă vrei o foaie albă, alege „Ocazie”.",
+        "d": "La „Când are loc?” alege „Într-o zi”, „Mai multe zile” sau „Decidem prin sondaj”.",
+        "e": "Dacă vrei, apasă „Adaugă scopul și prioritățile” și scrie în câteva cuvinte de ce are loc ocazia și ce contează cel mai mult.",
+        "f": "Apasă „Creează ocazia”."
+      },
+      "note1": "Poți crea ocazia fără dată. Sarcinile din model își primesc termenele când stabilești data.",
+      "p1": "Ajungi în „Privire de ansamblu”, de unde pornești spre sarcini, invitați, buget și restul secțiunilor.",
+      "note2": "Dacă ai încheiat alte ocazii și ți-ai notat ce ai învățat, notițele apar pe pagina de creare, la „Lecții de la ocaziile trecute”."
+    }
+  }
+}

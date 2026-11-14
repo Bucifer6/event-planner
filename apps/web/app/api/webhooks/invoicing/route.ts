@@ -1,7 +1,7 @@
 import { systemCtx } from "@ed/core/context";
-import { handleInvoicingWebhook } from "@ed/core/invoicing";
+import { handleInvoicingWebhook, verifyInvoicingWebhookSecret } from "@ed/core/invoicing";
 import { getDb } from "@ed/db";
-import { isAppError } from "@ed/shared/errors";
+import { describeError, isAppError } from "@ed/shared/errors";
 import { z } from "zod";
 
 export const dynamic = "force-dynamic";
@@ -17,6 +17,12 @@ const STATUS: Record<string, number> = { UNAUTHENTICATED: 401, VALIDATION: 400, 
  */
 export async function POST(request: Request): Promise<Response> {
   if (!process.env.INVOICING_WEBHOOK_SECRET?.trim()) return new Response(null, { status: 404 });
+  // The secret is checked BEFORE the body is read or parsed (constant-time, in core too):
+  // an unauthenticated caller costs nothing more than this comparison.
+  const secret = /^Bearer (.+)$/.exec(request.headers.get("authorization") ?? "")?.[1] ?? null;
+  if (!verifyInvoicingWebhookSecret(secret)) return Response.json({ ok: false }, { status: 401 });
+  const declared = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declared) && declared > 200_000) return Response.json({ ok: false }, { status: 413 });
   const text = await request.text();
   if (text.length > 200_000) return Response.json({ ok: false }, { status: 413 });
   let body: unknown;
@@ -26,13 +32,12 @@ export async function POST(request: Request): Promise<Response> {
     return Response.json({ ok: false }, { status: 400 });
   }
   try {
-    const secret = /^Bearer (.+)$/.exec(request.headers.get("authorization") ?? "")?.[1] ?? null;
     const result = await handleInvoicingWebhook(systemCtx(getDb()), { secret, body });
     return Response.json({ ok: true, status: result.status });
   } catch (e) {
     if (e instanceof z.ZodError) return Response.json({ ok: false }, { status: 400 });
     if (isAppError(e)) return Response.json({ ok: false }, { status: STATUS[e.code] ?? 400 });
-    console.error("[invoicing] webhook failed", e instanceof Error ? e.message : e);
+    console.error("[invoicing] webhook failed", describeError(e));
     return Response.json({ ok: false }, { status: 500 });
   }
 }
