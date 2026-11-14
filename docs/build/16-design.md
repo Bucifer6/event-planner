@@ -138,7 +138,7 @@ invitat"). Sentences are short. Buttons are verbs with their object. English mir
 
 ## The looks
 
-The app ships with thirteen looks. A platform administrator chooses one for everyone in
+The app ships with fifteen looks. A platform administrator chooses one for everyone in
 **Console → Aspect** (`/console/appearance`); the choice is a platform setting (`ui.theme`),
 is audited, and takes effect on the next page load. A look changes appearance only.
 
@@ -157,6 +157,8 @@ is audited, and takes effect on the next page load. A look changes appearance on
 | **Dune** | sand, umber, burnt sienna | Fraunces (bold) / DM Sans | burnt sienna | sienna | 4px | sentence case |
 | **Ledger** | mint grey, typewriter, bottle green | system monospace / Instrument Sans | bottle green | bottle green | square | tracked capitals, no italics |
 | **Muse** | lilac, plum, soft light | Instrument Serif / DM Sans | plum | lavender | 16px, pill controls | sentence case |
+| **Vellum** | parchment, sepia, umber | Cormorant Garamond / Instrument Sans | umber | rose-clay | square | tracked capitals |
+| **Lagoon** | sea glass, harbour blue | Instrument Serif / DM Sans | harbour blue | sea glass | 24px, pill controls | sentence case |
 
 How it works:
 

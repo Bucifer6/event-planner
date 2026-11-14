@@ -193,6 +193,32 @@ THEMES = {
         "dark": dict(paper="#17121c", surface="#211a28", sunken="#0f0c13", ink="#efe6f7", ink2="#c7b8d6", ink3="#a796b8", line="#33293d", lineStrong="#62547a",
                      accent="#dcb0e8", accentHover="#ead0f1", onAccent="#17121c", accentTint="#33243b", gilt="#b9a8f0", giltInk="#cbbdf4"),
     },
+    "vellum": {
+        "comment": "VELLUM — a hand-bound book. Parchment paper, sepia ink, umber actions; a bookish serif, square corners.",
+        "voice": {
+            "--font-display": f'"Cormorant Garamond", {SERIF_FALLBACK}', "--font-text": f'"Instrument Sans", {SANS_FALLBACK}',
+            "--display-weight": "500", "--hero-weight": "500", "--figure-weight": "500", "--display-tracking": "-0.01em",
+            "--display-sm": "1.625rem", "--display-md": "2.125rem", "--display-lg": "2.75rem", "--display-xl": "clamp(2.875rem, 8.5vw, 4.75rem)",
+            "--track": "1.1", "--btn-weight": "600", "--radius": "0px", "--radius-sm": "0px", "--wordmark-size": "1.75rem", "--wordmark-weight": "500",
+        },
+        "light": dict(paper="#f5f0e7", surface="#fcf8f0", sunken="#ebe1d5", ink="#251f1b", ink2="#55483e", ink3="#66564a", line="#ddd0c2", lineStrong="#c9b9a9",
+                      accent="#8a482d", accentHover="#a3593a", onAccent="#fcf8f0", accentTint="#f1e1d6", gilt="#b98266", giltInk="#8a482d"),
+        "dark": dict(paper="#1b1714", surface="#25201b", sunken="#120f0d", ink="#f1e9dd", ink2="#c9bcab", ink3="#a99b8a", line="#382f28", lineStrong="#66584b",
+                     accent="#e8aa8c", accentHover="#f2c6ae", onAccent="#1b1714", accentTint="#3a2a21", gilt="#d29c80", giltInk="#e8aa8c"),
+    },
+    "lagoon": {
+        "comment": "LAGOON — sea glass and harbour blue. Pale aqua paper, deep-water ink, round cards and pill buttons.",
+        "voice": {
+            "--font-display": f'"Instrument Serif", {SERIF_FALLBACK}', "--font-text": f'"DM Sans", {SANS_FALLBACK}',
+            "--display-weight": "400", "--hero-weight": "400", "--figure-weight": "400", "--display-tracking": "-0.015em",
+            "--display-sm": "1.5rem", "--display-md": "2rem", "--display-lg": "2.75rem", "--display-xl": "clamp(2.875rem, 8.5vw, 4.75rem)",
+            "--caps": "none", "--track": "0.2", "--btn-weight": "600", "--btn-size": "0.9375rem", "--label-size": "0.8125rem", "--radius": "24px", "--radius-sm": "999px", "--wordmark-size": "1.75rem", "--wordmark-weight": "400",
+        },
+        "light": dict(paper="#f0f6f7", surface="#fcfdfc", sunken="#dbecef", ink="#14334d", ink2="#35536b", ink3="#406079", line="#c8dde2", lineStrong="#aac9d0",
+                      accent="#1f637c", accentHover="#287995", onAccent="#fcfdfc", accentTint="#dbecef", gilt="#80b9c6", giltInk="#24617a"),
+        "dark": dict(paper="#0f181d", surface="#162229", sunken="#0a1115", ink="#e3eff2", ink2="#b0c6cd", ink3="#91a9b1", line="#243840", lineStrong="#4b6872",
+                     accent="#94cfe0", accentHover="#b7e0ec", onAccent="#0f181d", accentTint="#1b3038", gilt="#80b9c6", giltInk="#94cfe0"),
+    },
 }
 
 VAR = dict(paper="--paper", surface="--surface", sunken="--sunken", ink="--ink", ink2="--ink-2", ink3="--ink-3", line="--line", lineStrong="--line-strong",

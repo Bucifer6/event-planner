@@ -584,6 +584,16 @@
         "name": "Muse",
         "mood": "liliac, prună, lumină blândă",
         "about": "Visător și delicat. O literă cu serife subțire, colțuri generos rotunjite."
+      },
+      "vellum": {
+        "name": "Vellum",
+        "mood": "pergament, sepia, umbră arsă",
+        "about": "Ca o carte legată de mână. O literă clasică cu serife, hârtie caldă și colțuri drepte."
+      },
+      "lagoon": {
+        "name": "Lagoon",
+        "mood": "sticlă de mare, albastru de port",
+        "about": "Proaspăt și liniștit. O literă cu serife subțire, carduri rotunde și butoane rotunjite."
       }
     }
   }

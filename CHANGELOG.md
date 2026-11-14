@@ -117,7 +117,8 @@ The first complete build of the product, made on 13–14 November 2026 on the br
 - Four more looks for the app — Atelier, Riviera, Jardin and Studio — beside the house look
   Maison, each with a dark version, switchable for everyone from Console → Aspect.
 - Eight more looks — Nocturne, Folio, Herbarium, Prism, Salon, Dune, Ledger and Muse — ported
-  from the planner-appearance work, as token sets in the same theme system (thirteen in all).
+  from the planner-appearance work, as token sets in the same theme system — plus Vellum and
+  Lagoon, the planner-appearance versions of Atelier and Riviera under new names (fifteen in all).
 - The invitation collections in the stationery designer: 64 more designs in five ranges —
   Romanian embroidery and weaving (16 cross-stitch borders), a signature collection (6),
   rustic (11) and traditional (11) regional editions, and twenty compositions — drawn by the
