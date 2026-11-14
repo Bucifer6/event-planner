@@ -544,6 +544,46 @@
         "name": "Studio",
         "mood": "blush, black, one stroke of red",
         "about": "Bold and editorial. Wide heavy capitals, no italics."
+      },
+      "nocturne": {
+        "name": "Nocturne",
+        "mood": "slate night, candle gold",
+        "about": "Always dark, day or night. Fine serif titles and warm gold for actions."
+      },
+      "folio": {
+        "name": "Folio",
+        "mood": "newsprint, iron ink, an oxblood rule",
+        "about": "Like a printed page. Tight, bold headlines and square corners."
+      },
+      "herbarium": {
+        "name": "Herbarium",
+        "mood": "lichen, forest green, pressed leaves",
+        "about": "Calm and natural. A classic serif, garden greens, soft corners."
+      },
+      "prism": {
+        "name": "Prism",
+        "mood": "lavender white, ultramarine",
+        "about": "Bright and confident. Heavy wide headlines, like a launch poster."
+      },
+      "salon": {
+        "name": "Salon",
+        "mood": "rosewater, mulberry, garnet",
+        "about": "An evening drawing room. Elegant serif titles and rounded buttons."
+      },
+      "dune": {
+        "name": "Dune",
+        "mood": "sand, umber, burnt sienna",
+        "about": "Warm desert tones at golden hour. Strong serif titles, softened corners."
+      },
+      "ledger": {
+        "name": "Ledger",
+        "mood": "mint grey, typewriter, bottle green",
+        "about": "Orderly and precise. Typewriter-style headings and square corners."
+      },
+      "muse": {
+        "name": "Muse",
+        "mood": "lilac, plum, soft light",
+        "about": "Dreamy and gentle. A light serif, generous round corners."
       }
     }
   }

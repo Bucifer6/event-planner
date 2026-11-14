@@ -3,10 +3,13 @@ import { join, resolve } from "node:path";
 import * as fontkit from "fontkit";
 import { pdfFonts } from "./briefingpdf";
 import { qrPathData, type QrMatrix } from "./qr";
+import { COLLECTION_PALETTES, EDITION_ART, KIND_MOTIFS, KIND_PALETTES, STITCH_CHARTS, STUDIO_PALETTES } from "./stationerycollections";
 
 // THE STATIONERY KIT (C-04) — designs as data, one layout engine, two renderers.
 //
-//   STATIONERY_DESIGNS        eight original typographic designs (no stock art, no imagery)
+//   STATIONERY_DESIGNS        eight original typographic house designs (no stock art, no imagery),
+//                             plus the invitation collections (embroidery, signature, rustic,
+//                             traditional and the twenty-composition library — see stationerycollections.ts)
 //   STATIONERY_PIECES         invitation (A5, square), save-the-date, menu, table card, place card, thank-you
 //   layoutPiece(input)        design + colourway + texts → a Scene (positioned text runs, paths)
 //   sceneToSvg(scene)         the proof: text drawn as the font's own outlines
@@ -190,6 +193,8 @@ export type Colourway = {
   /** true = the paper colour is printed edge to edge (needs the bleed); false = print on ivory stock. */
   flood: boolean;
   dark?: boolean;
+  /** Second colour of a textile design (embroidery thread). */
+  thread?: string;
 };
 
 // Ivoire, gilt, ink and bleu nuit are the Maison tokens; the rest are the curated paper/ink pairs.
@@ -202,7 +207,12 @@ export const COLOURWAYS: Record<string, Colourway> = {
   terracotta: { key: "terracotta", paper: "#fbf2e8", ink: "#2a2321", accent: "#bb5c3b", muted: "#6a5850", flood: true },
   minuit: { key: "minuit", paper: "#161c3f", ink: "#f5f2ec", accent: "#c9ab70", muted: "#c3c2cf", flood: true, dark: true },
   noir: { key: "noir", paper: "#17161b", ink: "#ece8df", accent: "#c9ab70", muted: "#bcb8af", flood: true, dark: true },
+  // the collection palettes (paper, ink, accent, muted, thread) — see stationerycollections.ts
+  ...Object.fromEntries(Object.entries(COLLECTION_PALETTES).map(([key, p]) => [key, { key, ...p }])),
 };
+
+/** The house colourways (the curated paper/ink pairs of the eight house designs). */
+export const HOUSE_COLOURWAYS = ["ivoire", "nuit", "sauge", "rose", "ciel", "terracotta", "minuit", "noir"] as const;
 
 /* ── Pieces ────────────────────────────────────────────────────────────── */
 
@@ -412,19 +422,38 @@ export type TextStyle = {
 
 export type FrameKind = "none" | "plate" | "hairline" | "arch" | "rule-left";
 
-export type DesignKey = "classic" | "modern" | "monogram" | "botanical" | "minimal" | "nocturne" | "botez" | "petrecere";
+/** Which family a design belongs to: the house designs, or one of the invitation collections. */
+export const DESIGN_RANGES = ["house", "embroidery", "featured", "rustic", "traditional", "collection"] as const;
+export type DesignRange = (typeof DESIGN_RANGES)[number];
+
+export type HouseDesignKey = "classic" | "modern" | "monogram" | "botanical" | "minimal" | "nocturne" | "botez" | "petrecere";
+/** A house design key or a collection design key (validated against DESIGN_KEYS). */
+export type DesignKey = HouseDesignKey | (string & {});
 
 export type Design = {
   key: DesignKey;
-  align: "center" | "left";
+  range: DesignRange;
+  align: "center" | "left" | "right";
+  /** Where the stack sits when it has room to spare (default: the optical centre). */
+  valign?: "top" | "bottom";
   frame: FrameKind;
+  /** Drawn artwork behind the text (collections): a key of COLLECTION_ART. */
+  art?: string;
+  /** Room the text keeps from each edge, as fractions of the sheet [left, right, top, bottom] (collections). */
+  textBox?: [number, number, number, number];
+  /** Print the palette the other way round: ink becomes the sheet, paper the lettering. */
+  invert?: boolean;
+  /** The colourways come from the occasion kind's palette set (+ studio palettes); `openOn` = which one first. */
+  kindColourways?: { openOn: number };
+  /** The opening mark sits under the text instead of above it. */
+  crestAt?: "top" | "foot";
   scatter?: "confetti" | "stars";
   /** How the names are set: one above the other with the conjunction between, or on running lines. */
   names: "stacked" | "inline";
   /** The mark between blocks. */
   rule: OrnamentKey;
   /** A larger opening mark above the text (invitation, menu, thank-you). */
-  crest?: { ornament: OrnamentKey; widthMm: number } | { monogram: true; diameterMm: number };
+  crest?: { ornament: OrnamentKey; widthMm: number } | { monogram: true; diameterMm: number } | { motif: "plain" | "ring" | "shield"; widthMm: number };
   /** Big date numerals (12 · 09 · 2026) instead of the written date, when the date can be read. */
   numeralDate?: boolean;
   styles: Record<TextRole, TextStyle>;
@@ -459,10 +488,11 @@ const withStyles = (over: Partial<Record<TextRole, Partial<TextStyle>>>): Record
   return out;
 };
 
-export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
+const HOUSE_DESIGNS: Record<HouseDesignKey, Design> = {
   // Centred Bodoni inside a gilt plate-mark: the house style.
   classic: {
     key: "classic",
+    range: "house",
     align: "center",
     frame: "plate",
     names: "stacked",
@@ -473,6 +503,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // Left-aligned, the date as large numerals, grotesque for everything that informs.
   modern: {
     key: "modern",
+    range: "house",
     align: "left",
     frame: "rule-left",
     names: "inline",
@@ -499,6 +530,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // Initials in a ring; the names themselves in spaced capitals.
   monogram: {
     key: "monogram",
+    range: "house",
     align: "center",
     frame: "none",
     names: "inline",
@@ -517,6 +549,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // One drawn sprig; italic names; light grotesque.
   botanical: {
     key: "botanical",
+    range: "house",
     align: "center",
     frame: "none",
     names: "stacked",
@@ -539,6 +572,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // Almost nothing: small type, a hairline, a great deal of paper.
   minimal: {
     key: "minimal",
+    range: "house",
     align: "center",
     frame: "none",
     names: "inline",
@@ -563,6 +597,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // The classic set at night: ivory and gilt on a deep sheet, a few stars.
   nocturne: {
     key: "nocturne",
+    range: "house",
     align: "center",
     frame: "hairline",
     scatter: "stars",
@@ -579,6 +614,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // Soft, for a christening: an arched frame, an open wreath, italics.
   botez: {
     key: "botez",
+    range: "house",
     align: "center",
     frame: "arch",
     names: "inline",
@@ -596,6 +632,7 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   // A party: a little confetti in two corners, a heavier Bodoni, the date in italics.
   petrecere: {
     key: "petrecere",
+    range: "house",
     align: "center",
     frame: "none",
     scatter: "confetti",
@@ -616,18 +653,195 @@ export const STATIONERY_DESIGNS: Record<DesignKey, Design> = {
   },
 };
 
+/* ── Collection designs (the invitation collections) ───────────────────── */
+
+/** Mixes two #rrggbb colours: `t` of `b` into `a`. */
+export function mixColour(a: string, b: string, t: number): string {
+  const p = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16);
+  const c = [0, 1, 2].map((i) => Math.round(p(a, i) * (1 - t) + p(b, i) * t));
+  return `#${c.map((v) => v.toString(16).padStart(2, "0")).join("")}`;
+}
+
+function luminance(hex: string): number {
+  const f = (c: number) => (c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4);
+  const v = [0, 1, 2].map((i) => parseInt(hex.slice(1 + i * 2, 3 + i * 2), 16) / 255) as [number, number, number];
+  return 0.2126 * f(v[0]) + 0.7152 * f(v[1]) + 0.0722 * f(v[2]);
+}
+
+/** WCAG contrast ratio of two #rrggbb colours. */
+export function contrastRatio(a: string, b: string): number {
+  const [hi, lo] = [luminance(a), luminance(b)].sort((x, y) => y - x) as [number, number];
+  return (hi + 0.05) / (lo + 0.05);
+}
+
+/** The same palette printed the other way round (ink sheet, paper lettering). */
+function invertColourway(cw: Colourway): Colourway {
+  const paper = cw.ink;
+  const ink = cw.paper;
+  let muted = mixColour(cw.paper, cw.ink, 0.2);
+  if (contrastRatio(muted, paper) < 4.6) muted = ink;
+  const dark = luminance(paper) < 0.18;
+  return { ...cw, paper, ink, muted, accent: mixColour(cw.paper, cw.ink, 0.28), flood: true, dark };
+}
+
+/** How a collection design sets its names (the PR's lettering, in the two stationery families). */
+type Voice = "roman" | "italic" | "caps" | "sans";
+
+const VOICES: Record<Voice, Partial<Record<TextRole, Partial<TextStyle>>>> = {
+  roman: { names: { size: 34 }, title: { size: 28 } },
+  italic: { names: { font: "display-italic", size: 33, tracking: 0, leading: 1.1 }, title: { font: "display-italic", size: 29, tracking: 0 }, placeName: { font: "display-italic" } },
+  caps: { names: { font: "text-medium", size: 15, tracking: 0.2, caps: true, leading: 1.5, maxLines: 3 }, title: { font: "text-medium", size: 14, tracking: 0.2, caps: true, leading: 1.5 }, placeName: { font: "text-medium", size: 15, tracking: 0.14, caps: true } },
+  sans: { names: { font: "text-medium", size: 28, tracking: -0.01, leading: 1.08 }, title: { font: "text-medium", size: 24, tracking: -0.01 }, wording: { font: "text", size: 9.6, leading: 1.6 }, placeName: { font: "text-medium", size: 22 } },
+};
+
+// Accent is decoration on a collection palette; text stays in ink and muted so it always reads.
+const COLLECTION_TEXT: Partial<Record<TextRole, Partial<TextStyle>>> = { amp: { color: "muted" }, course: { color: "ink" } };
+
+type CollectionSpec = {
+  range: Exclude<DesignRange, "house">;
+  voice: Voice;
+  align?: "center" | "left" | "right";
+  valign?: "top" | "bottom";
+  /** [left, right, top, bottom] fractions of the sheet the text keeps clear. */
+  box?: [number, number, number, number];
+  motif?: "plain" | "ring" | "shield" | "none";
+  crestAt?: "top" | "foot";
+  invert?: boolean;
+  colourways: string[] | { openOn: number };
+};
+
+const W10 = { openOn: 0 };
+// One entry per collection design. The artwork itself is drawn by COLLECTION_ART (same key).
+const COLLECTION_SPECS: Record<string, CollectionSpec> = {
+  // the twenty base compositions — any of the occasion kind's palettes or the studio palettes
+  frame: { range: "collection", voice: "roman", box: [0.12, 0.12, 0.1, 0.1], colourways: W10 },
+  arch: { range: "collection", voice: "italic", box: [0.13, 0.13, 0.2, 0.08], colourways: W10 },
+  seal: { range: "collection", voice: "roman", motif: "ring", box: [0.1, 0.1, 0.08, 0.12], colourways: W10 },
+  ribbon: { range: "collection", voice: "roman", align: "left", box: [0.12, 0.3, 0.09, 0.09], colourways: W10 },
+  band: { range: "collection", voice: "sans", box: [0.1, 0.1, 0.16, 0.08], colourways: W10 },
+  ticket: { range: "collection", voice: "caps", box: [0.1, 0.1, 0.1, 0.1], colourways: W10 },
+  postcard: { range: "collection", voice: "roman", align: "left", valign: "bottom", motif: "none", box: [0.1, 0.1, 0.24, 0.08], colourways: W10 },
+  split: { range: "collection", voice: "roman", align: "left", motif: "none", box: [0.37, 0.08, 0.08, 0.08], colourways: W10 },
+  crest: { range: "collection", voice: "caps", box: [0.1, 0.1, 0.26, 0.08], colourways: W10 },
+  border: { range: "collection", voice: "roman", crestAt: "foot", box: [0.1, 0.1, 0.09, 0.12], colourways: W10 },
+  triptych: { range: "collection", voice: "roman", box: [0.17, 0.17, 0.08, 0.08], colourways: W10 },
+  medallion: { range: "collection", voice: "roman", motif: "ring", box: [0.12, 0.12, 0.1, 0.1], colourways: W10 },
+  rays: { range: "collection", voice: "roman", box: [0.1, 0.1, 0.08, 0.1], colourways: W10 },
+  diagonal: { range: "collection", voice: "roman", align: "left", box: [0.1, 0.24, 0.08, 0.08], colourways: W10 },
+  plaque: { range: "collection", voice: "roman", crestAt: "foot", box: [0.14, 0.14, 0.11, 0.11], colourways: W10 },
+  column: { range: "collection", voice: "roman", align: "right", box: [0.22, 0.09, 0.08, 0.08], colourways: W10 },
+  scallop: { range: "collection", voice: "italic", box: [0.1, 0.1, 0.11, 0.08], colourways: W10 },
+  imprint: { range: "collection", voice: "roman", valign: "bottom", motif: "none", box: [0.1, 0.1, 0.12, 0.08], colourways: W10 },
+  ruling: { range: "collection", voice: "sans", box: [0.1, 0.1, 0.14, 0.14], colourways: W10 },
+  duotone: { range: "collection", voice: "roman", align: "left", motif: "none", box: [0.1, 0.1, 0.38, 0.08], colourways: W10 },
+  // signature editions — open on one of the kind's palettes
+  "letterpress-edition": { range: "featured", voice: "roman", box: [0.13, 0.13, 0.1, 0.1], colourways: { openOn: 0 } },
+  "botanical-edition": { range: "featured", voice: "italic", box: [0.24, 0.24, 0.08, 0.08], colourways: { openOn: 2 } },
+  "deco-edition": { range: "featured", voice: "caps", invert: true, box: [0.14, 0.14, 0.12, 0.12], colourways: { openOn: 1 } },
+  "modernist-edition": { range: "featured", voice: "sans", align: "left", box: [0.27, 0.08, 0.08, 0.08], colourways: { openOn: 3 } },
+  "folded-edition": { range: "featured", voice: "roman", motif: "ring", box: [0.12, 0.12, 0.31, 0.08], colourways: { openOn: 4 } },
+  "engraved-edition": { range: "featured", voice: "caps", box: [0.14, 0.14, 0.1, 0.1], colourways: { openOn: 2 } },
+  // rustic and traditional regional editions — each in its own palette
+  "wildflower-edition": { range: "rustic", voice: "italic", valign: "top", box: [0.14, 0.14, 0.09, 0.34], colourways: ["harvest-linen"] },
+  "woodcut-edition": { range: "rustic", voice: "caps", align: "left", valign: "bottom", box: [0.11, 0.11, 0.24, 0.07], colourways: ["orchard-bark"] },
+  "woven-edition": { range: "rustic", voice: "roman", align: "left", box: [0.31, 0.08, 0.08, 0.08], colourways: ["oat-cloth"] },
+  "maramures-gate": { range: "rustic", voice: "roman", box: [0.17, 0.17, 0.23, 0.08], colourways: ["maramures-oak"] },
+  "bucovina-wax": { range: "rustic", voice: "italic", box: [0.1, 0.1, 0.2, 0.12], colourways: ["bucovina-wax"] },
+  "horezu-clay": { range: "rustic", voice: "italic", align: "left", box: [0.11, 0.11, 0.2, 0.13], colourways: ["horezu-clay"] },
+  "saxon-chest": { range: "rustic", voice: "roman", align: "left", box: [0.32, 0.08, 0.08, 0.08], colourways: ["saxon-chest"] },
+  "muscel-altita": { range: "rustic", voice: "italic", box: [0.1, 0.1, 0.24, 0.15], colourways: ["muscel-thread"] },
+  "maramures-ciupag": { range: "rustic", voice: "roman", align: "left", box: [0.13, 0.12, 0.22, 0.13], colourways: ["ciupag-thread"] },
+  "moldova-sirlau": { range: "rustic", voice: "roman", align: "left", box: [0.33, 0.08, 0.08, 0.08], colourways: ["moldova-wool"] },
+  "dobrogea-stergar": { range: "rustic", voice: "italic", box: [0.12, 0.12, 0.2, 0.17], colourways: ["dobrogea-cotton"] },
+  "damask-edition": { range: "traditional", voice: "caps", box: [0.13, 0.13, 0.12, 0.12], colourways: ["antique-ivory"] },
+  "heraldic-edition": { range: "traditional", voice: "caps", motif: "shield", box: [0.16, 0.16, 0.12, 0.12], colourways: ["heritage-blue"] },
+  "embroidered-edition": { range: "traditional", voice: "italic", box: [0.1, 0.1, 0.15, 0.15], colourways: ["heirloom-red"] },
+  "maramures-rosette": { range: "traditional", voice: "caps", box: [0.12, 0.12, 0.2, 0.2], colourways: ["maramures-ink"] },
+  "bucovina-lozenge": { range: "traditional", voice: "caps", box: [0.14, 0.14, 0.1, 0.1], colourways: ["bucovina-red"] },
+  "horezu-medallion": { range: "traditional", voice: "roman", box: [0.2, 0.2, 0.14, 0.14], colourways: ["horezu-glaze"] },
+  "saxon-floral": { range: "traditional", voice: "italic", box: [0.12, 0.12, 0.2, 0.2], colourways: ["saxon-blue"] },
+  "muscel-rauri": { range: "traditional", voice: "caps", box: [0.2, 0.2, 0.1, 0.1], colourways: ["muscel-thread"] },
+  "sibiu-fodori": { range: "traditional", voice: "caps", box: [0.2, 0.2, 0.16, 0.16], colourways: ["sibiu-cloth"] },
+  "oltenia-scoarta": { range: "traditional", voice: "italic", box: [0.12, 0.12, 0.24, 0.16], colourways: ["dolj-wool"] },
+  "moldova-romburi": { range: "traditional", voice: "caps", box: [0.14, 0.14, 0.14, 0.14], colourways: ["moldova-diamond"] },
+};
+
+// Romanian embroidery and weaving: the chart is the decoration (no motif), on linen.
+const EMBROIDERY_PAPER: Record<string, string> = {
+  "comanesti-diamond": "linen-comanesti-diamond",
+  "rasinari-woven": "linen-rasinari-woven",
+  "dolj-woven": "linen-dolj-woven",
+  "muscel-altita-grid": "linen-muscel-altita-grid",
+};
+const EMBROIDERY_VOICE: Record<string, Voice> = { "muscel-altita-grid": "caps", "comanesti-sprig": "italic", "dolj-woven": "italic" };
+
+function collectionDesigns(): Record<string, Design> {
+  const out: Record<string, Design> = {};
+  const make = (key: string, spec: CollectionSpec): Design => {
+    const motif = spec.motif ?? "plain";
+    return {
+      key,
+      range: spec.range,
+      align: spec.align ?? "center",
+      valign: spec.valign,
+      frame: "none",
+      art: key,
+      textBox: spec.box,
+      invert: spec.invert,
+      crestAt: spec.crestAt,
+      kindColourways: Array.isArray(spec.colourways) ? undefined : spec.colourways,
+      names: spec.voice === "caps" ? "inline" : "stacked",
+      rule: spec.voice === "sans" || spec.voice === "caps" ? "hair" : "diamond",
+      crest: motif === "none" ? undefined : { motif, widthMm: spec.range === "collection" ? 17 : 14 },
+      styles: withStyles({ ...merge(VOICES[spec.voice], COLLECTION_TEXT) }),
+      colourways: Array.isArray(spec.colourways) ? spec.colourways : [...STUDIO_PALETTES],
+    };
+  };
+  for (const [key, spec] of Object.entries(COLLECTION_SPECS)) out[key] = make(key, spec);
+  for (const key of Object.keys(STITCH_CHARTS)) {
+    const placement = STITCH_CHARTS[key]!.placement;
+    out[key] = make(key, {
+      range: "embroidery",
+      voice: EMBROIDERY_VOICE[key] ?? "roman",
+      motif: "none",
+      align: key === "rasinari-woven" ? "left" : "center",
+      box: placement === "sidebar" ? [0.36, 0.1, 0.1, 0.1] : [0.11, 0.11, placement === "bottom" ? 0.1 : 0.22, placement === "top" ? 0.1 : 0.22],
+      colourways: [EMBROIDERY_PAPER[key] ?? "stitched-linen"],
+    });
+  }
+  return out;
+}
+
+function merge(a: Partial<Record<TextRole, Partial<TextStyle>>>, b: Partial<Record<TextRole, Partial<TextStyle>>>) {
+  const out: Partial<Record<TextRole, Partial<TextStyle>>> = { ...a };
+  for (const [k, v] of Object.entries(b)) out[k as TextRole] = { ...out[k as TextRole], ...v };
+  return out;
+}
+
+export const STATIONERY_DESIGNS: Record<string, Design> = { ...HOUSE_DESIGNS, ...collectionDesigns() };
+
 export const DESIGN_KEYS = Object.keys(STATIONERY_DESIGNS) as DesignKey[];
+export const HOUSE_DESIGN_KEYS = Object.keys(HOUSE_DESIGNS) as HouseDesignKey[];
 
 export function getDesign(key: string): Design {
-  const d = STATIONERY_DESIGNS[key as DesignKey];
+  const d = Object.hasOwn(STATIONERY_DESIGNS, key) ? STATIONERY_DESIGNS[key] : undefined;
   if (!d) throw new Error(`Unknown stationery design "${key}"`);
   return d;
 }
 
+/** The colourways a design offers for an occasion kind, in order (kind palettes first, then the studio palettes). */
+export function colourwaysFor(design: Design, occasionKind?: string | null): string[] {
+  if (!design.kindColourways) return design.colourways;
+  const kind = (occasionKind && KIND_PALETTES[occasionKind]) || KIND_PALETTES.blank!;
+  const first = kind[design.kindColourways.openOn % kind.length]!;
+  return [...new Set([first, ...kind, ...STUDIO_PALETTES])];
+}
+
 /** The colourway of a design; an unknown or foreign key falls back to the design's first. */
 export function getColourway(design: Design, key: string | null | undefined): Colourway {
-  const k = key && design.colourways.includes(key) ? key : design.colourways[0]!;
-  return COLOURWAYS[k]!;
+  const allowed = key && (design.colourways.includes(key) || (design.kindColourways && Object.hasOwn(COLLECTION_PALETTES, key)));
+  const cw = COLOURWAYS[allowed ? key : design.colourways[0]!]!;
+  return design.invert ? invertColourway(cw) : cw;
 }
 
 /* ── Texts ─────────────────────────────────────────────────────────────── */
@@ -749,6 +963,8 @@ type Item =
 /** What each piece says, in order. Gaps are points before the item on the A5 invitation. */
 function compose(design: Design, piece: PieceKind, t: KitTexts, extra: PieceExtra): Item[] {
   const left = design.align === "left";
+  const crestTop = !!design.crest && design.crestAt !== "foot";
+  const crestFoot = !!design.crest && design.crestAt === "foot";
   const numerals = !!design.numeralDate && !!parseDateText(t.date);
   const dateItems: Item[] = [
     { i: "text", role: "date", value: t.date, gap: 28 },
@@ -760,7 +976,8 @@ function compose(design: Design, piece: PieceKind, t: KitTexts, extra: PieceExtr
       const square = piece === "invitation-square";
       if (left) {
         return [
-          { i: "text", role: "kicker", value: t.kicker, gap: 0 },
+          ...(crestTop && !square ? [{ i: "crest", gap: 0 } as Item] : []),
+          { i: "text", role: "kicker", value: t.kicker, gap: crestTop && !square ? 20 : 0 },
           ...(numerals ? [{ i: "numerals", gap: 22 } as Item] : []),
           { i: "names", gap: numerals ? 26 : 20 },
           { i: "rule", gap: 20 },
@@ -771,12 +988,13 @@ function compose(design: Design, piece: PieceKind, t: KitTexts, extra: PieceExtr
           { i: "text", role: "venue", value: t.venue, gap: 20 },
           { i: "text", role: "address", value: t.address, gap: 6 },
           { i: "text", role: "rsvp", value: t.rsvp, gap: 22 },
+          ...(crestFoot && !square ? [{ i: "crest", gap: 22 } as Item] : []),
           ...(extra.qr ? [{ i: "qr", gap: 14, sizeMm: 17 } as Item] : []),
         ];
       }
       return [
-        ...(design.crest && !square ? [{ i: "crest", gap: 0 } as Item] : []),
-        { i: "text", role: "kicker", value: t.kicker, gap: design.crest && !square ? 24 : 0 },
+        ...(crestTop && !square ? [{ i: "crest", gap: 0 } as Item] : []),
+        { i: "text", role: "kicker", value: t.kicker, gap: crestTop && !square ? 24 : 0 },
         { i: "names", gap: 24 },
         { i: "rule", gap: 24 },
         { i: "text", role: "wording", value: t.wording, gap: 24 },
@@ -784,6 +1002,7 @@ function compose(design: Design, piece: PieceKind, t: KitTexts, extra: PieceExtr
         { i: "text", role: "venue", value: t.venue, gap: 26 },
         { i: "text", role: "address", value: t.address, gap: 7 },
         { i: "text", role: "rsvp", value: t.rsvp, gap: 32 },
+        ...(crestFoot && !square ? [{ i: "crest", gap: 26 } as Item] : []),
         ...(extra.qr ? [{ i: "qr", gap: 14, sizeMm: 17 } as Item] : []),
       ];
     }
@@ -797,8 +1016,8 @@ function compose(design: Design, piece: PieceKind, t: KitTexts, extra: PieceExtr
       ];
     case "menu":
       return [
-        ...(design.crest && !left ? [{ i: "crest", gap: 0 } as Item] : []),
-        { i: "text", role: "title", value: t.menuTitle, gap: design.crest && !left ? 14 : 0 },
+        ...(crestTop && !left ? [{ i: "crest", gap: 0 } as Item] : []),
+        { i: "text", role: "title", value: t.menuTitle, gap: crestTop && !left ? 14 : 0 },
         { i: "rule", gap: 16 },
         { i: "flex" },
         { i: "menu", gap: 18 },
@@ -932,6 +1151,8 @@ export type LayoutInput = {
   piece: PieceKind;
   texts: KitTexts;
   extra?: PieceExtra;
+  /** The occasion's kind: picks the collection designs' motif (none needed for the house designs). */
+  occasionKind?: string | null;
 };
 
 /** THE layout: design + colourway + texts → positioned runs and paths on the trim sheet. */
@@ -1001,7 +1222,19 @@ export function layoutPiece(input: LayoutInput): Scene {
     top = Math.max(top, inset + mm(Math.min(13, spec.heightMm * 0.085)));
     bottom = Math.max(bottom, inset + mm(Math.min(13, spec.heightMm * 0.085)));
   }
-  const column = W - mx * 2;
+  let ml = mx;
+  let mr = mx;
+  if (design.art) drawCollectionArt(design, W, H, cw, input.occasionKind ?? undefined, nodes);
+  if (design.textBox) {
+    // the collections keep their text clear of the artwork; small pieces keep at least the safe margin
+    const [l, r, tp, b] = design.textBox;
+    const short = Math.min(W, H) / mm(148);
+    ml = Math.max(mm(spec.marginMm[0]) * 0.7, W * l * Math.max(0.75, short));
+    mr = Math.max(mm(spec.marginMm[0]) * 0.7, W * r * Math.max(0.75, short));
+    top = Math.max(mm(spec.marginMm[1]) * 0.7, H * tp);
+    bottom = Math.max(mm(spec.marginMm[1]) * 0.7, H * b);
+  }
+  const column = W - ml - mr;
   const boxH = H - top - bottom;
   const items = compose(design, input.piece, input.texts, extra);
 
@@ -1034,6 +1267,9 @@ export function layoutPiece(input: LayoutInput): Scene {
         if ("monogram" in design.crest) {
           const initials = monogramInitials(input.texts.names);
           if (initials.length) blocks.push({ k: "monogram", diameter: mm(design.crest.diameterMm) * sc, initials, gap: g(it.gap) });
+        } else if ("motif" in design.crest) {
+          const o = motifOrnament(input.occasionKind ?? undefined, design.crest.motif);
+          blocks.push({ k: "ornament", ornament: o, width: mm(design.crest.widthMm) * sc * (o.w / 80), gap: g(it.gap) });
         } else blocks.push({ k: "ornament", ornament: ORNAMENTS[design.crest.ornament], width: mm(design.crest.widthMm) * sc, gap: g(it.gap) });
       } else if (it.i === "numerals") {
         const p = parseDateText(input.texts.date);
@@ -1085,9 +1321,13 @@ export function layoutPiece(input: LayoutInput): Scene {
   /* place: flexes take the free space by weight; with none, the stack sits at the optical centre */
   const free = Math.max(0, boxH - stackHeight(blocks));
   const flexTotal = blocks.reduce((n, b) => n + (b.k === "flex" ? b.weight : 0), 0);
-  let y = top + (flexTotal > 0 ? 0 : free * (design.align === "left" ? 0.4 : 0.46));
-  const xLeft = mx;
-  const xMid = W / 2;
+  const rest = design.valign === "top" ? 0 : design.valign === "bottom" ? 1 : design.align === "left" ? 0.4 : 0.46;
+  let y = top + (flexTotal > 0 ? 0 : free * rest);
+  const xLeft = ml;
+  const xRight = W - mr;
+  const xMid = ml + column / 2;
+  /** Left edge of a run `width` wide, by the design's alignment. */
+  const xAt = (width: number) => (design.align === "left" ? xLeft : design.align === "right" ? xRight - width : xMid - width / 2);
   for (const b of blocks) {
     if (b.k === "flex") {
       y += (free * b.weight) / flexTotal;
@@ -1103,18 +1343,18 @@ export function layoutPiece(input: LayoutInput): Scene {
         const width = measureText(b.style.font, line, b.size, tracking);
         const baseline = y + m.capHeight * b.size + i * lead;
         // tracked lines carry their spacing after the last letter: centre the letters, not the spacing
-        const x = design.align === "left" ? xLeft : xMid - width / 2;
+        const x = xAt(width);
         nodes.push({ t: "text", font: b.style.font, size: r2(b.size), x: r2(x), y: r2(baseline), text: line, tracking: r2(tracking), color: colour(b.style.color), width: r2(width) });
       });
     } else if (b.k === "ornament") {
       const scale = b.width / b.ornament.w;
-      const x = design.align === "left" ? xLeft : xMid - b.width / 2;
+      const x = xAt(b.width);
       for (const p of b.ornament.paths) {
         nodes.push({ t: "path", d: p.d, tx: r2(x), ty: r2(y), s: scale, paint: p.paint, color: colour(b.colorOverride ?? p.role), sw: p.sw ?? 0 });
       }
     } else if (b.k === "monogram") {
       const r = b.diameter / 2;
-      const cx = design.align === "left" ? xLeft + r : xMid;
+      const cx = xAt(b.diameter) + r;
       const cy = y + r;
       stroke(circle(cx, cy, r), cw.accent, 0.6);
       stroke(circle(cx, cy, r - mm(0.9)), cw.accent, 0.25);
@@ -1143,7 +1383,7 @@ export function layoutPiece(input: LayoutInput): Scene {
       const sep = b.size * 0.5;
       const widths = b.parts.map((p) => measureText("display", p, b.size, tracking));
       const total = widths.reduce((a, c) => a + c, 0) + sep * (b.parts.length - 1);
-      let x = design.align === "left" ? xLeft - b.size * 0.03 : xMid - total / 2;
+      let x = design.align === "left" ? xLeft - b.size * 0.03 : xAt(total);
       const baseline = y + h;
       b.parts.forEach((p, i) => {
         nodes.push({ t: "text", font: "display", size: r2(b.size), x: r2(x), y: r2(baseline), text: p, tracking: r2(tracking), color: cw.ink, width: r2(widths[i]!) });
@@ -1154,7 +1394,7 @@ export function layoutPiece(input: LayoutInput): Scene {
         }
       });
     } else if (b.k === "qr") {
-      const x = design.align === "left" ? xLeft : xMid - b.size / 2;
+      const x = xAt(b.size);
       nodes.push({ t: "qr", x: r2(x), y: r2(y), size: r2(b.size), matrix: b.matrix });
       if (b.caption) {
         const st = { ...design.styles.note, size: 5.6 };
@@ -1162,7 +1402,7 @@ export function layoutPiece(input: LayoutInput): Scene {
         const tracking = (st.tracking ?? 0) * st.size;
         const fitted = ellipsize(st.font, text, st.size, tracking, column);
         const width = measureText(st.font, fitted, st.size, tracking);
-        nodes.push({ t: "text", font: st.font, size: st.size, x: r2(design.align === "left" ? xLeft : xMid - width / 2), y: r2(y + b.size + 9), text: fitted, tracking: r2(tracking), color: cw.muted, width: r2(width) });
+        nodes.push({ t: "text", font: st.font, size: st.size, x: r2(xAt(width)), y: r2(y + b.size + 9), text: fitted, tracking: r2(tracking), color: cw.muted, width: r2(width) });
       }
     }
     y += h;
@@ -1196,6 +1436,371 @@ export function sceneTexts(scene: Scene): string[] {
   return scene.nodes.filter((n): n is Extract<SceneNode, { t: "text" }> => n.t === "text").map((n) => n.text);
 }
 
+/* ── Collection artwork (drawn behind the text) ────────────────────────── */
+
+/**
+ * Rewrites SVG path data as absolute commands, scaled by (sx, sy) then moved by (tx, ty).
+ * Used to stretch the collections' 100 × 100 artwork over a sheet without stretching the stroke.
+ */
+export function transformPath(d: string, sx: number, sy: number, tx = 0, ty = 0): string {
+  const tokens = d.match(/[a-zA-Z]|-?(?:\d+\.?\d*|\.\d+)(?:e[-+]?\d+)?/g) ?? [];
+  const out: string[] = [];
+  const X = (x: number) => r2(x * sx + tx);
+  const Y = (y: number) => r2(y * sy + ty);
+  let i = 0;
+  let cmd = "";
+  let cx = 0;
+  let cy = 0;
+  let startX = 0;
+  let startY = 0;
+  const num = () => parseFloat(tokens[i++] ?? "0");
+  const isCmd = (t: string | undefined) => !!t && /^[a-zA-Z]$/.test(t);
+  while (i < tokens.length) {
+    if (isCmd(tokens[i])) cmd = tokens[i++]!;
+    else if (!cmd) break;
+    const rel = cmd === cmd.toLowerCase();
+    const ox = rel ? cx : 0;
+    const oy = rel ? cy : 0;
+    const pair = () => [num() + ox, num() + oy] as const;
+    switch (cmd.toUpperCase()) {
+      case "M": {
+        const [x, y] = pair();
+        cx = startX = x;
+        cy = startY = y;
+        out.push(`M${X(x)} ${Y(y)}`);
+        cmd = rel ? "l" : "L";
+        break;
+      }
+      case "L": {
+        const [x, y] = pair();
+        cx = x;
+        cy = y;
+        out.push(`L${X(x)} ${Y(y)}`);
+        break;
+      }
+      case "H":
+        cx = num() + ox;
+        out.push(`L${X(cx)} ${Y(cy)}`);
+        break;
+      case "V":
+        cy = num() + oy;
+        out.push(`L${X(cx)} ${Y(cy)}`);
+        break;
+      case "C": {
+        const a = pair();
+        const b = pair();
+        const c = pair();
+        out.push(`C${X(a[0])} ${Y(a[1])} ${X(b[0])} ${Y(b[1])} ${X(c[0])} ${Y(c[1])}`);
+        [cx, cy] = c;
+        break;
+      }
+      case "S":
+      case "Q": {
+        const a = pair();
+        const b = pair();
+        out.push(`${cmd.toUpperCase()}${X(a[0])} ${Y(a[1])} ${X(b[0])} ${Y(b[1])}`);
+        [cx, cy] = b;
+        break;
+      }
+      case "T": {
+        const [x, y] = pair();
+        out.push(`T${X(x)} ${Y(y)}`);
+        cx = x;
+        cy = y;
+        break;
+      }
+      case "A": {
+        const rx = num();
+        const ry = num();
+        const rot = num();
+        const large = num();
+        const sweep = num();
+        const [x, y] = pair();
+        const flip = sx * sy < 0 ? 1 - sweep : sweep;
+        out.push(`A${r2(Math.abs(rx * sx))} ${r2(Math.abs(ry * sy))} ${rot} ${large} ${flip} ${X(x)} ${Y(y)}`);
+        cx = x;
+        cy = y;
+        break;
+      }
+      case "Z":
+        out.push("Z");
+        cx = startX;
+        cy = startY;
+        break;
+      default:
+        i += 1; // unknown command: skip a token rather than loop forever
+    }
+  }
+  return out.join("");
+}
+
+/** A dashed (or, with dash ≈ 0 and a round cap, dotted) straight line as separate segments. */
+function dashed(x1: number, y1: number, x2: number, y2: number, dash: number, gap: number): string {
+  const len = Math.hypot(x2 - x1, y2 - y1);
+  const ux = (x2 - x1) / len;
+  const uy = (y2 - y1) / len;
+  let d = "";
+  for (let s = 0; s < len; s += dash + gap) {
+    const e = Math.min(len, s + Math.max(dash, 0.01));
+    d += `M${r2(x1 + ux * s)} ${r2(y1 + uy * s)}L${r2(x1 + ux * e)} ${r2(y1 + uy * e)}`;
+  }
+  return d;
+}
+
+const box = (x: number, y: number, w: number, h: number) => `M${r2(x)} ${r2(y)}H${r2(x + w)}V${r2(y + h)}H${r2(x)}Z`;
+
+type ArtCtx = {
+  W: number;
+  H: number;
+  /** Points per pixel of the collections' 400-pixel-wide reference card. */
+  k: number;
+  /** Bleed allowance: fills that touch an edge run this far past it (the PDF keeps what falls in the bleed). */
+  E: number;
+  cw: Colourway;
+  /** The occasion kind's motif, 80 × 64. */
+  motif: string;
+  stroke: (d: string, color: string, sw: number) => void;
+  fill: (d: string, color: string) => void;
+  /** The accent laid over the paper at strength t (0 = paper, 1 = accent). */
+  tint: (t: number) => string;
+  /** 100 × 100 artwork stretched over the sheet. */
+  sheet: (d: string) => string;
+};
+
+/** Draws a cross-stitch chart as filled squares, tiled `repeat` times along a strip. */
+function stitchStrip(g: ArtCtx, chart: { colours: readonly string[]; cells: readonly string[] }, x: number, y: number, length: number, vertical: boolean, maxThickness?: number): number {
+  const repeat = 5;
+  const cols = Math.max(...chart.cells.map((r) => r.length));
+  const rows = chart.cells.length;
+  let cell = length / (cols * repeat);
+  if (maxThickness && rows * cell > maxThickness) cell = maxThickness / rows;
+  const used = cols * repeat * cell;
+  const start = (vertical ? y : x) + (length - used) / 2;
+  chart.colours.forEach((colour, ci) => {
+    const mark = "ARCD"[ci];
+    let d = "";
+    for (let t = 0; t < repeat; t += 1) {
+      chart.cells.forEach((row, r) => {
+        // one rectangle per run of the same stitch
+        for (let c = 0; c < row.length; c += 1) {
+          if (row[c] !== mark) continue;
+          let run = 1;
+          while (row[c + run] === mark) run += 1;
+          const along = start + (t * cols + c) * cell;
+          const across = (vertical ? x : y) + r * cell;
+          d += vertical ? box(across, along, cell + 0.05, run * cell + 0.05) : box(along, across, run * cell + 0.05, cell + 0.05);
+          c += run - 1;
+        }
+      });
+    }
+    if (d) g.fill(d, colour);
+  });
+  return rows * cell;
+}
+
+/** Each collection design's artwork. Fractions follow the reference cards of the collection. */
+const COLLECTION_ART: Record<string, (g: ArtCtx) => void> = {
+  frame: ({ W, H, k, stroke, cw }) => {
+    stroke(box(9.7 * k, 9.7 * k, W - 19.4 * k, H - 19.4 * k), cw.accent, 1.3 * k);
+    stroke(box(12.3 * k, 12.3 * k, W - 24.6 * k, H - 24.6 * k), cw.accent, 1.3 * k);
+  },
+  arch: ({ W, H, E, stroke, cw }) => {
+    const x0 = W * 0.05;
+    const x1 = W * 0.95;
+    const rx = (x1 - x0) / 2;
+    const ry = Math.min(rx * 1.15, H * 0.4);
+    const top = H * 0.06;
+    stroke(`M${r2(x0)} ${r2(H + E)}V${r2(top + ry)}A${r2(rx)} ${r2(ry)} 0 0 1 ${r2(x1)} ${r2(top + ry)}V${r2(H + E)}`, cw.accent, 0.8);
+  },
+  seal: ({ W, H, k, stroke, cw }) => stroke(`M${r2(W * 0.1)} ${r2(H - 16 * k)}H${r2(W * 0.9)}`, cw.accent, 0.8),
+  ribbon: ({ W, H, k, E, fill, stroke, tint }) => {
+    fill(box(-E, -E, 12 * k + E, H + E * 2), tint(1));
+    // diagonal hatching in a band on the right
+    const x0 = W * 0.66;
+    let d = "";
+    for (let c = x0 + 9 * k; c < W + H + E; c += 9 * k) {
+      const len = Math.min(H + E * 2, c - x0);
+      d += `M${r2(c)} ${r2(-E)}L${r2(c - len)} ${r2(-E + len)}`;
+    }
+    stroke(d, tint(0.3), 0.5);
+  },
+  band: ({ W, k, E, fill, stroke, tint }) => {
+    let d = "";
+    for (let x = 0; x < W + E; x += 7 * k) d += box(x, -E, 2 * k, 24 * k + E);
+    fill(d, tint(1));
+    stroke(`M${r2(-E)} ${r2(24 * k)}H${r2(W + E)}`, tint(1), 0.8);
+  },
+  ticket: ({ W, H, k, E, fill, stroke, tint }) => {
+    fill(box(-E, -E, W + E * 2, 8 * k + E) + box(-E, H - 8 * k, W + E * 2, 8 * k + E), tint(1));
+    stroke(dashed(14 * k, 20 * k, 14 * k, H - 20 * k, 6 * k, 4 * k) + dashed(W - 14 * k, 20 * k, W - 14 * k, H - 20 * k, 6 * k, 4 * k), tint(1), 1.6 * k);
+  },
+  postcard: (g) => {
+    const { W, k, stroke, cw } = g;
+    stroke(box(12 * k, 12 * k, W - 24 * k, g.H - 24 * k), cw.accent, 0.8);
+    const size = 62 * k;
+    const x = W - 12 * k - mm(6) - size;
+    const y = 12 * k + mm(6);
+    stroke(dotted(box(x, y, size, size * 0.86), 3.2 * k), cw.accent, 1.6 * k);
+    stroke(transformPath(g.motif, (size * 0.7) / 80, (size * 0.7) / 80, x + size * 0.15, y + size * 0.86 * 0.5 - size * 0.7 * 0.4), cw.accent, 1.1);
+  },
+  split: (g) => {
+    const { W, H, E, fill, tint, stroke, cw } = g;
+    fill(box(-E, -E, W * 0.3 + E, H + E * 2), tint(0.18));
+    const size = W * 0.22;
+    stroke(transformPath(g.motif, size / 80, size / 80, W * 0.15 - size / 2, H / 2 - size * 0.4), cw.accent, 1.1);
+  },
+  crest: ({ W, k, stroke, tint }) => {
+    const r = 90 * k;
+    stroke(circleD(W / 2, 4 * k, r - 1.35 * k), tint(0.55), 2.7 * k);
+    stroke(circleD(W / 2, 4 * k, r - 6.7 * k), tint(0.55), 2.7 * k);
+  },
+  border: ({ W, H, k, E, fill, stroke, cw }) => {
+    fill(box(-E, H - 14 * k, W + E * 2, 14 * k + E), cw.accent);
+    stroke(`M${r2(10 * k)} ${r2(10 * k)}H${r2(W - 10 * k)}M${r2(10 * k)} ${r2(H - 24 * k)}H${r2(W - 10 * k)}`, cw.accent, 0.8);
+  },
+  triptych: ({ W, H, E, fill, tint }) => fill(box(-E, -E, W * 0.12 + E, H + E * 2) + box(W * 0.88, -E, W * 0.12 + E, H + E * 2), tint(0.24)),
+  medallion: ({ W, H, stroke, cw }) => stroke(dotted(box(W * 0.05, H * 0.05, W * 0.9, H * 0.9), 4.2), cw.accent, 1.3),
+  rays: ({ W, H, fill, tint }) => {
+    // thin wedges fanning up from below the sheet, kept to its lower half
+    const ox = W / 2;
+    const oy = H * 1.15;
+    const at = (deg: number) => r2(ox + Math.tan((deg * Math.PI) / 180) * (oy - H / 2));
+    let d = "";
+    for (let a = -77; a <= 77; a += 11) d += `M${r2(ox)} ${r2(oy)}L${at(a)} ${r2(H / 2)}L${at(a + 2)} ${r2(H / 2)}Z`;
+    fill(d, tint(0.24));
+  },
+  diagonal: ({ W, H, E, fill, tint }) => fill(`M${r2(W * 0.85)} ${r2(-E)}L${r2(W + E)} ${r2(-E)}L${r2(W + E)} ${r2(H + E)}L${r2(W * 0.42)} ${r2(H + E)}Z`, tint(0.23)),
+  plaque: ({ W, H, k, stroke, cw }) => {
+    stroke(box(W * 0.08, H * 0.07, W * 0.84, H * 0.86), cw.accent, 0.8);
+    stroke(box(W * 0.08 + 4 * k, H * 0.07 + 4 * k, W * 0.84 - 8 * k, H * 0.86 - 8 * k), cw.accent, 0.8);
+  },
+  column: ({ W, H, k, E, stroke, tint }) => {
+    let d = "";
+    for (let x = 0.5; x < W * 0.14; x += 6 * k) d += `M${r2(x)} ${r2(-E)}V${r2(H + E)}`;
+    stroke(d, tint(0.5), 0.8 * k);
+  },
+  scallop: ({ W, k, fill, cw }) => {
+    let d = "";
+    for (let x = 14 * k; x < W + 28 * k; x += 28 * k) d += circleD(x, 0, 12 * k);
+    fill(d, cw.accent);
+  },
+  imprint: (g) => {
+    const size = g.W * 0.72 * 1.2;
+    g.stroke(transformPath(g.motif, size / 80, size / 80, g.W * 0.4, -g.H * 0.06), g.tint(0.16), 2.4);
+  },
+  ruling: ({ W, H, k, stroke, cw }) => {
+    for (const y of [H * 0.08, H * 0.92]) {
+      stroke(`M${r2(W * 0.06)} ${r2(y - 1.35 * k)}H${r2(W * 0.94)}M${r2(W * 0.06)} ${r2(y + 1.35 * k)}H${r2(W * 0.94)}`, cw.accent, 1.3 * k);
+    }
+  },
+  duotone: (g) => {
+    const { W, H, E, fill, tint, stroke, cw } = g;
+    fill(box(-E, -E, W + E * 2, H * 0.34 + E), tint(0.26));
+    const size = W * 0.2;
+    stroke(transformPath(g.motif, size / 80, size / 80, W - mm(14) - size, H * 0.17 - size * 0.4), cw.accent, 1.1);
+  },
+  "letterpress-edition": ({ W, H, stroke, tint, cw }) => {
+    stroke(box(W * 0.04, H * 0.04, W * 0.92, H * 0.92), cw.accent, 0.8);
+    stroke(box(W * 0.04 + 3.5, H * 0.04 + 3.5, W * 0.92 - 7, H * 0.92 - 7), tint(0.55), 0.6);
+  },
+  "deco-edition": () => {},
+  "modernist-edition": ({ W, H, E, fill, cw }) => fill(box(-E, -E, W * 0.21 + E, H + E * 2), cw.ink),
+  "folded-edition": ({ W, H, E, fill, tint }) => fill(`M${r2(-E)} ${r2(-E)}L${r2(W / 2)} ${r2(H * 0.37)}L${r2(W + E)} ${r2(-E)}Z`, tint(0.33)),
+  "wildflower-edition": ({ W, H, k, stroke, tint }) => stroke(box(8 * k, 8 * k, W - 16 * k, H - 16 * k), tint(0.55), 0.8),
+  "woven-edition": ({ W, H, E, fill, tint }) => fill(box(-E, -E, W * 0.26 + E, H + E * 2), tint(0.24)),
+  "bucovina-lozenge": ({ W, H, stroke, tint }) => stroke(`M${r2(W * 0.1)} ${r2(H * 0.05)}V${r2(H * 0.95)}M${r2(W * 0.9)} ${r2(H * 0.05)}V${r2(H * 0.95)}`, tint(0.65), 0.8),
+  "saxon-chest": ({ W, H, E, fill, tint }) => fill(box(-E, -E, W * 0.3 + E, H + E * 2), tint(0.22)),
+  "moldova-sirlau": ({ W, H, E, fill, cw }) => fill(box(-E, -E, W * 0.28 + E, H + E * 2), mixColour(cw.accent, "#644049", 0.6)),
+  "damask-edition": ({ W, H, stroke, cw }) => {
+    stroke(box(W * 0.04, H * 0.04, W * 0.92, H * 0.92), cw.accent, 1);
+    stroke(box(W * 0.04 + 2, H * 0.04 + 2, W * 0.92 - 4, H * 0.92 - 4), cw.accent, 1);
+  },
+  "embroidered-edition": ({ W, H, E, stroke, cw }) => stroke(`M${r2(-E)} ${r2(H * 0.11)}H${r2(W + E)}M${r2(-E)} ${r2(H * 0.89)}H${r2(W + E)}`, cw.accent, 0.8),
+};
+
+/** Opacity of the drawn edition artwork, where the collection softens it. */
+const EDITION_STRENGTH: Record<string, number> = { "botanical-edition": 0.6, "folded-edition": 0.65, "engraved-edition": 0.25, "maramures-gate": 0.76, "horezu-medallion": 0.65 };
+
+function dotted(path: string, gap: number): string {
+  // the rectangles drawn as dotted lines: walk each side
+  const m = path.match(/M([\d.-]+) ([\d.-]+)H([\d.-]+)V([\d.-]+)H([\d.-]+)Z/);
+  if (!m) return path;
+  const [x0, y0, x1, y1] = [Number(m[1]), Number(m[2]), Number(m[3]), Number(m[4])];
+  return dashed(x0, y0, x1, y0, 0, gap) + dashed(x1, y0, x1, y1, 0, gap) + dashed(x1, y1, x0, y1, 0, gap) + dashed(x0, y1, x0, y0, 0, gap);
+}
+
+function circleD(cx: number, cy: number, r: number): string {
+  return `M${r2(cx - r)} ${r2(cy)}A${r2(r)} ${r2(r)} 0 1 0 ${r2(cx + r)} ${r2(cy)}A${r2(r)} ${r2(r)} 0 1 0 ${r2(cx - r)} ${r2(cy)}Z`;
+}
+
+/** Draws a collection design's artwork onto the scene (behind everything that follows). */
+function drawCollectionArt(design: Design, W: number, H: number, cw: Colourway, occasionKind: string | undefined, nodes: SceneNode[]): void {
+  const key = design.art!;
+  const g: ArtCtx = {
+    W,
+    H,
+    k: Math.min(W, H) / 400,
+    E: mm(BLEED_MM + 1),
+    cw,
+    motif: KIND_MOTIFS[occasionKind ?? ""] ?? KIND_MOTIFS.blank!,
+    stroke: (d, color, sw) => nodes.push({ t: "path", d, tx: 0, ty: 0, s: 1, paint: "stroke", color, sw }),
+    fill: (d, color) => nodes.push({ t: "path", d, tx: 0, ty: 0, s: 1, paint: "fill", color, sw: 0 }),
+    tint: (t) => mixColour(cw.paper, cw.accent, t),
+    sheet: (d) => transformPath(d, W / 100, H / 100),
+  };
+  const chart = STITCH_CHARTS[key];
+  if (chart) {
+    // Romanian embroidery: linen with a faint weave, a hairline edge, the chart as the border
+    g.stroke(box(0.6, 0.6, W - 1.2, H - 1.2), g.tint(0.25), 0.6);
+    if (key === "muscel-altita-grid") g.stroke(box(2.5 * g.k, 2.5 * g.k, W - 5 * g.k, H - 5 * g.k), "#241f21", 5 * g.k);
+    const inset = key === "muscel-altita-grid" ? 9 * g.k : 0;
+    const maxT = key === "comanesti-sprig" ? 58 * g.k : undefined;
+    if (chart.placement === "sidebar") stitchStrip(g, chart, inset, 0, H, true, maxT);
+    else {
+      if (chart.placement !== "bottom") stitchStrip(g, chart, inset, inset, W - inset * 2, false, maxT);
+      if (chart.placement !== "top") {
+        const rows = chart.cells.length;
+        const cols = Math.max(...chart.cells.map((r) => r.length));
+        let cell = (W - inset * 2) / (cols * 5);
+        if (maxT && rows * cell > maxT) cell = maxT / rows;
+        stitchStrip(g, chart, inset, H - inset - rows * cell, W - inset * 2, false, maxT);
+      }
+    }
+    return;
+  }
+  COLLECTION_ART[key]?.(g);
+  const edition = EDITION_ART[key];
+  if (edition) {
+    const strength = EDITION_STRENGTH[key] ?? 1;
+    g.stroke(g.sheet(edition.d), strength < 1 ? g.tint(strength) : cw.accent, 0.8);
+    if (edition.thread) g.stroke(g.sheet(edition.thread), key === "maramures-ciupag" ? "#375994" : (cw.thread ?? cw.accent), 0.8);
+  }
+}
+
+/** The occasion kind's motif as an opening mark: plain, in a ring, or in a shield. */
+function motifOrnament(kind: string | undefined, variant: "plain" | "ring" | "shield"): Ornament {
+  const d = KIND_MOTIFS[kind ?? ""] ?? KIND_MOTIFS.blank!;
+  if (variant === "plain") return { w: 80, h: 64, paths: [{ d, paint: "stroke", role: "accent", sw: 0.9 }] };
+  if (variant === "ring") {
+    return {
+      w: 88,
+      h: 88,
+      paths: [
+        { d: circleD(44, 44, 42), paint: "stroke", role: "accent", sw: 0.6 },
+        { d: transformPath(d, 0.72, 0.72, 44 - 28.8, 44 - 23), paint: "stroke", role: "accent", sw: 0.9 },
+      ],
+    };
+  }
+  return {
+    w: 80,
+    h: 88,
+    paths: [
+      { d: "M6 4H74V44C74 66 56 80 40 85C24 80 6 66 6 44Z", paint: "stroke", role: "accent", sw: 0.6 },
+      { d: transformPath(d, 0.62, 0.62, 40 - 24.8, 36 - 19.8), paint: "stroke", role: "accent", sw: 0.9 },
+    ],
+  };
+}
+
 /* ── Renderer 1: SVG (the proof) ───────────────────────────────────────── */
 
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -1212,7 +1817,8 @@ export type SvgOptions = {
 
 /** The body of a scene as SVG elements (no <svg> wrapper), in the scene's own points. */
 export function sceneSvgBody(scene: Scene): string {
-  let out = `<rect width="${scene.width}" height="${scene.height}" fill="${scene.colourway.paper}"/>`;
+  // a nested <svg> clips the artwork that runs into the bleed to the sheet
+  let out = `<svg width="${scene.width}" height="${scene.height}" viewBox="0 0 ${scene.width} ${scene.height}" overflow="hidden"><rect width="${scene.width}" height="${scene.height}" fill="${scene.colourway.paper}"/>`;
   for (const n of scene.nodes) {
     if (n.t === "text") {
       out += `<path fill="${n.color}" d="${runPathData(n.font, n.text, n.size, n.tracking, n.x, n.y)}"/>`;
@@ -1226,7 +1832,7 @@ export function sceneSvgBody(scene: Scene): string {
       out += `<rect x="${n.x}" y="${n.y}" width="${n.size}" height="${n.size}" fill="#ffffff"/><path fill="#17161b" d="${qrPathData(n.matrix, n.x, n.y, n.size)}"/>`;
     }
   }
-  return out;
+  return `${out}</svg>`;
 }
 
 /** A scene as a self-contained SVG document: no fonts needed, text is outlines. */
@@ -1267,7 +1873,10 @@ export function pdfPageSize(scene: Pick<Scene, "width" | "height">, opts: PdfPag
 }
 
 /** Draws the scene's runs and paths at the current origin (1 unit = 1 pt of the trim sheet). No page, no flood. */
-export function drawSceneNodes(doc: PDFKit.PDFDocument, scene: Scene): void {
+export function drawSceneNodes(doc: PDFKit.PDFDocument, scene: Scene, bleed = 0): void {
+  // artwork may run past the sheet: keep it to the sheet (plus its bleed when printing)
+  doc.save();
+  doc.rect(-bleed, -bleed, scene.width + bleed * 2, scene.height + bleed * 2).clip();
   for (const n of scene.nodes) {
     if (n.t === "text") {
       doc
@@ -1286,6 +1895,7 @@ export function drawSceneNodes(doc: PDFKit.PDFDocument, scene: Scene): void {
       doc.path(qrPathData(n.matrix, n.x, n.y, n.size)).fill("#17161b");
     }
   }
+  doc.restore();
 }
 
 /**
@@ -1308,7 +1918,7 @@ export function drawSceneOnPdf(doc: PDFKit.PDFDocument, scene: Scene, opts: PdfP
   }
   doc.save();
   doc.translate(o, o);
-  drawSceneNodes(doc, scene);
+  drawSceneNodes(doc, scene, bleed);
   doc.restore();
 
   if (opts.cropMarks) {

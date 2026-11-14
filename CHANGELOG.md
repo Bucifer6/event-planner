@@ -116,6 +116,21 @@ The first complete build of the product, made on 13–14 November 2026 on the br
 
 - Four more looks for the app — Atelier, Riviera, Jardin and Studio — beside the house look
   Maison, each with a dark version, switchable for everyone from Console → Aspect.
+- Eight more looks — Nocturne, Folio, Herbarium, Prism, Salon, Dune, Ledger and Muse — ported
+  from the planner-appearance work, as token sets in the same theme system (thirteen in all).
+- The invitation collections in the stationery designer: 64 more designs in five ranges —
+  Romanian embroidery and weaving (16 cross-stitch borders), a signature collection (6),
+  rustic (11) and traditional (11) regional editions, and twenty compositions — drawn by the
+  same kit, so the proof, the PDF and the proof gate work exactly as for the house designs.
+  Each occasion kind has five palettes of its own plus five studio palettes, a small motif,
+  and ten starter wordings in Romanian and English. Sources for the regional designs:
+  `docs/design/romanian-invitations.md`.
+- 24 more occasion kinds (graduation, engagement party, baby shower, housewarming,
+  conference, launch, charity gala, reunion, dinner party, exhibition opening, concert,
+  workshop, sports tournament, retirement, awards ceremony, festival, birthday, kids'
+  birthday, bridal shower, vow renewal, gender reveal, Christmas party, celebration of life,
+  networking event), each with a short starter task list, budget categories and directory
+  suggestions.
 - `AGENTS.md` (rules for coding agents and new developers), a generated code map (`docs/build/21-code-map.md`, kept current by a test) and `pnpm check`, one command that runs every gate.
 - An in-app help centre at `/help`: 60 task-based articles in Romanian and English, search, a
   staff section, and contextual help links on the main screens.

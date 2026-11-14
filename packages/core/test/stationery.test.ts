@@ -16,10 +16,12 @@ import {
   getGuestInvitationStyle,
   getStationeryEditor,
   getStationerySummary,
+  getStarterWordings,
   getWordingPreset,
   listPlaceCards,
   markStationeryProofed,
   previewStationery,
+  stationeryThumbnail,
   saveStationeryVersion,
   setDigitalInvitation,
   STATIONERY_FIELD_LIMITS,
@@ -27,9 +29,17 @@ import {
   stillAiGenerated,
   type SaveStationeryInput,
 } from "../src/stationery";
+import { OCCASION_KINDS } from "@ed/db";
+import { translate } from "@ed/i18n";
+import { KIND_MOTIFS, KIND_PALETTES, STITCH_CHARTS, STUDIO_PALETTES } from "../src/stationerycollections";
 import {
+  colourwaysFor,
   COLOURWAYS,
+  contrastRatio,
   DESIGN_KEYS,
+  getColourway,
+  getDesign,
+  HOUSE_DESIGN_KEYS,
   layoutPiece,
   mm,
   monogramInitials,
@@ -42,6 +52,7 @@ import {
   stationeryFontFamily,
   STATIONERY_DESIGNS,
   STATIONERY_PIECES,
+  transformPath,
   type KitTexts,
 } from "../src/stationerykit";
 import { as, code, guestCtx, HELPER, household, newOccasion, OUTSIDER, OWNER, PM, seedAccounts } from "./_releasec";
@@ -66,6 +77,8 @@ const TEXTS: KitTexts = {
   menuBody: "Gustare\nPlatou rece\n\nFel principal\nMușchi de vită\n\nDesert\nTort",
   thanks: "Mulțumim\nVă mulțumim din suflet că ați fost alături de noi.",
 };
+
+const HOUSE = Object.fromEntries(HOUSE_DESIGN_KEYS.map((k) => [k, true]));
 
 const draft = (occasionId: string, over: Partial<SaveStationeryInput> = {}, texts: Partial<KitTexts> = {}): SaveStationeryInput => ({
   occasionId,
@@ -113,11 +126,12 @@ afterAll(async () => {
 });
 
 describe("the stationery kit: designs as data, one layout", () => {
-  it("has eight designs in our two families, each with two or three curated colourways", () => {
-    expect(DESIGN_KEYS).toHaveLength(8);
+  it("has eight house designs in our two families, each with two or three curated colourways", () => {
+    expect(HOUSE_DESIGN_KEYS).toHaveLength(8);
     expect(stationeryFontFamily()).toBe("maison"); // Bodoni Moda + Hanken Grotesk are embedded, not the fallback
-    for (const key of DESIGN_KEYS) {
-      const d = STATIONERY_DESIGNS[key];
+    for (const key of HOUSE_DESIGN_KEYS) {
+      const d = STATIONERY_DESIGNS[key]!;
+      expect(d.range).toBe("house");
       expect(d.colourways.length, key).toBeGreaterThanOrEqual(2);
       expect(d.colourways.length, key).toBeLessThanOrEqual(3);
       for (const c of d.colourways) expect(COLOURWAYS[c], `${key}/${c}`).toBeDefined();
@@ -127,9 +141,10 @@ describe("the stationery kit: designs as data, one layout", () => {
 
   it("renders every design × piece × colourway with all text inside the safe sheet", () => {
     for (const key of DESIGN_KEYS) {
-      for (const colourway of STATIONERY_DESIGNS[key].colourways) {
+      // the house designs in each of their colourways; a collection design in the first two it offers a wedding
+      for (const colourway of colourwaysFor(getDesign(key), "nunta").slice(0, key in HOUSE ? 3 : 2)) {
         for (const piece of STATIONERY_PIECES) {
-          const scene = layoutPiece({ design: key, colourway, piece, texts: TEXTS, extra: { tableLabel: "12", tableWord: "Masa", placeName: "Alexandra Constantinescu", placeNote: "Masa 12 · +2 copii" } });
+          const scene = layoutPiece({ design: key, colourway, piece, texts: TEXTS, occasionKind: "nunta", extra: { tableLabel: "12", tableWord: "Masa", placeName: "Alexandra Constantinescu", placeNote: "Masa 12 · +2 copii" } });
           const spec = PIECES[piece];
           expect(scene.width).toBeCloseTo(mm(spec.widthMm), 1);
           expect(scene.truncated, `${key}/${piece}`).toBe(false);
@@ -215,6 +230,95 @@ describe("the stationery kit: designs as data, one layout", () => {
     expect(d.date.value).toBe("Sâmbătă, 12 iunie 2027");
     expect(d.time.value).toBe("ora 17:00");
     expect(STATIONERY_TEXT_FIELDS.every((f) => d[f].aiGenerated === false)).toBe(true);
+  });
+});
+
+describe("the invitation collections", () => {
+  it("adds the embroidery, signature, rustic, traditional and composition ranges as designs of the same kit", () => {
+    const byRange = (r: string) => DESIGN_KEYS.filter((k) => getDesign(k).range === r);
+    expect(byRange("embroidery")).toHaveLength(16);
+    expect(byRange("featured")).toHaveLength(6);
+    expect(byRange("rustic")).toHaveLength(11);
+    expect(byRange("traditional")).toHaveLength(11);
+    expect(byRange("collection")).toHaveLength(20);
+    for (const key of DESIGN_KEYS) {
+      for (const locale of ["ro", "en"] as const) expect(translate(locale, `stationery.designs.${key}.name`), key).not.toMatch(/^stationery\./);
+      const d = getDesign(key);
+      if (d.range === "house") continue;
+      // every collection design draws artwork, not only text
+      const scene = layoutPiece({ design: key, piece: "invitation", texts: TEXTS, occasionKind: "nunta" });
+      expect(scene.nodes.filter((n) => n.t === "path").length, key).toBeGreaterThan(0);
+      for (const c of colourwaysFor(d, "nunta")) expect(COLOURWAYS[c], `${key}/${c}`).toBeDefined();
+    }
+    expect(Object.keys(STITCH_CHARTS)).toEqual(DESIGN_KEYS.filter((k) => getDesign(k).range === "embroidery"));
+  });
+
+  it("every occasion kind has its five palettes (plus the studio five), a motif and ten starter wordings in both languages", () => {
+    for (const kind of OCCASION_KINDS) {
+      expect(KIND_PALETTES[kind], kind).toHaveLength(5);
+      expect(KIND_MOTIFS[kind], kind).toMatch(/^[Mm]/);
+      expect(colourwaysFor(getDesign("frame"), kind)).toHaveLength(10);
+      expect(colourwaysFor(getDesign("frame"), kind)).toEqual(expect.arrayContaining([...STUDIO_PALETTES]));
+      for (const locale of ["ro", "en"] as const) {
+        const starters = getStarterWordings(kind, locale);
+        expect(starters, kind).toHaveLength(10);
+        for (const s of starters) expect(s.text, `${kind}.${s.key}`).not.toMatch(/^stationery\./);
+      }
+    }
+    // a signature edition opens on its own palette of the kind's five
+    expect(colourwaysFor(getDesign("botanical-edition"), "nunta")[0]).toBe(KIND_PALETTES.nunta![2]);
+    // a kind the collections never heard of gets the general set
+    expect(getStarterWordings("necunoscut", "ro")).toEqual(getStarterWordings("blank", "ro"));
+  });
+
+  it("every colourway reads: ink and muted text meet AA on the paper, and a dark sheet's accent does too", () => {
+    for (const [key, cw] of Object.entries(COLOURWAYS)) {
+      expect(contrastRatio(cw.ink, cw.paper), `${key} ink`).toBeGreaterThanOrEqual(4.5);
+      expect(contrastRatio(cw.muted, cw.paper), `${key} muted`).toBeGreaterThanOrEqual(4.5);
+      if (cw.dark && !(HOUSE_DESIGN_KEYS as string[]).some((d) => STATIONERY_DESIGNS[d]!.colourways.includes(key))) {
+        expect(contrastRatio(cw.accent, cw.paper), `${key} accent`).toBeGreaterThanOrEqual(4.5);
+      }
+    }
+    // the Deco edition prints its palette the other way round, and still reads
+    const inverted = getColourway(getDesign("deco-edition"), KIND_PALETTES.nunta![1]);
+    expect(inverted.paper).toBe(COLOURWAYS[KIND_PALETTES.nunta![1]!]!.ink);
+    expect(contrastRatio(inverted.muted, inverted.paper)).toBeGreaterThanOrEqual(4.5);
+    // a colourway from outside the design's set falls back to its first
+    expect(getColourway(getDesign("maramures-gate"), "ivoire").key).toBe("maramures-oak");
+  });
+
+  it("stretches artwork over a sheet without losing a command, relative or absolute", () => {
+    expect(transformPath("M10 10h20v10H10Z", 2, 3)).toBe("M20 30L60 30L60 60L20 60Z");
+    expect(transformPath("M0 0l5 5m10 0q5 5 10 0t10 0", 1, 1, 100, 0)).toBe("M100 0L105 5M115 5Q120 10 125 5T135 5");
+    expect(transformPath("M0 0c1 1 2 2 3 3s4 4 5 5a2 2 0 0 1 4 0", 2, 2)).toBe("M0 0C2 2 4 4 6 6S14 14 16 16A4 4 0 0 1 24 16");
+  });
+
+  it("artwork stays on the sheet in the proof, and the text keeps clear of it", () => {
+    const scene = layoutPiece({ design: "imprint", piece: "invitation", texts: TEXTS, occasionKind: "nunta" });
+    const svg = sceneToSvg(scene);
+    expect(svg).toMatch(/<svg width="[\d.]+" height="[\d.]+" viewBox="0 0 [\d.]+ [\d.]+" overflow="hidden">/);
+    // Split keeps the text to the right of its panel; Column sets it ragged-left against the right margin
+    const [splitLeft] = sceneTextBounds(layoutPiece({ design: "split", piece: "invitation", texts: TEXTS, occasionKind: "nunta" }));
+    expect(splitLeft).toBeGreaterThan(scene.width * 0.3);
+    const column = layoutPiece({ design: "column", piece: "invitation", texts: TEXTS, occasionKind: "nunta" });
+    const rights = column.nodes.filter((n) => n.t === "text").map((n) => (n.t === "text" ? n.x + n.width : 0));
+    expect(Math.max(...rights) - Math.min(...rights)).toBeLessThan(1);
+  });
+
+  it("saves a collection design in one of the occasion's palettes, refuses a palette from another set, and thumbnails it", async () => {
+    const occ = await newOccasion(t);
+    const kind = (await getStationeryEditor(as(t, OWNER), occ)).occasion.kind;
+    const palette = colourwaysFor(getDesign("frame"), kind)[3]!;
+    expect(await saveStationeryVersion(as(t, OWNER), draft(occ, { designKey: "frame", colourwayKey: palette }))).toEqual({ version: 1, created: true });
+    expect(await saveStationeryVersion(as(t, OWNER), draft(occ, { designKey: "muscel-check", colourwayKey: "stitched-linen" }))).toEqual({ version: 2, created: true });
+    expect(await code(() => saveStationeryVersion(as(t, OWNER), draft(occ, { designKey: "maramures-gate", colourwayKey: palette })))).toBe("VALIDATION:common.errors.VALIDATION");
+    const proof = await buildStationeryProofPdf(as(t, HELPER), { occasionId: occ });
+    expect(pdfText(proof.bytes)).toContain("Ioana");
+    const thumb = await stationeryThumbnail(as(t, HELPER), occ, "maramures-gate");
+    expect(thumb.startsWith("<svg")).toBe(true);
+    expect(thumb).not.toContain("<text");
+    expect(await code(() => stationeryThumbnail(as(t, OUTSIDER), occ, "frame"))).toMatch(/^(FORBIDDEN|NOT_FOUND)/);
+    expect(await code(() => stationeryThumbnail(as(t, OWNER), occ, "../x"))).toBe("NOT_FOUND:common.errors.NOT_FOUND");
   });
 });
 

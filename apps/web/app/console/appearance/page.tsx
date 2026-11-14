@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /**
- * Console → Appearance. A platform administrator picks one of five looks for the whole app.
+ * Console → Appearance. A platform administrator picks one of the looks for the whole app.
  * Each option is drawn with that look's own tokens, so the miniature is the real thing.
  */
 export default async function AppearancePage() {

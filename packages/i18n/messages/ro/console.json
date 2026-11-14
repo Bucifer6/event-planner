@@ -544,6 +544,46 @@
         "name": "Studio",
         "mood": "roz pudrat, negru, o tușă de roșu",
         "about": "Îndrăzneț, de revistă. Majuscule late și groase, fără cursive."
+      },
+      "nocturne": {
+        "name": "Nocturne",
+        "mood": "noapte de ardezie, auriu de lumânare",
+        "about": "Mereu întunecat, zi și noapte. Titluri cu serife fine și auriu cald pentru acțiuni."
+      },
+      "folio": {
+        "name": "Folio",
+        "mood": "hârtie de ziar, cerneală, o linie vișinie",
+        "about": "Ca o pagină tipărită. Titluri strânse și puternice, colțuri drepte."
+      },
+      "herbarium": {
+        "name": "Herbarium",
+        "mood": "licheni, verde de pădure, frunze presate",
+        "about": "Calm și natural. O literă clasică cu serife, verdele grădinii, colțuri moi."
+      },
+      "prism": {
+        "name": "Prism",
+        "mood": "alb-lavandă, ultramarin",
+        "about": "Luminos și sigur pe el. Titluri late și grele, ca un afiș de lansare."
+      },
+      "salon": {
+        "name": "Salon",
+        "mood": "apă de trandafiri, dud, granat",
+        "about": "Un salon de seară. Titluri elegante cu serife și butoane rotunjite."
+      },
+      "dune": {
+        "name": "Dune",
+        "mood": "nisip, umbră, siena arsă",
+        "about": "Tonuri calde de deșert la apus. Titluri ferme cu serife, colțuri îndulcite."
+      },
+      "ledger": {
+        "name": "Ledger",
+        "mood": "gri-mentă, mașină de scris, verde de sticlă",
+        "about": "Ordonat și precis. Titluri ca la mașina de scris și colțuri drepte."
+      },
+      "muse": {
+        "name": "Muse",
+        "mood": "liliac, prună, lumină blândă",
+        "about": "Visător și delicat. O literă cu serife subțire, colțuri generos rotunjite."
       }
     }
   }

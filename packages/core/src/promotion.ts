@@ -167,7 +167,7 @@ async function cardScene(ctx: Pick<Ctx, "db">, o: Occasion, size: PromotionCardS
   const d = await readDesign(ctx, o);
   // a card announces; the invitation's RSVP line and address stay on the invitation
   const texts: KitTexts = { ...d.texts, rsvp: "", address: "" };
-  return layoutPiece({ design: d.designKey, colourway: d.colourwayKey, piece: size === "square" ? "invitation-square" : "invitation", texts });
+  return layoutPiece({ design: d.designKey, colourway: d.colourwayKey, piece: size === "square" ? "invitation-square" : "invitation", texts, occasionKind: o.kind });
 }
 
 /** The square card as SVG, for the page's preview (the same drawing the PNG is made from). Planning members. */
@@ -256,7 +256,7 @@ export async function buildPromotionPoster(ctx: Ctx, input: { occasionId: string
   const o = await loadOccasion(ctx, input.occasionId);
   const locale: Locale = o.locale === "en" ? "en" : "ro";
   const d = await readDesign(ctx, o);
-  const scene = layoutPiece({ design: d.designKey, colourway: d.colourwayKey, piece: "invitation", texts: { ...d.texts, rsvp: "" } });
+  const scene = layoutPiece({ design: d.designKey, colourway: d.colourwayKey, piece: "invitation", texts: { ...d.texts, rsvp: "" }, occasionKind: o.kind });
   const page = { w: mm(PROMOTION_POSTER_SIZES[size].widthMm), h: mm(PROMOTION_POSTER_SIZES[size].heightMm) };
   const { doc, done } = await newSheetDocument({ title: translate(locale, "promotion.poster.docTitle", { title: o.title, size }), lang: locale, createdAt: ctx.now, subject: translate(locale, "promotion.poster.subject") });
   doc.addPage({ size: [page.w, page.h], margin: 0 });

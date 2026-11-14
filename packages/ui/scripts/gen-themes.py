@@ -89,6 +89,110 @@ THEMES = {
         "dark": dict(paper="#121110", surface="#1c1a18", sunken="#0a0909", ink="#f4ebe6", ink2="#c4b9b2", ink3="#a2978f", line="#342f2c", lineStrong="#f4ebe6",
                      accent="#f4ebe6", accentHover="#ffffff", onAccent="#121110", accentTint="#2a2522", gilt="#ff6a4d", giltInk="#ff8d75"),
     },
+    "nocturne": {
+        "comment": "NOCTURNE — always at night. Slate-ink paper, warm candle-gold for actions, a sepia hairline; the same in both modes.",
+        "scheme": "dark",
+        "voice": {
+            "--font-display": f'"Cormorant Garamond", {SERIF_FALLBACK}', "--font-text": f'"DM Sans", {SANS_FALLBACK}',
+            "--display-weight": "500", "--hero-weight": "400", "--figure-weight": "500", "--display-tracking": "-0.01em",
+            "--display-sm": "1.625rem", "--display-md": "2.125rem", "--display-lg": "2.75rem", "--display-xl": "clamp(3rem, 8.5vw, 4.75rem)",
+            "--track": "1.2", "--btn-weight": "600", "--radius": "2px", "--wordmark-size": "1.75rem", "--wordmark-weight": "500",
+        },
+        "light": dict(paper="#14191e", surface="#1e252b", sunken="#0f1317", ink="#f6eddf", ink2="#cabcaa", ink3="#a99c8b", line="#2f373d", lineStrong="#5c5143",
+                      accent="#e5bd81", accentHover="#f0d3a6", onAccent="#14191e", accentTint="#2b2a26", gilt="#c9a46b", giltInk="#e5bd81"),
+        "dark": dict(paper="#14191e", surface="#1e252b", sunken="#0f1317", ink="#f6eddf", ink2="#cabcaa", ink3="#a99c8b", line="#2f373d", lineStrong="#5c5143",
+                     accent="#e5bd81", accentHover="#f0d3a6", onAccent="#14191e", accentTint="#2b2a26", gilt="#c9a46b", giltInk="#e5bd81"),
+    },
+    "folio": {
+        "comment": "FOLIO — the printed page. Newsprint cream, iron-gall ink, an oxblood rule; tight editorial headlines, square corners.",
+        "voice": {
+            "--font-display": f'"Fraunces", {SERIF_FALLBACK}', "--font-text": f'"Instrument Sans", {SANS_FALLBACK}',
+            "--display-weight": "600", "--hero-weight": "500", "--figure-weight": "600", "--display-tracking": "-0.04em", "--display-leading": "1.04",
+            "--track": "1.1", "--btn-weight": "600", "--radius": "0px", "--radius-sm": "0px", "--wordmark-size": "1.5rem", "--wordmark-weight": "700",
+        },
+        "light": dict(paper="#f4f2e9", surface="#f8f6ef", sunken="#ece7d8", ink="#26251e", ink2="#4f4a3d", ink3="#625c4c", line="#d9d3c1", lineStrong="#a6a08d",
+                      accent="#8f342c", accentHover="#a8453b", onAccent="#f8f6ef", accentTint="#f1e2dc", gilt="#a34031", giltInk="#8f342c"),
+        "dark": dict(paper="#191814", surface="#22201b", sunken="#11100d", ink="#efebdd", ink2="#c3bda9", ink3="#a39d8a", line="#36332b", lineStrong="#625d50",
+                     accent="#eba59b", accentHover="#f4c3bb", onAccent="#191814", accentTint="#3a2522", gilt="#d97f6f", giltInk="#eba59b"),
+    },
+    "herbarium": {
+        "comment": "HERBARIUM — pressed leaves. Lichen paper, forest-green ink and actions, a little softness in the corners.",
+        "voice": {
+            "--font-display": f'"Cormorant Garamond", {SERIF_FALLBACK}', "--font-text": f'"Instrument Sans", {SANS_FALLBACK}',
+            "--display-weight": "500", "--hero-weight": "500", "--figure-weight": "500", "--display-tracking": "-0.005em",
+            "--display-sm": "1.625rem", "--display-md": "2.125rem", "--display-lg": "2.75rem", "--display-xl": "clamp(2.875rem, 8vw, 4.5rem)",
+            "--caps": "none", "--track": "0.3", "--btn-weight": "600", "--btn-size": "0.9375rem", "--label-size": "0.8125rem", "--radius": "5px", "--radius-sm": "4px", "--wordmark-size": "1.75rem", "--wordmark-weight": "500",
+        },
+        "light": dict(paper="#e8ecdf", surface="#f4f6ee", sunken="#dce5d0", ink="#253427", ink2="#46523f", ink3="#536047", line="#c8d1bd", lineStrong="#a7b49d",
+                      accent="#435932", accentHover="#56703f", onAccent="#f4f6ee", accentTint="#dbe5cf", gilt="#8a9e74", giltInk="#4c6138"),
+        "dark": dict(paper="#141913", surface="#1c231b", sunken="#0d110c", ink="#e6ecdc", ink2="#b8c2ab", ink3="#98a38b", line="#2c3529", lineStrong="#56634f",
+                     accent="#b9d39c", accentHover="#d1e4bb", onAccent="#141913", accentTint="#24301f", gilt="#9fb487", giltInk="#b9d39c"),
+    },
+    "prism": {
+        "comment": "PRISM — a launch poster. Lavender-white paper, ultramarine actions, heavy wide grotesque headlines.",
+        "voice": {
+            "--font-display": f'"Archivo", {SANS_FALLBACK}', "--font-text": f'"Archivo", {SANS_FALLBACK}',
+            "--display-weight": "900", "--hero-weight": "900", "--figure-weight": "800", "--display-stretch": "112%", "--display-tracking": "-0.035em",
+            "--display-leading": "1.02", "--italic": "normal", "--em-color": "var(--accent)",
+            "--display-sm": "1.25rem", "--display-md": "1.75rem", "--display-lg": "2.375rem", "--display-xl": "clamp(2.25rem, 8vw, 4.25rem)", "--wordmark-size": "1.25rem", "--wordmark-weight": "900",
+            "--caps": "none", "--track": "0", "--btn-weight": "700", "--btn-size": "0.9375rem", "--label-size": "0.8125rem", "--radius": "8px", "--radius-sm": "6px",
+        },
+        "light": dict(paper="#ecedf9", surface="#fbfaff", sunken="#e0def8", ink="#211c43", ink2="#46406a", ink3="#555075", line="#d3d0f0", lineStrong="#bdb8e6",
+                      accent="#3e35af", accentHover="#4d43de", onAccent="#fbfaff", accentTint="#e0def8", gilt="#4d43de", giltInk="#3e35af"),
+        "dark": dict(paper="#13112a", surface="#1c1938", sunken="#0c0b1d", ink="#eceafd", ink2="#bfbbe4", ink3="#9f9ac6", line="#2e2a52", lineStrong="#58539a",
+                     accent="#b3adff", accentHover="#cdc9ff", onAccent="#13112a", accentTint="#26224d", gilt="#8f87ff", giltInk="#b3adff"),
+    },
+    "salon": {
+        "comment": "SALON — an evening drawing room. Rosewater paper, mulberry ink, garnet actions in pill-shaped buttons.",
+        "voice": {
+            "--font-display": f'"Cormorant Garamond", {SERIF_FALLBACK}', "--font-text": f'"Jost", {SANS_FALLBACK}',
+            "--display-weight": "500", "--hero-weight": "400", "--figure-weight": "500", "--display-tracking": "-0.01em",
+            "--display-sm": "1.625rem", "--display-md": "2.125rem", "--display-lg": "2.875rem", "--display-xl": "clamp(3rem, 9vw, 5rem)",
+            "--track": "1.2", "--btn-weight": "500", "--radius": "6px", "--radius-sm": "999px", "--wordmark-size": "1.75rem", "--wordmark-weight": "500",
+        },
+        "light": dict(paper="#f7eee8", surface="#fff7ef", sunken="#f1e0db", ink="#491f2a", ink2="#683f49", ink3="#754b55", line="#e4ccc6", lineStrong="#c4a19c",
+                      accent="#8b3b4d", accentHover="#a34a5e", onAccent="#fff7ef", accentTint="#f3dfe0", gilt="#a8735a", giltInk="#7c4a36"),
+        "dark": dict(paper="#1d1215", surface="#28191e", sunken="#140c0e", ink="#f7e6e2", ink2="#d2b6b5", ink3="#b39596", line="#3b262c", lineStrong="#6c4a52",
+                     accent="#f0a9b8", accentHover="#f7c7d1", onAccent="#1d1215", accentTint="#3c2329", gilt="#d8a68d", giltInk="#e6bba5"),
+    },
+    "dune": {
+        "comment": "DUNE — desert at golden hour. Sand paper, umber ink, burnt-sienna actions, softened corners.",
+        "voice": {
+            "--font-display": f'"Fraunces", {SERIF_FALLBACK}', "--font-text": f'"DM Sans", {SANS_FALLBACK}',
+            "--display-weight": "700", "--hero-weight": "600", "--figure-weight": "600", "--display-tracking": "-0.025em",
+            "--caps": "none", "--track": "0.2", "--btn-weight": "600", "--btn-size": "0.9375rem", "--label-size": "0.8125rem", "--radius": "4px", "--radius-sm": "4px", "--wordmark-size": "1.5rem", "--wordmark-weight": "700",
+        },
+        "light": dict(paper="#f2e6d7", surface="#f9efe2", sunken="#eddbc7", ink="#3b2921", ink2="#5c443a", ink3="#694e42", line="#e0cbb5", lineStrong="#c7aa91",
+                      accent="#8b472e", accentHover="#a3573a", onAccent="#f9efe2", accentTint="#f1dccd", gilt="#d08c64", giltInk="#8b472e"),
+        "dark": dict(paper="#1c1611", surface="#261e18", sunken="#130f0b", ink="#f4e8d9", ink2="#cdbba7", ink3="#ac9a87", line="#3a2f26", lineStrong="#6a5848",
+                     accent="#eeaa86", accentHover="#f5c6ab", onAccent="#1c1611", accentTint="#3b2a20", gilt="#d9a07a", giltInk="#eeaa86"),
+    },
+    "ledger": {
+        "comment": "LEDGER — the accountant's book. Mint-grey paper, typewriter headings, bottle-green actions, square corners.",
+        "voice": {
+            "--font-display": 'ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace', "--font-text": f'"Instrument Sans", {SANS_FALLBACK}',
+            "--display-weight": "600", "--hero-weight": "500", "--figure-weight": "600", "--display-tracking": "-0.04em", "--italic": "normal", "--em-color": "var(--accent)",
+            "--display-sm": "1.25rem", "--display-md": "1.5rem", "--display-lg": "1.875rem", "--display-xl": "clamp(2rem, 6.5vw, 3.25rem)",
+            "--track": "1", "--btn-weight": "600", "--radius": "0px", "--radius-sm": "0px", "--wordmark-size": "1.25rem", "--wordmark-weight": "600",
+        },
+        "light": dict(paper="#ebefed", surface="#f9faf8", sunken="#e0e8e3", ink="#1e2826", ink2="#3e4c49", ink3="#465653", line="#cdd7d2", lineStrong="#aebbb6",
+                      accent="#226454", accentHover="#2d7a67", onAccent="#f9faf8", accentTint="#dae9e2", gilt="#226454", giltInk="#226454"),
+        "dark": dict(paper="#111716", surface="#19201e", sunken="#0a0f0e", ink="#e5ece9", ink2="#b3c0bb", ink3="#93a19c", line="#28322f", lineStrong="#51605b",
+                     accent="#8fd3bd", accentHover="#b2e3d3", onAccent="#111716", accentTint="#1d302a", gilt="#8fd3bd", giltInk="#8fd3bd"),
+    },
+    "muse": {
+        "comment": "MUSE — dreamy and soft. Lilac paper, plum ink and actions, generous round corners and pill buttons.",
+        "voice": {
+            "--font-display": f'"Instrument Serif", {SERIF_FALLBACK}', "--font-text": f'"DM Sans", {SANS_FALLBACK}',
+            "--display-weight": "400", "--hero-weight": "400", "--figure-weight": "400", "--display-tracking": "-0.015em",
+            "--display-sm": "1.5rem", "--display-md": "2rem", "--display-lg": "2.75rem", "--display-xl": "clamp(2.875rem, 8.5vw, 4.75rem)",
+            "--caps": "none", "--track": "0.2", "--btn-weight": "600", "--btn-size": "0.9375rem", "--label-size": "0.8125rem", "--radius": "16px", "--radius-sm": "999px", "--wordmark-size": "1.75rem", "--wordmark-weight": "400",
+        },
+        "light": dict(paper="#f1edf7", surface="#fcf9ff", sunken="#e9e0f4", ink="#31243c", ink2="#544461", ink3="#5f4d6e", line="#ddd2ea", lineStrong="#c8b9d7",
+                      accent="#754581", accentHover="#8b559a", onAccent="#fcf9ff", accentTint="#ece0f2", gilt="#b3a1ed", giltInk="#6a4b9a"),
+        "dark": dict(paper="#17121c", surface="#211a28", sunken="#0f0c13", ink="#efe6f7", ink2="#c7b8d6", ink3="#a796b8", line="#33293d", lineStrong="#62547a",
+                     accent="#dcb0e8", accentHover="#ead0f1", onAccent="#17121c", accentTint="#33243b", gilt="#b9a8f0", giltInk="#cbbdf4"),
+    },
 }
 
 VAR = dict(paper="--paper", surface="--surface", sunken="--sunken", ink="--ink", ink2="--ink-2", ink3="--ink-3", line="--line", lineStrong="--line-strong",
@@ -129,7 +233,7 @@ def main():
                 r = ratio(t[mode][a], t[mode][b])
                 if r < 4.5:
                     bad += 1; print(f"CONTRAST {name} {mode} {a}/{b} = {r:.2f}", file=sys.stderr)
-        light = list(t["voice"].items()) + [(VAR[k], v) for k, v in t["light"].items()]
+        light = ([("color-scheme", "dark")] if t.get("scheme") == "dark" else []) + list(t["voice"].items()) + [(VAR[k], v) for k, v in t["light"].items()]
         dark = [(VAR[k], v) for k, v in t["dark"].items()]
         css.append(f"/* {t['comment']} */")
         css.append(block(f'[data-ui="{name}"]', light))

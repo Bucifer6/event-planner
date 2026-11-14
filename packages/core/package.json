@@ -79,6 +79,7 @@
     "./comms": "./src/comms.ts",
     "./stationery": "./src/stationery.ts",
     "./stationerykit": "./src/stationerykit.ts",
+    "./stationerycollections": "./src/stationerycollections.ts",
     "./printpack": "./src/printpack.ts",
     "./qr": "./src/qr.ts",
     "./gifts": "./src/gifts.ts",

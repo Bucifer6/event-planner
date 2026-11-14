@@ -33,6 +33,198 @@
     "petrecere": {
       "name": "Petrecere",
       "blurb": "Câteva confetti în colțuri și un Bodoni mai apăsat."
+    },
+    "muscel-sleeve-steps": {
+      "name": "Muscel · Trepte de mânecă"
+    },
+    "muscel-gold-lattice": {
+      "name": "Muscel · Rețea aurie"
+    },
+    "bucovina-hooked-cross": {
+      "name": "Comănești · Cruce cu cârlige"
+    },
+    "bucovina-branching-flower": {
+      "name": "Comănești · Ramuri înflorite"
+    },
+    "bucovina-diamond-chain": {
+      "name": "Comănești · Lanț de romburi"
+    },
+    "rasinari-end-register": {
+      "name": "Rășinari · Registre de ștergar"
+    },
+    "rasinari-stripe-rhythm": {
+      "name": "Rășinari · Vărgi roșii și albastre"
+    },
+    "moldova-stepped-wave": {
+      "name": "Moldova · Șirlău în trepte"
+    },
+    "moldova-woven-diamonds": {
+      "name": "Moldova de Nord · Romburi la război"
+    },
+    "oltenia-floral-scoarta": {
+      "name": "Oltenia · Floare și vrej"
+    },
+    "muscel-check": {
+      "name": "Muscel · Guler în carouri"
+    },
+    "muscel-altita-grid": {
+      "name": "Muscel · Cruci de altiță"
+    },
+    "comanesti-diamond": {
+      "name": "Comănești · Romburi roșii și negre"
+    },
+    "comanesti-sprig": {
+      "name": "Comănești · Crenguțe negre"
+    },
+    "rasinari-woven": {
+      "name": "Rășinari · Vărgi țesute"
+    },
+    "dolj-woven": {
+      "name": "Oltenia · Păsări afrontate"
+    },
+    "muscel-altita": {
+      "name": "Muscel · Registre de altiță"
+    },
+    "muscel-rauri": {
+      "name": "Muscel · Râuri și romburi"
+    },
+    "maramures-ciupag": {
+      "name": "Maramureș · Ciupag de mireasă"
+    },
+    "sibiu-fodori": {
+      "name": "Mărginimea Sibiului · Fodori"
+    },
+    "moldova-sirlau": {
+      "name": "Moldova · Țesătură cu șirlău"
+    },
+    "dobrogea-stergar": {
+      "name": "Dobrogea · Ștergar țesut"
+    },
+    "oltenia-scoarta": {
+      "name": "Oltenia · Păsări pe scoarță"
+    },
+    "moldova-romburi": {
+      "name": "Moldova de Nord · Romburi în trepte"
+    },
+    "maramures-gate": {
+      "name": "Maramureș · Poartă sculptată"
+    },
+    "maramures-rosette": {
+      "name": "Maramureș · Rozetă solară"
+    },
+    "bucovina-wax": {
+      "name": "Bucovina · Brâuri încondeiate"
+    },
+    "bucovina-lozenge": {
+      "name": "Bucovina · Romburi"
+    },
+    "horezu-clay": {
+      "name": "Oltenia · Spirale de Horezu"
+    },
+    "horezu-medallion": {
+      "name": "Oltenia · Medalion smălțuit de Horezu"
+    },
+    "saxon-chest": {
+      "name": "Transilvania · Ladă săsească pictată"
+    },
+    "saxon-floral": {
+      "name": "Transilvania · Panouri florale săsești"
+    },
+    "wildflower-edition": {
+      "name": "Flori de câmp"
+    },
+    "woodcut-edition": {
+      "name": "Xilogravură de livadă"
+    },
+    "woven-edition": {
+      "name": "Pânză de in"
+    },
+    "damask-edition": {
+      "name": "Damasc fildeș"
+    },
+    "heraldic-edition": {
+      "name": "Blazon ceremonial"
+    },
+    "embroidered-edition": {
+      "name": "Chenar brodat"
+    },
+    "letterpress-edition": {
+      "name": "Tipar în relief"
+    },
+    "botanical-edition": {
+      "name": "Gravură botanică"
+    },
+    "deco-edition": {
+      "name": "Art Deco"
+    },
+    "modernist-edition": {
+      "name": "Modernist"
+    },
+    "folded-edition": {
+      "name": "Hârtie pliată"
+    },
+    "engraved-edition": {
+      "name": "Gravură în adâncime"
+    },
+    "triptych": {
+      "name": "Triptic"
+    },
+    "medallion": {
+      "name": "Medalion"
+    },
+    "rays": {
+      "name": "Raze"
+    },
+    "diagonal": {
+      "name": "Diagonală"
+    },
+    "plaque": {
+      "name": "Plachetă"
+    },
+    "column": {
+      "name": "Coloană laterală"
+    },
+    "scallop": {
+      "name": "Margine festonată"
+    },
+    "imprint": {
+      "name": "Amprentă"
+    },
+    "ruling": {
+      "name": "Linii tipografice"
+    },
+    "duotone": {
+      "name": "Două tonuri"
+    },
+    "frame": {
+      "name": "Chenar dublu"
+    },
+    "arch": {
+      "name": "Arcadă"
+    },
+    "seal": {
+      "name": "Sigiliu"
+    },
+    "ribbon": {
+      "name": "Panglică"
+    },
+    "band": {
+      "name": "Tipar în relief"
+    },
+    "ticket": {
+      "name": "Bilet"
+    },
+    "postcard": {
+      "name": "Carte poștală"
+    },
+    "split": {
+      "name": "Panou divizat"
+    },
+    "crest": {
+      "name": "Blazon"
+    },
+    "border": {
+      "name": "Bordură lată"
     }
   },
   "colourways": {
@@ -43,7 +235,198 @@
     "ciel": "Albastru de cer",
     "terracotta": "Teracotă",
     "minuit": "Miez de noapte",
-    "noir": "Negru cald"
+    "noir": "Negru cald",
+    "stitched-linen": "Pânză brodată",
+    "muscel-thread": "Fildeș, negru, roșu și auriu",
+    "ciupag-thread": "Broderie roșie, albastră și verde",
+    "sibiu-cloth": "Alb și negru",
+    "moldova-wool": "Lână neagră și roz",
+    "dobrogea-cotton": "Roșu și negru pe bumbac",
+    "dolj-wool": "Lână roșie și violetă",
+    "moldova-diamond": "Lână roșie și verde-oliv",
+    "maramures-oak": "Stejar",
+    "maramures-ink": "Nuc sculptat",
+    "bucovina-wax": "Ceară și negru de fum",
+    "bucovina-red": "Roșu de vopsea",
+    "horezu-clay": "Lut nesmălțuit",
+    "horezu-glaze": "Smalț măsliniu",
+    "saxon-chest": "Pin pictat",
+    "saxon-blue": "Albastru pictat",
+    "harvest-linen": "In de recoltă",
+    "orchard-bark": "Scoarță de pom",
+    "oat-cloth": "In în nuanța ovăzului",
+    "antique-ivory": "Fildeș antichizat",
+    "heritage-blue": "Albastru de patrimoniu",
+    "heirloom-red": "Roșu tradițional",
+    "truffle": "Trufă",
+    "vermilion": "Vermion",
+    "sparkler": "Artificiu",
+    "nightshade": "Mov nocturn",
+    "peach": "Piersică",
+    "jellybean": "Jeleu",
+    "crayon": "Creion cerat",
+    "balloon": "Balon",
+    "lemonade": "Limonadă",
+    "gumdrop": "Bomboană",
+    "peony": "Bujor",
+    "organza": "Organza",
+    "gardenia": "Gardenie",
+    "rhubarb": "Rubarbă",
+    "primrose": "Primulă",
+    "ribbon-silk": "Panglică de mătase",
+    "rosewood": "Lemn de trandafir",
+    "quartz": "Cuarț",
+    "patinated-brass": "Alamă patinată",
+    "mist": "Ceață",
+    "sugarplum": "Prună dulce",
+    "buttermilk": "Lapte bătut",
+    "morning-sky": "Cer de dimineață",
+    "bubblegum": "Gumă roz",
+    "pistachio": "Fistic",
+    "holly": "Ilice",
+    "cranberry": "Merișor",
+    "snowfall": "Ninsoare",
+    "spruce": "Molid",
+    "tinsel": "Beteală",
+    "willow": "Salcie",
+    "remembrance": "Amintire",
+    "soft-stone": "Piatră deschisă",
+    "white-rose": "Trandafir alb",
+    "stillwater": "Apă liniștită",
+    "blueprint": "Plan albastru",
+    "type-metal": "Metal tipografic",
+    "copperplate": "Gravură pe cupru",
+    "sea-ink": "Cerneală marină",
+    "newsprint": "Hârtie de ziar",
+    "saffron": "Șofran",
+    "merlot": "Merlot",
+    "stoneware": "Ceramică",
+    "fig": "Smochină",
+    "tablecloth": "Față de masă",
+    "alabaster": "Alabastru",
+    "celadon": "Celadon",
+    "mulberry": "Dudă",
+    "lapis": "Lapis lazuli",
+    "marigold": "Gălbenele",
+    "gesso": "Grund",
+    "canvas": "Pânză",
+    "patina": "Patină",
+    "matboard": "Passepartout",
+    "lacquer": "Lac",
+    "backstage": "Culise",
+    "encore": "Bis",
+    "soundcheck": "Probă de sunet",
+    "vinyl": "Vinil",
+    "amp": "Amplificator",
+    "notebook": "Caiet",
+    "pigment": "Pigment",
+    "workbench": "Banc de lucru",
+    "pencil": "Creion",
+    "indigo-dye": "Vopsea indigo",
+    "track": "Pistă",
+    "court": "Teren",
+    "turf": "Gazon",
+    "scoreboard": "Tabelă de scor",
+    "relay": "Ștafetă",
+    "afterglow": "Amurg",
+    "sundial": "Ceas solar",
+    "parchment": "Hârtie pergamentată",
+    "amber": "Chihlimbar",
+    "seaglass": "Sticlă de mare",
+    "statuette": "Statuetă",
+    "marquee": "Firmă luminoasă",
+    "platinum": "Platină",
+    "applause": "Aplauze",
+    "laureate": "Laureat",
+    "bunting": "Ghirlandă",
+    "lantern": "Felinar",
+    "parade": "Paradă",
+    "daybreak": "Zori",
+    "fairground": "Iarmaroc",
+    "laurel": "Laur",
+    "tassel": "Ciucure",
+    "diploma": "Diplomă",
+    "honours": "Distincție",
+    "campus": "Campus",
+    "blush": "Roz pudrat",
+    "promise": "Promisiune",
+    "pearl": "Perlă",
+    "vow": "Legământ",
+    "bouquet": "Buchet",
+    "moon": "Lună",
+    "cotton": "Bumbac",
+    "mint": "Mentă",
+    "apricot": "Caisă",
+    "starlight": "Lumină de noapte",
+    "hearth": "Vatră",
+    "doorstep": "Prag",
+    "brick": "Cărămidă",
+    "linen": "In",
+    "woodgrain": "Fibră de lemn",
+    "keynote": "Prezentare",
+    "graphite": "Grafit",
+    "signal": "Semnal",
+    "grid": "Grilă",
+    "forum": "Forum",
+    "spotlight": "Reflector",
+    "spectrum": "Spectru",
+    "chrome": "Crom",
+    "prototype": "Prototip",
+    "neon": "Neon",
+    "gilded": "Aurit",
+    "sapphire": "Safir",
+    "patron": "Mecena",
+    "orchid": "Orhidee",
+    "onyx": "Onix",
+    "album": "Album",
+    "postscript": "Post-scriptum",
+    "heritage": "Moștenire",
+    "copper": "Cupru",
+    "evergreen": "Verde peren",
+    "orchard": "Livadă",
+    "gingham": "Carouri",
+    "meadow": "Pajiște",
+    "citrus": "Citrice",
+    "lakeside": "La malul lacului",
+    "confetti": "Confetti",
+    "candle": "Lumânări",
+    "sorbet": "Sorbet",
+    "disco": "Disco",
+    "sprinkles": "Bombonele",
+    "silk": "Mătase",
+    "olive": "Măslin",
+    "heirloom": "De familie",
+    "porcelain": "Porțelan",
+    "vellum": "Pergament",
+    "cloud": "Nor",
+    "lullaby": "Cântec de leagăn",
+    "nest": "Cuib",
+    "lamb": "Miel",
+    "petal": "Petală",
+    "champagne": "Șampanie",
+    "fireworks": "Artificii",
+    "frost": "Chiciură",
+    "emerald": "Smarald",
+    "velvet": "Catifea",
+    "compass": "Busolă",
+    "sunrise": "Răsărit",
+    "atlas": "Atlas",
+    "horizon": "Orizont",
+    "desert": "Deșert",
+    "railway": "Cale ferată",
+    "postmark": "Ștampilă poștală",
+    "summit": "Vârf de munte",
+    "harbour": "Port",
+    "caravan": "Caravană",
+    "paper": "Hârtie",
+    "ink": "Cerneală",
+    "terrace": "Terasă",
+    "studio": "Studio",
+    "gallery": "Galerie",
+    "linen-comanesti-diamond": "Pânză de casă închisă",
+    "linen-rasinari-woven": "Lână nevopsită",
+    "linen-dolj-woven": "Țesătură prună",
+    "linen-muscel-altita-grid": "Pânză de in nealbită"
   },
   "pieces": {
     "invitation": "Invitație A5",
@@ -128,7 +511,13 @@
     "savedSame": "Nu s-a schimbat nimic față de versiunea {version}.",
     "readOnly": "Poți vedea papetăria, dar numai organizatorii o pot modifica.",
     "unsaved": "Ai modificări nesalvate. Proba de mai sus le arată deja.",
-    "aiLabel": "generat cu AI"
+    "aiLabel": "generat cu AI",
+    "rangeLegend": "Colecția",
+    "designCount": "{count} modele",
+    "starterLabel": "Text de pornire",
+    "starterHint": "Completează textul invitației cu o formulare gata făcută pentru acest fel de ocazie. O poți schimba după aceea.",
+    "starterNone": "Alege un text de pornire…",
+    "motifNote": "Desenul mic de pe aceste modele se potrivește cu felul ocaziei."
   },
   "preview": {
     "title": "Proba",
@@ -229,5 +618,417 @@
     "printNoteFlood": "Fondul colorat se tipărește până în margine (bleed 3 mm).",
     "printNoteStock": "Fără fond tipărit: se recomandă carton fildeș, 300 g/m².",
     "slugBleed": "bleed {mm} mm"
+  },
+  "ranges": {
+    "house": {
+      "name": "Modelele casei",
+      "blurb": "Cele opt modele tipografice ale noastre, desenate pentru EventDesk."
+    },
+    "embroidery": {
+      "name": "Broderii și țesături românești",
+      "blurb": "Chenare desenate cusătură cu cusătură după broderii și țesături românești documentate, pe pânză."
+    },
+    "featured": {
+      "name": "Colecția de autor",
+      "blurb": "Șase ediții cu desen propriu, în paletele ocaziei tale."
+    },
+    "rustic": {
+      "name": "Rustic",
+      "blurb": "Modele calde, lucrate de mână, printre care patru repere de meșteșug regional."
+    },
+    "traditional": {
+      "name": "Tradițional",
+      "blurb": "Modele solemne cu ornament regional din Maramureș, Bucovina, Oltenia și Transilvania."
+    },
+    "collection": {
+      "name": "Toate compozițiile",
+      "blurb": "Douăzeci de așezări în pagină, în paletele ocaziei tale sau în paletele de studio."
+    }
+  },
+  "starters": {
+    "zi_de_nastere": {
+      "frame": "Te așteptăm cu tort și un toast pentru încă un an.",
+      "arch": "Te așteptăm cu tort și un toast pentru încă un an.",
+      "seal": "Te așteptăm cu tort și un toast pentru încă un an.",
+      "ribbon": "Te așteptăm cu tort și un toast pentru încă un an.",
+      "band": "Te așteptăm cu tort și un toast pentru încă un an.",
+      "ticket": "Te așteptăm cu tort și un toast pentru încă un an. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Te așteptăm cu tort și un toast pentru încă un an. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te așteptăm cu tort și un toast pentru încă un an. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te așteptăm cu tort și un toast pentru încă un an. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Te așteptăm cu tort și un toast pentru încă un an. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "zi_de_nastere_copii": {
+      "frame": "Vino să ne jucăm, să râdem și să mâncăm tort!",
+      "arch": "Vino să ne jucăm, să râdem și să mâncăm tort!",
+      "seal": "Vino să ne jucăm, să râdem și să mâncăm tort!",
+      "ribbon": "Vino să ne jucăm, să râdem și să mâncăm tort!",
+      "band": "Vino să ne jucăm, să râdem și să mâncăm tort!",
+      "ticket": "Vino să ne jucăm, să râdem și să mâncăm tort! Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino să ne jucăm, să râdem și să mâncăm tort! Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino să ne jucăm, să râdem și să mâncăm tort! Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino să ne jucăm, să râdem și să mâncăm tort! Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino să ne jucăm, să râdem și să mâncăm tort! Te rugăm să ne confirmi dacă poți veni."
+    },
+    "petrecere_mireasa": {
+      "frame": "Te invităm la o după-amiază în cinstea viitoarei mirese.",
+      "arch": "Te invităm la o după-amiază în cinstea viitoarei mirese.",
+      "seal": "Te invităm la o după-amiază în cinstea viitoarei mirese.",
+      "ribbon": "Te invităm la o după-amiază în cinstea viitoarei mirese.",
+      "band": "Te invităm la o după-amiază în cinstea viitoarei mirese.",
+      "ticket": "Te invităm la o după-amiază în cinstea viitoarei mirese. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Te invităm la o după-amiază în cinstea viitoarei mirese. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te invităm la o după-amiază în cinstea viitoarei mirese. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te invităm la o după-amiază în cinstea viitoarei mirese. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Te invităm la o după-amiază în cinstea viitoarei mirese. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "reinnoire_juraminte": {
+      "frame": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună.",
+      "arch": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună.",
+      "seal": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună.",
+      "ribbon": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună.",
+      "band": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună.",
+      "ticket": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vă invităm să ne fiți alături când ne reînnoim jurămintele și să sărbătorim anii petrecuți împreună. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "dezvaluire_sex_bebelus": {
+      "frame": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină.",
+      "arch": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină.",
+      "seal": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină.",
+      "ribbon": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină.",
+      "band": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină.",
+      "ticket": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino să afli alături de noi vestea despre bebelușul care urmează să vină. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "petrecere_craciun": {
+      "frame": "Te așteptăm la căldură să sărbătorim Crăciunul împreună.",
+      "arch": "Te așteptăm la căldură să sărbătorim Crăciunul împreună.",
+      "seal": "Te așteptăm la căldură să sărbătorim Crăciunul împreună.",
+      "ribbon": "Te așteptăm la căldură să sărbătorim Crăciunul împreună.",
+      "band": "Te așteptăm la căldură să sărbătorim Crăciunul împreună.",
+      "ticket": "Te așteptăm la căldură să sărbătorim Crăciunul împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Te așteptăm la căldură să sărbătorim Crăciunul împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te așteptăm la căldură să sărbătorim Crăciunul împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te așteptăm la căldură să sărbătorim Crăciunul împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Te așteptăm la căldură să sărbătorim Crăciunul împreună. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "comemorare": {
+      "frame": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "arch": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "seal": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "ribbon": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "band": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "ticket": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "postcard": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "split": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "crest": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri.",
+      "border": "Vă invităm să ne amintim împreună de o viață dragă și să împărtășim amintiri."
+    },
+    "eveniment_networking": {
+      "frame": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune.",
+      "arch": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune.",
+      "seal": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune.",
+      "ribbon": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune.",
+      "band": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune.",
+      "ticket": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Cunoaște oameni din domeniul tău și fă-ți timp pentru conversații bune. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "cina": {
+      "frame": "Te așteptăm la masă pentru o cină și conversații pe îndelete.",
+      "arch": "Te așteptăm la masă pentru o cină și conversații pe îndelete.",
+      "seal": "Te așteptăm la masă pentru o cină și conversații pe îndelete.",
+      "ribbon": "Te așteptăm la masă pentru o cină și conversații pe îndelete.",
+      "band": "Te așteptăm la masă pentru o cină și conversații pe îndelete.",
+      "ticket": "Te așteptăm la masă pentru o cină și conversații pe îndelete. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Te așteptăm la masă pentru o cină și conversații pe îndelete. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te așteptăm la masă pentru o cină și conversații pe îndelete. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te așteptăm la masă pentru o cină și conversații pe îndelete. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Te așteptăm la masă pentru o cină și conversații pe îndelete. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "expozitie": {
+      "frame": "Vino la vernisaj să vezi expoziția în premieră.",
+      "arch": "Vino la vernisaj să vezi expoziția în premieră.",
+      "seal": "Vino la vernisaj să vezi expoziția în premieră.",
+      "ribbon": "Vino la vernisaj să vezi expoziția în premieră.",
+      "band": "Vino la vernisaj să vezi expoziția în premieră.",
+      "ticket": "Vino la vernisaj să vezi expoziția în premieră. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino la vernisaj să vezi expoziția în premieră. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino la vernisaj să vezi expoziția în premieră. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino la vernisaj să vezi expoziția în premieră. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino la vernisaj să vezi expoziția în premieră. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "concert": {
+      "frame": "Hai să ascultăm muzică live și să petrecem seara împreună.",
+      "arch": "Hai să ascultăm muzică live și să petrecem seara împreună.",
+      "seal": "Hai să ascultăm muzică live și să petrecem seara împreună.",
+      "ribbon": "Hai să ascultăm muzică live și să petrecem seara împreună.",
+      "band": "Hai să ascultăm muzică live și să petrecem seara împreună.",
+      "ticket": "Hai să ascultăm muzică live și să petrecem seara împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Hai să ascultăm muzică live și să petrecem seara împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Hai să ascultăm muzică live și să petrecem seara împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Hai să ascultăm muzică live și să petrecem seara împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Hai să ascultăm muzică live și să petrecem seara împreună. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "atelier": {
+      "frame": "Vino la un atelier practic și adu cu tine curiozitatea.",
+      "arch": "Vino la un atelier practic și adu cu tine curiozitatea.",
+      "seal": "Vino la un atelier practic și adu cu tine curiozitatea.",
+      "ribbon": "Vino la un atelier practic și adu cu tine curiozitatea.",
+      "band": "Vino la un atelier practic și adu cu tine curiozitatea.",
+      "ticket": "Vino la un atelier practic și adu cu tine curiozitatea. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino la un atelier practic și adu cu tine curiozitatea. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino la un atelier practic și adu cu tine curiozitatea. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino la un atelier practic și adu cu tine curiozitatea. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino la un atelier practic și adu cu tine curiozitatea. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "turneu_sportiv": {
+      "frame": "Adună echipa și vino la turneu.",
+      "arch": "Adună echipa și vino la turneu.",
+      "seal": "Adună echipa și vino la turneu.",
+      "ribbon": "Adună echipa și vino la turneu.",
+      "band": "Adună echipa și vino la turneu.",
+      "ticket": "Adună echipa și vino la turneu. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Adună echipa și vino la turneu. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Adună echipa și vino la turneu. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Adună echipa și vino la turneu. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Adună echipa și vino la turneu. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "pensionare": {
+      "frame": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează.",
+      "arch": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează.",
+      "seal": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează.",
+      "ribbon": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează.",
+      "band": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează.",
+      "ticket": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Te invităm să sărbătorim o carieră remarcabilă și să ridicăm un pahar pentru etapa care urmează. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "festivitate_premii": {
+      "frame": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an.",
+      "arch": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an.",
+      "seal": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an.",
+      "ribbon": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an.",
+      "band": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an.",
+      "ticket": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino să îi sărbătorim pe cei din spatele reușitelor acestui an. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "festival": {
+      "frame": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună.",
+      "arch": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună.",
+      "seal": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună.",
+      "ribbon": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună.",
+      "band": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună.",
+      "ticket": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "postcard": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "border": "Vino la festival pentru spectacole, descoperiri și timp petrecut împreună. Te rugăm să ne confirmi dacă poți veni."
+    },
+    "absolvire": {
+      "frame": "Sărbătorește alături de noi încheierea unui capitol și începutul altuia.",
+      "arch": "Te invităm să ridicăm un pahar în cinstea absolventului și a muncii din spatele acestui moment.",
+      "seal": "Sărbătorește alături de noi încheierea unui capitol și începutul altuia. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Te invităm să ridicăm un pahar în cinstea absolventului și a muncii din spatele acestui moment. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Sărbătorește alături de noi încheierea unui capitol și începutul altuia.",
+      "ticket": "Te invităm să ridicăm un pahar în cinstea absolventului și a muncii din spatele acestui moment.",
+      "postcard": "Sărbătorește alături de noi încheierea unui capitol și începutul altuia. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te invităm să ridicăm un pahar în cinstea absolventului și a muncii din spatele acestui moment. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Sărbătorește alături de noi încheierea unui capitol și începutul altuia.",
+      "border": "Te invităm să ridicăm un pahar în cinstea absolventului și a muncii din spatele acestui moment."
+    },
+    "logodna": {
+      "frame": "Ne-am logodit! Vino să sărbătorim vestea alături de cei dragi.",
+      "arch": "Te invităm să ridicăm un pahar pentru logodna noastră și pentru planurile pe care le facem împreună.",
+      "seal": "Ne-am logodit! Vino să sărbătorim vestea alături de cei dragi. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Te invităm să ridicăm un pahar pentru logodna noastră și pentru planurile pe care le facem împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Ne-am logodit! Vino să sărbătorim vestea alături de cei dragi.",
+      "ticket": "Te invităm să ridicăm un pahar pentru logodna noastră și pentru planurile pe care le facem împreună.",
+      "postcard": "Ne-am logodit! Vino să sărbătorim vestea alături de cei dragi. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te invităm să ridicăm un pahar pentru logodna noastră și pentru planurile pe care le facem împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Ne-am logodit! Vino să sărbătorim vestea alături de cei dragi.",
+      "border": "Te invităm să ridicăm un pahar pentru logodna noastră și pentru planurile pe care le facem împreună."
+    },
+    "petrecere_bebelus": {
+      "frame": "Hai să întâmpinăm bebelușul care urmează să vină, cu o după-amiază petrecută împreună.",
+      "arch": "Vino să sărbătorim familia înainte de sosirea celui mic.",
+      "seal": "Hai să întâmpinăm bebelușul care urmează să vină, cu o după-amiază petrecută împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Vino să sărbătorim familia înainte de sosirea celui mic. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Hai să întâmpinăm bebelușul care urmează să vină, cu o după-amiază petrecută împreună.",
+      "ticket": "Vino să sărbătorim familia înainte de sosirea celui mic.",
+      "postcard": "Hai să întâmpinăm bebelușul care urmează să vină, cu o după-amiază petrecută împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino să sărbătorim familia înainte de sosirea celui mic. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Hai să întâmpinăm bebelușul care urmează să vină, cu o după-amiază petrecută împreună.",
+      "border": "Vino să sărbătorim familia înainte de sosirea celui mic."
+    },
+    "inaugurare_casa": {
+      "frame": "Aproape toate cutiile sunt desfăcute. Vino să vezi noua noastră casă și să bem ceva împreună.",
+      "arch": "Te așteptăm în noua noastră locuință la o petrecere de casă nouă.",
+      "seal": "Aproape toate cutiile sunt desfăcute. Vino să vezi noua noastră casă și să bem ceva împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Te așteptăm în noua noastră locuință la o petrecere de casă nouă. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Aproape toate cutiile sunt desfăcute. Vino să vezi noua noastră casă și să bem ceva împreună.",
+      "ticket": "Te așteptăm în noua noastră locuință la o petrecere de casă nouă.",
+      "postcard": "Aproape toate cutiile sunt desfăcute. Vino să vezi noua noastră casă și să bem ceva împreună. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Te așteptăm în noua noastră locuință la o petrecere de casă nouă. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Aproape toate cutiile sunt desfăcute. Vino să vezi noua noastră casă și să bem ceva împreună.",
+      "border": "Te așteptăm în noua noastră locuință la o petrecere de casă nouă."
+    },
+    "conferinta": {
+      "frame": "Te invităm la prezentări și discuții despre inițiativele care ne modelează domeniul.",
+      "arch": "Rezervă timp pentru o conferință cu colegi, invitați și perspective noi.",
+      "seal": "Te invităm la prezentări și discuții despre inițiativele care ne modelează domeniul. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Rezervă timp pentru o conferință cu colegi, invitați și perspective noi. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Te invităm la prezentări și discuții despre inițiativele care ne modelează domeniul.",
+      "ticket": "Rezervă timp pentru o conferință cu colegi, invitați și perspective noi.",
+      "postcard": "Te invităm la prezentări și discuții despre inițiativele care ne modelează domeniul. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Rezervă timp pentru o conferință cu colegi, invitați și perspective noi. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Te invităm la prezentări și discuții despre inițiativele care ne modelează domeniul.",
+      "border": "Rezervă timp pentru o conferință cu colegi, invitați și perspective noi."
+    },
+    "lansare": {
+      "frame": "Fii printre primii care văd la ce am lucrat. Te așteptăm la lansare.",
+      "arch": "Vino la prezentarea în premieră și cunoaște echipa din spatele proiectului.",
+      "seal": "Fii printre primii care văd la ce am lucrat. Te așteptăm la lansare. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Vino la prezentarea în premieră și cunoaște echipa din spatele proiectului. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Fii printre primii care văd la ce am lucrat. Te așteptăm la lansare.",
+      "ticket": "Vino la prezentarea în premieră și cunoaște echipa din spatele proiectului.",
+      "postcard": "Fii printre primii care văd la ce am lucrat. Te așteptăm la lansare. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino la prezentarea în premieră și cunoaște echipa din spatele proiectului. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Fii printre primii care văd la ce am lucrat. Te așteptăm la lansare.",
+      "border": "Vino la prezentarea în premieră și cunoaște echipa din spatele proiectului."
+    },
+    "gala_caritabila": {
+      "frame": "Vă invităm la o seară în sprijinul unei cauze importante pentru comunitatea noastră.",
+      "arch": "Vă invităm la o gală caritabilă pentru a cunoaște oamenii implicați și a susține următorii pași.",
+      "seal": "Vă invităm la o seară în sprijinul unei cauze importante pentru comunitatea noastră. Vă rugăm să ne confirmați dacă puteți participa.",
+      "ribbon": "Vă invităm la o gală caritabilă pentru a cunoaște oamenii implicați și a susține următorii pași. Vă rugăm să ne confirmați dacă puteți participa.",
+      "band": "Vă invităm la o seară în sprijinul unei cauze importante pentru comunitatea noastră.",
+      "ticket": "Vă invităm la o gală caritabilă pentru a cunoaște oamenii implicați și a susține următorii pași.",
+      "postcard": "Vă invităm la o seară în sprijinul unei cauze importante pentru comunitatea noastră. Vă rugăm să ne confirmați dacă puteți participa.",
+      "split": "Vă invităm la o gală caritabilă pentru a cunoaște oamenii implicați și a susține următorii pași. Vă rugăm să ne confirmați dacă puteți participa.",
+      "crest": "Vă invităm la o seară în sprijinul unei cauze importante pentru comunitatea noastră.",
+      "border": "Vă invităm la o gală caritabilă pentru a cunoaște oamenii implicați și a susține următorii pași."
+    },
+    "reuniune": {
+      "frame": "Hai să ne revedem cu toții. Adu o poveste și fă-ți timp să stăm la povești.",
+      "arch": "Vino la reuniune să revezi chipuri cunoscute și să depănăm câteva amintiri.",
+      "seal": "Hai să ne revedem cu toții. Adu o poveste și fă-ți timp să stăm la povești. Te rugăm să ne confirmi dacă poți veni.",
+      "ribbon": "Vino la reuniune să revezi chipuri cunoscute și să depănăm câteva amintiri. Te rugăm să ne confirmi dacă poți veni.",
+      "band": "Hai să ne revedem cu toții. Adu o poveste și fă-ți timp să stăm la povești.",
+      "ticket": "Vino la reuniune să revezi chipuri cunoscute și să depănăm câteva amintiri.",
+      "postcard": "Hai să ne revedem cu toții. Adu o poveste și fă-ți timp să stăm la povești. Te rugăm să ne confirmi dacă poți veni.",
+      "split": "Vino la reuniune să revezi chipuri cunoscute și să depănăm câteva amintiri. Te rugăm să ne confirmi dacă poți veni.",
+      "crest": "Hai să ne revedem cu toții. Adu o poveste și fă-ți timp să stăm la povești.",
+      "border": "Vino la reuniune să revezi chipuri cunoscute și să depănăm câteva amintiri."
+    },
+    "picnic": {
+      "frame": "Ia o pătură și vino la un picnic în aer liber.",
+      "arch": "Hai să luăm prânzul și să petrecem după-amiaza afară.",
+      "seal": "Adu ceva bun de împărțit. Noi găsim un loc la umbră.",
+      "ribbon": "Te așteptăm cu gustări, jocuri pe iarbă și timp de stat la povești.",
+      "band": "Ne întâlnim la picnic. Adu o pătură și ceva de băut.",
+      "ticket": "Ia o pătură și vino la un picnic în aer liber. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Hai să luăm prânzul și să petrecem după-amiaza afară. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Adu ceva bun de împărțit. Noi găsim un loc la umbră. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Te așteptăm cu gustări, jocuri pe iarbă și timp de stat la povești. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Ne întâlnim la picnic. Adu o pătură și ceva de băut. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    },
+    "aniversare": {
+      "frame": "Hai să sărbătorim împreună, cu tort și un toast pentru încă un an.",
+      "arch": "Vino să marcăm încă un an alături de oamenii dragi.",
+      "seal": "Păstrează loc pentru tort. Ne-ar bucura să sărbătorim cu tine.",
+      "ribbon": "Te invităm la o aniversare cu muzică și oameni dragi.",
+      "band": "Hai să facem din această aniversare o amintire frumoasă.",
+      "ticket": "Hai să sărbătorim împreună, cu tort și un toast pentru încă un an. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Vino să marcăm încă un an alături de oamenii dragi. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Păstrează loc pentru tort. Ne-ar bucura să sărbătorim cu tine. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Te invităm la o aniversare cu muzică și oameni dragi. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Hai să facem din această aniversare o amintire frumoasă. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    },
+    "nunta": {
+      "frame": "Împreună cu familiile noastre, vă invităm să sărbătoriți alături de noi căsătoria noastră.",
+      "arch": "Vă așteptăm să ne fiți alături la cununie și la petrecerea care urmează.",
+      "seal": "Ne-am bucura să petrecem ziua nunții împreună cu voi.",
+      "ribbon": "Vă invităm la ceremonia de căsătorie și la o seară alături de cei dragi.",
+      "band": "Cu bucurie, vă invităm să ne fiți martori la cununie și să sărbătorim împreună.",
+      "ticket": "Împreună cu familiile noastre, vă invităm să sărbătoriți alături de noi căsătoria noastră. Vă rugăm să ne confirmați dacă puteți veni.",
+      "postcard": "Vă așteptăm să ne fiți alături la cununie și la petrecerea care urmează. Vă rugăm să ne confirmați dacă puteți veni.",
+      "split": "Ne-am bucura să petrecem ziua nunții împreună cu voi. Vă rugăm să ne confirmați dacă puteți veni.",
+      "crest": "Vă invităm la ceremonia de căsătorie și la o seară alături de cei dragi. Vă rugăm să ne confirmați dacă puteți veni.",
+      "border": "Cu bucurie, vă invităm să ne fiți martori la cununie și să sărbătorim împreună. Vă rugăm să ne confirmați dacă puteți veni."
+    },
+    "botez": {
+      "frame": "Împreună cu familia, vă invităm să împărtășiți bucuria botezului copilului nostru.",
+      "arch": "Vă așteptăm la botez și la întâlnirea de familie care urmează.",
+      "seal": "Ne-ar bucura să ne fiți alături în această zi specială pentru copilul nostru.",
+      "ribbon": "Veniți să sărbătorim botezul celui mai nou membru al familiei.",
+      "band": "Vă invităm la slujba de botez, alături de familie și prietenii dragi.",
+      "ticket": "Împreună cu familia, vă invităm să împărtășiți bucuria botezului copilului nostru. Vă rugăm să ne confirmați dacă puteți veni.",
+      "postcard": "Vă așteptăm la botez și la întâlnirea de familie care urmează. Vă rugăm să ne confirmați dacă puteți veni.",
+      "split": "Ne-ar bucura să ne fiți alături în această zi specială pentru copilul nostru. Vă rugăm să ne confirmați dacă puteți veni.",
+      "crest": "Veniți să sărbătorim botezul celui mai nou membru al familiei. Vă rugăm să ne confirmați dacă puteți veni.",
+      "border": "Vă invităm la slujba de botez, alături de familie și prietenii dragi. Vă rugăm să ne confirmați dacă puteți veni."
+    },
+    "revelion": {
+      "frame": "Ridică un pahar cu noi la numărătoarea inversă de Anul Nou.",
+      "arch": "Te așteptăm la petrecerea de Revelion și la un toast la miezul nopții.",
+      "seal": "Vino să încheiem anul dansând și să-l întâmpinăm împreună pe următorul.",
+      "ribbon": "Hai să petrecem împreună ultima seară din an.",
+      "band": "Te invităm să numărăm împreună ultimele secunde până la miezul nopții.",
+      "ticket": "Ridică un pahar cu noi la numărătoarea inversă de Anul Nou. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Te așteptăm la petrecerea de Revelion și la un toast la miezul nopții. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Vino să încheiem anul dansând și să-l întâmpinăm împreună pe următorul. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Hai să petrecem împreună ultima seară din an. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Te invităm să numărăm împreună ultimele secunde până la miezul nopții. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    },
+    "voiaj_solo": {
+      "frame": "Plec într-o călătorie pe cont propriu. Hai la o cafea înainte de plecare.",
+      "arch": "Te aștept la o mică întâlnire înainte să pornesc singur la drum.",
+      "seal": "Mi-ar plăcea să ne vedem înainte să pornesc la drum pe cont propriu.",
+      "ribbon": "Te invit la un pahar înainte să plec în călătorie.",
+      "band": "Hai să facem schimb de sfaturi de călătorie înainte să închid valiza.",
+      "ticket": "Plec într-o călătorie pe cont propriu. Hai la o cafea înainte de plecare. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Te aștept la o mică întâlnire înainte să pornesc singur la drum. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Mi-ar plăcea să ne vedem înainte să pornesc la drum pe cont propriu. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Te invit la un pahar înainte să plec în călătorie. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Hai să facem schimb de sfaturi de călătorie înainte să închid valiza. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    },
+    "voiaj_grup": {
+      "frame": "Vino cu noi în călătorie. Hai să strângem grupul și să pornim la drum.",
+      "arch": "Păstrează câteva zile libere în calendar pentru călătoria noastră.",
+      "seal": "Te invităm să vii cu grupul în următoarea aventură.",
+      "ribbon": "Fă-ți bagajul și vino cu noi într-o călătorie cu prietenii.",
+      "band": "Plănuim o escapadă în grup și ne-ar bucura să vii cu noi.",
+      "ticket": "Vino cu noi în călătorie. Hai să strângem grupul și să pornim la drum. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Păstrează câteva zile libere în calendar pentru călătoria noastră. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Te invităm să vii cu grupul în următoarea aventură. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Fă-ți bagajul și vino cu noi într-o călătorie cu prietenii. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Plănuim o escapadă în grup și ne-ar bucura să vii cu noi. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    },
+    "blank": {
+      "frame": "Te invităm să ni te alături. Ne-ar bucura să te vedem acolo.",
+      "arch": "Vino să petrecem timp împreună, în compania prietenilor.",
+      "seal": "Rezervă data și vino să petrecem puțin timp împreună.",
+      "ribbon": "Adunăm oamenii dragi și ne-am bucura să fii alături de noi.",
+      "band": "Abia așteptăm să te primim și să petrecem împreună această ocazie.",
+      "ticket": "Te invităm să ni te alături. Ne-ar bucura să te vedem acolo. Te rugăm să ne spui dacă poți veni.",
+      "postcard": "Vino să petrecem timp împreună, în compania prietenilor. Te rugăm să ne confirmi dacă ni te alături.",
+      "split": "Rezervă data și vino să petrecem puțin timp împreună. Spune-ne dacă putem conta pe prezența ta.",
+      "crest": "Adunăm oamenii dragi și ne-am bucura să fii alături de noi. Ne-ar bucura să aflăm dacă poți veni.",
+      "border": "Abia așteptăm să te primim și să petrecem împreună această ocazie. Te rugăm să răspunzi pentru a-ți rezerva locul."
+    }
   }
 }

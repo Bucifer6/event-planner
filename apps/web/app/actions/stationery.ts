@@ -1,7 +1,7 @@
 "use server";
 
 import { markStationeryProofed, previewStationery, saveStationeryVersion, setDigitalInvitation } from "@ed/core/stationery";
-import { svgDataUri, STATIONERY_PIECES } from "@ed/core/stationerykit";
+import { DESIGN_KEYS, svgDataUri, STATIONERY_PIECES } from "@ed/core/stationerykit";
 import { zId } from "@ed/shared/zod";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -13,11 +13,12 @@ import { action } from "@/lib/action";
 const path = (occasionId: string) => `/occasions/${occasionId}/stationery`;
 const text = z.object({ value: z.string().max(1000), aiOriginal: z.string().max(1000).nullish() });
 const draft = {
-  designKey: z.enum(["classic", "modern", "monogram", "botanical", "minimal", "nocturne", "botez", "petrecere"]),
+  designKey: z.enum(DESIGN_KEYS as [string, ...string[]]),
   colourwayKey: z.string().min(1).max(40),
   locale: z.enum(["ro", "en"]),
   texts: z.record(z.string().max(40), text),
   qrOnInvitation: z.boolean().optional(),
+  occasionKind: z.string().max(40).regex(/^[a-z_]+$/).optional(),
 };
 
 /** The live proof of an unsaved draft: one piece, as a data: image. Stores nothing. */

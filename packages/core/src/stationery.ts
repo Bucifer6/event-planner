@@ -24,8 +24,10 @@ import { assertOccasionWritable } from "./lifecycle";
 import { onOccasionPurge } from "./occasions";
 import { listHouseholdQrs, qrMatrix } from "./qr";
 import { getSeatingRoster, getSeatingSummary } from "./seating";
+import { KIND_PALETTES, STARTER_KEYS, type StarterKey } from "./stationerycollections";
 import {
   BLEED_MM,
+  colourwaysFor,
   DESIGN_KEYS,
   drawSceneOnPdf,
   getColourway,
@@ -51,6 +53,8 @@ import { inTx } from "./tx";
 //   getStationeryEditor(ctx, occasionId)        everything the designer page shows
 //   getStationerySummary(ctx, occasionId)       READ API for other domains / MCP get tools (no SVG)
 //   previewStationery(ctx, draft)               SVG proofs of an UNSAVED draft (nothing stored)
+//   stationeryThumbnail(ctx, occasionId, key)   a design's gallery thumbnail (artwork + motif, no text)
+//   getStarterWordings(kind, locale)            the ten starter wordings of an occasion kind
 //   saveStationeryVersion(ctx, input)           every save is a new immutable version
 //   markStationeryProofed(ctx, …)               "Am verificat proba" — managers only
 //   buildStationeryProofPdf(ctx, …)             the proof to read: every piece, stamped PROBĂ
@@ -103,6 +107,8 @@ const draftInput = z.object({
   locale: zLocale,
   texts: z.record(z.string(), textInput),
   qrOnInvitation: z.boolean().optional(),
+  /** The occasion's kind, for the collection designs' motif in an unsaved preview (saved versions read it from the occasion). */
+  occasionKind: z.string().max(40).regex(/^[a-z_]+$/).optional(),
 });
 export type StationeryDraftInput = z.input<typeof draftInput>;
 
@@ -177,8 +183,21 @@ export function getWordingPreset(kind: StationeryWordingKind, locale: Stationery
   return Object.fromEntries(PRESET_FIELDS.map((f) => [f, translate(locale, `stationery.presets.${kind}.${f}`)])) as WordingPreset;
 }
 
-const presetKindFor = (occasionKind: string): StationeryWordingKind => (occasionKind === "nunta" ? "nunta" : occasionKind === "botez" ? "botez" : "aniversare");
-const designFor = (occasionKind: string): DesignKey => (occasionKind === "nunta" ? "classic" : occasionKind === "botez" ? "botez" : occasionKind === "aniversare" || occasionKind === "revelion" || occasionKind === "picnic" ? "petrecere" : "minimal");
+const WEDDING_LIKE = new Set(["nunta", "logodna", "reinnoire_juraminte"]);
+const CHRISTENING_LIKE = new Set(["botez", "petrecere_bebelus", "dezvaluire_sex_bebelus"]);
+const PARTY_LIKE = new Set(["aniversare", "revelion", "picnic", "zi_de_nastere", "zi_de_nastere_copii", "petrecere_mireasa", "petrecere_craciun", "inaugurare_casa", "absolvire", "pensionare", "reuniune", "festival"]);
+const FORMAL = new Set(["conferinta", "lansare", "gala_caritabila", "expozitie", "concert", "atelier", "turneu_sportiv", "festivitate_premii", "eveniment_networking", "cina"]);
+// an engagement is the couple's own party: it takes the celebration wording, with the wedding design
+const presetKindFor = (occasionKind: string): StationeryWordingKind => (WEDDING_LIKE.has(occasionKind) && occasionKind !== "logodna" ? "nunta" : CHRISTENING_LIKE.has(occasionKind) ? "botez" : "aniversare");
+const designFor = (occasionKind: string): DesignKey =>
+  WEDDING_LIKE.has(occasionKind) ? "classic" : CHRISTENING_LIKE.has(occasionKind) ? "botez" : PARTY_LIKE.has(occasionKind) ? "petrecere" : FORMAL.has(occasionKind) ? "modern" : "minimal";
+
+/** The ten starter wordings an occasion kind offers (any kind; unknown kinds get the general set). */
+export function getStarterWordings(occasionKind: string, locale: StationeryLocale): Array<{ key: StarterKey; text: string }> {
+  const kind = STARTER_KINDS.has(occasionKind) ? occasionKind : "blank";
+  return STARTER_KEYS.map((key) => ({ key, text: translate(locale, `stationery.starters.${kind}.${key}`) }));
+}
+const STARTER_KINDS = new Set(Object.keys(KIND_PALETTES));
 
 type OccasionFacts = Pick<typeof occasions.$inferSelect, "title" | "kind" | "startsAt" | "timezone" | "venueName" | "venueAddress">;
 
@@ -187,6 +206,8 @@ const capitalise = (s: string) => (s ? s[0]!.toLocaleUpperCase("ro") + s.slice(1
 /** The texts a new set starts from: the occasion's own facts and the preset for its kind. */
 export function defaultStationeryTexts(o: OccasionFacts, locale: StationeryLocale): StationeryTexts {
   const preset = getWordingPreset(presetKindFor(o.kind), locale);
+  // the three preset families have their own wording; every other kind opens on its first starter
+  const ownWording = o.kind === "nunta" || o.kind === "botez" || o.kind === "aniversare";
   let time = "";
   if (o.startsAt) {
     const hm = formatTime(o.startsAt, locale, o.timezone);
@@ -195,7 +216,7 @@ export function defaultStationeryTexts(o: OccasionFacts, locale: StationeryLocal
   const values: Record<StationeryTextField, string> = {
     kicker: preset.kicker,
     names: o.title,
-    wording: preset.wording,
+    wording: ownWording ? preset.wording : getStarterWordings(o.kind, locale)[0]!.text,
     date: o.startsAt ? capitalise(formatWeekdayDate(o.startsAt, locale, o.timezone)) : "",
     time,
     venue: o.venueName ?? "",
@@ -251,7 +272,7 @@ export async function getStationeryEditor(ctx: Ctx, occasionId: string): Promise
     canManage: isManager(member) && ctx.actor.kind !== "mcp",
     current: rows[0] ?? null,
     versions: rows.map((r) => ({ version: r.version, designKey: r.designKey, colourwayKey: r.colourwayKey, createdAt: r.createdAt, proofedAt: r.proofedAt })),
-    defaults: { designKey, colourwayKey: getDesign(designKey).colourways[0]!, locale, texts: defaultStationeryTexts(o, locale) },
+    defaults: { designKey, colourwayKey: colourwaysFor(getDesign(designKey), o.kind)[0]!, locale, texts: defaultStationeryTexts(o, locale) },
     digitalVersion: set?.digitalVersion ?? null,
     fontFamily: stationeryFontFamily(),
   };
@@ -300,7 +321,7 @@ const SAMPLE_EXTRA = (locale: StationeryLocale): PieceExtra => ({
 
 function previewOf(draft: z.output<typeof draftInput>, texts: StationeryTexts, pieces: readonly PieceKind[]): StationeryPreview[] {
   return pieces.map((piece) => {
-    const scene = layoutPiece({ design: draft.designKey, colourway: draft.colourwayKey, piece, texts: kitTexts(texts), extra: SAMPLE_EXTRA(draft.locale) });
+    const scene = layoutPiece({ design: draft.designKey, colourway: draft.colourwayKey, piece, texts: kitTexts(texts), extra: SAMPLE_EXTRA(draft.locale), occasionKind: draft.occasionKind });
     const spec = PIECES[piece];
     return { piece, svg: sceneToSvg(scene, { title: translate(draft.locale, `stationery.pieces.${pieceKey(piece)}`) }), widthMm: spec.widthMm, heightMm: spec.heightMm, fit: scene.fit, truncated: scene.truncated };
   });
@@ -321,12 +342,29 @@ export async function previewStationery(ctx: Ctx, input: StationeryDraftInput & 
   return previewOf(draft, texts, pieces);
 }
 
+const EMPTY_TEXTS: KitTexts = { kicker: "", names: "", wording: "", date: "", time: "", venue: "", address: "", rsvp: "", saveTheDate: "", menuTitle: "", menuBody: "", thanks: "" };
+
+/**
+ * A design's thumbnail for the designer's gallery: the invitation sheet with its artwork and
+ * the occasion kind's motif, no text, in the first colourway the design offers this occasion.
+ * Planning members; nothing personal is drawn.
+ */
+export async function stationeryThumbnail(ctx: Ctx, occasionId: string, designKey: string): Promise<string> {
+  await requireMember(ctx, occasionId, { roles: PLANNING_ROLES });
+  if (!(DESIGN_KEYS as readonly string[]).includes(designKey)) throw new AppError("NOT_FOUND", "common.errors.NOT_FOUND");
+  const o = await loadOccasion(ctx, occasionId);
+  const design = getDesign(designKey);
+  const scene = layoutPiece({ design: designKey, colourway: colourwaysFor(design, o.kind)[0], piece: "invitation", texts: EMPTY_TEXTS, occasionKind: o.kind });
+  return sceneToSvg(scene, { width: 148 });
+}
+
 /** SVG proofs of a SAVED version (the page's first paint, the version list). */
 export async function renderStationeryVersion(ctx: Ctx, occasionId: string, version?: number | null, pieces: readonly PieceKind[] = STATIONERY_PIECES): Promise<StationeryPreview[]> {
   await requireMember(ctx, occasionId, { roles: PLANNING_ROLES });
   const row = await loadVersion(ctx, occasionId, version);
   if (!row) throw new AppError("NOT_FOUND", "common.errors.NOT_FOUND");
-  return previewOf({ designKey: row.designKey as DesignKey, colourwayKey: row.colourwayKey, locale: row.locale, texts: {}, qrOnInvitation: row.qrOnInvitation }, row.texts, pieces);
+  const o = await loadOccasion(ctx, occasionId);
+  return previewOf({ designKey: row.designKey as DesignKey, colourwayKey: row.colourwayKey, locale: row.locale, texts: {}, qrOnInvitation: row.qrOnInvitation, occasionKind: o.kind }, row.texts, pieces);
 }
 
 /* ── Writes ────────────────────────────────────────────────────────────── */
@@ -349,7 +387,8 @@ export async function saveStationeryVersion(ctx: Ctx, input: SaveStationeryInput
   const data = saveInput.parse(input);
   const accountId = await manage(ctx, data.occasionId);
   const design = getDesign(data.designKey);
-  if (!design.colourways.includes(data.colourwayKey)) throw new AppError("VALIDATION", "common.errors.VALIDATION", { fieldErrors: { colourwayKey: ["stationery.errors.colourway"] } });
+  const occasion = await loadOccasion(ctx, data.occasionId);
+  if (!colourwaysFor(design, occasion.kind).includes(data.colourwayKey)) throw new AppError("VALIDATION", "common.errors.VALIDATION", { fieldErrors: { colourwayKey: ["stationery.errors.colourway"] } });
   return inTx(ctx, async (tx) => {
     // one writer at a time per occasion: the set row is the lock
     await tx.db.insert(stationerySets).values({ occasionId: data.occasionId }).onConflictDoNothing();
@@ -520,7 +559,8 @@ export async function listPlaceCards(ctx: Ctx, occasionId: string, locale: Stati
 
 async function scenesFor(ctx: Ctx, row: StationeryVersion, pieces: readonly PieceKind[], opts: { personalise: boolean }): Promise<Array<{ piece: PieceKind; scene: Scene }>> {
   const texts = kitTexts(row.texts);
-  const base = { design: row.designKey, colourway: row.colourwayKey, texts };
+  const o = await loadOccasion(ctx, row.occasionId);
+  const base = { design: row.designKey, colourway: row.colourwayKey, texts, occasionKind: o.kind };
   const out: Array<{ piece: PieceKind; scene: Scene }> = [];
   const tableWord = translate(row.locale, "stationery.pieces.tableWord");
   for (const piece of pieces) {
