@@ -58,6 +58,8 @@ import {
   assignSeats,
   attachVenueSpace,
   createOwnSpace,
+  saveOwnRoomDrawing,
+  updateSpaceModel,
   getFitChecks,
   getGuestSeat,
   getGuestSpaceView,
@@ -572,6 +574,99 @@ describe("space model in the plan (V4–V6)", () => {
     await addTable(planner.ctx, { occasionId: occ2, custom: { name: "Masă lungă", shape: "rect", widthMm: 3000, lengthMm: 900, seats: 10 }, x: 5000, y: 4000 });
     fit = (await getFitChecks(planner.ctx, occ2))!;
     expect(fit.base.status).toBe("fits");
+  });
+
+  it("a drawn room replaces the rectangle: its shape drives the fit check; only members of an own space can draw it", async () => {
+    const planner = await mkAccount();
+    const stranger = await mkAccount();
+    const occ = await mkOccasion(planner.id);
+    await createOwnSpace(planner.ctx, { occasionId: occ, name: "Salon în L", widthMm: 12_000, lengthMm: 10_000 });
+    // an L: the top-right 6 × 5 m is not part of the room
+    const L = [
+      { x: 0, y: 0 },
+      { x: 6000, y: 0 },
+      { x: 6000, y: 5000 },
+      { x: 12_000, y: 5000 },
+      { x: 12_000, y: 10_000 },
+      { x: 0, y: 10_000 },
+    ];
+    expect(await code(saveOwnRoomDrawing(stranger.ctx, { occasionId: occ, areas: [{ id: "a", name: null, points: L }] }))).toMatch(/NOT_FOUND|FORBIDDEN/);
+    const bow = [{ x: 0, y: 0 }, { x: 4000, y: 4000 }, { x: 4000, y: 0 }, { x: 0, y: 4000 }];
+    expect(await key(saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "a", name: null, points: bow }] }))).toBe("space.draw.errors.crossing");
+    const tiny = [{ x: 0, y: 0 }, { x: 500, y: 0 }, { x: 500, y: 500 }];
+    expect(await key(saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "a", name: null, points: tiny }] }))).toBe("space.draw.errors.tooSmall");
+
+    await saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "hall", name: "Salon", points: L }] });
+    let view = (await getSpaceModel(planner.ctx, occ))!;
+    expect(view.drawn).toBe(true);
+    expect(view.model.areas).toEqual([{ id: "hall", name: "Salon", points: L }]);
+    expect([view.model.widthMm, view.model.lengthMm]).toEqual([12_000, 10_000]);
+    // typed sides would contradict the drawing
+    expect(await key(updateSpaceModel(planner.ctx, { occasionId: occ, widthMm: 9000 }))).toBe("space.draw.errors.drawnSize");
+
+    // a table in the missing corner does not fit; in the room it does
+    const t1 = await addTable(planner.ctx, { occasionId: occ, custom: { name: "Rotundă", shape: "round", diameterMm: 1500, seats: 8 }, x: 9000, y: 2500 });
+    expect((await getFitChecks(planner.ctx, occ))!.base.status).not.toBe("fits");
+    await moveItem(planner.ctx, { itemId: t1.id, x: 3000, y: 7000 });
+    expect((await getFitChecks(planner.ctx, occ))!.base.status).toBe("fits");
+
+    // an oval and a half-moon from the ready-made list fit too
+    await addTable(planner.ctx, { occasionId: occ, custom: { name: "Ovală", shape: "oval", widthMm: 2400, lengthMm: 1200, seats: 10 }, x: 8500, y: 7500 });
+    await addTable(planner.ctx, { occasionId: occ, custom: { name: "Semilună", shape: "halfmoon", diameterMm: 1500, widthMm: 999, seats: 4 }, x: 3000, y: 2500 });
+    view = (await getSpaceModel(planner.ctx, occ))!;
+    const half = view.model.items.find((i) => i.shape === "halfmoon")!;
+    expect([half.diameterMm, half.widthMm, half.lengthMm]).toEqual([1500, null, null]);
+    expect((await getFitChecks(planner.ctx, occ))!.base.status).toBe("fits");
+
+    // clearing the drawing goes back to the typed rectangle
+    await saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [] });
+    view = (await getSpaceModel(planner.ctx, occ))!;
+    expect(view.drawn).toBe(false);
+    expect(view.model.areas).toHaveLength(1);
+    expect(view.model.areas[0]!.points).toHaveLength(4);
+  });
+
+  it("doors and pillars are saved with the drawn room and take part in the fit check; fixtures keep what they are", async () => {
+    const planner = await mkAccount();
+    const occ = await mkOccasion(planner.id);
+    await createOwnSpace(planner.ctx, { occasionId: occ, name: "Sala" });
+    const sq = [{ x: 0, y: 0 }, { x: 10_000, y: 0 }, { x: 10_000, y: 8000 }, { x: 0, y: 8000 }];
+    const door = { id: "d1", areaId: "hall", wall: 0, offsetMm: 5000, widthMm: 900, kind: "single" as const, swing: "in" as const, hinge: "start" as const };
+    expect(await key(saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "hall", name: null, points: sq }], features: { doors: [{ ...door, offsetMm: 9900 }], pillars: [] } }))).toBe("space.draw.errors.door.offWall");
+    expect(await key(saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "hall", name: null, points: sq }], features: { doors: [], pillars: [{ id: "p", shape: "round", sizeMm: 400, x: 50_000, y: 0 }] } }))).toBe("space.draw.errors.pillar.outside");
+    await saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "hall", name: null, points: sq }], features: { doors: [door], pillars: [{ id: "p", shape: "square", sizeMm: 400, x: 2000, y: 6000 }] } });
+    let view = (await getSpaceModel(planner.ctx, occ))!;
+    expect(view.features.doors).toHaveLength(1);
+    expect(view.model.doors).toHaveLength(1);
+    expect(view.model.pillars).toHaveLength(1);
+    const t1 = await addTable(planner.ctx, { occasionId: occ, custom: { name: "Rotundă", shape: "round", diameterMm: 1500, seats: 8 }, x: 5000, y: 1200 });
+    let issues = (await getFitChecks(planner.ctx, occ))!.base.issues.map((i) => i.type);
+    expect(issues).toContain("door");
+    await moveItem(planner.ctx, { itemId: t1.id, x: 2000, y: 6200 });
+    issues = (await getFitChecks(planner.ctx, occ))!.base.issues.map((i) => i.type);
+    expect(issues).toEqual(["pillar"]);
+    await moveItem(planner.ctx, { itemId: t1.id, x: 6000, y: 5000 });
+    expect((await getFitChecks(planner.ctx, occ))!.base.status).toBe("fits");
+
+    const floor = await addFixture(planner.ctx, { occasionId: occ, name: "Ring de dans 4 × 4 m", kind: "dance", widthMm: 4000, lengthMm: 4000, x: 3000, y: 3000 });
+    expect(floor.fixtureKind).toBe("dance");
+    view = (await getSpaceModel(planner.ctx, occ))!;
+    expect(view.model.items.find((i) => i.id === floor.id)!.fixtureKind).toBe("dance");
+
+    // clearing the drawing clears its doors and pillars too
+    await saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [] });
+    view = (await getSpaceModel(planner.ctx, occ))!;
+    expect([view.model.doors, view.model.pillars, view.features]).toEqual([[], [], { doors: [], pillars: [] }]);
+  });
+
+  it("a venue's space cannot be redrawn by the planner", async () => {
+    const v = await mkVenue();
+    const sp = await mkSpace(v, { approve: true });
+    const planner = await mkAccount();
+    const occ = await mkOccasion(planner.id, { listingId: v.listingId });
+    await attachVenueSpace(planner.ctx, { occasionId: occ, spaceId: sp });
+    const sq = [{ x: 0, y: 0 }, { x: 5000, y: 0 }, { x: 5000, y: 5000 }, { x: 0, y: 5000 }];
+    expect(await key(saveOwnRoomDrawing(planner.ctx, { occasionId: occ, areas: [{ id: "a", name: null, points: sq }] }))).toBe("space.draw.errors.ownOnly");
   });
 });
 

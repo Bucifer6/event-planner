@@ -131,7 +131,9 @@
     "overlap": "{a} se suprapune cu {b}.",
     "tooClose": "{a} și {b} sunt prea aproape: rămân {gap} cm de trecere, minimul este {min} cm.",
     "outside": "{a} iese din suprafața utilă.",
-    "overInventory": "Sunt cu {count} mai multe mese „{name}” decât are locația."
+    "overInventory": "Sunt cu {count} mai multe mese „{name}” decât are locația.",
+    "pillar": "{a} se lovește de stâlpul {n}.",
+    "door": "{a} stă în fața ușii {n}: lasă liber locul de trecere."
   },
   "zoom": {
     "in": "Mărește planul",
@@ -187,7 +189,15 @@
     "customNote": "Ce adaugi tu apare cu linie întreruptă și nu este prezentat ca fiind al locației.",
     "customDefault": "Masă proprie",
     "customSubmit": "Adaugă masa",
-    "fixtureSubmit": "Adaugă elementul"
+    "fixtureSubmit": "Adaugă elementul",
+    "preset": "Masă gata făcută",
+    "presetHint": "Mărimi obișnuite la firmele de închirieri. Poți schimba orice după ce alegi.",
+    "presetCustom": "Aleg singur mărimea",
+    "standing": "în picioare",
+    "fixturePreset": "Element gata făcut",
+    "fixturePresetHint": "Scene, ringuri de dans, tehnică și servire în mărimi obișnuite.",
+    "fixtureKind": "Ce este",
+    "fixtureKindHint": "Ringul de dans intră în calculul de dansatori."
   },
   "fields": {
     "name": "Nume",
@@ -201,11 +211,14 @@
     "seats": "Locuri",
     "howMany": "Câte mese",
     "label": "Numărul sau numele mesei",
-    "labelHint": "Apare pe plan și pe linkul invitaților: „3” sau „Miri”."
+    "labelHint": "Apare pe plan și pe linkul invitaților: „3” sau „Miri”.",
+    "seatsHint": "Un scaun pentru fiecare loc; scaunele apar pe plan."
   },
   "shapes": {
     "round": "Rotundă",
-    "rect": "Dreptunghiulară"
+    "rect": "Dreptunghiulară",
+    "oval": "Ovală",
+    "halfmoon": "Semilună"
   },
   "tables": {
     "title": "Mese ({count})",
@@ -220,18 +233,10 @@
     "how": "Atinge o masă din listă sau de pe plan, apoi bifează cine stă la ea."
   },
   "people": {
-    "extra": {
-      "one": "+1 adult",
-      "few": "+{count} adulți",
-      "other": "+{count} de adulți"
-    },
-    "children": {
-      "one": "+1 copil",
-      "few": "+{count} copii",
-      "other": "+{count} de copii"
-    },
-    "confirmed": "a confirmat",
-    "notAnswered": "fără răspuns"
+    "hint": "Atinge planul ca să pui o persoană la scară (50 × 30 cm). Trage-o ca s-o muți; dublu clic o scoate. Persoanele nu se salvează.",
+    "count": "Persoane pe plan: {count}",
+    "fill": "Umple ringul cu dansatori",
+    "clear": "Scoate persoanele"
   },
   "position": {
     "title": "Poziția pentru {name}",
@@ -340,5 +345,72 @@
     "pickSomeone": "Bifează cel puțin o persoană.",
     "seatOutOfRange": "Masa are doar {seats} locuri.",
     "seatTaken": "Locul {seatNo} este deja al altcuiva de la această masă."
+  },
+  "presetGroups": {
+    "round": "Masă rotundă",
+    "square": "Masă pătrată",
+    "rect": "Masă dreptunghiulară",
+    "oval": "Masă ovală",
+    "halfmoon": "Masă semilună",
+    "cocktail": "Masă de cocteil"
+  },
+  "modes": {
+    "label": "Ce faci pe plan",
+    "arrange": "Aranjează",
+    "measure": "Măsoară",
+    "people": "Persoane de referință"
+  },
+  "measure": {
+    "first": "Atinge primul punct. Se lipește de marginea meselor, a scaunelor, a pereților și a stâlpilor.",
+    "second": "Atinge al doilea punct.",
+    "item": "Măsurătoarea {n}: {length} m (pe orizontală {dx} m, pe verticală {dy} m)",
+    "clear": "Șterge măsurătorile"
+  },
+  "dance": {
+    "summary": "Ringul are {area} m²: încap confortabil cam {comfortable} dansatori (înghesuit, {packed}).",
+    "small": "Dacă dansează jumătate din cei {attending} confirmați ({half}), ringul e mic.",
+    "ok": "Ajunge pentru jumătate din cei {attending} confirmați ({half})."
+  },
+  "fixtureGroups": {
+    "stage": "Scenă și tehnică",
+    "dance": "Ring de dans",
+    "music": "Muzică",
+    "service": "Servire și altele"
+  },
+  "fixturePresets": {
+    "stage-4x3": "Scenă 4 × 3 m",
+    "stage-6x4": "Scenă 6 × 4 m",
+    "stage-8x5": "Scenă 8 × 5 m",
+    "dance-4x4": "Ring de dans 4 × 4 m",
+    "dance-5x5": "Ring de dans 5 × 5 m",
+    "dance-6x6": "Ring de dans 6 × 6 m",
+    "dance-8x8": "Ring de dans 8 × 8 m",
+    "dj-booth": "Cabină DJ",
+    "band-riser": "Podium tobe / formație",
+    "speaker": "Boxă",
+    "subwoofer": "Subwoofer",
+    "light-stand": "Stativ de lumini",
+    "truss-3m": "Truss de lumini 3 m",
+    "screen-3m": "Ecran 3 m",
+    "bar-3m": "Bar 3 m",
+    "buffet-4m": "Bufet 4 m",
+    "cake-table": "Masa tortului",
+    "candybar": "Candy bar",
+    "photobooth": "Cabină foto"
+  },
+  "fixtureKinds": {
+    "dance": "Ring de dans",
+    "candybar": "Candy bar",
+    "photobooth": "Cabină foto",
+    "stage": "Scenă",
+    "bar": "Bar",
+    "other": "Alt element",
+    "dj": "Cabină DJ",
+    "band": "Podium formație",
+    "speaker": "Boxă",
+    "lighting": "Lumini",
+    "screen": "Ecran",
+    "buffet": "Bufet",
+    "cake": "Masa tortului"
   }
 }

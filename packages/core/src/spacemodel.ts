@@ -1,7 +1,11 @@
 import type {
   Calibration,
   DrawingSnapshot,
+  FixtureKind,
   FloorArea,
+  Pillar,
+  RoomDoor,
+  RoomFeatures,
   ParkingArea,
   PlanItemKind,
   PlanItemSource,
@@ -32,8 +36,14 @@ import { z } from "zod";
 
 export type {
   Calibration,
+  DoorKind,
+  DoorSwing,
   DrawingSnapshot,
+  FixtureKind,
   FloorArea,
+  Pillar,
+  RoomDoor,
+  RoomFeatures,
   ParkingArea,
   PlanPoint,
   SpaceMarkings,
@@ -43,9 +53,106 @@ export type {
   VenuePoi,
 } from "@ed/db";
 
-export const FIXTURE_KIND_VALUES = ["dance", "candybar", "photobooth", "stage", "bar", "other"] as const;
+export const FIXTURE_KIND_VALUES = ["dance", "candybar", "photobooth", "stage", "bar", "other", "dj", "band", "speaker", "lighting", "screen", "buffet", "cake"] as const;
 export const POI_KIND_VALUES = ["toilets", "cloakroom", "bar", "entrance", "exit", "photo", "stage", "other"] as const;
-export const TABLE_SHAPE_VALUES = ["round", "rect"] as const;
+export const TABLE_SHAPE_VALUES = ["round", "rect", "oval", "halfmoon"] as const;
+
+/** Round and half-moon tables are sized by a diameter; rectangular and oval ones by two sides. */
+export function shapeUsesDiameter(shape: TableShape): boolean {
+  return shape === "round" || shape === "halfmoon";
+}
+
+/** A size is stated whole or not at all: keeps only the dimensions the shape uses. */
+export function shapeDims(shape: TableShape, d: { diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) {
+  return shapeUsesDiameter(shape) ? { diameterMm: d.diameterMm, widthMm: null, lengthMm: null } : { diameterMm: null, widthMm: d.widthMm, lengthMm: d.lengthMm };
+}
+
+/* ── Ready-made tables ───────────────────────────────────────────────────────────────── */
+
+export const TABLE_PRESET_GROUPS = ["round", "square", "rect", "oval", "halfmoon", "cocktail"] as const;
+export type TablePresetGroup = (typeof TABLE_PRESET_GROUPS)[number];
+export type TablePreset = {
+  key: string;
+  group: TablePresetGroup;
+  shape: TableShape;
+  diameterMm: number | null;
+  widthMm: number | null;
+  lengthMm: number | null;
+  /** Usual number of chairs; the planner can change it. Cocktail tables are for standing. */
+  seats: number;
+};
+
+const round = (key: string, d: number, seats: number, group: TablePresetGroup = "round"): TablePreset => ({ key, group, shape: "round", diameterMm: d, widthMm: null, lengthMm: null, seats });
+const sides = (key: string, group: TablePresetGroup, shape: TableShape, w: number, l: number, seats: number): TablePreset => ({ key, group, shape, diameterMm: null, widthMm: w, lengthMm: l, seats });
+const half = (key: string, d: number, seats: number): TablePreset => ({ key, group: "halfmoon", shape: "halfmoon", diameterMm: d, widthMm: null, lengthMm: null, seats });
+
+/** Common hire sizes (Romanian event-hire catalogues and UK/EU banqueting standards). */
+export const TABLE_PRESETS: readonly TablePreset[] = [
+  round("round-90", 900, 4),
+  round("round-120", 1200, 6),
+  round("round-150", 1500, 8),
+  round("round-160", 1600, 10),
+  round("round-180", 1800, 10),
+  round("round-200", 2000, 12),
+  sides("square-80", "square", "rect", 800, 800, 4),
+  sides("square-90", "square", "rect", 900, 900, 4),
+  sides("square-120", "square", "rect", 1200, 1200, 8),
+  sides("rect-120", "rect", "rect", 1200, 800, 4),
+  sides("rect-160", "rect", "rect", 1600, 800, 6),
+  sides("rect-180", "rect", "rect", 1800, 800, 6),
+  sides("rect-200", "rect", "rect", 2000, 900, 8),
+  sides("rect-240", "rect", "rect", 2400, 1000, 10),
+  sides("rect-300", "rect", "rect", 3000, 1000, 12),
+  sides("oval-200", "oval", "oval", 2000, 1100, 8),
+  sides("oval-240", "oval", "oval", 2400, 1200, 10),
+  half("halfmoon-150", 1500, 4),
+  half("halfmoon-180", 1800, 5),
+  round("cocktail-60", 600, 0, "cocktail"),
+  round("cocktail-80", 800, 0, "cocktail"),
+];
+
+/* ── Ready-made stage, dance floor and equipment ──────────────────────────────────────── */
+
+export type FixturePreset = { key: string; kind: FixtureKind; widthMm: number; lengthMm: number };
+const fx = (key: string, kind: FixtureKind, w: number, l: number): FixturePreset => ({ key, kind, widthMm: w, lengthMm: l });
+
+/** Usual sizes from event-hire catalogues: modular stage decks, dance floor panels, PA and lighting. */
+export const FIXTURE_PRESETS: readonly FixturePreset[] = [
+  fx("stage-4x3", "stage", 4000, 3000),
+  fx("stage-6x4", "stage", 6000, 4000),
+  fx("stage-8x5", "stage", 8000, 5000),
+  fx("dance-4x4", "dance", 4000, 4000),
+  fx("dance-5x5", "dance", 5000, 5000),
+  fx("dance-6x6", "dance", 6000, 6000),
+  fx("dance-8x8", "dance", 8000, 8000),
+  fx("dj-booth", "dj", 2000, 800),
+  fx("band-riser", "band", 2400, 2400),
+  fx("speaker", "speaker", 600, 600),
+  fx("subwoofer", "speaker", 800, 800),
+  fx("light-stand", "lighting", 800, 800),
+  fx("truss-3m", "lighting", 3000, 300),
+  fx("screen-3m", "screen", 3000, 400),
+  fx("bar-3m", "bar", 3000, 1000),
+  fx("buffet-4m", "buffet", 4000, 1000),
+  fx("cake-table", "cake", 1200, 800),
+  fx("candybar", "candybar", 2000, 800),
+  fx("photobooth", "photobooth", 2500, 2500),
+];
+
+/**
+ * Floor per dancer: about 0.42 m² packed (the common "4.5 sq ft a dancer" rule) and 0.75 m²
+ * to dance comfortably. Planners usually reckon a third to a half of the guests dance at once.
+ */
+export const DANCER_AREA_MM2 = { packed: 420_000, comfortable: 750_000 } as const;
+
+/** A standing adult seen from above, for the reference people: shoulders and depth. */
+export const REFERENCE_PERSON_MM = { width: 500, depth: 300 } as const;
+
+/* ── Doors and pillars of a drawn room ─────────────────────────────────────────────────── */
+
+export const DOOR_KIND_VALUES = ["single", "double", "exit", "opening"] as const;
+export const DOOR_SWING_VALUES = ["in", "out", "sliding"] as const;
+export const FEATURE_LIMITS = { doors: 60, pillars: 100, minDoorMm: 500, maxDoorMm: 6000, minPillarMm: 100, maxPillarMm: 3000 } as const;
 
 /** Limits of one drawing / one plan (kept generous; they bound JSON size and render cost). */
 export const SPACE_LIMITS = {
@@ -116,6 +223,29 @@ export const zSpaceMarkings = z.object({
   parkingAreas: z.array(zParkingArea).max(SPACE_LIMITS.parkingAreas).default([]),
 });
 
+export const zRoomDoor = z.object({
+  id: shortId,
+  areaId: shortId,
+  wall: z.number().int().min(0).max(200),
+  offsetMm: z.number().int().min(0).max(SPACE_LIMITS.maxCoordMm),
+  widthMm: z.number().int().min(FEATURE_LIMITS.minDoorMm, "common.validation.tooSmall").max(FEATURE_LIMITS.maxDoorMm, "common.validation.tooBig"),
+  kind: z.enum(DOOR_KIND_VALUES),
+  swing: z.enum(DOOR_SWING_VALUES),
+  hinge: z.enum(["start", "end"]),
+});
+export const zPillar = z.object({
+  id: shortId,
+  shape: z.enum(["round", "square"]),
+  sizeMm: z.number().int().min(FEATURE_LIMITS.minPillarMm, "common.validation.tooSmall").max(FEATURE_LIMITS.maxPillarMm, "common.validation.tooBig"),
+  x: coord,
+  y: coord,
+});
+export const zRoomFeatures = z.object({
+  doors: z.array(zRoomDoor).max(FEATURE_LIMITS.doors).default([]),
+  pillars: z.array(zPillar).max(FEATURE_LIMITS.pillars).default([]),
+});
+export const EMPTY_FEATURES: RoomFeatures = { doors: [], pillars: [] };
+
 export function markingsEmpty(m: SpaceMarkings): boolean {
   return m.areas.length + m.tableTypes.length + m.fixtures.length + m.pois.length + m.parkingAreas.length === 0;
 }
@@ -161,6 +291,8 @@ export type PlanItem = {
   version?: number;
   /** Places taken at this table (planner views only). */
   seated?: number;
+  /** Fixtures: what it is (stage, dance floor…); null/absent = not said. */
+  fixtureKind?: FixtureKind | null;
 };
 
 export type PlanModel = {
@@ -181,7 +313,13 @@ export type PlanModel = {
   pois: VenuePoi[];
   parkingAreas: ParkingArea[];
   aisleMm: number;
+  /** Drawn rooms: doors placed on their walls, and pillars. Absent = none. */
+  doors?: PlacedDoor[];
+  pillars?: Pillar[];
 };
+
+/** A door resolved onto its wall: `a` is the hinge jamb, `b` the other; `inward` points into the room. */
+export type PlacedDoor = { id: string; index: number; kind: RoomDoor["kind"]; swing: RoomDoor["swing"]; widthMm: number; a: PlanPoint; b: PlanPoint; inward: PlanPoint };
 
 /** The plan a drawing snapshot describes (no placed tables — venue fixtures sit where the venue drew them). */
 export function modelFromSnapshot(
@@ -220,6 +358,7 @@ export function fixtureToItem(f: VenueFixture): PlanItem {
     name: f.name,
     label: f.name,
     shape: "rect",
+    fixtureKind: f.kind,
     diameterMm: null,
     widthMm: f.widthMm,
     lengthMm: f.lengthMm,
@@ -249,7 +388,7 @@ export function ownSpaceAreas(widthMm: number | null, lengthMm: number | null): 
 
 /** V6: an item whose size nobody stated has no footprint — it is shown as unknown and excluded. */
 export function itemHasDims(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm">): boolean {
-  return item.shape === "round" ? item.diameterMm !== null && item.diameterMm > 0 : item.widthMm !== null && item.lengthMm !== null && item.widthMm > 0 && item.lengthMm > 0;
+  return shapeUsesDiameter(item.shape) ? item.diameterMm !== null && item.diameterMm > 0 : item.widthMm !== null && item.lengthMm !== null && item.widthMm > 0 && item.lengthMm > 0;
 }
 
 /* ── Geometry ─────────────────────────────────────────────────────────────────────────── */
@@ -270,10 +409,46 @@ function rectCorners(cx: number, cy: number, w: number, l: number, deg: number):
   ].map(([dx, dy]) => ({ x: cx + dx! * cos - dy! * sin, y: cy + dx! * sin + dy! * cos }));
 }
 
+const CURVE_STEPS = 32;
+
+/**
+ * The outline of an oval or half-moon table around its centre, before rotation (convex, so
+ * the gap maths below stays exact). A half-moon is `diameter` wide and half as deep: its flat
+ * side faces up (−y) and the curve faces down, where its chairs are.
+ */
+function curvedOutline(shape: "oval" | "halfmoon", d: { diameterMm: number | null; widthMm: number | null; lengthMm: number | null }, pad: number): PlanPoint[] {
+  const out: PlanPoint[] = [];
+  if (shape === "oval") {
+    const rx = d.widthMm! / 2 + pad;
+    const ry = d.lengthMm! / 2 + pad;
+    for (let i = 0; i < CURVE_STEPS; i++) {
+      const a = (i / CURVE_STEPS) * 2 * Math.PI;
+      out.push({ x: rx * Math.cos(a), y: ry * Math.sin(a) });
+    }
+    return out;
+  }
+  const r = d.diameterMm! / 2;
+  const flat = -r / 2; // the straight side, a quarter of the diameter above the centre
+  for (let i = 0; i <= CURVE_STEPS / 2; i++) {
+    const a = (i / (CURVE_STEPS / 2)) * Math.PI;
+    out.push({ x: (r + pad) * Math.cos(a), y: flat + (r + pad) * Math.sin(a) });
+  }
+  out.push({ x: -(r + pad), y: flat - pad }, { x: r + pad, y: flat - pad });
+  return out;
+}
+
+function placeLocal(points: PlanPoint[], cx: number, cy: number, deg: number): PlanPoint[] {
+  const a = (deg * Math.PI) / 180;
+  const cos = Math.cos(a);
+  const sin = Math.sin(a);
+  return points.map((p) => ({ x: cx + p.x * cos - p.y * sin, y: cy + p.x * sin + p.y * cos }));
+}
+
 /** The floor an item covers, optionally grown by `pad` mm on every side (chairs). null = unknown size. */
 export function itemFootprint(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm" | "x" | "y" | "rotation">, pad = 0): Footprint | null {
   if (!itemHasDims(item)) return null;
   if (item.shape === "round") return { type: "circle", cx: item.x, cy: item.y, r: item.diameterMm! / 2 + pad };
+  if (item.shape === "oval" || item.shape === "halfmoon") return { type: "poly", points: placeLocal(curvedOutline(item.shape, item, pad), item.x, item.y, item.rotation) };
   return { type: "poly", points: rectCorners(item.x, item.y, item.widthMm! + 2 * pad, item.lengthMm! + 2 * pad, item.rotation) };
 }
 
@@ -402,6 +577,215 @@ function footprintSamples(f: Footprint): PlanPoint[] {
 export function insideAreas(f: Footprint, areas: FloorArea[]): boolean {
   if (areas.length === 0) return false;
   return footprintSamples(f).every((p) => areas.some((a) => pointInPolygon(p, a.points)));
+}
+
+/* ── Drawn rooms ──────────────────────────────────────────────────────────────────────── */
+
+/** The smallest floor outline worth keeping: half a square metre. */
+export const MIN_ROOM_AREA_MM2 = 500_000;
+
+function cross(o: PlanPoint, a: PlanPoint, b: PlanPoint): number {
+  return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+}
+
+/** Whether two segments cross or overlap anywhere other than at a shared end. */
+export function segmentsCross(a: PlanPoint, b: PlanPoint, c: PlanPoint, d: PlanPoint): boolean {
+  const d1 = cross(c, d, a);
+  const d2 = cross(c, d, b);
+  const d3 = cross(a, b, c);
+  const d4 = cross(a, b, d);
+  if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) && ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))) return true;
+  // collinear overlap (walls drawn back over themselves)
+  const on = (p: PlanPoint, q: PlanPoint, r: PlanPoint) => cross(p, q, r) === 0 && Math.min(p.x, q.x) <= r.x && r.x <= Math.max(p.x, q.x) && Math.min(p.y, q.y) <= r.y && r.y <= Math.max(p.y, q.y);
+  const same = (p: PlanPoint, q: PlanPoint) => p.x === q.x && p.y === q.y;
+  const touches = (p: PlanPoint) => same(p, a) || same(p, b);
+  return (on(a, b, c) && !touches(c)) || (on(a, b, d) && !touches(d)) || (on(c, d, a) && !same(a, c) && !same(a, d)) || (on(c, d, b) && !same(b, c) && !same(b, d));
+}
+
+/** Whether any two walls of the outline cross (a figure-of-eight is not a room). */
+export function polygonSelfIntersects(points: PlanPoint[]): boolean {
+  const n = points.length;
+  for (let i = 0; i < n; i++) {
+    const a = points[i]!;
+    const b = points[(i + 1) % n]!;
+    if (a.x === b.x && a.y === b.y) return true; // a wall of no length
+    for (let j = i + 1; j < n; j++) {
+      if (j === i || (j + 1) % n === i || j === (i + 1) % n) continue; // neighbours share a corner
+      if (segmentsCross(a, b, points[j]!, points[(j + 1) % n]!)) return true;
+    }
+  }
+  return false;
+}
+
+export type RoomProblem = { index: number; problem: "crossing" | "tooSmall" };
+
+/** What is wrong with a drawn room, outline by outline; empty = fine to save. */
+export function roomDrawingProblems(areas: FloorArea[]): RoomProblem[] {
+  const out: RoomProblem[] = [];
+  areas.forEach((a, index) => {
+    if (polygonSelfIntersects(a.points)) out.push({ index, problem: "crossing" });
+    else if (polygonArea(a.points) < MIN_ROOM_AREA_MM2) out.push({ index, problem: "tooSmall" });
+  });
+  return out;
+}
+
+/** The length of each wall of an outline (wall i runs from corner i to corner i + 1). */
+export function wallLengths(points: PlanPoint[]): number[] {
+  return points.map((p, i) => {
+    const q = points[(i + 1) % points.length]!;
+    return Math.hypot(q.x - p.x, q.y - p.y);
+  });
+}
+
+/** Changing one wall's length moves its far corner and the next one with it, so the following wall keeps its direction and length. */
+export function setWallLength(points: PlanPoint[], wall: number, lengthMm: number): PlanPoint[] {
+  const n = points.length;
+  const a = points[wall]!;
+  const b = points[(wall + 1) % n]!;
+  const len = Math.hypot(b.x - a.x, b.y - a.y);
+  if (len === 0) return points;
+  const k = (lengthMm - len) / len;
+  const dx = Math.round((b.x - a.x) * k);
+  const dy = Math.round((b.y - a.y) * k);
+  const move = new Set([(wall + 1) % n]);
+  if (n > 3) move.add((wall + 2) % n);
+  return points.map((p, i) => (move.has(i) ? { x: p.x + dx, y: p.y + dy } : p));
+}
+
+/**
+ * The nearest place to `near` where a new item stands on the floor with its chairs and an aisle
+ * clear of everything already placed, off the pillars and out of the way of the doors (searched outwards on a 50 cm grid, up to 40 m away).
+ * null = no such place, or the item's size is unknown.
+ */
+export function findFreeSpot(model: PlanModel, item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm" | "rotation" | "seats" | "kind">, near: PlanPoint, others: PlanItem[] = model.items): PlanPoint | null {
+  if (!itemHasDims(item)) return null;
+  // the same zones as the fit check: every table keeps room for people around it
+  const pad = item.kind === "table" ? CHAIR_ZONE_MM : 0;
+  const placed = others
+    .map((o) => itemFootprint(o, o.kind === "table" ? CHAIR_ZONE_MM : 0))
+    .filter((f): f is Footprint => f !== null);
+  // pillars and the clear floor in front of doors, as the fit check sees them
+  const blockers: Footprint[] = [...(model.pillars ?? []).map(pillarFootprint), ...(model.doors ?? []).map((d) => ({ type: "poly" as const, points: doorClearance(d) }))];
+  const step = 500;
+  const cx = Math.round(near.x / 100) * 100;
+  const cy = Math.round(near.y / 100) * 100;
+  for (let ring = 0; ring <= 80; ring++) {
+    for (let i = -ring; i <= ring; i++) {
+      for (const [dx, dy] of ring === 0 ? [[0, 0]] : [[i, -ring], [i, ring], [-ring, i], [ring, i]]) {
+        if (ring > 0 && Math.abs(dx!) !== ring && Math.abs(dy!) !== ring) continue;
+        const at = { x: cx + dx! * step, y: cy + dy! * step };
+        const f = itemFootprint({ ...item, ...at }, pad);
+        if (!f) return null;
+        if (model.areas.length > 0 && !insideAreas(f, model.areas)) continue;
+        if (!placed.every((o) => shapeGap(f, o) >= model.aisleMm)) continue;
+        if (blockers.some((o) => shapeGap(f, o) < 0)) continue;
+        return at;
+      }
+    }
+  }
+  return null;
+}
+
+/** Where each door sits, from the wall it hangs on; doors whose wall no longer exists are left out. */
+export function resolveDoors(areas: FloorArea[], doors: RoomDoor[]): PlacedDoor[] {
+  const out: PlacedDoor[] = [];
+  doors.forEach((d, i) => {
+    const area = areas.find((a) => a.id === d.areaId);
+    if (!area || d.wall >= area.points.length) return;
+    const p = area.points[d.wall]!;
+    const q = area.points[(d.wall + 1) % area.points.length]!;
+    const len = Math.hypot(q.x - p.x, q.y - p.y);
+    if (len === 0) return;
+    const ux = (q.x - p.x) / len;
+    const uy = (q.y - p.y) / len;
+    const half = d.widthMm / 2;
+    const mid = Math.max(half, Math.min(len - half, d.offsetMm));
+    const j1 = { x: p.x + ux * (mid - half), y: p.y + uy * (mid - half) };
+    const j2 = { x: p.x + ux * (mid + half), y: p.y + uy * (mid + half) };
+    let n = { x: -uy, y: ux };
+    const probe = { x: p.x + ux * mid + n.x * 50, y: p.y + uy * mid + n.y * 50 };
+    if (!pointInPolygon(probe, area.points)) n = { x: uy, y: -ux };
+    const [a, b] = d.hinge === "start" ? [j1, j2] : [j2, j1];
+    out.push({ id: d.id, index: i + 1, kind: d.kind, swing: d.swing, widthMm: d.widthMm, a, b, inward: n });
+  });
+  return out;
+}
+
+/** The floor in front of a door that must stay clear: as deep as the door is wide (at least 90 cm), inside the room. */
+export function doorClearance(d: PlacedDoor): PlanPoint[] {
+  const depth = Math.max(900, d.kind === "double" ? d.widthMm / 2 : d.widthMm);
+  return [d.a, d.b, { x: d.b.x + d.inward.x * depth, y: d.b.y + d.inward.y * depth }, { x: d.a.x + d.inward.x * depth, y: d.a.y + d.inward.y * depth }];
+}
+
+export function pillarFootprint(p: Pillar): Footprint {
+  if (p.shape === "round") return { type: "circle", cx: p.x, cy: p.y, r: p.sizeMm / 2 };
+  const h = p.sizeMm / 2;
+  return { type: "poly", points: [{ x: p.x - h, y: p.y - h }, { x: p.x + h, y: p.y - h }, { x: p.x + h, y: p.y + h }, { x: p.x - h, y: p.y + h }] };
+}
+
+export type FeatureProblem = { kind: "door" | "pillar"; index: number; problem: "offWall" | "tooWide" | "outside" };
+
+/** Doors that no longer sit on a wall (or are wider than it) and pillars outside every outline. */
+export function roomFeatureProblems(areas: FloorArea[], features: RoomFeatures): FeatureProblem[] {
+  const out: FeatureProblem[] = [];
+  features.doors.forEach((d, index) => {
+    const area = areas.find((a) => a.id === d.areaId);
+    if (!area || d.wall >= area.points.length) return out.push({ kind: "door", index, problem: "offWall" });
+    const len = wallLengths(area.points)[d.wall]!;
+    if (d.widthMm > len) out.push({ kind: "door", index, problem: "tooWide" });
+    else if (d.offsetMm < d.widthMm / 2 - 1 || d.offsetMm > len - d.widthMm / 2 + 1) out.push({ kind: "door", index, problem: "offWall" });
+  });
+  features.pillars.forEach((p, index) => {
+    if (!areas.some((a) => pointInPolygon({ x: p.x, y: p.y }, a.points))) out.push({ kind: "pillar", index, problem: "outside" });
+  });
+  return out;
+}
+
+/** Floor of the dance floors in a layout and how many can dance on it; null = no dance floor of known size. */
+export function danceFloorCapacity(model: PlanModel): { areaMm2: number; packed: number; comfortable: number; count: number } | null {
+  const floors = model.items.filter((i) => i.kind === "fixture" && i.fixtureKind === "dance" && itemHasDims(i));
+  if (floors.length === 0) return null;
+  const areaMm2 = floors.reduce((s, f) => s + f.widthMm! * f.lengthMm!, 0);
+  return { areaMm2, packed: Math.floor(areaMm2 / DANCER_AREA_MM2.packed), comfortable: Math.floor(areaMm2 / DANCER_AREA_MM2.comfortable), count: floors.length };
+}
+
+function nearestOnSegment(p: PlanPoint, a: PlanPoint, b: PlanPoint): PlanPoint {
+  const dx = b.x - a.x;
+  const dy = b.y - a.y;
+  const l2 = dx * dx + dy * dy;
+  const t = l2 === 0 ? 0 : Math.max(0, Math.min(1, ((p.x - a.x) * dx + (p.y - a.y) * dy) / l2));
+  return { x: a.x + t * dx, y: a.y + t * dy };
+}
+
+/**
+ * For the measuring tool: the nearest edge point within `tolMm` — a table's top, the edge of
+ * its chairs, a fixture, a wall, a pillar or a door — so a measurement runs edge to edge.
+ */
+export function snapToEdges(model: PlanModel, p: PlanPoint, tolMm: number): { point: PlanPoint; on: "item" | "chairs" | "wall" | "pillar" } | null {
+  let best: { point: PlanPoint; on: "item" | "chairs" | "wall" | "pillar" } | null = null;
+  let bestD = tolMm;
+  const consider = (q: PlanPoint, on: "item" | "chairs" | "wall" | "pillar") => {
+    const d = Math.hypot(q.x - p.x, q.y - p.y);
+    if (d < bestD) {
+      bestD = d;
+      best = { point: { x: Math.round(q.x), y: Math.round(q.y) }, on };
+    }
+  };
+  const outline = (f: Footprint, on: "item" | "chairs" | "pillar") => {
+    if (f.type === "circle") {
+      const d = Math.hypot(p.x - f.cx, p.y - f.cy) || 1;
+      consider({ x: f.cx + ((p.x - f.cx) / d) * f.r, y: f.cy + ((p.y - f.cy) / d) * f.r }, on);
+    } else for (let i = 0; i < f.points.length; i++) consider(nearestOnSegment(p, f.points[i]!, f.points[(i + 1) % f.points.length]!), on);
+  };
+  for (const it of model.items) {
+    const body = itemFootprint(it);
+    if (!body) continue;
+    outline(body, "item");
+    if (it.kind === "table" && (it.seats ?? 0) > 0) outline(itemFootprint(it, CHAIR_ZONE_MM)!, "chairs");
+  }
+  for (const pl of model.pillars ?? []) outline(pillarFootprint(pl), "pillar");
+  for (const a of model.areas) for (let i = 0; i < a.points.length; i++) consider(nearestOnSegment(p, a.points[i]!, a.points[(i + 1) % a.points.length]!), "wall");
+  return best;
 }
 
 export type Bounds = { minX: number; minY: number; maxX: number; maxY: number };
@@ -555,7 +939,11 @@ export type SceneRole =
   | "title-name"
   | "title-meta"
   | "calibration"
-  | "highlight";
+  | "highlight"
+  | "pillar"
+  | "door-gap"
+  | "door"
+  | "door-swing";
 
 export type SceneNode =
   | { t: "line"; role: SceneRole; x1: number; y1: number; x2: number; y2: number }
@@ -637,6 +1025,28 @@ function seatPositions(item: PlanItem): PlanPoint[] {
     }
     return out;
   }
+  if (item.shape === "oval") {
+    // evenly round the ellipse (by angle — close enough for a plan)
+    const local: PlanPoint[] = [];
+    const rx = item.widthMm! / 2 + SEAT_OFFSET_MM;
+    const ry = item.lengthMm! / 2 + SEAT_OFFSET_MM;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+      local.push({ x: rx * Math.cos(a), y: ry * Math.sin(a) });
+    }
+    return placeLocal(local, item.x, item.y, item.rotation);
+  }
+  if (item.shape === "halfmoon") {
+    // along the curve only; the flat side stays free (against a wall or the top table)
+    const r = item.diameterMm! / 2 + SEAT_OFFSET_MM;
+    const flat = -item.diameterMm! / 4;
+    const local: PlanPoint[] = [];
+    for (let i = 0; i < n; i++) {
+      const a = ((i + 0.5) / n) * Math.PI;
+      local.push({ x: r * Math.cos(a), y: flat + r * Math.sin(a) });
+    }
+    return placeLocal(local, item.x, item.y, item.rotation);
+  }
   // rectangular: along the two long sides; an odd one out sits at an end
   const w = item.widthMm!;
   const l = item.lengthMm!;
@@ -656,6 +1066,39 @@ function seatPositions(item: PlanItem): PlanPoint[] {
   if (ends > 0) local.push(longIsW ? [long / 2 + SEAT_OFFSET_MM, 0] : [0, long / 2 + SEAT_OFFSET_MM]);
   const a = (item.rotation * Math.PI) / 180;
   for (const [dx, dy] of local) out.push({ x: item.x + dx * Math.cos(a) - dy * Math.sin(a), y: item.y + dx * Math.sin(a) + dy * Math.cos(a) });
+  return out;
+}
+
+/** A door as drawn on a plan: the gap in the wall, the leaf (or leaves) and the dotted swing. */
+function doorNodes(d: PlacedDoor, X: (mm: number) => number, Y: (mm: number) => number, r2: (n: number) => number): SceneNode[] {
+  const out: SceneNode[] = [{ t: "line", role: "door-gap", x1: r2(X(d.a.x)), y1: r2(Y(d.a.y)), x2: r2(X(d.b.x)), y2: r2(Y(d.b.y)) }];
+  if (d.kind === "opening") return out;
+  const dir = d.swing === "out" ? { x: -d.inward.x, y: -d.inward.y } : d.inward;
+  if (d.swing === "sliding") {
+    const off = 80;
+    out.push({ t: "line", role: "door", x1: r2(X(d.a.x + d.inward.x * off)), y1: r2(Y(d.a.y + d.inward.y * off)), x2: r2(X(d.b.x + d.inward.x * off)), y2: r2(Y(d.b.y + d.inward.y * off)) });
+    return out;
+  }
+  const leaf = (hinge: PlanPoint, free: PlanPoint) => {
+    const w = Math.hypot(free.x - hinge.x, free.y - hinge.y);
+    const open = { x: hinge.x + dir.x * w, y: hinge.y + dir.y * w };
+    out.push({ t: "line", role: "door", x1: r2(X(hinge.x)), y1: r2(Y(hinge.y)), x2: r2(X(open.x)), y2: r2(Y(open.y)) });
+    const a0 = Math.atan2(free.y - hinge.y, free.x - hinge.x);
+    let a1 = Math.atan2(open.y - hinge.y, open.x - hinge.x);
+    while (a1 - a0 > Math.PI) a1 -= 2 * Math.PI;
+    while (a0 - a1 > Math.PI) a1 += 2 * Math.PI;
+    const arc: Array<[number, number]> = [[r2(X(hinge.x)), r2(Y(hinge.y))]];
+    for (let i = 0; i <= 12; i++) {
+      const a = a0 + ((a1 - a0) * i) / 12;
+      arc.push([r2(X(hinge.x + w * Math.cos(a))), r2(Y(hinge.y + w * Math.sin(a)))]);
+    }
+    out.push({ t: "polygon", role: "door-swing", points: arc });
+  };
+  if (d.kind === "double") {
+    const mid = { x: (d.a.x + d.b.x) / 2, y: (d.a.y + d.b.y) / 2 };
+    leaf(d.a, mid);
+    leaf(d.b, mid);
+  } else leaf(d.a, d.b);
   return out;
 }
 
@@ -717,6 +1160,13 @@ export function buildPlanScene(model: PlanModel, opts: PlanSceneOptions = {}): P
     }
   }
 
+  for (const p of model.pillars ?? []) {
+    const f = pillarFootprint(p);
+    if (f.type === "circle") under.push({ t: "circle", role: "pillar", cx: r2(X(f.cx)), cy: r2(Y(f.cy)), r: r2(Math.max(1.5, f.r * scale)) });
+    else under.push({ t: "polygon", role: "pillar", points: pts(f.points) });
+  }
+  for (const d of model.doors ?? []) under.push(...doorNodes(d, X, Y, r2));
+
   const only = opts.onlyItemIds ? new Set(opts.onlyItemIds) : null;
   const items: SceneItem[] = [];
   for (const it of model.items) {
@@ -736,6 +1186,11 @@ export function buildPlanScene(model: PlanModel, opts: PlanSceneOptions = {}): P
       const r = (it.diameterMm! / 2) * scale;
       halfW = halfH = r;
       nodes.push({ t: "circle", role: bodyRole, cx, cy, r: r2(r) });
+    } else if (it.shape === "oval" || it.shape === "halfmoon") {
+      const outline = placeLocal(curvedOutline(it.shape, it, 0), it.x, it.y, it.rotation);
+      halfW = ((Math.max(...outline.map((p) => p.x)) - Math.min(...outline.map((p) => p.x))) * scale) / 2;
+      halfH = ((Math.max(...outline.map((p) => p.y)) - Math.min(...outline.map((p) => p.y))) * scale) / 2;
+      nodes.push({ t: "polygon", role: bodyRole, points: pts(outline) });
     } else {
       const w = it.widthMm! * scale;
       const h = it.lengthMm! * scale;
@@ -849,6 +1304,10 @@ const PRINT_STYLE: Record<SceneRole, string> = {
   "title-meta": `fill="${INK2}" font-size="8.5" font-weight="500" letter-spacing="0.3"`,
   calibration: `stroke="${GILT}" stroke-width="1.5" fill="none"`,
   highlight: `fill="none" stroke="${INK}" stroke-width="2.4"`,
+  pillar: `fill="${INK2}" stroke="${INK}" stroke-width="1"`,
+  "door-gap": `stroke="${PAPER}" stroke-width="4" fill="none"`,
+  door: `stroke="${INK}" stroke-width="1.2" fill="none"`,
+  "door-swing": `fill="none" stroke="${INK2}" stroke-width="0.7" stroke-dasharray="2 2"`,
 };
 
 function esc(s: string): string {
@@ -929,5 +1388,5 @@ export function parseMetres(text: string | null | undefined): number | null {
 /** Size of an item in words-free form: "⌀ 1,8 m" or "0,9 × 2 m"; null = unknown. */
 export function itemSizeText(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm">, locale: "ro" | "en" = "ro"): string | null {
   if (!itemHasDims(item)) return null;
-  return item.shape === "round" ? `⌀ ${mmToMetresText(item.diameterMm!, locale)} m` : `${mmToMetresText(item.widthMm!, locale)} × ${mmToMetresText(item.lengthMm!, locale)} m`;
+  return shapeUsesDiameter(item.shape) ? `⌀ ${mmToMetresText(item.diameterMm!, locale)} m` : `${mmToMetresText(item.widthMm!, locale)} × ${mmToMetresText(item.lengthMm!, locale)} m`;
 }

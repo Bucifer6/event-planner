@@ -18,6 +18,7 @@ import {
   unpublishSeating,
   updateItem,
 } from "@ed/core/seating";
+import { FIXTURE_KIND_VALUES, TABLE_SHAPE_VALUES } from "@ed/core/spacemodel";
 import { zId } from "@ed/shared/zod";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
@@ -29,7 +30,7 @@ import { action } from "@/lib/action";
 const mm = z.number().int();
 const optMm = mm.nullable().optional();
 const group = z.object({ householdId: zId, kind: z.enum(["extra", "children"]) });
-const custom = z.object({ name: z.string().max(200), shape: z.enum(["round", "rect"]), diameterMm: optMm, widthMm: optMm, lengthMm: optMm, seats: z.number().int() });
+const custom = z.object({ name: z.string().max(200), shape: z.enum(TABLE_SHAPE_VALUES), diameterMm: optMm, widthMm: optMm, lengthMm: optMm, seats: z.number().int() });
 const done = (occasionId: string) => revalidatePath(`/occasions/${occasionId}/seating`);
 
 export const addTableAction = action(
@@ -41,7 +42,7 @@ export const addTableAction = action(
   },
 );
 
-export const addFixtureAction = action(z.object({ occasionId: zId, id: zId.optional(), name: z.string().max(200), widthMm: optMm, lengthMm: optMm, x: mm.optional(), y: mm.optional() }), async (ctx, input) => {
+export const addFixtureAction = action(z.object({ occasionId: zId, id: zId.optional(), name: z.string().max(200), kind: z.enum(FIXTURE_KIND_VALUES).optional(), widthMm: optMm, lengthMm: optMm, x: mm.optional(), y: mm.optional() }), async (ctx, input) => {
   const item = await addFixture(ctx, input);
   done(input.occasionId);
   return item;

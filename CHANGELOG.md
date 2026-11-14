@@ -11,6 +11,34 @@ Status and evidence for everything listed here: `docs/build/13-implementation-lo
 
 ## [Unreleased]
 
+### Added (room drawing and ready-made tables)
+- **Draw the room** (Room plan → "Desenează sala"): planners who describe their own space can
+  draw it to scale like a simple CAD tool — walls corner by corner, rectangles, L-shaped rooms
+  and extra areas such as a terrace. Snapping to a grid (1 cm to 1 m), to existing corners and to
+  15° angles, each switchable; every wall labelled with its length and every outline with its
+  area; exact typed lengths, angles, sizes and corner positions; undo and redo; full keyboard
+  path. The drawn shape replaces the typed rectangle and drives the fit check. Stored in the new
+  `space_models.own_areas` column (migration 0001).
+- **Ready-made tables** in "Add a table": round (⌀ 0.9–2 m), square, rectangular (1.2–3 m),
+  oval, half-moon and cocktail tables in common hire sizes, with the usual number of chairs
+  filled in and still editable. New table shapes **oval** and **half-moon**, drawn with their
+  chairs on the plan, the PDFs and the guest view, and available to venues for their stated
+  table inventory and to assistants through MCP.
+- **Doors and pillars** in the room drawing: single, double, emergency-exit doors and plain
+  openings placed on a wall (they follow the wall when the room is reshaped), with width,
+  position, swing direction and hinge side; round or square pillars and posts of any size. Both
+  appear on every plan and PDF, and the fit check flags tables (with their chairs) standing on
+  a pillar or in the clear floor in front of a door (`space_models.own_features`).
+- **Stage, dance floor and equipment**: ready-made stages (4 × 3 to 8 × 5 m), dance floors
+  (4 × 4 to 8 × 8 m), DJ booth, band riser, speakers, subwoofers, lighting stands and truss,
+  screen, bar, buffet, cake table, candy bar and photo booth; fixtures now record what they are
+  (`plan_items.fixture_kind`).
+- **Dance floor check and reference people**: the seating desk shows how many people can dance
+  on the dance floor (comfortable and packed) against half the confirmed guests, and can place
+  to-scale people anywhere or fill the dance floor with dancers to see the space (not saved).
+- **Measuring tool** on the seating desk and in the room drawing: two clicks give the distance,
+  sticking to the edges of tables, chairs, walls and pillars.
+
 ### Fixed (remaining check items)
 - A stranger or signed-out visitor opening someone else's occasion or business now gets a real
   "not found" (HTTP 404), not the not-found page with status 200. The loading skeleton moved

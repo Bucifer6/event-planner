@@ -20,7 +20,11 @@
     "length": "Lungime (m)",
     "dimsHint": "Lasă gol dacă nu o știi încă.",
     "emptyUnknown": "gol = necunoscut",
-    "create": "Creează spațiul"
+    "create": "Creează spațiul",
+    "draw": "Desenează sala",
+    "redraw": "Modifică desenul",
+    "drawHint": "Desenează forma exactă a sălii, cu pereți și colțuri la scară.",
+    "drawnNote": "Sala este desenată; dimensiunile vin din desen."
   },
   "empty": {
     "title": "Încă nu ai un plan al sălii",
@@ -105,5 +109,206 @@
     "intro": "Unde găsești ce ai nevoie în sală.",
     "planLabel": "Planul sălii {name}, cu punctele de interes",
     "parking": "Parcare"
+  },
+  "draw": {
+    "title": "Desenează sala",
+    "description": "Desenează la scară forma spațiului „{name}”: pereți, colțuri și zone. Mesele se așază apoi pe acest desen.",
+    "back": "Înapoi la planul sălii",
+    "unavailable": {
+      "noSpace": "Creează mai întâi spațiul, apoi îl poți desena.",
+      "venue": "Acest spațiu vine din planul locației și nu se redesenează aici.",
+      "role": "Doar organizatorul și managerii de proiect pot desena sala."
+    },
+    "toolbar": "Unelte de desen",
+    "tools": {
+      "label": "Unealtă",
+      "select": "Selectează",
+      "line": "Pereți",
+      "rect": "Dreptunghi",
+      "door": "Ușă",
+      "pillar": "Stâlp",
+      "measure": "Măsoară"
+    },
+    "history": "Istoric",
+    "undo": "Anulează (Ctrl+Z)",
+    "redo": "Refă (Ctrl+Y)",
+    "zoom": {
+      "label": "Mărire",
+      "in": "Mărește",
+      "out": "Micșorează",
+      "fit": "Încadrează"
+    },
+    "snap": {
+      "title": "Aliniere automată: {state}",
+      "on": "pornită",
+      "off": "oprită",
+      "grid": "Aliniază la grilă",
+      "step": "Pasul grilei",
+      "cm": "{n} cm",
+      "m": "{n} m",
+      "corners": "Aliniază la colțuri existente",
+      "angle": "Unghiuri din 15° în 15°",
+      "angleHint": "Ține apăsat Shift ca să schimbi pentru o mișcare."
+    },
+    "canvas": "Desenul sălii. Contururi: {count}.",
+    "keys": "Taste: V selectează, W pereți, R dreptunghi, D ușă, P stâlp, M măsoară, Enter închide conturul, Backspace șterge ultimul colț sau selecția, săgețile mută selecția (Shift = de 10 ori), Esc renunță, + și − măresc, F încadrează.",
+    "line": {
+      "live": "Perete de {length} m la {angle}°. Apasă ca să fixezi colțul.",
+      "start": "Apasă unde începe primul perete sau scrie punctul de start mai jos.",
+      "next": "Apasă pentru colțul următor. Apasă pe primul colț sau Enter ca să închizi conturul.",
+      "needThree": "Un contur are nevoie de cel puțin trei colțuri.",
+      "typedStart": "Sau scrie unde începe",
+      "startHere": "Începe aici",
+      "typedNext": "Peretele următor (colțuri: {n})",
+      "from": "Pornește din x {x} m, y {y} m.",
+      "directions": "Direcții rapide",
+      "addWall": "Adaugă peretele",
+      "dir0": "→ dreapta",
+      "dir90": "↓ în jos",
+      "dir180": "← stânga",
+      "dir270": "↑ în sus",
+      "close": "Închide conturul",
+      "undoPoint": "Șterge ultimul colț",
+      "cancel": "Renunță la contur"
+    },
+    "rect": {
+      "live": "{w} × {l} m. Apasă ca să fixezi colțul opus.",
+      "first": "Apasă primul colț al dreptunghiului sau scrie dimensiunile mai jos.",
+      "second": "Apasă colțul opus.",
+      "flat": "Dreptunghiul are nevoie de lățime și de lungime.",
+      "typed": "Sau scrie dimensiunile",
+      "add": "Adaugă dreptunghiul"
+    },
+    "select": {
+      "corner": "Colț la x {x} m, y {y} m",
+      "empty": "Încă nu ai desenat nimic. Alege „Dreptunghi” sau „Pereți”.",
+      "hint": "Apasă pe un perete, un colț sau un contur. Trage colțurile ca să schimbi forma; trage conturul ca să-l muți; trage pe gol ca să te deplasezi.",
+      "minCorners": "Un contur are nevoie de cel puțin trei colțuri.",
+      "rename": "Salvează numele",
+      "wallLength": "Lungimea peretelui {n} (m)",
+      "wallHint": "Colțul de la capăt se mută; peretele următor își păstrează direcția.",
+      "apply": "Aplică",
+      "split": "Adaugă un colț la mijloc",
+      "moveCorner": "Mută colțul {n}",
+      "walls": "Pereți și colțuri ({count})",
+      "wallItem": "Peretele {n}: {length} m",
+      "cornerItem": "Colțul {n}",
+      "removeCorner": "Șterge colțul",
+      "removeArea": "Șterge conturul"
+    },
+    "limits": {
+      "areas": "Poți desena cel mult {max} contururi.",
+      "corners": "Un contur poate avea cel mult {max} colțuri.",
+      "doors": "Poți pune cel mult {max} uși.",
+      "pillars": "Poți pune cel mult {max} stâlpi."
+    },
+    "areaM2": "{n} m²",
+    "list": {
+      "title": "Contururile sălii",
+      "empty": "Niciun contur încă.",
+      "unnamed": "Zona {n}",
+      "facts": "Colțuri: {corners} · {area} m²",
+      "select": "Selectează"
+    },
+    "problems": {
+      "title": "Desenul are o problemă",
+      "body": "Repară contururile marcate înainte să salvezi.",
+      "crossing": "pereți care se încrucișează",
+      "tooSmall": "prea mic"
+    },
+    "errors": {
+      "network": "Nu am putut salva. Verifică conexiunea și încearcă din nou.",
+      "measure": "Scrie o lungime în metri, de exemplu 6,5.",
+      "angle": "Scrie un unghi în grade, de exemplu 90.",
+      "crossing": "Zona {n} are pereți care se încrucișează.",
+      "tooSmall": "Zona {n} are sub jumătate de metru pătrat.",
+      "ownOnly": "Doar un spațiu descris de tine se poate desena.",
+      "drawnSize": "Sala este desenată: schimbă dimensiunile din desen.",
+      "door": {
+        "offWall": "Ușa {n} nu mai încape pe peretele ei: mut-o sau îngusteaz-o.",
+        "tooWide": "Ușa {n} e mai lată decât peretele."
+      },
+      "pillar": {
+        "outside": "Stâlpul {n} e în afara sălii."
+      },
+      "doorWidth": "Scrie o lățime între 0,5 și 6 m.",
+      "pillarSize": "Scrie o mărime între 0,1 și 3 m."
+    },
+    "fields": {
+      "x": "x (m)",
+      "y": "y (m)",
+      "length": "Lungime (m)",
+      "angle": "Unghi (°)",
+      "angleHint": "0 = spre dreapta, 90 = în jos",
+      "width": "Lățime (m)",
+      "depth": "Adâncime (m)",
+      "name": "Numele zonei",
+      "nameHint": "De exemplu „Salon” sau „Terasă”."
+    },
+    "itemsNote": "Mesele deja așezate apar punctat și rămân unde sunt. Verificarea de încăpere îți arată dacă vreuna a rămas în afara sălii.",
+    "save": "Salvează desenul",
+    "saveClear": "Șterge desenul",
+    "leaveConfirm": "Ai modificări nesalvate. Pleci fără să le salvezi?",
+    "unsaved": "Nesalvat",
+    "door": {
+      "tooShort": "Peretele e mai scurt decât ușa.",
+      "onWall": "Apasă pe un perete ca să pui ușa.",
+      "hint": "Apasă pe un perete ca să pui o ușă. O poți trage apoi de-a lungul peretelui.",
+      "newTitle": "Ușa pe care o pui",
+      "kind": "Tip",
+      "kinds": {
+        "single": "Ușă simplă",
+        "double": "Ușă dublă",
+        "exit": "Ieșire de urgență",
+        "opening": "Gol fără ușă"
+      },
+      "width": "Lățime (m)",
+      "typedHint": "De la tastatură: selectează un perete și apasă „Pune o ușă aici”.",
+      "addHere": "Pune o ușă aici",
+      "name": "Ușa {n}",
+      "facts": "{kind} · {width} m",
+      "swing": "Cum se deschide",
+      "swings": {
+        "in": "Spre interior",
+        "out": "Spre exterior",
+        "sliding": "Glisantă"
+      },
+      "offset": "Distanța de la colț (m)",
+      "offsetHint": "De la primul colț al peretelui până la marginea ușii.",
+      "flipHinge": "Mută balamalele pe partea cealaltă",
+      "clearNote": "Locul hașurat din fața ușii rămâne liber; verificarea de încăpere îți spune dacă o masă îl ocupă.",
+      "remove": "Șterge ușa"
+    },
+    "pillar": {
+      "live": "Stâlp la x {x} m, y {y} m. Apasă ca să-l pui.",
+      "hint": "Apasă unde stă stâlpul sau scrie poziția mai jos.",
+      "newTitle": "Stâlpul pe care îl pui",
+      "shape": "Formă",
+      "shapes": {
+        "round": "Rotund",
+        "square": "Pătrat"
+      },
+      "diameter": "Diametru (m)",
+      "side": "Latură (m)",
+      "add": "Pune stâlpul",
+      "name": "Stâlpul {n}",
+      "facts": {
+        "round": "rotund, ⌀ {size} m",
+        "square": "pătrat, {size} m"
+      },
+      "remove": "Șterge stâlpul"
+    },
+    "measure": {
+      "live": "{length} m. Apasă ca să fixezi capătul.",
+      "first": "Apasă primul punct de măsurat.",
+      "second": "Apasă al doilea punct.",
+      "title": "Măsurători",
+      "none": "Nicio măsurătoare încă. Măsurătorile nu se salvează.",
+      "item": "Măsurătoarea {n}: {length} m (pe orizontală {dx} m, pe verticală {dy} m)",
+      "clear": "Șterge măsurătorile"
+    },
+    "features": {
+      "title": "Uși și stâlpi"
+    }
   }
 }

@@ -12,7 +12,7 @@ export type PlanPoint = { x: number; y: number };
 /** A usable floor area (V2): a closed outline; a rectangle is simply four points. */
 export type FloorArea = { id: string; name: string | null; points: PlanPoint[] };
 
-export const TABLE_SHAPES = ["round", "rect"] as const;
+export const TABLE_SHAPES = ["round", "rect", "oval", "halfmoon"] as const;
 export type TableShape = (typeof TABLE_SHAPES)[number];
 
 /** One line of the venue's standard table inventory (V2). */
@@ -31,7 +31,7 @@ export type TableType = {
   count: number | null;
 };
 
-export const FIXTURE_KINDS = ["dance", "candybar", "photobooth", "stage", "bar", "other"] as const;
+export const FIXTURE_KINDS = ["dance", "candybar", "photobooth", "stage", "bar", "other", "dj", "band", "speaker", "lighting", "screen", "buffet", "cake"] as const;
 export type FixtureKind = (typeof FIXTURE_KINDS)[number];
 
 /** A named fixture with real dimensions (V8): takes part in fit checks. x/y = its centre. */

@@ -185,7 +185,14 @@
     "photobooth": "Cabină foto",
     "stage": "Scenă",
     "bar": "Bar",
-    "other": "Alt element"
+    "other": "Alt element",
+    "dj": "Cabină DJ",
+    "band": "Podium formație",
+    "speaker": "Boxă",
+    "lighting": "Lumini",
+    "screen": "Ecran",
+    "buffet": "Bufet",
+    "cake": "Masa tortului"
   },
   "poiKinds": {
     "toilets": "Toalete",
@@ -199,7 +206,9 @@
   },
   "shapes": {
     "round": "Rotundă",
-    "rect": "Dreptunghiulară"
+    "rect": "Dreptunghiulară",
+    "oval": "Ovală",
+    "halfmoon": "Semilună"
   },
   "fields": {
     "spaceName": "Numele spațiului",

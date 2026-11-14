@@ -59,10 +59,10 @@ registerMcpTool({
 
 const customTable = z.object({
   name: z.string().min(1).max(80),
-  shape: z.enum(["round", "rect"]),
-  diameterMm: z.number().int().min(1).nullable().optional().describe("Round tables."),
-  widthMm: z.number().int().min(1).nullable().optional().describe("Rectangular tables."),
-  lengthMm: z.number().int().min(1).nullable().optional().describe("Rectangular tables."),
+  shape: z.enum(["round", "rect", "oval", "halfmoon"]),
+  diameterMm: z.number().int().min(1).nullable().optional().describe("Round and half-moon tables."),
+  widthMm: z.number().int().min(1).nullable().optional().describe("Rectangular and oval tables."),
+  lengthMm: z.number().int().min(1).nullable().optional().describe("Rectangular and oval tables."),
   seats: z.number().int().min(0),
 });
 

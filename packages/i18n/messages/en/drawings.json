@@ -185,7 +185,14 @@
     "photobooth": "Photo booth",
     "stage": "Stage",
     "bar": "Bar",
-    "other": "Other fixture"
+    "other": "Other fixture",
+    "dj": "DJ booth",
+    "band": "Band riser",
+    "speaker": "Speaker",
+    "lighting": "Lighting",
+    "screen": "Screen",
+    "buffet": "Buffet",
+    "cake": "Cake table"
   },
   "poiKinds": {
     "toilets": "Toilets",
@@ -199,7 +206,9 @@
   },
   "shapes": {
     "round": "Round",
-    "rect": "Rectangular"
+    "rect": "Rectangular",
+    "oval": "Oval",
+    "halfmoon": "Half-moon"
   },
   "fields": {
     "spaceName": "Name of the space",

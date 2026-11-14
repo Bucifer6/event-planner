@@ -59,6 +59,16 @@ import {
   modelBounds,
   modelFromSnapshot,
   ownSpaceAreas,
+  resolveDoors,
+  roomDrawingProblems,
+  roomFeatureProblems,
+  zRoomFeatures,
+  FIXTURE_KIND_VALUES,
+  type FloorArea,
+  type RoomFeatures,
+  shapeDims,
+  zFloorArea,
+  shapeUsesDiameter,
   polygonArea,
   SPACE_LIMITS,
   TABLE_SHAPE_VALUES,
@@ -78,6 +88,7 @@ import { createPreview, registerWhatIf, type WhatIfPreview } from "./whatif";
 //   listAttachableSpaces(ctx, occasionId)      venue spaces the occasion may use (see below)
 //   attachVenueSpace(ctx, { occasionId, spaceId })   "Folosește planul locației" — freezes the live version
 //   createOwnSpace(ctx, { occasionId, name, widthMm?, lengthMm? })   a planner-entered rectangle
+//   saveOwnRoomDrawing(ctx, { occasionId, areas })   the room drawn with the drawing tool (own only)
 //   getSpaceModel(ctx, occasionId)             THE read API (pages, MCP get_space_model)
 //   proposeDrawingUpdate(ctx, occasionId)      newer approved version → What-if "space.updateDrawing"
 //
@@ -142,6 +153,7 @@ function rowToItem(r: PlanItemRow, seated?: number): PlanItem {
     rotation: r.rotation,
     version: r.version,
     seated,
+    fixtureKind: r.kind === "fixture" ? (r.fixtureKind ?? null) : null,
   };
 }
 
@@ -161,13 +173,20 @@ function buildModel(row: SpaceModelRow, snapshot: DrawingSnapshot | null, items:
     widthMm: row.ownWidthMm,
     lengthMm: row.ownLengthMm,
     backdrop: null,
-    areas: ownSpaceAreas(row.ownWidthMm, row.ownLengthMm),
+    areas: drawnAreas(row) ?? ownSpaceAreas(row.ownWidthMm, row.ownLengthMm),
     tableTypes: [],
     items,
     pois: [],
     parkingAreas: [],
     aisleMm: row.aisleMm,
+    // doors and pillars belong to a drawn room only
+    doors: drawnAreas(row) ? resolveDoors(row.ownAreas!, row.ownFeatures?.doors ?? []) : [],
+    pillars: drawnAreas(row) ? (row.ownFeatures?.pillars ?? []) : [],
   };
+}
+
+function drawnAreas(row: SpaceModelRow): FloorArea[] | null {
+  return row.source === "own" && row.ownAreas && row.ownAreas.length > 0 ? row.ownAreas : null;
 }
 
 /** NO access check. `lock` takes the model row FOR UPDATE (serialises layout writers of one occasion). */
@@ -235,6 +254,7 @@ function fixtureItemValues(occasionId: string, modelId: string, snapshot: Drawin
     name: f.name,
     label: f.name,
     shape: "rect" as const,
+    fixtureKind: f.kind,
     widthMm: f.widthMm,
     lengthMm: f.lengthMm,
     x: f.x,
@@ -312,8 +332,16 @@ export async function updateSpaceModel(ctx: Ctx, input: z.input<typeof settingsI
   if (data.aisleMm !== undefined) set.aisleMm = data.aisleMm;
   if (row.source === "own") {
     if (data.name !== undefined) set.name = data.name;
-    if (data.widthMm !== undefined) set.ownWidthMm = data.widthMm;
-    if (data.lengthMm !== undefined) set.ownLengthMm = data.lengthMm;
+    // a drawn room takes its size from the drawing; typed sides would contradict it
+    const drawn = !!row.ownAreas && row.ownAreas.length > 0;
+    if (data.widthMm !== undefined && !(drawn && data.widthMm === row.ownWidthMm)) {
+      if (drawn) throw new AppError("VALIDATION", "space.draw.errors.drawnSize", { fieldErrors: { widthMm: ["space.draw.errors.drawnSize"] } });
+      set.ownWidthMm = data.widthMm;
+    }
+    if (data.lengthMm !== undefined && !(drawn && data.lengthMm === row.ownLengthMm)) {
+      if (drawn) throw new AppError("VALIDATION", "space.draw.errors.drawnSize", { fieldErrors: { lengthMm: ["space.draw.errors.drawnSize"] } });
+      set.ownLengthMm = data.lengthMm;
+    }
   }
   if (Object.keys(set).length === 0) return row;
   const [updated] = await ctx.db.update(spaceModels).set(set).where(eq(spaceModels.id, row.id)).returning();
@@ -330,6 +358,50 @@ export async function removeSpaceModel(ctx: Ctx, input: { occasionId: string }):
     const [plan] = await tx.db.update(seatingPlans).set({ publishedAt: null }).where(eq(seatingPlans.occasionId, occasionId)).returning();
     if (plan) await bumpGuestRevision(tx, occasionId, "seating.changes.withdrawn");
     await audit(tx, { action: "space.removed", objectType: "space_model", objectId: row.id });
+  });
+}
+
+const roomInput = z.object({ occasionId: zId, areas: z.array(zFloorArea).max(SPACE_LIMITS.areas), features: zRoomFeatures.optional() });
+export type RoomDrawingInput = z.input<typeof roomInput>;
+
+/**
+ * Saves the room the planner drew (own spaces only): its floor outlines in mm. An empty list
+ * goes back to the typed rectangle. The stated size becomes the drawing's overall extent.
+ * Tables already placed stay where they are; the fit checks show any that now stand outside.
+ */
+export async function saveOwnRoomDrawing(ctx: Ctx, input: RoomDrawingInput): Promise<SpaceModelRow> {
+  const data = roomInput.parse(input);
+  await writeAccess(ctx, data.occasionId);
+  const problems = roomDrawingProblems(data.areas);
+  if (problems.length > 0) {
+    const p = problems[0]!;
+    throw new AppError("VALIDATION", `space.draw.errors.${p.problem}`, { params: { n: p.index + 1 } });
+  }
+  if (new Set(data.areas.map((a) => a.id)).size !== data.areas.length) throw new AppError("VALIDATION", "common.validation.invalid");
+  const features: RoomFeatures = data.areas.length > 0 ? (data.features ?? { doors: [], pillars: [] }) : { doors: [], pillars: [] };
+  const fp = roomFeatureProblems(data.areas, features);
+  if (fp.length > 0) throw new AppError("VALIDATION", `space.draw.errors.${fp[0]!.kind}.${fp[0]!.problem}`, { params: { n: fp[0]!.index + 1 } });
+  return inTx(ctx, async (tx) => {
+    const { row } = await requireModel(tx, data.occasionId, { lock: true });
+    if (row.source !== "own") throw new AppError("CONFLICT", "space.draw.errors.ownOnly");
+    const set: Partial<typeof spaceModels.$inferInsert> = {
+      ownAreas: data.areas.length > 0 ? data.areas : null,
+      ownFeatures: features.doors.length + features.pillars.length > 0 ? features : null,
+    };
+    if (data.areas.length > 0) {
+      const xs = data.areas.flatMap((a) => a.points.map((p) => p.x));
+      const ys = data.areas.flatMap((a) => a.points.map((p) => p.y));
+      set.ownWidthMm = Math.max(...xs) - Math.min(...xs);
+      set.ownLengthMm = Math.max(...ys) - Math.min(...ys);
+    }
+    const [updated] = await tx.db.update(spaceModels).set(set).where(eq(spaceModels.id, row.id)).returning();
+    await audit(tx, {
+      action: "space.roomDrawn",
+      objectType: "space_model",
+      objectId: row.id,
+      after: { outlines: data.areas.length, corners: data.areas.reduce((n, a) => n + a.points.length, 0), doors: features.doors.length, pillars: features.pillars.length },
+    });
+    return updated!;
   });
 }
 
@@ -352,6 +424,10 @@ export type SpaceModelView = {
   pendingUpdatePreviewId: string | null;
   parking: ParkingView | null;
   canManage: boolean;
+  /** Own spaces: the planner drew the room with the drawing tool (not just typed two sides). */
+  drawn: boolean;
+  /** Own spaces: the drawn room's doors (as stored, on their walls) and pillars. */
+  features: RoomFeatures;
 };
 
 /**
@@ -395,6 +471,8 @@ export async function getSpaceModel(ctx: Ctx, occasionId: string): Promise<Space
     pendingUpdatePreviewId,
     parking: version ? await readListingParking(ctx, version.listingId) : null,
     canManage: isManager(member),
+    drawn: row.source === "own" && !!row.ownAreas && row.ownAreas.length > 0,
+    features: row.ownFeatures ?? { doors: [], pillars: [] },
   };
 }
 
@@ -444,7 +522,7 @@ export type AddTableInput = z.input<typeof addTableInput>;
 
 function customDims(c: z.output<typeof customTable>) {
   // a size is whole or unknown: round = diameter, rectangular = both sides
-  if (c.shape === "round") return { diameterMm: c.diameterMm ?? null, widthMm: null, lengthMm: null };
+  if (shapeUsesDiameter(c.shape)) return { diameterMm: c.diameterMm ?? null, widthMm: null, lengthMm: null };
   const both = c.widthMm != null && c.lengthMm != null;
   if (!both && (c.widthMm != null || c.lengthMm != null)) throw new AppError("VALIDATION", "seating.errors.bothSides", { fieldErrors: { lengthMm: ["seating.errors.bothSides"] } });
   return { diameterMm: null, widthMm: both ? c.widthMm! : null, lengthMm: both ? c.lengthMm! : null };
@@ -478,9 +556,7 @@ async function insertTable(tx: Ctx, loaded: Loaded, data: z.output<typeof addTab
       name: type.name,
       label,
       shape: type.shape,
-      diameterMm: type.shape === "round" ? type.diameterMm : null,
-      widthMm: type.shape === "rect" ? type.widthMm : null,
-      lengthMm: type.shape === "rect" ? type.lengthMm : null,
+      ...shapeDims(type.shape, type),
       seats: type.seats,
       ...at,
       rotation: data.rotation ?? 0,
@@ -523,6 +599,7 @@ const addFixtureInput = z.object({
   occasionId: zId,
   id: zId.optional(),
   name: text(80),
+  kind: z.enum(FIXTURE_KIND_VALUES).optional(),
   widthMm: optMm,
   lengthMm: optMm,
   x: zCoordMm.optional(),
@@ -555,6 +632,7 @@ export async function addFixture(ctx: Ctx, input: z.input<typeof addFixtureInput
         name: data.name,
         label: data.name,
         shape: "rect",
+        fixtureKind: data.kind ?? null,
         widthMm: both ? data.widthMm! : null,
         lengthMm: both ? data.lengthMm! : null,
         ...at,
@@ -1182,7 +1260,7 @@ export async function getGuestSpaceView(ctx: Ctx): Promise<GuestSpaceView | null
 
 const tx_ = (key: string, params?: Record<string, string | number>): { key: string; params?: Record<string, string | number> } => (params ? { key, params } : { key });
 const m = (mm: number | null) => (mm === null ? null : `${mmToMetresText(mm)} m`);
-const typeSize = (t: TableType) => (t.shape === "round" ? (t.diameterMm === null ? null : `⌀ ${mmToMetresText(t.diameterMm)} m`) : t.widthMm === null || t.lengthMm === null ? null : `${mmToMetresText(t.widthMm)} × ${mmToMetresText(t.lengthMm)} m`);
+const typeSize = (t: TableType) => (shapeUsesDiameter(t.shape) ? (t.diameterMm === null ? null : `⌀ ${mmToMetresText(t.diameterMm)} m`) : t.widthMm === null || t.lengthMm === null ? null : `${mmToMetresText(t.widthMm)} × ${mmToMetresText(t.lengthMm)} m`);
 
 type DrawingUpdatePlan = {
   delta: WhatIfDeltaRow[];
@@ -1333,7 +1411,7 @@ function registerWhatIfKinds(): void {
         if (plan.toCustom.includes(r.id)) continue;
         await tx.db
           .update(planItems)
-          .set({ name: r.type.name, shape: r.type.shape, diameterMm: r.type.shape === "round" ? r.type.diameterMm : null, widthMm: r.type.shape === "rect" ? r.type.widthMm : null, lengthMm: r.type.shape === "rect" ? r.type.lengthMm : null, seats: r.type.seats, ...bump })
+          .set({ name: r.type.name, shape: r.type.shape, ...shapeDims(r.type.shape, r.type), seats: r.type.seats, ...bump })
           .where(eq(planItems.id, r.id));
       }
       if (plan.toCustom.length > 0) await tx.db.update(planItems).set({ source: "custom", venueRef: null, ...bump }).where(inArray(planItems.id, plan.toCustom));
@@ -1356,7 +1434,7 @@ function registerWhatIfKinds(): void {
     authorize: (ctx, subject, action) => authorizeSeating(ctx, subject.occasionId, action),
     compute: async (ctx, input, subject) => {
       await requireModel(ctx, subject.occasionId!);
-      const size = input.shape === "round" ? (input.diameterMm ? `⌀ ${mmToMetresText(input.diameterMm)} m` : null) : input.widthMm && input.lengthMm ? `${mmToMetresText(input.widthMm)} × ${mmToMetresText(input.lengthMm)} m` : null;
+      const size = shapeUsesDiameter(input.shape) ? (input.diameterMm ? `⌀ ${mmToMetresText(input.diameterMm)} m` : null) : input.widthMm && input.lengthMm ? `${mmToMetresText(input.widthMm)} × ${mmToMetresText(input.lengthMm)} m` : null;
       return {
         title: tx_("space.whatif.customTitle", { name: input.name }),
         delta: [

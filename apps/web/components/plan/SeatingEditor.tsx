@@ -2,7 +2,7 @@
 
 import { checkFit, mm2ToM2, type FitIssue, type FitResult } from "@ed/core/fitcheck";
 import type { MealStageView, RosterHousehold } from "@ed/core/seating";
-import { applyStage, buildPlanScene, GRID_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, snapPosition, type PlanItem, type PlanModel, type StageItemState } from "@ed/core/spacemodel";
+import { applyStage, buildPlanScene, danceFloorCapacity, DANCER_AREA_MM2, snapToEdges, findFreeSpot, FIXTURE_KIND_VALUES, FIXTURE_PRESETS, GRID_MM, REFERENCE_PERSON_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, shapeUsesDiameter, snapPosition, TABLE_PRESET_GROUPS, TABLE_PRESETS, TABLE_SHAPE_VALUES, type FixtureKind, type PlanItem, type PlanModel, type StageItemState, type TableShape } from "@ed/core/spacemodel";
 import { Button, Checkbox, IconButton, Notice, Section, SelectField, Sheet, Tag, TextField, Unknown } from "@ed/ui";
 import { IconAlert, IconArrowLeft, IconArrowRight, IconCheck, IconClose, IconInfo, IconMinus, IconPlus } from "@ed/ui/icons";
 import { useTranslations } from "next-intl";
@@ -97,6 +97,14 @@ export function SeatingEditor(props: SeatingEditorProps) {
   const [saving, setSaving] = useState(0);
   const [savedOnce, setSavedOnce] = useState(false);
   const [problem, setProblem] = useState<string | null>(null);
+  /** arrange = move tables; measure = two taps give a distance; people = to-scale people to judge space (never saved). */
+  const [mode, setMode] = useState<"arrange" | "measure" | "people">("arrange");
+  const [measures, setMeasures] = useState<Array<{ a: { x: number; y: number }; b: { x: number; y: number } }>>([]);
+  const [measureFrom, setMeasureFrom] = useState<{ x: number; y: number } | null>(null);
+  const [measureHover, setMeasureHover] = useState<{ x: number; y: number } | null>(null);
+  const [people, setPeople] = useState<Array<{ id: number; x: number; y: number }>>([]);
+  const personDrag = useRef<{ id: number; pointerId: number } | null>(null);
+  const personSeq = useRef(0);
 
   const itemsRef = useRef(items);
   itemsRef.current = items;
@@ -400,6 +408,7 @@ export function SeatingEditor(props: SeatingEditorProps) {
   zoomRef.current = zoom;
 
   function itemPointerDown(id: string, e: ReactPointerEvent<SVGGElement>) {
+    if (mode !== "arrange") return; // measuring and people go through the sheet's own handlers
     if (placeMode) return; // the next touch says WHERE the selected item goes, whatever is under it
     setSelectedId(id);
     if (!canManage || (e.pointerType === "mouse" && e.button !== 0)) return;
@@ -409,7 +418,37 @@ export function SeatingEditor(props: SeatingEditorProps) {
     dragRef.current = { id, pointerId: e.pointerId, startX: e.clientX, startY: e.clientY, originX: it.x, originY: it.y, started: false, lift: e.pointerType === "touch" ? 56 : 0 };
   }
 
+  /** Where a measurement point lands: an edge (table, chairs, wall, pillar) close by, else the 5 cm grid. */
+  const measurePoint = (clientX: number, clientY: number) => {
+    const at = clientToMm(clientX, clientY);
+    if (!at) return null;
+    const edge = snapToEdges(liveModel, at, 14 / sceneRef.current.scale);
+    return edge ? edge.point : { x: Math.round(at.x / 50) * 50, y: Math.round(at.y / 50) * 50 };
+  };
+
   function sheetPointerUp(e: ReactPointerEvent<HTMLDivElement>) {
+    if (mode === "measure") {
+      const p = measurePoint(e.clientX, e.clientY);
+      if (!p) return;
+      if (!measureFrom) setMeasureFrom(p);
+      else {
+        if (p.x !== measureFrom.x || p.y !== measureFrom.y) setMeasures((m) => [...m.slice(-7), { a: measureFrom, b: p }]);
+        setMeasureFrom(null);
+        setMeasureHover(null);
+      }
+      return;
+    }
+    if (mode === "people") {
+      if (personDrag.current) {
+        personDrag.current = null;
+        return;
+      }
+      if ((e.target as Element).closest("[data-person]")) return;
+      const at = clientToMm(e.clientX, e.clientY);
+      if (!at || people.length >= 300) return;
+      setPeople((list) => [...list, { id: ++personSeq.current, x: Math.round(at.x / 50) * 50, y: Math.round(at.y / 50) * 50 }]);
+      return;
+    }
     if (dragRef.current?.started) return;
     const onItem = (e.target as Element).closest("[data-item]");
     if (placeMode && selected && canManage) {
@@ -458,6 +497,8 @@ export function SeatingEditor(props: SeatingEditorProps) {
     if (i.type === "overlap") return t("issues.overlap", { a: name(i.itemIds[0]!, a!), b: name(i.itemIds[1]!, b!) });
     if (i.type === "tooClose") return t("issues.tooClose", { a: name(i.itemIds[0]!, a!), b: name(i.itemIds[1]!, b!), gap: Math.round((i.value ?? 0) / 10), min: Math.round(props.model.aisleMm / 10) });
     if (i.type === "outside") return t("issues.outside", { a: name(i.itemIds[0]!, a!) });
+    if (i.type === "pillar") return t("issues.pillar", { a: name(i.itemIds[0]!, a!), n: i.value ?? 1 });
+    if (i.type === "door") return t("issues.door", { a: name(i.itemIds[0]!, a!), n: i.value ?? 1 });
     return t("issues.overInventory", { name: a!, count: i.value ?? 0 });
   };
 
@@ -492,6 +533,29 @@ export function SeatingEditor(props: SeatingEditorProps) {
       onFocus: () => setSelectedId(id),
       onKeyDown: (e: KeyboardEvent<SVGGElement>) => itemKey(id, e),
     };
+  };
+
+  const sx = (mm: number) => scene.originX + mm * scene.scale;
+  const sy = (mm: number) => scene.originY + mm * scene.scale;
+  const dance = danceFloorCapacity(liveModel);
+  /** Fills every dance floor with people at a comfortable spacing, to see what it looks like. */
+  const fillDanceFloors = () => {
+    const spacing = Math.sqrt(DANCER_AREA_MM2.comfortable);
+    const out: Array<{ id: number; x: number; y: number }> = [];
+    for (const f of liveModel.items) {
+      if (f.kind !== "fixture" || f.fixtureKind !== "dance" || !itemHasDims(f)) continue;
+      const cols = Math.max(1, Math.floor(f.widthMm! / spacing));
+      const rows = Math.max(1, Math.floor(f.lengthMm! / spacing));
+      const a = (f.rotation * Math.PI) / 180;
+      for (let r = 0; r < rows; r++)
+        for (let c = 0; c < cols; c++) {
+          const lx = -f.widthMm! / 2 + (c + 0.5) * (f.widthMm! / cols);
+          const ly = -f.lengthMm! / 2 + (r + 0.5) * (f.lengthMm! / rows);
+          if (out.length < 300) out.push({ id: ++personSeq.current, x: Math.round(f.x + lx * Math.cos(a) - ly * Math.sin(a)), y: Math.round(f.y + lx * Math.sin(a) + ly * Math.cos(a)) });
+        }
+    }
+    setPeople((list) => [...list, ...out].slice(-300));
+    setMode("people");
   };
 
   const dragOrigin = drag ? { x: scene.originX + drag.originX * scene.scale, y: scene.originY + drag.originY * scene.scale } : null;
@@ -538,7 +602,16 @@ export function SeatingEditor(props: SeatingEditorProps) {
         className={`ed-plan ${styles.sheet} ${styles.tall} ${placeMode ? styles.crosshair : ""}`}
         data-zoomed={zoom > 1 ? "true" : undefined}
         data-backdrop={props.pictureUrl && scene.backdrop ? "true" : undefined}
+        data-mode={mode}
         onPointerUp={sheetPointerUp}
+        onPointerMove={(e) => {
+          if (mode === "measure" && measureFrom) setMeasureHover(measurePoint(e.clientX, e.clientY));
+          if (mode === "people" && personDrag.current && e.pointerId === personDrag.current.pointerId) {
+            const at = clientToMm(e.clientX, e.clientY);
+            const id = personDrag.current.id;
+            if (at) setPeople((list) => list.map((p) => (p.id === id ? { ...p, x: Math.round(at.x / 50) * 50, y: Math.round(at.y / 50) * 50 } : p)));
+          }
+        }}
       >
         <PlanSvg
           scene={scene}
@@ -551,6 +624,39 @@ export function SeatingEditor(props: SeatingEditorProps) {
           displayWidth={zoom > 1 ? width : undefined}
           svgProps={zoom > 1 ? { style: { width, height: "auto" } } : undefined}
         >
+          {people.map((p) => (
+            <g
+              key={p.id}
+              data-person={p.id}
+              className={mode === "people" ? styles.grab : undefined}
+              onPointerDown={(e) => {
+                if (mode !== "people") return;
+                e.stopPropagation();
+                (e.currentTarget.ownerSVGElement ?? e.currentTarget).setPointerCapture?.(e.pointerId);
+                personDrag.current = { id: p.id, pointerId: e.pointerId };
+              }}
+              onDoubleClick={() => mode === "people" && setPeople((list) => list.filter((x) => x.id !== p.id))}
+            >
+              <ellipse cx={sx(p.x)} cy={sy(p.y)} rx={(REFERENCE_PERSON_MM.width / 2) * scene.scale} ry={(REFERENCE_PERSON_MM.depth / 2) * scene.scale} data-role="person" />
+              <circle cx={sx(p.x)} cy={sy(p.y)} r={110 * scene.scale} data-role="person-head" />
+            </g>
+          ))}
+          {[...measures, ...(measureFrom && measureHover ? [{ a: measureFrom, b: measureHover }] : [])].map((m, i) => {
+            const len = Math.hypot(m.b.x - m.a.x, m.b.y - m.a.y);
+            const mx = (sx(m.a.x) + sx(m.b.x)) / 2;
+            const my = (sy(m.a.y) + sy(m.b.y)) / 2;
+            return (
+              <g key={i} data-role="measure-group">
+                <line x1={sx(m.a.x)} y1={sy(m.a.y)} x2={sx(m.b.x)} y2={sy(m.b.y)} data-role="measure" />
+                <circle cx={sx(m.a.x)} cy={sy(m.a.y)} r={3} data-role="measure-end" />
+                <circle cx={sx(m.b.x)} cy={sy(m.b.y)} r={3} data-role="measure-end" />
+                <text x={mx} y={my - 5} textAnchor="middle" data-role="measure-label">
+                  {mmToMetresText(Math.round(len), locale)} m
+                </text>
+              </g>
+            );
+          })}
+          {measureFrom && !measureHover ? <circle cx={sx(measureFrom.x)} cy={sy(measureFrom.y)} r={4} data-role="measure-end" /> : null}
           {drag && dragOrigin && dragAt ? (
             <>
               <circle cx={dragOrigin.x} cy={dragOrigin.y} r={16} data-role="origin" />
@@ -577,6 +683,73 @@ export function SeatingEditor(props: SeatingEditorProps) {
           {saving > 0 ? t("saving") : savedOnce ? t("saved") : ""}
         </span>
       </div>
+
+      <div className={styles.toolbar}>
+        <div className={styles.toolGroup} role="group" aria-label={t("modes.label")}>
+          {(["arrange", "measure", "people"] as const).map((k) => (
+            <Button
+              key={k}
+              size="sm"
+              variant={mode === k ? "secondary" : "quiet"}
+              aria-pressed={mode === k}
+              onClick={() => {
+                setMode(k);
+                setMeasureFrom(null);
+                setMeasureHover(null);
+                setPlaceMode(false);
+              }}
+            >
+              {t(`modes.${k}`)}
+            </Button>
+          ))}
+        </div>
+      </div>
+      {mode === "measure" ? (
+        <div className={styles.modePanel} aria-live="polite">
+          <p className="ed-small">{measureFrom ? t("measure.second") : t("measure.first")}</p>
+          {measures.length > 0 ? (
+            <>
+              <ol className={styles.measureList}>
+                {measures.map((m, i) => (
+                  <li key={i}>{t("measure.item", { n: i + 1, length: mmToMetresText(Math.round(Math.hypot(m.b.x - m.a.x, m.b.y - m.a.y)), locale), dx: mmToMetresText(Math.abs(m.b.x - m.a.x), locale), dy: mmToMetresText(Math.abs(m.b.y - m.a.y), locale) })}</li>
+                ))}
+              </ol>
+              <Button size="sm" variant="quiet" onClick={() => setMeasures([])}>
+                {t("measure.clear")}
+              </Button>
+            </>
+          ) : null}
+        </div>
+      ) : null}
+      {mode === "people" ? (
+        <div className={styles.modePanel} aria-live="polite">
+          <p className="ed-small">{t("people.hint")}</p>
+          <p className="ed-small ed-muted">{t("people.count", { count: people.length })}</p>
+          <div className="ed-cluster">
+            {dance ? (
+              <Button size="sm" onClick={fillDanceFloors}>
+                {t("people.fill")}
+              </Button>
+            ) : null}
+            {people.length > 0 ? (
+              <Button size="sm" variant="quiet" onClick={() => setPeople([])}>
+                {t("people.clear")}
+              </Button>
+            ) : null}
+          </div>
+        </div>
+      ) : null}
+      {dance ? (
+        <p className={`ed-small ${styles.danceLine}`}>
+          {t("dance.summary", { area: mm2ToM2(dance.areaMm2).toLocaleString(locale === "ro" ? "ro-RO" : "en-GB"), comfortable: dance.comfortable, packed: dance.packed })}{" "}
+          {props.attending > 0 ? t(Math.ceil(props.attending / 2) > dance.comfortable ? "dance.small" : "dance.ok", { half: Math.ceil(props.attending / 2), attending: props.attending }) : null}{" "}
+          {mode !== "people" ? (
+            <Button size="sm" variant="quiet" onClick={fillDanceFloors}>
+              {t("people.fill")}
+            </Button>
+          ) : null}
+        </p>
+      ) : null}
 
       <ul className={styles.key}>
         <li>
@@ -1057,8 +1230,8 @@ function FitStrip({
 
 type AddSpec = {
   tableTypeId?: string;
-  custom?: { name: string; shape: "round" | "rect"; diameterMm: number | null; widthMm: number | null; lengthMm: number | null; seats: number };
-  fixture?: { name: string; widthMm: number | null; lengthMm: number | null };
+  custom?: { name: string; shape: TableShape; diameterMm: number | null; widthMm: number | null; lengthMm: number | null; seats: number };
+  fixture?: { name: string; kind?: FixtureKind; widthMm: number | null; lengthMm: number | null };
   x?: number;
   y?: number;
 };
@@ -1069,14 +1242,51 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
   const id = useId();
   const [kind, setKind] = useState<"table" | "fixture">("table");
   const [v, setV] = useState<Record<string, string>>({ name: "", shape: "round", diameter: "", w: "", l: "", seats: "10", count: "1" });
+  const [preset, setPreset] = useState("");
+  const [fxPreset, setFxPreset] = useState("");
+  const [fxKind, setFxKind] = useState<FixtureKind>("other");
+  /** A ready-made stage, dance floor or piece of equipment fills the form. */
+  const chooseFixture = (key: string) => {
+    setFxPreset(key);
+    const p = FIXTURE_PRESETS.find((x) => x.key === key);
+    if (!p) return;
+    setFxKind(p.kind);
+    setV((s) => ({ ...s, name: `${t(`fixturePresets.${p.key}`)}`, w: fm(p.widthMm), l: fm(p.lengthMm) }));
+    setErr({});
+  };
+  const fm = (mm: number | null) => (mm === null ? "" : mmToMetresText(mm, locale));
+  const presetName = (p: (typeof TABLE_PRESETS)[number]) => `${t(`presetGroups.${p.group}`)} ${itemSizeText(p, locale) ?? ""}`.trim();
+  /** A ready-made table fills the form; every field stays editable. */
+  const choosePreset = (key: string) => {
+    setPreset(key);
+    const p = TABLE_PRESETS.find((x) => x.key === key);
+    if (!p) return;
+    setV((s) => ({ ...s, name: presetName(p), shape: p.shape, diameter: fm(p.diameterMm), w: fm(p.widthMm), l: fm(p.lengthMm), seats: String(p.seats) }));
+    setErr({});
+  };
   const [err, setErr] = useState<Record<string, string>>({});
   const set = (k: string) => (e: { target: { value: string } }) => setV((s) => ({ ...s, [k]: e.target.value }));
   const at = (n: number): { x?: number; y?: number } => {
     const c = centre();
     return c ? { x: c.x + (n % 4) * 2600, y: c.y + Math.floor(n / 4) * 2600 } : {};
   };
+  /** Each new item goes to the nearest free floor around the view's centre, never on top of another. */
+  const placeAll = (specs: AddSpec[]): AddSpec[] => {
+    const c = centre() ?? { x: 0, y: 0 };
+    const others = [...model.items];
+    return specs.map((spec, n) => {
+      const type = spec.tableTypeId ? model.tableTypes.find((x) => x.id === spec.tableTypeId) : undefined;
+      const dims = spec.custom ?? (type ? { shape: type.shape, diameterMm: type.diameterMm, widthMm: type.widthMm, lengthMm: type.lengthMm, seats: type.seats ?? 0 } : spec.fixture ? { shape: "rect" as const, diameterMm: null, widthMm: spec.fixture.widthMm, lengthMm: spec.fixture.lengthMm, seats: 0 } : null);
+      if (!dims) return spec;
+      const probe = { kind: spec.fixture ? ("fixture" as const) : ("table" as const), rotation: 0, ...dims };
+      const spot = findFreeSpot(model, probe, c, others);
+      const pos = spot ?? at(n);
+      if (pos.x !== undefined && pos.y !== undefined) others.push({ ...probe, id: `new${n}`, source: "custom", name: "", label: "", x: pos.x, y: pos.y });
+      return { ...spec, ...pos };
+    });
+  };
   const placed = (typeId: string) => model.items.filter((i) => i.kind === "table" && i.source === "venue" && i.venueRef === typeId).length;
-  const size = (x: { shape: "round" | "rect"; diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) => itemSizeText(x, locale);
+  const size = (x: { shape: TableShape; diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) => itemSizeText(x, locale);
 
   function submit(e: FormEvent) {
     e.preventDefault();
@@ -1098,10 +1308,11 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
       if ((w === null) !== (l === null) && !errors.w && !errors.l) errors[w === null ? "w" : "l"] = t("errors.bothSides");
       setErr(errors);
       if (Object.keys(errors).length) return focusFirst(id, errors);
-      onAdd([{ fixture: { name, widthMm: w, lengthMm: l }, ...at(0) }]);
+      onAdd(placeAll([{ fixture: { name, kind: fxKind, widthMm: w, lengthMm: l } }]));
       return;
     }
-    const round = v.shape === "round";
+    const shape = (v.shape ?? "round") as TableShape;
+    const round = shapeUsesDiameter(shape);
     const d = round ? measure("diameter") : null;
     const w = round ? null : measure("w");
     const l = round ? null : measure("l");
@@ -1112,7 +1323,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
     if (Number.isNaN(count) || count < 1 || count > 40) errors.count = t("errors.count");
     setErr(errors);
     if (Object.keys(errors).length) return focusFirst(id, errors);
-    onAdd(Array.from({ length: count }, (_, n) => ({ custom: { name, shape: round ? "round" : "rect", diameterMm: d, widthMm: w, lengthMm: l, seats }, ...at(n) })));
+    onAdd(placeAll(Array.from({ length: count }, () => ({ custom: { name, shape, diameterMm: d, widthMm: w, lengthMm: l, seats } }))));
   }
 
   return (
@@ -1147,7 +1358,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
                       {left === null ? <Unknown label={t("add.countUnknown")} /> : t("add.left", { left, count: type.count ?? 0 })}
                     </span>
                   </span>
-                  <Button size="sm" disabled={left === 0} onClick={() => onAdd([{ tableTypeId: type.id, ...at(0) }])} aria-label={t("add.venueAddLabel", { name: type.name })}>
+                  <Button size="sm" disabled={left === 0} onClick={() => onAdd(placeAll([{ tableTypeId: type.id }]))} aria-label={t("add.venueAddLabel", { name: type.name })}>
                     {left === 0 ? t("add.allPlaced") : t("add.venueAdd")}
                   </Button>
                 </li>
@@ -1162,14 +1373,54 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
           <option value="fixture">{t("add.customFixture")}</option>
         </SelectField>
         <p className="ed-small ed-muted">{t("add.customNote")}</p>
+        {kind === "table" ? (
+          <SelectField id={`${id}-preset`} label={t("add.preset")} hint={t("add.presetHint")} value={preset} onChange={(e) => choosePreset(e.target.value)}>
+            <option value="">{t("add.presetCustom")}</option>
+            {TABLE_PRESET_GROUPS.map((g) => (
+              <optgroup key={g} label={t(`presetGroups.${g}`)}>
+                {TABLE_PRESETS.filter((p) => p.group === g).map((p) => (
+                  <option key={p.key} value={p.key}>
+                    {itemSizeText(p, locale)} · {p.seats === 0 ? t("add.standing") : t("add.seats", { count: p.seats })}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </SelectField>
+        ) : null}
+        {kind === "fixture" ? (
+          <>
+            <SelectField id={`${id}-fxpreset`} label={t("add.fixturePreset")} hint={t("add.fixturePresetHint")} value={fxPreset} onChange={(e) => chooseFixture(e.target.value)}>
+              <option value="">{t("add.presetCustom")}</option>
+              {(["stage", "dance", "music", "service"] as const).map((g) => (
+                <optgroup key={g} label={t(`fixtureGroups.${g}`)}>
+                  {FIXTURE_PRESETS.filter((p) => FIXTURE_GROUP[p.kind] === g).map((p) => (
+                    <option key={p.key} value={p.key}>
+                      {t(`fixturePresets.${p.key}`)} · {itemSizeText({ shape: "rect", diameterMm: null, widthMm: p.widthMm, lengthMm: p.lengthMm }, locale)}
+                    </option>
+                  ))}
+                </optgroup>
+              ))}
+            </SelectField>
+            <SelectField id={`${id}-fxkind`} label={t("add.fixtureKind")} hint={t("add.fixtureKindHint")} value={fxKind} onChange={(e) => setFxKind(e.target.value as FixtureKind)}>
+              {FIXTURE_KIND_VALUES.map((k) => (
+                <option key={k} value={k}>
+                  {t(`fixtureKinds.${k}`)}
+                </option>
+              ))}
+            </SelectField>
+          </>
+        ) : null}
         <TextField id={`${id}-name`} label={t("fields.name")} hint={kind === "table" ? t("fields.tableNameHint") : t("fields.fixtureNameHint")} value={v.name} onChange={set("name")} error={err.name} autoComplete="off" />
         {kind === "table" ? (
           <SelectField id={`${id}-shape`} label={t("fields.shape")} value={v.shape} onChange={set("shape")}>
-            <option value="round">{t("shapes.round")}</option>
-            <option value="rect">{t("shapes.rect")}</option>
+            {TABLE_SHAPE_VALUES.map((x) => (
+              <option key={x} value={x}>
+                {t(`shapes.${x}`)}
+              </option>
+            ))}
           </SelectField>
         ) : null}
-        {kind === "table" && v.shape === "round" ? (
+        {kind === "table" && shapeUsesDiameter(v.shape as TableShape) ? (
           <TextField id={`${id}-diameter`} label={t("fields.diameter")} optionalLabel={t("fields.emptyUnknown")} inputMode="decimal" value={v.diameter} onChange={set("diameter")} error={err.diameter} autoComplete="off" />
         ) : (
           <div className={styles.fields2}>
@@ -1179,7 +1430,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
         )}
         {kind === "table" ? (
           <div className={styles.fields2}>
-            <TextField id={`${id}-seats`} label={t("fields.seats")} inputMode="numeric" value={v.seats} onChange={set("seats")} error={err.seats} autoComplete="off" />
+            <TextField id={`${id}-seats`} label={t("fields.seats")} hint={t("fields.seatsHint")} inputMode="numeric" value={v.seats} onChange={set("seats")} error={err.seats} autoComplete="off" />
             <TextField id={`${id}-count`} label={t("fields.howMany")} inputMode="numeric" value={v.count} onChange={set("count")} error={err.count} autoComplete="off" />
           </div>
         ) : null}
@@ -1187,6 +1438,23 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
     </Sheet>
   );
 }
+
+/** How the ready-made fixtures are grouped in the picker. */
+const FIXTURE_GROUP: Record<FixtureKind, "stage" | "dance" | "music" | "service"> = {
+  stage: "stage",
+  band: "stage",
+  screen: "stage",
+  lighting: "stage",
+  dance: "dance",
+  dj: "music",
+  speaker: "music",
+  bar: "service",
+  buffet: "service",
+  cake: "service",
+  candybar: "service",
+  photobooth: "service",
+  other: "service",
+};
 
 function focusFirst(formId: string, errors: Record<string, string>) {
   const first = Object.keys(errors)[0];
@@ -1252,7 +1520,7 @@ function EditSheet({
   item: PlanItem;
   locale: Locale;
   onClose: () => void;
-  onSave: (patch: { label?: string; custom?: { name?: string; shape?: "round" | "rect"; diameterMm?: number | null; widthMm?: number | null; lengthMm?: number | null; seats?: number } }) => Promise<boolean>;
+  onSave: (patch: { label?: string; custom?: { name?: string; shape?: TableShape; diameterMm?: number | null; widthMm?: number | null; lengthMm?: number | null; seats?: number } }) => Promise<boolean>;
 }) {
   const t = useTranslations("seating");
   const tc = useTranslations("common");
@@ -1283,14 +1551,15 @@ function EditSheet({
     if (custom) {
       const name = (v.name ?? "").trim();
       if (!name) errors.name = tc("validation.required");
-      const round = item.kind === "table" && v.shape === "round";
+      const shape: TableShape = item.kind === "table" ? (v.shape as TableShape) : "rect";
+      const round = shapeUsesDiameter(shape);
       const d = round ? measure("diameter") : null;
       const w = round ? null : measure("w");
       const l = round ? null : measure("l");
       if (!round && (w === null) !== (l === null) && !errors.w && !errors.l) errors[w === null ? "w" : "l"] = t("errors.bothSides");
       const seats = /^\d+$/.test((v.seats ?? "").trim()) ? Number(v.seats) : NaN;
       if (item.kind === "table" && (Number.isNaN(seats) || seats > 60)) errors.seats = t("errors.seats");
-      patch.custom = { name, shape: round ? "round" : "rect", diameterMm: d, widthMm: w, lengthMm: l, ...(item.kind === "table" ? { seats } : {}) };
+      patch.custom = { name, shape, diameterMm: d, widthMm: w, lengthMm: l, ...(item.kind === "table" ? { seats } : {}) };
     }
     setErr(errors);
     if (Object.keys(errors).length) return focusFirst(id, errors);
@@ -1320,11 +1589,14 @@ function EditSheet({
             <TextField id={`${id}-name`} label={t("fields.name")} value={v.name} onChange={set("name")} error={err.name} autoComplete="off" />
             {item.kind === "table" ? (
               <SelectField id={`${id}-shape`} label={t("fields.shape")} value={v.shape} onChange={set("shape")}>
-                <option value="round">{t("shapes.round")}</option>
-                <option value="rect">{t("shapes.rect")}</option>
+                {TABLE_SHAPE_VALUES.map((x) => (
+                  <option key={x} value={x}>
+                    {t(`shapes.${x}`)}
+                  </option>
+                ))}
               </SelectField>
             ) : null}
-            {item.kind === "table" && v.shape === "round" ? (
+            {item.kind === "table" && shapeUsesDiameter(v.shape as TableShape) ? (
               <TextField id={`${id}-diameter`} label={t("fields.diameter")} optionalLabel={t("fields.emptyUnknown")} inputMode="decimal" value={v.diameter} onChange={set("diameter")} error={err.diameter} autoComplete="off" />
             ) : (
               <div className={styles.fields2}>

@@ -1,13 +1,28 @@
 import { sql } from "drizzle-orm";
-import { boolean, check, index, integer, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, check, index, integer, jsonb, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
 import { createdAt, id, ref, timestamptz, updatedAt } from "./_helpers";
 import { accounts } from "./accounts";
-import { drawingVersions, spaces, type TableShape } from "./drawings";
+import { drawingVersions, spaces, type FixtureKind, type FloorArea, type TableShape } from "./drawings";
 import { guests, households } from "./guests";
 import { occasions } from "./occasions";
 
 // The occasion's space model, the layout on it and who sits where (P-06 V4–V6, C-01, C-02,
 // C-08). Measures are integer millimetres; unknown = NULL, never 0.
+
+export const DOOR_KINDS = ["single", "double", "exit", "opening"] as const;
+export type DoorKind = (typeof DOOR_KINDS)[number];
+export const DOOR_SWINGS = ["in", "out", "sliding"] as const;
+export type DoorSwing = (typeof DOOR_SWINGS)[number];
+
+/**
+ * A door in a drawn room, attached to one wall so it follows the wall when the room is
+ * reshaped: wall `wall` of outline `areaId` runs from corner `wall` to corner `wall + 1`;
+ * `offsetMm` is the distance from that first corner to the middle of the door.
+ */
+export type RoomDoor = { id: string; areaId: string; wall: number; offsetMm: number; widthMm: number; kind: DoorKind; swing: DoorSwing; hinge: "start" | "end" };
+/** A pillar or post standing in the room; x/y = its centre. Tables must stand clear of it. */
+export type Pillar = { id: string; shape: "round" | "square"; sizeMm: number; x: number; y: number };
+export type RoomFeatures = { doors: RoomDoor[]; pillars: Pillar[] };
 
 export const SPACE_MODEL_SOURCES = ["venue", "own"] as const;
 export type SpaceModelSource = (typeof SPACE_MODEL_SOURCES)[number];
@@ -15,7 +30,7 @@ export type SpaceModelSource = (typeof SPACE_MODEL_SOURCES)[number];
 /**
  * ONE space model per occasion. source "venue": a frozen approved drawing version of a venue
  * space (version + effective date shown to the planner; it changes only when the planner
- * accepts a proposal, V4). source "own": a rectangle the planner typed in.
+ * accepts a proposal, V4). source "own": a rectangle the planner typed in, or a room they drew.
  */
 export const spaceModels = pgTable(
   "space_models",
@@ -34,6 +49,13 @@ export const spaceModels = pgTable(
     name: text("name").notNull(),
     ownWidthMm: integer("own_width_mm"),
     ownLengthMm: integer("own_length_mm"),
+    /**
+     * A room the planner drew with the drawing tool (source "own"): one or more floor outlines
+     * in mm. NULL = not drawn, the typed rectangle is used.
+     */
+    ownAreas: jsonb("own_areas").$type<FloorArea[]>(),
+    /** Doors and pillars of the drawn room (source "own"). NULL = none. */
+    ownFeatures: jsonb("own_features").$type<RoomFeatures>(),
     /** Minimum free passage between tables, chairs included (C-01). */
     aisleMm: integer("aisle_mm").notNull().default(600),
     createdAt: createdAt(),
@@ -73,6 +95,8 @@ export const planItems = pgTable(
     /** What is written on the plan and on the guest's link: "1", "Masa mirilor". */
     label: text("label").notNull(),
     shape: text("shape").$type<TableShape>().notNull(),
+    /** Fixtures: what it is (stage, dance floor, speaker…), so checks can tell a dance floor. NULL = not said. */
+    fixtureKind: text("fixture_kind").$type<FixtureKind>(),
     diameterMm: integer("diameter_mm"),
     widthMm: integer("width_mm"),
     lengthMm: integer("length_mm"),
@@ -92,7 +116,7 @@ export const planItems = pgTable(
     index("plan_items_model_idx").on(t.spaceModelId),
     check("plan_items_kind_ck", sql`${t.kind} in ('table', 'fixture')`),
     check("plan_items_source_ck", sql`${t.source} in ('venue', 'custom')`),
-    check("plan_items_shape_ck", sql`${t.shape} in ('round', 'rect')`),
+    check("plan_items_shape_ck", sql`${t.shape} in ('round', 'rect', 'oval', 'halfmoon')`),
     check(
       "plan_items_dims_ck",
       sql`(${t.diameterMm} is null or ${t.diameterMm} > 0) and (${t.widthMm} is null or ${t.widthMm} > 0) and (${t.lengthMm} is null or ${t.lengthMm} > 0) and (${t.seats} is null or ${t.seats} >= 0)`,
