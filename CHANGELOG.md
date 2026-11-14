@@ -11,6 +11,16 @@ Status and evidence for everything listed here: `docs/build/13-implementation-lo
 
 ## [Unreleased]
 
+### Fixed (remaining check items)
+- A stranger or signed-out visitor opening someone else's occasion or business now gets a real
+  "not found" (HTTP 404), not the not-found page with status 200. The loading skeleton moved
+  from the top of the app to inside the occasion, business and account sections, below their
+  access checks; a test stops it moving back above them.
+- Patched two security advisories in developer-only tools (drizzle-kit's bundled esbuild and
+  eslint's minimatch) with dependency overrides; `pnpm audit` is clean.
+- The guest-import test no longer fails at random when a generated id or timestamp happens to
+  contain "41"; it still proves the age column is never stored.
+
 The first complete build of the product, made on 13–14 November 2026 on the branch
 `build/eventdesk-app`, from the requirements in `docs/PRD.md` (v4.9).
 

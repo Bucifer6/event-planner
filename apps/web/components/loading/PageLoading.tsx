@@ -2,7 +2,12 @@ import { Page, Skeleton, Stack, VisuallyHidden } from "@ed/ui";
 import { getTranslations } from "next-intl/server";
 
 // Reserves the shape of a page (header, lead, three rows) so nothing jumps when it arrives.
-export default async function Loading() {
+//
+// Used as loading.tsx BELOW the layouts that check access (occasions/[id], business/[businessId]),
+// never at the root: a loading boundary starts streaming, and a page that has started streaming
+// can no longer answer 404 — a stranger opening someone's occasion would get "page not found"
+// with status 200. apps/web/test/loading.test.ts keeps it that way.
+export async function PageLoading() {
   const t = await getTranslations("platform.loading");
   return (
     <Page>
