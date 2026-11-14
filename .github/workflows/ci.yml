@@ -78,6 +78,11 @@ jobs:
       - name: Install (frozen lockfile)
         run: pnpm install --frozen-lockfile
 
+      # The PDF tests read generated PDFs back with pdftotext, and PDF venue drawings are
+      # rasterised with pdftoppm; both come from poppler-utils.
+      - name: Install poppler-utils (PDF tools the tests use)
+        run: sudo apt-get update && sudo apt-get install -y --no-install-recommends poppler-utils
+
       - name: Throwaway session secret for this run
         run: echo "SESSION_SECRET=$(openssl rand -hex 32)" >> "$GITHUB_ENV"
 

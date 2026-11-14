@@ -77,6 +77,7 @@ pnpm build        # both production builds + the public-site privacy gate
 ```
 
 - Local PostgreSQL for tests: `docker compose -f docker-compose.dev.yml up -d`.
+- The PDF tests need `pdftotext` (package `poppler-utils`); CI installs it.
 - Changed anything a browser sees? Also run `node scripts/check-headers.mjs` and
   `node scripts/smoke.mjs` after the build (they need `DATABASE_URL`).
 - Added, moved or removed a module, route, table, job or tool? Run `pnpm codemap` and commit
