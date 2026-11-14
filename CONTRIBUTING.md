@@ -1,5 +1,9 @@
 # Contributing
 
+> Start with [`AGENTS.md`](AGENTS.md) — the short list of rules that keep one change from
+> breaking another — and the generated [code map](docs/build/21-code-map.md). `pnpm check` runs
+> every gate in one command.
+
 **What this is, in plain English.** The rules for changing EventDesk.ro's code: how a change
 travels from an idea to the live service, what must be true before it is accepted, and the
 recipes for the most common kinds of change. It applies equally to people and to AI coding

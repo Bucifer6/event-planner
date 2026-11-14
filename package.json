@@ -20,7 +20,9 @@
     "dev:web": "pnpm --filter @ed/web run dev",
     "dev:public": "pnpm --filter @ed/public run dev",
     "dev:worker": "pnpm --filter @ed/worker run dev",
-    "check:public-d1": "node scripts/check-public-d1.mjs"
+    "check:public-d1": "node scripts/check-public-d1.mjs",
+    "codemap": "node scripts/gen-codemap.mjs",
+    "check": "node scripts/gen-codemap.mjs --check && pnpm typecheck && pnpm lint && pnpm test"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",
