@@ -114,7 +114,11 @@ The first complete build of the product, made on 13–14 November 2026 on the br
 
 ### Added — after the main build (14 November 2026)
 
-- An in-app help centre at `/help`.
+- An in-app help centre at `/help`: 60 task-based articles in Romanian and English, search, a
+  staff section, and contextual help links on the main screens.
+- A deleted account's occasions are handed to their longest-standing project manager, or
+  deleted with the account when there is none.
+- The security log is erased after 90 days.
 - A security review (`docs/build/12-security-review.md`) with fixes and `security-review`
   test files; its own write-up says what was found and fixed.
 - Documentation brought in line with the code: architecture, data model, cross-cutting rules,
