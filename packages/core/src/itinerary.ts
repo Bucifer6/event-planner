@@ -588,7 +588,7 @@ function importDelta(rows: ImportPlanRow[], skippedUnreadable: number): WhatIfDe
     const what = c.title ?? { key: "travel.import.untitled" };
     const after = `${when(c.startsAt, c.startTz)}${c.endsAt ? ` → ${when(c.endsAt, c.endTz)}` : ""}`;
     const note = c.missing.length > 0 ? { noteKey: "travel.import.missingNote", noteParams: { count: c.missing.length } } : {};
-    if (r.action === "create") return { key: `c${i}`, what, kindLabelKey: "travel.import.create", before: null, after, ...note };
+    if (r.action === "create") return { key: `c${i}`, what, kindLabelKey: "travel.import.create", after, ...note };
     if (r.action === "change") {
       return { key: `c${i}`, what, kindLabelKey: "travel.import.change", before: `${when(r.existing!.startsAt, r.existing!.startTz)}${r.existing!.endsAt ? ` → ${when(r.existing!.endsAt, r.existing!.endTz)}` : ""}`, after, ...note };
     }

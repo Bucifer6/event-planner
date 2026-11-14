@@ -90,7 +90,7 @@
   "drinks": {
     "title": "Drinks — estimate",
     "intro": "A simple reckoning from rules you can change. It is an estimate: nothing is ever ordered by itself.",
-    "rule": "1 {unit} per {perGuests} guests, every {perHours} hours",
+    "rule": "one per {perGuests} guests, every {perHours} hours",
     "ruleAdults": "adults only",
     "estimate": "estimate",
     "for": "for {guests} people, {hours} hours",
@@ -101,7 +101,7 @@
     "label": "Drink",
     "labelHint": "For example: White wine",
     "unit": "Unit",
-    "unitHint": "For example: bottle",
+    "unitHint": "In the plural, for example: bottles",
     "perGuests": "For how many guests",
     "perGuestsHint": "One unit for this many guests.",
     "perHours": "Every how many hours",
@@ -110,7 +110,7 @@
     "remove": "Delete the rule",
     "removeTitle": "Delete the rule “{label}”?",
     "removeSubmit": "Delete the rule",
-    "empty": "No rule yet. Add one — for example “Wine: 1 bottle per 3 guests, every 3 hours”."
+    "empty": "No rule yet. Add one — for example “Wine, bottles: one per 3 guests, every 3 hours”."
   },
   "order": {
     "title": "Final order",

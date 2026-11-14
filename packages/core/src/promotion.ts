@@ -170,6 +170,12 @@ async function cardScene(ctx: Pick<Ctx, "db">, o: Occasion, size: PromotionCardS
   return layoutPiece({ design: d.designKey, colourway: d.colourwayKey, piece: size === "square" ? "invitation-square" : "invitation", texts });
 }
 
+/** The square card as SVG, for the page's preview (the same drawing the PNG is made from). Planning members. */
+export async function getPromotionCardPreview(ctx: Ctx, occasionId: string): Promise<string> {
+  await requireMember(ctx, occasionId, { roles: PLANNING_ROLES });
+  return promotionCardSvg(await cardScene(ctx, await loadOccasion(ctx, occasionId), "square"), "square");
+}
+
 export type BinaryFile = { filename: string; mime: string; bytes: Uint8Array };
 
 /** A shareable image card (PNG) in the occasion's stationery design. Planning members. Returned to the caller — never posted. */

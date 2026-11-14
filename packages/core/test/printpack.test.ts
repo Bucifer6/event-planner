@@ -96,7 +96,7 @@ describe("QR for physical invitations (SEC2)", () => {
   it("unknown, malformed, revoked and expired codes are refused alike; the id stays with the invitation", async () => {
     const occ = await mkOccasion();
     const a = await hh(occ, "Popescu");
-    const [{ qrId }] = (await listHouseholdQrs(as(t, OWNER), occ)) as [{ qrId: string }];
+    const qrId = (await listHouseholdQrs(as(t, OWNER), occ))[0]!.qrId;
     expect(await resolveQrLink(anon(), "A".repeat(32))).toBeNull();
     expect(await resolveQrLink(anon(), "not a code")).toBeNull();
     expect(await resolveQrLink(anon(), a.token)).toBeNull(); // a link token is not a QR id

@@ -83,7 +83,9 @@
     "inBucharest": "în România:",
     "duration": "Durează {duration}",
     "toComplete": "De completat",
-    "clockNote": "Ceasul de la sosire arată o oră mai mică decât cel de la plecare. E corect: sunt fusuri orare diferite, iar durata de mai sus e cea reală."
+    "clockNote": "Ceasul de la sosire arată o oră mai mică decât cel de la plecare. E corect: sunt fusuri orare diferite, iar durata de mai sus e cea reală.",
+    "begins": "Început",
+    "finishes": "Sfârșit"
   },
   "itinerary": {
     "title": "Itinerar",
@@ -122,7 +124,7 @@
     "change": "Se modifică",
     "skip": "Se sare",
     "skipNote": "Există deja în itinerar, neschimbat.",
-    "missingNote": "De completat după aplicare: {count} câmpuri.",
+    "missingNote": "Câmpuri de completat după aplicare: {count}.",
     "untitled": "Etapă fără nume",
     "unreadable": "Evenimente fără o dată care să poată fi citită: {count}",
     "nothingFound": "N-am găsit în text nicio dată cu oră pe care să ne putem baza. Verifică dacă ai lipit confirmarea întreagă sau adaugă etapa de mână."

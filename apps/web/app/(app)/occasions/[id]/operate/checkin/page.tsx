@@ -1,4 +1,5 @@
 import { getCheckInRoster } from "@ed/core/checkin";
+import { getOccasionView } from "@ed/core/occasions";
 import { IconArrowLeft } from "@ed/ui/icons";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -25,6 +26,7 @@ export default async function CheckInPage({ params }: { params: Promise<{ id: st
   const tc = await getTranslations("common");
   // access check only (planning members); the rows are not rendered into the page
   await orNotFound(getCheckInRoster(ctx, id).then(() => true));
+  const { occasion } = await getOccasionView(ctx, id);
   const raw = (key: string) => t.raw(key as never) as string;
 
   return (
@@ -38,6 +40,7 @@ export default async function CheckInPage({ params }: { params: Promise<{ id: st
       <CheckInBoard
         occasionId={id}
         locale={ctx.locale}
+        timeZone={occasion.timezone}
         labels={{
           heroLabel: t("checkin.heroLabel"),
           heroOf: raw("checkin.heroOf"),

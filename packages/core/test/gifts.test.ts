@@ -6,7 +6,7 @@ import { giftEstimates, occasionMembers, occasions } from "@ed/db";
 import { setupTestDb, type TestDb } from "@ed/db/testing";
 import { newId } from "@ed/shared/ids";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
-import { makeCtx } from "../src/context";
+import { makeCtx, type Actor } from "../src/context";
 import { listExports, runExport } from "../src/exports";
 import { deleteGiftEstimate, DEFAULT_GIFT_GUIDE, estimateGift, getGiftGuide, getGiftPage, resetGiftGuide, saveGiftEstimate, saveGiftGuide } from "../src/gifts";
 import { createHousehold } from "../src/guests";
@@ -110,7 +110,7 @@ describe("private to the planner's own account", () => {
       { kind: "mcp", accountId: OWNER, tokenId: "tok", scope: "read_propose" },
       { kind: "staff", accountId: OWNER, staffId: "s", roles: ["platform_admin"] },
       { kind: "system" },
-    ] as const) {
+    ] as Actor[]) {
       const ctx = makeCtx(t.db, actor);
       expect(await code(() => getGiftPage(ctx, occ)), actor.kind).toMatch(/^FORBIDDEN/);
       expect(await code(() => getGiftGuide(ctx)), actor.kind).toMatch(/^FORBIDDEN/);

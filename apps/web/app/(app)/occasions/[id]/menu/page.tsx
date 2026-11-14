@@ -221,13 +221,13 @@ export default async function MenuPage({ params }: { params: Promise<{ id: strin
                 <tbody>
                   {q.lines.map((l) => (
                     <tr key={l.itemId}>
-                      <th scope="row">
-                        {l.name}
+                      <td>
+                        <strong>{l.name}</strong>
                         <br />
                         <span className="ed-small ed-muted">
                           {[view.menus.length > 1 ? l.menuName : null, t(`courses.${l.course}`), l.audience === "children" ? t("item.childrenTag") : null, l.isChoice ? t("item.choiceTag") : null].filter(Boolean).join(" · ")}
                         </span>
-                      </th>
+                      </td>
                       <td className={styles.num}>{l.base}</td>
                       <td className={styles.num}>
                         <strong>{l.withMargin}</strong>
@@ -238,11 +238,11 @@ export default async function MenuPage({ params }: { params: Promise<{ id: strin
                     .filter((g) => g.unchosen > 0)
                     .map((g) => (
                       <tr key={g.key}>
-                        <th scope="row">
+                        <td>
                           <em>{t("quantities.unchosen", { course: t(`courses.${g.course}`), audience: t(`audience.${g.audience}`) })}</em>
                           <br />
                           <span className="ed-small ed-muted">{t("quantities.unchosenNote")}</span>
-                        </th>
+                        </td>
                         <td className={styles.num}>{g.unchosen}</td>
                         <td className={styles.num}>{g.unchosen}</td>
                       </tr>
@@ -288,7 +288,7 @@ export default async function MenuPage({ params }: { params: Promise<{ id: strin
                         </span>
                       </div>
                       <p className="ed-small ed-muted">
-                        {t("drinks.rule", { unit: d.unit, perGuests: d.perGuests, perHours: d.perHours })}
+                        {t("drinks.rule", { perGuests: d.perGuests, perHours: d.perHours })}
                         {d.adultsOnly ? ` · ${t("drinks.ruleAdults")}` : ""} · {t("drinks.for", { guests: d.guests, hours: q.serviceHours })}
                       </p>
                       {canManage && rule ? (

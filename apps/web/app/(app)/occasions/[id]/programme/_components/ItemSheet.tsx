@@ -4,6 +4,7 @@ import { Button, FocusFirstError, Notice, SelectField, Sheet, SubmitButton, Text
 import { useRouter } from "next/navigation";
 import { useActionState, useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { removeProgrammeItemAction, saveProgrammeItemAction } from "@/app/actions/programme";
+import { useKeptSubmit } from "@/app/e/_components/kept-form";
 import styles from "./programme.module.css";
 
 // Add / edit a moment in a Sheet. Text fields keep what was typed after a failed submit
@@ -115,7 +116,8 @@ function ItemForm({
   labels: ItemLabels;
   onDone: () => void;
 }) {
-  const [state, formAction] = useActionState(saveProgrammeItemAction, null);
+  const [state, formAction, pending] = useActionState(saveProgrammeItemAction, null);
+  const keptSubmit = useKeptSubmit(formAction);
   const [removeState, removeAction] = useActionState(removeProgrammeItemAction, null);
   const [nextDay, setNextDay] = useState(item?.nextDay ?? false);
   const [visible, setVisible] = useState(item?.visibleToGuests ?? false);
@@ -141,13 +143,13 @@ function ItemForm({
 
   return (
     <div className={styles.stack}>
-      <form action={formAction} className="ed-form" noValidate>
+      <form action={formAction} onSubmit={keptSubmit} className="ed-form" noValidate>
         <input type="hidden" name="occasionId" value={occasionId} />
         {item ? <input type="hidden" name="itemId" value={item.id} /> : null}
         {error && !besideField ? <Notice tone="danger" title={error.message} role="alert" /> : null}
         <TextField id={fid("title")} name="title" label={labels.title} hint={labels.titleHint} maxLength={160} required autoComplete="off" defaultValue={v.title ?? item?.title ?? ""} error={fe.title?.[0]} />
         <div className={styles.pair}>
-          <TextField id={fid("time")} name="time" label={labels.time} hint={labels.timeHint} maxLength={5} required inputMode="numeric" autoComplete="off" placeholder="18:30" defaultValue={v.time ?? item?.time ?? ""} error={fe.time?.[0]} />
+          <TextField id={fid("time")} name="time" label={labels.time} hint={labels.timeHint} maxLength={5} required autoComplete="off" placeholder="18:30" defaultValue={v.time ?? item?.time ?? ""} error={fe.time?.[0]} />
           <TextField id={fid("durationMin")} name="durationMin" label={labels.duration} hint={labels.durationHint} optionalLabel={labels.optional} maxLength={4} inputMode="numeric" pattern="[0-9]*" autoComplete="off" defaultValue={v.durationMin ?? item?.durationMin?.toString() ?? ""} error={fe.durationMin?.[0]} />
         </div>
         <label className="ed-check">
@@ -232,7 +234,7 @@ function ItemForm({
         <TextareaField id={fid("notes")} name="notes" label={labels.notes} hint={labels.notesHint} optionalLabel={labels.optional} rows={3} maxLength={2000} defaultValue={v.notes ?? item?.notes ?? ""} error={fe.notes?.[0]} />
         <FocusFirstError errors={error?.fieldErrors ?? null} />
         <div>
-          <SubmitButton pendingLabel={labels.saving} block>
+          <SubmitButton pendingLabel={labels.saving} pending={pending} block>
             {labels.submit}
           </SubmitButton>
         </div>

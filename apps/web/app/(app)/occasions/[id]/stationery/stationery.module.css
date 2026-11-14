@@ -1,0 +1,53 @@
+/* Stationery designer — tokens only (docs/build/16-design.md). */
+
+.layout {
+  display: grid;
+  gap: var(--s-5);
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+@media (min-width: 960px) {
+  .layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s-5); }
+  .proofColumn { position: sticky; top: var(--s-4); }
+}
+
+.proofColumn { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+
+/* The sheet lies on a sunken ground, like paper on a desk; the only edge is a hairline. */
+.desk {
+  display: grid;
+  place-items: center;
+  padding: var(--s-4);
+  background: var(--sunken);
+  border: var(--hair) solid var(--line);
+  min-height: 280px;
+}
+.sheet {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: min(68vh, 620px);
+  border: var(--hair) solid var(--line);
+  background: var(--surface);
+  transition: opacity var(--t-out) var(--ease);
+}
+.sheet[data-busy="true"] { opacity: 0.6; }
+@media (prefers-reduced-motion: reduce) { .sheet { transition: none; } }
+
+.proofMeta { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s-2); }
+
+.formColumn { display: flex; flex-direction: column; gap: var(--s-5); min-width: 0; }
+.group { display: flex; flex-direction: column; gap: var(--s-3); min-width: 0; }
+.groupTitle { font-family: var(--font-display); font-size: var(--display-sm); font-weight: 400; letter-spacing: -0.01em; }
+
+/* A chip that carries its paper, ink and accent: three small squares, hairline-edged. */
+.swatch { display: inline-flex; flex: none; gap: 2px; }
+.chipText { white-space: nowrap; }
+.swatch i { display: block; width: 12px; height: 16px; border: var(--hair) solid var(--line-strong); }
+
+.fieldHead { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+.aiRow { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-2); }
+
+.versionHead { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s-2); }
+.inline { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3); }

@@ -690,6 +690,8 @@ export function parseDateText(text: string): { day: number; month: number; year:
 export function splitNames(names: string): { first: string; joiner: string; second: string } | null {
   const m = /^(.+?)\s+(&|și|şi|si|and)\s+(.+)$/iu.exec(names.replace(/\s*\n\s*/g, " ").trim());
   if (!m) return null;
+  // two NAMES: each side starts with a capital ("Nunta Ioanei și a lui Ștefan" is a title, not a pair)
+  if (!/^\p{Lu}/u.test(m[1]!.trim()) || !/^\p{Lu}/u.test(m[3]!.trim())) return null;
   return { first: m[1]!.trim(), joiner: m[2] === "&" ? "&" : m[2]!.toLowerCase().replace("si", "și").replace("şi", "și"), second: m[3]!.trim() };
 }
 

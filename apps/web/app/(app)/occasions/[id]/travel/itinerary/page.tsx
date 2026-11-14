@@ -79,14 +79,14 @@ export default async function ItineraryPage({ params }: { params: Promise<{ id: 
                   </div>
                   <dl className={styles.times}>
                     <div>
-                      <dt>{leg.endsAt ? t("leg.departs") : t("leg.at")}</dt>
+                      <dt>{!leg.endsAt ? t("leg.at") : leg.kind === "stay" || leg.kind === "activity" ? t("leg.begins") : t("leg.departs")}</dt>
                       <dd>
                         <ZonedTime at={leg.startsAt} tz={leg.startTz} locale={ctx.locale} bucharestLabel={t("leg.inBucharest")} />
                       </dd>
                     </div>
                     {leg.endsAt ? (
                       <div>
-                        <dt>{t("leg.arrives")}</dt>
+                        <dt>{leg.kind === "stay" || leg.kind === "activity" ? t("leg.finishes") : t("leg.arrives")}</dt>
                         <dd>
                           <ZonedTime at={leg.endsAt} tz={leg.endTz} locale={ctx.locale} bucharestLabel={t("leg.inBucharest")} />
                         </dd>
@@ -95,7 +95,7 @@ export default async function ItineraryPage({ params }: { params: Promise<{ id: 
                   </dl>
                   <div className={styles.meta}>
                     {leg.placeFrom || leg.placeTo ? <span>{[leg.placeFrom, leg.placeTo].filter(Boolean).join(" → ")}</span> : null}
-                    {duration(leg.durationMinutes) ? <span>{t("leg.duration", { duration: duration(leg.durationMinutes) ?? "" })}</span> : null}
+                    {leg.kind !== "stay" && duration(leg.durationMinutes) ? <span>{t("leg.duration", { duration: duration(leg.durationMinutes) ?? "" })}</span> : null}
                     {leg.reference ? <span>{t("leg.referenceShort", { code: leg.reference })}</span> : null}
                     {leg.title === "—" ? <Tag tone="attention">{t("leg.toComplete")}</Tag> : null}
                   </div>

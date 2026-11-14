@@ -4,6 +4,7 @@ import { FocusFirstError, Notice, SubmitButton, TextareaField, TextField } from 
 import { useRouter } from "next/navigation";
 import { useActionState, useEffect, useRef, useState, type ReactNode } from "react";
 import { saveJourneyAction, savePublicPageAction } from "@/app/actions/publicpage";
+import { useKeptSubmit } from "@/app/e/_components/kept-form";
 import styles from "../../programme/_components/programme.module.css";
 
 // The two long forms of the event-page settings: what the public page shows, and the
@@ -75,7 +76,8 @@ export type PageSettingsLabels = {
 const FLAGS = ["showDate", "showVenue", "showProgramme", "showMenu", "registrationEnabled", "sharesCapacity", "published"] as const;
 
 export function PageSettingsForm({ occasionId, initial, capacityNote, labels }: { occasionId: string; initial: PageSettingsValues; capacityNote: ReactNode; labels: PageSettingsLabels }) {
-  const [state, formAction] = useActionState(savePublicPageAction, null);
+  const [state, formAction, pending] = useActionState(savePublicPageAction, null);
+  const keptSubmit = useKeptSubmit(formAction);
   const [flags, setFlags] = useState<Record<(typeof FLAGS)[number], boolean>>(() => Object.fromEntries(FLAGS.map((f) => [f, initial[f]])) as Record<(typeof FLAGS)[number], boolean>);
   const router = useRouter();
   const handled = useRef<unknown>(null);
@@ -92,7 +94,7 @@ export function PageSettingsForm({ occasionId, initial, capacityNote, labels }: 
   const beside = !!error && Object.keys(fe).length > 0;
 
   return (
-    <form action={formAction} className={`ed-form ${styles.narrow}`} noValidate>
+    <form action={formAction} onSubmit={keptSubmit} className={`ed-form ${styles.narrow}`} noValidate>
       <input type="hidden" name="occasionId" value={occasionId} />
       {error && !beside ? <Notice tone="danger" title={error.message} role="alert" /> : null}
       <TextField id="pp-slug" name="slug" label={labels.slug} hint={labels.slugHint} required maxLength={60} autoComplete="off" autoCapitalize="none" spellCheck={false} defaultValue={val("slug")} error={fe.slug?.[0]} />
@@ -147,7 +149,9 @@ export function PageSettingsForm({ occasionId, initial, capacityNote, labels }: 
       ) : null}
       <FocusFirstError errors={error?.fieldErrors ?? null} />
       <div>
-        <SubmitButton pendingLabel={labels.saving}>{labels.save}</SubmitButton>
+        <SubmitButton pendingLabel={labels.saving} pending={pending}>
+          {labels.save}
+        </SubmitButton>
       </div>
     </form>
   );
@@ -174,7 +178,8 @@ export type JourneyLabels = {
 };
 
 export function JourneyForm({ occasionId, facts, contactName, contactRoute, published, labels }: { occasionId: string; facts: JourneyFactValue[]; contactName: string; contactRoute: string; published: boolean; labels: JourneyLabels }) {
-  const [state, formAction] = useActionState(saveJourneyAction, null);
+  const [state, formAction, pending] = useActionState(saveJourneyAction, null);
+  const keptSubmit = useKeptSubmit(formAction);
   const [states, setStates] = useState<Record<string, string>>(() => Object.fromEntries(facts.map((f) => [f.key, f.state])));
   const [isPublished, setPublished] = useState(published);
   const router = useRouter();
@@ -187,7 +192,7 @@ export function JourneyForm({ occasionId, facts, contactName, contactRoute, publ
   const error = state && !state.ok ? state.error : null;
   const v = error?.values ?? {};
   return (
-    <form action={formAction} className={`ed-form ${styles.narrow}`} noValidate>
+    <form action={formAction} onSubmit={keptSubmit} className={`ed-form ${styles.narrow}`} noValidate>
       <input type="hidden" name="occasionId" value={occasionId} />
       {error ? <Notice tone="danger" title={error.message} role="alert" /> : null}
       <div>
@@ -205,7 +210,7 @@ export function JourneyForm({ occasionId, facts, contactName, contactRoute, publ
               </div>
             </fieldset>
             <div className={styles.pair}>
-              <TextField id={`j-${f.key}-ro`} name={`fact_${f.key}_noteRo`} label={labels.noteRo} hint={n === 0 ? labels.noteHint : undefined} optionalLabel={labels.optional} maxLength={300} autoComplete="off" defaultValue={v[`fact_${f.key}_noteRo`] ?? f.noteRo} />
+              <TextField id={`j-${f.key}-ro`} name={`fact_${f.key}_noteRo`} label={labels.noteRo} placeholder={n === 0 ? labels.noteHint : undefined} optionalLabel={labels.optional} maxLength={300} autoComplete="off" defaultValue={v[`fact_${f.key}_noteRo`] ?? f.noteRo} />
               <TextField id={`j-${f.key}-en`} name={`fact_${f.key}_noteEn`} label={labels.noteEn} optionalLabel={labels.optional} maxLength={300} autoComplete="off" lang="en" defaultValue={v[`fact_${f.key}_noteEn`] ?? f.noteEn} />
             </div>
           </div>
@@ -222,7 +227,7 @@ export function JourneyForm({ occasionId, facts, contactName, contactRoute, publ
         </Notice>
       ) : null}
       <div>
-        <SubmitButton variant="secondary" pendingLabel={labels.saving}>
+        <SubmitButton variant="secondary" pendingLabel={labels.saving} pending={pending}>
           {labels.save}
         </SubmitButton>
       </div>

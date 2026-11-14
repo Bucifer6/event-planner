@@ -81,9 +81,10 @@ const optionalText = (max: number) =>
     .transform((v) => (v && v.trim() !== "" ? v.trim() : null));
 const formBool = z.preprocess((v) => (v === "on" || v === "true" || v === "1" ? true : v === "" || v === "false" || v === "0" || v == null ? false : v), z.boolean()).default(false);
 
-/** "18:30" / "9.05" → minutes after midnight. */
+/** "18:30" / "9.05" / "1830" → minutes after midnight. */
 export function parseClock(value: string): number | null {
-  const m = /^\s*([01]?\d|2[0-3])[:.]([0-5]\d)\s*$/.exec(value);
+  // "18:30", "18.30" and, typed on a number pad, "1830"
+  const m = /^\s*([01]?\d|2[0-3])[:.]([0-5]\d)\s*$/.exec(value) ?? /^\s*([01]\d|2[0-3])([0-5]\d)\s*$/.exec(value);
   return m ? Number(m[1]) * 60 + Number(m[2]) : null;
 }
 

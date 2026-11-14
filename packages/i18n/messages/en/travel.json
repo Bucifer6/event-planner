@@ -83,7 +83,9 @@
     "inBucharest": "in Romania:",
     "duration": "Takes {duration}",
     "toComplete": "To complete",
-    "clockNote": "The clock at arrival reads earlier than the one at departure. That is right: the zones differ, and the duration above is the real one."
+    "clockNote": "The clock at arrival reads earlier than the one at departure. That is right: the zones differ, and the duration above is the real one.",
+    "begins": "Starts",
+    "finishes": "Ends"
   },
   "itinerary": {
     "title": "Itinerary",
@@ -122,7 +124,7 @@
     "change": "Changed",
     "skip": "Skipped",
     "skipNote": "Already in the itinerary, unchanged.",
-    "missingNote": "To complete after applying: {count} fields.",
+    "missingNote": "Fields to complete after applying: {count}.",
     "untitled": "Untitled leg",
     "unreadable": "Events without a readable date: {count}",
     "nothingFound": "We found no date with a time we could rely on in this text. Check that you pasted the whole confirmation, or add the leg by hand."

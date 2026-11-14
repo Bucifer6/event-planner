@@ -3,9 +3,11 @@ import { getGuestInvitationText } from "@ed/core/invitationtext"; // custom word
 import { getGuestView, markGuestLinkViewed, type GuestView } from "@ed/core/invitations";
 import { FORM_STAMP_FIELD, HONEYPOT_FIELD, issueFormStamp } from "@ed/core/ratelimit";
 import { questionField } from "@ed/core/rsvp";
+import { getGuestInvitationStyle } from "@ed/core/stationery"; // Release C (C-04): the plate may adopt the stationery wording + colourway
 import { formatDateTime, formatTime, formatWeekdayDate } from "@ed/i18n/format";
 import { DescriptionList, ExternalLink, Invitation, Notice, Seal } from "@ed/ui";
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { IncidentBanner } from "@/components/incident-banner/IncidentBanner";
@@ -79,6 +81,11 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
   const scope = brandScope(branding);
   // The planner's own wording for the plate. While it still is an assistant's draft it says so (MCP5).
   const wording = await getGuestInvitationText(ctx);
+  // Release C (C-04): when the planner chose it, the plate wears the stationery design's words and colours.
+  const adopted = await getGuestInvitationStyle(ctx);
+  const adoptedStyle = adopted
+    ? ({ "--surface": adopted.colours.paper, "--ink": adopted.colours.ink, "--ink-2": adopted.colours.muted, "--ink-3": adopted.colours.muted, "--gilt": adopted.colours.accent, "--line": adopted.colours.accent, ...(adopted.colours.dark ? { "--accent": adopted.colours.accent } : {}), color: adopted.colours.ink } as CSSProperties)
+    : undefined;
   const t = guestTranslator(locale, "rsvp");
   const tr = guestTranslator(locale);
 
@@ -108,9 +115,10 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
     : null;
 
   const plate = (
+    <div style={adoptedStyle}>
     <Invitation
-      kicker={t("invite.kicker")}
-      title={view.occasion.title}
+      kicker={adopted?.kicker || t("invite.kicker")}
+      title={adopted?.names || view.occasion.title}
       meta={whenLine(view, locale, t("invite.dateUndecided"))}
     >
       {view.occasion.venueName || view.occasion.venueAddress ? (
@@ -131,9 +139,12 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
           <p className={styles.wordingText}>{wording.text}</p>
           {wording.externalAssistant ? <p className="ed-small ed-muted">{tr("whatif.external")}</p> : null}
         </div>
+      ) : adopted?.wording ? (
+        <p className="ed-invite__meta">{adopted.wording}</p>
       ) : null}
       <p className={styles.household}>{t("invite.for", { name: view.household.name })}</p>
     </Invitation>
+    </div>
   );
 
   const sections = <GuestSections view={view} locale={locale} base={base} />;

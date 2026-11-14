@@ -8,6 +8,7 @@ import { setMealChoicesAction } from "@/app/actions/menus";
 import { cancelOwnRegistrationAction, registerPublicAction } from "@/app/actions/publicpage";
 import { submitGuestRequestAction, submitRegistrantRequestAction } from "@/app/actions/requests";
 import styles from "./event.module.css";
+import { useKeptSubmit } from "./kept-form";
 
 // The small client forms of the guest event page. Wording arrives through props in the page's
 // language; every form carries the SEC11 bot guard (hidden stamp + honeypot). Choices that
@@ -134,7 +135,8 @@ export function RegistrationForm({
   maxChildren: number;
   labels: RegistrationLabels;
 }) {
-  const [state, formAction] = useActionState(registerPublicAction, null);
+  const [state, formAction, pending] = useActionState(registerPublicAction, null);
+  const keptSubmit = useKeptSubmit(formAction);
   const [choices, setChoices] = useState<Record<string, string>>({});
   const [consent, setConsent] = useState(false);
   const [origin, setOrigin] = useState("");
@@ -181,7 +183,7 @@ export function RegistrationForm({
   const visible = (q: RegistrationQuestion) => !q.showIf || choices[q.showIf.questionId] === q.showIf.optionId;
 
   return (
-    <form action={formAction} className="ed-form" noValidate>
+    <form action={formAction} onSubmit={keptSubmit} className="ed-form" noValidate>
       <Guard guard={guard} />
       <input type="hidden" name="idempotencyKey" value={idempotencyKey} />
       {error && !besideField ? <FormProblem error={error} retryAtText={labels.retryAt} lang={lang} /> : null}
@@ -229,7 +231,9 @@ export function RegistrationForm({
       </div>
       <FocusFirstError errors={error?.fieldErrors ?? null} />
       <div className="ed-actionbar">
-        <SubmitButton pendingLabel={labels.sending}>{labels.submit}</SubmitButton>
+        <SubmitButton pendingLabel={labels.sending} pending={pending}>
+          {labels.submit}
+        </SubmitButton>
       </div>
     </form>
   );
@@ -280,7 +284,8 @@ export type RequestLabels = {
 };
 
 export function PrivateRequestForm({ mode, guard, lang, dietTags, labels }: { mode: "guest" | "registrant"; guard: FormGuard; lang: "ro" | "en"; dietTags: Array<{ value: string; label: string }>; labels: RequestLabels }) {
-  const [state, formAction] = useActionState(mode === "guest" ? submitGuestRequestAction : submitRegistrantRequestAction, null);
+  const [state, formAction, pending] = useActionState(mode === "guest" ? submitGuestRequestAction : submitRegistrantRequestAction, null);
+  const keptSubmit = useKeptSubmit(formAction);
   const [kind, setKind] = useState("");
   const [dietTag, setDietTag] = useState("");
   const [body, setBody] = useState("");
@@ -306,7 +311,7 @@ export function PrivateRequestForm({ mode, guard, lang, dietTags, labels }: { mo
   const childWarning = !!error && error.message === labels.childDetailsMessage;
   const fe = error?.fieldErrors ?? {};
   return (
-    <form action={formAction} className="ed-form" noValidate>
+    <form action={formAction} onSubmit={keptSubmit} className="ed-form" noValidate>
       <Guard guard={guard} />
       <input type="hidden" name="childDetailsAcknowledged" value={warned ? "1" : ""} />
       {state?.ok ? (
@@ -368,7 +373,7 @@ export function PrivateRequestForm({ mode, guard, lang, dietTags, labels }: { mo
       />
       <FocusFirstError errors={childWarning ? null : (error?.fieldErrors ?? null)} />
       <div>
-        <SubmitButton variant="secondary" pendingLabel={labels.sending}>
+        <SubmitButton variant="secondary" pendingLabel={labels.sending} pending={pending}>
           {warned && childWarning ? labels.sendAnyway : labels.send}
         </SubmitButton>
       </div>

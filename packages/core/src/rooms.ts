@@ -65,6 +65,7 @@ export async function getRooming(ctx: Ctx, occasionId: string): Promise<Rooming>
   const [rows, people] = await Promise.all([listRoomsUnchecked(ctx, id), listPeopleUnchecked(ctx, id)]);
   const byKey = new Map(people.map((p) => [p.key, p]));
   const myKey = memberPersonKey(member);
+  const sizeOf = new Map(people.map((p) => [p.key, p.size]));
   const placed = new Set<string>();
   const householdsPlaced = new Set<string>();
   for (const r of rows) {
@@ -94,7 +95,8 @@ export async function getRooming(ctx: Ctx, occasionId: string): Promise<Rooming>
   const unplaced = planner
     ? people.filter((p) => {
         if (placed.has(p.key)) return false;
-        if (p.kind === "guest") return !householdsPlaced.has(`h:${p.householdId}`);
+        // a household of one is offered once (as the household), not again as its only guest
+        if (p.kind === "guest") return !householdsPlaced.has(`h:${p.householdId}`) && (sizeOf.get(`h:${p.householdId}`) ?? 0) > 1;
         if (p.kind === "household") return !guestsPlacedBy.has(p.key);
         return true;
       })

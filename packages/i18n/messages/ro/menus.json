@@ -90,7 +90,7 @@
   "drinks": {
     "title": "Băuturi — estimare",
     "intro": "O socoteală simplă, pe reguli pe care le poți schimba. Este o estimare: nimic nu se comandă singur.",
-    "rule": "1 {unit} la {perGuests} invitați, la fiecare {perHours} ore",
+    "rule": "câte una la {perGuests} invitați, la fiecare {perHours} ore",
     "ruleAdults": "doar adulți",
     "estimate": "estimare",
     "for": "pentru {guests} persoane, {hours} ore",
@@ -101,7 +101,7 @@
     "label": "Băutura",
     "labelHint": "De exemplu: Vin alb",
     "unit": "Unitatea",
-    "unitHint": "De exemplu: sticlă",
+    "unitHint": "La plural, de exemplu: sticle",
     "perGuests": "La câți invitați",
     "perGuestsHint": "O unitate la atâția invitați.",
     "perHours": "La fiecare câte ore",
@@ -110,7 +110,7 @@
     "remove": "Șterge regula",
     "removeTitle": "Ștergi regula „{label}”?",
     "removeSubmit": "Șterge regula",
-    "empty": "Nicio regulă încă. Adaugă una — de exemplu „Vin: 1 sticlă la 3 invitați, la fiecare 3 ore”."
+    "empty": "Nicio regulă încă. Adaugă una — de exemplu „Vin, sticle: câte una la 3 invitați, la fiecare 3 ore”."
   },
   "order": {
     "title": "Comanda finală",

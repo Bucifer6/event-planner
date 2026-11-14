@@ -173,7 +173,7 @@
       "overlap_everyone": "„{a}” și „{b}” se suprapun, iar amândouă implică toată lumea.",
       "overlap_supplier": "Furnizorul {supplier} are două intervale care se suprapun: „{a}” și „{b}”.",
       "overlap_place": "Două lucruri în același loc ({place}) în același timp: „{a}” și „{b}”.",
-      "task_in_busy_block": "„{a}” cade în timp ce {person} este ocupat cu „{b}”.",
+      "task_in_busy_block": "„{a}” cade în intervalul în care {person} are „{b}”.",
       "dependency_order": "„{a}” depinde de „{b}”, dar „{b}” este programat mai târziu.",
       "over_capacity": "„{what}” are {used} persoane pe {total} locuri.",
       "delivery_late": "Livrarea „{a}” e așteptată până la {at}, dar „{b}” începe la {need}. Verifică dacă e nevoie de ea mai devreme."

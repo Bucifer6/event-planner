@@ -26,6 +26,11 @@ import "@ed/core/transport";
 import "@ed/core/rehearsal";
 import "@ed/core/checkin";
 import "@ed/core/sustainability";
+import "@ed/core/printpack"; // release C: print pack exports (QR labels, QR invitations, table cards, room plan) + stationery purge hook
+import "@ed/core/arrangements"; // release C: What-if kind arrangement.applyDesign, purge hook
+import "@ed/core/gifts"; // release C: purge hooks only (private per account; registers nothing else)
+import "@ed/core/promotion"; // release C: purge hook
+import "@ed/core/aitext"; // INF7: account purge hook
 import { assertBootEnv, EnvError } from "@ed/shared/env";
 
 // The app refuses to boot with a missing or invalid environment; only variable NAMES are

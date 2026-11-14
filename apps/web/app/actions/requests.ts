@@ -51,6 +51,7 @@ export async function submitGuestRequestAction(...args: [unknown, FormData] | [u
   return runGuestAction(args, {
     schema: z.object({ ...guestFormFields, ...requestFields }),
     formKey: "private.request",
+    minSeconds: 1, // the page re-renders (fresh stamp) after any other section saves
     handler: (ctx, input) => submitGuestRequest(ctx, { kind: input.kind as never, dietTag: input.dietTag, body: input.body, childDetailsAcknowledged: input.childDetailsAcknowledged }),
   });
 }

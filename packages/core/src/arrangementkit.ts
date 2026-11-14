@@ -195,16 +195,15 @@ const FORMS: Record<ArrangementFormKey, { place: Placer; outline: string[]; vess
   // seen from the front: an arch with two posts
   arch: {
     place: (i, n) => {
-      const t = h2(i);
-      const band = (h3(i) - 0.5) * 34;
-      if (t < 0.62) {
-        const a = Math.PI * (1 - t / 0.62);
-        return { x: 160 + Math.cos(a) * (112 + band), y: 150 - Math.sin(a) * (112 + band) };
-      }
-      // the two posts, fuller towards the shoulders
-      const leftSide = h5(i) < 0.5;
-      const d = Math.pow((t - 0.62) / 0.38, 1.4);
-      return { x: (leftSide ? 48 : 272) + band * 0.8, y: 150 + d * 140 };
+      // evenly along the whole line: up the left post, over the arch, down the right post
+      const post = 150;
+      const arc = Math.PI * 112;
+      const d = ((i * 0.6180339887498949) % 1) * (post * 2 + arc);
+      const band = (h3(i) - 0.5) * 32;
+      if (d < post) return { x: 48 + band, y: 300 - d };
+      if (d > post + arc) return { x: 272 + band, y: 150 + (d - post - arc) };
+      const a = Math.PI * (1 - (d - post) / arc);
+      return { x: 160 + Math.cos(a) * (112 + band), y: 150 - Math.sin(a) * (112 + band) };
     },
     outline: ["M30 300V150A130 130 0 0 1 290 150V300", "M66 300V150A94 94 0 0 1 254 150V300"],
     vessel: [],

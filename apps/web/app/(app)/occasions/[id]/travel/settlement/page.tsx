@@ -111,10 +111,10 @@ export default async function SettlementPage({ params }: { params: Promise<{ id:
               <tbody>
                 {c.lines.map((l) => (
                   <tr key={l.participantId}>
-                    <th scope="row">
+                    <td>
                       {l.name}
                       {l.isMe && all ? <span className="ed-small ed-muted"> · {t("settlement.you")}</span> : null}
-                    </th>
+                    </td>
                     {all ? (
                       <>
                         <td className={`ed-right ${styles.amount}`}>{money(l.paidMinor ?? 0, c.currency)}</td>

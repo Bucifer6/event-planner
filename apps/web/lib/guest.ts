@@ -7,7 +7,8 @@ import "@ed/core/menus"; // registers the "menu" guest section (C-05)
 import "@ed/core/guestevent"; // registers the "venue" guest section: navigation link + accessible journey (C-10, C-07)
 import "@ed/core/requests"; // registers the "privateRequest" guest section (C-07)
 import { makeCtx, type Ctx, type Locale } from "@ed/core/context";
-import { resolveGuestLink, type GuestLink } from "@ed/core/invitations";
+import type { GuestLink } from "@ed/core/invitations";
+import { resolveGuestCredential } from "@ed/core/qr"; // release C (C-09): a link token, or "qr-<qrId>" after a printed QR was scanned
 import { checkPublicForm, FORM_STAMP_FIELD, HONEYPOT_FIELD } from "@ed/core/ratelimit";
 import { getDb } from "@ed/db";
 import { AppError, isAppError } from "@ed/shared/errors";
@@ -52,7 +53,7 @@ export const resolveGuestRequest = cache(async (token: string, requestedLang?: s
   const ip = await clientIp();
   const anonymous = makeCtx(getDb(), { kind: "anonymous" }, { ip });
   try {
-    const link = await resolveGuestLink(anonymous, token);
+    const link = await resolveGuestCredential(anonymous, token);
     if (!link) return { status: "notFound" };
     const locale = guestLocale(link, requestedLang);
     return { status: "ok", link, locale, ctx: makeCtx(getDb(), link.actor, { ip, locale, now: anonymous.now }) };

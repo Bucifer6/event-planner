@@ -66,7 +66,7 @@ export type CheckInLabels = {
 };
 
 type Feedback = { tone: "success" | "attention" | "danger"; title: string; body?: string };
-const SHOWN = 40;
+const SHOWN = 25;
 const fill = (s: string, v: Record<string, string | number>) => s.replace(/\{(\w+)\}/g, (_, k: string) => String(v[k] ?? ""));
 
 type Detector = { detect(source: HTMLVideoElement): Promise<Array<{ rawValue: string }>> };
@@ -77,7 +77,7 @@ type Detector = { detect(source: HTMLVideoElement): Promise<Array<{ rawValue: st
  * (IndexedDB) and is sent at once when there is network — so the screen behaves the same
  * with and without it, and a double tap or a second scan is applied once.
  */
-export function CheckInBoard({ occasionId, locale, labels }: { occasionId: string; locale: string; labels: CheckInLabels }) {
+export function CheckInBoard({ occasionId, locale, timeZone, labels }: { occasionId: string; locale: string; /** The occasion's zone: arrival times are shown in it, whatever the device is set to. */ timeZone: string; labels: CheckInLabels }) {
   const [roster, setRoster] = useState<RosterRow[] | null>(null);
   const [state, setState] = useState<"loading" | "ready" | "stale" | "none" | "closed">("loading");
   const [q, setQ] = useState("");
@@ -113,7 +113,7 @@ export function CheckInBoard({ occasionId, locale, labels }: { occasionId: strin
   }, [queue.online, state, refresh]);
 
   const waiting = useMemo(() => new Set(queue.pending.filter((i) => i.kind === "arrival").map((i) => (i.kind === "arrival" ? i.payload.householdId : ""))), [queue.pending]);
-  const time = useCallback((iso: string) => new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "ro-RO", { hour: "2-digit", minute: "2-digit", hour12: false }).format(new Date(iso)), [locale]);
+  const time = useCallback((iso: string) => new Intl.DateTimeFormat(locale === "en" ? "en-GB" : "ro-RO", { hour: "2-digit", minute: "2-digit", hour12: false, timeZone }).format(new Date(iso)), [locale, timeZone]);
   const party = useCallback((a: number | null, c: number | null) => (a === null ? labels.partyUnknown : fill(labels.party, { adults: a, children: c ?? 0 })), [labels]);
 
   const arrive = useCallback(
@@ -210,7 +210,11 @@ export function CheckInBoard({ occasionId, locale, labels }: { occasionId: strin
   const needle = foldName(q);
   const matches = needle === "" ? rows : rows.filter((r) => r.search.includes(needle));
   // not-yet-arrived first: they are the ones the door is looking for
-  const ordered = useMemo(() => [...matches].sort((a, b) => Number(!!a.arrived || waiting.has(a.householdId)) - Number(!!b.arrived || waiting.has(b.householdId)) || a.name.localeCompare(b.name, "ro")), [matches, waiting]);
+  const ordered = useMemo(() => {
+    // expected and not here yet first, then the other not-yet-arrived, then those already in
+    const rank = (r: RosterRow) => (r.arrived || waiting.has(r.householdId) ? 2 : r.rsvp === "yes" ? 0 : 1);
+    return [...matches].sort((a, b) => rank(a) - rank(b) || a.name.localeCompare(b.name, "ro"));
+  }, [matches, waiting]);
   const expected = rows.filter((r) => r.rsvp === "yes");
   const expectedPeople = expected.reduce((n, r) => n + (r.expectedAdults ?? 0) + (r.expectedChildren ?? 0), 0);
   const arrivedPeople = rows.reduce((n, r) => n + (r.arrived ? r.arrived.adults + r.arrived.children : waiting.has(r.householdId) ? (r.expectedAdults ?? 1) + (r.expectedChildren ?? 0) : 0), 0);
@@ -247,7 +251,7 @@ export function CheckInBoard({ occasionId, locale, labels }: { occasionId: strin
       {!readOnly && state !== "none" ? (
         <>
           <div className={styles.search}>
-            <label className="ed-label" htmlFor="checkin-search">
+            <label className={`ed-label ${styles.searchLabel}`} htmlFor="checkin-search">
               <IconSearch size={16} /> {labels.search}
             </label>
             <input id="checkin-search" className={`ed-input ${styles.searchInput}`} type="search" inputMode="search" autoComplete="off" value={q} onChange={(e) => setQ(e.target.value)} />
