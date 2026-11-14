@@ -73,6 +73,23 @@ export function mcpProposal(
   return { [PROPOSAL]: true, proposalId: preview.id, occasionId: preview.occasionId, summary };
 }
 
+const IMAGE = Symbol.for("ed.mcp.image");
+
+/** A read result that also carries a picture (sent as MCP image content beside the JSON). */
+export type McpWithImage = { [IMAGE]: { data: string; mimeType: "image/png" }; value: Record<string, unknown> };
+
+/** Wraps a read tool's JSON result with a PNG (base64) the assistant can look at. */
+export function mcpWithImage(value: Record<string, unknown>, png: string): McpWithImage {
+  return { [IMAGE]: { data: png, mimeType: "image/png" }, value };
+}
+
+export function isMcpWithImage(value: unknown): value is McpWithImage {
+  return typeof value === "object" && value !== null && (value as Record<symbol, unknown>)[IMAGE] !== undefined;
+}
+export function mcpImageOf(value: McpWithImage): { data: string; mimeType: "image/png" } {
+  return value[IMAGE];
+}
+
 export function isMcpProposal(value: unknown): value is McpProposal {
   return typeof value === "object" && value !== null && (value as Record<symbol, unknown>)[PROPOSAL] === true;
 }

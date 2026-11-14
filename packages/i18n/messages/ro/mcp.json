@@ -59,7 +59,8 @@
       "seating": "Așezarea la mese: câte locuri are fiecare masă și câte sunt ocupate",
       "suppliers": "Furnizorii din plan și starea rezervărilor; sumele doar dacă ai acces la bani",
       "planNotes": "Notele din plan și notele de buget (cele de buget doar dacă ai acces la bani)",
-      "proposals": "Propunerile care așteaptă decizia ta"
+      "proposals": "Propunerile care așteaptă decizia ta",
+      "invitations": "Modelele tale de invitație și textele lor"
     },
     "limits": "Asistentul primește doar ce poți vedea tu în aplicație. Nu vede cererile private ale invitaților, datele altor conturi, plățile sau consola de administrare.",
     "transfer": "Dacă furnizorul asistentului este în afara Spațiului Economic European, datele sunt transferate în afara SEE. Recomandăm asistenți găzduiți în SEE.",
@@ -128,7 +129,10 @@
     "propose_supplier_shortlist": "Propune o notă cu firme de luat în calcul. Nu anunță pe nimeni și nu trimite nicio cerere.",
     "propose_seating_layout": "Propune o așezare a meselor și a invitaților, verificată cu spațiul.",
     "propose_custom_table": "Propune o masă nouă, cu nume și dimensiuni.",
-    "propose_arrangement_design": "Propune un aranjament floral din cataloage, cu cost orientativ."
+    "propose_arrangement_design": "Propune un aranjament floral din cataloage, cu cost orientativ.",
+    "list_invitation_designs": "Modelele de invitație pe care le poate folosi ocazia, culorile lor, câmpurile de text și invitația salvată acum.",
+    "get_invitation_preview": "Desenează o invitație de probă ca imagine, cu un raport dacă textul încape. Nu salvează nimic.",
+    "propose_invitation_design": "Propune o invitație completă. O confirmi aici; apoi verifici proba înainte de tipar."
   },
   "results": {
     "unclaimed": "Această listare nu a fost încă revendicată"

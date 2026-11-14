@@ -12,7 +12,9 @@ import {
   EXTERNAL_ASSISTANT_LABEL_EN,
   getMcpTool,
   isMcpProposal,
+  isMcpWithImage,
   listMcpTools,
+  mcpImageOf,
   proposalConfirmUrl,
   type McpCtx,
 } from "./registry";
@@ -310,13 +312,19 @@ const callParams = z.object({
   arguments: z.record(z.string(), z.unknown()).optional(),
 });
 
-type ToolResult = { content: Array<{ type: "text"; text: string }>; structuredContent?: Record<string, unknown>; isError: boolean };
+type ToolResult = { content: Array<{ type: "text"; text: string } | { type: "image"; data: string; mimeType: string }>; structuredContent?: Record<string, unknown>; isError: boolean };
 
 function toolError(text: string): ToolResult {
   return { content: [{ type: "text", text }], isError: true };
 }
 
 function toolOk(value: unknown): ToolResult {
+  if (isMcpWithImage(value)) {
+    // a picture beside the JSON (the invitation preview): the image goes as image content only
+    const base = toolOk(value.value);
+    const image = mcpImageOf(value);
+    return { ...base, content: [...base.content, { type: "image", data: image.data, mimeType: image.mimeType }] };
+  }
   const structured: Record<string, unknown> =
     typeof value === "object" && value !== null && !Array.isArray(value)
       ? (JSON.parse(JSON.stringify(value)) as Record<string, unknown>)

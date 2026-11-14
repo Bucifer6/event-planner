@@ -1139,5 +1139,11 @@
     "summit": "Pisc",
     "coral-reef": "Recif de corali",
     "spring-garden": "Grădină de primăvară"
+  },
+  "whatif": {
+    "title": "Model nou de invitație",
+    "design": "Model",
+    "colourway": "Culori",
+    "note": "Se salvează ca versiune nouă. Verifică proba înainte să faci fișierul pentru tipar."
   }
 }

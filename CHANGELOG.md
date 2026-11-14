@@ -137,6 +137,12 @@ The first complete build of the product, made on 13–14 November 2026 on the br
   Bauhaus blocks, terrazzo, snowflakes, laurels, mountains, soundwaves…) in 55 palettes, chosen
   to suit each kind, each with two alternative palettes. A test checks every template on four
   sheet sizes: text stays on the sheet and never sits on top of the artwork.
+- An invitation builder for AI assistants (MCP): `list_invitation_designs` (the designs an
+  occasion can use, their colours, the text fields and limits, starter wordings, the current
+  invitation), `get_invitation_preview` (draws a draft and returns it as a picture with a fit
+  report) and `propose_invitation_design` (a proposal the planner confirms; it becomes a new,
+  unproofed version with the assistant's wording AI-labelled). The consent screen names the
+  new data class, "your invitation designs and their wording".
 - The template picker on "New occasion" now works in two steps: choose a group (weddings and
   love, family, parties, trips, work, culture and sport, or blank), then the kind within it.
 - `AGENTS.md` (rules for coding agents and new developers), a generated code map (`docs/build/21-code-map.md`, kept current by a test) and `pnpm check`, one command that runs every gate.

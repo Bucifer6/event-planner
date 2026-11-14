@@ -6,6 +6,7 @@ import { getDirectoryResults, setFeaturedProvider } from "@ed/core/directory";
 import { createHousehold } from "@ed/core/guests";
 import { proposeHandover } from "@ed/core/handover";
 import { getGuestInvitationText, getInvitationText, setInvitationText } from "@ed/core/invitationtext";
+import { getStationeryEditor } from "@ed/core/stationery";
 import { resolveGuestLink } from "@ed/core/invitations";
 import { createListing, createUnclaimedListing, submitListing } from "@ed/core/listings";
 import { decideRevision } from "@ed/core/moderation";
@@ -170,6 +171,9 @@ describe("the catalogue (MCP6, MCP8)", () => {
       "propose:propose_seating_layout",
       "propose:propose_custom_table",
       "propose:propose_arrangement_design",
+      "read:list_invitation_designs",
+      "read:get_invitation_preview",
+      "propose:propose_invitation_design",
     ]);
   });
 
@@ -345,6 +349,7 @@ describe("propose tools are bounded by write access (SEC15)", () => {
     propose_seating_layout: { occasionId, tables: [{ custom: { name: "Rotundă", shape: "round", diameterMm: 1800, seats: 10 }, x: 3000, y: 3000 }] },
     propose_custom_table: { occasionId, name: "Prezidiu", shape: "rect", widthMm: 3000, lengthMm: 800, seats: 6 },
     propose_arrangement_design: { occasionId, form: "round_bouquet", items: [{ catalogueItemId: "x".repeat(24), stems: 12 }] },
+    propose_invitation_design: { occasionId, designKey: "t.blank.01", colourwayKey: "tp-x", locale: "ro", texts: { names: "Ana & Mihai" } },
   });
 
   it("a read-only token cannot call any propose tool", async () => {
@@ -372,7 +377,7 @@ describe("propose tools are bounded by write access (SEC15)", () => {
       for (const name of Object.keys(args)) expect((await call(tok, name, args[name])).isError, name).toBe(true);
     }
     const contributorTok = await mkToken(await join(occ.id, "contributor"));
-    for (const name of ["propose_budget", "propose_budget_note", "propose_invitation_text", "propose_supplier_shortlist", "propose_seating_layout", "propose_custom_table", "propose_arrangement_design"]) {
+    for (const name of ["propose_budget", "propose_budget_note", "propose_invitation_text", "propose_supplier_shortlist", "propose_seating_layout", "propose_custom_table", "propose_arrangement_design", "propose_invitation_design"]) {
       expect((await call(contributorTok, name, args[name])).isError, name).toBe(true);
     }
     expect(await previewsOf(occ.id)).toHaveLength(0);
@@ -690,5 +695,85 @@ describe("business tokens (MCP7)", () => {
     expect((await call(raw, "whoami")).data.occasions).toEqual([]);
     // the client, who now owns it, reads it with their own token
     expect((await call(await mkToken(client, "read"), "get_occasion", { occasionId: occ.id })).data.member.role).toBe("owner");
+  });
+});
+
+describe("the invitation builder (list_invitation_designs, get_invitation_preview, propose_invitation_design)", () => {
+  async function rawCall(token: string, name: string, args: Record<string, unknown>) {
+    const res = await handleMcpRequest(
+      new Request(`${APP}/mcp`, {
+        method: "POST",
+        headers: { "content-type": "application/json", authorization: `Bearer ${token}` },
+        body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name, arguments: args } }),
+      }),
+      { db: t.db, now: new Date(T0.getTime() + 60_000), appUrl: APP, env: {} },
+    );
+    return ((await res.json()) as { result: { isError: boolean; structuredContent?: any; content: Array<{ type: string; text?: string; data?: string; mimeType?: string }> } }).result; // eslint-disable-line @typescript-eslint/no-explicit-any
+  }
+
+  it("an assistant reads the designs, looks at a draft, proposes it; the planner's confirmation makes a new, unproofed, AI-labelled version", async () => {
+    const occ = await mkOccasion();
+    const token = await mkToken(occ.owner);
+
+    const list = await call(token, "list_invitation_designs", { occasionId: occ.id });
+    expect(list.isError).toBe(false);
+    expect(list.data.collection).toBe("occasion");
+    expect(list.data.total).toBeGreaterThanOrEqual(50);
+    expect(list.data.designs[0]).toMatchObject({ key: expect.stringMatching(/^t\.blank\./), name: expect.stringContaining(" · ") });
+    expect(list.data.designs[0].colourways).toHaveLength(3);
+    expect(list.data.fields.find((f: { field: string }) => f.field === "names")).toMatchObject({ required: true, maxLength: 90 });
+    expect(list.data.starterWordings).toHaveLength(10);
+    expect(list.data.current).toBeNull();
+    expect(list.data.collections.map((c: { key: string }) => c.key)).toContain("embroidery");
+    // another kind's templates are never offered, and a collection can be asked for
+    expect(list.data.designs.every((d: { key: string }) => !d.key.startsWith("t.nunta."))).toBe(true);
+    expect((await call(token, "list_invitation_designs", { occasionId: occ.id, collection: "house" })).data.designs.map((d: { key: string }) => d.key)).toContain("classic");
+
+    const design = list.data.designs[4];
+    const draft = { occasionId: occ.id, designKey: design.key, colourwayKey: design.colourways[0].key, locale: "ro", texts: { kicker: "Cu drag", names: "Ana & Mihai", wording: "vă invităm la nunta noastră", date: "Sâmbătă, 12 septembrie 2026", venue: "Conacul Vechi", rsvp: "Confirmați până la 1 august" } };
+    const preview = await rawCall(token, "get_invitation_preview", draft);
+    expect(preview.isError, preview.content[0]?.text).toBe(false);
+    expect(preview.structuredContent).toMatchObject({ piece: "invitation", widthMm: 148, heightMm: 210, tooLong: [], fitsAsDesigned: true });
+    const image = preview.content.find((c) => c.type === "image")!;
+    expect(image.mimeType).toBe("image/png");
+    expect(Buffer.from(image.data!, "base64").subarray(1, 4).toString()).toBe("PNG");
+    expect(JSON.stringify(preview.structuredContent)).not.toContain(image.data!.slice(0, 40)); // the picture is not repeated in the JSON
+    // too long is reported, not refused; a design of another kind is refused
+    const long = await call(token, "get_invitation_preview", { ...draft, texts: { ...draft.texts, kicker: "x".repeat(120) } });
+    expect(long.data.tooLong).toEqual(["kicker"]);
+    expect((await call(token, "get_invitation_preview", { ...draft, designKey: "t.nunta.01", colourwayKey: "tp-macaron" })).isError).toBe(true);
+
+    const out = await call(token, "propose_invitation_design", draft);
+    expect(out.isError).toBe(false);
+    expect(out.data).toMatchObject({ applied: false, label: EXTERNAL_ASSISTANT_LABEL, confirmUrl: `${APP}/occasions/${occ.id}/proposals` });
+    expect((await getStationeryEditor(occ.owner.ctx, occ.id)).current).toBeNull(); // nothing saved yet
+    const [p] = await previewsOf(occ.id);
+    expect(p).toMatchObject({ kind: "stationery.version", state: "pending", proposedByKind: "mcp" });
+    expect(p!.delta.map((d) => d.key)).toEqual(expect.arrayContaining(["design", "colourway", "text:names", "text:wording"]));
+    // texts over the limit are refused at proposal time
+    expect((await call(token, "propose_invitation_design", { ...draft, texts: { ...draft.texts, names: "" } })).isError).toBe(true);
+
+    await confirmPreview(occ.owner.ctx, p!.id);
+    const editor = await getStationeryEditor(occ.owner.ctx, occ.id);
+    expect(editor.current).toMatchObject({ version: 1, designKey: design.key, colourwayKey: design.colourways[0].key, proofedAt: null });
+    expect(editor.current!.texts.wording).toMatchObject({ value: "vă invităm la nunta noastră", aiGenerated: true });
+    expect(editor.current!.texts.names.aiGenerated).toBe(true);
+    // and the builder now reports it
+    expect((await call(token, "list_invitation_designs", { occasionId: occ.id })).data.current).toMatchObject({ version: 1, proofed: false });
+  });
+
+  it("a contributor reads and previews but cannot propose; a stranger reads nothing", async () => {
+    const occ = await mkOccasion();
+    const contributor = await mkToken(await join(occ.id, "contributor"));
+    const list = await call(contributor, "list_invitation_designs", { occasionId: occ.id });
+    expect(list.isError).toBe(false);
+    const d = list.data.designs[0];
+    const draft = { occasionId: occ.id, designKey: d.key, colourwayKey: d.colourways[0].key, locale: "ro", texts: { names: "Ana & Mihai" } };
+    expect((await call(contributor, "get_invitation_preview", draft)).isError).toBe(false);
+    expect((await call(contributor, "propose_invitation_design", draft)).isError).toBe(true);
+    const stranger = await mkToken(await mkAccount());
+    expect((await call(stranger, "list_invitation_designs", { occasionId: occ.id })).isError).toBe(true);
+    expect((await call(stranger, "get_invitation_preview", draft)).isError).toBe(true);
+    expect(await previewsOf(occ.id)).toHaveLength(0);
   });
 });

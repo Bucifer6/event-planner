@@ -242,7 +242,7 @@ import time is loaded in every process through `@ed/core/all`.
 | `registerJobs` | `packages/jobs/src/builtin.ts` | `core/src/billing.ts` `core/src/budget.ts` `core/src/business.ts` `core/src/catalogues.ts` `core/src/claims.ts` `core/src/closeout.ts` … +27 more |
 | `registerJobs` | `packages/jobs/src/registry.ts` | `core/src/billing.ts` `core/src/budget.ts` `core/src/business.ts` `core/src/catalogues.ts` `core/src/claims.ts` `core/src/closeout.ts` … +27 more |
 | `registerLifecycleImpact` | `packages/core/src/lifecycle.ts` | `core/src/closeout.ts` `core/src/deliveries.ts` `core/src/expenses.ts` `core/src/ledger.ts` `core/src/payments.ts` `core/src/registrations.ts` |
-| `registerMcpTool` | `packages/mcp/src/registry.ts` | `mcp/src/builtin.ts` `mcp/src/index.ts` `mcp/src/tools-arrangements.ts` `mcp/src/tools-directory.ts` `mcp/src/tools-money.ts` `mcp/src/tools-planning.ts` … +1 more |
+| `registerMcpTool` | `packages/mcp/src/registry.ts` | `mcp/src/builtin.ts` `mcp/src/index.ts` `mcp/src/tools-arrangements.ts` `mcp/src/tools-directory.ts` `mcp/src/tools-money.ts` `mcp/src/tools-planning.ts` … +2 more |
 | `registerModerationKind` | `packages/core/src/moderation.ts` | `core/src/catalogues.ts` `core/src/drawings.ts` `core/src/listings.ts` |
 | `registerOnrcAdapter` | `packages/core/src/discovery.ts` | — |
 | `registerOverviewSection` | `packages/core/src/overview.ts` | `core/src/budget.ts` `core/src/closeout.ts` `core/src/ledger.ts` `core/src/payments.ts` `core/src/readiness.ts` |
@@ -285,6 +285,7 @@ import time is loaded in every process through `@ed/core/all`.
 | `seating.applyLayout` | `packages/core/src/seating.ts` |
 | `space.addCustomTable` | `packages/core/src/seating.ts` |
 | `space.updateDrawing` | `packages/core/src/seating.ts` |
+| `stationery.version` | `packages/core/src/stationery.ts` |
 | `tasks.applyTemplate` | `packages/core/src/templates.ts` |
 | `tasks.proposeList` | `packages/core/src/tasks-proposals.ts` |
 
@@ -530,6 +531,7 @@ Route groups in brackets do not appear in the URL. `page` = a screen, `route` = 
 | Tool | Scope | File |
 | --- | --- | --- |
 | `get_budget_summary` | read | `packages/mcp/src/tools-money.ts` |
+| `get_invitation_preview` | read | `packages/mcp/src/tools-stationery.ts` |
 | `get_listing` | read | `packages/mcp/src/tools-directory.ts` |
 | `get_occasion` | read | `packages/mcp/src/tools-planning.ts` |
 | `get_rsvp_summary` | read | `packages/mcp/src/tools-planning.ts` |
@@ -538,6 +540,7 @@ Route groups in brackets do not appear in the URL. `page` = a screen, `route` = 
 | `list_catalogues` | read | `packages/mcp/src/tools-directory.ts` |
 | `list_directory_filters` | read | `packages/mcp/src/tools-directory.ts` |
 | `list_households` | read | `packages/mcp/src/tools-planning.ts` |
+| `list_invitation_designs` | read | `packages/mcp/src/tools-stationery.ts` |
 | `list_occasions` | read | `packages/mcp/src/tools-planning.ts` |
 | `list_pending_proposals` | read | `packages/mcp/src/tools-planning.ts` |
 | `list_suppliers` | read | `packages/mcp/src/tools-money.ts` |
@@ -546,6 +549,7 @@ Route groups in brackets do not appear in the URL. `page` = a screen, `route` = 
 | `propose_budget` | propose | `packages/mcp/src/tools-money.ts` |
 | `propose_budget_note` | propose | `packages/mcp/src/tools-money.ts` |
 | `propose_custom_table` | propose | `packages/mcp/src/tools-space.ts` |
+| `propose_invitation_design` | propose | `packages/mcp/src/tools-stationery.ts` |
 | `propose_invitation_text` | propose | `packages/mcp/src/tools-planning.ts` |
 | `propose_seating_layout` | propose | `packages/mcp/src/tools-space.ts` |
 | `propose_supplier_shortlist` | propose | `packages/mcp/src/tools-directory.ts` |

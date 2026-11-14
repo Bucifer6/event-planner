@@ -339,6 +339,13 @@ Web: `@/components/plan/PlanView` (read-only, client), `PlanSvg` (server-safe),
   `MCP_TOOL_CATALOGUE` in `packages/mcp/src/tools.ts`, add `mcp.tools.<name>` in both
   languages, and — before it returns a new kind of data — add the class to
   `MCP_CONSENT_DATA_CLASSES`.
+- A read tool may return a picture with `mcpWithImage(json, pngBase64)`: the server sends it as
+  MCP image content beside the JSON (used by `get_invitation_preview`).
+- The invitation builder (`tools-stationery.ts`): `list_invitation_designs` (read),
+  `get_invitation_preview` (read; PNG + fit report), `propose_invitation_design` (propose; What-if
+  kind `stationery.version`, confirmed → `saveStationeryVersion`, unproofed, assistant text
+  AI-labelled). Core: `getInvitationBuilder`, `previewInvitationDraft`, `proposeInvitationDesign`
+  in `@ed/core/stationery`. Data class `invitations`.
 - `createMcpToken`, `listMcpTokens`, `revokeMcpToken`, `revokeAllMcpTokens`,
   `revokeBusinessMcpTokens`, `authenticateMcpToken`, `handleMcpRequest(request, { db, ip })`,
   `setOccasionLister`.

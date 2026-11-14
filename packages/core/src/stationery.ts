@@ -28,8 +28,10 @@ import { KIND_PALETTES, STARTER_KEYS, type StarterKey } from "./stationerycollec
 import {
   BLEED_MM,
   colourwaysFor,
+  COLOURWAYS,
   designAvailableFor,
   DESIGN_KEYS,
+  DESIGN_RANGES,
   drawSceneOnPdf,
   getColourway,
   getDesign,
@@ -48,6 +50,7 @@ import {
 } from "./stationerykit";
 import { PLANNING_ROLES } from "./suppliers";
 import { inTx } from "./tx";
+import { createPreview, registerWhatIf, type WhatIfPreview } from "./whatif";
 
 // INVITATION AND STATIONERY DESIGNER (C-04).
 //
@@ -56,6 +59,9 @@ import { inTx } from "./tx";
 //   previewStationery(ctx, draft)               SVG proofs of an UNSAVED draft (nothing stored)
 //   stationeryThumbnail(ctx, occasionId, key)   a design's gallery thumbnail (artwork + motif, no text)
 //   getStarterWordings(kind, locale)            the ten starter wordings of an occasion kind
+//   getInvitationBuilder(ctx, …)                assistant (MCP) catalogue: designs, colours, fields, current set
+//   previewInvitationDraft(ctx, …)              assistant preview of a draft: fit report + PNG
+//   proposeInvitationDesign(ctx, …)             assistant proposal → What-if "stationery.version" → a new version on confirm
 //   saveStationeryVersion(ctx, input)           every save is a new immutable version
 //   markStationeryProofed(ctx, …)               "Am verificat proba" — managers only
 //   buildStationeryProofPdf(ctx, …)             the proof to read: every piece, stamped PROBĂ
@@ -671,4 +677,152 @@ export { STATIONERY_TEXT_FIELDS };
 onOccasionPurge(async (tx, occasionId) => {
   await tx.db.delete(stationeryVersions).where(eq(stationeryVersions.occasionId, occasionId));
   await tx.db.delete(stationerySets).where(eq(stationerySets.occasionId, occasionId));
+});
+
+/* ── The invitation builder for assistants (MCP) ───────────────────────── */
+//
+// An assistant reads the catalogue, draws drafts to look at, then PROPOSES a design. Nothing is
+// saved until a manager confirms the proposal in the app (What-if kind "stationery.version");
+// it then becomes a new, unproofed version — the proof gate still stands before any print —
+// and every text the assistant wrote carries the AI label until it is substantially rewritten.
+
+export const STATIONERY_VERSION_KIND = "stationery.version";
+
+const zBuilderText = z.partialRecord(z.enum(STATIONERY_TEXT_FIELDS as unknown as [StationeryTextField, ...StationeryTextField[]]), z.string().max(1000));
+const builderDraft = z.object({
+  designKey: z.enum(DESIGN_KEYS as [DesignKey, ...DesignKey[]]),
+  colourwayKey: z.string().min(1).max(40),
+  locale: zLocale,
+  texts: zBuilderText,
+  qrOnInvitation: z.boolean().optional(),
+});
+export type InvitationBuilderDraft = z.input<typeof builderDraft>;
+
+export type InvitationBuilder = {
+  occasion: { id: string; title: string; kind: string; locale: StationeryLocale };
+  collections: Array<{ key: string; name: string; description: string; designs: number }>;
+  collection: string;
+  designs: Array<{ key: string; name: string; colourways: Array<{ key: string; name: string; paper: string; ink: string; accent: string }> }>;
+  total: number;
+  fields: Array<{ field: StationeryTextField; label: string; hint: string; maxLength: number; required: boolean; multiline: boolean }>;
+  starterWordings: Array<{ key: string; text: string }>;
+  pieces: readonly PieceKind[];
+  current: { version: number; designKey: string; designName: string; colourwayKey: string; locale: StationeryLocale; proofed: boolean; texts: Record<string, string> } | null;
+  /** What a new set starts from when nothing is saved yet. */
+  defaults: { designKey: string; colourwayKey: string; locale: StationeryLocale; texts: Record<string, string> };
+};
+
+/** The catalogue an assistant builds from. Planning members (the same people who see the designer). */
+export async function getInvitationBuilder(ctx: Ctx, input: { occasionId: string; collection?: string; offset?: number; limit?: number }): Promise<InvitationBuilder> {
+  const data = z.object({ occasionId: zId, collection: z.enum(DESIGN_RANGES).default("occasion"), offset: z.number().int().min(0).default(0), limit: z.number().int().min(1).max(100).default(60) }).parse(input);
+  await requireMember(ctx, data.occasionId, { roles: PLANNING_ROLES });
+  const o = await loadOccasion(ctx, data.occasionId);
+  const locale: StationeryLocale = o.locale === "en" ? "en" : "ro";
+  const available = DESIGN_KEYS.filter((k) => designAvailableFor(getDesign(k), o.kind));
+  const inRange = available.filter((k) => getDesign(k).range === data.collection);
+  const current = await loadVersion(ctx, data.occasionId);
+  const defaultKey = designFor(o.kind);
+  const plain = (t: StationeryTexts) => Object.fromEntries(STATIONERY_TEXT_FIELDS.map((f) => [f, t[f]?.value ?? ""]));
+  return {
+    occasion: { id: o.id, title: o.title, kind: o.kind, locale },
+    collections: DESIGN_RANGES.map((r) => ({ key: r, name: translate(locale, `stationery.ranges.${r}.name`), description: translate(locale, `stationery.ranges.${r}.blurb`), designs: available.filter((k) => getDesign(k).range === r).length })),
+    collection: data.collection,
+    designs: inRange.slice(data.offset, data.offset + data.limit).map((key) => ({
+      key,
+      name: stationeryDesignName(key, locale),
+      colourways: colourwaysFor(getDesign(key), o.kind).map((c) => ({ key: c, name: stationeryColourwayName(c, locale), paper: COLOURWAYS[c]!.paper, ink: COLOURWAYS[c]!.ink, accent: COLOURWAYS[c]!.accent })),
+    })),
+    total: inRange.length,
+    fields: STATIONERY_TEXT_FIELDS.map((f) => ({ field: f, label: translate(locale, `stationery.fields.${f}.label`), hint: translate(locale, `stationery.fields.${f}.hint`), maxLength: STATIONERY_FIELD_LIMITS[f], required: f === "names", multiline: MULTILINE.has(f) })),
+    starterWordings: getStarterWordings(o.kind, locale),
+    pieces: STATIONERY_PIECES,
+    current: current ? { version: current.version, designKey: current.designKey, designName: stationeryDesignName(current.designKey, locale), colourwayKey: current.colourwayKey, locale: current.locale, proofed: !!current.proofedAt, texts: plain(current.texts) } : null,
+    defaults: { designKey: defaultKey, colourwayKey: colourwaysFor(getDesign(defaultKey), o.kind)[0]!, locale, texts: plain(defaultStationeryTexts(o, locale)) },
+  };
+}
+
+/** Checks a draft against the occasion: the design is offered to its kind and the colourway to the design. */
+function checkDraft(design: string, colourway: string, kind: string): void {
+  const d = getDesign(design);
+  if (!designAvailableFor(d, kind)) throw new AppError("VALIDATION", "stationery.errors.design");
+  if (!colourwaysFor(d, kind).includes(colourway)) throw new AppError("VALIDATION", "stationery.errors.colourway");
+}
+
+export type InvitationDraftPreview = {
+  piece: PieceKind;
+  widthMm: number;
+  heightMm: number;
+  /** 1 = set as designed; below 1 the text had to be set smaller to fit. */
+  fit: number;
+  truncated: boolean;
+  /** Fields over their length limit (they would be refused on save). */
+  tooLong: StationeryTextField[];
+  missing: StationeryTextField[];
+  png: string;
+};
+
+/** Draws an unsaved draft for an assistant to look at: a PNG and a fit report. Planning members; stores nothing. */
+export async function previewInvitationDraft(ctx: Ctx, input: InvitationBuilderDraft & { occasionId: string; piece?: PieceKind }): Promise<InvitationDraftPreview> {
+  const occasionId = zId.parse(input.occasionId);
+  const draft = builderDraft.parse(input);
+  const piece = z.enum(STATIONERY_PIECES).default("invitation").parse(input.piece);
+  await requireMember(ctx, occasionId, { roles: PLANNING_ROLES });
+  const o = await loadOccasion(ctx, occasionId);
+  checkDraft(draft.designKey, draft.colourwayKey, o.kind);
+  const values = Object.fromEntries(STATIONERY_TEXT_FIELDS.map((f) => [f, cleanValue(f, draft.texts[f] ?? "")])) as Record<StationeryTextField, string>;
+  const tooLong = STATIONERY_TEXT_FIELDS.filter((f) => values[f].length > STATIONERY_FIELD_LIMITS[f]);
+  const kit = Object.fromEntries(STATIONERY_TEXT_FIELDS.map((f) => [f, values[f].slice(0, STATIONERY_FIELD_LIMITS[f])])) as KitTexts;
+  const scene = layoutPiece({ design: draft.designKey, colourway: draft.colourwayKey, piece, texts: kit, extra: SAMPLE_EXTRA(draft.locale), occasionKind: o.kind });
+  const spec = PIECES[piece];
+  const { default: sharp } = await import("sharp");
+  const png = await sharp(Buffer.from(sceneToSvg(scene, { width: 900 }))).png().toBuffer();
+  return { piece, widthMm: spec.widthMm, heightMm: spec.heightMm, fit: scene.fit, truncated: scene.truncated, tooLong, missing: values.names ? [] : ["names"], png: png.toString("base64") };
+}
+
+/** An assistant's proposed design + wording, as a What-if preview the manager confirms. Managers only (SEC15). */
+export async function proposeInvitationDesign(ctx: Ctx, input: InvitationBuilderDraft & { occasionId: string }): Promise<WhatIfPreview> {
+  const occasionId = zId.parse(input.occasionId);
+  const draft = builderDraft.parse(input);
+  await requireMember(ctx, occasionId, { manage: true });
+  await assertOccasionWritable(ctx, occasionId);
+  const o = await loadOccasion(ctx, occasionId);
+  checkDraft(draft.designKey, draft.colourwayKey, o.kind);
+  const { fieldErrors } = normaliseTexts(Object.fromEntries(Object.entries(draft.texts).map(([k, v]) => [k, { value: v }])), null);
+  if (Object.keys(fieldErrors).length) throw new AppError("VALIDATION", "common.errors.VALIDATION", { fieldErrors });
+  return createPreview(ctx, { kind: STATIONERY_VERSION_KIND, occasionId, subjectType: "occasion", subjectId: occasionId, input: draft });
+}
+
+registerWhatIf<z.output<typeof builderDraft>>(STATIONERY_VERSION_KIND, {
+  input: builderDraft,
+  authorize: async (ctx, subject, action) => {
+    await requireMember(ctx, subject.occasionId ?? "", action === "read" ? { roles: PLANNING_ROLES } : { manage: true });
+  },
+  compute: async (ctx, input, subject) => {
+    const current = await loadVersion(ctx, subject.occasionId!);
+    const locale: StationeryLocale = input.locale;
+    const rows: Array<{ key: string; what: { key: string }; before?: string; after: string; noteKey?: string }> = [
+      { key: "design", what: { key: "stationery.whatif.design" }, before: current ? stationeryDesignName(current.designKey, locale) : undefined, after: stationeryDesignName(input.designKey, locale), noteKey: "stationery.whatif.note" },
+      { key: "colourway", what: { key: "stationery.whatif.colourway" }, before: current ? stationeryColourwayName(current.colourwayKey, locale) : undefined, after: stationeryColourwayName(input.colourwayKey, locale) },
+    ];
+    for (const f of STATIONERY_TEXT_FIELDS) {
+      const after = cleanValue(f, input.texts[f] ?? "");
+      const before = current?.texts[f]?.value ?? "";
+      if (after !== before) rows.push({ key: `text:${f}`, what: { key: `stationery.fields.${f}.label` }, before: before || undefined, after: after || "—" });
+    }
+    return { title: { key: "stationery.whatif.title" }, delta: rows };
+  },
+  apply: async (tx, preview) => {
+    const occasionId = preview.occasionId!;
+    const current = await loadVersion(tx, occasionId);
+    const input = preview.input;
+    // what the assistant wrote carries the AI label (INF7, MCP5); text it left as it was keeps its own
+    const texts = Object.fromEntries(
+      STATIONERY_TEXT_FIELDS.map((f) => {
+        const value = input.texts[f] ?? "";
+        const changed = cleanValue(f, value) !== (current?.texts[f]?.value ?? "");
+        return [f, { value, aiOriginal: changed && value.trim() ? cleanValue(f, value) : null }];
+      }),
+    );
+    await saveStationeryVersion(tx, { occasionId, designKey: input.designKey, colourwayKey: input.colourwayKey, locale: input.locale, qrOnInvitation: input.qrOnInvitation, texts });
+  },
 });

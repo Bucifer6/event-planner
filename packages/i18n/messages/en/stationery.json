@@ -1139,5 +1139,11 @@
     "summit": "Summit",
     "coral-reef": "Coral reef",
     "spring-garden": "Spring garden"
+  },
+  "whatif": {
+    "title": "New invitation design",
+    "design": "Design",
+    "colourway": "Colours",
+    "note": "Saved as a new version. Check its proof before you make the print file."
   }
 }

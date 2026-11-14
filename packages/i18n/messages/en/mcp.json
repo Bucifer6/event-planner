@@ -59,7 +59,8 @@
       "seating": "Seating: how many seats each table has and how many are taken",
       "suppliers": "The plan's suppliers and their booking state; amounts only if you have finance access",
       "planNotes": "Plan notes and budget notes (budget notes only if you have finance access)",
-      "proposals": "The proposals waiting for your decision"
+      "proposals": "The proposals waiting for your decision",
+      "invitations": "Your invitation designs and their wording"
     },
     "limits": "The assistant receives only what you can see in the app. It does not see guests' private requests, other accounts' data, payments or the admin console.",
     "transfer": "If the assistant's provider is outside the European Economic Area, the data is transferred outside the EEA. We recommend assistants hosted in the EEA.",
@@ -128,7 +129,10 @@
     "propose_supplier_shortlist": "Proposes a note listing businesses to consider. It notifies nobody and sends no enquiry.",
     "propose_seating_layout": "Proposes a layout of tables and guests, checked against the space.",
     "propose_custom_table": "Proposes a new table, with name and dimensions.",
-    "propose_arrangement_design": "Proposes a flower arrangement from the catalogues, with an indicative cost."
+    "propose_arrangement_design": "Proposes a flower arrangement from the catalogues, with an indicative cost.",
+    "list_invitation_designs": "Invitation designs this occasion can use, their colours, the text fields and the invitation saved now.",
+    "get_invitation_preview": "Draws a draft invitation as a picture, with a report of whether the text fits. Stores nothing.",
+    "propose_invitation_design": "Proposes a complete invitation. You confirm it here; then you check the proof before printing."
   },
   "results": {
     "unclaimed": "This listing isn't claimed yet"
