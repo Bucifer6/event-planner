@@ -594,3 +594,574 @@
   --gilt: #ff6a4d;
   --gilt-ink: #ff8d75;
 }
+
+/* NOCTURNE — always at night. Slate-ink paper, warm candle-gold for actions, a sepia hairline; the same in both modes. */
+[data-ui="nocturne"] {
+  color-scheme: dark;
+  --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "DM Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 500;
+  --hero-weight: 400;
+  --figure-weight: 500;
+  --display-tracking: -0.01em;
+  --display-sm: 1.625rem;
+  --display-md: 2.125rem;
+  --display-lg: 2.75rem;
+  --display-xl: clamp(3rem, 8.5vw, 4.75rem);
+  --track: 1.2;
+  --btn-weight: 600;
+  --radius: 2px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 500;
+  --paper: #14191e;
+  --surface: #1e252b;
+  --sunken: #0f1317;
+  --ink: #f6eddf;
+  --ink-2: #cabcaa;
+  --ink-3: #a99c8b;
+  --line: #2f373d;
+  --line-strong: #5c5143;
+  --accent: #e5bd81;
+  --accent-hover: #f0d3a6;
+  --on-accent: #14191e;
+  --accent-tint: #2b2a26;
+  --gilt: #c9a46b;
+  --gilt-ink: #e5bd81;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="nocturne"] {
+    --paper: #14191e;
+    --surface: #1e252b;
+    --sunken: #0f1317;
+    --ink: #f6eddf;
+    --ink-2: #cabcaa;
+    --ink-3: #a99c8b;
+    --line: #2f373d;
+    --line-strong: #5c5143;
+    --accent: #e5bd81;
+    --accent-hover: #f0d3a6;
+    --on-accent: #14191e;
+    --accent-tint: #2b2a26;
+    --gilt: #c9a46b;
+    --gilt-ink: #e5bd81;
+  }
+}
+[data-ui="nocturne"][data-theme="dark"],
+[data-ui="nocturne"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #14191e;
+  --surface: #1e252b;
+  --sunken: #0f1317;
+  --ink: #f6eddf;
+  --ink-2: #cabcaa;
+  --ink-3: #a99c8b;
+  --line: #2f373d;
+  --line-strong: #5c5143;
+  --accent: #e5bd81;
+  --accent-hover: #f0d3a6;
+  --on-accent: #14191e;
+  --accent-tint: #2b2a26;
+  --gilt: #c9a46b;
+  --gilt-ink: #e5bd81;
+}
+
+/* FOLIO — the printed page. Newsprint cream, iron-gall ink, an oxblood rule; tight editorial headlines, square corners. */
+[data-ui="folio"] {
+  --font-display: "Fraunces", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "Instrument Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 600;
+  --hero-weight: 500;
+  --figure-weight: 600;
+  --display-tracking: -0.04em;
+  --display-leading: 1.04;
+  --track: 1.1;
+  --btn-weight: 600;
+  --radius: 0px;
+  --radius-sm: 0px;
+  --wordmark-size: 1.5rem;
+  --wordmark-weight: 700;
+  --paper: #f4f2e9;
+  --surface: #f8f6ef;
+  --sunken: #ece7d8;
+  --ink: #26251e;
+  --ink-2: #4f4a3d;
+  --ink-3: #625c4c;
+  --line: #d9d3c1;
+  --line-strong: #a6a08d;
+  --accent: #8f342c;
+  --accent-hover: #a8453b;
+  --on-accent: #f8f6ef;
+  --accent-tint: #f1e2dc;
+  --gilt: #a34031;
+  --gilt-ink: #8f342c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="folio"] {
+    --paper: #191814;
+    --surface: #22201b;
+    --sunken: #11100d;
+    --ink: #efebdd;
+    --ink-2: #c3bda9;
+    --ink-3: #a39d8a;
+    --line: #36332b;
+    --line-strong: #625d50;
+    --accent: #eba59b;
+    --accent-hover: #f4c3bb;
+    --on-accent: #191814;
+    --accent-tint: #3a2522;
+    --gilt: #d97f6f;
+    --gilt-ink: #eba59b;
+  }
+}
+[data-ui="folio"][data-theme="dark"],
+[data-ui="folio"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #191814;
+  --surface: #22201b;
+  --sunken: #11100d;
+  --ink: #efebdd;
+  --ink-2: #c3bda9;
+  --ink-3: #a39d8a;
+  --line: #36332b;
+  --line-strong: #625d50;
+  --accent: #eba59b;
+  --accent-hover: #f4c3bb;
+  --on-accent: #191814;
+  --accent-tint: #3a2522;
+  --gilt: #d97f6f;
+  --gilt-ink: #eba59b;
+}
+
+/* HERBARIUM — pressed leaves. Lichen paper, forest-green ink and actions, a little softness in the corners. */
+[data-ui="herbarium"] {
+  --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "Instrument Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 500;
+  --hero-weight: 500;
+  --figure-weight: 500;
+  --display-tracking: -0.005em;
+  --display-sm: 1.625rem;
+  --display-md: 2.125rem;
+  --display-lg: 2.75rem;
+  --display-xl: clamp(2.875rem, 8vw, 4.5rem);
+  --caps: none;
+  --track: 0.3;
+  --btn-weight: 600;
+  --btn-size: 0.9375rem;
+  --label-size: 0.8125rem;
+  --radius: 5px;
+  --radius-sm: 4px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 500;
+  --paper: #e8ecdf;
+  --surface: #f4f6ee;
+  --sunken: #dce5d0;
+  --ink: #253427;
+  --ink-2: #46523f;
+  --ink-3: #536047;
+  --line: #c8d1bd;
+  --line-strong: #a7b49d;
+  --accent: #435932;
+  --accent-hover: #56703f;
+  --on-accent: #f4f6ee;
+  --accent-tint: #dbe5cf;
+  --gilt: #8a9e74;
+  --gilt-ink: #4c6138;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="herbarium"] {
+    --paper: #141913;
+    --surface: #1c231b;
+    --sunken: #0d110c;
+    --ink: #e6ecdc;
+    --ink-2: #b8c2ab;
+    --ink-3: #98a38b;
+    --line: #2c3529;
+    --line-strong: #56634f;
+    --accent: #b9d39c;
+    --accent-hover: #d1e4bb;
+    --on-accent: #141913;
+    --accent-tint: #24301f;
+    --gilt: #9fb487;
+    --gilt-ink: #b9d39c;
+  }
+}
+[data-ui="herbarium"][data-theme="dark"],
+[data-ui="herbarium"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #141913;
+  --surface: #1c231b;
+  --sunken: #0d110c;
+  --ink: #e6ecdc;
+  --ink-2: #b8c2ab;
+  --ink-3: #98a38b;
+  --line: #2c3529;
+  --line-strong: #56634f;
+  --accent: #b9d39c;
+  --accent-hover: #d1e4bb;
+  --on-accent: #141913;
+  --accent-tint: #24301f;
+  --gilt: #9fb487;
+  --gilt-ink: #b9d39c;
+}
+
+/* PRISM — a launch poster. Lavender-white paper, ultramarine actions, heavy wide grotesque headlines. */
+[data-ui="prism"] {
+  --font-display: "Archivo", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --font-text: "Archivo", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 900;
+  --hero-weight: 900;
+  --figure-weight: 800;
+  --display-stretch: 112%;
+  --display-tracking: -0.035em;
+  --display-leading: 1.02;
+  --italic: normal;
+  --em-color: var(--accent);
+  --display-sm: 1.25rem;
+  --display-md: 1.75rem;
+  --display-lg: 2.375rem;
+  --display-xl: clamp(2.25rem, 8vw, 4.25rem);
+  --wordmark-size: 1.25rem;
+  --wordmark-weight: 900;
+  --caps: none;
+  --track: 0;
+  --btn-weight: 700;
+  --btn-size: 0.9375rem;
+  --label-size: 0.8125rem;
+  --radius: 8px;
+  --radius-sm: 6px;
+  --paper: #ecedf9;
+  --surface: #fbfaff;
+  --sunken: #e0def8;
+  --ink: #211c43;
+  --ink-2: #46406a;
+  --ink-3: #555075;
+  --line: #d3d0f0;
+  --line-strong: #bdb8e6;
+  --accent: #3e35af;
+  --accent-hover: #4d43de;
+  --on-accent: #fbfaff;
+  --accent-tint: #e0def8;
+  --gilt: #4d43de;
+  --gilt-ink: #3e35af;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="prism"] {
+    --paper: #13112a;
+    --surface: #1c1938;
+    --sunken: #0c0b1d;
+    --ink: #eceafd;
+    --ink-2: #bfbbe4;
+    --ink-3: #9f9ac6;
+    --line: #2e2a52;
+    --line-strong: #58539a;
+    --accent: #b3adff;
+    --accent-hover: #cdc9ff;
+    --on-accent: #13112a;
+    --accent-tint: #26224d;
+    --gilt: #8f87ff;
+    --gilt-ink: #b3adff;
+  }
+}
+[data-ui="prism"][data-theme="dark"],
+[data-ui="prism"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #13112a;
+  --surface: #1c1938;
+  --sunken: #0c0b1d;
+  --ink: #eceafd;
+  --ink-2: #bfbbe4;
+  --ink-3: #9f9ac6;
+  --line: #2e2a52;
+  --line-strong: #58539a;
+  --accent: #b3adff;
+  --accent-hover: #cdc9ff;
+  --on-accent: #13112a;
+  --accent-tint: #26224d;
+  --gilt: #8f87ff;
+  --gilt-ink: #b3adff;
+}
+
+/* SALON — an evening drawing room. Rosewater paper, mulberry ink, garnet actions in pill-shaped buttons. */
+[data-ui="salon"] {
+  --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "Jost", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 500;
+  --hero-weight: 400;
+  --figure-weight: 500;
+  --display-tracking: -0.01em;
+  --display-sm: 1.625rem;
+  --display-md: 2.125rem;
+  --display-lg: 2.875rem;
+  --display-xl: clamp(3rem, 9vw, 5rem);
+  --track: 1.2;
+  --btn-weight: 500;
+  --radius: 6px;
+  --radius-sm: 999px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 500;
+  --paper: #f7eee8;
+  --surface: #fff7ef;
+  --sunken: #f1e0db;
+  --ink: #491f2a;
+  --ink-2: #683f49;
+  --ink-3: #754b55;
+  --line: #e4ccc6;
+  --line-strong: #c4a19c;
+  --accent: #8b3b4d;
+  --accent-hover: #a34a5e;
+  --on-accent: #fff7ef;
+  --accent-tint: #f3dfe0;
+  --gilt: #a8735a;
+  --gilt-ink: #7c4a36;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="salon"] {
+    --paper: #1d1215;
+    --surface: #28191e;
+    --sunken: #140c0e;
+    --ink: #f7e6e2;
+    --ink-2: #d2b6b5;
+    --ink-3: #b39596;
+    --line: #3b262c;
+    --line-strong: #6c4a52;
+    --accent: #f0a9b8;
+    --accent-hover: #f7c7d1;
+    --on-accent: #1d1215;
+    --accent-tint: #3c2329;
+    --gilt: #d8a68d;
+    --gilt-ink: #e6bba5;
+  }
+}
+[data-ui="salon"][data-theme="dark"],
+[data-ui="salon"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1d1215;
+  --surface: #28191e;
+  --sunken: #140c0e;
+  --ink: #f7e6e2;
+  --ink-2: #d2b6b5;
+  --ink-3: #b39596;
+  --line: #3b262c;
+  --line-strong: #6c4a52;
+  --accent: #f0a9b8;
+  --accent-hover: #f7c7d1;
+  --on-accent: #1d1215;
+  --accent-tint: #3c2329;
+  --gilt: #d8a68d;
+  --gilt-ink: #e6bba5;
+}
+
+/* DUNE — desert at golden hour. Sand paper, umber ink, burnt-sienna actions, softened corners. */
+[data-ui="dune"] {
+  --font-display: "Fraunces", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "DM Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 700;
+  --hero-weight: 600;
+  --figure-weight: 600;
+  --display-tracking: -0.025em;
+  --caps: none;
+  --track: 0.2;
+  --btn-weight: 600;
+  --btn-size: 0.9375rem;
+  --label-size: 0.8125rem;
+  --radius: 4px;
+  --radius-sm: 4px;
+  --wordmark-size: 1.5rem;
+  --wordmark-weight: 700;
+  --paper: #f2e6d7;
+  --surface: #f9efe2;
+  --sunken: #eddbc7;
+  --ink: #3b2921;
+  --ink-2: #5c443a;
+  --ink-3: #694e42;
+  --line: #e0cbb5;
+  --line-strong: #c7aa91;
+  --accent: #8b472e;
+  --accent-hover: #a3573a;
+  --on-accent: #f9efe2;
+  --accent-tint: #f1dccd;
+  --gilt: #d08c64;
+  --gilt-ink: #8b472e;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="dune"] {
+    --paper: #1c1611;
+    --surface: #261e18;
+    --sunken: #130f0b;
+    --ink: #f4e8d9;
+    --ink-2: #cdbba7;
+    --ink-3: #ac9a87;
+    --line: #3a2f26;
+    --line-strong: #6a5848;
+    --accent: #eeaa86;
+    --accent-hover: #f5c6ab;
+    --on-accent: #1c1611;
+    --accent-tint: #3b2a20;
+    --gilt: #d9a07a;
+    --gilt-ink: #eeaa86;
+  }
+}
+[data-ui="dune"][data-theme="dark"],
+[data-ui="dune"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1c1611;
+  --surface: #261e18;
+  --sunken: #130f0b;
+  --ink: #f4e8d9;
+  --ink-2: #cdbba7;
+  --ink-3: #ac9a87;
+  --line: #3a2f26;
+  --line-strong: #6a5848;
+  --accent: #eeaa86;
+  --accent-hover: #f5c6ab;
+  --on-accent: #1c1611;
+  --accent-tint: #3b2a20;
+  --gilt: #d9a07a;
+  --gilt-ink: #eeaa86;
+}
+
+/* LEDGER — the accountant's book. Mint-grey paper, typewriter headings, bottle-green actions, square corners. */
+[data-ui="ledger"] {
+  --font-display: ui-monospace, "SFMono-Regular", "Cascadia Mono", Menlo, Consolas, monospace;
+  --font-text: "Instrument Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 600;
+  --hero-weight: 500;
+  --figure-weight: 600;
+  --display-tracking: -0.04em;
+  --italic: normal;
+  --em-color: var(--accent);
+  --display-sm: 1.25rem;
+  --display-md: 1.5rem;
+  --display-lg: 1.875rem;
+  --display-xl: clamp(2rem, 6.5vw, 3.25rem);
+  --track: 1;
+  --btn-weight: 600;
+  --radius: 0px;
+  --radius-sm: 0px;
+  --wordmark-size: 1.25rem;
+  --wordmark-weight: 600;
+  --paper: #ebefed;
+  --surface: #f9faf8;
+  --sunken: #e0e8e3;
+  --ink: #1e2826;
+  --ink-2: #3e4c49;
+  --ink-3: #465653;
+  --line: #cdd7d2;
+  --line-strong: #aebbb6;
+  --accent: #226454;
+  --accent-hover: #2d7a67;
+  --on-accent: #f9faf8;
+  --accent-tint: #dae9e2;
+  --gilt: #226454;
+  --gilt-ink: #226454;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="ledger"] {
+    --paper: #111716;
+    --surface: #19201e;
+    --sunken: #0a0f0e;
+    --ink: #e5ece9;
+    --ink-2: #b3c0bb;
+    --ink-3: #93a19c;
+    --line: #28322f;
+    --line-strong: #51605b;
+    --accent: #8fd3bd;
+    --accent-hover: #b2e3d3;
+    --on-accent: #111716;
+    --accent-tint: #1d302a;
+    --gilt: #8fd3bd;
+    --gilt-ink: #8fd3bd;
+  }
+}
+[data-ui="ledger"][data-theme="dark"],
+[data-ui="ledger"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #111716;
+  --surface: #19201e;
+  --sunken: #0a0f0e;
+  --ink: #e5ece9;
+  --ink-2: #b3c0bb;
+  --ink-3: #93a19c;
+  --line: #28322f;
+  --line-strong: #51605b;
+  --accent: #8fd3bd;
+  --accent-hover: #b2e3d3;
+  --on-accent: #111716;
+  --accent-tint: #1d302a;
+  --gilt: #8fd3bd;
+  --gilt-ink: #8fd3bd;
+}
+
+/* MUSE — dreamy and soft. Lilac paper, plum ink and actions, generous round corners and pill buttons. */
+[data-ui="muse"] {
+  --font-display: "Instrument Serif", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "DM Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 400;
+  --hero-weight: 400;
+  --figure-weight: 400;
+  --display-tracking: -0.015em;
+  --display-sm: 1.5rem;
+  --display-md: 2rem;
+  --display-lg: 2.75rem;
+  --display-xl: clamp(2.875rem, 8.5vw, 4.75rem);
+  --caps: none;
+  --track: 0.2;
+  --btn-weight: 600;
+  --btn-size: 0.9375rem;
+  --label-size: 0.8125rem;
+  --radius: 16px;
+  --radius-sm: 999px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 400;
+  --paper: #f1edf7;
+  --surface: #fcf9ff;
+  --sunken: #e9e0f4;
+  --ink: #31243c;
+  --ink-2: #544461;
+  --ink-3: #5f4d6e;
+  --line: #ddd2ea;
+  --line-strong: #c8b9d7;
+  --accent: #754581;
+  --accent-hover: #8b559a;
+  --on-accent: #fcf9ff;
+  --accent-tint: #ece0f2;
+  --gilt: #b3a1ed;
+  --gilt-ink: #6a4b9a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="muse"] {
+    --paper: #17121c;
+    --surface: #211a28;
+    --sunken: #0f0c13;
+    --ink: #efe6f7;
+    --ink-2: #c7b8d6;
+    --ink-3: #a796b8;
+    --line: #33293d;
+    --line-strong: #62547a;
+    --accent: #dcb0e8;
+    --accent-hover: #ead0f1;
+    --on-accent: #17121c;
+    --accent-tint: #33243b;
+    --gilt: #b9a8f0;
+    --gilt-ink: #cbbdf4;
+  }
+}
+[data-ui="muse"][data-theme="dark"],
+[data-ui="muse"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #17121c;
+  --surface: #211a28;
+  --sunken: #0f0c13;
+  --ink: #efe6f7;
+  --ink-2: #c7b8d6;
+  --ink-3: #a796b8;
+  --line: #33293d;
+  --line-strong: #62547a;
+  --accent: #dcb0e8;
+  --accent-hover: #ead0f1;
+  --on-accent: #17121c;
+  --accent-tint: #33243b;
+  --gilt: #b9a8f0;
+  --gilt-ink: #cbbdf4;
+}

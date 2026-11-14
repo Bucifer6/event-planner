@@ -1,6 +1,6 @@
 "use client";
 
-import { Checkbox, Notice, SubmitButton, Tag, TextareaField, TextField } from "@ed/ui";
+import { Checkbox, Notice, SelectField, SubmitButton, Tag, TextareaField, TextField } from "@ed/ui";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, useTransition } from "react";
@@ -18,7 +18,8 @@ const pieceKey = (p: string) => p.replace(/-([a-z])/g, (_, c: string) => c.toUpp
 const PRESET_FIELDS = ["kicker", "wording", "rsvp", "saveTheDate", "menuTitle", "thanks"] as const;
 const AI_FIELDS: Partial<Record<Field, "invitation" | "thanks">> = { wording: "invitation", thanks: "thanks" };
 
-export type DesignOption = { key: string; colourways: Array<{ key: string; paper: string; ink: string; accent: string }> };
+export type DesignOption = { key: string; range: string; thumb: string; colourways: Array<{ key: string; paper: string; ink: string; accent: string }> };
+type Starters = Record<"ro" | "en", Array<{ key: string; text: string }>>;
 export type DesignerDraft = { designKey: string; colourwayKey: string; locale: "ro" | "en"; texts: Record<Field, string>; aiOriginal: Partial<Record<Field, string | null>>; qrOnInvitation: boolean };
 type Proof = { src: string; widthMm: number; heightMm: number; fit: number; truncated: boolean };
 type Presets = Record<"ro" | "en", Record<"nunta" | "botez" | "aniversare", Record<(typeof PRESET_FIELDS)[number], string>>>;
@@ -49,6 +50,8 @@ export function StationeryDesigner({
   occasionKind,
   canManage,
   designs,
+  ranges,
+  starters,
   limits,
   presets,
   initial,
@@ -60,6 +63,8 @@ export function StationeryDesigner({
   occasionKind: string;
   canManage: boolean;
   designs: DesignOption[];
+  ranges: string[];
+  starters: Starters;
   limits: Record<string, number>;
   presets: Presets;
   initial: DesignerDraft;
@@ -82,6 +87,13 @@ export function StationeryDesigner({
   const first = useRef(true);
 
   const design = designs.find((d) => d.key === draft.designKey) ?? designs[0]!;
+  const [range, setRange] = useState(design.range);
+  const inRange = designs.filter((d) => d.range === range);
+  const pickDesign = (key: string) => {
+    if (!canManage) return;
+    const next = designs.find((d) => d.key === key)!;
+    change({ designKey: key, colourwayKey: next.colourways.some((c) => c.key === draft.colourwayKey) ? draft.colourwayKey : next.colourways[0]!.key });
+  };
   const change = (patch: Partial<DesignerDraft>) => {
     setDraft((d) => ({ ...d, ...patch }));
     setDirty(true);
@@ -105,6 +117,7 @@ export function StationeryDesigner({
         locale: draft.locale,
         texts: Object.fromEntries(Object.entries(draft.texts).map(([k, v]) => [k, { value: v.slice(0, limits[k] ?? 1000) }])),
         piece,
+        occasionKind,
       });
       if (mine !== seq.current) return;
       setBusy(false);
@@ -114,7 +127,7 @@ export function StationeryDesigner({
       } else setProofError(true);
     }, 350);
     return () => clearTimeout(timer);
-  }, [draft.designKey, draft.colourwayKey, draft.locale, draft.texts, piece, limits]);
+  }, [draft.designKey, draft.colourwayKey, draft.locale, draft.texts, piece, limits, occasionKind]);
 
   const save = () =>
     startSave(async () => {
@@ -124,6 +137,7 @@ export function StationeryDesigner({
         colourwayKey: draft.colourwayKey,
         locale: draft.locale,
         qrOnInvitation: draft.qrOnInvitation,
+        occasionKind,
         texts: Object.fromEntries(Object.entries(draft.texts).map(([k, v]) => [k, { value: v, aiOriginal: draft.aiOriginal[k as Field] ?? null }])),
       });
       if (res.ok) {
@@ -211,17 +225,29 @@ export function StationeryDesigner({
         {!canManage ? <Notice>{t("form.readOnly")}</Notice> : null}
         <div className={styles.group}>
           <Chips
-            name="design"
-            legend={t("form.designLegend")}
-            value={draft.designKey}
-            options={designs.map((d) => ({ value: d.key, label: t(`designs.${d.key}.name`) }))}
-            onChange={(key) => {
-              if (!canManage) return;
-              const next = designs.find((d) => d.key === key)!;
-              change({ designKey: key, colourwayKey: next.colourways.some((c) => c.key === draft.colourwayKey) ? draft.colourwayKey : next.colourways[0]!.key });
-            }}
+            name="range"
+            legend={t("form.rangeLegend")}
+            value={range}
+            options={ranges.map((r) => ({ value: r, label: t(`ranges.${r}.name`) }))}
+            onChange={setRange}
           />
-          <p className="ed-small ed-muted">{t(`designs.${draft.designKey}.blurb`)}</p>
+          <p className="ed-small ed-muted">
+            {t(`ranges.${range}.blurb`)} {t("form.designCount", { count: inRange.length })}
+            {range !== "house" && range !== "embroidery" ? ` ${t("form.motifNote")}` : ""}
+          </p>
+          <fieldset className="ed-fieldset">
+            <legend className="ed-field__label">{t("form.designLegend")}</legend>
+            <div className={styles.gallery}>
+              {inRange.map((d) => (
+                <label key={d.key} className={styles.option}>
+                  <input className="ed-vh" type="radio" name="design" value={d.key} checked={draft.designKey === d.key} onChange={() => pickDesign(d.key)} />
+                  <img src={d.thumb} alt="" width={148} height={210} loading="lazy" decoding="async" />
+                  <span className="ed-small">{t(`designs.${d.key}.name`)}</span>
+                </label>
+              ))}
+            </div>
+          </fieldset>
+          {design.range === "house" ? <p className="ed-small ed-muted">{t(`designs.${draft.designKey}.blurb`)}</p> : null}
         </div>
         <Chips
           name="colourway"
@@ -255,6 +281,23 @@ export function StationeryDesigner({
                 </button>
               ))}
             </div>
+            <SelectField
+              id="st-starter"
+              label={t("form.starterLabel")}
+              hint={t("form.starterHint")}
+              value=""
+              onChange={(e) => {
+                const chosen = starters[draft.locale].find((s) => s.key === e.target.value);
+                if (chosen) change({ texts: { ...draft.texts, wording: chosen.text }, aiOriginal: { ...draft.aiOriginal, wording: null } });
+              }}
+            >
+              <option value="">{t("form.starterNone")}</option>
+              {starters[draft.locale].map((s) => (
+                <option key={s.key} value={s.key}>
+                  {s.text.length > 70 ? `${s.text.slice(0, 68).trimEnd()}…` : s.text}
+                </option>
+              ))}
+            </SelectField>
           </div>
         ) : null}
 

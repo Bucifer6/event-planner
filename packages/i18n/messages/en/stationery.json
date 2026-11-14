@@ -33,6 +33,198 @@
     "petrecere": {
       "name": "Party",
       "blurb": "A little confetti in two corners and a heavier Bodoni."
+    },
+    "muscel-sleeve-steps": {
+      "name": "Muscel · Stepped sleeve"
+    },
+    "muscel-gold-lattice": {
+      "name": "Muscel · Gold lattice"
+    },
+    "bucovina-hooked-cross": {
+      "name": "Comănești · Hooked cross"
+    },
+    "bucovina-branching-flower": {
+      "name": "Comănești · Flowering branches"
+    },
+    "bucovina-diamond-chain": {
+      "name": "Comănești · Diamond chain"
+    },
+    "rasinari-end-register": {
+      "name": "Rășinari · Woven end bands"
+    },
+    "rasinari-stripe-rhythm": {
+      "name": "Rășinari · Red and blue stripes"
+    },
+    "moldova-stepped-wave": {
+      "name": "Moldova · Stepped water wave"
+    },
+    "moldova-woven-diamonds": {
+      "name": "Northern Moldova · Loom diamonds"
+    },
+    "oltenia-floral-scoarta": {
+      "name": "Oltenia · Flower and vine"
+    },
+    "muscel-check": {
+      "name": "Muscel · Checked collar"
+    },
+    "muscel-altita-grid": {
+      "name": "Muscel · Altiță crosses"
+    },
+    "comanesti-diamond": {
+      "name": "Comănești · Red and black diamonds"
+    },
+    "comanesti-sprig": {
+      "name": "Comănești · Black sprigs"
+    },
+    "rasinari-woven": {
+      "name": "Rășinari · Woven stripes"
+    },
+    "dolj-woven": {
+      "name": "Oltenia · Facing birds"
+    },
+    "muscel-altita": {
+      "name": "Muscel · Altiță bands"
+    },
+    "muscel-rauri": {
+      "name": "Muscel · Râuri and diamonds"
+    },
+    "maramures-ciupag": {
+      "name": "Maramureș · Bridal ciupag"
+    },
+    "sibiu-fodori": {
+      "name": "Mărginimea Sibiului · Fodori"
+    },
+    "moldova-sirlau": {
+      "name": "Moldova · Șirlău weave"
+    },
+    "dobrogea-stergar": {
+      "name": "Dobrogea · Woven ștergar"
+    },
+    "oltenia-scoarta": {
+      "name": "Oltenia · Birds on a scoarță"
+    },
+    "moldova-romburi": {
+      "name": "Northern Moldova · Stepped diamonds"
+    },
+    "maramures-gate": {
+      "name": "Maramureș · Carved Gate"
+    },
+    "maramures-rosette": {
+      "name": "Maramureș · Solar Rosette"
+    },
+    "bucovina-wax": {
+      "name": "Bucovina · Waxwork Bands"
+    },
+    "bucovina-lozenge": {
+      "name": "Bucovina · Lozenges"
+    },
+    "horezu-clay": {
+      "name": "Oltenia · Horezu Clay Spirals"
+    },
+    "horezu-medallion": {
+      "name": "Oltenia · Horezu Glazed Medallion"
+    },
+    "saxon-chest": {
+      "name": "Transylvania · Saxon Painted Chest"
+    },
+    "saxon-floral": {
+      "name": "Transylvania · Saxon Floral Panels"
+    },
+    "wildflower-edition": {
+      "name": "Gathered wildflowers"
+    },
+    "woodcut-edition": {
+      "name": "Orchard woodcut"
+    },
+    "woven-edition": {
+      "name": "Woven linen"
+    },
+    "damask-edition": {
+      "name": "Ivory damask"
+    },
+    "heraldic-edition": {
+      "name": "Formal crest"
+    },
+    "embroidered-edition": {
+      "name": "Embroidered border"
+    },
+    "letterpress-edition": {
+      "name": "Letterpress"
+    },
+    "botanical-edition": {
+      "name": "Botanical engraving"
+    },
+    "deco-edition": {
+      "name": "Deco"
+    },
+    "modernist-edition": {
+      "name": "Modernist"
+    },
+    "folded-edition": {
+      "name": "Folded paper"
+    },
+    "engraved-edition": {
+      "name": "Intaglio"
+    },
+    "triptych": {
+      "name": "Triptych"
+    },
+    "medallion": {
+      "name": "Medallion"
+    },
+    "rays": {
+      "name": "Sunburst"
+    },
+    "diagonal": {
+      "name": "Diagonal"
+    },
+    "plaque": {
+      "name": "Plaque"
+    },
+    "column": {
+      "name": "Side column"
+    },
+    "scallop": {
+      "name": "Scalloped edge"
+    },
+    "imprint": {
+      "name": "Imprint"
+    },
+    "ruling": {
+      "name": "Ruled lines"
+    },
+    "duotone": {
+      "name": "Duotone"
+    },
+    "frame": {
+      "name": "Double frame"
+    },
+    "arch": {
+      "name": "Arch"
+    },
+    "seal": {
+      "name": "Seal"
+    },
+    "ribbon": {
+      "name": "Ribbon"
+    },
+    "band": {
+      "name": "Letterpress"
+    },
+    "ticket": {
+      "name": "Ticket"
+    },
+    "postcard": {
+      "name": "Postcard"
+    },
+    "split": {
+      "name": "Split panel"
+    },
+    "crest": {
+      "name": "Crest"
+    },
+    "border": {
+      "name": "Wide border"
     }
   },
   "colourways": {
@@ -43,7 +235,198 @@
     "ciel": "Sky blue",
     "terracotta": "Terracotta",
     "minuit": "Midnight",
-    "noir": "Warm black"
+    "noir": "Warm black",
+    "stitched-linen": "Stitched linen",
+    "muscel-thread": "Ivory, black, red and gold",
+    "ciupag-thread": "Red, blue and green embroidery",
+    "sibiu-cloth": "Black and white",
+    "moldova-wool": "Black wool and pink",
+    "dobrogea-cotton": "Red and black on cotton",
+    "dolj-wool": "Red and violet wool",
+    "moldova-diamond": "Red wool and olive",
+    "maramures-oak": "Oak",
+    "maramures-ink": "Carved walnut",
+    "bucovina-wax": "Wax and soot",
+    "bucovina-red": "Dyed red",
+    "horezu-clay": "Unglazed clay",
+    "horezu-glaze": "Olive glaze",
+    "saxon-chest": "Painted pine",
+    "saxon-blue": "Painted blue",
+    "harvest-linen": "Harvest linen",
+    "orchard-bark": "Orchard bark",
+    "oat-cloth": "Oat linen",
+    "antique-ivory": "Antique ivory",
+    "heritage-blue": "Heritage blue",
+    "heirloom-red": "Heirloom red",
+    "truffle": "Truffle",
+    "vermilion": "Vermilion",
+    "sparkler": "Sparkler",
+    "nightshade": "Nightshade",
+    "peach": "Peach",
+    "jellybean": "Jellybean",
+    "crayon": "Crayon",
+    "balloon": "Balloon",
+    "lemonade": "Lemonade",
+    "gumdrop": "Gumdrop",
+    "peony": "Peony",
+    "organza": "Organza",
+    "gardenia": "Gardenia",
+    "rhubarb": "Rhubarb",
+    "primrose": "Primrose",
+    "ribbon-silk": "Silk ribbon",
+    "rosewood": "Rosewood",
+    "quartz": "Quartz",
+    "patinated-brass": "Aged brass",
+    "mist": "Mist",
+    "sugarplum": "Sugarplum",
+    "buttermilk": "Buttermilk",
+    "morning-sky": "Morning sky",
+    "bubblegum": "Bubblegum",
+    "pistachio": "Pistachio",
+    "holly": "Holly",
+    "cranberry": "Cranberry",
+    "snowfall": "Snowfall",
+    "spruce": "Spruce",
+    "tinsel": "Tinsel",
+    "willow": "Willow",
+    "remembrance": "Remembrance",
+    "soft-stone": "Soft stone",
+    "white-rose": "White rose",
+    "stillwater": "Still water",
+    "blueprint": "Blueprint",
+    "type-metal": "Type metal",
+    "copperplate": "Copperplate",
+    "sea-ink": "Sea ink",
+    "newsprint": "Newsprint",
+    "saffron": "Saffron",
+    "merlot": "Merlot",
+    "stoneware": "Stoneware",
+    "fig": "Fig",
+    "tablecloth": "Tablecloth",
+    "alabaster": "Alabaster",
+    "celadon": "Celadon",
+    "mulberry": "Mulberry",
+    "lapis": "Lapis",
+    "marigold": "Marigold",
+    "gesso": "Gesso",
+    "canvas": "Canvas",
+    "patina": "Patina",
+    "matboard": "Matboard",
+    "lacquer": "Lacquer",
+    "backstage": "Backstage",
+    "encore": "Encore",
+    "soundcheck": "Soundcheck",
+    "vinyl": "Vinyl",
+    "amp": "Amp",
+    "notebook": "Notebook",
+    "pigment": "Pigment",
+    "workbench": "Workbench",
+    "pencil": "Pencil",
+    "indigo-dye": "Indigo dye",
+    "track": "Track",
+    "court": "Court",
+    "turf": "Turf",
+    "scoreboard": "Scoreboard",
+    "relay": "Relay",
+    "afterglow": "Afterglow",
+    "sundial": "Sundial",
+    "parchment": "Parchment",
+    "amber": "Amber",
+    "seaglass": "Sea glass",
+    "statuette": "Statuette",
+    "marquee": "Marquee",
+    "platinum": "Platinum",
+    "applause": "Applause",
+    "laureate": "Laureate",
+    "bunting": "Bunting",
+    "lantern": "Lantern",
+    "parade": "Parade",
+    "daybreak": "Daybreak",
+    "fairground": "Fairground",
+    "laurel": "Laurel",
+    "tassel": "Tassel",
+    "diploma": "Diploma",
+    "honours": "Honours",
+    "campus": "Campus",
+    "blush": "Blush",
+    "promise": "Promise",
+    "pearl": "Pearl",
+    "vow": "Vow",
+    "bouquet": "Bouquet",
+    "moon": "Moon",
+    "cotton": "Cotton",
+    "mint": "Mint",
+    "apricot": "Apricot",
+    "starlight": "Starlight",
+    "hearth": "Hearth",
+    "doorstep": "Doorstep",
+    "brick": "Brick",
+    "linen": "Linen",
+    "woodgrain": "Woodgrain",
+    "keynote": "Keynote",
+    "graphite": "Graphite",
+    "signal": "Signal",
+    "grid": "Grid",
+    "forum": "Forum",
+    "spotlight": "Spotlight",
+    "spectrum": "Spectrum",
+    "chrome": "Chrome",
+    "prototype": "Prototype",
+    "neon": "Neon",
+    "gilded": "Gilded",
+    "sapphire": "Sapphire",
+    "patron": "Patron",
+    "orchid": "Orchid",
+    "onyx": "Onyx",
+    "album": "Album",
+    "postscript": "Postscript",
+    "heritage": "Heritage",
+    "copper": "Copper",
+    "evergreen": "Evergreen",
+    "orchard": "Orchard",
+    "gingham": "Gingham",
+    "meadow": "Meadow",
+    "citrus": "Citrus",
+    "lakeside": "Lakeside",
+    "confetti": "Confetti",
+    "candle": "Candlelight",
+    "sorbet": "Sorbet",
+    "disco": "Disco",
+    "sprinkles": "Sprinkles",
+    "silk": "Silk",
+    "olive": "Olive",
+    "heirloom": "Heirloom",
+    "porcelain": "Porcelain",
+    "vellum": "Vellum",
+    "cloud": "Cloud",
+    "lullaby": "Lullaby",
+    "nest": "Nest",
+    "lamb": "Lamb",
+    "petal": "Petal",
+    "champagne": "Champagne",
+    "fireworks": "Fireworks",
+    "frost": "Frost",
+    "emerald": "Emerald",
+    "velvet": "Velvet",
+    "compass": "Compass",
+    "sunrise": "Sunrise",
+    "atlas": "Atlas",
+    "horizon": "Horizon",
+    "desert": "Desert",
+    "railway": "Railway",
+    "postmark": "Postmark",
+    "summit": "Summit",
+    "harbour": "Harbour",
+    "caravan": "Caravan",
+    "paper": "Paper",
+    "ink": "Ink",
+    "terrace": "Terrace",
+    "studio": "Studio",
+    "gallery": "Gallery",
+    "linen-comanesti-diamond": "Dark homespun",
+    "linen-rasinari-woven": "Undyed wool",
+    "linen-dolj-woven": "Plum weave",
+    "linen-muscel-altita-grid": "Unbleached linen"
   },
   "pieces": {
     "invitation": "Invitation, A5",
@@ -128,7 +511,13 @@
     "savedSame": "Nothing changed since version {version}.",
     "readOnly": "You can see the stationery, but only the organisers can change it.",
     "unsaved": "You have unsaved changes. The proof above already shows them.",
-    "aiLabel": "AI-generated"
+    "aiLabel": "AI-generated",
+    "rangeLegend": "Collection",
+    "designCount": "{count} designs",
+    "starterLabel": "Starter wording",
+    "starterHint": "Fills the invitation text with a ready-made wording for this kind of occasion. You can change it afterwards.",
+    "starterNone": "Choose a starter wording…",
+    "motifNote": "The small drawing on these designs matches the kind of occasion."
   },
   "preview": {
     "title": "Proof",
@@ -229,5 +618,417 @@
     "printNoteFlood": "The coloured ground prints to the edge (3 mm bleed).",
     "printNoteStock": "No printed ground: ivory card of 300 g/m² is recommended.",
     "slugBleed": "{mm} mm bleed"
+  },
+  "ranges": {
+    "house": {
+      "name": "House designs",
+      "blurb": "Our eight typographic designs, drawn for EventDesk."
+    },
+    "embroidery": {
+      "name": "Romanian embroidery & weaving",
+      "blurb": "Borders drawn stitch by stitch from documented Romanian embroidery and woven textiles, on linen."
+    },
+    "featured": {
+      "name": "Signature collection",
+      "blurb": "Six editions with their own artwork, in your occasion’s palettes."
+    },
+    "rustic": {
+      "name": "Rustic",
+      "blurb": "Warm, hand-made designs, including four regional craft references."
+    },
+    "traditional": {
+      "name": "Traditional",
+      "blurb": "Formal designs with regional ornament from Maramureș, Bucovina, Oltenia and Transylvania."
+    },
+    "collection": {
+      "name": "All compositions",
+      "blurb": "Twenty layouts, in your occasion’s palettes or the studio palettes."
+    }
+  },
+  "starters": {
+    "zi_de_nastere": {
+      "frame": "Join us for cake and a toast to another year.",
+      "arch": "Join us for cake and a toast to another year.",
+      "seal": "Join us for cake and a toast to another year.",
+      "ribbon": "Join us for cake and a toast to another year.",
+      "band": "Join us for cake and a toast to another year.",
+      "ticket": "Join us for cake and a toast to another year. Please let us know if you can join us.",
+      "postcard": "Join us for cake and a toast to another year. Please let us know if you can join us.",
+      "split": "Join us for cake and a toast to another year. Please let us know if you can join us.",
+      "crest": "Join us for cake and a toast to another year. Please let us know if you can join us.",
+      "border": "Join us for cake and a toast to another year. Please let us know if you can join us."
+    },
+    "zi_de_nastere_copii": {
+      "frame": "Come play, laugh and share some birthday cake!",
+      "arch": "Come play, laugh and share some birthday cake!",
+      "seal": "Come play, laugh and share some birthday cake!",
+      "ribbon": "Come play, laugh and share some birthday cake!",
+      "band": "Come play, laugh and share some birthday cake!",
+      "ticket": "Come play, laugh and share some birthday cake! Please let us know if you can join us.",
+      "postcard": "Come play, laugh and share some birthday cake! Please let us know if you can join us.",
+      "split": "Come play, laugh and share some birthday cake! Please let us know if you can join us.",
+      "crest": "Come play, laugh and share some birthday cake! Please let us know if you can join us.",
+      "border": "Come play, laugh and share some birthday cake! Please let us know if you can join us."
+    },
+    "petrecere_mireasa": {
+      "frame": "Please join us for an afternoon celebrating the bride-to-be.",
+      "arch": "Please join us for an afternoon celebrating the bride-to-be.",
+      "seal": "Please join us for an afternoon celebrating the bride-to-be.",
+      "ribbon": "Please join us for an afternoon celebrating the bride-to-be.",
+      "band": "Please join us for an afternoon celebrating the bride-to-be.",
+      "ticket": "Please join us for an afternoon celebrating the bride-to-be. Please let us know if you can join us.",
+      "postcard": "Please join us for an afternoon celebrating the bride-to-be. Please let us know if you can join us.",
+      "split": "Please join us for an afternoon celebrating the bride-to-be. Please let us know if you can join us.",
+      "crest": "Please join us for an afternoon celebrating the bride-to-be. Please let us know if you can join us.",
+      "border": "Please join us for an afternoon celebrating the bride-to-be. Please let us know if you can join us."
+    },
+    "reinnoire_juraminte": {
+      "frame": "Join us as we renew our vows and celebrate the years we’ve shared.",
+      "arch": "Join us as we renew our vows and celebrate the years we’ve shared.",
+      "seal": "Join us as we renew our vows and celebrate the years we’ve shared.",
+      "ribbon": "Join us as we renew our vows and celebrate the years we’ve shared.",
+      "band": "Join us as we renew our vows and celebrate the years we’ve shared.",
+      "ticket": "Join us as we renew our vows and celebrate the years we’ve shared. Please let us know if you can join us.",
+      "postcard": "Join us as we renew our vows and celebrate the years we’ve shared. Please let us know if you can join us.",
+      "split": "Join us as we renew our vows and celebrate the years we’ve shared. Please let us know if you can join us.",
+      "crest": "Join us as we renew our vows and celebrate the years we’ve shared. Please let us know if you can join us.",
+      "border": "Join us as we renew our vows and celebrate the years we’ve shared. Please let us know if you can join us."
+    },
+    "dezvaluire_sex_bebelus": {
+      "frame": "Join us as we share some happy news about the baby on the way.",
+      "arch": "Join us as we share some happy news about the baby on the way.",
+      "seal": "Join us as we share some happy news about the baby on the way.",
+      "ribbon": "Join us as we share some happy news about the baby on the way.",
+      "band": "Join us as we share some happy news about the baby on the way.",
+      "ticket": "Join us as we share some happy news about the baby on the way. Please let us know if you can join us.",
+      "postcard": "Join us as we share some happy news about the baby on the way. Please let us know if you can join us.",
+      "split": "Join us as we share some happy news about the baby on the way. Please let us know if you can join us.",
+      "crest": "Join us as we share some happy news about the baby on the way. Please let us know if you can join us.",
+      "border": "Join us as we share some happy news about the baby on the way. Please let us know if you can join us."
+    },
+    "petrecere_craciun": {
+      "frame": "Come in from the cold and celebrate Christmas with us.",
+      "arch": "Come in from the cold and celebrate Christmas with us.",
+      "seal": "Come in from the cold and celebrate Christmas with us.",
+      "ribbon": "Come in from the cold and celebrate Christmas with us.",
+      "band": "Come in from the cold and celebrate Christmas with us.",
+      "ticket": "Come in from the cold and celebrate Christmas with us. Please let us know if you can join us.",
+      "postcard": "Come in from the cold and celebrate Christmas with us. Please let us know if you can join us.",
+      "split": "Come in from the cold and celebrate Christmas with us. Please let us know if you can join us.",
+      "crest": "Come in from the cold and celebrate Christmas with us. Please let us know if you can join us.",
+      "border": "Come in from the cold and celebrate Christmas with us. Please let us know if you can join us."
+    },
+    "comemorare": {
+      "frame": "Please join us to remember a life and share stories together.",
+      "arch": "Please join us to remember a life and share stories together.",
+      "seal": "Please join us to remember a life and share stories together.",
+      "ribbon": "Please join us to remember a life and share stories together.",
+      "band": "Please join us to remember a life and share stories together.",
+      "ticket": "Please join us to remember a life and share stories together.",
+      "postcard": "Please join us to remember a life and share stories together.",
+      "split": "Please join us to remember a life and share stories together.",
+      "crest": "Please join us to remember a life and share stories together.",
+      "border": "Please join us to remember a life and share stories together."
+    },
+    "eveniment_networking": {
+      "frame": "Meet people in your field and make time for good conversations.",
+      "arch": "Meet people in your field and make time for good conversations.",
+      "seal": "Meet people in your field and make time for good conversations.",
+      "ribbon": "Meet people in your field and make time for good conversations.",
+      "band": "Meet people in your field and make time for good conversations.",
+      "ticket": "Meet people in your field and make time for good conversations. Please let us know if you can join us.",
+      "postcard": "Meet people in your field and make time for good conversations. Please let us know if you can join us.",
+      "split": "Meet people in your field and make time for good conversations. Please let us know if you can join us.",
+      "crest": "Meet people in your field and make time for good conversations. Please let us know if you can join us.",
+      "border": "Meet people in your field and make time for good conversations. Please let us know if you can join us."
+    },
+    "cina": {
+      "frame": "Join us around the table for dinner and good conversation.",
+      "arch": "Join us around the table for dinner and good conversation.",
+      "seal": "Join us around the table for dinner and good conversation.",
+      "ribbon": "Join us around the table for dinner and good conversation.",
+      "band": "Join us around the table for dinner and good conversation.",
+      "ticket": "Join us around the table for dinner and good conversation. Please let us know if you can make it.",
+      "postcard": "Join us around the table for dinner and good conversation. Please let us know if you can make it.",
+      "split": "Join us around the table for dinner and good conversation. Please let us know if you can make it.",
+      "crest": "Join us around the table for dinner and good conversation. Please let us know if you can make it.",
+      "border": "Join us around the table for dinner and good conversation. Please let us know if you can make it."
+    },
+    "expozitie": {
+      "frame": "Join us for the opening and take a first look at the exhibition.",
+      "arch": "Join us for the opening and take a first look at the exhibition.",
+      "seal": "Join us for the opening and take a first look at the exhibition.",
+      "ribbon": "Join us for the opening and take a first look at the exhibition.",
+      "band": "Join us for the opening and take a first look at the exhibition.",
+      "ticket": "Join us for the opening and take a first look at the exhibition. Please let us know if you can make it.",
+      "postcard": "Join us for the opening and take a first look at the exhibition. Please let us know if you can make it.",
+      "split": "Join us for the opening and take a first look at the exhibition. Please let us know if you can make it.",
+      "crest": "Join us for the opening and take a first look at the exhibition. Please let us know if you can make it.",
+      "border": "Join us for the opening and take a first look at the exhibition. Please let us know if you can make it."
+    },
+    "concert": {
+      "frame": "Come hear the music live and spend the evening with us.",
+      "arch": "Come hear the music live and spend the evening with us.",
+      "seal": "Come hear the music live and spend the evening with us.",
+      "ribbon": "Come hear the music live and spend the evening with us.",
+      "band": "Come hear the music live and spend the evening with us.",
+      "ticket": "Come hear the music live and spend the evening with us. Please let us know if you can make it.",
+      "postcard": "Come hear the music live and spend the evening with us. Please let us know if you can make it.",
+      "split": "Come hear the music live and spend the evening with us. Please let us know if you can make it.",
+      "crest": "Come hear the music live and spend the evening with us. Please let us know if you can make it.",
+      "border": "Come hear the music live and spend the evening with us. Please let us know if you can make it."
+    },
+    "atelier": {
+      "frame": "Join us for a hands-on workshop and bring your curiosity.",
+      "arch": "Join us for a hands-on workshop and bring your curiosity.",
+      "seal": "Join us for a hands-on workshop and bring your curiosity.",
+      "ribbon": "Join us for a hands-on workshop and bring your curiosity.",
+      "band": "Join us for a hands-on workshop and bring your curiosity.",
+      "ticket": "Join us for a hands-on workshop and bring your curiosity. Please let us know if you can make it.",
+      "postcard": "Join us for a hands-on workshop and bring your curiosity. Please let us know if you can make it.",
+      "split": "Join us for a hands-on workshop and bring your curiosity. Please let us know if you can make it.",
+      "crest": "Join us for a hands-on workshop and bring your curiosity. Please let us know if you can make it.",
+      "border": "Join us for a hands-on workshop and bring your curiosity. Please let us know if you can make it."
+    },
+    "turneu_sportiv": {
+      "frame": "Get the team together and join us for tournament day.",
+      "arch": "Get the team together and join us for tournament day.",
+      "seal": "Get the team together and join us for tournament day.",
+      "ribbon": "Get the team together and join us for tournament day.",
+      "band": "Get the team together and join us for tournament day.",
+      "ticket": "Get the team together and join us for tournament day. Please let us know if you can make it.",
+      "postcard": "Get the team together and join us for tournament day. Please let us know if you can make it.",
+      "split": "Get the team together and join us for tournament day. Please let us know if you can make it.",
+      "crest": "Get the team together and join us for tournament day. Please let us know if you can make it.",
+      "border": "Get the team together and join us for tournament day. Please let us know if you can make it."
+    },
+    "pensionare": {
+      "frame": "Join us to celebrate a remarkable career and raise a glass to what comes next.",
+      "arch": "Join us to celebrate a remarkable career and raise a glass to what comes next.",
+      "seal": "Join us to celebrate a remarkable career and raise a glass to what comes next.",
+      "ribbon": "Join us to celebrate a remarkable career and raise a glass to what comes next.",
+      "band": "Join us to celebrate a remarkable career and raise a glass to what comes next.",
+      "ticket": "Join us to celebrate a remarkable career and raise a glass to what comes next. Please let us know if you can make it.",
+      "postcard": "Join us to celebrate a remarkable career and raise a glass to what comes next. Please let us know if you can make it.",
+      "split": "Join us to celebrate a remarkable career and raise a glass to what comes next. Please let us know if you can make it.",
+      "crest": "Join us to celebrate a remarkable career and raise a glass to what comes next. Please let us know if you can make it.",
+      "border": "Join us to celebrate a remarkable career and raise a glass to what comes next. Please let us know if you can make it."
+    },
+    "festivitate_premii": {
+      "frame": "Join us as we recognise the people and work behind this year’s achievements.",
+      "arch": "Join us as we recognise the people and work behind this year’s achievements.",
+      "seal": "Join us as we recognise the people and work behind this year’s achievements.",
+      "ribbon": "Join us as we recognise the people and work behind this year’s achievements.",
+      "band": "Join us as we recognise the people and work behind this year’s achievements.",
+      "ticket": "Join us as we recognise the people and work behind this year’s achievements. Please let us know if you can make it.",
+      "postcard": "Join us as we recognise the people and work behind this year’s achievements. Please let us know if you can make it.",
+      "split": "Join us as we recognise the people and work behind this year’s achievements. Please let us know if you can make it.",
+      "crest": "Join us as we recognise the people and work behind this year’s achievements. Please let us know if you can make it.",
+      "border": "Join us as we recognise the people and work behind this year’s achievements. Please let us know if you can make it."
+    },
+    "festival": {
+      "frame": "Come for a day of performances, discoveries and time together at the festival.",
+      "arch": "Come for a day of performances, discoveries and time together at the festival.",
+      "seal": "Come for a day of performances, discoveries and time together at the festival.",
+      "ribbon": "Come for a day of performances, discoveries and time together at the festival.",
+      "band": "Come for a day of performances, discoveries and time together at the festival.",
+      "ticket": "Come for a day of performances, discoveries and time together at the festival. Please let us know if you can make it.",
+      "postcard": "Come for a day of performances, discoveries and time together at the festival. Please let us know if you can make it.",
+      "split": "Come for a day of performances, discoveries and time together at the festival. Please let us know if you can make it.",
+      "crest": "Come for a day of performances, discoveries and time together at the festival. Please let us know if you can make it.",
+      "border": "Come for a day of performances, discoveries and time together at the festival. Please let us know if you can make it."
+    },
+    "absolvire": {
+      "frame": "Celebrate the end of one chapter and the start of another at our graduation gathering.",
+      "arch": "Join us for a toast to the graduate and all the work that brought us here.",
+      "seal": "Celebrate the end of one chapter and the start of another at our graduation gathering. Please let us know if you can join us.",
+      "ribbon": "Join us for a toast to the graduate and all the work that brought us here. Please let us know if you can join us.",
+      "band": "Celebrate the end of one chapter and the start of another at our graduation gathering.",
+      "ticket": "Join us for a toast to the graduate and all the work that brought us here.",
+      "postcard": "Celebrate the end of one chapter and the start of another at our graduation gathering. Please let us know if you can join us.",
+      "split": "Join us for a toast to the graduate and all the work that brought us here. Please let us know if you can join us.",
+      "crest": "Celebrate the end of one chapter and the start of another at our graduation gathering.",
+      "border": "Join us for a toast to the graduate and all the work that brought us here."
+    },
+    "logodna": {
+      "frame": "We’re engaged! Join us to celebrate the news with the people we love.",
+      "arch": "Please join us for a toast to our engagement and the life we’re planning together.",
+      "seal": "We’re engaged! Join us to celebrate the news with the people we love. Please let us know if you can join us.",
+      "ribbon": "Please join us for a toast to our engagement and the life we’re planning together. Please let us know if you can join us.",
+      "band": "We’re engaged! Join us to celebrate the news with the people we love.",
+      "ticket": "Please join us for a toast to our engagement and the life we’re planning together.",
+      "postcard": "We’re engaged! Join us to celebrate the news with the people we love. Please let us know if you can join us.",
+      "split": "Please join us for a toast to our engagement and the life we’re planning together. Please let us know if you can join us.",
+      "crest": "We’re engaged! Join us to celebrate the news with the people we love.",
+      "border": "Please join us for a toast to our engagement and the life we’re planning together."
+    },
+    "petrecere_bebelus": {
+      "frame": "Help us welcome the baby on the way with an afternoon together.",
+      "arch": "Come celebrate the growing family before the little one arrives.",
+      "seal": "Help us welcome the baby on the way with an afternoon together. Please let us know if you can join us.",
+      "ribbon": "Come celebrate the growing family before the little one arrives. Please let us know if you can join us.",
+      "band": "Help us welcome the baby on the way with an afternoon together.",
+      "ticket": "Come celebrate the growing family before the little one arrives.",
+      "postcard": "Help us welcome the baby on the way with an afternoon together. Please let us know if you can join us.",
+      "split": "Come celebrate the growing family before the little one arrives. Please let us know if you can join us.",
+      "crest": "Help us welcome the baby on the way with an afternoon together.",
+      "border": "Come celebrate the growing family before the little one arrives."
+    },
+    "inaugurare_casa": {
+      "frame": "The boxes are mostly unpacked. Come see our new place and stay for a drink.",
+      "arch": "We’d love to welcome you into our new home for a housewarming.",
+      "seal": "The boxes are mostly unpacked. Come see our new place and stay for a drink. Please let us know if you can join us.",
+      "ribbon": "We’d love to welcome you into our new home for a housewarming. Please let us know if you can join us.",
+      "band": "The boxes are mostly unpacked. Come see our new place and stay for a drink.",
+      "ticket": "We’d love to welcome you into our new home for a housewarming.",
+      "postcard": "The boxes are mostly unpacked. Come see our new place and stay for a drink. Please let us know if you can join us.",
+      "split": "We’d love to welcome you into our new home for a housewarming. Please let us know if you can join us.",
+      "crest": "The boxes are mostly unpacked. Come see our new place and stay for a drink.",
+      "border": "We’d love to welcome you into our new home for a housewarming."
+    },
+    "conferinta": {
+      "frame": "Join us for talks and conversations about the work shaping our field.",
+      "arch": "Reserve time for a conference with colleagues, speakers and new perspectives.",
+      "seal": "Join us for talks and conversations about the work shaping our field. Please let us know if you can join us.",
+      "ribbon": "Reserve time for a conference with colleagues, speakers and new perspectives. Please let us know if you can join us.",
+      "band": "Join us for talks and conversations about the work shaping our field.",
+      "ticket": "Reserve time for a conference with colleagues, speakers and new perspectives.",
+      "postcard": "Join us for talks and conversations about the work shaping our field. Please let us know if you can join us.",
+      "split": "Reserve time for a conference with colleagues, speakers and new perspectives. Please let us know if you can join us.",
+      "crest": "Join us for talks and conversations about the work shaping our field.",
+      "border": "Reserve time for a conference with colleagues, speakers and new perspectives."
+    },
+    "lansare": {
+      "frame": "Be among the first to see what we’ve been working on. Join us for the launch.",
+      "arch": "Join us for the unveiling and meet the people behind it.",
+      "seal": "Be among the first to see what we’ve been working on. Join us for the launch. Please let us know if you can join us.",
+      "ribbon": "Join us for the unveiling and meet the people behind it. Please let us know if you can join us.",
+      "band": "Be among the first to see what we’ve been working on. Join us for the launch.",
+      "ticket": "Join us for the unveiling and meet the people behind it.",
+      "postcard": "Be among the first to see what we’ve been working on. Join us for the launch. Please let us know if you can join us.",
+      "split": "Join us for the unveiling and meet the people behind it. Please let us know if you can join us.",
+      "crest": "Be among the first to see what we’ve been working on. Join us for the launch.",
+      "border": "Join us for the unveiling and meet the people behind it."
+    },
+    "gala_caritabila": {
+      "frame": "Please join us for an evening in support of a cause that matters to our community.",
+      "arch": "We invite you to a charity gala to meet the people doing the work and help support what comes next.",
+      "seal": "Please join us for an evening in support of a cause that matters to our community. Please let us know if you can join us.",
+      "ribbon": "We invite you to a charity gala to meet the people doing the work and help support what comes next. Please let us know if you can join us.",
+      "band": "Please join us for an evening in support of a cause that matters to our community.",
+      "ticket": "We invite you to a charity gala to meet the people doing the work and help support what comes next.",
+      "postcard": "Please join us for an evening in support of a cause that matters to our community. Please let us know if you can join us.",
+      "split": "We invite you to a charity gala to meet the people doing the work and help support what comes next. Please let us know if you can join us.",
+      "crest": "Please join us for an evening in support of a cause that matters to our community.",
+      "border": "We invite you to a charity gala to meet the people doing the work and help support what comes next."
+    },
+    "reuniune": {
+      "frame": "Let’s get everyone together again. Bring a story and make time to catch up.",
+      "arch": "Join us for a reunion to see familiar faces and share a few memories.",
+      "seal": "Let’s get everyone together again. Bring a story and make time to catch up. Please let us know if you can join us.",
+      "ribbon": "Join us for a reunion to see familiar faces and share a few memories. Please let us know if you can join us.",
+      "band": "Let’s get everyone together again. Bring a story and make time to catch up.",
+      "ticket": "Join us for a reunion to see familiar faces and share a few memories.",
+      "postcard": "Let’s get everyone together again. Bring a story and make time to catch up. Please let us know if you can join us.",
+      "split": "Join us for a reunion to see familiar faces and share a few memories. Please let us know if you can join us.",
+      "crest": "Let’s get everyone together again. Bring a story and make time to catch up.",
+      "border": "Join us for a reunion to see familiar faces and share a few memories."
+    },
+    "picnic": {
+      "frame": "Pack a blanket and join us for a picnic in the open air.",
+      "arch": "Come share a picnic lunch and a long afternoon outside.",
+      "seal": "Bring a favourite snack to share. We’ll find a spot in the shade.",
+      "ribbon": "Join us for an outdoor spread, lawn games and time to catch up.",
+      "band": "Meet us for a picnic. A blanket and something to sip are all you need.",
+      "ticket": "Pack a blanket and join us for a picnic in the open air. Please let us know if you can make it.",
+      "postcard": "Come share a picnic lunch and a long afternoon outside. Please confirm whether you’ll be joining us.",
+      "split": "Bring a favourite snack to share. We’ll find a spot in the shade. Let us know whether to count you in.",
+      "crest": "Join us for an outdoor spread, lawn games and time to catch up. We’d love to hear whether you can join us.",
+      "border": "Meet us for a picnic. A blanket and something to sip are all you need. Please reply to reserve your place."
+    },
+    "aniversare": {
+      "frame": "Come celebrate with us. There’ll be cake and a toast to another year.",
+      "arch": "Join us to mark another year in the company of our favourite people.",
+      "seal": "Save room for cake. We’d love to celebrate with you.",
+      "ribbon": "You’re invited to an anniversary celebration with music and good company.",
+      "band": "Help us make this anniversary one to remember.",
+      "ticket": "Come celebrate with us. There’ll be cake and a toast to another year. Please let us know if you can make it.",
+      "postcard": "Join us to mark another year in the company of our favourite people. Please confirm whether you’ll be joining us.",
+      "split": "Save room for cake. We’d love to celebrate with you. Let us know whether to count you in.",
+      "crest": "You’re invited to an anniversary celebration with music and good company. We’d love to hear whether you can join us.",
+      "border": "Help us make this anniversary one to remember. Please reply to reserve your place."
+    },
+    "nunta": {
+      "frame": "Together with our families, we invite you to celebrate our wedding.",
+      "arch": "Please join us as we exchange vows and celebrate the start of our married life.",
+      "seal": "We would love to share our wedding day with you.",
+      "ribbon": "Join us for our wedding ceremony and an evening in the company of those we love.",
+      "band": "With joy, we invite you to witness our marriage and celebrate with us.",
+      "ticket": "Together with our families, we invite you to celebrate our wedding. Please let us know if you can make it.",
+      "postcard": "Please join us as we exchange vows and celebrate the start of our married life. Please confirm whether you’ll be joining us.",
+      "split": "We would love to share our wedding day with you. Let us know whether to count you in.",
+      "crest": "Join us for our wedding ceremony and an evening in the company of those we love. We’d love to hear whether you can join us.",
+      "border": "With joy, we invite you to witness our marriage and celebrate with us. Please reply to reserve your place."
+    },
+    "botez": {
+      "frame": "With our family, we invite you to share the joy of our little one’s baptism.",
+      "arch": "Please join us for a baptism and a family gathering afterwards.",
+      "seal": "We would be delighted to have you with us on this special day for our child.",
+      "ribbon": "Come celebrate the baptism of the newest member of our family.",
+      "band": "Join us for the baptism service as we gather with family and dear friends.",
+      "ticket": "With our family, we invite you to share the joy of our little one’s baptism. Please let us know if you can make it.",
+      "postcard": "Please join us for a baptism and a family gathering afterwards. Please confirm whether you’ll be joining us.",
+      "split": "We would be delighted to have you with us on this special day for our child. Let us know whether to count you in.",
+      "crest": "Come celebrate the baptism of the newest member of our family. We’d love to hear whether you can join us.",
+      "border": "Join us for the baptism service as we gather with family and dear friends. Please reply to reserve your place."
+    },
+    "revelion": {
+      "frame": "Raise a glass with us as we count down to the new year.",
+      "arch": "Join us for a New Year’s Eve celebration and a toast at midnight.",
+      "seal": "Come dance out the old year and welcome the next one with us.",
+      "ribbon": "Let’s spend the last evening of the year together.",
+      "band": "You’re invited to join our countdown to midnight.",
+      "ticket": "Raise a glass with us as we count down to the new year. Please let us know if you can make it.",
+      "postcard": "Join us for a New Year’s Eve celebration and a toast at midnight. Please confirm whether you’ll be joining us.",
+      "split": "Come dance out the old year and welcome the next one with us. Let us know whether to count you in.",
+      "crest": "Let’s spend the last evening of the year together. We’d love to hear whether you can join us.",
+      "border": "You’re invited to join our countdown to midnight. Please reply to reserve your place."
+    },
+    "voiaj_solo": {
+      "frame": "I’m setting off on a solo trip. Join me for a coffee before I leave.",
+      "arch": "Come to a small send-off before my solo adventure begins.",
+      "seal": "I’d love to see you before I head off on my own.",
+      "ribbon": "Join me for a farewell toast before I set out on my trip.",
+      "band": "Come swap travel tips with me before I close my suitcase.",
+      "ticket": "I’m setting off on a solo trip. Join me for a coffee before I leave. Please let us know if you can make it.",
+      "postcard": "Come to a small send-off before my solo adventure begins. Please confirm whether you’ll be joining us.",
+      "split": "I’d love to see you before I head off on my own. Let us know whether to count you in.",
+      "crest": "Join me for a farewell toast before I set out on my trip. We’d love to hear whether you can join us.",
+      "border": "Come swap travel tips with me before I close my suitcase. Please reply to reserve your place."
+    },
+    "voiaj_grup": {
+      "frame": "Come away with us. Let’s gather the group and get the trip under way.",
+      "arch": "Save a place in your calendar for a trip together.",
+      "seal": "You’re invited to join the group for our next adventure.",
+      "ribbon": "Pack your bags and join us for a trip with friends.",
+      "band": "We’re planning a group getaway and would love for you to come along.",
+      "ticket": "Come away with us. Let’s gather the group and get the trip under way. Please let us know if you can make it.",
+      "postcard": "Save a place in your calendar for a trip together. Please confirm whether you’ll be joining us.",
+      "split": "You’re invited to join the group for our next adventure. Let us know whether to count you in.",
+      "crest": "Pack your bags and join us for a trip with friends. We’d love to hear whether you can join us.",
+      "border": "We’re planning a group getaway and would love for you to come along. Please reply to reserve your place."
+    },
+    "blank": {
+      "frame": "You’re invited. We’d be delighted to see you there.",
+      "arch": "Please join us for a gathering with friends and good company.",
+      "seal": "Save the date and come spend some time with us.",
+      "ribbon": "We’re bringing people together and would love for you to be there.",
+      "band": "We look forward to welcoming you and sharing the occasion.",
+      "ticket": "You’re invited. We’d be delighted to see you there. Please let us know if you can make it.",
+      "postcard": "Please join us for a gathering with friends and good company. Please confirm whether you’ll be joining us.",
+      "split": "Save the date and come spend some time with us. Let us know whether to count you in.",
+      "crest": "We’re bringing people together and would love for you to be there. We’d love to hear whether you can join us.",
+      "border": "We look forward to welcoming you and sharing the occasion. Please reply to reserve your place."
+    }
   }
 }

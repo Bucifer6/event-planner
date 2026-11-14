@@ -8,7 +8,7 @@ import { readSetting, requireStaffRole, writeSetting } from "./staff";
 // themes.css for the others); the root layout puts the chosen name on <html data-ui="…">.
 // It changes how the app looks, never what it does or what anyone is allowed to see.
 
-export const UI_THEMES = ["maison", "atelier", "riviera", "jardin", "studio"] as const;
+export const UI_THEMES = ["maison", "atelier", "riviera", "jardin", "studio", "nocturne", "folio", "herbarium", "prism", "salon", "dune", "ledger", "muse"] as const;
 export type UiTheme = (typeof UI_THEMES)[number];
 export const DEFAULT_UI_THEME: UiTheme = "maison";
 export const UI_THEME_SETTING_KEY = "ui.theme";
@@ -21,6 +21,14 @@ export const UI_THEME_PAPER: Record<UiTheme, string> = {
   riviera: "#f7efe3",
   jardin: "#f1f1eb",
   studio: "#f4ebe6",
+  nocturne: "#14191e",
+  folio: "#f4f2e9",
+  herbarium: "#e8ecdf",
+  prism: "#ecedf9",
+  salon: "#f7eee8",
+  dune: "#f2e6d7",
+  ledger: "#ebefed",
+  muse: "#f1edf7",
 };
 
 export function isUiTheme(value: unknown): value is UiTheme {

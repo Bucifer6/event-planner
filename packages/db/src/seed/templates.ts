@@ -4,7 +4,7 @@ import type { TaskStage } from "../schema/tasks";
 import { templateTasks, templates } from "../schema/templates";
 import type { Seed } from "./index";
 
-// The seven occasion templates plus "blank" (A2). Each task is scheduled relative to the
+// The occasion templates plus "blank" (A2). Each task is scheduled relative to the
 // occasion date: `months` before it (the 12/9/6/3/1-month stages) and/or `days` from it
 // (negative = before, positive = after). Keys are stable: they are how a re-run recognises a
 // task that already exists — rename a title freely, never reuse or change a key.
@@ -146,6 +146,207 @@ const voiajGrup: T[] = [
   ["album", "after", 0, 5, "Puneți fotografiile într-un album comun", "Put the photos in a shared album"],
 ];
 
+// Kinds added with the invitation collections (each with a short starter list).
+const absolvire: T[] = [
+  ["locatie", "m3", 3, 0, "Rezervă locul petrecerii", "Book the party venue"],
+  ["invitati", "m3", 3, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["tinuta", "m1", 1, 0, "Alege ținuta pentru festivitate", "Choose the outfit for the ceremony"],
+  ["fotograf", "m1", 1, 0, "Rezervă fotograful", "Book the photographer"],
+  ["invitatii", "m1", 1, 0, "Trimite invitațiile", "Send the invitations"],
+  ["multumiri", "after", 0, 3, "Trimite mulțumiri și fotografiile", "Send thank-yous and the photos"],
+];
+
+const logodna: T[] = [
+  ["data", "m3", 3, 0, "Alegeți data și locul", "Choose the date and the venue"],
+  ["invitati", "m3", 3, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["invitatii", "m1", 1, 0, "Trimite invitațiile", "Send the invitations"],
+  ["meniu", "m1", 1, 0, "Stabilește meniul și băuturile", "Settle the menu and drinks"],
+  ["toast", "week", 0, -3, "Pregătește toastul", "Prepare the toast"],
+  ["multumiri", "after", 0, 3, "Trimite mulțumiri invitaților", "Send thank-yous to the guests"],
+];
+
+const petrecereBebelus: T[] = [
+  ["data", "m1", 1, 0, "Stabilește data cu viitorii părinți", "Agree the date with the parents-to-be"],
+  ["invitati", "m1", 1, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["lista-cadouri", "m1", 1, 0, "Pregătește lista de cadouri", "Prepare the gift list"],
+  ["jocuri", "week", 0, -5, "Pregătește jocurile și decorul", "Prepare the games and the decor"],
+  ["gustari", "week", 0, -2, "Comandă tortul și gustările", "Order the cake and snacks"],
+  ["multumiri", "after", 0, 3, "Trimite mulțumiri pentru cadouri", "Send thank-yous for the gifts"],
+];
+
+const inaugurareCasa: T[] = [
+  ["data", "m1", 1, 0, "Alege data după mutare", "Pick a date after the move"],
+  ["invitati", "m1", 1, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["invitatii", "week", 0, -14, "Trimite invitațiile cu adresa nouă", "Send the invitations with the new address"],
+  ["gustari", "week", 0, -3, "Cumpără gustările și băuturile", "Buy the snacks and drinks"],
+  ["casa", "week", 0, -1, "Pregătește casa pentru oaspeți", "Get the home ready for guests"],
+];
+
+const conferinta: T[] = [
+  ["tema", "m6", 6, 0, "Stabilește tema și publicul", "Set the theme and the audience"],
+  ["sala", "m6", 6, 0, "Rezervă sala și echipamentul AV", "Book the venue and AV equipment"],
+  ["vorbitori", "m3", 3, 0, "Confirmă vorbitorii", "Confirm the speakers"],
+  ["inscrieri", "m3", 3, 0, "Deschide înscrierile", "Open registration"],
+  ["program", "m1", 1, 0, "Publică programul final", "Publish the final programme"],
+  ["feedback", "after", 0, 3, "Trimite chestionarul de feedback", "Send the feedback survey"],
+];
+
+const lansare: T[] = [
+  ["locatie", "m3", 3, 0, "Rezervă locația", "Book the venue"],
+  ["invitati", "m3", 3, 0, "Fă lista de invitați și de presă", "Draft the guest and press list"],
+  ["invitatii", "m1", 1, 0, "Trimite invitațiile", "Send the invitations"],
+  ["demo", "week", 0, -7, "Repetă prezentarea", "Rehearse the presentation"],
+  ["foto", "week", 0, -5, "Rezervă fotograful", "Book the photographer"],
+  ["urmare", "after", 0, 2, "Trimite comunicatul și fotografiile", "Send the press release and photos"],
+];
+
+const galaCaritabila: T[] = [
+  ["cauza", "m6", 6, 0, "Stabilește cauza și ținta de strângere", "Set the cause and the fundraising target"],
+  ["locatie", "m6", 6, 0, "Rezervă locația", "Book the venue"],
+  ["sponsori", "m3", 3, 0, "Contactează sponsorii", "Approach the sponsors"],
+  ["bilete", "m3", 3, 0, "Pune biletele în vânzare", "Put the tickets on sale"],
+  ["licitatie", "m1", 1, 0, "Strânge obiectele pentru licitație", "Gather the auction lots"],
+  ["raport", "after", 0, 7, "Anunță suma strânsă și mulțumește", "Announce the total raised and say thank you"],
+];
+
+const reuniune: T[] = [
+  ["contacte", "m6", 6, 0, "Strânge datele de contact", "Gather everyone's contact details"],
+  ["data", "m3", 3, 0, "Alegeți data printr-un sondaj", "Choose the date with a poll"],
+  ["locatie", "m3", 3, 0, "Rezervă locul", "Book the venue"],
+  ["amintiri", "m1", 1, 0, "Strânge fotografii vechi", "Collect old photos"],
+  ["confirmari", "week", 0, -7, "Confirmă cine vine", "Confirm who is coming"],
+  ["album", "after", 0, 5, "Puneți fotografiile într-un album comun", "Put the photos in a shared album"],
+];
+
+const cina: T[] = [
+  ["invitati", "m1", 1, 0, "Alege invitații", "Choose the guests"],
+  ["meniu", "week", 0, -10, "Stabilește meniul", "Plan the menu"],
+  ["vinuri", "week", 0, -5, "Alege vinurile", "Choose the wines"],
+  ["cumparaturi", "week", 0, -2, "Fă cumpărăturile", "Do the shopping"],
+  ["masa", "week", 0, -1, "Aranjează masa și locurile", "Lay the table and the places"],
+];
+
+const expozitie: T[] = [
+  ["spatiu", "m3", 3, 0, "Confirmă spațiul și datele expoziției", "Confirm the space and exhibition dates"],
+  ["lucrari", "m1", 1, 0, "Finalizează lista de lucrări și etichetele", "Finalise the list of works and labels"],
+  ["invitatii", "m1", 1, 0, "Trimite invitațiile și anunțul de presă", "Send the invitations and press notice"],
+  ["montaj", "week", 0, -3, "Montează expoziția", "Hang the exhibition"],
+  ["bauturi", "week", 0, -2, "Comandă băuturile pentru vernisaj", "Order the drinks for the opening"],
+];
+
+const concert: T[] = [
+  ["artisti", "m6", 6, 0, "Confirmă artiștii", "Confirm the artists"],
+  ["sala", "m6", 6, 0, "Rezervă sala", "Book the venue"],
+  ["sunet", "m3", 3, 0, "Rezervă sunetul și luminile", "Book sound and lighting"],
+  ["bilete", "m3", 3, 0, "Pune biletele în vânzare", "Put the tickets on sale"],
+  ["proba", "week", 0, -1, "Programează proba de sunet", "Schedule the soundcheck"],
+];
+
+const atelier: T[] = [
+  ["program", "m1", 1, 0, "Stabilește programul atelierului", "Plan the workshop programme"],
+  ["loc", "m1", 1, 0, "Rezervă spațiul", "Book the space"],
+  ["inscrieri", "m1", 1, 0, "Deschide înscrierile", "Open registration"],
+  ["materiale", "week", 0, -5, "Pregătește materialele", "Prepare the materials"],
+  ["feedback", "after", 0, 2, "Cere părerea participanților", "Ask the participants for feedback"],
+];
+
+const turneuSportiv: T[] = [
+  ["teren", "m3", 3, 0, "Rezervă terenul sau sala", "Book the pitch or the hall"],
+  ["echipe", "m1", 1, 0, "Înscrie echipele", "Register the teams"],
+  ["program", "m1", 1, 0, "Fă programul meciurilor", "Draw up the match schedule"],
+  ["arbitri", "week", 0, -7, "Confirmă arbitrii", "Confirm the referees"],
+  ["premii", "week", 0, -5, "Comandă trofeele și medaliile", "Order the trophies and medals"],
+];
+
+const pensionare: T[] = [
+  ["locatie", "m1", 1, 0, "Rezervă locul", "Book the venue"],
+  ["invitati", "m1", 1, 0, "Fă lista de colegi și prieteni", "Draft the list of colleagues and friends"],
+  ["cadou", "m1", 1, 0, "Strânge banii pentru cadou", "Collect for the gift"],
+  ["discursuri", "week", 0, -5, "Stabilește cine ține discursuri", "Agree who gives speeches"],
+  ["album", "week", 0, -3, "Pregătește un album cu amintiri", "Prepare a book of memories"],
+];
+
+const festivitatePremii: T[] = [
+  ["categorii", "m6", 6, 0, "Stabilește categoriile", "Set the categories"],
+  ["jurizare", "m3", 3, 0, "Organizează jurizarea", "Organise the judging"],
+  ["locatie", "m3", 3, 0, "Rezervă locația și scena", "Book the venue and stage"],
+  ["premii", "m1", 1, 0, "Comandă trofeele", "Order the trophies"],
+  ["scenariu", "week", 0, -7, "Scrie scenariul serii", "Write the running order"],
+];
+
+const festival: T[] = [
+  ["avize", "m12", 12, 0, "Obține avizele și autorizațiile", "Get the permits and licences"],
+  ["artisti", "m9", 9, 0, "Confirmă artiștii", "Confirm the artists"],
+  ["furnizori", "m6", 6, 0, "Rezervă scena, corturile și sunetul", "Book the stage, marquees and sound"],
+  ["voluntari", "m3", 3, 0, "Recrutează voluntarii", "Recruit the volunteers"],
+  ["siguranta", "m1", 1, 0, "Fă planul de siguranță", "Write the safety plan"],
+  ["bilant", "after", 0, 7, "Fă bilanțul cu echipa", "Hold the debrief with the team"],
+];
+
+const ziDeNastere: T[] = [
+  ["locatie", "m1", 1, 0, "Rezervă locul", "Book the venue"],
+  ["invitati", "m1", 1, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["invitatii", "week", 0, -14, "Trimite invitațiile", "Send the invitations"],
+  ["tort", "week", 0, -7, "Comandă tortul", "Order the cake"],
+  ["muzica", "week", 0, -3, "Pregătește muzica", "Prepare the music"],
+];
+
+const ziDeNastereCopii: T[] = [
+  ["locatie", "m1", 1, 0, "Rezervă locul de joacă sau sala", "Book the play venue or hall"],
+  ["animator", "m1", 1, 0, "Rezervă animatorul", "Book the entertainer"],
+  ["invitatii", "week", 0, -14, "Trimite invitațiile părinților", "Send the invitations to the parents"],
+  ["tort", "week", 0, -7, "Comandă tortul", "Order the cake"],
+  ["pungute", "week", 0, -2, "Pregătește punguțele cu surprize", "Prepare the party bags"],
+];
+
+const petrecereMireasa: T[] = [
+  ["data", "m1", 1, 0, "Stabilește data cu domnișoara de onoare", "Agree the date with the maid of honour"],
+  ["invitate", "m1", 1, 0, "Fă lista de invitate", "Draft the guest list"],
+  ["locatie", "m1", 1, 0, "Rezervă locul", "Book the venue"],
+  ["jocuri", "week", 0, -5, "Pregătește jocurile", "Prepare the games"],
+  ["decor", "week", 0, -2, "Comandă florile și decorul", "Order the flowers and decor"],
+];
+
+const reinnoireJuraminte: T[] = [
+  ["locatie", "m3", 3, 0, "Rezervă locul ceremoniei", "Book the ceremony venue"],
+  ["invitati", "m3", 3, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["invitatii", "m1", 1, 0, "Trimite invitațiile", "Send the invitations"],
+  ["juraminte", "m1", 1, 0, "Scrieți jurămintele", "Write the vows"],
+  ["fotograf", "m1", 1, 0, "Rezervă fotograful", "Book the photographer"],
+];
+
+const dezvaluireSexBebelus: T[] = [
+  ["secret", "m1", 1, 0, "Alege cine păstrează secretul", "Choose who keeps the secret"],
+  ["invitati", "m1", 1, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["surpriza", "week", 0, -7, "Pregătește surpriza: tort, baloane sau confetti", "Prepare the reveal: cake, balloons or confetti"],
+  ["gustari", "week", 0, -2, "Cumpără gustările", "Buy the snacks"],
+  ["foto", "week", 0, -1, "Stabilește cine filmează momentul", "Agree who films the moment"],
+];
+
+const petrecereCraciun: T[] = [
+  ["locatie", "m3", 3, 0, "Rezervă locul din timp", "Book the venue early"],
+  ["invitati", "m1", 1, 0, "Fă lista de invitați", "Draft the guest list"],
+  ["secret-santa", "m1", 1, 0, "Organizează tragerea la sorți pentru cadouri", "Run the gift draw"],
+  ["meniu", "week", 0, -10, "Stabilește meniul", "Plan the menu"],
+  ["decor", "week", 0, -5, "Pregătește decorul și muzica", "Prepare the decor and music"],
+];
+
+const comemorare: T[] = [
+  ["locatie", "m1", 1, 0, "Alege locul întâlnirii", "Choose the place"],
+  ["anunt", "m1", 1, 0, "Anunță familia și prietenii", "Let family and friends know"],
+  ["amintiri", "week", 0, -7, "Strânge fotografii și amintiri", "Gather photos and memories"],
+  ["flori", "week", 0, -3, "Comandă florile", "Order the flowers"],
+  ["cuvinte", "week", 0, -2, "Stabilește cine spune câteva cuvinte", "Agree who will say a few words"],
+];
+
+const evenimentNetworking: T[] = [
+  ["public", "m3", 3, 0, "Stabilește publicul și formatul", "Set the audience and format"],
+  ["locatie", "m3", 3, 0, "Rezervă spațiul", "Book the space"],
+  ["inscrieri", "m1", 1, 0, "Deschide înscrierile", "Open registration"],
+  ["ecusoane", "week", 0, -3, "Tipărește ecusoanele", "Print the name badges"],
+  ["urmare", "after", 0, 2, "Trimite lista de contacte participanților care au acceptat", "Send the contact list to those who opted in"],
+];
+
 export const TEMPLATE_SEED: Tpl[] = [
   { kind: "nunta", ro: "Nuntă", en: "Wedding", descRo: "De la buget și nași până la mulțumiri, pe etape.", descEn: "From budget and godparents to thank-yous, stage by stage.", tasks: nunta },
   { kind: "botez", ro: "Botez", en: "Christening", descRo: "Biserică, nași, petrecere și tot ce ține de ele.", descEn: "Church, godparents, the party and everything around them.", tasks: botez },
@@ -154,6 +355,30 @@ export const TEMPLATE_SEED: Tpl[] = [
   { kind: "revelion", ro: "Revelion", en: "New Year's Eve", descRo: "Rezervare, meniu și miezul nopții.", descEn: "Booking, menu and midnight.", tasks: revelion },
   { kind: "voiaj_solo", ro: "Voiaj solo", en: "Solo trip", descRo: "Acte, bilete, cazare și bagaj.", descEn: "Papers, tickets, a place to stay and packing.", tasks: voiajSolo },
   { kind: "voiaj_grup", ro: "Voiaj de grup", en: "Group trip", descRo: "Un plan comun, de la avans la împărțit cheltuielile.", descEn: "A shared plan, from deposits to settling up.", tasks: voiajGrup },
+  { kind: "absolvire", ro: "Absolvire", en: "Graduation", descRo: "Festivitate, petrecere și fotografii.", descEn: "Ceremony, party and photos.", tasks: absolvire },
+  { kind: "logodna", ro: "Petrecere de logodnă", en: "Engagement party", descRo: "Anunțul, invitații și o seară de sărbătoare.", descEn: "The announcement, the guests and an evening to celebrate.", tasks: logodna },
+  { kind: "petrecere_bebelus", ro: "Petrecere pentru viitorul bebeluș", en: "Baby shower", descRo: "Gazdă, jocuri, gustări și darurile pentru bebeluș.", descEn: "Host, games, snacks and gifts for the baby.", tasks: petrecereBebelus },
+  { kind: "inaugurare_casa", ro: "Petrecere de casă nouă", en: "Housewarming", descRo: "Casa pregătită, gustări și invitați.", descEn: "The home ready, snacks and guests.", tasks: inaugurareCasa },
+  { kind: "conferinta", ro: "Conferință", en: "Conference", descRo: "Program, vorbitori, sală, înscrieri și logistică.", descEn: "Programme, speakers, venue, registration and logistics.", tasks: conferinta },
+  { kind: "lansare", ro: "Eveniment de lansare", en: "Launch event", descRo: "Invitați, presă, demonstrație și o seară memorabilă.", descEn: "Guests, press, a demo and a memorable evening.", tasks: lansare },
+  { kind: "gala_caritabila", ro: "Gală caritabilă", en: "Charity gala", descRo: "Cauza, sponsorii, biletele și licitația.", descEn: "The cause, sponsors, tickets and the auction.", tasks: galaCaritabila },
+  { kind: "reuniune", ro: "Reuniune", en: "Reunion", descRo: "Găsește-i pe toți, alege locul și pregătește amintirile.", descEn: "Find everyone, choose the place and gather the memories.", tasks: reuniune },
+  { kind: "cina", ro: "Cină festivă", en: "Dinner party", descRo: "Meniu, masă și invitați la tine acasă sau la restaurant.", descEn: "Menu, table and guests, at home or in a restaurant.", tasks: cina },
+  { kind: "expozitie", ro: "Vernisaj", en: "Exhibition opening", descRo: "Lucrări, spațiu, invitați și presă.", descEn: "Works, space, guests and press.", tasks: expozitie },
+  { kind: "concert", ro: "Concert", en: "Concert", descRo: "Artiști, sală, sunet și bilete.", descEn: "Artists, venue, sound and tickets.", tasks: concert },
+  { kind: "atelier", ro: "Atelier", en: "Workshop", descRo: "Program, materiale și participanți.", descEn: "Programme, materials and participants.", tasks: atelier },
+  { kind: "turneu_sportiv", ro: "Turneu sportiv", en: "Sports tournament", descRo: "Echipe, teren, program și premii.", descEn: "Teams, pitch, schedule and prizes.", tasks: turneuSportiv },
+  { kind: "pensionare", ro: "Petrecere de pensionare", en: "Retirement celebration", descRo: "Colegi, discursuri și un cadou de neuitat.", descEn: "Colleagues, speeches and a gift to remember.", tasks: pensionare },
+  { kind: "festivitate_premii", ro: "Festivitate de premiere", en: "Awards ceremony", descRo: "Categorii, jurizare, scenă și premii.", descEn: "Categories, judging, stage and awards.", tasks: festivitatePremii },
+  { kind: "festival", ro: "Festival", en: "Festival", descRo: "Program, artiști, avize, siguranță și voluntari.", descEn: "Programme, artists, permits, safety and volunteers.", tasks: festival },
+  { kind: "zi_de_nastere", ro: "Zi de naștere", en: "Birthday", descRo: "Loc, invitați, tort și muzică.", descEn: "Venue, guests, cake and music.", tasks: ziDeNastere },
+  { kind: "zi_de_nastere_copii", ro: "Zi de naștere pentru copii", en: "Kids’ birthday", descRo: "Loc, animatori, jocuri și tort.", descEn: "Venue, entertainers, games and cake.", tasks: ziDeNastereCopii },
+  { kind: "petrecere_mireasa", ro: "Petrecere în cinstea miresei", en: "Bridal shower", descRo: "O după-amiază pentru viitoarea mireasă.", descEn: "An afternoon for the bride-to-be.", tasks: petrecereMireasa },
+  { kind: "reinnoire_juraminte", ro: "Reînnoirea jurămintelor", en: "Vow renewal", descRo: "Ceremonia, jurămintele și petrecerea.", descEn: "The ceremony, the vows and the party.", tasks: reinnoireJuraminte },
+  { kind: "dezvaluire_sex_bebelus", ro: "Petrecere de dezvăluire a sexului bebelușului", en: "Gender reveal", descRo: "Surpriza, invitații și momentul dezvăluirii.", descEn: "The surprise, the guests and the reveal.", tasks: dezvaluireSexBebelus },
+  { kind: "petrecere_craciun", ro: "Petrecere de Crăciun", en: "Christmas party", descRo: "Loc, meniu, cadouri și colinde.", descEn: "Venue, menu, gifts and carols.", tasks: petrecereCraciun },
+  { kind: "comemorare", ro: "Întâlnire de comemorare", en: "Celebration of life", descRo: "Un loc liniștit, amintiri și cei dragi.", descEn: "A quiet place, memories and loved ones.", tasks: comemorare },
+  { kind: "eveniment_networking", ro: "Eveniment de networking", en: "Networking event", descRo: "Invitați, spațiu, ecusoane și conversații bune.", descEn: "Guests, space, name badges and good conversations.", tasks: evenimentNetworking },
   { kind: "blank", ro: "De la zero", en: "Blank", descRo: "Fără sarcini pregătite: le adaugi tu.", descEn: "No prepared tasks: you add your own.", tasks: [] },
 ];
 

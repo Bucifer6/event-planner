@@ -159,7 +159,7 @@ export async function buildTableCardsPdf(ctx: Ctx, occasionId: string): Promise<
   const { doc, done } = await newSheetDocument({ title: tr(locale, "tables.docTitle", { title: o.title }), lang: locale, createdAt: ctx.now, subject: tr(locale, "tables.subject"), keywords: "RGB; bleed 3 mm" });
   const spec = PIECES["table-card"];
   for (const t of summary.tables) {
-    const scene = layoutPiece({ design, colourway, piece: "table-card", texts, extra: { tableLabel: t.label, tableWord: translate(lang, "stationery.pieces.tableWord"), qr } });
+    const scene = layoutPiece({ design, colourway, piece: "table-card", texts, occasionKind: o.kind, extra: { tableLabel: t.label, tableWord: translate(lang, "stationery.pieces.tableWord"), qr } });
     drawSceneOnPdf(doc, scene, { bleedMm: BLEED_MM, cropMarks: true, slug: `EventDesk.ro · ${tr(locale, "tables.slug", { label: t.label })} · ${spec.widthMm} × ${spec.heightMm} mm · ${translate(locale, "stationery.pdf.slugBleed", { mm: BLEED_MM })} · ${translate(locale, "stationery.pdf.printNote")}` });
   }
   return { filename: `${fileSlug(o.title)}-${locale === "ro" ? "carduri-mese" : "table-cards"}.pdf`, mime: "application/pdf", bytes: await done() };

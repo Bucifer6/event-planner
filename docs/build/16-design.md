@@ -136,9 +136,9 @@ These live outside `packages/ui` but follow its tokens.
 Polite second person plural is not used; address the planner informally and warmly ("Adaugă primul
 invitat"). Sentences are short. Buttons are verbs with their object. English mirrors it.
 
-## The five looks
+## The looks
 
-The app ships with five looks. A platform administrator chooses one for everyone in
+The app ships with thirteen looks. A platform administrator chooses one for everyone in
 **Console → Aspect** (`/console/appearance`); the choice is a platform setting (`ui.theme`),
 is audited, and takes effect on the next page load. A look changes appearance only.
 
@@ -149,6 +149,14 @@ is audited, and takes effect on the next page load. A look changes appearance on
 | **Riviera** | sand, Mediterranean blue, terracotta | Fraunces / DM Sans | deep sea blue | terracotta | 12px | sentence case |
 | **Jardin** | stone, sage, moss | Instrument Serif / Instrument Sans | moss green | sage | 4px | sentence case |
 | **Studio** | blush, black, a stroke of vermilion | Archivo (wide, heavy) / Archivo | black | vermilion | square | capitals, no italics |
+| **Nocturne** | slate night, candle gold — dark in both modes | Cormorant Garamond / DM Sans | candle gold | sepia | 2px | tracked capitals |
+| **Folio** | newsprint, iron ink, oxblood | Fraunces (tight) / Instrument Sans | oxblood | oxblood | square | tracked capitals |
+| **Herbarium** | lichen, forest green, pressed leaves | Cormorant Garamond / Instrument Sans | forest green | sage | 5px | sentence case |
+| **Prism** | lavender white, ultramarine | Archivo (heavy, wide) / Archivo | ultramarine | ultramarine | 8px | sentence case, no italics |
+| **Salon** | rosewater, mulberry, garnet | Cormorant Garamond / Jost | garnet | rose gold | 6px, pill controls | tracked capitals |
+| **Dune** | sand, umber, burnt sienna | Fraunces (bold) / DM Sans | burnt sienna | sienna | 4px | sentence case |
+| **Ledger** | mint grey, typewriter, bottle green | system monospace / Instrument Sans | bottle green | bottle green | square | tracked capitals, no italics |
+| **Muse** | lilac, plum, soft light | Instrument Serif / DM Sans | plum | lavender | 16px, pill controls | sentence case |
 
 How it works:
 
@@ -164,7 +172,8 @@ How it works:
   `--figure-weight`, `--btn-weight`, `--btn-size`, `--label-size`, `--wordmark-size`,
   `--wordmark-weight`, `--radius`, `--radius-sm`, `--hair`. Components must use these tokens
   rather than fixed values, or they will look wrong in another look.
-- Every look has a dark version (automatic, and forced on the event-day and check-in screens).
+- Every look has a dark version (automatic, and forced on the event-day and check-in screens). Nocturne is dark in both modes (`"scheme": "dark"` in the generator table).
+- Ledger uses the device's own monospace face for headings (no font file); the others use the self-hosted families above.
 - Not themed: printed stationery and PDFs (they have their own designs), emails, and the
   static public site, which stays in Maison.
 - Adding a look: add it to the generator table, to `UI_THEMES` and `UI_THEME_PAPER` in

@@ -279,7 +279,7 @@ A suggested rhythm; adjust to your team.
 
 ## Changing the look of the app
 
-**Console → Aspect** (platform administrator). Pick one of the five looks and press
+**Console → Aspect** (platform administrator). Pick one of the thirteen looks and press
 "Aplică aspectul". Everyone sees it on the next page they open; other web servers follow
 within about 15 seconds. It changes appearance only and can be changed back at any time. The
 change is recorded in the audit log. Printed stationery, emails and the public marketing site

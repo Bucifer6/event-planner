@@ -5,6 +5,7 @@ import {
   emailOutbox,
   emailSuppressions,
   eq,
+  OCCASION_KINDS,
   occasionMembers,
   occasions,
   reminderDigests,
@@ -266,13 +267,13 @@ describe("team: invitations, roles and grants (A5, S4)", () => {
 });
 
 describe("templates and date-relative scheduling (A2)", () => {
-  it("seeds the seven templates plus blank", async () => {
+  it("seeds the seven full templates, a starter template for every other kind, plus blank", async () => {
     const list = await listTemplates(as(await makeAccount()));
-    expect(list.map((x) => x.kind).sort()).toEqual(
-      ["aniversare", "blank", "botez", "nunta", "picnic", "revelion", "voiaj_grup", "voiaj_solo"].sort(),
-    );
+    const full = ["aniversare", "botez", "nunta", "picnic", "revelion", "voiaj_grup", "voiaj_solo"];
+    expect(list.map((x) => x.kind).sort()).toEqual([...OCCASION_KINDS].sort());
     expect(list.find((x) => x.kind === "nunta")!.taskCount).toBeGreaterThanOrEqual(30);
-    for (const tpl of list.filter((x) => x.kind !== "blank")) expect(tpl.taskCount).toBeGreaterThanOrEqual(10);
+    for (const tpl of list.filter((x) => full.includes(x.kind))) expect(tpl.taskCount).toBeGreaterThanOrEqual(10);
+    for (const tpl of list.filter((x) => x.kind !== "blank" && !full.includes(x.kind))) expect(tpl.taskCount, tpl.kind).toBeGreaterThanOrEqual(5);
   });
 
   it("template tasks land on the right dates", async () => {

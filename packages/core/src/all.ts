@@ -95,6 +95,7 @@ import "./spacemodel";
 import "./staff";
 import "./stationery";
 import "./stationerykit";
+import "./stationerycollections";
 import "./stats";
 import "./subgroups";
 import "./suppliers";

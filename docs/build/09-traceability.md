@@ -31,7 +31,7 @@ The eight principles are enforced as the invariants listed, with code and test, 
 | Id | Status | Where | Test |
 | --- | --- | --- | --- |
 | A1 | Built | `core/occasions` (`createOccasion`: date, range or poll); `/occasions/new`. No payment step exists | `core/planning.test.ts`; `web/monetization-off.test.ts` |
-| A2 | Built | `core/templates` (seven templates + blank, offsets, re-run diff); date move is the What-if kind `occasion.moveDate` | `core/planning.test.ts` ("templates and date-relative scheduling (A2)") |
+| A2 | Built | `core/templates` (seven full templates, 24 starter templates for the further kinds, + blank, offsets, re-run diff); date move is the What-if kind `occasion.moveDate` | `core/planning.test.ts` ("templates and date-relative scheduling (A2)") |
 | A3 | Built | `core/tasks` (`queryTasks`, list/board/calendar views, checklist, dependencies, child tasks); `/occasions/[id]/tasks` | `core/planning.test.ts` ("one record, three views") |
 | A4 | Built | `core/delegations` | `core/planning.test.ts` ("delegation by offer and acceptance") |
 | A5 | Built | `core/access`, `core/members`; roles and the two grants; suggested labels for botez and nuntă (`suggestedLabelKeys`); `/occasions/[id]/team` | `core/planning.test.ts` ("occasion access", "team") |
@@ -225,7 +225,7 @@ The PRD lists these as rows without ids; the ids are the work items of
 | C-01 | Layouts and seating on the space model, drag with a tap path | Built, not verified in production | `core/seating`, `core/spacemodel`; `SeatingEditor.tsx` (drag was not tried on a phone) | `core/drawings-seating.test.ts`, `core/spacemodel.test.ts` |
 | C-02 | Fit checks at every stage of the meal | Built | `core/fitcheck`, `meal_stages`, `applyStage` | `core/spacemodel.test.ts`, `core/drawings-seating.test.ts` |
 | C-03 | Programme, cue list, performer briefings | Built | `core/programme` | `core/programme.test.ts` |
-| C-04 | Stationery designer with proofs and print PDF | Built, not verified in production | `core/stationery`, `core/stationerykit`. In the container image the Bodoni and Hanken `.ttf` files may not be present, in which case the PDF falls back to DejaVu (`STATIONERY_FONT_DIR`) | `core/stationery.test.ts` |
+| C-04 | Stationery designer with proofs and print PDF | Built, not verified in production | `core/stationery`, `core/stationerykit`, `core/stationerycollections` (the invitation collections: 64 more designs in five ranges, per-occasion palettes, starter wordings). In the container image the Bodoni and Hanken `.ttf` files may not be present, in which case the PDF falls back to DejaVu (`STATIONERY_FONT_DIR`) | `core/stationery.test.ts` |
 | C-05 | Menus, meal choices, quantities | Built | `core/menus` | `core/menus.test.ts` |
 | C-06 | Public event page, registration, waiting list, conditional questions | Built | `core/publicpage`, `core/registrations`; `/e/[slug]` | `core/publicpage.test.ts` |
 | C-07 | Private requests; accessible guest journey | Built | `core/requests`, `core/guestevent` | `core/requests.test.ts` |

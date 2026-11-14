@@ -1,6 +1,6 @@
 import { getAiTextStatus } from "@ed/core/aitext";
-import { getStationeryEditor, getWordingPreset, previewStationery, STATIONERY_FIELD_LIMITS, STATIONERY_TEXT_FIELDS, STATIONERY_WORDING_KINDS } from "@ed/core/stationery";
-import { COLOURWAYS, DESIGN_KEYS, STATIONERY_DESIGNS, svgDataUri } from "@ed/core/stationerykit";
+import { getStarterWordings, getStationeryEditor, getWordingPreset, previewStationery, STATIONERY_FIELD_LIMITS, STATIONERY_TEXT_FIELDS, STATIONERY_WORDING_KINDS } from "@ed/core/stationery";
+import { colourwaysFor, COLOURWAYS, DESIGN_KEYS, DESIGN_RANGES, STATIONERY_DESIGNS, svgDataUri } from "@ed/core/stationerykit";
 import { formatDate } from "@ed/i18n/format";
 import { Card, Checkbox, EmptyState, LinkButton, List, Notice, PageHeader, Row, Section, Stack, Tag } from "@ed/ui";
 import { IconDownload } from "@ed/ui/icons";
@@ -41,8 +41,18 @@ export default async function StationeryPage({ params, searchParams }: { params:
     aiOriginal: Object.fromEntries(STATIONERY_TEXT_FIELDS.map((f) => [f, texts[f]?.aiGenerated ? (texts[f].aiOriginal ?? texts[f].value) : null])),
     qrOnInvitation: current?.qrOnInvitation ?? false,
   };
-  const [first] = await previewStationery(ctx, { designKey: initial.designKey as never, colourwayKey: initial.colourwayKey, locale: initial.locale, texts: Object.fromEntries(Object.entries(initial.texts).map(([k, v]) => [k, { value: v }])), pieces: ["invitation"] });
-  const designs: DesignOption[] = DESIGN_KEYS.map((key) => ({ key, colourways: STATIONERY_DESIGNS[key].colourways.map((c) => ({ key: c, paper: COLOURWAYS[c]!.paper, ink: COLOURWAYS[c]!.ink, accent: COLOURWAYS[c]!.accent })) }));
+  const kind = ed.occasion.kind;
+  const [first] = await previewStationery(ctx, { designKey: initial.designKey as never, colourwayKey: initial.colourwayKey, locale: initial.locale, texts: Object.fromEntries(Object.entries(initial.texts).map(([k, v]) => [k, { value: v }])), pieces: ["invitation"], occasionKind: kind });
+  const designs: DesignOption[] = DESIGN_KEYS.map((key) => {
+    const d = STATIONERY_DESIGNS[key]!;
+    return {
+      key,
+      range: d.range,
+      thumb: `/occasions/${id}/stationery/thumb?design=${encodeURIComponent(key)}`,
+      colourways: colourwaysFor(d, kind).map((c) => ({ key: c, paper: COLOURWAYS[c]!.paper, ink: COLOURWAYS[c]!.ink, accent: COLOURWAYS[c]!.accent })),
+    };
+  });
+  const starters = { ro: getStarterWordings(kind, "ro"), en: getStarterWordings(kind, "en") };
   const presets = Object.fromEntries((["ro", "en"] as const).map((l) => [l, Object.fromEntries(STATIONERY_WORDING_KINDS.map((k) => [k, getWordingPreset(k, l)]))])) as never;
   const blocked = typeof sp.blocked === "string" && all.has(sp.blocked as never) ? all(sp.blocked as never, { version: current?.version ?? 0 } as never) : null;
   const pdf = (kind: "proof" | "print", version: number) => `/occasions/${id}/stationery/pdf?kind=${kind}&version=${version}`;
@@ -59,6 +69,8 @@ export default async function StationeryPage({ params, searchParams }: { params:
           occasionKind={ed.occasion.kind}
           canManage={ed.canManage}
           designs={designs}
+          ranges={[...DESIGN_RANGES]}
+          starters={starters}
           limits={STATIONERY_FIELD_LIMITS}
           presets={presets}
           initial={initial}

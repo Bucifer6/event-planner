@@ -270,7 +270,7 @@ Dockerfile's `deps` stage.
 | `@ed/core/fitcheck` | `checkFit(model, { needed: number \| null })` → `{ status: "fits" \| "no" \| "unknown", seats, area, issues, excluded, … }` |
 | `@ed/core/seating` | `getSpaceModel`, `attachVenueSpace`, `createOwnSpace`, `addTable`, `addFixture`, `moveItem`, `assignSeats`, `publishSeating`, `getSeatingSummary` (counts only), `getFitChecks`, `getGuestSeat`, `getGuestSpaceView`, `listMealStages`, `addMealStage`, `proposeDrawingUpdate` |
 | `@ed/core/programme` | `listProgramme`, `saveProgrammeItem`, `saveCueList`, `getGuestProgramme`, `notifyProgrammeChange` |
-| `@ed/core/stationery`, `stationerykit` | Versions and proofs; the kit: `layoutPiece`, `sceneToSvg`, `drawSceneOnPdf`, `stationeryFontFamily()` |
+| `@ed/core/stationery`, `stationerykit`, `stationerycollections` | Versions and proofs (`getStarterWordings(kind, locale)`, `stationeryThumbnail(ctx, occasionId, designKey)` for the designer gallery); the kit: `layoutPiece` (takes `occasionKind` for the collections' motif), `sceneToSvg`, `drawSceneOnPdf` (artwork is clipped to the bleed), `stationeryFontFamily()`, `colourwaysFor(design, kind)` (a design's colourways for an occasion kind), `getColourway`, `transformPath`, `mixColour`, `contrastRatio`, `DESIGN_RANGES`, `HOUSE_DESIGN_KEYS`; `stationerycollections` holds the collection data (palettes, `KIND_PALETTES`, edition artwork, embroidery charts, `KIND_MOTIFS`, `STARTER_KEYS`) |
 | `@ed/core/menus` | `getMenus`, `saveMenu`, `saveMenuItem`, `setMealChoices`, `getMenuQuantities`, `pushMenuToOrder` |
 | `@ed/core/publicpage`, `registrations` | `savePublicPage`, `getPublicEvent`; `registerForEvent`, `cancelOwnRegistration`, `promoteWaitlist` |
 | `@ed/core/requests`, `guestevent` | Private requests (own grant); venue link and the accessible guest journey |
@@ -416,7 +416,7 @@ Exports: `.`, `./icons`, `./styles.css`. Components and tokens are listed in `16
 the rules every screen follows are in `17-ui-rules.md`. `.ed-vh` inside a horizontally
 scrolling container needs a `position: relative` ancestor.
 
-## Appearance (the five looks)
+## Appearance (the looks)
 
 - `@ed/core/appearance`: `UI_THEMES`, `UiTheme`, `getUiTheme(ctx, { fresh? })` (public read,
   cached ~15 s per process, never throws), `setUiTheme(staffCtx, { theme })` (platform_admin
