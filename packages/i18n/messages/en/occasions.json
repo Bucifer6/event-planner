@@ -94,7 +94,17 @@
     "cancel": "Cancel",
     "freeNote": "Creating an occasion is free.",
     "lessonsTitle": "Lessons from past occasions",
-    "lessonsIntro": "Your own notes from the occasions you closed."
+    "lessonsIntro": "Your own notes from the occasions you closed.",
+    "kindLegend": "Which one?",
+    "groups": {
+      "love": "Weddings and love",
+      "family": "Family",
+      "party": "Parties",
+      "travel": "Trips",
+      "work": "Work",
+      "culture": "Culture and sport",
+      "blank": "Blank"
+    }
   },
   "fields": {
     "title": "Occasion title",

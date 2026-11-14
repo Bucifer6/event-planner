@@ -94,7 +94,17 @@
     "cancel": "Renunță",
     "freeNote": "Crearea unei ocazii este gratuită.",
     "lessonsTitle": "Lecții de la ocaziile trecute",
-    "lessonsIntro": "Notițele tale de la ocaziile pe care le-ai încheiat."
+    "lessonsIntro": "Notițele tale de la ocaziile pe care le-ai încheiat.",
+    "kindLegend": "Care anume?",
+    "groups": {
+      "love": "Nuntă și iubire",
+      "family": "Familie",
+      "party": "Petreceri",
+      "travel": "Călătorii",
+      "work": "Profesional",
+      "culture": "Cultură și sport",
+      "blank": "De la zero"
+    }
   },
   "fields": {
     "title": "Titlul ocaziei",

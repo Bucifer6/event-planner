@@ -132,6 +132,8 @@ The first complete build of the product, made on 13–14 November 2026 on the br
   birthday, bridal shower, vow renewal, gender reveal, Christmas party, celebration of life,
   networking event), each with a short starter task list, budget categories and directory
   suggestions.
+- The template picker on "New occasion" now works in two steps: choose a group (weddings and
+  love, family, parties, trips, work, culture and sport, or blank), then the kind within it.
 - `AGENTS.md` (rules for coding agents and new developers), a generated code map (`docs/build/21-code-map.md`, kept current by a test) and `pnpm check`, one command that runs every gate.
 - An in-app help centre at `/help`: 60 task-based articles in Romanian and English, search, a
   staff section, and contextual help links on the main screens.
