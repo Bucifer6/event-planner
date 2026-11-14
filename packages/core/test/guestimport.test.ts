@@ -106,9 +106,12 @@ describe("guest list import (A13)", () => {
       ["Familia Țăranu", "ro", 3, "stefan@example.test"],
       ["The Browns", "en", 2, "emma@example.test"],
     ]);
-    // the age column went nowhere
-    const dump = JSON.stringify((await t.db.execute(sql`SELECT * FROM households WHERE occasion_id = ${occ}`)).rows);
-    expect(dump).not.toContain("41");
+    // the age column went nowhere: no stored value holds it. (Generated ids and timestamps are
+    // left out of the check — they can contain "41" by chance, which made this test flaky.)
+    const stored = (await t.db.execute(sql`SELECT * FROM households WHERE occasion_id = ${occ}`)).rows as Array<Record<string, unknown>>;
+    const values = stored.flatMap((r) => Object.entries(r).filter(([k]) => !/^(id|occasion_id|created_at|updated_at)$/.test(k) && !k.endsWith("_id")).map(([, v]) => v));
+    expect(values.length).toBeGreaterThan(stored.length * 3);
+    expect(JSON.stringify(values)).not.toContain("41");
   });
 
   it("shows a create / change / skip diff, applies exactly it on confirm, and cancel changes nothing", async () => {

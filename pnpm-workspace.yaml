@@ -7,3 +7,8 @@ onlyBuiltDependencies:
   - unrs-resolver
   - "@parcel/watcher"
   - "@swc/core"
+# Security patches for dev-only tools (drizzle-kit's old esbuild loader, eslint's minimatch);
+# remove once those packages ship the fixed versions themselves.
+overrides:
+  "@esbuild-kit/core-utils>esbuild": "^0.25.4"
+  "minimatch@>=7.0.0 <11.0.1": "^11.0.1"
