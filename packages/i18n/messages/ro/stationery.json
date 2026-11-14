@@ -1145,5 +1145,6 @@
     "design": "Model",
     "colourway": "Culori",
     "note": "Se salvează ca versiune nouă. Verifică proba înainte să faci fișierul pentru tipar."
-  }
+  },
+  "templateName": "{style} nr. {number}"
 }

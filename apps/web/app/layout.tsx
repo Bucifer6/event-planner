@@ -1,7 +1,8 @@
 import "@ed/ui/styles.css";
 import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getTranslations } from "next-intl/server";
+import { clientMessages } from "@/lib/client-messages";
+import { getLocale, getMessages, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
 import { getUiTheme, UI_THEME_PAPER } from "@ed/core/appearance";
 import { getDb } from "@ed/db";
@@ -25,12 +26,14 @@ export async function generateViewport(): Promise<Viewport> {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const locale = await getLocale();
-  // The look of the whole app (Maison, Atelier, Riviera, Jardin, Studio): design tokens only.
+  // The look of the whole app (Console → Aspect): design tokens only.
   const theme = await getUiTheme({ db: getDb() });
+  // only what client components read goes to the browser (lib/client-messages.ts)
+  const messages = clientMessages((await getMessages()) as Record<string, unknown>);
   return (
     <html lang={locale} data-ui={theme}>
       <body>
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={messages}>
           {children}
           <CookieNotice />
           <RegisterServiceWorker />

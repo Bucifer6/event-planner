@@ -276,7 +276,17 @@
   },
   "export": {
     "title": "Așezarea la mese",
-    "description": "Lista cu masa și locul fiecărui invitat (CSV)."
+    "description": "Lista cu masa și locul fiecărui invitat (CSV).",
+    "columns": {
+      "table": "Masa",
+      "seat": "Locul",
+      "household": "Familia",
+      "guest": "Invitat",
+      "places": "Locuri",
+      "rsvp": "Răspuns"
+    },
+    "extraAdults": "Adulți în plus: {count}",
+    "extraChildren": "Copii: {count}"
   },
   "whatif": {
     "title": "Propunere de așezare — mese: {count}",

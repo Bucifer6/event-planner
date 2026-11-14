@@ -276,7 +276,17 @@
   },
   "export": {
     "title": "Seating",
-    "description": "The list with each guest's table and seat (CSV)."
+    "description": "The list with each guest's table and seat (CSV).",
+    "columns": {
+      "table": "Table",
+      "seat": "Seat",
+      "household": "Household",
+      "guest": "Guest",
+      "places": "Places",
+      "rsvp": "Reply"
+    },
+    "extraAdults": "Extra adults: {count}",
+    "extraChildren": "Children: {count}"
   },
   "whatif": {
     "title": "Seating proposal — tables: {count}",
