@@ -1,6 +1,6 @@
 import { getAiTextStatus } from "@ed/core/aitext";
-import { getStarterWordings, getStationeryEditor, getWordingPreset, previewStationery, STATIONERY_FIELD_LIMITS, STATIONERY_TEXT_FIELDS, STATIONERY_WORDING_KINDS } from "@ed/core/stationery";
-import { colourwaysFor, COLOURWAYS, DESIGN_KEYS, DESIGN_RANGES, STATIONERY_DESIGNS, svgDataUri } from "@ed/core/stationerykit";
+import { getStarterWordings, getStationeryEditor, stationeryColourwayName, stationeryDesignName, getWordingPreset, previewStationery, STATIONERY_FIELD_LIMITS, STATIONERY_TEXT_FIELDS, STATIONERY_WORDING_KINDS } from "@ed/core/stationery";
+import { colourwaysFor, COLOURWAYS, DESIGN_KEYS, DESIGN_RANGES, designAvailableFor, STATIONERY_DESIGNS, svgDataUri } from "@ed/core/stationerykit";
 import { formatDate } from "@ed/i18n/format";
 import { Card, Checkbox, EmptyState, LinkButton, List, Notice, PageHeader, Row, Section, Stack, Tag } from "@ed/ui";
 import { IconDownload } from "@ed/ui/icons";
@@ -43,13 +43,15 @@ export default async function StationeryPage({ params, searchParams }: { params:
   };
   const kind = ed.occasion.kind;
   const [first] = await previewStationery(ctx, { designKey: initial.designKey as never, colourwayKey: initial.colourwayKey, locale: initial.locale, texts: Object.fromEntries(Object.entries(initial.texts).map(([k, v]) => [k, { value: v }])), pieces: ["invitation"], occasionKind: kind });
-  const designs: DesignOption[] = DESIGN_KEYS.map((key) => {
+  // the designs this occasion can use: everything shared, plus the templates made for its kind
+  const designs: DesignOption[] = DESIGN_KEYS.filter((key) => designAvailableFor(STATIONERY_DESIGNS[key]!, kind)).map((key) => {
     const d = STATIONERY_DESIGNS[key]!;
     return {
       key,
+      name: stationeryDesignName(key, locale),
       range: d.range,
       thumb: `/occasions/${id}/stationery/thumb?design=${encodeURIComponent(key)}`,
-      colourways: colourwaysFor(d, kind).map((c) => ({ key: c, paper: COLOURWAYS[c]!.paper, ink: COLOURWAYS[c]!.ink, accent: COLOURWAYS[c]!.accent })),
+      colourways: colourwaysFor(d, kind).map((c) => ({ key: c, name: stationeryColourwayName(c, locale), paper: COLOURWAYS[c]!.paper, ink: COLOURWAYS[c]!.ink, accent: COLOURWAYS[c]!.accent })),
     };
   });
   const starters = { ro: getStarterWordings(kind, "ro"), en: getStarterWordings(kind, "en") };
@@ -92,7 +94,7 @@ export default async function StationeryPage({ params, searchParams }: { params:
                   <strong>{t("versions.version", { version: current.version })}</strong>
                   <Tag tone={current.proofedAt ? "success" : "attention"}>{current.proofedAt ? t("versions.proofed") : t("versions.notProofed")}</Tag>
                 </div>
-                <p className="ed-small ed-muted">{t("versions.meta", { design: t(`designs.${current.designKey}.name`), date: formatDate(current.createdAt, locale) })}</p>
+                <p className="ed-small ed-muted">{t("versions.meta", { design: stationeryDesignName(current.designKey, locale), date: formatDate(current.createdAt, locale) })}</p>
                 <div className={styles.inline}>
                   <LinkButton href={pdf("proof", current.version)} download>
                     <IconDownload size={18} />
@@ -125,7 +127,7 @@ export default async function StationeryPage({ params, searchParams }: { params:
                       <Row
                         key={v.version}
                         title={t("versions.version", { version: v.version })}
-                        meta={t("versions.meta", { design: t(`designs.${v.designKey}.name`), date: formatDate(v.createdAt, locale) })}
+                        meta={t("versions.meta", { design: stationeryDesignName(v.designKey, locale), date: formatDate(v.createdAt, locale) })}
                         end={
                           <span className={styles.inline}>
                             <Tag tone={v.proofedAt ? "success" : "neutral"}>{v.proofedAt ? t("versions.proofed") : t("versions.notProofed")}</Tag>

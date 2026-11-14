@@ -96,6 +96,7 @@ import "./staff";
 import "./stationery";
 import "./stationerykit";
 import "./stationerycollections";
+import "./stationerytemplates";
 import "./stats";
 import "./subgroups";
 import "./suppliers";

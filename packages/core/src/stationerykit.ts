@@ -4,6 +4,7 @@ import * as fontkit from "fontkit";
 import { pdfFonts } from "./briefingpdf";
 import { qrPathData, type QrMatrix } from "./qr";
 import { COLLECTION_PALETTES, EDITION_ART, KIND_MOTIFS, KIND_PALETTES, STITCH_CHARTS, STUDIO_PALETTES } from "./stationerycollections";
+import { drawTemplate, occasionTemplates, TEMPLATE_PALETTES, type TemplateSpec } from "./stationerytemplates";
 
 // THE STATIONERY KIT (C-04) — designs as data, one layout engine, two renderers.
 //
@@ -210,6 +211,9 @@ export const COLOURWAYS: Record<string, Colourway> = {
   // the collection palettes (paper, ink, accent, muted, thread) — see stationerycollections.ts
   ...Object.fromEntries(Object.entries(COLLECTION_PALETTES).map(([key, p]) => [key, { key, ...p }])),
 };
+
+/** Colourway key of an occasion-template palette. */
+export const templateColourwayKey = (palette: string) => `tp-${palette}`;
 
 /** The house colourways (the curated paper/ink pairs of the eight house designs). */
 export const HOUSE_COLOURWAYS = ["ivoire", "nuit", "sauge", "rose", "ciel", "terracotta", "minuit", "noir"] as const;
@@ -423,7 +427,8 @@ export type TextStyle = {
 export type FrameKind = "none" | "plate" | "hairline" | "arch" | "rule-left";
 
 /** Which family a design belongs to: the house designs, or one of the invitation collections. */
-export const DESIGN_RANGES = ["house", "embroidery", "featured", "rustic", "traditional", "collection"] as const;
+/** "occasion" = the templates made for one occasion kind (stationerytemplates.ts). */
+export const DESIGN_RANGES = ["occasion", "house", "embroidery", "featured", "rustic", "traditional", "collection"] as const;
 export type DesignRange = (typeof DESIGN_RANGES)[number];
 
 export type HouseDesignKey = "classic" | "modern" | "monogram" | "botanical" | "minimal" | "nocturne" | "botez" | "petrecere";
@@ -447,6 +452,9 @@ export type Design = {
   kindColourways?: { openOn: number };
   /** The opening mark sits under the text instead of above it. */
   crestAt?: "top" | "foot";
+  /** An occasion template: drawn by stationerytemplates.ts, offered only to occasions of `forKind`. */
+  template?: TemplateSpec;
+  forKind?: string;
   scatter?: "confetti" | "stars";
   /** How the names are set: one above the other with the conjunction between, or on running lines. */
   names: "stacked" | "inline";
@@ -818,7 +826,66 @@ function merge(a: Partial<Record<TextRole, Partial<TextStyle>>>, b: Partial<Reco
   return out;
 }
 
-export const STATIONERY_DESIGNS: Record<string, Design> = { ...HOUSE_DESIGNS, ...collectionDesigns() };
+/** A readable colourway from a template palette: ink pushed to AA+ on the paper, a muted that still reads. */
+function templateColourway(key: string): Colourway {
+  const p = TEMPLATE_PALETTES[key]!;
+  const toward = (fg: string, bg: string, target: number) => {
+    const end = luminance(bg) > 0.18 ? "#000000" : "#ffffff";
+    let c = fg;
+    for (let t = 0.04; contrastRatio(c, bg) < target && t <= 1; t += 0.04) c = mixColour(fg, end, t);
+    return c;
+  };
+  const ink = toward(p.ink, p.paper, 7);
+  let muted = ink;
+  for (let t = 0.4; t >= 0; t -= 0.02) {
+    const m = mixColour(ink, p.paper, t);
+    if (contrastRatio(m, p.paper) >= 4.6) {
+      muted = m;
+      break;
+    }
+  }
+  const dark = luminance(p.paper) < 0.18;
+  const accent = dark ? toward(p.a1, p.paper, 4.5) : p.a1;
+  return { key: templateColourwayKey(key), paper: p.paper, ink, accent, muted, flood: luminance(p.paper) < 0.94, dark, thread: p.a2 };
+}
+for (const key of Object.keys(TEMPLATE_PALETTES)) COLOURWAYS[templateColourwayKey(key)] = templateColourway(key);
+
+const TEMPLATE_VOICES: Record<TemplateSpec["layout"]["voice"], Partial<Record<TextRole, Partial<TextStyle>>>> = {
+  roman: { names: { size: 34 }, title: { size: 28 } },
+  italic: { names: { font: "display-italic", size: 33, tracking: 0, leading: 1.1 }, title: { font: "display-italic", size: 29, tracking: 0 }, placeName: { font: "display-italic" } },
+  caps: { names: { font: "text-medium", size: 15, tracking: 0.2, caps: true, leading: 1.5, maxLines: 3 }, title: { font: "text-medium", size: 14, tracking: 0.2, caps: true, leading: 1.5 }, placeName: { font: "text-medium", size: 15, tracking: 0.14, caps: true } },
+  sans: { names: { font: "text-medium", size: 28, tracking: -0.01, leading: 1.08 }, title: { font: "text-medium", size: 24, tracking: -0.01 }, wording: { font: "text", size: 9.6, leading: 1.6 }, placeName: { font: "text-medium", size: 22 } },
+};
+
+/** The 52 templates of every occasion kind, as designs (offered only to that kind). */
+function occasionTemplateDesigns(): Record<string, Design> {
+  const out: Record<string, Design> = {};
+  for (const kind of Object.keys(KIND_PALETTES)) {
+    for (const spec of occasionTemplates(kind)) {
+      const v = spec.layout.voice;
+      out[spec.key] = {
+        key: spec.key,
+        range: "occasion",
+        forKind: kind,
+        template: spec,
+        align: spec.layout.align,
+        frame: "none",
+        names: v === "caps" ? "inline" : "stacked",
+        rule: v === "sans" || v === "caps" ? "hair" : "diamond",
+        styles: withStyles({ ...TEMPLATE_VOICES[v], amp: { color: "muted" }, course: { color: "ink" }, kicker: { color: "muted" } }),
+        colourways: spec.palettes.map(templateColourwayKey),
+      };
+    }
+  }
+  return out;
+}
+
+/** Whether a design may be used by an occasion of this kind (templates belong to one kind). */
+export function designAvailableFor(design: Design, occasionKind: string | null | undefined): boolean {
+  return !design.forKind || design.forKind === occasionKind;
+}
+
+export const STATIONERY_DESIGNS: Record<string, Design> = { ...HOUSE_DESIGNS, ...collectionDesigns(), ...occasionTemplateDesigns() };
 
 export const DESIGN_KEYS = Object.keys(STATIONERY_DESIGNS) as DesignKey[];
 export const HOUSE_DESIGN_KEYS = Object.keys(HOUSE_DESIGNS) as HouseDesignKey[];
@@ -925,7 +992,7 @@ export function monogramInitials(names: string): string[] {
 
 export type SceneNode =
   | { t: "text"; font: FontKey; size: number; x: number; y: number; text: string; tracking: number; color: string; width: number }
-  | { t: "path"; d: string; tx: number; ty: number; s: number; paint: "stroke" | "fill"; color: string; sw: number }
+  | { t: "path"; d: string; tx: number; ty: number; s: number; paint: "stroke" | "fill"; color: string; sw: number; /** template artwork: its bounds, and whether it is a text plate */ box?: [number, number, number, number]; plate?: boolean; frame?: boolean }
   | { t: "qr"; x: number; y: number; size: number; matrix: QrMatrix };
 
 export type Scene = {
@@ -1157,7 +1224,7 @@ export type LayoutInput = {
 
 /** THE layout: design + colourway + texts → positioned runs and paths on the trim sheet. */
 export function layoutPiece(input: LayoutInput): Scene {
-  const design = getDesign(input.design);
+  let design = getDesign(input.design);
   const cw = getColourway(design, input.colourway);
   const spec = PIECES[input.piece];
   const extra = input.extra ?? {};
@@ -1225,6 +1292,13 @@ export function layoutPiece(input: LayoutInput): Scene {
   let ml = mx;
   let mr = mx;
   if (design.art) drawCollectionArt(design, W, H, cw, input.occasionKind ?? undefined, nodes);
+  if (design.template) {
+    // an occasion template: its artwork, then the text box (and alignment) the style asks for
+    const motif = KIND_MOTIFS[design.forKind ?? ""] ?? KIND_MOTIFS.blank!;
+    const art = drawTemplate(design.template, cw.key.replace(/^tp-/, ""), W, H, motif);
+    for (const n of art.nodes) nodes.push({ t: "path", d: n.d, tx: 0, ty: 0, s: 1, paint: n.paint, color: n.color, sw: n.sw, ...(n.plate ? { plate: true } : {}), ...(n.frame ? { frame: true } : {}), box: n.box });
+    design = { ...design, textBox: art.result.box, align: art.result.align ?? design.align, valign: art.result.valign };
+  }
   if (design.textBox) {
     // the collections keep their text clear of the artwork; small pieces keep at least the safe margin
     const [l, r, tp, b] = design.textBox;

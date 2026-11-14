@@ -132,6 +132,11 @@ The first complete build of the product, made on 13–14 November 2026 on the br
   birthday, bridal shower, vow renewal, gender reveal, Christmas party, celebration of life,
   networking event), each with a short starter task list, budget categories and directory
   suggestions.
+- 52 original invitation templates for every occasion kind (1,664 in all) under "Made for this
+  occasion" in the stationery designer: 45 drawn styles (confetti, balloons, art deco fans,
+  Bauhaus blocks, terrazzo, snowflakes, laurels, mountains, soundwaves…) in 55 palettes, chosen
+  to suit each kind, each with two alternative palettes. A test checks every template on four
+  sheet sizes: text stays on the sheet and never sits on top of the artwork.
 - The template picker on "New occasion" now works in two steps: choose a group (weddings and
   love, family, parties, trips, work, culture and sport, or blank), then the kind within it.
 - `AGENTS.md` (rules for coding agents and new developers), a generated code map (`docs/build/21-code-map.md`, kept current by a test) and `pnpm check`, one command that runs every gate.
