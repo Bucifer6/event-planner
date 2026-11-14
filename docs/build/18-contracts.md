@@ -415,3 +415,11 @@ state.
 Exports: `.`, `./icons`, `./styles.css`. Components and tokens are listed in `16-design.md`;
 the rules every screen follows are in `17-ui-rules.md`. `.ed-vh` inside a horizontally
 scrolling container needs a `position: relative` ancestor.
+
+## Appearance (the five looks)
+
+- `@ed/core/appearance`: `UI_THEMES`, `UiTheme`, `getUiTheme(ctx, { fresh? })` (public read,
+  cached ~15 s per process, never throws), `setUiTheme(staffCtx, { theme })` (platform_admin
+  only, audited), `UI_THEME_PAPER`, `UI_THEME_SETTING_KEY = "ui.theme"`.
+- Web: `apps/web/app/layout.tsx` sets `<html data-ui>`; console screen
+  `apps/web/app/console/appearance` (`saveUiTheme` action). Design details: `16-design.md`.

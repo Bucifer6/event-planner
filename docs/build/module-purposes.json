@@ -3,6 +3,7 @@
   "accounts": "The signed-in person's account: profile, display name, fresh sign-in check for sensitive actions, account deletion and purge.",
   "aitext": "AI wording suggestions for invitations and messages: provider seam, 10-per-month limit, nothing applied without the user accepting.",
   "all": "Imports every core module so all import-time registrations exist in every process (web, worker, tests).",
+  "appearance": "The look of the whole app (Maison, Atelier, Riviera, Jardin, Studio), chosen by a platform administrator in the console. Changes appearance only.",
   "approvals": "Second-person approvals for irreversible staff actions; single-operator mode queues them.",
   "arrangementkit": "Pure, client-safe helpers for the flower arrangement designer: forms, sketch layout, indicative cost, version diff.",
   "arrangements": "Flower arrangement designs and their versions, quote requests from a design, the arrangement What-if kind.",

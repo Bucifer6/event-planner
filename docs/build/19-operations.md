@@ -276,3 +276,11 @@ A suggested rhythm; adjust to your team.
 - **Every month:** the restore test result; discovery runs and drafts.
 - **Every year, and when someone leaves:** rotate secrets; rotate the backup key; review who
   holds which role; review the launch checklist records.
+
+## Changing the look of the app
+
+**Console → Aspect** (platform administrator). Pick one of the five looks and press
+"Aplică aspectul". Everyone sees it on the next page they open; other web servers follow
+within about 15 seconds. It changes appearance only and can be changed back at any time. The
+change is recorded in the audit log. Printed stationery, emails and the public marketing site
+are not affected.

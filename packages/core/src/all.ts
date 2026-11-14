@@ -7,6 +7,7 @@
 import "./access";
 import "./accounts";
 import "./aitext";
+import "./appearance";
 import "./approvals";
 import "./arrangementkit";
 import "./arrangements";

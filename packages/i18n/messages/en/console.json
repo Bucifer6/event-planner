@@ -21,7 +21,8 @@
     "commercial": "Commercial",
     "communications": "Communications",
     "discovery": "Discovery",
-    "help": "Help for the team"
+    "help": "Help for the team",
+    "appearance": "Appearance"
   },
   "roles": {
     "platform_admin": "Platform admin",
@@ -497,6 +498,53 @@
       "dsaContactPoint": "Published DSA point of contact",
       "accessibilityStatementDate": "Accessibility statement — date",
       "accessibilityEvaluationMethod": "Accessibility statement — evaluation method"
+    }
+  },
+  "appearance": {
+    "title": "Appearance",
+    "description": "Choose how EventDesk looks for everyone. It changes only the look — colours, lettering, corners — never what the app does.",
+    "choose": "Choose the look",
+    "apply": "Apply this look",
+    "applying": "Applying…",
+    "applied": "The look has been changed. Everyone sees it on the next page they open.",
+    "inUse": "In use",
+    "noteTitle": "Good to know",
+    "note": "Every look also has a night version, which follows the phone or computer setting. Printed invitations keep their own design. The public marketing site stays in the Maison look until it is next published.",
+    "sample": {
+      "kicker": "Wedding · 12 June 2027",
+      "action": "Send the invitations",
+      "meta": "Saturday, 5 pm · Conacul Polizu",
+      "unknown": "flower price: unknown"
+    },
+    "errors": {
+      "unknownTheme": "That look does not exist. Choose one from the list."
+    },
+    "themes": {
+      "maison": {
+        "name": "Maison",
+        "mood": "ivory, midnight blue, a thread of gold",
+        "about": "The house look. Bodoni for titles, square corners, the elegance of fine stationery."
+      },
+      "atelier": {
+        "name": "Atelier",
+        "mood": "black and white, fashion-house",
+        "about": "No colour at all. Fine serif lettering and airy capitals."
+      },
+      "riviera": {
+        "name": "Riviera",
+        "mood": "sand, Mediterranean blue, terracotta",
+        "about": "Warm and sunlit. Rounded corners, ordinary sentence-case writing."
+      },
+      "jardin": {
+        "name": "Jardin",
+        "mood": "stone, sage and moss",
+        "about": "Quiet and botanical. An old-style serif and garden colours."
+      },
+      "studio": {
+        "name": "Studio",
+        "mood": "blush, black, one stroke of red",
+        "about": "Bold and editorial. Wide heavy capitals, no italics."
+      }
     }
   }
 }

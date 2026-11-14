@@ -296,10 +296,15 @@ These are tracked in the console under *Lansare* (`/console/launch`), each with 
 
 ## Licences of bundled fonts
 
-- **Bodoni Moda** and **Hanken Grotesk** (the two typefaces of the interface) are shipped as
-  `.woff2` files in `packages/ui/fonts/`. Both are under the SIL Open Font License 1.1; the
-  licence texts are beside them: `LICENSE-bodoni-moda.txt`, `LICENSE-hanken-grotesk.txt`.
-  The same two families are also installed as `.ttf` files through the npm packages
+- **Bodoni Moda** and **Hanken Grotesk** (the two typefaces of the house look, Maison) are
+  shipped as `.woff2` files in `packages/ui/fonts/`. Both are under the SIL Open Font License
+  1.1; the licence texts are beside them: `LICENSE-bodoni-moda.txt`,
+  `LICENSE-hanken-grotesk.txt`.
+- The four other looks use **Cormorant Garamond**, **Jost**, **Fraunces**, **DM Sans**,
+  **Instrument Serif**, **Instrument Sans** and **Archivo**, also self-hosted as `.woff2` in
+  `packages/ui/fonts/`, all under the SIL Open Font License 1.1, each with its
+  `LICENSE-<family>.txt` beside it.
+- Bodoni Moda and Hanken Grotesk are also installed as `.ttf` files through the npm packages
   `@expo-google-fonts/bodoni-moda` and `@expo-google-fonts/hanken-grotesk`, which the
   stationery PDFs use.
 - **DejaVu** (used in generated PDFs such as the supplier briefing, and as the fallback for

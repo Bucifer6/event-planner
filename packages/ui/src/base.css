@@ -33,11 +33,14 @@ h3,
 h4 {
   margin: 0;
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
   font-optical-sizing: auto;
-  line-height: 1.12;
-  letter-spacing: -0.015em;
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
+  text-transform: var(--display-caps);
   text-wrap: balance;
+  overflow-wrap: break-word;
 }
 h1 {
   font-size: var(--display-lg);

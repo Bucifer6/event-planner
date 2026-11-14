@@ -1,0 +1,112 @@
+/* Console → Appearance. Each option is a live miniature rendered with that look's own tokens
+   (data-ui on the card), so what the administrator picks is what the app will look like. */
+.grid {
+  display: grid;
+  gap: var(--s-4);
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 600px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-5);
+  max-width: 760px;
+}
+.wrap form {
+  max-width: none;
+}
+.option {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  cursor: pointer;
+}
+.option input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+/* the miniature: uses the look's own paper, ink, fonts and corners */
+.sample {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  min-height: 304px;
+  padding: var(--s-4);
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-text);
+  border: var(--hair) solid var(--line);
+  border-radius: var(--radius);
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+.option input:checked + .sample {
+  outline-color: var(--focus-ring, #1c2452);
+}
+.option input:focus-visible + .sample {
+  outline: 3px solid var(--focus-ring, #1c2452);
+}
+.plate {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-2);
+  padding: var(--s-4) var(--s-3);
+  background: var(--surface);
+  border: var(--hair) solid var(--line);
+  border-radius: var(--radius);
+  outline: var(--hair) solid var(--gilt);
+  outline-offset: -8px;
+}
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  font-weight: var(--display-weight);
+  font-stretch: var(--display-stretch);
+  line-height: var(--display-leading);
+  letter-spacing: var(--display-tracking);
+  text-transform: var(--display-caps);
+  overflow-wrap: anywhere;
+}
+.title em {
+  font-style: var(--italic);
+  color: var(--em-color);
+  font-weight: inherit;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s-2);
+  margin-top: auto;
+}
+.swatches {
+  display: flex;
+  gap: var(--s-1);
+  margin-left: auto;
+}
+.swatches span {
+  width: 16px;
+  height: 16px;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+}
+.caption {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: var(--s-2);
+}
+.current {
+  margin-left: var(--s-2);
+}
