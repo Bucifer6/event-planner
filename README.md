@@ -17,8 +17,8 @@ check it, and where every other document is. The product requirements are in
   [`docs/build/13-implementation-log.md`](docs/build/13-implementation-log.md); the
   requirement-by-requirement verdict is
   [`docs/build/09-traceability.md`](docs/build/09-traceability.md).
-- **Checked on the build machine:** type checks, lint, the automated tests (63 test files,
-  681 tests at the last full run), the two production builds, the public-site privacy gate,
+- **Checked on the build machine:** type checks, lint, the automated tests (69 test files,
+  724 tests at the last full run), the two production builds, the public-site privacy gate,
   the security-header check and the HTTP smoke test.
 - **Not verified anywhere yet:** the GitHub workflows, the container images, the Terraform
   description and the deploy scripts have never run; there is no browser-driven test suite,
@@ -41,7 +41,7 @@ packages/
   db/         PostgreSQL schema (Drizzle ORM), the migration, SQL guards, seed data, test harness
   core/       every business rule and every access check (web, worker and MCP only call this)
   auth/       sign-in codes and links, anonymous accounts, sessions, two-step sign-in
-  i18n/       all user-facing text, Romanian and English (61 namespaces each)
+  i18n/       all user-facing text, Romanian and English (75 namespaces each: 61 for the product, 14 for the help centre)
   ui/         the "Maison" design system (components, tokens, fonts)
   email/      email templates, the send pipeline, the suppression list
   storage/    uploads: type check, image re-encoding, malware-scan gate, fair-use counters
@@ -276,7 +276,7 @@ These are tracked in the console under *Lansare* (`/console/launch`), each with 
 | [`docs/build/09-traceability.md`](docs/build/09-traceability.md) | Every PRD requirement: built or not, where it lives, which test covers it |
 | [`docs/build/10-operator-decisions.md`](docs/build/10-operator-decisions.md) | Every decision left to the operator and the setting that carries it |
 | [`docs/build/11-testing-and-qa.md`](docs/build/11-testing-and-qa.md) | What is tested, what is not, and a manual checklist per release |
-| [`docs/build/12-security-review.md`](docs/build/12-security-review.md) | The security review |
+| [`docs/build/12-security-review.md`](docs/build/12-security-review.md) | The security review: scope, checklist, severity scale and findings (maintained by the security review itself) |
 | [`docs/build/13-implementation-log.md`](docs/build/13-implementation-log.md) | The status page: what is built and what has been verified |
 | [`docs/build/14-deploy-runbook.md`](docs/build/14-deploy-runbook.md) | Deploying, rolling back, backups and restore, launch day |
 | [`docs/build/15-conventions.md`](docs/build/15-conventions.md) | Binding code conventions |

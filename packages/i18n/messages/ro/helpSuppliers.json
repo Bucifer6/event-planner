@@ -47,7 +47,7 @@
     "summary": "Scrii o dată ce trebuie să știe furnizorul, îi trimiți un link și vezi când a confirmat că a înțeles.",
     "keywords": "briefing furnizor link versiune publică confirmă confirmare acces parcare mențiuni",
     "where": "Ocazia ta → Furnizori → un furnizor → Briefing",
-    "need": "Organizatorul, managerii de proiect și coordonatorii.",
+    "need": "Echipa de planificare a ocaziei.",
     "body": {
       "ol1": {
         "a": "Deschide furnizorul și apasă „Scrie briefingul”.",
@@ -68,7 +68,7 @@
     "summary": "Ce urmează să sosească, ce închiriezi și ce trebuie dus înapoi — cu cantitățile primite înregistrate ca fapte.",
     "keywords": "livrări retururi închiriere scaune primit cantitate corectează parțială returnată",
     "where": "Ocazia ta → Livrări și retururi",
-    "need": "Echipa de planificare adaugă livrări. Oricine din echipă poate înregistra ce a sosit.",
+    "need": "Echipa de planificare adaugă livrări. Echipa de planificare înregistrează ce a sosit.",
     "body": {
       "ol1": {
         "a": "Apasă „Adaugă o livrare” și scrie „Ce se livrează”, ziua, intervalul și locul unde ajunge.",
@@ -86,7 +86,7 @@
     "summary": "O singură pagină pentru ziua cea mare: ceasul, programul, livrările, contactele și decizia „suntem gata?”.",
     "keywords": "ziua evenimentului program moment începe gata așteptare contacte decizie pregătire continuăm amânăm ceas",
     "where": "Ocazia ta → Ziua evenimentului",
-    "need": "Oricine din echipă vede pagina. Decizia de pregătire o înregistrează organizatorul sau managerii de proiect.",
+    "need": "Echipa de planificare vede pagina. Decizia de pregătire o înregistrează organizatorul sau managerii de proiect.",
     "body": {
       "p1": "Pagina are fundal închis, ca să se vadă bine afară și seara, și se reîmprospătează singură la fiecare 30 de secunde.",
       "ol1": {
@@ -106,7 +106,7 @@
     "summary": "Parcurgi ziua pas cu pas înainte de eveniment, apoi înregistrezi sosirile cu o atingere sau cu codul QR.",
     "keywords": "check-in sosiri repetiție qr scanează a sosit corectează lista mea bife sustenabilitate",
     "where": "Ocazia ta → Repetiție și sosiri",
-    "need": "Oricine din echipă poate înregistra sosiri și își poate bifa propriile sarcini.",
+    "need": "Echipa de planificare a ocaziei. Fiecare își bifează propriile sarcini.",
     "body": {
       "h1": "Înainte: repetiția",
       "p1": "„Repetiția zilei” te trece prin tot ce are oră în acea zi și îți arată ce se suprapune, fără să schimbe nimic.",

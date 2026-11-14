@@ -47,7 +47,7 @@
     "summary": "You write once what the supplier has to know, send them a link and see when they confirmed they understood.",
     "keywords": "briefing supplier link version publish acknowledge confirmation access parking notes",
     "where": "Your occasion → Suppliers → a supplier → Briefing",
-    "need": "The owner, project managers and workstream leads.",
+    "need": "The occasion's planning team.",
     "body": {
       "ol1": {
         "a": "Open the supplier and press “Write the briefing”.",
@@ -68,7 +68,7 @@
     "summary": "What is due to arrive, what you rent and what has to go back — with received quantities recorded as facts.",
     "keywords": "deliveries returns rental chairs received quantity correct partial returned",
     "where": "Your occasion → Deliveries and returns",
-    "need": "The planning team adds deliveries. Anyone on the team can record what arrived.",
+    "need": "The planning team adds deliveries. The planning team records what arrived.",
     "body": {
       "ol1": {
         "a": "Press “Add a delivery” and type “What is delivered”, the day, the time window and the place it goes to.",
@@ -86,7 +86,7 @@
     "summary": "One page for the big day: the clock, the programme, deliveries, contacts and the “are we ready?” decision.",
     "keywords": "event day programme moment start done waiting contacts readiness decision proceed hold clock",
     "where": "Your occasion → Event day",
-    "need": "Anyone on the team sees the page. The readiness decision is recorded by the owner or project managers.",
+    "need": "The planning team sees the page. The readiness decision is recorded by the owner or project managers.",
     "body": {
       "p1": "The page has a dark background, so it reads well outdoors and in the evening, and it refreshes by itself every 30 seconds.",
       "ol1": {
@@ -106,7 +106,7 @@
     "summary": "You step through the day before the event, then record arrivals with one tap or with the QR code.",
     "keywords": "check-in arrivals rehearsal qr scan arrived correct my checklist ticks sustainability",
     "where": "Your occasion → Rehearsal and arrivals",
-    "need": "Anyone on the team can record arrivals and tick their own tasks.",
+    "need": "The occasion's planning team. Each person ticks their own tasks.",
     "body": {
       "h1": "Before: the rehearsal",
       "p1": "“Rehearse the day” takes you through everything that has a time on that day and shows you what collides, without changing anything.",

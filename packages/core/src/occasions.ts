@@ -22,7 +22,7 @@ import { AppError } from "@ed/shared/errors";
 import { zOptionalText, zText } from "@ed/shared/zod";
 import { z } from "zod";
 import { getMember, isManager, requireMember, type Member } from "./access";
-import { requireFreshAuth } from "./accounts";
+import { onAccountPurge, requireFreshAuth } from "./accounts";
 import { audit } from "./audit";
 import { requireAccount, requireSystem, requireWriteCapable, type Ctx } from "./context";
 import {
@@ -573,10 +573,8 @@ export async function purgeDueOccasions(ctx: Ctx, input: { limit?: number } = {}
   for (const request of due) {
     const occasionId = request.targetId;
     await inTx(ctx, async (tx) => {
-      for (const hook of purgeHooks) await hook(tx, occasionId);
-      await tx.db.delete(whatifPreviews).where(eq(whatifPreviews.occasionId, occasionId));
       // tasks, checklists, dependencies, delegations, digests and members cascade
-      await tx.db.delete(occasions).where(eq(occasions.id, occasionId));
+      await purgeOccasionRows(tx, occasionId);
       await completeDeletion(tx, { id: request.id });
     });
     // stored files are removed outside the row transaction (object storage is not transactional)
@@ -586,7 +584,71 @@ export async function purgeDueOccasions(ctx: Ctx, input: { limit?: number } = {}
   return purged;
 }
 
+/** Hard-deletes one occasion and everything other domains registered for it. Inside a transaction. */
+async function purgeOccasionRows(tx: Ctx, occasionId: string): Promise<void> {
+  for (const hook of purgeHooks) await hook(tx, occasionId);
+  await tx.db.delete(whatifPreviews).where(eq(whatifPreviews.occasionId, occasionId));
+  await tx.db.delete(occasions).where(eq(occasions.id, occasionId));
+}
+
+/**
+ * D6 / INF6 — when an account is purged, its personal occasions must not linger with their guest
+ * data. Each occasion the account owns goes to its longest-standing project manager if there is
+ * one (the plan belongs to the people still running it); otherwise it is deleted with the account.
+ * Business-owned occasions are handled by the business domain. The account's seats in other
+ * people's occasions end.
+ */
+async function releaseOccasionsOfPurgedAccount(tx: Ctx, accountId: string): Promise<void> {
+  const owned = await tx.db
+    .select({ id: occasions.id })
+    .from(occasions)
+    .where(and(eq(occasions.ownerAccountId, accountId), isNull(occasions.businessId)));
+  for (const { id: occasionId } of owned) {
+    const [heir] = await tx.db
+      .select({ id: occasionMembers.id, accountId: occasionMembers.accountId })
+      .from(occasionMembers)
+      .where(
+        and(
+          eq(occasionMembers.occasionId, occasionId),
+          eq(occasionMembers.role, "pm"),
+          isNotNull(occasionMembers.accountId),
+          ne(occasionMembers.accountId, accountId),
+          isNull(occasionMembers.removedAt),
+        ),
+      )
+      .orderBy(asc(occasionMembers.createdAt))
+      .limit(1);
+    if (heir?.accountId) {
+      await tx.db.update(occasions).set({ ownerAccountId: heir.accountId }).where(eq(occasions.id, occasionId));
+      await tx.db
+        .update(occasionMembers)
+        .set({ role: "owner", grantFinance: true, grantPrivateRequests: true })
+        .where(eq(occasionMembers.id, heir.id));
+      await audit(tx, {
+        action: "occasion.owner_inherited",
+        objectType: "occasion",
+        objectId: occasionId,
+        meta: { reason: "owner_account_purged" },
+      });
+    } else {
+      await purgeOccasionRows(tx, occasionId);
+      await deleteOwnerAssets(tx, { ownerType: "occasion", ownerId: occasionId }).catch(() => 0);
+      await audit(tx, {
+        action: "occasion.purged",
+        objectType: "occasion",
+        objectId: occasionId,
+        meta: { reason: "owner_account_purged" },
+      });
+    }
+  }
+  await tx.db
+    .update(occasionMembers)
+    .set({ removedAt: tx.now })
+    .where(and(eq(occasionMembers.accountId, accountId), isNull(occasionMembers.removedAt)));
+}
+
 function registerRules(): void {
+  onAccountPurge(releaseOccasionsOfPurgedAccount);
   registerRetentionRule({
     name: "occasions-deleted",
     run: async (ctx) => (await purgeDueOccasions(ctx)).length,

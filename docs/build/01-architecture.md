@@ -87,8 +87,8 @@ as TypeScript source (no build step); the Next apps list them in `transpilePacka
 
 ### `apps/web` — the app
 
-Next.js App Router. Route groups and what they are for (139 pages and route handlers at the
-time of writing; the full list is easiest to see with `find apps/web/app -name page.tsx -o
+Next.js App Router. Route groups and what they are for (about 140 pages and route handlers at
+the time of writing; the full list is easiest to see with `find apps/web/app -name page.tsx -o
 -name route.ts`):
 
 | Path | Who | What |
@@ -112,8 +112,7 @@ time of writing; the full list is easiest to see with `find apps/web/app -name p
 | `/api/deploys/record` | the deploy workflow | Progress reports, authenticated by a machine token |
 | `/api/auth/link/[token]`, `/api/occasions/[id]/offline` | the app itself | One-tap sign-in; offline capture sync |
 | `/offline`, `manifest.ts`, `public/sw.js` | installed app | The offline shell of the installable app (B11) |
-
-A help centre is being added under `apps/web/app/help` (see `18-contracts.md`).
+| `/help`, `/help/[slug]` | anyone; a staff section for staff | The help centre (added 14 November 2026; see `18-contracts.md`) |
 
 ### `apps/public` — the public site
 
@@ -136,7 +135,7 @@ setting `ops.queueMetrics` every minute and stops cleanly on `SIGTERM`.
 | --- | --- | --- |
 | `@ed/shared` | Ids (cuid2), token hashing, money in minor units, time zones, zod helpers, `AppError`, boot-time environment check, the SSRF guard | — |
 | `@ed/db` | Drizzle schema (46 files, 167 tables), the migration, SQL guards, seeds, the test-database harness | shared |
-| `@ed/i18n` | Messages (61 namespaces × Romanian and English), locale formatting | shared |
+| `@ed/i18n` | Messages (75 namespaces × Romanian and English, 14 of them the help centre), locale formatting | shared |
 | `@ed/ui` | The "Maison" components, tokens, icons, fonts | — |
 | `@ed/core` | **All business rules and all access checks.** about a hundred modules, one per domain (plus the loader and two wiring files) | db, shared, i18n, email, storage, jobs |
 | `@ed/auth` | Sign-in codes and links, anonymous accounts, sessions, fresh confirmation, TOTP, recovery codes | core, db, email, shared |

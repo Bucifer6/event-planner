@@ -283,7 +283,7 @@ The PRD lists these as rows without ids; the ids are the work items of
 | D3 | Built | Enquiry is the only route; no MCP tool sends one | `core/enquiries.test.ts`, `mcp/tools.test.ts` |
 | D4 | Built | `core/stats`; `stats_daily` has no identifier column | `core/stats.test.ts`, `core/directory.test.ts`, `core/bizoccasions.test.ts` |
 | D5 | **Partly** | See INF6 | `core/platform.test.ts`, `core/requests.test.ts` |
-| D6 | **Partly** | Seven-day undo and the retained-data statement for accounts and occasions (`core/deletion`, `core/accounts`, `core/occasions`). **Missing:** when an account is finally deleted, the occasions it owns are neither deleted nor handed over; and the statement says the audit log is kept 2 years while nothing ever deletes it | `core/deletion.test.ts`, `core/planning.test.ts` |
+| D6 | **Partly** | Seven-day undo and the retained-data statement for accounts and occasions (`core/deletion`, `core/accounts`, `core/occasions`). When an account is finally deleted its occasions go to their longest-standing project manager or are deleted with it. **Missing:** the statement says the audit log is kept 2 years while nothing ever deletes it | `core/deletion.test.ts`, `core/planning.test.ts`, `core/account-purge-occasions.test.ts` |
 
 ## Platform and quality
 
@@ -304,7 +304,7 @@ The PRD lists these as rows without ids; the ids are the work items of
 | INF3 | Built, not verified in production | `packages/storage` (S3 transport, signed uploads and links, counters). Tested with a local folder only | `storage/storage.test.ts` |
 | INF4 | Built | 15 minutes, 5 attempts, 3 per hour, 10 per day | `auth/auth.test.ts`, `core/ratelimit.test.ts` |
 | INF5 | Built, not verified in production | Lead email captured at reply; "changed since your last visit" marker | `core/guests-rsvp.test.ts`, `core/programme.test.ts` |
-| INF6 | **Partly** | Fifteen retention rules (`02-data-model.md`). **Missing or different:** audit log never purged (PRD: 2 years); security log and email outbox have no rule; receipts counted from deletion, not closeout; occasions of a deleted account stay | `core/platform.test.ts`, `core/lifecycle.test.ts`, `core/requests.test.ts`, `core/enquiries.test.ts` |
+| INF6 | **Partly** | Sixteen retention rules (`02-data-model.md`), including the security log at 90 days. **Missing or different:** audit log never purged (PRD: 2 years); email outbox has no rule; receipts counted from deletion, not closeout | `core/platform.test.ts`, `core/lifecycle.test.ts`, `core/requests.test.ts`, `core/enquiries.test.ts` |
 | INF7 | Built | `core/aitext`; provider off by default; **no AI vendor integrated** (operator's choice). The provider and model in use are written to the setting `aitext.provider`, but no console screen displays it | `core/aitext.test.ts`, `core/stationery.test.ts` |
 | INF8 | Built | UTC storage; `@ed/shared/time`, `@ed/i18n/format` | `shared/time.test.ts`, `i18n/format.test.ts`, `core/travel.test.ts` |
 | INF9 | Operator-owned | Hosting vendor and region | — |
@@ -316,7 +316,7 @@ The PRD lists these as rows without ids; the ids are the work items of
 
 | Id | Status | Where | Test |
 | --- | --- | --- | --- |
-| L1 | Built | `packages/i18n/messages` (61 namespaces × 2). The parity test proves the two languages match; nothing mechanically proves no string is hard-coded | `i18n/parity.test.ts` |
+| L1 | Built | `packages/i18n/messages` (75 namespaces × 2). The parity test proves the two languages match; nothing mechanically proves no string is hard-coded | `i18n/parity.test.ts` |
 | L2 | Built | Account locale, `ed_lang` cookie, guest-link language | `i18n/parity.test.ts`, `core/guests-rsvp.test.ts` |
 | L3 | Built | `@ed/i18n/format` | `i18n/format.test.ts` |
 | L4 | Built | Romanian-first content with the "numai în română" note | `core/directory.test.ts`, `core/enquiries.test.ts` |
@@ -354,9 +354,7 @@ Everything that is not simply "Built", in one place.
 4. **Publishing the "For businesses" page and guides from the console** (W7): they change by
    code release.
 5. **Secret rotation dates in the console** (SEC13).
-6. **Deleting or handing over the occasions of a deleted account** (D6, INF6).
-7. **Purging the audit log after 2 years** (INF6); no retention for the security log and the
-   email outbox.
+6. **Purging the audit log after 2 years** (INF6); no retention for the email outbox.
 
 8. **Showing the AI provider and model in use on a console screen** (INF7): they are recorded
    in a setting only.

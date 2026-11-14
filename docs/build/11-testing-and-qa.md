@@ -16,7 +16,7 @@ reversed facts.
 | Layer | What it is | How to run it | Runs in CI |
 | --- | --- | --- | --- |
 | **Unit and integration tests** | Vitest. Most tests call the real business rules in `@ed/core` against a real PostgreSQL 16 database — not mocks. Each test file gets its own private database from `setupTestDb()` (`packages/db/src/testing.ts`), cloned from a template built from the current schema and SQL guards, so files run in parallel safely | `pnpm test` (whole suite) · `pnpm exec vitest run packages/core/test/money.test.ts` (one file) · `pnpm exec vitest run --project @ed/core` (one package) | yes |
-| **Translation parity** | Romanian and English have exactly the same keys in all 61 namespaces; plural branches match | `pnpm --filter @ed/i18n test` (also part of `pnpm test`) | yes |
+| **Translation parity** | Romanian and English have exactly the same keys in every namespace (75 at the time of writing); plural branches match | `pnpm --filter @ed/i18n test` (also part of `pnpm test`) | yes |
 | **Source-scan tests** | Tests that read the source code to prove an absence: no pricing or checkout route while monetisation is off; no rating, star or testimonial wording in the directory code; every core module is in the `@ed/core/all` loader; the MCP tool list equals the fixed catalogue | Part of `pnpm test` (`apps/web/test/monetization-off.test.ts`, `packages/core/test/directory.test.ts`, `all.test.ts`, `packages/mcp/test/tools.test.ts`) | yes |
 | **Type checks and lint** | TypeScript strict mode across all packages and apps; ESLint | `pnpm typecheck` · `pnpm lint` | yes |
 | **Builds** | Production build of the app and static export of the public site | `pnpm build` | yes |
@@ -30,10 +30,11 @@ run on GitHub.** Every step was run by hand on the build machine.
 
 ### The numbers
 
-At the last full run (14 November 2026, before the help centre and the security-review
-fixes): **63 test files, 681 tests, all passing**, with 0 type errors and 0 lint errors. Test
-files have been added since; for the current figure run `pnpm test` or look at the latest CI
-run once CI exists. The per-file counts below are the number of test cases declared in each
+At the last full run (14 November 2026, including the help centre and the security-review
+fixes): **69 test files, 724 tests, all passing**, with 0 type errors and 0 lint errors. The
+files added after the inventory below was written are `apps/web/test/help.test.ts`, the three
+`security-review.test.ts` files, `packages/shared/test/errors.test.ts` and
+`packages/core/test/account-purge-occasions.test.ts`. The per-file counts below are the number of test cases declared in each
 file's source at the time of writing (parameterised cases expand when run, which is why the
 total run is higher than the sum).
 

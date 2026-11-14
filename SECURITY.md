@@ -54,7 +54,8 @@ Act (`docs/build/19-operations.md`, section 6).
 ## The project's own security work
 
 - **Security review:** [`docs/build/12-security-review.md`](docs/build/12-security-review.md)
-  — scope, findings and their status. It is a code review, not a penetration test.
+  — scope, checklist, severity scale and, as the review is written up, its findings and
+  their status. It is a code review, not a penetration test.
 - **External penetration test:** required before the first guest link is sent (launch
   obligation LAU4). **Not done yet** — it is the operator's to commission.
 - **How the security requirements were met:** `docs/build/09-traceability.md`, rows SEC1–SEC16,

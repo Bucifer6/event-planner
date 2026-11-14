@@ -46,7 +46,7 @@ apply); and translations are **one file per namespace** instead of one file per 
 | [`09-traceability.md`](09-traceability.md) | Every PRD requirement id: status, where it lives, which test covers it; the gap list | To judge completeness |
 | [`10-operator-decisions.md`](10-operator-decisions.md) | Every decision left to the operator, the setting that carries it, its placeholder and where the code reads it | Before a deployment; when a value needs choosing |
 | [`11-testing-and-qa.md`](11-testing-and-qa.md) | The test layers that exist, the test inventory, what is not covered, a manual checklist per release, the evidence people must gather | Before a release |
-| [`12-security-review.md`](12-security-review.md) | The security review | Before a release and before the penetration test (LAU4) |
+| [`12-security-review.md`](12-security-review.md) | The security review: scope, checklist, severity scale, findings | Before a release and before the penetration test (LAU4) |
 | [`13-implementation-log.md`](13-implementation-log.md) | Status page: what is built, what was verified, what was not | Always, for the current state |
 | [`14-deploy-runbook.md`](14-deploy-runbook.md) | Deploy, rollback, first installation, backups and restore, secrets, launch day | Before and during any deployment |
 | [`15-conventions.md`](15-conventions.md) | Binding code conventions and the deviations from the plan | Before writing code |

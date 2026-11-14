@@ -91,7 +91,7 @@
     "summary": "În ziua evenimentului poți înregistra sosiri și bifele tale și fără conexiune. Se trimit o singură dată, când revine internetul.",
     "keywords": "offline fără internet conexiune check-in sosiri sincronizare bife conflict semnal",
     "where": "Ocazia ta → Repetiție și sosiri → Sincronizare",
-    "need": "Oricine din echipă care face check-in sau are sarcini în acea zi.",
+    "need": "Cei din echipa de planificare care fac check-in sau au sarcini în acea zi.",
     "body": {
       "p1": "Fără internet poți face doar două lucruri: să înregistrezi sosiri și să îți bifezi sarcinile din „Lista mea”. Restul aplicației are nevoie de conexiune.",
       "ol1": {

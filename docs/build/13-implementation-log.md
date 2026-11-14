@@ -23,20 +23,20 @@ the "Maison" design language, and per-namespace translation files.
 | D | Itinerary across time zones and import, subgroups and activities, packing lists, transport and rooms, multi-currency settlement | Built |
 | E | Rehearsal, QR check-in and guest flow, limited offline capture, sustainability goals | Built. The offline service-worker path and camera scanning are implemented but **not exercised in a real browser on a device** |
 
-Since the last full verification run, two pieces of work were in progress in parallel with
-this documentation pass: a **help centre** (`apps/web/app/help`, `apps/web/components/help`,
-help namespaces in `packages/i18n/messages`) and the **security review** with its fixes
-(`12-security-review.md`, `security-review.test.ts` files). Their own reports say what they
-verified; they are not included in the figures below.
+After the feature build, three further pieces landed on 14 November 2026 and are included in
+the figures below: the **help centre** (`/help`, 60 articles in Romanian and English, contextual
+help links, `apps/web/components/help`), the **security review** with nine fixes
+([`12-security-review.md`](12-security-review.md)), and two privacy fixes that came out of the
+documentation pass — a deleted account's occasions are now handed to their longest-standing
+project manager or deleted with the account, and the security log is erased after 90 days.
 
 ## Verification at the last full run (14 November 2026)
 
-Before the help centre and the security-review fixes:
+After the help centre, the security-review fixes and the two privacy fixes:
 
 - `pnpm typecheck`: 0 errors. `pnpm lint`: 0 errors.
-- `pnpm test`: **63 files, 681 tests**, all passing against PostgreSQL 16. For today's exact
-  number run `pnpm test` or see the latest CI run once CI exists — test files have been added
-  since and this page does not claim a count nobody re-ran.
+- `pnpm test`: **69 files, 724 tests**, all passing against PostgreSQL 16. Three small tests
+  were re-run on their own after the last retention change rather than the whole suite.
 - `pnpm --filter @ed/web build`, `pnpm --filter @ed/public build`: succeed.
 - `node scripts/check-public-d1.mjs`: no external origins, no cookies on the public site.
 - `node scripts/check-headers.mjs` and `node scripts/smoke.mjs` against the production build:
@@ -73,10 +73,11 @@ The full list with evidence is the gap list in `09-traceability.md`. In short:
 3. Per-person, per-session attendance (A6) — replies are household counts.
 4. Console publishing of the "For businesses" page and guides (W7) — not built.
 5. Secret rotation dates in the console (SEC13) — not built.
-6. **Occasions owned by a deleted account are not deleted** (D6, INF6) — needs a decision and
-   a fix before real users.
-7. Audit log is never purged (PRD: 2 years); the security log and email outbox have no
-   retention rule (INF6).
+6. ~~Occasions owned by a deleted account are not deleted~~ — fixed: handed to the
+   longest-standing project manager, otherwise deleted with the account
+   (`core/account-purge-occasions.test.ts`).
+7. Audit log is never purged (PRD: 2 years) and the email outbox has no retention rule (INF6).
+   The security log is now erased after 90 days.
 8. The AI provider and model in use are recorded but not shown on a console screen (INF7).
 
 ## Open operator decisions

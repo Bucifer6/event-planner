@@ -91,7 +91,7 @@
     "summary": "On the day of the event you can record arrivals and your own ticks without a connection. They are sent once, when the internet comes back.",
     "keywords": "offline no internet connection check-in arrivals sync ticks conflict signal",
     "where": "Your occasion → Rehearsal and arrivals → Sync",
-    "need": "Anyone on the team who does check-in or has tasks that day.",
+    "need": "People on the planning team who do check-in or have tasks that day.",
     "body": {
       "p1": "Without internet you can do only two things: record arrivals and tick your tasks in “My checklist”. The rest of the app needs a connection.",
       "ol1": {

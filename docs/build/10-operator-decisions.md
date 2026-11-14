@@ -26,7 +26,7 @@ a placeholder that works on a developer machine.
 | Database (INF9, INF12) | `DATABASE_URL` | Local `eventdesk_dev` | `packages/db/src/client.ts` |
 | Secret store product (SEC13) | None — it only has to deliver environment variables | — | `infra/reference-docker-host/README.md` (`render-env`) |
 | Session signing secret | `SESSION_SECRET` (32+ characters); optional `STORAGE_URL_SECRET` for file links | Empty — you must set it | `packages/shared/src/env.ts`, `packages/storage/src/sign.ts` |
-| Which request header carries the visitor's address | `TRUSTED_IP_HEADER` | `x-forwarded-for` | `apps/web/lib/ctx.ts` and the guest, supplier, public-page and MCP entry points |
+| Which request header carries the visitor's address, and how many of your own proxies sit in front of the app | `TRUSTED_IP_HEADER`; `TRUSTED_PROXY_HOPS` (for `x-forwarded-for`: the address is read that many entries from the right, so entries a visitor sends themselves are ignored) | `x-forwarded-for`; 1 | `apps/web/lib/client-ip.ts`, used by `apps/web/lib/ctx.ts` and the guest, supplier, public-page and MCP entry points |
 | Object store endpoint, region, buckets, encryption key (INF3, INF12) | `S3_ENDPOINT`, `S3_REGION`, `S3_ACCESS_KEY_ID`, `S3_SECRET_ACCESS_KEY`, `S3_BUCKET_PRIVATE`, `S3_BUCKET_MEDIA`, `S3_FORCE_PATH_STYLE`, `S3_SSE_KMS_KEY_ID`; or `STORAGE_DIR` for a local folder | Unset: files go to a local folder | `packages/storage/src/transport.ts` |
 | Malware scanner (SEC4) | `MALWARE_SCANNER` (`none`, `command`, `http`) with `MALWARE_SCANNER_COMMAND` or `MALWARE_SCANNER_URL` | `none` — **production then refuses uploads** | `packages/storage/src/scan.ts` |
 | PDF tooling for venue drawings | `PDF_RASTERISER_BIN` | `pdftoppm` (poppler; installed in the web image). Without it PDF drawings cannot be calibrated | `packages/core/src/drawings.ts` |
@@ -81,6 +81,7 @@ testing; leave them as documented in `.env.example`.
 | Who holds each of the six roles; the named privacy owner | Console → *Acces* | — | `core/staff` |
 | Launch-day on-call names (LAU7) | The table in `14-deploy-runbook.md` §9 | Blank | — |
 | Where security reports go | `SECURITY.md` at the repository root | Placeholder | — |
+| Support address shown to users in the help centre | `SUPPORT_EMAIL` (environment variable) | Empty — no address is shown; the report form, status page and legal links still are | `apps/web/app/help/page.tsx` |
 
 ## Console settings
 

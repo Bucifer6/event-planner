@@ -189,8 +189,8 @@ how a local sign-in code is read) and `http` (a generic seam that posts the mess
 
 ## Languages and formats (L1–L5, INF8)
 
-- Every user-facing string is in `packages/i18n/messages/ro/` and `…/en/`, 61 namespaces
-  each; `packages/i18n/test/parity.test.ts` fails if the key sets differ.
+- Every user-facing string is in `packages/i18n/messages/ro/` and `…/en/`, 75 namespaces
+  each (14 of them the help centre); `packages/i18n/test/parity.test.ts` fails if the key sets differ.
 - Romanian is the default. English is a full toggle at account level (and the `ed_lang`
   cookie) and per guest link; it changes wording only, never data.
 - Formatting goes through `@ed/i18n/format` only: `1.990 RON`, `dd.mm.yyyy`, Romanian weekday

@@ -1,5 +1,11 @@
 # 15 — Build conventions (binding for every agent working in this repo)
 
+**What this is, in plain English.** The house rules for writing code in this repository — how
+the database, the business rules, the screens and the translations must be written so that
+work done by different people and AI agents fits together as one product. Anyone changing the
+code must follow it; nobody else needs to read it. The step-by-step recipes built on these
+rules are in `../../CONTRIBUTING.md`.
+
 The PRD (`docs/PRD.md`) wins over everything. The numbered plan files say WHAT to build. This file
 says HOW, so parallel agents produce one coherent codebase. Read it fully before writing code.
 
@@ -38,8 +44,12 @@ Names: `@ed/db @ed/shared @ed/core @ed/auth @ed/i18n @ed/ui @ed/email @ed/storag
 - Facts (arrivals, payments, received quantities) change only through a `corrections` row.
 - DB-level guards (triggers) live in `packages/db/src/sql/*.sql`; they are applied by the test
   harness and by migrations.
-- Do NOT generate migrations while building features; the integrator generates one initial
-  migration at the end. Tests use the push-based harness.
+- Migrations: the initial migration exists (`packages/db/drizzle/0000_eminent_the_stranger.sql`,
+  167 tables). From now on a schema change comes with its generated migration
+  (`pnpm db:generate`) in the same pull request; `pnpm db:migrate` applies migrations and then
+  the SQL guards. (During the first build no migrations were generated per feature — one was
+  generated at integration.) Tests use the push-based harness, which builds its database from
+  the schema files, not from the migrations.
 - Tests: `import { setupTestDb } from "@ed/db/testing"` gives an isolated, fully-migrated database
   per test file. Local Postgres: `postgresql://ed:ed@127.0.0.1:5432` (role `ed` is superuser).
 
@@ -58,7 +68,8 @@ Names: `@ed/db @ed/shared @ed/core @ed/auth @ed/i18n @ed/ui @ed/email @ed/storag
 - Changes to dates, guests, suppliers, payments, cancel/postpone and anything proposed by MCP go
   through the What-if engine (`@ed/core/whatif`): create preview → user confirms → apply.
 - One file per domain: `packages/core/src/<domain>.ts`, tests in `packages/core/test/<domain>.test.ts`.
-  Export from `packages/core/package.json` `exports` as `./<domain>` (add your line only).
+  Export from `packages/core/package.json` `exports` as `./<domain>` (add your line only), and add
+  `import "./<domain>";` to `packages/core/src/all.ts` (a test fails if it is missing).
 
 ## Web app (`apps/web`)
 

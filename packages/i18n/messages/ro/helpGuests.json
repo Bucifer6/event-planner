@@ -76,7 +76,7 @@
     "summary": "Spui de ce este nevoie, iar invitații și echipa își aleg ce aduc. Nimic nu se promite de două ori.",
     "keywords": "cine ce aduce nevoi contribuții listă bucăți picnic promis acoperit",
     "where": "Ocazia ta → Cine ce aduce",
-    "need": "Organizatorul și managerii de proiect adaugă nevoile. Oricine din echipă și orice invitat cu link își poate alege o parte.",
+    "need": "Organizatorul și managerii de proiect adaugă nevoile. Echipa de planificare și orice invitat cu link își pot alege o parte.",
     "body": {
       "ol1": {
         "a": "Apasă „Adaugă o nevoie”.",

@@ -294,7 +294,7 @@ stationery, arrangements and drawings tests in `packages/core/test/`.
 ## Retention, as implemented
 
 The nightly job `retention.purge` (03:30) runs every rule registered with
-`registerRetentionRule`. Fifteen rules exist. The PRD's retention table is INF6.
+`registerRetentionRule`. Sixteen rules exist (the sixteenth, `security-log`, erases the security log after 90 days). The PRD's retention table is INF6.
 
 | What | Kept for | Rule or job | Where |
 | --- | --- | --- | --- |
@@ -362,11 +362,9 @@ MCP tokens (`@ed/mcp`), business memberships with ownership passed to another me
 blanks the account row (email, username, name, password hash) so that retained records keep a
 valid reference. The row itself stays as an anonymous tombstone.
 
-> **Gap — occasions owned by a deleted account.** No purge hook deletes or hands over the
-> occasions an account owns, and nothing on the deletion screen asks the person to delete
-> them first. After the account is purged those occasions — with their guest households,
-> replies and contacts — remain in the database with an owner nobody can sign in as. The
-> PRD's rule is that data is "kept while the account or occasion exists, then deleted with
-> it". This needs a decision (delete the owner's occasions with the account, or require
-> transferring or deleting them first) and a code change. It is listed in
-> `09-traceability.md` under D6 and INF6.
+> **Occasions owned by a deleted account.** When the account is purged, each personal
+> occasion it owns is handed to its longest-standing project manager (who becomes the owner,
+> with both grants); if there is none, the occasion is deleted with the account, running the
+> same purge hooks as an occasion deletion. Business-owned occasions follow the business. The
+> account's seats in other people's occasions end. Covered by
+> `packages/core/test/account-purge-occasions.test.ts`.

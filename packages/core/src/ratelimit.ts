@@ -3,6 +3,7 @@ import { isIP } from "node:net";
 import {
   and,
   eq,
+  lt,
   platformSettings,
   rateLimitBackoffs,
   rateLimitBuckets,
@@ -13,7 +14,8 @@ import {
 import { AppError } from "@ed/shared/errors";
 import { hashToken } from "@ed/shared/ids";
 import { z } from "zod";
-import type { Ctx } from "./context";
+import { requireSystem, type Ctx } from "./context";
+import { registerRetentionRule } from "./retention";
 
 // Rate limiting and public-form bot protection (R0-05; SEC11, SEC16).
 //
@@ -374,3 +376,18 @@ export async function checkPublicForm(ctx: Ctx, input: PublicFormInput): Promise
     ],
   });
 }
+
+/* ── Retention ────────────────────────────────────────────────────────────── */
+
+/** The security log holds IP addresses and device hints; nothing in it is needed after 90 days. */
+export const SECURITY_LOG_RETENTION_DAYS = 90;
+
+registerRetentionRule({
+  name: "security-log",
+  run: async (ctx) => {
+    requireSystem(ctx);
+    const cutoff = new Date(ctx.now.getTime() - SECURITY_LOG_RETENTION_DAYS * 86_400_000);
+    const res = await ctx.db.delete(securityLog).where(lt(securityLog.at, cutoff));
+    return res.rowCount ?? 0;
+  },
+});
