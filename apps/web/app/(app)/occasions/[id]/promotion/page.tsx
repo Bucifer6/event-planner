@@ -1,6 +1,7 @@
 import { getAiTextStatus } from "@ed/core/aitext";
 import { getPromotionCardPreview, getPromotionPage, PROMOTION_TEXT_KEYS, PROMOTION_TEXT_LIMITS } from "@ed/core/promotion";
 import { svgDataUri } from "@ed/core/stationerykit";
+import { stationeryDesignName } from "@ed/core/stationery";
 import { formatDate } from "@ed/i18n/format";
 import { LinkButton, List, Notice, PageHeader, Row, Section } from "@ed/ui";
 import { IconDownload } from "@ed/ui/icons";
@@ -24,7 +25,6 @@ export default async function PromotionPage({ params }: { params: Promise<{ id: 
   const { id } = await params;
   const ctx = await requireCtx();
   const t = await getTranslations("promotion");
-  const ts = await getTranslations("stationery");
   const locale = (await getLocale()) === "en" ? "en" : "ro";
   const page = await orNotFound(getPromotionPage(ctx, id));
   const [card, ai] = await Promise.all([getPromotionCardPreview(ctx, id), getAiTextStatus(ctx)]);
@@ -50,7 +50,7 @@ export default async function PromotionPage({ params }: { params: Promise<{ id: 
             <img className={styles.card} src={svgDataUri(card)} width={420} height={420} alt={t("assets.previewAlt")} />
           </div>
           <div>
-            <p className="ed-small ed-muted">{page.design.fromStationery ? t("assets.design", { design: ts(`designs.${page.design.designKey}.name`) }) : t("assets.designDefault")}</p>
+            <p className="ed-small ed-muted">{page.design.fromStationery ? t("assets.design", { design: stationeryDesignName(page.design.designKey, locale) }) : t("assets.designDefault")}</p>
             <List>
               {assets.map((a) => (
                 <Row

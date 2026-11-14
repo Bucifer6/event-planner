@@ -80,6 +80,7 @@
     "./stationery": "./src/stationery.ts",
     "./stationerykit": "./src/stationerykit.ts",
     "./stationerycollections": "./src/stationerycollections.ts",
+    "./stationerytemplates": "./src/stationerytemplates.ts",
     "./printpack": "./src/printpack.ts",
     "./qr": "./src/qr.ts",
     "./gifts": "./src/gifts.ts",

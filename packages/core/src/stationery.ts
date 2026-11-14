@@ -28,6 +28,7 @@ import { KIND_PALETTES, STARTER_KEYS, type StarterKey } from "./stationerycollec
 import {
   BLEED_MM,
   colourwaysFor,
+  designAvailableFor,
   DESIGN_KEYS,
   drawSceneOnPdf,
   getColourway,
@@ -191,6 +192,18 @@ const FORMAL = new Set(["conferinta", "lansare", "gala_caritabila", "expozitie",
 const presetKindFor = (occasionKind: string): StationeryWordingKind => (WEDDING_LIKE.has(occasionKind) && occasionKind !== "logodna" ? "nunta" : CHRISTENING_LIKE.has(occasionKind) ? "botez" : "aniversare");
 const designFor = (occasionKind: string): DesignKey =>
   WEDDING_LIKE.has(occasionKind) ? "classic" : CHRISTENING_LIKE.has(occasionKind) ? "botez" : PARTY_LIKE.has(occasionKind) ? "petrecere" : FORMAL.has(occasionKind) ? "modern" : "minimal";
+
+/** A design's display name: its own name, or for an occasion template "<style> · <palette>". */
+export function stationeryDesignName(designKey: string, locale: StationeryLocale): string {
+  const d = (DESIGN_KEYS as readonly string[]).includes(designKey) ? getDesign(designKey) : null;
+  if (d?.template) return `${translate(locale, `stationery.styles.${d.template.style}`)} · ${translate(locale, `stationery.palettes.${d.template.palettes[0]}`)}`;
+  return translate(locale, `stationery.designs.${designKey}.name`);
+}
+
+/** A colourway's display name (template palettes are named by their palette). */
+export function stationeryColourwayName(colourwayKey: string, locale: StationeryLocale): string {
+  return colourwayKey.startsWith("tp-") ? translate(locale, `stationery.palettes.${colourwayKey.slice(3)}`) : translate(locale, `stationery.colourways.${colourwayKey}`);
+}
 
 /** The ten starter wordings an occasion kind offers (any kind; unknown kinds get the general set). */
 export function getStarterWordings(occasionKind: string, locale: StationeryLocale): Array<{ key: StarterKey; text: string }> {
@@ -388,6 +401,7 @@ export async function saveStationeryVersion(ctx: Ctx, input: SaveStationeryInput
   const accountId = await manage(ctx, data.occasionId);
   const design = getDesign(data.designKey);
   const occasion = await loadOccasion(ctx, data.occasionId);
+  if (!designAvailableFor(design, occasion.kind)) throw new AppError("VALIDATION", "common.errors.VALIDATION", { fieldErrors: { designKey: ["stationery.errors.design"] } });
   if (!colourwaysFor(design, occasion.kind).includes(data.colourwayKey)) throw new AppError("VALIDATION", "common.errors.VALIDATION", { fieldErrors: { colourwayKey: ["stationery.errors.colourway"] } });
   return inTx(ctx, async (tx) => {
     // one writer at a time per occasion: the set row is the lock

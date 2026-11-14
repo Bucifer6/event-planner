@@ -18,7 +18,7 @@ const pieceKey = (p: string) => p.replace(/-([a-z])/g, (_, c: string) => c.toUpp
 const PRESET_FIELDS = ["kicker", "wording", "rsvp", "saveTheDate", "menuTitle", "thanks"] as const;
 const AI_FIELDS: Partial<Record<Field, "invitation" | "thanks">> = { wording: "invitation", thanks: "thanks" };
 
-export type DesignOption = { key: string; range: string; thumb: string; colourways: Array<{ key: string; paper: string; ink: string; accent: string }> };
+export type DesignOption = { key: string; name: string; range: string; thumb: string; colourways: Array<{ key: string; name: string; paper: string; ink: string; accent: string }> };
 type Starters = Record<"ro" | "en", Array<{ key: string; text: string }>>;
 export type DesignerDraft = { designKey: string; colourwayKey: string; locale: "ro" | "en"; texts: Record<Field, string>; aiOriginal: Partial<Record<Field, string | null>>; qrOnInvitation: boolean };
 type Proof = { src: string; widthMm: number; heightMm: number; fit: number; truncated: boolean };
@@ -207,7 +207,7 @@ export function StationeryDesigner({
             src={proof.src}
             width={Math.round(proof.widthMm * 3)}
             height={Math.round(proof.heightMm * 3)}
-            alt={t("preview.alt", { piece: t(`pieces.${pieceKey(piece)}`), design: t(`designs.${draft.designKey}.name`) })}
+            alt={t("preview.alt", { piece: t(`pieces.${pieceKey(piece)}`), design: design.name })}
           />
         </div>
         <div className={styles.proofMeta}>
@@ -233,7 +233,7 @@ export function StationeryDesigner({
           />
           <p className="ed-small ed-muted">
             {t(`ranges.${range}.blurb`)} {t("form.designCount", { count: inRange.length })}
-            {range !== "house" && range !== "embroidery" ? ` ${t("form.motifNote")}` : ""}
+            {range !== "house" && range !== "embroidery" && range !== "occasion" ? ` ${t("form.motifNote")}` : ""}
           </p>
           <fieldset className="ed-fieldset">
             <legend className="ed-field__label">{t("form.designLegend")}</legend>
@@ -242,7 +242,7 @@ export function StationeryDesigner({
                 <label key={d.key} className={styles.option}>
                   <input className="ed-vh" type="radio" name="design" value={d.key} checked={draft.designKey === d.key} onChange={() => pickDesign(d.key)} />
                   <img src={d.thumb} alt="" width={148} height={210} loading="lazy" decoding="async" />
-                  <span className="ed-small">{t(`designs.${d.key}.name`)}</span>
+                  <span className="ed-small">{d.name}</span>
                 </label>
               ))}
             </div>
@@ -262,7 +262,7 @@ export function StationeryDesigner({
                   <i style={{ background: c.ink }} />
                   <i style={{ background: c.accent }} />
                 </span>
-                <span className={styles.chipText}>{t(`colourways.${c.key}`)}</span>
+                <span className={styles.chipText}>{c.name}</span>
               </>
             ),
           }))}

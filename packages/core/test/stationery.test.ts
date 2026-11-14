@@ -79,6 +79,8 @@ const TEXTS: KitTexts = {
 };
 
 const HOUSE = Object.fromEntries(HOUSE_DESIGN_KEYS.map((k) => [k, true]));
+/** House and collection designs; the occasion templates have their own test (stationerytemplates.test.ts). */
+const SHARED_DESIGN_KEYS = DESIGN_KEYS.filter((k) => getDesign(k).range !== "occasion");
 
 const draft = (occasionId: string, over: Partial<SaveStationeryInput> = {}, texts: Partial<KitTexts> = {}): SaveStationeryInput => ({
   occasionId,
@@ -140,7 +142,7 @@ describe("the stationery kit: designs as data, one layout", () => {
   });
 
   it("renders every design × piece × colourway with all text inside the safe sheet", () => {
-    for (const key of DESIGN_KEYS) {
+    for (const key of SHARED_DESIGN_KEYS) {
       // the house designs in each of their colourways; a collection design in the first two it offers a wedding
       for (const colourway of colourwaysFor(getDesign(key), "nunta").slice(0, key in HOUSE ? 3 : 2)) {
         for (const piece of STATIONERY_PIECES) {
@@ -183,7 +185,7 @@ describe("the stationery kit: designs as data, one layout", () => {
       menuBody: Array.from({ length: 8 }, (_, i) => `Felul ${i + 1}\n${long(90, "preparat")}`).join("\n\n"),
       thanks: `Mulțumim\n${long(STATIONERY_FIELD_LIMITS.thanks - 12, "mulțumim")}`,
     };
-    for (const key of DESIGN_KEYS) {
+    for (const key of SHARED_DESIGN_KEYS) {
       for (const piece of STATIONERY_PIECES) {
         const scene = layoutPiece({ design: key, piece, texts: maxed, extra: { tableLabel: "Masa cu un nume foarte lung", placeName: "Alexandra-Ecaterina Constantinescu-Dumitrescu", placeNote: "Masa 12 · +3 copii" } });
         const [minX, minY, maxX, maxY] = sceneTextBounds(scene);
@@ -241,7 +243,7 @@ describe("the invitation collections", () => {
     expect(byRange("rustic")).toHaveLength(11);
     expect(byRange("traditional")).toHaveLength(11);
     expect(byRange("collection")).toHaveLength(20);
-    for (const key of DESIGN_KEYS) {
+    for (const key of SHARED_DESIGN_KEYS) {
       for (const locale of ["ro", "en"] as const) expect(translate(locale, `stationery.designs.${key}.name`), key).not.toMatch(/^stationery\./);
       const d = getDesign(key);
       if (d.range === "house") continue;
