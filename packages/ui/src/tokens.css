@@ -114,6 +114,25 @@
   --page: 1120px;
   --page-narrow: 640px;
 
+  /* Voice — how a look speaks. Alternative looks (themes.css) override these. */
+  --caps: uppercase; /* small labels and buttons */
+  --track: 1; /* multiplier on label letter-spacing */
+  --italic: italic; /* the display face's emphasis style */
+  --em-color: inherit; /* colour of an emphasised word in a title */
+  --display-weight: 500;
+  --display-stretch: normal;
+  --display-leading: 1.12;
+  --display-tracking: -0.015em;
+  --display-caps: none;
+  --hero-weight: 400;
+  --figure-weight: 500;
+  --btn-weight: 650;
+  --btn-size: 0.8125rem;
+  --label-size: 0.75rem;
+  --wordmark-size: 1.375rem;
+  --wordmark-weight: 500;
+  --radius-sm: var(--radius); /* tags and tick boxes */
+
   /* Motion */
   --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
   --t-in: 220ms;

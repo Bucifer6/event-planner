@@ -3,6 +3,8 @@ import type { Metadata, Viewport } from "next";
 import { NextIntlClientProvider } from "next-intl";
 import { getLocale, getTranslations } from "next-intl/server";
 import type { ReactNode } from "react";
+import { getUiTheme, UI_THEME_PAPER } from "@ed/core/appearance";
+import { getDb } from "@ed/db";
 import { CookieNotice } from "@/components/cookie-notice/CookieNotice";
 import { RegisterServiceWorker } from "@/components/pwa/RegisterServiceWorker";
 
@@ -15,12 +17,18 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const viewport: Viewport = { width: "device-width", initialScale: 1, themeColor: "#f5f2ec" };
+/** The browser chrome takes the paper colour of the look chosen in Console → Appearance. */
+export async function generateViewport(): Promise<Viewport> {
+  const theme = await getUiTheme({ db: getDb() });
+  return { width: "device-width", initialScale: 1, themeColor: UI_THEME_PAPER[theme] };
+}
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   const locale = await getLocale();
+  // The look of the whole app (Maison, Atelier, Riviera, Jardin, Studio): design tokens only.
+  const theme = await getUiTheme({ db: getDb() });
   return (
-    <html lang={locale}>
+    <html lang={locale} data-ui={theme}>
       <body>
         <NextIntlClientProvider>
           {children}

@@ -17,6 +17,7 @@ routes that import the module; "Tests" lists the test files that exercise it.
 | `accounts` | The signed-in person's account: profile, display name, fresh sign-in check for sensitive actions, account deletion and purge. | `schema/accounts.ts` | `app/actions/account.ts` `app/actions/auth.ts` `app/actions/integration.ts` | `/account/delete` `/account/email` `/account` `/account/security` … +8 more | `account-purge-occasions.test.ts` `deletion.test.ts` `integration-wiring.test.ts` |
 | `aitext` | AI wording suggestions for invitations and messages: provider seam, 10-per-month limit, nothing applied without the user accepting. | `schema/aitext.ts` | `app/actions/aitext.ts` | `/occasions/[id]/promotion` `/occasions/[id]/stationery` | `aitext.test.ts` |
 | `all` | Imports every core module so all import-time registrations exist in every process (web, worker, tests). | — | — | — | — |
+| `appearance` | The look of the whole app (Maison, Atelier, Riviera, Jardin, Studio), chosen by a platform administrator in the console. Changes appearance only. | — | `app/console/appearance/actions.ts` | `/console/appearance` | `appearance.test.ts` |
 | `approvals` | Second-person approvals for irreversible staff actions; single-operator mode queues them. | — | `app/actions/console.ts` | `/console/approvals` | `billing.test.ts` `complianceaccess.test.ts` `deploys.test.ts` `discovery-claims.test.ts` … +1 more |
 | `arrangementkit` | Pure, client-safe helpers for the flower arrangement designer: forms, sketch layout, indicative cost, version diff. | — | — | `/occasions/[id]/flowers` | `arrangements.test.ts` |
 | `arrangements` | Flower arrangement designs and their versions, quote requests from a design, the arrangement What-if kind. | `schema/arrangements.ts` | `app/actions/arrangements.ts` | `/occasions/[id]/flowers` | `arrangements.test.ts` |
@@ -37,7 +38,7 @@ routes that import the module; "Tests" lists the test files that exercise it.
 | `comms` | Staff notices to businesses only; never to planner-entered contacts. | `schema/comms.ts` | `app/actions/comms.ts` | `/console/communications` | `featured.test.ts` |
 | `compliance` | Launch checklist, legal-document publication gate for sign-up, launch records. | `schema/compliance.ts` | `app/actions/console.ts` | `/console/launch` | `staff.test.ts` |
 | `complianceaccess` | Time-boxed, three-person-approved staff access to one person's records, and the data-subject export. | `schema/complianceaccess.ts` | `app/console/compliance/actions.ts` | `/console/compliance/[id]/export` `/console/compliance` | `complianceaccess.test.ts` |
-| `context` | The request context every core function receives (database, actor, time, locale) and the actor types. | — | `app/actions/auth.ts` | `/occasions/[id]/print/[key]` `/occasions/[id]/promotion/download/[asset]` `/occasions/[id]/stationery/pdf` `/api/deploys/record` … +9 more | `account-purge-occasions.test.ts` `aitext.test.ts` `arrangements.test.ts` `audit.test.ts` … +37 more |
+| `context` | The request context every core function receives (database, actor, time, locale) and the actor types. | — | `app/actions/auth.ts` | `/occasions/[id]/print/[key]` `/occasions/[id]/promotion/download/[asset]` `/occasions/[id]/stationery/pdf` `/api/deploys/record` … +9 more | `account-purge-occasions.test.ts` `aitext.test.ts` `appearance.test.ts` `arrangements.test.ts` … +38 more |
 | `contributions` | "Who brings what": needs with quantities and atomic claims by guests and members. | — | `app/actions/contributions.ts` | `/occasions/[id]/contributions` | `contributions.test.ts` `security-review.test.ts` |
 | `cookies` | The exact set of three cookies the app uses and its signature for the cookie notice. Client-safe. | — | — | — | `platform.test.ts` |
 | `corrections` | Records a correction to a fact (payment, received quantity, arrival) with before, after, who and why. | `schema/corrections.ts` | — | — | `money.test.ts` |
@@ -358,6 +359,7 @@ Route groups in brackets do not appear in the URL. `page` = a screen, `route` = 
 | `/claim/[listingId]/remove` | page | `apps/web/app/claim/[listingId]/remove/page.tsx` |
 | `/console` | page | `apps/web/app/console/page.tsx` |
 | `/console/access` | page | `apps/web/app/console/access/page.tsx` |
+| `/console/appearance` | page | `apps/web/app/console/appearance/page.tsx` |
 | `/console/approvals` | page | `apps/web/app/console/approvals/page.tsx` |
 | `/console/audit` | page | `apps/web/app/console/audit/page.tsx` |
 | `/console/audit/export` | route | `apps/web/app/console/audit/export/route.ts` |
@@ -513,6 +515,7 @@ Route groups in brackets do not appear in the URL. `page` = a screen, `route` = 
 | `apps/web/app/actions/travel.ts` | `createLegAction` `updateLegAction` `deleteLegAction` `proposeImportAction` `createSubgroupAction` `setSubgroupPeopleAction` `deleteSubgroupAction` `createActivityAction` `deleteActivityAction` `optInAction` `createPackingListAction` `addPackingItemAction` `setPackingItemAction` `removePackingItemAction` `deletePackingListAction` `createTransportAction` `deleteTransportAction` `setTransportPeopleAction` `claimSeatAction` `createRoomAction` `updateRoomAction` `deleteRoomAction` `assignRoomAction` `unassignRoomAction` `addTripCostAction` `setExchangeNoteAction` |
 | `apps/web/app/actions/uploads.ts` | `uploadFile` `deleteUpload` |
 | `apps/web/app/actions/whatif.ts` | `confirmWhatIf` `discardWhatIf` |
+| `apps/web/app/console/appearance/actions.ts` | `saveUiTheme` |
 | `apps/web/app/console/compliance/actions.ts` | `requestComplianceAccessAction` `revokeComplianceAccessAction` |
 
 ## 8. Translations — `packages/i18n/messages/{ro,en}/<namespace>.json`

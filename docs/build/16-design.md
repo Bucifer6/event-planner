@@ -135,3 +135,38 @@ These live outside `packages/ui` but follow its tokens.
 
 Polite second person plural is not used; address the planner informally and warmly ("Adaugă primul
 invitat"). Sentences are short. Buttons are verbs with their object. English mirrors it.
+
+## The five looks
+
+The app ships with five looks. A platform administrator chooses one for everyone in
+**Console → Aspect** (`/console/appearance`); the choice is a platform setting (`ui.theme`),
+is audited, and takes effect on the next page load. A look changes appearance only.
+
+| Look | Mood | Display / text face | Action colour | Ornament | Corners | Labels |
+| --- | --- | --- | --- | --- | --- | --- |
+| **Maison** (default) | ivory, midnight blue, a thread of gold | Bodoni Moda / Hanken Grotesk | bleu nuit | gilt | 2px | tracked capitals |
+| **Atelier** | couture black and white | Cormorant Garamond / Jost | black | black | square | wide-tracked capitals |
+| **Riviera** | sand, Mediterranean blue, terracotta | Fraunces / DM Sans | deep sea blue | terracotta | 12px | sentence case |
+| **Jardin** | stone, sage, moss | Instrument Serif / Instrument Sans | moss green | sage | 4px | sentence case |
+| **Studio** | blush, black, a stroke of vermilion | Archivo (wide, heavy) / Archivo | black | vermilion | square | capitals, no italics |
+
+How it works:
+
+- Maison's tokens are in `packages/ui/src/tokens.css`. The other looks are in
+  `packages/ui/src/themes.css`, which is **generated** from the table in
+  `packages/ui/scripts/gen-themes.py` (`python3 packages/ui/scripts/gen-themes.py`). The
+  generator refuses a palette that fails WCAG AA; `apps/web/test/themes.test.ts` re-checks the
+  generated CSS and that every font file is in the repo.
+- The root layout sets `<html data-ui="<look>">`. `data-ui` also works on any element, which
+  is how the console draws live miniatures of each look.
+- Besides colours, a look sets "voice" tokens: `--caps`, `--track`, `--italic`, `--em-color`,
+  `--display-weight`, `--display-stretch`, `--display-caps`, `--hero-weight`,
+  `--figure-weight`, `--btn-weight`, `--btn-size`, `--label-size`, `--wordmark-size`,
+  `--wordmark-weight`, `--radius`, `--radius-sm`, `--hair`. Components must use these tokens
+  rather than fixed values, or they will look wrong in another look.
+- Every look has a dark version (automatic, and forced on the event-day and check-in screens).
+- Not themed: printed stationery and PDFs (they have their own designs), emails, and the
+  static public site, which stays in Maison.
+- Adding a look: add it to the generator table, to `UI_THEMES` and `UI_THEME_PAPER` in
+  `packages/core/src/appearance.ts`, and its name and description to `console.appearance.themes`
+  in both languages; self-host its fonts under `packages/ui/fonts` with their licence files.

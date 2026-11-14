@@ -21,7 +21,8 @@
     "commercial": "Comercial",
     "communications": "Comunicări",
     "discovery": "Descoperire",
-    "help": "Ajutor pentru echipă"
+    "help": "Ajutor pentru echipă",
+    "appearance": "Aspect"
   },
   "roles": {
     "platform_admin": "Administrator platformă",
@@ -497,6 +498,53 @@
       "dsaContactPoint": "Punctul de contact DSA publicat",
       "accessibilityStatementDate": "Declarația de accesibilitate — data",
       "accessibilityEvaluationMethod": "Declarația de accesibilitate — metoda de evaluare"
+    }
+  },
+  "appearance": {
+    "title": "Aspect",
+    "description": "Alege cum arată EventDesk pentru toată lumea. Schimbă doar înfățișarea — culori, litere, colțuri — nu și ce face aplicația.",
+    "choose": "Alege aspectul",
+    "apply": "Aplică aspectul",
+    "applying": "Se aplică…",
+    "applied": "Aspectul a fost schimbat. Îl vede toată lumea la următoarea pagină deschisă.",
+    "inUse": "În uz",
+    "noteTitle": "Bine de știut",
+    "note": "Fiecare aspect are și o variantă de noapte, care urmează setarea telefonului sau a calculatorului. Invitațiile tipărite își păstrează propriul design. Site-ul public de prezentare rămâne în aspectul Maison până la următoarea lui publicare.",
+    "sample": {
+      "kicker": "Nuntă · 12 iunie 2027",
+      "action": "Trimite invitațiile",
+      "meta": "sâmbătă, ora 17:00 · Conacul Polizu",
+      "unknown": "preț flori: necunoscut"
+    },
+    "errors": {
+      "unknownTheme": "Acest aspect nu există. Alege unul din listă."
+    },
+    "themes": {
+      "maison": {
+        "name": "Maison",
+        "mood": "fildeș, albastru de noapte, un fir de aur",
+        "about": "Aspectul casei. Bodoni pentru titluri, colțuri drepte, eleganță de papetărie."
+      },
+      "atelier": {
+        "name": "Atelier",
+        "mood": "alb și negru, de casă de modă",
+        "about": "Fără nicio culoare. Litere fine cu serife și majuscule aerisite."
+      },
+      "riviera": {
+        "name": "Riviera",
+        "mood": "nisip, albastru mediteranean, teracotă",
+        "about": "Cald și însorit. Colțuri rotunjite, scriere obișnuită, fără majuscule."
+      },
+      "jardin": {
+        "name": "Jardin",
+        "mood": "piatră, salvie și mușchi",
+        "about": "Liniștit și botanic. Un serif vechi, culori de grădină."
+      },
+      "studio": {
+        "name": "Studio",
+        "mood": "roz pudrat, negru, o tușă de roșu",
+        "about": "Îndrăzneț, de revistă. Majuscule late și groase, fără cursive."
+      }
     }
   }
 }
