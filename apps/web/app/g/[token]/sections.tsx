@@ -6,6 +6,7 @@ import { formatWeekdayDate } from "@ed/i18n/format";
 import type { ReactNode } from "react";
 import { GuestSeatSection, GuestSpaceSection } from "@/components/plan/GuestSections"; // seating domain (C-08, V9)
 import { guestTranslator } from "@/lib/guest";
+import { GuestMenuSection, GuestProgrammeSection, GuestRequestSection, GuestVenueSection } from "./event-sections"; // release C: programme, menu, venue + accessible journey, private request
 import styles from "./guest.module.css";
 import { ContributionForm, PollVoteForm, type GuestFormBase } from "./section-forms";
 
@@ -89,6 +90,10 @@ const renderers: Record<string, (props: SectionProps<any>) => ReactNode | Promis
   contributions: ContributionSection,
   seat: GuestSeatSection,
   spaceView: GuestSpaceSection,
+  programme: GuestProgrammeSection,
+  menu: GuestMenuSection,
+  venue: GuestVenueSection,
+  privateRequest: GuestRequestSection,
 };
 
 export function GuestSections({ view, locale, base }: { view: GuestView; locale: Locale; base: GuestFormBase }) {

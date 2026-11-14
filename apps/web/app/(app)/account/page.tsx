@@ -6,6 +6,7 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { signOutEverywhereAction, signOutSession, undoDeleteAccount } from "@/app/actions/account";
+import { saveDisplayName } from "@/app/actions/integration";
 import { ActionForm } from "@/app/(auth)/_components/forms";
 import { requireCtx } from "@/lib/ctx";
 import { LanguageForm } from "./_components/language-form";
@@ -59,6 +60,25 @@ export default async function AccountPage() {
             ]}
           />
           {account.kind === "anonymous" ? <p className="ed-small ed-muted">{t("profile.anonymousNote")}</p> : null}
+          <ActionForm
+            action={saveDisplayName}
+            fields={[
+              {
+                name: "displayName",
+                label: t("profile.displayName"),
+                hint: t("profile.displayNameHint"),
+                autoComplete: "name",
+                maxLength: 60,
+                required: false,
+                defaultValue: account.displayName ?? "",
+              },
+            ]}
+            variant="secondary"
+            block={false}
+            submitLabel={t("profile.saveDisplayName")}
+            pendingLabel={t("profile.savingDisplayName")}
+            success={t("profile.displayNameSaved")}
+          />
           <LanguageForm locale={account.locale} />
         </Stack>
       </Section>

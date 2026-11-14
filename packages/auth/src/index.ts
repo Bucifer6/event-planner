@@ -4,8 +4,10 @@ export * from "./anonymous";
 export * from "./codes";
 export * from "./fresh";
 export * from "./login-email";
+export * from "./next";
 export * from "./passkeys";
 export * from "./sessions";
+export * from "./signup";
 export * from "./totp";
 export {
   CODE_TTL_MINUTES,

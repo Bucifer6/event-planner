@@ -1,0 +1,58 @@
+{
+  "title": "Promovare",
+  "description": "Texte și materiale gata de descărcat, făcute din datele ocaziei. Le folosești tu, unde vrei.",
+  "exportOnly": {
+    "title": "Nimic nu se publică singur",
+    "body": "EventDesk nu postează, nu trimite și nu cheltuiește nimic în numele tău. De aici doar descarci."
+  },
+  "texts": {
+    "title": "Texte de descriere",
+    "shortRo": "Text scurt, în română",
+    "longRo": "Text lung, în română",
+    "shortEn": "Text scurt, în engleză",
+    "longEn": "Text lung, în engleză",
+    "composed": "Scris din datele ocaziei. Îl poți modifica.",
+    "copy": "Copiază textul",
+    "copied": "Copiat",
+    "save": "Salvează textele",
+    "saving": "Se salvează…",
+    "saved": "Textele au fost salvate.",
+    "readOnly": "Poți copia textele, dar numai organizatorii le pot modifica."
+  },
+  "assets": {
+    "title": "Materiale de descărcat",
+    "design": "Desenate cu designul papetăriei tale ({design}).",
+    "designDefault": "Desenate cu designul casei. Alege-ți propriul design în „Invitații”.",
+    "previewAlt": "Cardul pătrat, așa cum se descarcă",
+    "square": "Card pătrat",
+    "squareMeta": "Imagine PNG, 1080 × 1080",
+    "story": "Card vertical",
+    "storyMeta": "Imagine PNG, 1080 × 1920",
+    "ics": "Fișier de calendar",
+    "icsMeta": "Fișier .ics, se deschide în orice calendar",
+    "icsNoDate": "Apare după ce ocazia are o dată.",
+    "posterA4": "Afiș A4",
+    "posterA3": "Afiș A3",
+    "posterMeta": "PDF de tipărit, text vectorial",
+    "download": "Descarcă"
+  },
+  "copy": {
+    "when": "{date}",
+    "whenTime": "{date}, ora {time}",
+    "where": "{venue}",
+    "whereAddress": "{venue}, {address}",
+    "short": "{title} — {facts}.",
+    "shortBare": "{title}.",
+    "longOpen": "Vă așteptăm la „{title}”.",
+    "longWhen": "Ne vedem {when}.",
+    "longWhere": "Locul: {where}.",
+    "longClose": "Abia așteptăm să ne revedem."
+  },
+  "poster": {
+    "docTitle": "{title} — afiș {size}",
+    "subject": "Afiș de tipărit"
+  },
+  "errors": {
+    "noDate": "Ocazia nu are încă o dată; fișierul de calendar apare după ce o stabilești."
+  }
+}

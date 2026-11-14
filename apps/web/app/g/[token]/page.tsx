@@ -1,4 +1,5 @@
 import { getOccasionBranding } from "@ed/core/bizoccasions"; // Release P (P20)
+import { getGuestInvitationText } from "@ed/core/invitationtext"; // custom wording (MCP5 label)
 import { getGuestView, markGuestLinkViewed, type GuestView } from "@ed/core/invitations";
 import { FORM_STAMP_FIELD, HONEYPOT_FIELD, issueFormStamp } from "@ed/core/ratelimit";
 import { questionField } from "@ed/core/rsvp";
@@ -76,6 +77,8 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
   // Release P (P20): name, logo and accent of the business running this occasion; null after handover (P22)
   const branding = await getOccasionBranding(ctx, view.occasion.id);
   const scope = brandScope(branding);
+  // The planner's own wording for the plate. While it still is an assistant's draft it says so (MCP5).
+  const wording = await getGuestInvitationText(ctx);
   const t = guestTranslator(locale, "rsvp");
   const tr = guestTranslator(locale);
 
@@ -122,6 +125,12 @@ export default async function GuestLinkPage({ params, searchParams }: Props) {
             </>
           ) : null}
         </p>
+      ) : null}
+      {wording.text ? (
+        <div className={styles.wording}>
+          <p className={styles.wordingText}>{wording.text}</p>
+          {wording.externalAssistant ? <p className="ed-small ed-muted">{tr("whatif.external")}</p> : null}
+        </div>
       ) : null}
       <p className={styles.household}>{t("invite.for", { name: view.household.name })}</p>
     </Invitation>

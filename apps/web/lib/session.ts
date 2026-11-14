@@ -1,5 +1,5 @@
 import "server-only";
-import { DEVICE_COOKIE, resolveSession, SESSION_COOKIE, type SessionInfo } from "@ed/auth";
+import { DEVICE_COOKIE, resolveSession, safeNextPath, SESSION_COOKIE, withNext, type SessionInfo } from "@ed/auth";
 import { makeCtx, type AccountActor, type Actor } from "@ed/core/context";
 import { getDb } from "@ed/db";
 import { LOCALE_COOKIE, LOCALE_COOKIE_MAX_AGE_SECONDS, toLocale } from "@ed/i18n/config";
@@ -118,16 +118,29 @@ export async function setLanguageCookie(locale: string): Promise<void> {
 }
 
 /**
- * After a successful first factor: store the session cookie and, when this browser has no
- * language chosen yet, adopt the account's saved language. Returns where to go next.
+ * Where a signed-in person goes: the return path they came with (`?next=`, an invitation,
+ * a claim, an enquiry button) when it is a safe same-origin path — see safeNextPath in
+ * @ed/auth — and /occasions otherwise. Never redirect to a `next` value without this.
  */
-export async function applySignIn(result: {
-  token: string;
-  expiresAt: Date;
-  secondFactorRequired?: boolean;
-  locale?: string;
-}): Promise<string> {
+export function afterSignInPath(next?: unknown): string {
+  return safeNextPath(next) ?? AFTER_SIGN_IN_PATH;
+}
+
+/**
+ * After a successful first factor: store the session cookie and, when this browser has no
+ * language chosen yet, adopt the account's saved language. Returns where to go next (the
+ * safe return path, if one was carried through the flow).
+ */
+export async function applySignIn(
+  result: {
+    token: string;
+    expiresAt: Date;
+    secondFactorRequired?: boolean;
+    locale?: string;
+  },
+  next?: unknown,
+): Promise<string> {
   await setSessionCookie(result.token, result.expiresAt);
   if (result.locale && !(await cookies()).get(LOCALE_COOKIE)) await setLanguageCookie(result.locale);
-  return result.secondFactorRequired ? TWO_STEP_PATH : AFTER_SIGN_IN_PATH;
+  return result.secondFactorRequired ? withNext(TWO_STEP_PATH, next) : afterSignInPath(next);
 }

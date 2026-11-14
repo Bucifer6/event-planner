@@ -1,0 +1,233 @@
+{
+  "title": "Invitations and stationery",
+  "description": "Pick a design, fit the wording and see the proof at once. What you see here is exactly what is printed.",
+  "designs": {
+    "classic": {
+      "name": "Classic",
+      "blurb": "Centred Bodoni inside a fine gilt plate-mark."
+    },
+    "modern": {
+      "name": "Modern",
+      "blurb": "Left-aligned, with the date in large numerals."
+    },
+    "monogram": {
+      "name": "Monogram",
+      "blurb": "Initials in a ring, names in spaced capitals."
+    },
+    "botanical": {
+      "name": "Botanical line",
+      "blurb": "A single line-drawn sprig, italic names."
+    },
+    "minimal": {
+      "name": "Minimal",
+      "blurb": "Small type, a hairline and a great deal of paper."
+    },
+    "nocturne": {
+      "name": "Nocturne",
+      "blurb": "Ivory and gilt on a sheet the colour of night."
+    },
+    "botez": {
+      "name": "Christening",
+      "blurb": "Soft: an arch, an open wreath, italics."
+    },
+    "petrecere": {
+      "name": "Party",
+      "blurb": "A little confetti in two corners and a heavier Bodoni."
+    }
+  },
+  "colourways": {
+    "ivoire": "Ivory and gilt",
+    "nuit": "Ivory and night blue",
+    "sauge": "Sage",
+    "rose": "Dusty rose",
+    "ciel": "Sky blue",
+    "terracotta": "Terracotta",
+    "minuit": "Midnight",
+    "noir": "Warm black"
+  },
+  "pieces": {
+    "invitation": "Invitation, A5",
+    "invitationSquare": "Square invitation",
+    "saveTheDate": "Save the date",
+    "menu": "Menu card",
+    "tableCard": "Table card",
+    "placeCard": "Place card",
+    "thankYou": "Thank-you card",
+    "tableWord": "Table",
+    "note": {
+      "tableCard": "One card for every table of the seating plan.",
+      "placeCard": "One card for every named adult of the seating plan. Children appear only as a number (“+2 children”) on the household's card."
+    }
+  },
+  "fields": {
+    "kicker": {
+      "label": "Opening line",
+      "hint": "A short line above the names."
+    },
+    "names": {
+      "label": "Names",
+      "hint": "For example “Ioana & Ștefan”. Put “&” or “and” between the names so we can set them well."
+    },
+    "wording": {
+      "label": "Invitation wording",
+      "hint": "Long text is set smaller by itself so that it fits; it never runs off the sheet."
+    },
+    "date": {
+      "label": "Date",
+      "hint": "Written the way you want it to appear."
+    },
+    "time": {
+      "label": "Time",
+      "hint": "For example “at 5 pm”."
+    },
+    "venue": {
+      "label": "Venue",
+      "hint": "The name of the place."
+    },
+    "address": {
+      "label": "Address",
+      "hint": "Street, number, town."
+    },
+    "rsvp": {
+      "label": "Reply line",
+      "hint": "How and by when you expect a reply."
+    },
+    "saveTheDate": {
+      "label": "Save-the-date heading",
+      "hint": "Shown above the names on the announcement card."
+    },
+    "menuTitle": {
+      "label": "Menu heading",
+      "hint": "Usually “Menu”."
+    },
+    "menuBody": {
+      "label": "Menu",
+      "hint": "Leave an empty line between courses. The first line of each group names the course, the next ones are the dishes."
+    },
+    "thanks": {
+      "label": "Thank-you wording",
+      "hint": "The first line is the heading (“Thank you”), the rest is the message."
+    }
+  },
+  "form": {
+    "designLegend": "Design",
+    "colourwayLegend": "Paper and ink",
+    "languageLegend": "Language of the wording",
+    "textsTitle": "Wording",
+    "moreTitle": "Menu and thank-you",
+    "presetsTitle": "Ready-made wording",
+    "presetsHint": "They replace the opening line, the invitation wording, the reply line and the thank-you wording. Names, date and venue stay as you wrote them.",
+    "presetNunta": "Wedding wording",
+    "presetBotez": "Christening wording",
+    "presetAniversare": "Anniversary wording",
+    "qr": "Print each household's QR code on the invitation",
+    "qrHint": "Each household gets its own sheet; the code opens only its own invitation.",
+    "save": "Save version",
+    "saving": "Saving…",
+    "saved": "Version {version} is saved. Read the proof before printing.",
+    "savedSame": "Nothing changed since version {version}.",
+    "readOnly": "You can see the stationery, but only the organisers can change it.",
+    "unsaved": "You have unsaved changes. The proof above already shows them.",
+    "aiLabel": "AI-generated"
+  },
+  "preview": {
+    "title": "Proof",
+    "pieceLegend": "Piece",
+    "alt": "Proof of the {piece}, {design} design",
+    "size": "{width} × {height} mm",
+    "loading": "Redrawing the proof…",
+    "fit": "The text was set smaller to fit the sheet.",
+    "truncated": "The text is too long even when set smaller; part of it was cut. Shorten it.",
+    "error": "The proof could not be redrawn. Try again."
+  },
+  "versions": {
+    "title": "Versions and proof",
+    "body": "Every save is a new version. The print PDF can be made only for a version you have read and marked as checked.",
+    "version": "Version {version}",
+    "meta": "{design} · saved on {date}",
+    "proofed": "Proof checked",
+    "notProofed": "Proof not checked",
+    "empty": "Nothing saved yet",
+    "emptyBody": "Fit the wording and save the first version. The proof shows at once, before you save.",
+    "older": "Older versions"
+  },
+  "proof": {
+    "download": "Download the proof (PDF)",
+    "mark": "I have checked the proof",
+    "marking": "Marking…",
+    "markHint": "Read the proof word by word: names, date, time, address. Once marked, the version can go to print.",
+    "needManager": "Only the organisers can mark the proof as checked.",
+    "cropMarks": "Add crop marks",
+    "print": "Download the print PDF",
+    "printHint": "Exact trim size, 3 mm bleed, vector text, fonts embedded. Colours are RGB; the print shop does the CMYK conversion.",
+    "fallbackFonts": "The Maison fonts were not found on the server; the proof and the print use DejaVu Serif and Sans."
+  },
+  "digital": {
+    "title": "The digital invitation",
+    "body": "The guests' link can carry the same words and the same colours as the printed invitation.",
+    "on": "The guests' link uses the design and wording of version {version}.",
+    "off": "The guests' link shows the standard invitation.",
+    "enable": "Use on the guests' link",
+    "disable": "Go back to the standard invitation",
+    "working": "Applying…"
+  },
+  "errors": {
+    "tooLong": "The text is too long for this field. Shorten it.",
+    "namesRequired": "Write the names shown on the invitation.",
+    "colourway": "Pick one of this design's colourways.",
+    "notProofed": "Version {version} has not been marked as checked. Read the proof and press “I have checked the proof”; only then can the print PDF be made.",
+    "saveFirst": "Save a version of the stationery first.",
+    "nothingToPrint": "There is nothing to print for the chosen pieces: table and place cards appear once the seating plan has tables and guests."
+  },
+  "presets": {
+    "nunta": {
+      "kicker": "Together with our parents and godparents",
+      "wording": "we request the pleasure of your company on the day we join our lives",
+      "rsvp": "Kindly let us know whether you will attend",
+      "saveTheDate": "Save the date",
+      "menuTitle": "Menu",
+      "thanks": "Thank you\nWith all our hearts, thank you for being with us on the happiest day of our lives."
+    },
+    "botez": {
+      "kicker": "With joy in our hearts",
+      "wording": "we invite you to be with us at the christening and at the celebration that follows",
+      "rsvp": "Kindly let us know whether you will attend",
+      "saveTheDate": "Save the date",
+      "menuTitle": "Menu",
+      "thanks": "Thank you\nThank you for being with us on a day so dear to us."
+    },
+    "aniversare": {
+      "kicker": "Let us celebrate together",
+      "wording": "you are warmly invited to my birthday — an evening of friends, music and good cheer",
+      "rsvp": "Let me know if you can come",
+      "saveTheDate": "Keep the evening free",
+      "menuTitle": "Menu",
+      "thanks": "Thank you\nThank you for celebrating with me. It was an evening to remember."
+    }
+  },
+  "defaults": {
+    "time": "at {time}",
+    "menuBody": "Starter\nA plate of cold appetisers\n\nMain course\nThe house dish with seasonal garnish\n\nDessert\nCake"
+  },
+  "sample": {
+    "placeName": "Maria Ionescu",
+    "placeNote": "Table 4 · +2 children"
+  },
+  "place": {
+    "table": "Table {label}",
+    "childOne": "+{count} child",
+    "childMany": "+{count} children",
+    "seatOne": "{count} seat",
+    "seatMany": "{count} seats"
+  },
+  "pdf": {
+    "proofTitle": "Proof — {title} (version {version})",
+    "proofSubject": "A proof to read. Not for print.",
+    "proofStamp": "Proof · version {version} · not for print",
+    "printTitle": "{title} — stationery for print (version {version})",
+    "printNote": "RGB colours; the CMYK conversion is done by the print shop.",
+    "printNoteFlood": "The coloured ground prints to the edge (3 mm bleed).",
+    "printNoteStock": "No printed ground: ivory card of 300 g/m² is recommended.",
+    "slugBleed": "{mm} mm bleed"
+  }
+}

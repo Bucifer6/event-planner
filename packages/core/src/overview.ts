@@ -1,6 +1,7 @@
 import { and, eq, gt, isNotNull, lt, ne, occasionMembers, sql, tasks, whatifPreviews } from "@ed/db";
 import { addDays } from "@ed/shared/time";
 import { requireMember, type Member } from "./access";
+import { accountLabel } from "./accounts";
 import type { Ctx } from "./context";
 import { listOpenOffersUnchecked } from "./delegations";
 import { getOccasionView, type OccasionView } from "./occasions";
@@ -135,10 +136,11 @@ async function memberNameMap(ctx: Ctx, occasionId: string): Promise<Map<string, 
       inviteEmail: occasionMembers.inviteEmail,
       email: sql<string | null>`(select a.email from accounts a where a.id = ${occasionMembers.accountId})`,
       username: sql<string | null>`(select a.username from accounts a where a.id = ${occasionMembers.accountId})`,
+      displayName: sql<string | null>`(select a.display_name from accounts a where a.id = ${occasionMembers.accountId})`,
     })
     .from(occasionMembers)
     .where(eq(occasionMembers.occasionId, occasionId));
-  return new Map(rows.map((r) => [r.id, r.email ?? r.username ?? r.inviteEmail ?? ""]));
+  return new Map(rows.map((r) => [r.id, accountLabel(r) || r.inviteEmail || ""]));
 }
 
 /* ── Extension point ────────────────────────────────────────────────────── */

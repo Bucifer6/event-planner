@@ -1,0 +1,93 @@
+{
+  "title": "Cereri private",
+  "description": "Nevoi alimentare și de acces spuse în încredere. Le văd doar cei cărora li s-a dat anume acest acces.",
+  "kinds": {
+    "dietary": "Alimentară",
+    "access": "De acces",
+    "other": "Altceva"
+  },
+  "status": {
+    "open": "De rezolvat",
+    "handled": "Rezolvată"
+  },
+  "hero": {
+    "label": "Cereri de rezolvat acum",
+    "note": "Din {total} primite în total"
+  },
+  "retention": "Cererile se șterg singure la 30 de zile după încheierea ocaziei.",
+  "empty": {
+    "title": "Nicio cerere privată",
+    "body": "Invitații pot trimite una de pe linkul lor, din secțiunea „Cerere privată”. Trimite-le invitațiile din pagina Invitați.",
+    "action": "Deschide Invitați"
+  },
+  "list": {
+    "title": "Cereri",
+    "from": "De la {name}",
+    "fromPublic": "De la {name} (pagina publică)",
+    "received": "primită pe {date}",
+    "noText": "Fără text — doar eticheta.",
+    "note": "Nota ta: {note}",
+    "handle": "Marchează rezolvată",
+    "reopen": "Redeschide",
+    "handleTitle": "Cererea de la {name}",
+    "noteLabel": "Notă pentru tine și ceilalți cu acest acces",
+    "noteHint": "De exemplu: am vorbit cu bucătarul.",
+    "saveHandled": "Salvează ca rezolvată",
+    "saveOpen": "Salvează ca nerezolvată"
+  },
+  "counts": {
+    "title": "Pe scurt, în numere",
+    "access": "nevoi de acces",
+    "other": "alte cereri",
+    "untagged": "alimentare fără etichetă"
+  },
+  "share": {
+    "title": "Trimite doar numere unui furnizor",
+    "intro": "Furnizorul primește în briefing rânduri ca „3 × fără gluten”. Niciun nume, nicio familie, niciun text scris de invitați.",
+    "booking": "Furnizorul",
+    "tags": "Ce numere trimiți",
+    "tagLine": "{count} × {tag}",
+    "access": "{count} × nevoi de acces",
+    "accessLine": "nevoi de acces (detalii la organizator)",
+    "submit": "Trimite numerele în briefing",
+    "sending": "Se publică…",
+    "sent": "Publicat ca versiunea {version} a briefingului.",
+    "nothing": "Nu există încă numere de trimis: cererile nu au etichete alimentare și nu sunt nevoi de acces.",
+    "noSuppliers": "Nu ai încă furnizori în această ocazie.",
+    "managersOnly": "Doar organizatorii pot publica în briefingul unui furnizor."
+  },
+  "guest": {
+    "title": "Cerere privată",
+    "intro": "Ai o nevoie alimentară sau de acces? Spune-ne aici. O citesc doar organizatorii desemnați pentru asta — nu ceilalți invitați și nu furnizorii.",
+    "kind": "Despre ce este vorba",
+    "kindDietary": "Mâncare",
+    "kindAccess": "Acces",
+    "kindOther": "Altceva",
+    "dietTag": "Regim",
+    "dietTagNone": "Altul / nu se aplică",
+    "body": "Detalii",
+    "bodyHint": "De exemplu: alergie la nuci; am nevoie de rampă la intrare.",
+    "childWarningTitle": "Pare că ai scris detalii despre un copil",
+    "childWarningBody": "Nu este nevoie de numele sau vârsta unui copil — ajunge nevoia în sine („un meniu fără gluten”). Poți șterge detaliile sau poți trimite așa.",
+    "sendAnyway": "Trimite așa",
+    "send": "Trimite cererea",
+    "sending": "Se trimite…",
+    "sent": "Cererea a ajuns la organizatori.",
+    "sentBefore": "Ai trimis deja:",
+    "sentRow": "{kind} — pe {date}",
+    "sentNote": "Din discreție, textul nu se mai afișează aici după trimitere.",
+    "another": "Trimite încă o cerere",
+    "honeypot": "Lasă acest câmp gol"
+  },
+  "export": {
+    "title": "Cereri private (CSV)",
+    "description": "Doar pentru cei cu acces la cererile private."
+  },
+  "errors": {
+    "kind": "Alege despre ce este cererea.",
+    "empty": "Scrie câteva cuvinte sau alege un regim.",
+    "tooMany": "Ai trimis deja mai multe cereri. Pentru altceva, scrie direct organizatorilor.",
+    "nothingToShare": "Bifează cel puțin un număr de trimis.",
+    "alreadyShared": "Briefingul are deja aceste numere."
+  }
+}

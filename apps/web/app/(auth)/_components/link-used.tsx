@@ -9,13 +9,14 @@ import { ActionForm } from "./forms";
  * SEC14: the link was already used (often by a mail scanner). The code from the same email
  * still works here, and ONE new code can be requested.
  */
-export function LinkUsed({ token }: { token: string }) {
+export function LinkUsed({ token, next }: { token: string; next?: string }) {
   const t = useTranslations("auth");
+  const carry: Record<string, string> = next ? { next } : {};
   return (
     <Stack gap={5}>
       <ActionForm
         action={verifyCode}
-        hidden={{ linkToken: token }}
+        hidden={{ linkToken: token, ...carry }}
         fields={[
           {
             name: "code",
@@ -34,7 +35,7 @@ export function LinkUsed({ token }: { token: string }) {
         <p className="ed-small ed-muted">{t("link.resendIntro")}</p>
         <ActionForm
           action={resendFromLink}
-          hidden={{ linkToken: token }}
+          hidden={{ linkToken: token, ...carry }}
           variant="secondary"
           submitLabel={t("link.resend")}
           pendingLabel={t("signIn.sendingCode")}

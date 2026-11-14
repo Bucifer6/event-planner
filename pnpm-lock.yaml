@@ -237,25 +237,46 @@ importers:
       '@ed/storage':
         specifier: workspace:*
         version: link:../storage
+      '@expo-google-fonts/bodoni-moda':
+        specifier: 0.4.2
+        version: 0.4.2
+      '@expo-google-fonts/hanken-grotesk':
+        specifier: 0.4.3
+        version: 0.4.3
       dejavu-fonts-ttf:
         specifier: 2.37.3
         version: 2.37.3
+      fontkit:
+        specifier: 2.0.4
+        version: 2.0.4
       pdfkit:
         specifier: 0.20.2
         version: 0.20.2
+      qrcode:
+        specifier: 1.5.4
+        version: 1.5.4
       read-excel-file:
         specifier: 9.3.17
         version: 9.3.17
+      sharp:
+        specifier: 0.35.5
+        version: 0.35.5(@types/node@22.20.5)
       zod:
         specifier: 4.6.7
         version: 4.6.7
     devDependencies:
+      '@types/fontkit':
+        specifier: 2.0.9
+        version: 2.0.9
       '@types/node':
         specifier: 22.20.5
         version: 22.20.5
       '@types/pdfkit':
         specifier: 0.17.7
         version: 0.17.7
+      '@types/qrcode':
+        specifier: 1.5.6
+        version: 1.5.6
       typescript:
         specifier: 5.9.3
         version: 5.9.3
@@ -1080,6 +1101,12 @@ packages:
     resolution: {integrity: sha512-IkO+/KEUvwbVpiURZg+P7zF74z5Jxe0UgJxVni+RtoHQ6IZieXaO02kmadomap/q+l6bc/jdPGGqTjhuZnuz1Q==}
     engines: {node: ^20.19.0 || ^22.13.0 || >=24}
 
+  '@expo-google-fonts/bodoni-moda@0.4.2':
+    resolution: {integrity: sha512-fnHVMSHRIU1Pzg27Iv/L5PVq/JpVJSTBHsx3hQZSOjUwsQzAd0hGMoRjT91ck/9Ui0P7d+8si0A/AeV+jzIhMg==}
+
+  '@expo-google-fonts/hanken-grotesk@0.4.3':
+    resolution: {integrity: sha512-TZn/Ux+nCxEjG/zAenCFbEhOAPxSXN3lo2YU2jHcPsNBPFeicm8feQStL81igJuAwJLCn62VvEOdTtmVEBDl0g==}
+
   '@formatjs/fast-memoize@3.1.7':
     resolution: {integrity: sha512-zXfhLpvA6T7+efdt9JLbBwZ00tT7NsBMDVnDu8rpHeNNv8KfRZAMo2gkG0k9lK/Nzc//3kJ9pImsfuJxk3KhUA==}
 
@@ -1744,6 +1771,9 @@ packages:
 
   '@types/estree@1.0.10':
     resolution: {integrity: sha512-lTyOMnOcmRBzdCv6/4zUZCrEhV0xrqQiUZBZtVcbmLHBXKLnN8q89v/wKRF/Q0HbwVsqbIG3o5HDoFl9sduM+g==}
+
+  '@types/fontkit@2.0.9':
+    resolution: {integrity: sha512-qNYerFky3muCmZPq+R+B3cUDRA5OONw/oh6aGGFxx2LOBz6yu8eamKusrhkHnC6rc2fm76+G9z9QoWSB2SaQaw==}
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -3348,6 +3378,10 @@ snapshots:
       '@eslint/core': 1.2.1
       levn: 0.4.1
 
+  '@expo-google-fonts/bodoni-moda@0.4.2': {}
+
+  '@expo-google-fonts/hanken-grotesk@0.4.3': {}
+
   '@formatjs/fast-memoize@3.1.7': {}
 
   '@formatjs/icu-messageformat-parser@3.5.23':
@@ -3828,6 +3862,10 @@ snapshots:
   '@types/esrecurse@4.3.1': {}
 
   '@types/estree@1.0.10': {}
+
+  '@types/fontkit@2.0.9':
+    dependencies:
+      '@types/node': 22.20.5
 
   '@types/json-schema@7.0.15': {}
 

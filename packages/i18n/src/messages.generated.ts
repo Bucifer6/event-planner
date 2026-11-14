@@ -2,6 +2,8 @@
 // Regenerate: pnpm --filter @ed/i18n gen
 /* eslint-disable */
 import ro_account from "../messages/ro/account.json";
+import ro_aitext from "../messages/ro/aitext.json";
+import ro_arrangements from "../messages/ro/arrangements.json";
 import ro_auth from "../messages/ro/auth.json";
 import ro_billing from "../messages/ro/billing.json";
 import ro_bizoccasions from "../messages/ro/bizoccasions.json";
@@ -26,6 +28,8 @@ import ro_emails from "../messages/ro/emails.json";
 import ro_enquiries from "../messages/ro/enquiries.json";
 import ro_eventday from "../messages/ro/eventday.json";
 import ro_featured from "../messages/ro/featured.json";
+import ro_gifts from "../messages/ro/gifts.json";
+import ro_guestevent from "../messages/ro/guestevent.json";
 import ro_guests from "../messages/ro/guests.json";
 import ro_guides from "../messages/ro/guides.json";
 import ro_ledger from "../messages/ro/ledger.json";
@@ -33,23 +37,34 @@ import ro_legal from "../messages/ro/legal.json";
 import ro_lifecycle from "../messages/ro/lifecycle.json";
 import ro_listings from "../messages/ro/listings.json";
 import ro_mcp from "../messages/ro/mcp.json";
+import ro_menus from "../messages/ro/menus.json";
 import ro_moderation from "../messages/ro/moderation.json";
 import ro_nav from "../messages/ro/nav.json";
 import ro_occasions from "../messages/ro/occasions.json";
+import ro_operate from "../messages/ro/operate.json";
 import ro_overview from "../messages/ro/overview.json";
 import ro_platform from "../messages/ro/platform.json";
 import ro_polls from "../messages/ro/polls.json";
+import ro_printpack from "../messages/ro/printpack.json";
+import ro_programme from "../messages/ro/programme.json";
+import ro_promotion from "../messages/ro/promotion.json";
+import ro_publicpage from "../messages/ro/publicpage.json";
 import ro_report from "../messages/ro/report.json";
+import ro_requests from "../messages/ro/requests.json";
 import ro_rsvp from "../messages/ro/rsvp.json";
 import ro_seating from "../messages/ro/seating.json";
 import ro_site from "../messages/ro/site.json";
 import ro_space from "../messages/ro/space.json";
+import ro_stationery from "../messages/ro/stationery.json";
 import ro_suppliers from "../messages/ro/suppliers.json";
 import ro_tasks from "../messages/ro/tasks.json";
 import ro_team from "../messages/ro/team.json";
 import ro_templates from "../messages/ro/templates.json";
+import ro_travel from "../messages/ro/travel.json";
 import ro_whatif from "../messages/ro/whatif.json";
 import en_account from "../messages/en/account.json";
+import en_aitext from "../messages/en/aitext.json";
+import en_arrangements from "../messages/en/arrangements.json";
 import en_auth from "../messages/en/auth.json";
 import en_billing from "../messages/en/billing.json";
 import en_bizoccasions from "../messages/en/bizoccasions.json";
@@ -74,6 +89,8 @@ import en_emails from "../messages/en/emails.json";
 import en_enquiries from "../messages/en/enquiries.json";
 import en_eventday from "../messages/en/eventday.json";
 import en_featured from "../messages/en/featured.json";
+import en_gifts from "../messages/en/gifts.json";
+import en_guestevent from "../messages/en/guestevent.json";
 import en_guests from "../messages/en/guests.json";
 import en_guides from "../messages/en/guides.json";
 import en_ledger from "../messages/en/ledger.json";
@@ -81,26 +98,37 @@ import en_legal from "../messages/en/legal.json";
 import en_lifecycle from "../messages/en/lifecycle.json";
 import en_listings from "../messages/en/listings.json";
 import en_mcp from "../messages/en/mcp.json";
+import en_menus from "../messages/en/menus.json";
 import en_moderation from "../messages/en/moderation.json";
 import en_nav from "../messages/en/nav.json";
 import en_occasions from "../messages/en/occasions.json";
+import en_operate from "../messages/en/operate.json";
 import en_overview from "../messages/en/overview.json";
 import en_platform from "../messages/en/platform.json";
 import en_polls from "../messages/en/polls.json";
+import en_printpack from "../messages/en/printpack.json";
+import en_programme from "../messages/en/programme.json";
+import en_promotion from "../messages/en/promotion.json";
+import en_publicpage from "../messages/en/publicpage.json";
 import en_report from "../messages/en/report.json";
+import en_requests from "../messages/en/requests.json";
 import en_rsvp from "../messages/en/rsvp.json";
 import en_seating from "../messages/en/seating.json";
 import en_site from "../messages/en/site.json";
 import en_space from "../messages/en/space.json";
+import en_stationery from "../messages/en/stationery.json";
 import en_suppliers from "../messages/en/suppliers.json";
 import en_tasks from "../messages/en/tasks.json";
 import en_team from "../messages/en/team.json";
 import en_templates from "../messages/en/templates.json";
+import en_travel from "../messages/en/travel.json";
 import en_whatif from "../messages/en/whatif.json";
 
 export const messagesByLocale = {
   ro: {
     "account": ro_account,
+    "aitext": ro_aitext,
+    "arrangements": ro_arrangements,
     "auth": ro_auth,
     "billing": ro_billing,
     "bizoccasions": ro_bizoccasions,
@@ -125,6 +153,8 @@ export const messagesByLocale = {
     "enquiries": ro_enquiries,
     "eventday": ro_eventday,
     "featured": ro_featured,
+    "gifts": ro_gifts,
+    "guestevent": ro_guestevent,
     "guests": ro_guests,
     "guides": ro_guides,
     "ledger": ro_ledger,
@@ -132,25 +162,36 @@ export const messagesByLocale = {
     "lifecycle": ro_lifecycle,
     "listings": ro_listings,
     "mcp": ro_mcp,
+    "menus": ro_menus,
     "moderation": ro_moderation,
     "nav": ro_nav,
     "occasions": ro_occasions,
+    "operate": ro_operate,
     "overview": ro_overview,
     "platform": ro_platform,
     "polls": ro_polls,
+    "printpack": ro_printpack,
+    "programme": ro_programme,
+    "promotion": ro_promotion,
+    "publicpage": ro_publicpage,
     "report": ro_report,
+    "requests": ro_requests,
     "rsvp": ro_rsvp,
     "seating": ro_seating,
     "site": ro_site,
     "space": ro_space,
+    "stationery": ro_stationery,
     "suppliers": ro_suppliers,
     "tasks": ro_tasks,
     "team": ro_team,
     "templates": ro_templates,
+    "travel": ro_travel,
     "whatif": ro_whatif,
   },
   en: {
     "account": en_account,
+    "aitext": en_aitext,
+    "arrangements": en_arrangements,
     "auth": en_auth,
     "billing": en_billing,
     "bizoccasions": en_bizoccasions,
@@ -175,6 +216,8 @@ export const messagesByLocale = {
     "enquiries": en_enquiries,
     "eventday": en_eventday,
     "featured": en_featured,
+    "gifts": en_gifts,
+    "guestevent": en_guestevent,
     "guests": en_guests,
     "guides": en_guides,
     "ledger": en_ledger,
@@ -182,21 +225,30 @@ export const messagesByLocale = {
     "lifecycle": en_lifecycle,
     "listings": en_listings,
     "mcp": en_mcp,
+    "menus": en_menus,
     "moderation": en_moderation,
     "nav": en_nav,
     "occasions": en_occasions,
+    "operate": en_operate,
     "overview": en_overview,
     "platform": en_platform,
     "polls": en_polls,
+    "printpack": en_printpack,
+    "programme": en_programme,
+    "promotion": en_promotion,
+    "publicpage": en_publicpage,
     "report": en_report,
+    "requests": en_requests,
     "rsvp": en_rsvp,
     "seating": en_seating,
     "site": en_site,
     "space": en_space,
+    "stationery": en_stationery,
     "suppliers": en_suppliers,
     "tasks": en_tasks,
     "team": en_team,
     "templates": en_templates,
+    "travel": en_travel,
     "whatif": en_whatif,
   },
 } as const;

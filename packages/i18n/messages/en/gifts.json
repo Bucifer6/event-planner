@@ -1,0 +1,90 @@
+{
+  "title": "Gift estimator",
+  "description": "A guide to the custom, not a rule: from three questions about a guest household you see the range of money gift that is customary.",
+  "private": {
+    "title": "For your eyes only",
+    "body": "What you work out and keep here is seen only by you, from your account. It is not shown to the other organisers, to guests, in exports or to connected assistants. It is free and will stay free."
+  },
+  "form": {
+    "relationship": "How close are you?",
+    "distance": "Where do they travel from?",
+    "venue": "What kind of venue is it?",
+    "adults": "Adults in the household",
+    "fewer": "Fewer adults",
+    "more": "More adults",
+    "calculate": "Show the range",
+    "calculating": "Working it out…"
+  },
+  "relationships": {
+    "close_family": "Close family",
+    "family": "Relatives",
+    "close_friend": "Close friends",
+    "friend": "Friends",
+    "colleague": "Colleagues or acquaintances"
+  },
+  "distances": {
+    "local": "From the same town",
+    "county": "From the same county",
+    "country": "From elsewhere in the country",
+    "abroad": "From abroad"
+  },
+  "venues": {
+    "restaurant": "Restaurant",
+    "ballroom": "Event hall",
+    "premium": "Premium venue",
+    "home": "At home or outdoors"
+  },
+  "result": {
+    "label": "Customary range for this household",
+    "range": "{low} – {high}",
+    "note": "A cultural guide, not a rule. Everyone gives what they can and what feels right.",
+    "why": "How we got here",
+    "base": "For “{venue}”, your table starts from {low} – {high} per adult.",
+    "relationship": "“{relationship}” means {pct} % of that range.",
+    "distance": "“{distance}” means {pct} %: those who travel far also bear the cost of the journey.",
+    "adults": "Multiplied by {adults} adults and rounded to 50 lei.",
+    "adultsOne": "For one adult, rounded to 50 lei.",
+    "empty": "Answer the three questions",
+    "emptyBody": "The range shows here, together with how it was worked out."
+  },
+  "keep": {
+    "title": "Keep for a household",
+    "household": "Household",
+    "none": "No household — I will write a name",
+    "label": "Name for the note",
+    "save": "Keep the range",
+    "saving": "Keeping…",
+    "saved": "The range is kept among your notes."
+  },
+  "notes": {
+    "title": "Your notes",
+    "empty": "Nothing kept yet",
+    "emptyBody": "When you keep a range for a household, you find it here. Only you see it.",
+    "meta": "{relationship} · {distance} · {venue} · adults: {adults}",
+    "remove": "Delete the note",
+    "removeFor": "Delete the note for {label}",
+    "removing": "Deleting…"
+  },
+  "guide": {
+    "title": "The table it is worked out from",
+    "body": "The starting values are indicative and round, put there for you to match the custom where you live. You can change them at any time; the change is yours alone.",
+    "isDefault": "You are using the starting values.",
+    "isOwn": "You are using your own values.",
+    "open": "See and change the table",
+    "baseTitle": "Customary range per adult, by venue (lei)",
+    "low": "{venue} — from",
+    "high": "{venue} — to",
+    "relationshipTitle": "Closeness (per cent of the range)",
+    "distanceTitle": "Distance (per cent of the range)",
+    "save": "Save the table",
+    "saving": "Saving…",
+    "reset": "Go back to the starting values",
+    "resetting": "Going back…",
+    "saved": "Your table is saved."
+  },
+  "errors": {
+    "rangeOrder": "“To” must be at least as much as “from”.",
+    "labelRequired": "Pick a household or write a name for the note.",
+    "number": "Write a whole number."
+  }
+}

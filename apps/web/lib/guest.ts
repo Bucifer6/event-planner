@@ -2,6 +2,10 @@ import "server-only";
 import "@ed/core/polls"; // registers the "polls" guest section
 import "@ed/core/contributions"; // registers the "contributions" guest section
 import "@ed/core/seating"; // registers the "seat" and "spaceView" guest sections
+import "@ed/core/programme"; // registers the "programme" guest section (C-03, C-10)
+import "@ed/core/menus"; // registers the "menu" guest section (C-05)
+import "@ed/core/guestevent"; // registers the "venue" guest section: navigation link + accessible journey (C-10, C-07)
+import "@ed/core/requests"; // registers the "privateRequest" guest section (C-07)
 import { makeCtx, type Ctx, type Locale } from "@ed/core/context";
 import { resolveGuestLink, type GuestLink } from "@ed/core/invitations";
 import { checkPublicForm, FORM_STAMP_FIELD, HONEYPOT_FIELD } from "@ed/core/ratelimit";

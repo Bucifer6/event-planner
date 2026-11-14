@@ -22,7 +22,7 @@ import { z } from "zod";
 import { action } from "@/lib/action";
 import { getCtx } from "@/lib/ctx";
 import {
-  AFTER_SIGN_IN_PATH,
+  afterSignInPath,
   applySignIn,
   clearSessionCookie,
   ensureDeviceId,
@@ -34,6 +34,8 @@ import {
 } from "@/lib/session";
 
 const zCode = z.string().trim().min(1, "common.validation.required").max(20, "common.validation.invalid");
+/** The return path carried through the flow as a hidden field; validated again where it is used. */
+const zNext = z.string().max(600).optional();
 
 /**
  * Language switch (L2): sets the ed_lang cookie and, when signed in, saves it on the account.
@@ -50,10 +52,10 @@ export async function setLanguage(formData: FormData): Promise<void> {
 
 /** S1 step 1: email a code + one-tap link. Same answer for every address (SEC1). */
 export const requestCode = action(
-  z.object({ email: zEmail }),
+  z.object({ email: zEmail, next: zNext }),
   async (ctx, input) => {
     const deviceId = await ensureDeviceId();
-    const { expiresAt } = await requestSignInCode(ctx, { email: input.email, deviceId });
+    const { expiresAt } = await requestSignInCode(ctx, { email: input.email, deviceId, next: input.next });
     return { email: input.email, expiresAt: expiresAt.toISOString() };
   },
   { auth: "public" },
@@ -61,7 +63,7 @@ export const requestCode = action(
 
 /** S1 step 2: confirm the code (by address, or by link token on the consumed-link page). */
 export const verifyCode = action(
-  z.object({ email: zEmail.optional(), linkToken: z.string().max(200).optional(), code: zCode }),
+  z.object({ email: zEmail.optional(), linkToken: z.string().max(200).optional(), code: zCode, next: zNext }),
   async (ctx, input) => {
     const deviceId = await ensureDeviceId();
     const result = await verifySignInCode(ctx, {
@@ -71,17 +73,17 @@ export const verifyCode = action(
       deviceId,
       userAgent: await requestUserAgent(),
     });
-    redirect(await applySignIn(result));
+    redirect(await applySignIn(result, input.next));
   },
   { auth: "public" },
 );
 
 /** SEC14: the one new code the consumed-link page may ask for. */
 export const resendFromLink = action(
-  z.object({ linkToken: z.string().min(20).max(200) }),
+  z.object({ linkToken: z.string().min(20).max(200), next: zNext }),
   async (ctx, input) => {
     const deviceId = await ensureDeviceId();
-    await requestCodeFromLink(ctx, { token: input.linkToken, deviceId });
+    await requestCodeFromLink(ctx, { token: input.linkToken, deviceId, next: input.next });
     return { sent: true };
   },
   { auth: "public" },
@@ -89,7 +91,7 @@ export const resendFromLink = action(
 
 /** S2: second step for accounts that turned two-step on. */
 export const verifyTwoStep = action(
-  z.object({ code: z.string().max(20).optional(), recoveryCode: z.string().max(40).optional() }),
+  z.object({ code: z.string().max(20).optional(), recoveryCode: z.string().max(40).optional(), next: zNext }),
   async (ctx, input) => {
     const token = await getSessionToken();
     if (!token) throw new AppError("UNAUTHENTICATED", "auth.errors.secondFactorExpired");
@@ -102,7 +104,7 @@ export const verifyTwoStep = action(
       deviceId,
     });
     await setSessionCookie(token, done.expiresAt);
-    redirect(AFTER_SIGN_IN_PATH);
+    redirect(afterSignInPath(input.next));
   },
   { auth: "public" },
 );
@@ -133,11 +135,12 @@ export const anonymousSignIn = action(
   z.object({
     username: z.string().trim().min(1, "common.validation.required").max(100, "common.validation.tooLong"),
     password: z.string().min(1, "common.validation.required").max(200, "common.validation.tooLong"),
+    next: zNext,
   }),
-  async (ctx, input) => {
+  async (ctx, { next, ...input }) => {
     const deviceId = await ensureDeviceId();
     const result = await signInAnonymous(ctx, { ...input, deviceId, userAgent: await requestUserAgent() });
-    redirect(await applySignIn(result));
+    redirect(await applySignIn(result, next));
   },
   { auth: "public" },
 );
@@ -148,11 +151,12 @@ export const anonymousRecover = action(
     username: z.string().trim().min(1, "common.validation.required").max(100, "common.validation.tooLong"),
     recoveryCode: z.string().trim().min(1, "common.validation.required").max(40, "common.validation.invalid"),
     newPassword: z.string().min(1, "common.validation.required").max(200, "common.validation.tooLong"),
+    next: zNext,
   }),
-  async (ctx, input) => {
+  async (ctx, { next, ...input }) => {
     const deviceId = await ensureDeviceId();
     const result = await recoverAnonymousAccount(ctx, { ...input, deviceId, userAgent: await requestUserAgent() });
-    redirect(await applySignIn(result));
+    redirect(await applySignIn(result, next));
   },
   { auth: "public" },
 );

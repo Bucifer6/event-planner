@@ -1,0 +1,233 @@
+{
+  "title": "Invitații și papetărie",
+  "description": "Alege un design, potrivește textele și vezi proba pe loc. Ce vezi aici este exact ce se tipărește.",
+  "designs": {
+    "classic": {
+      "name": "Clasic",
+      "blurb": "Bodoni centrat, într-un chenar auriu fin."
+    },
+    "modern": {
+      "name": "Modern",
+      "blurb": "Aliniat la stânga, cu data în cifre mari."
+    },
+    "monogram": {
+      "name": "Monogramă",
+      "blurb": "Inițialele într-un inel, numele în majuscule rare."
+    },
+    "botanical": {
+      "name": "Botanic",
+      "blurb": "O singură ramură desenată în linie, nume cursive."
+    },
+    "minimal": {
+      "name": "Minimal",
+      "blurb": "Literă mică, o linie subțire și multă hârtie."
+    },
+    "nocturne": {
+      "name": "Nocturn",
+      "blurb": "Fildeș și auriu pe o coală de culoarea nopții."
+    },
+    "botez": {
+      "name": "Botez",
+      "blurb": "Blând: o boltă, o cunună deschisă, cursive."
+    },
+    "petrecere": {
+      "name": "Petrecere",
+      "blurb": "Câteva confetti în colțuri și un Bodoni mai apăsat."
+    }
+  },
+  "colourways": {
+    "ivoire": "Fildeș și auriu",
+    "nuit": "Fildeș și bleu nuit",
+    "sauge": "Salvie",
+    "rose": "Roz pudrat",
+    "ciel": "Albastru de cer",
+    "terracotta": "Teracotă",
+    "minuit": "Miez de noapte",
+    "noir": "Negru cald"
+  },
+  "pieces": {
+    "invitation": "Invitație A5",
+    "invitationSquare": "Invitație pătrată",
+    "saveTheDate": "Save the date",
+    "menu": "Meniu",
+    "tableCard": "Card de masă",
+    "placeCard": "Card de loc",
+    "thankYou": "Card de mulțumire",
+    "tableWord": "Masa",
+    "note": {
+      "tableCard": "Câte un card pentru fiecare masă din planul de așezare.",
+      "placeCard": "Câte un card pentru fiecare adult cu nume din planul de așezare. Copiii apar doar ca număr („+2 copii”) pe cardul familiei."
+    }
+  },
+  "fields": {
+    "kicker": {
+      "label": "Rândul de deschidere",
+      "hint": "Un rând scurt deasupra numelor."
+    },
+    "names": {
+      "label": "Nume",
+      "hint": "De exemplu „Ioana & Ștefan”. Pune „&” sau „și” între nume ca să le așezăm frumos."
+    },
+    "wording": {
+      "label": "Textul invitației",
+      "hint": "Textul lung se micșorează singur ca să încapă; nu iese niciodată din pagină."
+    },
+    "date": {
+      "label": "Data",
+      "hint": "Scrisă așa cum vrei să apară."
+    },
+    "time": {
+      "label": "Ora",
+      "hint": "De exemplu „ora 17:00”."
+    },
+    "venue": {
+      "label": "Locul",
+      "hint": "Numele locației."
+    },
+    "address": {
+      "label": "Adresa",
+      "hint": "Stradă, număr, localitate."
+    },
+    "rsvp": {
+      "label": "Rândul de confirmare",
+      "hint": "Cum și până când aștepți confirmarea."
+    },
+    "saveTheDate": {
+      "label": "Titlul pentru „save the date”",
+      "hint": "Apare deasupra numelor pe cardul de anunț."
+    },
+    "menuTitle": {
+      "label": "Titlul meniului",
+      "hint": "De obicei „Meniu”."
+    },
+    "menuBody": {
+      "label": "Meniul",
+      "hint": "Lasă un rând liber între feluri. Primul rând din fiecare grup este numele felului, următoarele sunt preparatele."
+    },
+    "thanks": {
+      "label": "Textul de mulțumire",
+      "hint": "Primul rând este titlul („Mulțumim”), restul este mesajul."
+    }
+  },
+  "form": {
+    "designLegend": "Design",
+    "colourwayLegend": "Hârtie și cerneală",
+    "languageLegend": "Limba textelor",
+    "textsTitle": "Texte",
+    "moreTitle": "Meniu și mulțumire",
+    "presetsTitle": "Formulări gata făcute",
+    "presetsHint": "Înlocuiesc rândul de deschidere, textul invitației, rândul de confirmare și textul de mulțumire. Numele, data și locul rămân cum le-ai scris.",
+    "presetNunta": "Formulare de nuntă",
+    "presetBotez": "Formulare de botez",
+    "presetAniversare": "Formulare de aniversare",
+    "qr": "Tipărește pe invitație codul QR al fiecărei familii",
+    "qrHint": "Fiecare familie primește propria foaie; codul deschide doar invitația ei.",
+    "save": "Salvează versiunea",
+    "saving": "Se salvează…",
+    "saved": "Versiunea {version} a fost salvată. Citește proba înainte de tipar.",
+    "savedSame": "Nu s-a schimbat nimic față de versiunea {version}.",
+    "readOnly": "Poți vedea papetăria, dar numai organizatorii o pot modifica.",
+    "unsaved": "Ai modificări nesalvate. Proba de mai sus le arată deja.",
+    "aiLabel": "generat cu AI"
+  },
+  "preview": {
+    "title": "Proba",
+    "pieceLegend": "Piesa",
+    "alt": "Proba pentru {piece}, designul {design}",
+    "size": "{width} × {height} mm",
+    "loading": "Se redesenează proba…",
+    "fit": "Textul a fost micșorat ca să încapă pe pagină.",
+    "truncated": "Textul este prea lung chiar și micșorat; o parte a fost tăiată. Scurtează-l.",
+    "error": "Proba nu a putut fi redesenată. Reîncearcă."
+  },
+  "versions": {
+    "title": "Versiuni și probă",
+    "body": "Fiecare salvare este o versiune nouă. PDF-ul pentru tipar se poate face numai pentru o versiune pe care ai citit-o și ai marcat-o ca verificată.",
+    "version": "Versiunea {version}",
+    "meta": "{design} · salvată la {date}",
+    "proofed": "Probă verificată",
+    "notProofed": "Probă necitită",
+    "empty": "Încă nu ai salvat nimic",
+    "emptyBody": "Potrivește textele și salvează prima versiune. Proba apare pe loc, înainte să salvezi.",
+    "older": "Versiuni mai vechi"
+  },
+  "proof": {
+    "download": "Descarcă proba (PDF)",
+    "mark": "Am verificat proba",
+    "marking": "Se marchează…",
+    "markHint": "Citește proba cuvânt cu cuvânt: nume, dată, oră, adresă. După ce o marchezi, versiunea poate merge la tipar.",
+    "needManager": "Numai organizatorii pot marca proba ca verificată.",
+    "cropMarks": "Adaugă semne de tăiere",
+    "print": "Descarcă PDF-ul pentru tipar",
+    "printHint": "Format exact, 3 mm bleed, text vectorial, fonturi incluse. Culorile sunt RGB; conversia în CMYK o face tipografia.",
+    "fallbackFonts": "Fonturile Maison nu au fost găsite pe server; proba și tiparul folosesc DejaVu Serif și Sans."
+  },
+  "digital": {
+    "title": "Invitația digitală",
+    "body": "Linkul invitaților poate purta aceleași cuvinte și aceleași culori ca invitația tipărită.",
+    "on": "Linkul invitaților folosește designul și textele din versiunea {version}.",
+    "off": "Linkul invitaților arată invitația standard.",
+    "enable": "Folosește pe linkul invitaților",
+    "disable": "Revino la invitația standard",
+    "working": "Se aplică…"
+  },
+  "errors": {
+    "tooLong": "Textul este prea lung pentru acest câmp. Scurtează-l.",
+    "namesRequired": "Scrie numele care apar pe invitație.",
+    "colourway": "Alege una dintre culorile acestui design.",
+    "notProofed": "Versiunea {version} nu a fost marcată ca verificată. Citește proba și apasă „Am verificat proba”; abia apoi se poate face PDF-ul pentru tipar.",
+    "saveFirst": "Salvează întâi o versiune a papetăriei.",
+    "nothingToPrint": "Nu este nimic de tipărit pentru piesele alese: cardurile de masă și de loc apar după ce există mese și invitați în planul de așezare."
+  },
+  "presets": {
+    "nunta": {
+      "kicker": "Împreună cu părinții și nașii noștri",
+      "wording": "avem deosebita plăcere de a vă invita să fiți alături de noi în ziua în care ne unim destinele",
+      "rsvp": "Vă rugăm să ne confirmați prezența",
+      "saveTheDate": "Rezervați data",
+      "menuTitle": "Meniu",
+      "thanks": "Mulțumim\nVă mulțumim din suflet că ați fost alături de noi în cea mai frumoasă zi a noastră."
+    },
+    "botez": {
+      "kicker": "Cu bucurie în suflet",
+      "wording": "vă invităm să fiți alături de noi la Sfânta Taină a Botezului și la petrecerea care îi urmează",
+      "rsvp": "Vă rugăm să ne confirmați prezența",
+      "saveTheDate": "Rezervați data",
+      "menuTitle": "Meniu",
+      "thanks": "Mulțumim\nVă mulțumim că ne-ați fost alături într-o zi atât de dragă nouă."
+    },
+    "aniversare": {
+      "kicker": "Sărbătorim împreună",
+      "wording": "vă invit cu drag la aniversarea mea — o seară cu prieteni, muzică și voie bună",
+      "rsvp": "Dați-mi de veste dacă veniți",
+      "saveTheDate": "Păstrați seara liberă",
+      "menuTitle": "Meniu",
+      "thanks": "Mulțumesc\nVă mulțumesc că ați sărbătorit alături de mine. A fost o seară de neuitat."
+    }
+  },
+  "defaults": {
+    "time": "ora {time}",
+    "menuBody": "Gustare\nPlatou cu aperitive reci\n\nFel principal\nPreparatul casei cu garnitură de sezon\n\nDesert\nTort"
+  },
+  "sample": {
+    "placeName": "Maria Ionescu",
+    "placeNote": "Masa 4 · +2 copii"
+  },
+  "place": {
+    "table": "Masa {label}",
+    "childOne": "+{count} copil",
+    "childMany": "+{count} copii",
+    "seatOne": "{count} loc",
+    "seatMany": "{count} locuri"
+  },
+  "pdf": {
+    "proofTitle": "Probă — {title} (versiunea {version})",
+    "proofSubject": "Probă de citit. Nu este pentru tipar.",
+    "proofStamp": "Probă · versiunea {version} · nu este pentru tipar",
+    "printTitle": "{title} — papetărie pentru tipar (versiunea {version})",
+    "printNote": "Culori RGB; conversia în CMYK se face la tipografie.",
+    "printNoteFlood": "Fondul colorat se tipărește până în margine (bleed 3 mm).",
+    "printNoteStock": "Fără fond tipărit: se recomandă carton fildeș, 300 g/m².",
+    "slugBleed": "bleed {mm} mm"
+  }
+}

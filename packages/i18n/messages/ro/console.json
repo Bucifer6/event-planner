@@ -121,7 +121,10 @@
     "counters": {
       "businesses": "Firme",
       "listings": "Listări",
-      "moderationQueue": "Moderare · în așteptare"
+      "moderationQueue": "Moderare · în așteptare",
+      "enquiries": "Cereri către firme",
+      "discovery": "Descoperire · ciorne",
+      "claims": "Revendicări"
     }
   },
   "ops": {

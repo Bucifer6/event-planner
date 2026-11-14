@@ -36,7 +36,12 @@
     "language": "Language",
     "languageHint": "Changes the wording of the app only, never your data.",
     "saveLanguage": "Save language",
-    "languageSaved": "Language saved."
+    "languageSaved": "Language saved.",
+    "displayName": "Display name",
+    "displayNameHint": "This is how the people you plan with see you: on the team and on tasks. If you leave it empty, your email address or username is shown.",
+    "saveDisplayName": "Save the name",
+    "savingDisplayName": "Saving…",
+    "displayNameSaved": "The name was saved."
   },
   "sessions": {
     "title": "Signed-in devices",

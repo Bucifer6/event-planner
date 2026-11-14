@@ -1,0 +1,53 @@
+{
+  "exports": {
+    "qrLabels": {
+      "title": "QR codes for printed invitations",
+      "description": "Labels with the household's name and the code that opens only its own invitation (PDF, A4)."
+    },
+    "qrInvitations": {
+      "title": "Invitations with QR code",
+      "description": "The checked invitation, one sheet per household with its own code (print PDF)."
+    },
+    "tableCards": {
+      "title": "Table cards",
+      "description": "Each table's number or name, with a QR code to the event page when it is published (print PDF)."
+    },
+    "roomPlan": {
+      "title": "Room plan, to scale",
+      "description": "The plan with its tables, drawn as vectors at a standard scale, with a scale bar and title block (PDF, A4)."
+    }
+  },
+  "notice": {
+    "eyebrow": "Cannot be made yet"
+  },
+  "errors": {
+    "noTables": "The seating plan has no tables yet. Add the tables under “Seating”, then download the cards again.",
+    "noSpace": "The occasion has no room plan yet. Use the venue's plan or draw one under “Room plan”, then download again.",
+    "noStationery": "There is no invitation yet. Make one under “Invitations”, mark the proof as checked, then download again.",
+    "qrOff": "The invitation does not have the QR code switched on. Tick “Print each household's QR code on the invitation” under “Invitations”, save and check the proof."
+  },
+  "labels": {
+    "docTitle": "QR codes — {title}",
+    "subject": "QR code labels for printed invitations",
+    "caption": "Your invitation",
+    "foot": "{title} · invitation QR codes · page {page} of {pages} · {date}",
+    "emptyTitle": "No guests yet",
+    "emptyBody": "Add the households under “Guests and replies”; each gets a code."
+  },
+  "tables": {
+    "docTitle": "Table cards — {title}",
+    "subject": "Table cards for print",
+    "qrCaption": "Programme, menu and plan",
+    "slug": "table card {label}"
+  },
+  "plan": {
+    "docTitle": "Room plan — {title}",
+    "subject": "Room plan at 1:{scale}",
+    "eyebrow": "Room plan",
+    "scale": "Scale 1:{scale}",
+    "seats": "{taken} of {total} seats taken",
+    "printNote": "Print on A4 at 100 %, without “fit to page”, so that the scale stays true.",
+    "unpublished": "The seating is not yet published to guests.",
+    "made": "Made on {date}"
+  }
+}

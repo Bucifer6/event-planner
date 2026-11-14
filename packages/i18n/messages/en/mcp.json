@@ -53,7 +53,13 @@
       "guestCounts": "Guest and response counts — not their names, unless you have access to the guest list",
       "budgetSummaries": "Budget totals per category, only if you have access to money",
       "spaceModel": "The venue plan: dimensions, tables, points of interest, parking",
-      "ownMessages": "Your own messages"
+      "ownMessages": "Your own messages",
+      "team": "The occasion's team: the name or address each member appears with, and their role",
+      "guestNames": "The names of invited households and of their adults, only if you manage the guest list. Children appear only as a number; contact details never leave",
+      "seating": "Seating: how many seats each table has and how many are taken",
+      "suppliers": "The plan's suppliers and their booking state; amounts only if you have finance access",
+      "planNotes": "Plan notes and budget notes (budget notes only if you have finance access)",
+      "proposals": "The proposals waiting for your decision"
     },
     "limits": "The assistant receives only what you can see in the app. It does not see guests' private requests, other accounts' data, payments or the admin console.",
     "transfer": "If the assistant's provider is outside the European Economic Area, the data is transferred outside the EEA. We recommend assistants hosted in the EEA.",
@@ -82,6 +88,97 @@
   "errors": {
     "consentRequired": "This token is not active yet. Open {url} and accept the warning about the data sent to the assistant.",
     "readOnlyToken": "This token is read-only and cannot propose changes. Create a “Read and propose” token at {url}.",
-    "tooManyTokens": "You already have the maximum number of active connections. Disconnect one to create another."
+    "tooManyTokens": "You already have the maximum number of active connections. Disconnect one to create another.",
+    "listingNotPublic": "One of the businesses is not (or no longer) public in the directory. Search again and use the ids you receive.",
+    "categoryMissing": "The budget category no longer exists. Read the budget again.",
+    "categoryTwice": "The same category appears twice in the proposal.",
+    "tooManyNotes": "The occasion already has the maximum number of notes. Delete some to add more."
+  },
+  "catalogue": {
+    "title": "What an assistant can do",
+    "lead": "The list of tools is fixed and the same for everyone. Read tools show only what you can see in the app. Propose tools change nothing: each creates a proposal that you confirm or reject.",
+    "caption": "Tools the assistant can use",
+    "tool": "Tool",
+    "access": "Access",
+    "does": "What it does",
+    "read": "Read",
+    "propose": "Propose",
+    "never": "There are no tools for payments, subscriptions, the admin console, other accounts' data, publishing, or sending enquiries to businesses."
+  },
+  "tools": {
+    "whoami": "Confirms the connection and shows which occasions it can reach.",
+    "list_occasions": "Your occasions: title, kind, date, your role.",
+    "get_occasion": "One occasion's details: date, venue, purpose and priorities, your role, the team, how many proposals are waiting.",
+    "list_tasks": "An occasion's tasks, with owner, due date and status.",
+    "get_rsvp_summary": "How many guests answered and how many are coming — numbers only, no names.",
+    "list_households": "The invited households, with each one's answer and table. Only for people who manage the occasion; no contact details.",
+    "list_pending_proposals": "The proposals waiting for your decision.",
+    "get_budget_summary": "The budget by category: estimate, forecast, committed, invoiced, paid. Only with finance access.",
+    "list_suppliers": "The plan's suppliers and their booking state; amounts only with finance access.",
+    "get_space_model": "The venue plan as geometry: dimensions, tables, points of interest, parking — not the uploaded image.",
+    "get_seating_summary": "Seating in numbers: seats at each table, how many have no seat yet, the fit check.",
+    "list_directory_filters": "The categories and counties of the business directory.",
+    "search_directory": "Searches the public business directory. Results come in the directory's own order, with the “Featured — paid placement” label where it applies.",
+    "get_listing": "A business's public page in the directory.",
+    "list_catalogues": "Published flower catalogues, with indicative prices.",
+    "propose_task_list": "Proposes new tasks, with due date and owner.",
+    "propose_invitation_text": "Proposes the invitation wording shown to guests.",
+    "propose_budget": "Proposes estimates for budget categories. They appear as estimates, not quotes. Only with finance access.",
+    "propose_budget_note": "Proposes a note on a budget category. Only with finance access.",
+    "propose_supplier_shortlist": "Proposes a note listing businesses to consider. It notifies nobody and sends no enquiry.",
+    "propose_seating_layout": "Proposes a layout of tables and guests, checked against the space.",
+    "propose_custom_table": "Proposes a new table, with name and dimensions.",
+    "propose_arrangement_design": "Proposes a flower arrangement from the catalogues, with an indicative cost."
+  },
+  "results": {
+    "unclaimed": "This listing isn't claimed yet"
+  },
+  "whatif": {
+    "taskList": {
+      "title": "New tasks proposed: {count}",
+      "newTask": "New task",
+      "due": "Due: {date}",
+      "noDate": "No due date",
+      "owner": "Offered to {name}; they become the owner only if they accept."
+    },
+    "invitationText": {
+      "title": "New invitation wording",
+      "what": "Invitation wording",
+      "note": "Shown on the guests' page. It stays labelled “created with an external assistant” until you edit it."
+    },
+    "budget": {
+      "title": "Budget estimates proposed: {count}",
+      "estimate": "Estimate",
+      "newCategory": "New category",
+      "estimateNote": "An estimate — not a quote and not a confirmed price.",
+      "noteOn": "Note on “{name}”",
+      "noteGeneral": "Budget note",
+      "noteTitle": "Budget note proposed"
+    },
+    "shortlist": {
+      "title": "Businesses to consider: {count}",
+      "listing": "Directory business",
+      "noReason": "No reason given",
+      "noteOnly": "Only a note in the plan: it does not notify the business and sends no enquiry."
+    }
+  },
+  "notes": {
+    "title": "Plan notes",
+    "description": "Notes kept only for you and your team. They notify nobody.",
+    "shortlistTitle": "Businesses to consider",
+    "budgetTitle": "Budget note",
+    "open": "See in the directory",
+    "remove": "Delete note",
+    "removing": "Deleting…",
+    "removed": "The note was deleted.",
+    "noEnquiry": "No business was contacted. If you want, send an enquiry yourself from the business's page."
+  },
+  "invitation": {
+    "title": "Invitation wording",
+    "label": "Text shown to guests",
+    "hint": "Shown on the guests' page, under the occasion title. Leave empty for no text.",
+    "save": "Save the text",
+    "saved": "The text was saved.",
+    "externalNote": "The current text was proposed by an external assistant and confirmed here. The label goes away when you edit it."
   }
 }

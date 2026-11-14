@@ -1,0 +1,108 @@
+/* Guest-facing event content (public page /e/<slug> and guest-link sections) — tokens only. */
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--s-3);
+  padding-top: var(--s-4);
+  border-top: var(--hair) solid var(--line);
+  min-width: 0;
+}
+
+.blockTitle {
+  font-family: var(--font-display);
+  font-size: var(--display-sm);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+
+.sub {
+  font-family: var(--font-text);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+/* Programme: the hour speaks in Bodoni, the moment beside it. */
+.timeline { list-style: none; margin: 0; padding: 0; }
+.moment {
+  display: grid;
+  grid-template-columns: 4.25rem minmax(0, 1fr);
+  column-gap: var(--s-3);
+  align-items: baseline;
+  padding: var(--s-3) 0;
+  border-top: var(--hair) solid var(--line);
+}
+.moment:first-child { border-top: 0; padding-top: 0; }
+.time {
+  font-family: var(--font-display);
+  font-size: var(--display-sm);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums lining-nums;
+  letter-spacing: -0.01em;
+}
+.momentBody { display: flex; flex-direction: column; gap: var(--s-1); min-width: 0; }
+.momentTitle { font-size: var(--text-md); font-weight: 600; overflow-wrap: anywhere; }
+.momentMeta { font-size: var(--text-sm); color: var(--ink-2); overflow-wrap: anywhere; }
+.dayMark {
+  padding: var(--s-4) 0 var(--s-2);
+  border-top: var(--hair) solid var(--line);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--gilt-ink);
+}
+
+/* Menu card: centred like a printed menu. */
+.menu { display: flex; flex-direction: column; gap: var(--s-4); text-align: center; padding: var(--s-2) 0; }
+.menuName { font-family: var(--font-display); font-style: italic; font-size: var(--text-lg); color: var(--ink-2); }
+.course { display: flex; flex-direction: column; gap: var(--s-2); align-items: center; }
+.dish { display: flex; flex-direction: column; gap: 2px; align-items: center; max-width: 34ch; }
+.dishName { font-family: var(--font-display); font-size: var(--text-lg); line-height: 1.25; overflow-wrap: anywhere; }
+.dishDesc { font-size: var(--text-sm); color: var(--ink-2); }
+.dishTags { font-size: var(--text-xs); letter-spacing: 0.06em; color: var(--ink-2); }
+.or { font-family: var(--font-display); font-style: italic; font-size: var(--text-sm); color: var(--gilt-ink); }
+
+/* Access facts: a fact and its state on one line, the note under it. */
+.facts { list-style: none; margin: 0; padding: 0; }
+.fact { padding: var(--s-3) 0; border-top: var(--hair) solid var(--line); display: flex; flex-direction: column; gap: var(--s-1); }
+.fact:first-child { border-top: 0; padding-top: 0; }
+.factLine { display: flex; justify-content: space-between; gap: var(--s-3); align-items: baseline; }
+.factState { font-weight: 600; flex: none; }
+.factNote { font-size: var(--text-sm); color: var(--ink-2); overflow-wrap: anywhere; }
+
+.venueLine { font-size: var(--text-md); line-height: 1.45; overflow-wrap: anywhere; }
+.prose { white-space: pre-line; max-width: var(--measure); color: var(--ink-2); line-height: 1.55; overflow-wrap: anywhere; }
+
+/* Forms */
+.formStack { display: flex; flex-direction: column; gap: var(--s-4); min-width: 0; }
+.pair { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s-3); }
+@media (max-width: 359px) { .pair { grid-template-columns: minmax(0, 1fr); } }
+.choiceGroup { display: flex; flex-direction: column; gap: var(--s-3); padding: var(--s-3) 0; border-top: var(--hair) solid var(--line); }
+.choiceGroup:first-child { border-top: 0; padding-top: 0; }
+.option { display: flex; justify-content: space-between; align-items: flex-end; gap: var(--s-3); }
+.optionText { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-bottom: var(--s-2); }
+.optionName { font-weight: 600; overflow-wrap: anywhere; }
+.sentList { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--s-1); font-size: var(--text-sm); }
+
+/* Result plate after registering */
+.result { display: flex; flex-direction: column; gap: var(--s-3); align-items: center; text-align: center; padding: var(--s-4) 0; }
+.resultTitle {
+  font-family: var(--font-display);
+  font-size: var(--display-md);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+.resultTitle:focus { outline: none; }
+.linkBox { display: flex; flex-direction: column; gap: var(--s-3); align-items: stretch; text-align: left; width: 100%; }
+.wrap { overflow-wrap: anywhere; }
+.center { text-align: center; }
+.head { display: flex; align-items: center; justify-content: space-between; gap: var(--s-3); }
+.plain { display: flex; flex-direction: column; gap: var(--s-3); text-align: center; align-items: center; padding: var(--s-6) 0; }
+.actions { display: flex; flex-wrap: wrap; gap: var(--s-2); align-items: center; }

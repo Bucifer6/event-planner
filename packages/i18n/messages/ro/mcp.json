@@ -53,7 +53,13 @@
       "guestCounts": "Numărul de invitați și de răspunsuri — nu și numele lor, dacă nu ai acces la lista de invitați",
       "budgetSummaries": "Totalurile bugetului pe categorii, numai dacă ai acces la bani",
       "spaceModel": "Planul locației: dimensiuni, mese, puncte de interes, parcare",
-      "ownMessages": "Mesajele tale"
+      "ownMessages": "Mesajele tale",
+      "team": "Echipa ocaziei: numele sau adresa cu care apare fiecare membru și rolul lui",
+      "guestNames": "Numele gospodăriilor invitate și ale adulților din ele, numai dacă administrezi lista de invitați. Copiii apar doar ca număr; datele de contact nu pleacă niciodată",
+      "seating": "Așezarea la mese: câte locuri are fiecare masă și câte sunt ocupate",
+      "suppliers": "Furnizorii din plan și starea rezervărilor; sumele doar dacă ai acces la bani",
+      "planNotes": "Notele din plan și notele de buget (cele de buget doar dacă ai acces la bani)",
+      "proposals": "Propunerile care așteaptă decizia ta"
     },
     "limits": "Asistentul primește doar ce poți vedea tu în aplicație. Nu vede cererile private ale invitaților, datele altor conturi, plățile sau consola de administrare.",
     "transfer": "Dacă furnizorul asistentului este în afara Spațiului Economic European, datele sunt transferate în afara SEE. Recomandăm asistenți găzduiți în SEE.",
@@ -82,6 +88,97 @@
   "errors": {
     "consentRequired": "Acest token nu este încă activ. Deschide {url} și acceptă avertismentul despre datele trimise asistentului.",
     "readOnlyToken": "Acest token este doar pentru citire și nu poate propune schimbări. Creează un token „Citire și propuneri” la {url}.",
-    "tooManyTokens": "Ai deja numărul maxim de conexiuni active. Deconectează una ca să creezi alta."
+    "tooManyTokens": "Ai deja numărul maxim de conexiuni active. Deconectează una ca să creezi alta.",
+    "listingNotPublic": "Una dintre firme nu este (sau nu mai este) publică în director. Caută din nou și folosește identificatorii primiți.",
+    "categoryMissing": "Categoria de buget nu mai există. Citește din nou bugetul.",
+    "categoryTwice": "Aceeași categorie apare de două ori în propunere.",
+    "tooManyNotes": "Ocazia are deja numărul maxim de note. Șterge câteva ca să adaugi altele."
+  },
+  "catalogue": {
+    "title": "Ce poate face un asistent",
+    "lead": "Lista de unelte este fixă și aceeași pentru toată lumea. Uneltele de citire arată doar ce vezi tu în aplicație. Uneltele de propunere nu schimbă nimic: fiecare creează o propunere pe care o confirmi sau o respingi tu.",
+    "caption": "Uneltele pe care le poate folosi asistentul",
+    "tool": "Unealtă",
+    "access": "Acces",
+    "does": "Ce face",
+    "read": "Citire",
+    "propose": "Propunere",
+    "never": "Nu există unelte pentru plăți, abonamente, consola de administrare, datele altor conturi, publicare sau trimiterea de cereri către firme."
+  },
+  "tools": {
+    "whoami": "Confirmă conexiunea și arată la ce ocazii are acces.",
+    "list_occasions": "Ocaziile tale: titlu, tip, dată, rolul tău.",
+    "get_occasion": "Detaliile unei ocazii: dată, loc, scop și priorități, rolul tău, echipa, câte propuneri așteaptă.",
+    "list_tasks": "Sarcinile unei ocazii, cu responsabil, termen și stare.",
+    "get_rsvp_summary": "Câți invitați au răspuns și câți vin — doar numere, fără nume.",
+    "list_households": "Lista gospodăriilor invitate, cu răspunsul și masa fiecăreia. Numai pentru cine administrează ocazia; fără date de contact.",
+    "list_pending_proposals": "Propunerile care așteaptă decizia ta.",
+    "get_budget_summary": "Bugetul pe categorii: estimat, prognozat, angajat, facturat, plătit. Numai cu acces la bani.",
+    "list_suppliers": "Furnizorii din plan și starea rezervărilor; sumele numai cu acces la bani.",
+    "get_space_model": "Planul locației ca geometrie: dimensiuni, mese, puncte de interes, parcare — nu imaginea încărcată.",
+    "get_seating_summary": "Așezarea în cifre: locuri la fiecare masă, câți nu au încă loc, verificarea de încadrare.",
+    "list_directory_filters": "Categoriile și județele din directorul de firme.",
+    "search_directory": "Caută în directorul public de firme. Rezultatele vin în ordinea directorului, cu eticheta „Promovat — plasare plătită” acolo unde e cazul.",
+    "get_listing": "Pagina publică a unei firme din director.",
+    "list_catalogues": "Cataloagele de flori publicate, cu prețuri orientative.",
+    "propose_task_list": "Propune sarcini noi, cu termen și responsabil.",
+    "propose_invitation_text": "Propune textul invitației afișat invitaților.",
+    "propose_budget": "Propune estimări pe categorii de buget. Apar ca estimări, nu ca oferte. Numai cu acces la bani.",
+    "propose_budget_note": "Propune o notă la o categorie de buget. Numai cu acces la bani.",
+    "propose_supplier_shortlist": "Propune o notă cu firme de luat în calcul. Nu anunță pe nimeni și nu trimite nicio cerere.",
+    "propose_seating_layout": "Propune o așezare a meselor și a invitaților, verificată cu spațiul.",
+    "propose_custom_table": "Propune o masă nouă, cu nume și dimensiuni.",
+    "propose_arrangement_design": "Propune un aranjament floral din cataloage, cu cost orientativ."
+  },
+  "results": {
+    "unclaimed": "Această listare nu a fost încă revendicată"
+  },
+  "whatif": {
+    "taskList": {
+      "title": "Sarcini noi propuse: {count}",
+      "newTask": "Sarcină nouă",
+      "due": "Termen: {date}",
+      "noDate": "Fără termen",
+      "owner": "I se propune lui {name}; devine responsabil doar dacă acceptă."
+    },
+    "invitationText": {
+      "title": "Text nou pentru invitație",
+      "what": "Textul invitației",
+      "note": "Apare pe pagina invitaților. Rămâne etichetat „creat cu un asistent extern” până îl modifici."
+    },
+    "budget": {
+      "title": "Estimări de buget propuse: {count}",
+      "estimate": "Estimare",
+      "newCategory": "Categorie nouă",
+      "estimateNote": "Estimare — nu este o ofertă și nu este un preț confirmat.",
+      "noteOn": "Notă la „{name}”",
+      "noteGeneral": "Notă de buget",
+      "noteTitle": "Notă de buget propusă"
+    },
+    "shortlist": {
+      "title": "Firme de luat în calcul: {count}",
+      "listing": "Firmă din director",
+      "noReason": "Fără motiv scris",
+      "noteOnly": "Doar o notă în plan: nu anunță firma și nu trimite nicio cerere."
+    }
+  },
+  "notes": {
+    "title": "Note din plan",
+    "description": "Note păstrate doar pentru tine și echipa ta. Nu anunță pe nimeni.",
+    "shortlistTitle": "Firme de luat în calcul",
+    "budgetTitle": "Notă de buget",
+    "open": "Vezi în director",
+    "remove": "Șterge nota",
+    "removing": "Se șterge…",
+    "removed": "Nota a fost ștearsă.",
+    "noEnquiry": "Nicio firmă nu a fost contactată. Dacă vrei, trimite tu o cerere din pagina firmei."
+  },
+  "invitation": {
+    "title": "Textul invitației",
+    "label": "Text afișat invitaților",
+    "hint": "Apare pe pagina invitaților, sub titlul ocaziei. Lasă gol dacă nu vrei un text.",
+    "save": "Salvează textul",
+    "saved": "Textul a fost salvat.",
+    "externalNote": "Textul de acum a fost propus de un asistent extern și confirmat aici. Eticheta dispare când îl modifici."
   }
 }

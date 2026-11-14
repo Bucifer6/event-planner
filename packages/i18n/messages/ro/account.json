@@ -36,7 +36,12 @@
     "language": "Limba",
     "languageHint": "Schimbă doar textele aplicației, niciodată datele tale.",
     "saveLanguage": "Salvează limba",
-    "languageSaved": "Limba a fost salvată."
+    "languageSaved": "Limba a fost salvată.",
+    "displayName": "Numele afișat",
+    "displayNameHint": "Așa te văd oamenii cu care organizezi: în echipă și la sarcini. Dacă îl lași gol, apare adresa de email sau numele de utilizator.",
+    "saveDisplayName": "Salvează numele",
+    "savingDisplayName": "Se salvează…",
+    "displayNameSaved": "Numele a fost salvat."
   },
   "sessions": {
     "title": "Dispozitive conectate",

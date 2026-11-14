@@ -53,6 +53,13 @@ export const MCP_CONSENT_DATA_CLASSES = [
   "budgetSummaries",
   "spaceModel",
   "ownMessages",
+  // added with the release 0–P tool catalogue (tools.ts)
+  "team",
+  "guestNames",
+  "seating",
+  "suppliers",
+  "planNotes",
+  "proposals",
 ] as const;
 
 export type McpTokenRow = typeof mcpTokens.$inferSelect;

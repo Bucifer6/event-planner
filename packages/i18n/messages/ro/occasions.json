@@ -68,7 +68,9 @@
     "submit": "Creează ocazia",
     "submitting": "Se creează…",
     "cancel": "Renunță",
-    "freeNote": "Crearea unei ocazii este gratuită."
+    "freeNote": "Crearea unei ocazii este gratuită.",
+    "lessonsTitle": "Lecții de la ocaziile trecute",
+    "lessonsIntro": "Notițele tale de la ocaziile pe care le-ai încheiat."
   },
   "fields": {
     "title": "Titlul ocaziei",
@@ -138,7 +140,8 @@
     "save": "Salvează detaliile",
     "detailsTitle": "Detalii și brief",
     "readOnlyTitle": "Setările sunt ale organizatorului",
-    "readOnlyBody": "Doar organizatorul și managerii de proiect pot schimba detaliile ocaziei."
+    "readOnlyBody": "Doar organizatorul și managerii de proiect pot schimba detaliile ocaziei.",
+    "tripZoneNote": "Data ocaziei este în ora României. Etapele călătoriei își păstrează fiecare fusul orar al locului."
   },
   "move": {
     "title": "Data ocaziei",

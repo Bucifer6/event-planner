@@ -1,0 +1,58 @@
+{
+  "title": "Promotion",
+  "description": "Wording and materials ready to download, made from the occasion's own facts. You use them, wherever you like.",
+  "exportOnly": {
+    "title": "Nothing is published by itself",
+    "body": "EventDesk posts nothing, sends nothing and spends nothing on your behalf. From here you only download."
+  },
+  "texts": {
+    "title": "Description texts",
+    "shortRo": "Short text, Romanian",
+    "longRo": "Long text, Romanian",
+    "shortEn": "Short text, English",
+    "longEn": "Long text, English",
+    "composed": "Written from the occasion's facts. You can edit it.",
+    "copy": "Copy the text",
+    "copied": "Copied",
+    "save": "Save the texts",
+    "saving": "Saving…",
+    "saved": "The texts are saved.",
+    "readOnly": "You can copy the texts, but only the organisers can change them."
+  },
+  "assets": {
+    "title": "Materials to download",
+    "design": "Drawn with your stationery design ({design}).",
+    "designDefault": "Drawn with the house design. Choose your own under “Invitations”.",
+    "previewAlt": "The square card, as it downloads",
+    "square": "Square card",
+    "squareMeta": "PNG image, 1080 × 1080",
+    "story": "Tall card",
+    "storyMeta": "PNG image, 1080 × 1920",
+    "ics": "Calendar file",
+    "icsMeta": ".ics file, opens in any calendar",
+    "icsNoDate": "Available once the occasion has a date.",
+    "posterA4": "Poster, A4",
+    "posterA3": "Poster, A3",
+    "posterMeta": "Printable PDF, vector text",
+    "download": "Download"
+  },
+  "copy": {
+    "when": "{date}",
+    "whenTime": "{date} at {time}",
+    "where": "{venue}",
+    "whereAddress": "{venue}, {address}",
+    "short": "{title} — {facts}.",
+    "shortBare": "{title}.",
+    "longOpen": "Join us for “{title}”.",
+    "longWhen": "We meet on {when}.",
+    "longWhere": "The place: {where}.",
+    "longClose": "We look forward to seeing you."
+  },
+  "poster": {
+    "docTitle": "{title} — poster {size}",
+    "subject": "Printable poster"
+  },
+  "errors": {
+    "noDate": "The occasion has no date yet; the calendar file is available once you set one."
+  }
+}

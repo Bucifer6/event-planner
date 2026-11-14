@@ -1,0 +1,158 @@
+{
+  "title": "Programul zilei",
+  "description": "Momentele zilei în ordine, cine le susține și ce văd invitații. Ora este cea din ziua evenimentului.",
+  "dayLink": "Vezi ziua evenimentului",
+  "undated": "Ocazia nu are încă o dată. Orele rămân cum le scrii și se așază pe zi când alegi data.",
+  "revision": "Schimbări văzute de invitați până acum: {count}",
+  "notifyNote": "Când schimbi un moment vizibil invitaților, cei pe care îi privește primesc un singur mesaj pe email — nu câte unul la fiecare retușare. Cine nu a lăsat o adresă vede schimbarea marcată pe linkul lui.",
+  "nextDayHeading": "După miezul nopții",
+  "add": {
+    "button": "Adaugă un moment",
+    "title": "Un moment nou",
+    "submit": "Adaugă momentul"
+  },
+  "edit": {
+    "button": "Modifică",
+    "title": "Modifică momentul",
+    "submit": "Salvează momentul"
+  },
+  "remove": {
+    "button": "Șterge momentul",
+    "title": "Ștergi „{title}”?",
+    "body": "Momentul dispare din program împreună cu reperele lui. Dacă era vizibil invitaților, cei pe care îi privea sunt anunțați o singură dată.",
+    "submit": "Șterge momentul",
+    "keep": "Păstrează momentul"
+  },
+  "fields": {
+    "title": "Moment",
+    "titleHint": "De exemplu: Primul dans",
+    "kind": "Fel",
+    "time": "Ora",
+    "timeHint": "În format 24 de ore, de exemplu 18:30",
+    "nextDay": "După miezul nopții",
+    "nextDayHint": "Bifează pentru momentele din noaptea evenimentului, de pildă tortul de la 00:30.",
+    "duration": "Durată în minute",
+    "durationHint": "Lasă gol dacă nu știi încă.",
+    "place": "Loc",
+    "placeHint": "De exemplu: Salonul mare",
+    "performer": "Artist sau furnizor",
+    "performerNone": "Fără — îl ține echipa",
+    "performerHint": "Momentele unui furnizor pot fi trimise în briefingul lui.",
+    "visible": "Vizibil invitaților",
+    "visibleHint": "Apare pe linkul invitaților și, dacă alegi, pe pagina publică.",
+    "concerns": "Pe cine privește",
+    "concernsAll": "Pe toți invitații",
+    "concernsSome": "Doar pe unele familii",
+    "households": "Familiile pe care le privește",
+    "householdsEmpty": "Nu ai încă invitați pe listă.",
+    "notes": "Note pentru echipă",
+    "notesHint": "Nu ajung niciodată la invitați."
+  },
+  "kinds": {
+    "ceremony": "Ceremonie",
+    "meal": "Masă",
+    "music": "Muzică",
+    "dance": "Dans",
+    "speech": "Discurs",
+    "moment": "Moment",
+    "other": "Altceva"
+  },
+  "concerns": {
+    "all": "toți invitații",
+    "someCount": "familii: {count}"
+  },
+  "row": {
+    "minutes": "{n} min",
+    "durationUnknown": "durată necunoscută",
+    "visible": "Vizibil invitaților",
+    "hidden": "Doar pentru echipă",
+    "some": "Pentru familii: {count}",
+    "cues": "Repere: {count}",
+    "noCues": "Fără repere",
+    "show": "Arată invitaților",
+    "hide": "Ascunde de invitați",
+    "changing": "Se schimbă…"
+  },
+  "empty": {
+    "title": "Programul este încă gol",
+    "body": "Adaugă primul moment — de exemplu „Cununia religioasă, 16:00”. Apoi îi poți da repere și îl poți arăta invitaților.",
+    "bodyReadOnly": "Organizatorii nu au adăugat încă niciun moment."
+  },
+  "cues": {
+    "button": "Repere",
+    "title": "Repere — {title}",
+    "intro": "Lista de repere spune cine ce face și când, față de începutul momentului. Fiecare salvare păstrează versiunea de dinainte.",
+    "offset": "Minutul",
+    "offsetHint": "0 = la început",
+    "instruction": "Ce se întâmplă",
+    "who": "Cine",
+    "row": "Reperul {n}",
+    "addRow": "Adaugă un reper",
+    "removeRow": "Șterge reperul {n}",
+    "save": "Salvează versiunea nouă",
+    "saving": "Se salvează…",
+    "saved": "Salvat ca versiunea {version}.",
+    "unchanged": "Nimic de salvat — lista este la fel ca versiunea {version}.",
+    "empty": "Încă nu există repere. Adaugă primul.",
+    "history": "Toate versiunile",
+    "version": "Versiunea {version}",
+    "current": "în vigoare",
+    "versionAt": "salvată pe {date}",
+    "versionEmpty": "Fără repere în această versiune.",
+    "atStart": "la început",
+    "after": "la {n} min",
+    "before": "cu {n} min înainte"
+  },
+  "briefing": {
+    "sectionTitle": "Briefing pentru artiști",
+    "sectionIntro": "Trimite fiecărui artist momentele lui și reperele lor. Ajung ca o versiune nouă a briefingului, pe care el o confirmă pe linkul lui.",
+    "moments": "Momente: {count}",
+    "noVersion": "Niciun briefing publicat încă",
+    "version": "Briefing versiunea {version}",
+    "acked": "confirmată versiunea {version}",
+    "notAcked": "neconfirmată încă",
+    "include": "Include programul în briefing",
+    "including": "Se publică…",
+    "included": "Publicat ca versiunea {version} a briefingului.",
+    "openSupplier": "Deschide furnizorul",
+    "nextDay": "(a doua zi)",
+    "minutes": "{n} min",
+    "atStart": "la început",
+    "after": "+{n} min",
+    "before": "−{n} min"
+  },
+  "guest": {
+    "title": "Programul",
+    "intro": "Momentele la care ești așteptat.",
+    "changedNotice": "Programul s-a schimbat. Momentele modificate sunt marcate mai jos.",
+    "changed": "Modificat",
+    "removed": "Nu mai are loc: {list}",
+    "nextDay": "după miezul nopții",
+    "minutes": "{n} min",
+    "timeLabel": "Ora {time}"
+  },
+  "email": {
+    "subject": "S-a schimbat programul: {occasion}",
+    "greeting": "Bună, {household}!",
+    "body": "Organizatorii au schimbat ceva în programul pentru „{occasion}” care te privește.",
+    "moments": "Momente noi sau modificate: {list}.",
+    "removed": "Nu mai au loc: {list}.",
+    "where": "Deschide linkul invitației tale ca să vezi orele și locurile la zi.",
+    "why": "Primești acest mesaj o singură dată pentru această schimbare, pentru că ai lăsat adresa ta când ai răspuns la invitație."
+  },
+  "export": {
+    "title": "Programul zilei (CSV)",
+    "description": "Toate momentele cu ora, locul, artistul și reperele în vigoare."
+  },
+  "errors": {
+    "time": "Scrie ora ca 18:30.",
+    "duration": "Scrie durata în minute, între 1 și 1440.",
+    "chooseHouseholds": "Alege cel puțin o familie sau treci pe „toți invitații”.",
+    "tooMany": "Programul a ajuns la numărul maxim de momente.",
+    "cueOffset": "Scrie minutul ca număr, de exemplu 0 sau 5.",
+    "cueInstruction": "Scrie ce se întâmplă la acest reper sau șterge rândul.",
+    "tooManyCues": "O listă poate avea cel mult 60 de repere.",
+    "noPerformerItems": "Acest furnizor nu are încă niciun moment în program.",
+    "briefingUpToDate": "Briefingul are deja programul la zi."
+  }
+}

@@ -1,3 +1,4 @@
+import { signInPathFor } from "@ed/auth";
 import { getClaimView } from "@ed/core/claims";
 import { buttonClassName, ExternalLink, Lead, Notice, Section, Stack } from "@ed/ui";
 import type { Metadata } from "next";
@@ -91,7 +92,7 @@ export default async function ClaimPage({ params }: { params: Promise<{ listingI
         <Notice
           title={t("signIn.title")}
           actions={
-            <Link href="/sign-in" className={buttonClassName({ variant: "primary" })}>
+            <Link href={signInPathFor(`/claim/${listingId}`)} className={buttonClassName({ variant: "primary" })}>
               {t("signIn.action")}
             </Link>
           }

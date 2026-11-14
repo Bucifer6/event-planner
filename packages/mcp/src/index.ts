@@ -11,3 +11,4 @@ export * from "./registry";
 export * from "./tokens";
 export * from "./builtin";
 export * from "./server";
+export * from "./tools";

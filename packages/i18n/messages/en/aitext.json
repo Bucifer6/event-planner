@@ -1,0 +1,95 @@
+{
+  "label": "AI-generated",
+  "open": "Ask for a wording suggestion",
+  "title": "Wording suggestion",
+  "intro": "You get a wording you can change as you like. Nothing is used until you press “Use this text”.",
+  "sent": "We send only the kind of occasion, the tone, the language and the names written in the form. Never the guest list, contacts or addresses.",
+  "toneLegend": "Tone",
+  "tones": {
+    "ceremonious": "Ceremonious",
+    "warm": "Warm",
+    "playful": "Playful"
+  },
+  "hint": "Anything to keep in mind",
+  "hintHint": "For example “outdoors, nothing formal”.",
+  "generate": "Generate a suggestion",
+  "generating": "Writing the suggestion…",
+  "again": "Another suggestion",
+  "resultLabel": "The suggestion — you can edit it",
+  "use": "Use this text",
+  "discard": "Discard",
+  "remaining": "Suggestions left this month: {remaining} of {limit}.",
+  "resets": "The count starts again on {date}.",
+  "off": "Wording suggestions are not switched on for this platform.",
+  "keptLabel": "The text carries the “AI-generated” label until you rewrite most of it.",
+  "errors": {
+    "notConfigured": "Wording suggestions are not switched on for this platform.",
+    "monthlyLimit": "You have used this month's {limit} wording suggestions. The count starts again on {date}.",
+    "providerFailed": "The suggestion could not be made just now and was not counted. Try again a little later."
+  },
+  "dev": {
+    "who": "us",
+    "hint": "({hint})",
+    "occasion": {
+      "nunta": "our wedding",
+      "botez": "our child's christening",
+      "aniversare": "my birthday"
+    },
+    "invitation": {
+      "ceremonious": {
+        "a": "With great joy, {who} request the honour of your presence at {occasion}.",
+        "b": "It gives us great pleasure to invite you to join {who} at {occasion}, a day we wish to share with those dear to us."
+      },
+      "warm": {
+        "a": "It would make us very happy to have you with us at {occasion}. With love, {who}.",
+        "b": "You are warmly invited to {occasion}. It would not be the same without you — {who}."
+      },
+      "playful": {
+        "a": "Get your dancing shoes ready: {who} are calling you to {occasion}!",
+        "b": "Good cheer, music and favourite people are expected at {occasion}. Signed: {who}."
+      }
+    },
+    "save_the_date": {
+      "ceremonious": {
+        "a": "Kindly keep this day for {occasion}.",
+        "b": "Note the date: {who} will soon send the invitation to {occasion}."
+      },
+      "warm": {
+        "a": "Keep the day free for {occasion} — the invitation follows soon.",
+        "b": "A day to remember: {occasion}. We will be in touch with all the details."
+      },
+      "playful": {
+        "a": "Make no other plans: {occasion} is coming!",
+        "b": "Block the date — {occasion} is not to be missed."
+      }
+    },
+    "thanks": {
+      "ceremonious": {
+        "a": "Thank you for the honour of your company at {occasion} and for your kind thoughts.",
+        "b": "Your presence at {occasion} meant a great deal to {who}. Thank you."
+      },
+      "warm": {
+        "a": "Thank you with all our hearts for being with us at {occasion}. You made the day lovelier.",
+        "b": "We treasured every moment spent together at {occasion}. Thank you, {who}."
+      },
+      "playful": {
+        "a": "What a party! Thank you for dancing with us at {occasion}.",
+        "b": "Thank you for the laughter, the dancing and the memories of {occasion}. Let us do it again!"
+      }
+    },
+    "promotion": {
+      "ceremonious": {
+        "a": "You are invited to {occasion}, an event prepared with care for those close to us.",
+        "b": "{who} look forward to welcoming you at {occasion}. Date and venue are below."
+      },
+      "warm": {
+        "a": "We would love to see you at {occasion}. Come and celebrate with us!",
+        "b": "{occasion} is coming and we would be glad to have you there. Date and venue are below."
+      },
+      "playful": {
+        "a": "{occasion} is nearly here! Bring your good mood and come.",
+        "b": "Music, lovely people and {occasion}: be there."
+      }
+    }
+  }
+}

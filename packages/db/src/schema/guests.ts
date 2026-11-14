@@ -59,6 +59,12 @@ export const occasionGuestSettings = pgTable("occasion_guest_settings", {
   guestRevisionAt: timestamptz("guest_revision_at"),
   /** i18n key that says what changed, e.g. "rsvp.changes.date". */
   guestRevisionReasonKey: text("guest_revision_reason_key"),
+  /**
+   * MCP tool propose_invitation_text / planner edit (@ed/core/invitationtext): custom wording
+   * shown on the guest plate. NULL = none. Single column on purpose — whether the current
+   * text still is the assistant's draft is derived from the applied What-if preview (MCP5).
+   */
+  invitationText: text("invitation_text"),
   updatedAt: updatedAt(),
 });
 

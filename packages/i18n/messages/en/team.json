@@ -131,7 +131,7 @@
     "submit": "Accept the invitation",
     "submitting": "Accepting…",
     "signInTitle": "Sign in first",
-    "signInBody": "After signing in, open the link in the email again to accept the invitation."
+    "signInBody": "After you sign in we bring you back here to accept the invitation."
   },
   "email": {
     "subject": "Invitation to the team of “{occasion}”",

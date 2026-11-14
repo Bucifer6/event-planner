@@ -1,4 +1,5 @@
 import "server-only";
+import { signInPathFor } from "@ed/auth";
 import { actorAccountId, makeCtx, type Actor, type Ctx } from "@ed/core/context";
 import { getDb } from "@ed/db";
 import { toLocale } from "@ed/i18n/config";
@@ -38,10 +39,13 @@ export type AccountCtx = Ctx & { actor: Extract<Actor, { accountId: string }>; a
 /**
  * Like getCtx(), but redirects to /sign-in when there is no account actor.
  * Use it in every (app) page/layout; `ctx.accountId` is the signed-in account.
+ * The page that was asked for (set by proxy.ts) rides along as `?next=` when it is one of
+ * the allowlisted return paths (/occasions/…, /business/… — e.g. a business invitation), so
+ * the person lands back on it after signing in.
  */
 export async function requireCtx(): Promise<AccountCtx> {
   const ctx = await getCtx();
   const accountId = actorAccountId(ctx.actor);
-  if (!accountId) redirect(SIGN_IN_PATH);
+  if (!accountId) redirect(signInPathFor((await headers()).get("x-ed-path"), SIGN_IN_PATH));
   return { ...ctx, accountId } as AccountCtx;
 }

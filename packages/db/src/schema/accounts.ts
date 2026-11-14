@@ -23,6 +23,11 @@ export const accounts = pgTable(
     /** Argon2id PHC string with its own salt (S8). NULL for email accounts: they have no password. */
     passwordHash: text("password_hash"),
     locale: text("locale").$type<"ro" | "en">().notNull().default("ro"),
+    /**
+     * Optional name the person chose to be shown as to the people they plan with (member
+     * lists, task owners). NULL = show the email / generated username (@ed/core/accounts accountLabel).
+     */
+    displayName: text("display_name"),
     emailVerifiedAt: timestamptz("email_verified_at"),
     /** Set while a deletion request is inside its 7-day undo window (D6). */
     deletionRequestedAt: timestamptz("deletion_requested_at"),

@@ -36,6 +36,9 @@ import { registerJobs as enquiries } from "@ed/core/enquiries";
 import { registerJobs as catalogues } from "@ed/core/catalogues";
 import { registerJobs as discovery } from "@ed/core/discovery";
 import { registerJobs as claims } from "@ed/core/claims";
+import { registerJobs as programme } from "@ed/core/programme"; // C-03/C-10: programme.notify
+import { registerJobs as publicRegistrations } from "@ed/core/registrations"; // C-06: promoted email, waitlist sweep, lifecycle notice
+import { registerJobs as privateRequests } from "@ed/core/requests"; // C-07: retention rule private-requests
 
 const registrations: Array<() => void> = [
   builtin,
@@ -59,6 +62,9 @@ const registrations: Array<() => void> = [
   catalogues,
   discovery,
   claims,
+  programme,
+  publicRegistrations,
+  privateRequests,
 ];
 
 let done = false;

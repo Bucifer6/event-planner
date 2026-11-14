@@ -1,3 +1,4 @@
+import { safeNextPath, withNext } from "@ed/auth";
 import { Lead, Stack } from "@ed/ui";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -10,7 +11,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** S8: lost password — username + one recovery code + a new password. */
-export default async function AnonymousRecoverPage() {
+export default async function AnonymousRecoverPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const next = safeNextPath((await searchParams).next);
   const t = await getTranslations("auth.anonymous");
   return (
     <Stack gap={4}>
@@ -20,6 +22,7 @@ export default async function AnonymousRecoverPage() {
       </Stack>
       <ActionForm
         action={anonymousRecover}
+        hidden={next ? { next } : undefined}
         fields={[
           { name: "username", label: t("usernameLabel"), hint: t("usernameHint"), autoComplete: "username", maxLength: 100 },
           { name: "recoveryCode", label: t("recoveryCodeLabel"), hint: t("recoveryCodeHint"), autoComplete: "off", maxLength: 40 },
@@ -29,7 +32,7 @@ export default async function AnonymousRecoverPage() {
         pendingLabel={t("recovering")}
       />
       <p>
-        <Link href="/sign-in/anonymous">{t("backToAnonymous")}</Link>
+        <Link href={withNext("/sign-in/anonymous", next)}>{t("backToAnonymous")}</Link>
       </p>
     </Stack>
   );

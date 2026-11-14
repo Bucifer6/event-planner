@@ -89,6 +89,16 @@ Then, in a terminal opened in this folder:
 
    (Or use "Folosește un cont anonim" on the sign-in page, which needs no email.)
 
+   **Why you can create an account straight away here, and not on a real server.** New
+   accounts may only be created once the terms, the privacy policy and the cookie notice are
+   recorded as published (console → *Lansare* → legal documents; launch obligation LAU1).
+   On your own computer this rule is relaxed: while nothing has been recorded there yet
+   **and** `APP_URL` points at `localhost`, sign-up is open, so a fresh setup is not blocked.
+   On any real address — or as soon as you record anything in that console form — the rule
+   applies: until all three documents have a version and a publication date that is not in
+   the future, the sign-in page says "Înregistrările se deschid în curând" and only people
+   who already have an account can sign in.
+
 7. **Open the staff console (optional).** The console is for platform staff. To make your
    account the first staff member:
 

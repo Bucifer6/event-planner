@@ -18,7 +18,7 @@
   "report": "Report a problem",
   "signIn": {
     "title": "Sign in to claim",
-    "body": "You need an account with an email address. After signing in, come back to this page — sign-in does not bring you back here yet.",
+    "body": "You need an account with an email address. After signing in we bring you back to this page.",
     "action": "Sign in"
   },
   "noEmail": {

@@ -44,6 +44,10 @@ export function proxy(request: NextRequest): NextResponse {
 
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
+  // The path being asked for, so a signed-out visitor can be returned to it after sign-in
+  // (requireCtx in lib/ctx.ts). Always overwritten here — a client cannot supply it — and
+  // validated by safeNextPath before it is ever used as a redirect target.
+  requestHeaders.set("x-ed-path", `${pathname}${request.nextUrl.search}`.slice(0, 600));
   if (!isMedia) requestHeaders.set("Content-Security-Policy", headersOut["Content-Security-Policy"]!);
 
   const response = NextResponse.next({ request: { headers: requestHeaders } });

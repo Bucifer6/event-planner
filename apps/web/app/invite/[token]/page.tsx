@@ -1,3 +1,4 @@
+import { signInPathFor } from "@ed/auth";
 import { actorAccountId } from "@ed/core/context";
 import { getInvite } from "@ed/core/members";
 import { buttonClassName, Card, Eyebrow, Notice, Stack, Wordmark } from "@ed/ui";
@@ -26,6 +27,8 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
   const nav = await getTranslations("nav");
   const invite = await getInvite(ctx, token);
   const signedIn = actorAccountId(ctx.actor) !== null && ctx.actor.kind === "account";
+  // sign-in brings the person straight back to this invitation
+  const signInHref = signInPathFor(`/invite/${token}`, SIGN_IN_PATH);
 
   return (
     <div className="ed-solo">
@@ -63,7 +66,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
             ) : (
               <>
                 <Notice title={t("accept.signInTitle")}>{t("accept.signInBody")}</Notice>
-                <Link href={SIGN_IN_PATH} className={buttonClassName({ variant: "primary", block: true })}>
+                <Link href={signInHref} className={buttonClassName({ variant: "primary", block: true })}>
                   {t("accept.signIn")}
                 </Link>
               </>

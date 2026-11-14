@@ -1,6 +1,6 @@
 import { getFreshAuthMethod, isFreshAuth } from "@ed/auth";
 import { formatDate, formatDateTime } from "@ed/i18n/format";
-import { listMcpTokens, MCP_CONSENT_DATA_CLASSES, MCP_INACTIVITY_DAYS, MCP_MAX_ACTIVE_TOKENS } from "@ed/mcp";
+import { listMcpTokens, listMcpTools, MCP_CONSENT_DATA_CLASSES, MCP_INACTIVITY_DAYS, MCP_MAX_ACTIVE_TOKENS } from "@ed/mcp";
 import { EmptyState, Page, PageHeader, Section, Stack, Table, Tag } from "@ed/ui";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -95,6 +95,8 @@ export default async function AssistantsPage() {
         <p className="ed-small ed-muted">{t("list.expiryNote", { days: MCP_INACTIVITY_DAYS })}</p>
       </Section>
 
+      <ToolCatalogue />
+
       <Section title={t("create.title")} id="create">
         {atLimit ? (
           <p>{t("create.limit", { max: MCP_MAX_ACTIVE_TOKENS })}</p>
@@ -105,6 +107,48 @@ export default async function AssistantsPage() {
         )}
       </Section>
     </Page>
+  );
+}
+
+/**
+ * MCP6/MCP8: the fixed tool catalogue, shown BEFORE a token is created so the person sees
+ * what an assistant can do. Names and scopes come from the catalogue the server itself
+ * serves; the one-line descriptions are ours (mcp.tools.<name>).
+ */
+async function ToolCatalogue() {
+  const t = await getTranslations("mcp");
+  const tools = listMcpTools().map((tool) => ({ name: tool.name, scope: tool._meta["eventdesk.ro/scope"], title: tool.title }));
+  // read tools first, then propose tools; alphabetical inside each group
+  tools.sort((a, b) => (a.scope === b.scope ? a.name.localeCompare(b.name) : a.scope === "read" ? -1 : 1));
+  return (
+    <Section title={t("catalogue.title")} id="tools">
+      <Stack gap={3}>
+        <p>{t("catalogue.lead")}</p>
+        <Table caption={t("catalogue.caption")}>
+          <thead>
+            <tr>
+              <th scope="col">{t("catalogue.tool")}</th>
+              <th scope="col">{t("catalogue.access")}</th>
+              <th scope="col">{t("catalogue.does")}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {tools.map((tool) => (
+              <tr key={tool.name}>
+                <th scope="row" className="ed-num">
+                  {tool.name}
+                </th>
+                <td>
+                  <Tag tone={tool.scope === "propose" ? "accent" : "neutral"}>{t(`catalogue.${tool.scope}`)}</Tag>
+                </td>
+                <td>{t.has(`tools.${tool.name}` as never) ? t(`tools.${tool.name}` as never) : tool.title}</td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+        <p className="ed-small ed-muted">{t("catalogue.never")}</p>
+      </Stack>
+    </Section>
   );
 }
 

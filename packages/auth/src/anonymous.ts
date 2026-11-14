@@ -16,6 +16,7 @@ import {
   PASSWORD_MIN_LENGTH,
   withTimingFloor,
 } from "./util";
+import { assertSignupOpen } from "./signup";
 
 // Anonymous accounts (S7, S8): a random generated username and a user-chosen password — no
 // email, no phone, no name. Passwords are hashed with Argon2id (per-account random salt inside
@@ -68,6 +69,7 @@ export async function createAnonymousAccount(
   const data = z
     .object({ password: zPassword, userAgent: z.string().max(1000).nullish() })
     .parse({ password: input.password, userAgent: input.userAgent });
+  await assertSignupOpen(ctx); // LAU1: no account before the legal documents are published
   await checkPublicForm(ctx, {
     formKey: "anonymous_signup",
     honeypot: input.honeypot,

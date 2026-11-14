@@ -1,4 +1,5 @@
 import { getCapacity } from "@ed/core/capacity";
+import { getInvitationText } from "@ed/core/invitationtext";
 import { getRsvpSettings } from "@ed/core/rsvp";
 import { EmptyState, List, PageHeader, Row, Section, Tag } from "@ed/ui";
 import { IconArrowLeft, IconPlus } from "@ed/ui/icons";
@@ -13,6 +14,7 @@ import {
   setCapacityAction,
   setRsvpDeadlineAction,
 } from "@/app/actions/guests";
+import { saveInvitationText } from "@/app/actions/integration";
 import { requireCtx } from "@/lib/ctx";
 import { FormSheet, PlannerForm, type FieldSpec } from "../_components/form";
 import styles from "../_components/guests.module.css";
@@ -28,7 +30,8 @@ export default async function GuestSettingsPage({ params }: { params: Promise<{ 
   const ctx = await requireCtx();
   const t = await getTranslations("guests");
   const tc = await getTranslations("common");
-  const [settings, capacity] = await Promise.all([getRsvpSettings(ctx, id), getCapacity(ctx, id)]);
+  const tm = await getTranslations("mcp.invitation");
+  const [settings, capacity, wording] = await Promise.all([getRsvpSettings(ctx, id), getCapacity(ctx, id), getInvitationText(ctx, id)]);
   const base = `/occasions/${id}/guests`;
 
   const questionFields = (q?: (typeof settings.questions)[number]): FieldSpec[] => [
@@ -87,6 +90,32 @@ export default async function GuestSettingsPage({ params }: { params: Promise<{ 
           submitLabel={t("settings.saveDeadline")}
           pendingLabel={tc("status.saving")}
           success={tc("status.saved")}
+        />
+      </Section>
+
+      {/* Custom wording on the guest plate; an assistant can propose it (MCP propose_invitation_text) */}
+      <Section title={tm("title")}>
+        {wording.externalAssistant ? <p className="ed-small ed-muted">{tm("externalNote")}</p> : null}
+        <PlannerForm
+          id="invitation-text"
+          action={saveInvitationText}
+          hidden={{ occasionId: id }}
+          variant="secondary"
+          optionalLabel={tc("optional")}
+          fields={[
+            {
+              name: "invitationText",
+              label: tm("label"),
+              hint: tm("hint"),
+              type: "textarea",
+              rows: 5,
+              maxLength: 1200,
+              defaultValue: wording.text ?? "",
+            },
+          ]}
+          submitLabel={tm("save")}
+          pendingLabel={tc("status.saving")}
+          success={tm("saved")}
         />
       </Section>
 

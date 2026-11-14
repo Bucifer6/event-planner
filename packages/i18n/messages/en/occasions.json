@@ -68,7 +68,9 @@
     "submit": "Create the occasion",
     "submitting": "Creating…",
     "cancel": "Cancel",
-    "freeNote": "Creating an occasion is free."
+    "freeNote": "Creating an occasion is free.",
+    "lessonsTitle": "Lessons from past occasions",
+    "lessonsIntro": "Your own notes from the occasions you closed."
   },
   "fields": {
     "title": "Occasion title",
@@ -138,7 +140,8 @@
     "save": "Save details",
     "detailsTitle": "Details and brief",
     "readOnlyTitle": "Settings belong to the organiser",
-    "readOnlyBody": "Only the owner and project managers can change the occasion's details."
+    "readOnlyBody": "Only the owner and project managers can change the occasion's details.",
+    "tripZoneNote": "The occasion date is in Romanian time. Each leg of the trip keeps the time zone of its own place."
   },
   "move": {
     "title": "Occasion date",

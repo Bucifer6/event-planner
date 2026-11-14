@@ -4,7 +4,8 @@ import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 import { anonymousSignIn } from "@/app/actions/auth";
-import { AFTER_SIGN_IN_PATH, resolveActor, SIGN_IN_PATH } from "@/lib/session";
+import { safeNextPath, withNext } from "@ed/auth";
+import { afterSignInPath, resolveActor, SIGN_IN_PATH } from "@/lib/session";
 import { ActionForm } from "../../_components/forms";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -12,8 +13,9 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** S8: sign in to an anonymous account with its username and password. */
-export default async function AnonymousSignInPage() {
-  if (await resolveActor()) redirect(AFTER_SIGN_IN_PATH);
+export default async function AnonymousSignInPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const next = safeNextPath((await searchParams).next);
+  if (await resolveActor()) redirect(afterSignInPath(next));
   const t = await getTranslations("auth.anonymous");
   return (
     <Stack gap={4}>
@@ -23,6 +25,7 @@ export default async function AnonymousSignInPage() {
       </Stack>
       <ActionForm
         action={anonymousSignIn}
+        hidden={next ? { next } : undefined}
         fields={[
           { name: "username", label: t("usernameLabel"), hint: t("usernameHint"), autoComplete: "username", maxLength: 100 },
           { name: "password", label: t("passwordFieldLabel"), type: "password", autoComplete: "current-password", maxLength: 200 },
@@ -33,13 +36,13 @@ export default async function AnonymousSignInPage() {
       <GiltRule />
       <Stack gap={2}>
         <p>
-          {t("noAccountYet")} <Link href="/sign-in/anonymous/new">{t("createLink")}</Link>
+          {t("noAccountYet")} <Link href={withNext("/sign-in/anonymous/new", next)}>{t("createLink")}</Link>
         </p>
         <p>
-          {t("lostPassword")} <Link href="/sign-in/anonymous/recover">{t("recoverLink")}</Link>
+          {t("lostPassword")} <Link href={withNext("/sign-in/anonymous/recover", next)}>{t("recoverLink")}</Link>
         </p>
         <p>
-          <Link href={SIGN_IN_PATH}>{t("backToEmail")}</Link>
+          <Link href={withNext(SIGN_IN_PATH, next)}>{t("backToEmail")}</Link>
         </p>
       </Stack>
     </Stack>

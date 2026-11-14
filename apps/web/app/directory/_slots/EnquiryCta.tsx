@@ -1,3 +1,4 @@
+import { signInPathFor } from "@ed/auth";
 import { actorAccountId } from "@ed/core/context";
 import type { PublicListing } from "@ed/core/directory";
 import { listingTakesQuoteRequests } from "@ed/core/enquiries";
@@ -13,8 +14,8 @@ import styles from "./slots.module.css";
  *
  *  - rendered only for claimed listings (`listing.acceptsEnquiries`): an unclaimed listing
  *    never shows it (P29); the server refuses such an enquiry as well;
- *  - a signed-out visitor is sent to sign in first. Sign-in has no return path yet, so the
- *    note says plainly to come back to this page afterwards;
+ *  - a signed-out visitor is sent to sign in first, with the enquiry form of this listing as
+ *    the return path (`?next=`, validated by safeNextPath), so they land on it afterwards;
  *  - `occasionId` is set when the visitor arrived from an occasion ("Găsește firme") and is
  *    carried into the form, which pre-fills from that plan;
  *  - a florist or styling listing also offers the flower quote request (F5), as a secondary.
@@ -42,9 +43,10 @@ export async function EnquiryCta({ listing, occasionId }: { listing: PublicListi
   const ctx = await getCtx();
   const signedIn = ctx.actor.kind === "account" && !!actorAccountId(ctx.actor);
   if (!signedIn) {
+    const back = `/directory/listing/${listing.id}/enquire${occasionId ? `?occasion=${encodeURIComponent(occasionId)}` : ""}`;
     return (
       <div className={styles.cta}>
-        <Link href="/sign-in" className={buttonClassName({ variant: "primary", block: true })}>
+        <Link href={signInPathFor(back)} className={buttonClassName({ variant: "primary", block: true })}>
           {t("cta.signIn")}
         </Link>
         <p className="ed-small ed-muted">{t("cta.signInNote")}</p>

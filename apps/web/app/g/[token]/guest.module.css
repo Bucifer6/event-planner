@@ -113,3 +113,13 @@
 
 .center { text-align: center; }
 .gapTop { margin-top: var(--s-2); }
+
+/* Custom invitation wording (planner-written or confirmed from an assistant's proposal) */
+.wording {
+  margin: var(--s-3) auto 0;
+  max-width: var(--measure);
+}
+.wordingText {
+  white-space: pre-line;
+  line-height: 1.5;
+}

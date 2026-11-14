@@ -59,6 +59,12 @@ export default async function SettingsPage({ params }: { params: Promise<{ id: s
 
       <Section title={t("move.title")} level={3} id="date">
         <p style={{ maxWidth: "var(--measure)" }}>{t("move.intro")}</p>
+        {occasion.kind === "voiaj_solo" || occasion.kind === "voiaj_grup" ? (
+          // the occasion's own dates are always Europe/Bucharest; itinerary legs carry their own zones
+          <p className="ed-small ed-muted" style={{ maxWidth: "var(--measure)" }}>
+            {t("settings.tripZoneNote")}
+          </p>
+        ) : null}
         <MoveDateForm
           occasionId={id}
           mode={occasion.dateMode}

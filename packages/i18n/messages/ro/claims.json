@@ -18,7 +18,7 @@
   "report": "Raportează o problemă",
   "signIn": {
     "title": "Intră în cont ca să revendici",
-    "body": "Ai nevoie de un cont cu adresă de email. După autentificare, revino la această pagină — autentificarea nu te aduce încă înapoi aici.",
+    "body": "Ai nevoie de un cont cu adresă de email. După autentificare te aducem înapoi la această pagină.",
     "action": "Intră în cont"
   },
   "noEmail": {

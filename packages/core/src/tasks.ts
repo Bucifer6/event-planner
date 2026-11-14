@@ -27,6 +27,7 @@ import { AppError } from "@ed/shared/errors";
 import { zOptionalText, zText } from "@ed/shared/zod";
 import { z } from "zod";
 import { isManager, requireMember, type Member } from "./access";
+import { accountLabel } from "./accounts";
 import { audit } from "./audit";
 import { requireWriteCapable, type Ctx } from "./context";
 import { dayToInstant, daysBetween, instantToDay, zDay } from "./templates";
@@ -123,11 +124,12 @@ async function memberNames(ctx: Ctx, occasionId: string): Promise<Map<string, st
       inviteEmail: occasionMembers.inviteEmail,
       email: accounts.email,
       username: accounts.username,
+      displayName: accounts.displayName,
     })
     .from(occasionMembers)
     .leftJoin(accounts, eq(accounts.id, occasionMembers.accountId))
     .where(eq(occasionMembers.occasionId, occasionId));
-  return new Map(rows.map((r) => [r.id, r.email ?? r.username ?? r.inviteEmail ?? ""]));
+  return new Map(rows.map((r) => [r.id, accountLabel(r) || r.inviteEmail || ""]));
 }
 
 async function enrich(ctx: Ctx, occasionId: string, rows: Task[]): Promise<TaskItem[]> {
@@ -727,14 +729,14 @@ export async function listAssignableMembers(
 ): Promise<Array<{ id: string; name: string; role: OccasionRole; customLabel: string | null; isSelf: boolean }>> {
   const me = await requireMember(ctx, occasionId);
   const rows = await ctx.db
-    .select({ m: occasionMembers, email: accounts.email, username: accounts.username })
+    .select({ m: occasionMembers, email: accounts.email, username: accounts.username, displayName: accounts.displayName })
     .from(occasionMembers)
     .innerJoin(accounts, eq(accounts.id, occasionMembers.accountId))
     .where(and(eq(occasionMembers.occasionId, occasionId), isNull(occasionMembers.removedAt)))
     .orderBy(asc(occasionMembers.createdAt));
   return rows.map((r) => ({
     id: r.m.id,
-    name: r.email ?? r.username ?? "",
+    name: accountLabel(r),
     role: r.m.role,
     customLabel: r.m.customLabel,
     isSelf: r.m.id === me.id,

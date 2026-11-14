@@ -25,7 +25,9 @@ import { hashEquals, hashToken, randomToken, sixDigitCode } from "@ed/shared/ids
 import { zEmail } from "@ed/shared/zod";
 import { z } from "zod";
 import { getSignInLimits } from "@ed/core/ratelimit";
+import { withNext } from "./next";
 import { createSession } from "./sessions";
+import { assertSignupOpen } from "./signup";
 import {
   appUrl,
   CODE_TTL_MINUTES,
@@ -164,16 +166,17 @@ export async function consumeCode(
   return row.id;
 }
 
-const requestInput = z.object({ email: zEmail, deviceId: z.string().max(200).nullish() });
+const requestInput = z.object({ email: zEmail, deviceId: z.string().max(200).nullish(), next: z.string().max(600).nullish() });
 
 /**
  * S1: email a six-digit code (15 minutes, 5 attempts) and a one-tap link to `email`.
  * Identical answer and timing whether or not an account exists (SEC1). Rate limits per
  * address / IP / device (SEC16) throw the generic RATE_LIMITED with retryAt.
+ * `next` (a return path, see ./next) rides on the one-tap link; an unsafe value is dropped.
  */
 export async function requestSignInCode(
   ctx: Ctx,
-  input: { email: string; deviceId?: string | null },
+  input: { email: string; deviceId?: string | null; next?: string | null },
 ): Promise<{ expiresAt: Date }> {
   const data = requestInput.parse(input);
   return withTimingFloor(async () => {
@@ -185,7 +188,7 @@ export async function requestSignInCode(
       locale: ctx.locale,
       params: {
         code: issued.code,
-        linkUrl: `${appUrl()}/sign-in/link/${issued.linkToken}`,
+        linkUrl: withNext(`${appUrl()}/sign-in/link/${issued.linkToken}`, data.next),
         minutes: CODE_TTL_MINUTES,
       },
     });
@@ -202,6 +205,8 @@ async function completeEmailSignIn(
   return inTx(ctx, async (tx) => {
     let [account] = await tx.db.select().from(accounts).where(eq(accounts.email, email));
     if (!account) {
+      // LAU1: a NEW account needs the legal documents published; existing ones sign in as ever
+      await assertSignupOpen(tx);
       const created = await tx.db
         .insert(accounts)
         .values({ kind: "email", email, locale: tx.locale, emailVerifiedAt: tx.now, createdAt: tx.now })
@@ -338,9 +343,9 @@ export async function consumeMagicLink(
  */
 export async function requestCodeFromLink(
   ctx: Ctx,
-  input: { token: string; deviceId?: string | null },
+  input: { token: string; deviceId?: string | null; next?: string | null },
 ): Promise<{ ok: true }> {
-  const data = z.object({ token: z.string().min(20).max(200), deviceId: z.string().max(200).nullish() }).parse(input);
+  const data = z.object({ token: z.string().min(20).max(200), deviceId: z.string().max(200).nullish(), next: z.string().max(600).nullish() }).parse(input);
   return withTimingFloor(async () => {
     const claimed = await ctx.db
       .update(magicLinks)
@@ -357,7 +362,7 @@ export async function requestCodeFromLink(
       locale: ctx.locale,
       params: {
         code: issued.code,
-        linkUrl: `${appUrl()}/sign-in/link/${issued.linkToken}`,
+        linkUrl: withNext(`${appUrl()}/sign-in/link/${issued.linkToken}`, data.next),
         minutes: CODE_TTL_MINUTES,
       },
     });

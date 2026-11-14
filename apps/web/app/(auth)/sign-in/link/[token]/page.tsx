@@ -1,4 +1,4 @@
-import { getMagicLinkStatus } from "@ed/auth";
+import { getMagicLinkStatus, safeNextPath, withNext } from "@ed/auth";
 import { buttonClassName, Lead, Stack } from "@ed/ui";
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
@@ -17,12 +17,13 @@ export async function generateMetadata(): Promise<Metadata> {
  * it up and signs in; a used or expired one shows the SEC14 page: type the code from the same
  * email, or ask for one new code.
  */
-export default async function MagicLinkPage({ params }: { params: Promise<{ token: string }> }) {
+export default async function MagicLinkPage({ params, searchParams }: { params: Promise<{ token: string }>; searchParams: Promise<{ next?: string }> }) {
   const { token } = await params;
+  const next = safeNextPath((await searchParams).next);
   const t = await getTranslations("auth.link");
   const wellFormed = /^[A-Za-z0-9_-]{20,200}$/.test(token);
   const status = wellFormed ? await getMagicLinkStatus(await getCtx(), { token }) : "unknown";
-  if (status === "valid") redirect(`/api/auth/link/${token}`);
+  if (status === "valid") redirect(withNext(`/api/auth/link/${token}`, next));
 
   if (status === "unknown") {
     return (
@@ -31,7 +32,7 @@ export default async function MagicLinkPage({ params }: { params: Promise<{ toke
           <h1 className="ed-display">{t("unknownTitle")}</h1>
           <Lead>{t("unknownBody")}</Lead>
         </Stack>
-        <Link href={SIGN_IN_PATH} className={buttonClassName({ variant: "primary", block: true })}>
+        <Link href={withNext(SIGN_IN_PATH, next)} className={buttonClassName({ variant: "primary", block: true })}>
           {t("backToSignIn")}
         </Link>
       </Stack>
@@ -43,9 +44,9 @@ export default async function MagicLinkPage({ params }: { params: Promise<{ toke
         <h1 className="ed-display">{status === "used" ? t("usedTitle") : t("expiredTitle")}</h1>
         <Lead>{status === "used" ? t("usedBody") : t("expiredBody")}</Lead>
       </Stack>
-      <LinkUsed token={token} />
+      <LinkUsed token={token} next={next ?? undefined} />
       <p>
-        <Link href={SIGN_IN_PATH}>{t("backToSignIn")}</Link>
+        <Link href={withNext(SIGN_IN_PATH, next)}>{t("backToSignIn")}</Link>
       </p>
     </Stack>
   );

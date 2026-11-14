@@ -121,7 +121,10 @@
     "counters": {
       "businesses": "Businesses",
       "listings": "Listings",
-      "moderationQueue": "Moderation · waiting"
+      "moderationQueue": "Moderation · waiting",
+      "enquiries": "Enquiries to businesses",
+      "discovery": "Discovery · drafts",
+      "claims": "Claims"
     }
   },
   "ops": {

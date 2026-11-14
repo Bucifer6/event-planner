@@ -3,7 +3,8 @@ import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { AFTER_SIGN_IN_PATH, getCurrentSession, SIGN_IN_PATH } from "@/lib/session";
+import { safeNextPath, withNext } from "@ed/auth";
+import { afterSignInPath, getCurrentSession, SIGN_IN_PATH } from "@/lib/session";
 import { TwoStepForm } from "../../_components/two-step-form";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -11,10 +12,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 /** S2: shown only to an account that turned two-step on, after its first step. */
-export default async function TwoStepPage() {
+export default async function TwoStepPage({ searchParams }: { searchParams: Promise<{ next?: string }> }) {
+  const next = safeNextPath((await searchParams).next);
   const session = await getCurrentSession();
-  if (!session) redirect(SIGN_IN_PATH);
-  if (!session.secondFactorPending) redirect(AFTER_SIGN_IN_PATH);
+  if (!session) redirect(withNext(SIGN_IN_PATH, next));
+  if (!session.secondFactorPending) redirect(afterSignInPath(next));
   const t = await getTranslations("auth.twoStep");
   return (
     <Stack gap={4}>
@@ -22,9 +24,9 @@ export default async function TwoStepPage() {
         <h1 className="ed-display">{t("title")}</h1>
         <Lead>{t("lead")}</Lead>
       </Stack>
-      <TwoStepForm />
+      <TwoStepForm next={next ?? undefined} />
       <p>
-        <Link href={SIGN_IN_PATH}>{t("startOver")}</Link>
+        <Link href={withNext(SIGN_IN_PATH, next)}>{t("startOver")}</Link>
       </p>
     </Stack>
   );

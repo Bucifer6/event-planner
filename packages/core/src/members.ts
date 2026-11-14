@@ -19,7 +19,7 @@ import { addDays } from "@ed/shared/time";
 import { zEmail, zOptionalText } from "@ed/shared/zod";
 import { z } from "zod";
 import { isManager, requireMember } from "./access";
-import { requireFreshAuth } from "./accounts";
+import { accountLabel, requireFreshAuth } from "./accounts";
 import { audit } from "./audit";
 import { requireAccount, requireWriteCapable, type Ctx } from "./context";
 import { inTx } from "./tx";
@@ -82,13 +82,13 @@ export async function listMembers(ctx: Ctx, occasionId: string): Promise<TeamMem
   const me = await requireMember(ctx, occasionId);
   const manager = isManager(me);
   const rows = await ctx.db
-    .select({ m: occasionMembers, email: accounts.email, username: accounts.username })
+    .select({ m: occasionMembers, email: accounts.email, username: accounts.username, displayName: accounts.displayName })
     .from(occasionMembers)
     .leftJoin(accounts, eq(accounts.id, occasionMembers.accountId))
     .where(and(eq(occasionMembers.occasionId, occasionId), isNull(occasionMembers.removedAt)))
     .orderBy(asc(occasionMembers.createdAt));
   const out: TeamMember[] = [];
-  for (const { m, email, username } of rows) {
+  for (const { m, email, username, displayName } of rows) {
     const pending = m.accountId === null;
     if (pending && !manager) continue;
     const owner = m.role === "owner";
@@ -96,7 +96,7 @@ export async function listMembers(ctx: Ctx, occasionId: string): Promise<TeamMem
     out.push({
       id: m.id,
       accountId: m.accountId,
-      name: pending ? (m.inviteEmail ?? "") : (email ?? username ?? ""),
+      name: pending ? (m.inviteEmail ?? "") : accountLabel({ displayName, email, username }),
       role: m.role,
       customLabel: m.customLabel,
       grants:

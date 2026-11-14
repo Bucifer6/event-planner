@@ -7,7 +7,11 @@ import { requestCode, verifyCode } from "@/app/actions/auth";
 import { ActionForm } from "./forms";
 
 /** S1: email, then the six-digit code. The one-tap link in the same email does the same. */
-export function SignInFlow() {
+export function SignInFlow({ next }: { next?: string }) {
+  // `next` (already validated by the page, validated again by the actions) is carried as a
+  // hidden field through both steps and rides on the one-tap link in the email
+  const carry: Record<string, string> = next ? { next } : {};
+  const startOver = next ? `/sign-in?next=${encodeURIComponent(next)}` : "/sign-in";
   const t = useTranslations("auth");
   const request = useActionState(requestCode, null);
   const sentTo = request[0]?.ok ? request[0].data.email : null;
@@ -16,6 +20,7 @@ export function SignInFlow() {
     return (
       <ActionForm
         bound={request}
+        hidden={carry}
         fields={[
           {
             name: "email",
@@ -39,7 +44,7 @@ export function SignInFlow() {
       </Notice>
       <ActionForm
         action={verifyCode}
-        hidden={{ email: sentTo }}
+        hidden={{ email: sentTo, ...carry }}
         fields={[
           {
             name: "code",
@@ -57,7 +62,7 @@ export function SignInFlow() {
       />
       {/* A plain link: a full load starts the flow again, with or without JavaScript. */}
       <p>
-        <a href="/sign-in">{t("code.otherEmail")}</a>
+        <a href={startOver}>{t("code.otherEmail")}</a>
       </p>
     </Stack>
   );

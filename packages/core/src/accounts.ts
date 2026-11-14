@@ -80,6 +80,8 @@ export type AccountView = {
   kind: "email" | "anonymous";
   email: string | null;
   username: string | null;
+  /** The name the person chose to be shown as; null = email / username is shown. */
+  displayName: string | null;
   locale: Locale;
   createdAt: Date;
   /** Open deletion request, if any (D6). */
@@ -102,10 +104,32 @@ export async function getOwnAccount(ctx: Ctx): Promise<AccountView> {
     kind: row.kind,
     email: row.email,
     username: row.username,
+    displayName: row.displayName,
     locale: row.locale,
     createdAt: row.createdAt,
     deletion: open ? { requestedAt: open.requestedAt, undoUntil: open.undoUntil } : null,
   };
+}
+
+/**
+ * THE label of a person towards the people they plan with (member lists, task owners): the
+ * display name they chose, else the login email, else the generated username.
+ */
+export function accountLabel(a: { displayName?: string | null; email?: string | null; username?: string | null }): string {
+  return a.displayName?.trim() || a.email || a.username || "";
+}
+
+/** Sets or clears (blank) the optional display name of the signed-in account. */
+export async function setDisplayName(ctx: Ctx, input: { displayName?: string | null }): Promise<{ displayName: string | null }> {
+  if (ctx.actor.kind !== "account") throw new AppError(ctx.actor.kind === "anonymous" ? "UNAUTHENTICATED" : "FORBIDDEN");
+  const accountId = ctx.actor.accountId;
+  const { displayName } = z
+    .object({ displayName: z.string().trim().max(60, "common.validation.tooLong").nullish() })
+    .parse(input);
+  const value = displayName ? displayName.replace(/\s+/g, " ") : null;
+  await ctx.db.update(accounts).set({ displayName: value }).where(eq(accounts.id, accountId));
+  await audit(ctx, { action: "account.display_name_set", objectType: "account", objectId: accountId, meta: { set: value !== null } });
+  return { displayName: value };
 }
 
 /** Account-level language (L2): wording only, never data. */
@@ -187,6 +211,7 @@ export async function purgeDueAccounts(ctx: Ctx, input: { limit?: number } = {})
         .set({
           email: null,
           username: null,
+          displayName: null,
           passwordHash: null,
           emailVerifiedAt: null,
           deletedAt: tx.now,
