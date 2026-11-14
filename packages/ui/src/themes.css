@@ -1165,3 +1165,146 @@
   --gilt: #b9a8f0;
   --gilt-ink: #cbbdf4;
 }
+
+/* VELLUM — a hand-bound book. Parchment paper, sepia ink, umber actions; a bookish serif, square corners. */
+[data-ui="vellum"] {
+  --font-display: "Cormorant Garamond", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "Instrument Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 500;
+  --hero-weight: 500;
+  --figure-weight: 500;
+  --display-tracking: -0.01em;
+  --display-sm: 1.625rem;
+  --display-md: 2.125rem;
+  --display-lg: 2.75rem;
+  --display-xl: clamp(2.875rem, 8.5vw, 4.75rem);
+  --track: 1.1;
+  --btn-weight: 600;
+  --radius: 0px;
+  --radius-sm: 0px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 500;
+  --paper: #f5f0e7;
+  --surface: #fcf8f0;
+  --sunken: #ebe1d5;
+  --ink: #251f1b;
+  --ink-2: #55483e;
+  --ink-3: #66564a;
+  --line: #ddd0c2;
+  --line-strong: #c9b9a9;
+  --accent: #8a482d;
+  --accent-hover: #a3593a;
+  --on-accent: #fcf8f0;
+  --accent-tint: #f1e1d6;
+  --gilt: #b98266;
+  --gilt-ink: #8a482d;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="vellum"] {
+    --paper: #1b1714;
+    --surface: #25201b;
+    --sunken: #120f0d;
+    --ink: #f1e9dd;
+    --ink-2: #c9bcab;
+    --ink-3: #a99b8a;
+    --line: #382f28;
+    --line-strong: #66584b;
+    --accent: #e8aa8c;
+    --accent-hover: #f2c6ae;
+    --on-accent: #1b1714;
+    --accent-tint: #3a2a21;
+    --gilt: #d29c80;
+    --gilt-ink: #e8aa8c;
+  }
+}
+[data-ui="vellum"][data-theme="dark"],
+[data-ui="vellum"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #1b1714;
+  --surface: #25201b;
+  --sunken: #120f0d;
+  --ink: #f1e9dd;
+  --ink-2: #c9bcab;
+  --ink-3: #a99b8a;
+  --line: #382f28;
+  --line-strong: #66584b;
+  --accent: #e8aa8c;
+  --accent-hover: #f2c6ae;
+  --on-accent: #1b1714;
+  --accent-tint: #3a2a21;
+  --gilt: #d29c80;
+  --gilt-ink: #e8aa8c;
+}
+
+/* LAGOON — sea glass and harbour blue. Pale aqua paper, deep-water ink, round cards and pill buttons. */
+[data-ui="lagoon"] {
+  --font-display: "Instrument Serif", "Didot", "Bodoni 72", Georgia, serif;
+  --font-text: "DM Sans", "Avenir Next", "Helvetica Neue", "Segoe UI", system-ui, sans-serif;
+  --display-weight: 400;
+  --hero-weight: 400;
+  --figure-weight: 400;
+  --display-tracking: -0.015em;
+  --display-sm: 1.5rem;
+  --display-md: 2rem;
+  --display-lg: 2.75rem;
+  --display-xl: clamp(2.875rem, 8.5vw, 4.75rem);
+  --caps: none;
+  --track: 0.2;
+  --btn-weight: 600;
+  --btn-size: 0.9375rem;
+  --label-size: 0.8125rem;
+  --radius: 24px;
+  --radius-sm: 999px;
+  --wordmark-size: 1.75rem;
+  --wordmark-weight: 400;
+  --paper: #f0f6f7;
+  --surface: #fcfdfc;
+  --sunken: #dbecef;
+  --ink: #14334d;
+  --ink-2: #35536b;
+  --ink-3: #406079;
+  --line: #c8dde2;
+  --line-strong: #aac9d0;
+  --accent: #1f637c;
+  --accent-hover: #287995;
+  --on-accent: #fcfdfc;
+  --accent-tint: #dbecef;
+  --gilt: #80b9c6;
+  --gilt-ink: #24617a;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"])[data-ui="lagoon"] {
+    --paper: #0f181d;
+    --surface: #162229;
+    --sunken: #0a1115;
+    --ink: #e3eff2;
+    --ink-2: #b0c6cd;
+    --ink-3: #91a9b1;
+    --line: #243840;
+    --line-strong: #4b6872;
+    --accent: #94cfe0;
+    --accent-hover: #b7e0ec;
+    --on-accent: #0f181d;
+    --accent-tint: #1b3038;
+    --gilt: #80b9c6;
+    --gilt-ink: #94cfe0;
+  }
+}
+[data-ui="lagoon"][data-theme="dark"],
+[data-ui="lagoon"] [data-theme="dark"] {
+  color-scheme: dark;
+  --paper: #0f181d;
+  --surface: #162229;
+  --sunken: #0a1115;
+  --ink: #e3eff2;
+  --ink-2: #b0c6cd;
+  --ink-3: #91a9b1;
+  --line: #243840;
+  --line-strong: #4b6872;
+  --accent: #94cfe0;
+  --accent-hover: #b7e0ec;
+  --on-accent: #0f181d;
+  --accent-tint: #1b3038;
+  --gilt: #80b9c6;
+  --gilt-ink: #94cfe0;
+}

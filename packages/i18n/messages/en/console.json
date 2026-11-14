@@ -584,6 +584,16 @@
         "name": "Muse",
         "mood": "lilac, plum, soft light",
         "about": "Dreamy and gentle. A light serif, generous round corners."
+      },
+      "vellum": {
+        "name": "Vellum",
+        "mood": "parchment, sepia, umber",
+        "about": "Like a hand-bound book. A classic serif, warm paper and square corners."
+      },
+      "lagoon": {
+        "name": "Lagoon",
+        "mood": "sea glass, harbour blue",
+        "about": "Fresh and calm. A light serif, round cards and pill-shaped buttons."
       }
     }
   }
