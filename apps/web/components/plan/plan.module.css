@@ -206,3 +206,6 @@
 .modePanel p { margin: 0; }
 .measureList { margin: 0; padding-left: var(--s-5); font-size: var(--text-sm); font-variant-numeric: tabular-nums lining-nums; }
 .danceLine { margin: 0 0 var(--s-3); color: var(--ink-2); }
+
+.sheet :global([data-role="resize-handle"]) { fill: var(--accent); stroke: var(--surface); stroke-width: 1.5; cursor: nwse-resize; }
+.sheet [data-resize-handle] { cursor: nwse-resize; }

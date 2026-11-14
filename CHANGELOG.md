@@ -11,6 +11,13 @@ Status and evidence for everything listed here: `docs/build/13-implementation-lo
 
 ## [Unreleased]
 
+### Added (live band and resizing)
+- **Live band** items on the seating plan: small band (trio/quartet, 4 × 3 m), band of 4–6
+  musicians (6 × 4 m), large band (8 × 5 m) and a drum riser, in their own "Formație live" group.
+- **Resize stages, dance floors and other items**: select one of your own items and use the
+  ↔ / ↕ buttons (50 cm steps) or drag the square at its corner; the size is saved and the fit
+  check and dance floor capacity follow it.
+
 ### Added (room drawing and ready-made tables)
 - **Draw the room** (Room plan → "Desenează sala"): planners who describe their own space can
   draw it to scale like a simple CAD tool — walls corner by corner, rectangles, L-shaped rooms

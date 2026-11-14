@@ -2,7 +2,7 @@
 
 import { checkFit, mm2ToM2, type FitIssue, type FitResult } from "@ed/core/fitcheck";
 import type { MealStageView, RosterHousehold } from "@ed/core/seating";
-import { applyStage, buildPlanScene, danceFloorCapacity, DANCER_AREA_MM2, snapToEdges, findFreeSpot, FIXTURE_KIND_VALUES, FIXTURE_PRESETS, GRID_MM, REFERENCE_PERSON_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, shapeUsesDiameter, snapPosition, TABLE_PRESET_GROUPS, TABLE_PRESETS, TABLE_SHAPE_VALUES, type FixtureKind, type PlanItem, type PlanModel, type StageItemState, type TableShape } from "@ed/core/spacemodel";
+import { applyStage, buildPlanScene, danceFloorCapacity, FIXTURE_RESIZE, DANCER_AREA_MM2, snapToEdges, findFreeSpot, FIXTURE_KIND_VALUES, FIXTURE_PRESETS, GRID_MM, REFERENCE_PERSON_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, shapeUsesDiameter, snapPosition, TABLE_PRESET_GROUPS, TABLE_PRESETS, TABLE_SHAPE_VALUES, type FixtureKind, type PlanItem, type PlanModel, type StageItemState, type TableShape } from "@ed/core/spacemodel";
 import { Button, Checkbox, IconButton, Notice, Section, SelectField, Sheet, Tag, TextField, Unknown } from "@ed/ui";
 import { IconAlert, IconArrowLeft, IconArrowRight, IconCheck, IconClose, IconInfo, IconMinus, IconPlus } from "@ed/ui/icons";
 import { useTranslations } from "next-intl";
@@ -287,6 +287,43 @@ export function SeatingEditor(props: SeatingEditorProps) {
   );
   const shownModelRef = useRef(shownModel);
   shownModelRef.current = shownModel;
+
+  /** Resizing a fixture of the planner's own (stage, dance floor…): the centre stays put; saved a moment after the last change. */
+  const resizeTimers = useRef(new Map<string, ReturnType<typeof setTimeout>>());
+  /** A size written at the end of a name ("Ring de dans 5 × 5 m") follows the new size. */
+  const SIZE_IN_NAME = /\d+(?:[.,]\d+)?\s*×\s*\d+(?:[.,]\d+)?\s*m$/;
+  const resize = (id: string, widthMm: number, lengthMm: number, anchor?: { x: number; y: number }) => {
+    const w = Math.max(FIXTURE_RESIZE.minMm, Math.min(50_000, Math.round(widthMm / 100) * 100));
+    const l = Math.max(FIXTURE_RESIZE.minMm, Math.min(50_000, Math.round(lengthMm / 100) * 100));
+    const it = itemsRef.current.find((i) => i.id === id);
+    if (!it) return;
+    // dragging a corner keeps the opposite corner where it is; the buttons grow about the centre
+    let centre = { x: it.x, y: it.y };
+    if (anchor) {
+      const a = (it.rotation * Math.PI) / 180;
+      centre = { x: Math.round(anchor.x + (w / 2) * Math.cos(a) - (l / 2) * Math.sin(a)), y: Math.round(anchor.y + (w / 2) * Math.sin(a) + (l / 2) * Math.cos(a)) };
+    }
+    const name = SIZE_IN_NAME.test(it.name) ? it.name.replace(SIZE_IN_NAME, `${mmToMetresText(w, locale)} × ${mmToMetresText(l, locale)} m`) : it.name;
+    setItems((list) => list.map((i) => (i.id === id ? { ...i, widthMm: w, lengthMm: l, name, label: i.kind === "fixture" ? name : i.label, ...centre } : i)));
+    const old = resizeTimers.current.get(id);
+    if (old) clearTimeout(old);
+    resizeTimers.current.set(
+      id,
+      setTimeout(() => {
+        resizeTimers.current.delete(id);
+        const now = itemsRef.current.find((i) => i.id === id);
+        if (!now) return;
+        void run(async () => {
+          const res = await updateItemAction({ itemId: id, custom: { widthMm: now.widthMm, lengthMm: now.lengthMm, name: now.name }, version: now.version });
+          if (!res.ok || (res.data.x === now.x && res.data.y === now.y)) return res;
+          return moveItemAction({ itemId: id, x: now.x, y: now.y, rotation: now.rotation, version: res.data.version });
+        }).then((res) => {
+          if (res) setItems((list) => list.map((i) => (i.id === res.id ? { ...i, version: res.version } : i)));
+        });
+      }, 450),
+    );
+  };
+  const resizeDrag = useRef<{ id: string; pointerId: number; anchor: { x: number; y: number } } | null>(null);
 
   const rotate = (id: string, by: number) => {
     const it = shownModel.items.find((i) => i.id === id);
@@ -657,6 +694,49 @@ export function SeatingEditor(props: SeatingEditorProps) {
             );
           })}
           {measureFrom && !measureHover ? <circle cx={sx(measureFrom.x)} cy={sy(measureFrom.y)} r={4} data-role="measure-end" /> : null}
+          {mode === "arrange" && canManage && selected && selected.kind === "fixture" && selected.source === "custom" && itemHasDims(selected) && !selectedAway && !drag
+            ? (() => {
+                const a = (selected.rotation * Math.PI) / 180;
+                const lx = selected.widthMm! / 2;
+                const ly = selected.lengthMm! / 2;
+                const hx = sx(selected.x + lx * Math.cos(a) - ly * Math.sin(a));
+                const hy = sy(selected.y + lx * Math.sin(a) + ly * Math.cos(a));
+                return (
+                  <g
+                    data-resize-handle
+                    className={styles.grab}
+                    onPointerDown={(e) => {
+                      e.stopPropagation();
+                      e.currentTarget.setPointerCapture?.(e.pointerId);
+                      // the corner opposite the handle stays put
+                      resizeDrag.current = { id: selected.id, pointerId: e.pointerId, anchor: { x: selected.x - (lx * Math.cos(a) - ly * Math.sin(a)), y: selected.y - (lx * Math.sin(a) + ly * Math.cos(a)) } };
+                    }}
+                    onPointerMove={(e) => {
+                      const r = resizeDrag.current;
+                      if (!r || r.pointerId !== e.pointerId) return;
+                      const at = clientToMm(e.clientX, e.clientY);
+                      const it = itemsRef.current.find((i) => i.id === r.id);
+                      if (!at || !it) return;
+                      const ang = (it.rotation * Math.PI) / 180;
+                      const dx = at.x - r.anchor.x;
+                      const dy = at.y - r.anchor.y;
+                      // pointer in the item's own axes, measured from the fixed corner
+                      const ux = dx * Math.cos(ang) + dy * Math.sin(ang);
+                      const uy = -dx * Math.sin(ang) + dy * Math.cos(ang);
+                      resize(r.id, ux, uy, r.anchor);
+                    }}
+                    onPointerUp={(e) => {
+                      e.stopPropagation();
+                      resizeDrag.current = null;
+                    }}
+                  >
+                    <title>{t("resize.hint")}</title>
+                    <circle cx={hx} cy={hy} r={22} data-role="hit" />
+                    <rect x={hx - 6} y={hy - 6} width={12} height={12} data-role="resize-handle" />
+                  </g>
+                );
+              })()
+            : null}
           {drag && dragOrigin && dragAt ? (
             <>
               <circle cx={dragOrigin.x} cy={dragOrigin.y} r={16} data-role="origin" />
@@ -884,6 +964,25 @@ export function SeatingEditor(props: SeatingEditorProps) {
                     <Button aria-pressed={placeMode} onClick={() => setPlaceMode((v) => !v)}>
                       {t("bar.placeHere")}
                     </Button>
+                    {selected.kind === "fixture" && selected.source === "custom" && itemHasDims(selected) ? (
+                      <div className={styles.rot} role="group" aria-label={t("resize.label", { size: sizeOf(selected) ?? "" })}>
+                        <Button onClick={() => resize(selected.id, selected.widthMm! - FIXTURE_RESIZE.stepMm, selected.lengthMm!)} aria-label={t("resize.narrower")} disabled={selected.widthMm! <= FIXTURE_RESIZE.minMm}>
+                          ↔−
+                        </Button>
+                        <Button onClick={() => resize(selected.id, selected.widthMm! + FIXTURE_RESIZE.stepMm, selected.lengthMm!)} aria-label={t("resize.wider")}>
+                          ↔+
+                        </Button>
+                        <Button onClick={() => resize(selected.id, selected.widthMm!, selected.lengthMm! - FIXTURE_RESIZE.stepMm)} aria-label={t("resize.shorter")} disabled={selected.lengthMm! <= FIXTURE_RESIZE.minMm}>
+                          ↕−
+                        </Button>
+                        <Button onClick={() => resize(selected.id, selected.widthMm!, selected.lengthMm! + FIXTURE_RESIZE.stepMm)} aria-label={t("resize.longer")}>
+                          ↕+
+                        </Button>
+                        <span className="ed-small ed-num" aria-live="polite">
+                          {sizeOf(selected)}
+                        </span>
+                      </div>
+                    ) : null}
                   </>
                 ) : null}
                 {stage ? (
@@ -1391,7 +1490,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
           <>
             <SelectField id={`${id}-fxpreset`} label={t("add.fixturePreset")} hint={t("add.fixturePresetHint")} value={fxPreset} onChange={(e) => chooseFixture(e.target.value)}>
               <option value="">{t("add.presetCustom")}</option>
-              {(["stage", "dance", "music", "service"] as const).map((g) => (
+              {(["stage", "live", "dance", "music", "service"] as const).map((g) => (
                 <optgroup key={g} label={t(`fixtureGroups.${g}`)}>
                   {FIXTURE_PRESETS.filter((p) => FIXTURE_GROUP[p.kind] === g).map((p) => (
                     <option key={p.key} value={p.key}>
@@ -1440,9 +1539,9 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
 }
 
 /** How the ready-made fixtures are grouped in the picker. */
-const FIXTURE_GROUP: Record<FixtureKind, "stage" | "dance" | "music" | "service"> = {
+const FIXTURE_GROUP: Record<FixtureKind, "stage" | "live" | "dance" | "music" | "service"> = {
   stage: "stage",
-  band: "stage",
+  band: "live",
   screen: "stage",
   lighting: "stage",
   dance: "dance",
