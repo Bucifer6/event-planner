@@ -1,0 +1,44 @@
+# TEST COPY ONLY — EventDesk on your own computer, reachable only from this computer.
+#   Start:  double-click test-copy\start.cmd      (first start takes several minutes)
+#   Open:   http://localhost:3000
+#   Stop:   double-click test-copy\stop.cmd       (your test data is kept)
+#   Erase:  double-click test-copy\erase.cmd      (deletes the test data)
+name: eventdesk-test
+services:
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: ed
+      POSTGRES_PASSWORD: ed
+      POSTGRES_DB: eventdesk_test
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ed -d eventdesk_test"]
+      interval: 3s
+      timeout: 3s
+      retries: 30
+  web:
+    build:
+      context: ..
+      dockerfile: test-copy/Dockerfile
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - files:/data/files
+  worker:
+    build:
+      context: ..
+      dockerfile: test-copy/Dockerfile
+    command: ["sh", "-c", "sleep 20 && pnpm --filter @ed/worker start"]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - files:/data/files
+volumes:
+  pgdata:
+  files:
