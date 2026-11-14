@@ -1,5 +1,8 @@
 # EventDesk.ro
 
+> **Coding agents and new developers:** start with [`AGENTS.md`](AGENTS.md) (the rules) and
+> [`docs/build/21-code-map.md`](docs/build/21-code-map.md) (where everything is). Run `pnpm check` before finishing.
+
 **What this is, in plain English.** EventDesk.ro is a free, Romanian-first planning app for
 private events — weddings, baptisms, anniversaries, holidays. A host plans the occasion on a
 phone (tasks, guests and replies by link, budget, suppliers, the event-day run sheet); guests

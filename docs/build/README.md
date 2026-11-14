@@ -1,5 +1,8 @@
 # EventDesk.ro — build documentation (index)
 
+> New here, or a coding agent? Read [`AGENTS.md`](../../AGENTS.md) first, then use
+> [`21-code-map.md`](21-code-map.md) (generated from the code) to find things.
+
 **What this folder is, in plain English.** These files describe the EventDesk.ro product as it
 is built in this repository: how it is put together, what data it keeps, what has and has not
 been checked, how to deploy and run it, and how each requirement of the product document

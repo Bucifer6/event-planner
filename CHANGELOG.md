@@ -114,6 +114,7 @@ The first complete build of the product, made on 13–14 November 2026 on the br
 
 ### Added — after the main build (14 November 2026)
 
+- `AGENTS.md` (rules for coding agents and new developers), a generated code map (`docs/build/21-code-map.md`, kept current by a test) and `pnpm check`, one command that runs every gate.
 - An in-app help centre at `/help`: 60 task-based articles in Romanian and English, search, a
   staff section, and contextual help links on the main screens.
 - A deleted account's occasions are handed to their longest-standing project manager, or
