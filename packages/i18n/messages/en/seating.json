@@ -375,7 +375,8 @@
     "stage": "Stage and equipment",
     "dance": "Dance floor",
     "music": "Music",
-    "service": "Service and more"
+    "service": "Service and more",
+    "live": "Live band"
   },
   "fixturePresets": {
     "stage-4x3": "Stage 4 × 3 m",
@@ -386,7 +387,7 @@
     "dance-6x6": "Dance floor 6 × 6 m",
     "dance-8x8": "Dance floor 8 × 8 m",
     "dj-booth": "DJ booth",
-    "band-riser": "Drum / band riser",
+    "band-riser": "Drum riser",
     "speaker": "Speaker",
     "subwoofer": "Subwoofer",
     "light-stand": "Lighting stand",
@@ -396,7 +397,10 @@
     "buffet-4m": "Buffet 4 m",
     "cake-table": "Cake table",
     "candybar": "Candy bar",
-    "photobooth": "Photo booth"
+    "photobooth": "Photo booth",
+    "band-trio": "Small live band (trio, quartet)",
+    "band-5": "Live band (4–6 musicians)",
+    "band-big": "Large live band / big band"
   },
   "fixtureKinds": {
     "dance": "Dance floor",
@@ -406,11 +410,19 @@
     "bar": "Bar",
     "other": "Other item",
     "dj": "DJ booth",
-    "band": "Band riser",
+    "band": "Live band",
     "speaker": "Speaker",
     "lighting": "Lighting",
     "screen": "Screen",
     "buffet": "Buffet",
     "cake": "Cake table"
+  },
+  "resize": {
+    "label": "Size: {size}",
+    "narrower": "Narrower by 50 cm",
+    "wider": "Wider by 50 cm",
+    "shorter": "Shorter by 50 cm",
+    "longer": "Longer by 50 cm",
+    "hint": "Drag the square at the corner to resize."
   }
 }

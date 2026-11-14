@@ -375,7 +375,8 @@
     "stage": "Scenă și tehnică",
     "dance": "Ring de dans",
     "music": "Muzică",
-    "service": "Servire și altele"
+    "service": "Servire și altele",
+    "live": "Formație live"
   },
   "fixturePresets": {
     "stage-4x3": "Scenă 4 × 3 m",
@@ -386,7 +387,7 @@
     "dance-6x6": "Ring de dans 6 × 6 m",
     "dance-8x8": "Ring de dans 8 × 8 m",
     "dj-booth": "Cabină DJ",
-    "band-riser": "Podium tobe / formație",
+    "band-riser": "Podium pentru tobe",
     "speaker": "Boxă",
     "subwoofer": "Subwoofer",
     "light-stand": "Stativ de lumini",
@@ -396,7 +397,10 @@
     "buffet-4m": "Bufet 4 m",
     "cake-table": "Masa tortului",
     "candybar": "Candy bar",
-    "photobooth": "Cabină foto"
+    "photobooth": "Cabină foto",
+    "band-trio": "Formație live mică (trio, cvartet)",
+    "band-5": "Formație live (4–6 muzicieni)",
+    "band-big": "Formație live mare / big band"
   },
   "fixtureKinds": {
     "dance": "Ring de dans",
@@ -406,11 +410,19 @@
     "bar": "Bar",
     "other": "Alt element",
     "dj": "Cabină DJ",
-    "band": "Podium formație",
+    "band": "Formație live",
     "speaker": "Boxă",
     "lighting": "Lumini",
     "screen": "Ecran",
     "buffet": "Bufet",
     "cake": "Masa tortului"
+  },
+  "resize": {
+    "label": "Mărime: {size}",
+    "narrower": "Mai îngust cu 50 cm",
+    "wider": "Mai lat cu 50 cm",
+    "shorter": "Mai scurt cu 50 cm",
+    "longer": "Mai lung cu 50 cm",
+    "hint": "Trage pătratul din colț ca să schimbi mărimea."
   }
 }

@@ -116,7 +116,7 @@ export const TABLE_PRESETS: readonly TablePreset[] = [
 export type FixturePreset = { key: string; kind: FixtureKind; widthMm: number; lengthMm: number };
 const fx = (key: string, kind: FixtureKind, w: number, l: number): FixturePreset => ({ key, kind, widthMm: w, lengthMm: l });
 
-/** Usual sizes from event-hire catalogues: modular stage decks, dance floor panels, PA and lighting. */
+/** Usual sizes from event-hire catalogues: modular stage decks, dance floor panels, live band areas (with their backline), PA and lighting. */
 export const FIXTURE_PRESETS: readonly FixturePreset[] = [
   fx("stage-4x3", "stage", 4000, 3000),
   fx("stage-6x4", "stage", 6000, 4000),
@@ -125,8 +125,11 @@ export const FIXTURE_PRESETS: readonly FixturePreset[] = [
   fx("dance-5x5", "dance", 5000, 5000),
   fx("dance-6x6", "dance", 6000, 6000),
   fx("dance-8x8", "dance", 8000, 8000),
-  fx("dj-booth", "dj", 2000, 800),
+  fx("band-trio", "band", 4000, 3000),
+  fx("band-5", "band", 6000, 4000),
+  fx("band-big", "band", 8000, 5000),
   fx("band-riser", "band", 2400, 2400),
+  fx("dj-booth", "dj", 2000, 800),
   fx("speaker", "speaker", 600, 600),
   fx("subwoofer", "speaker", 800, 800),
   fx("light-stand", "lighting", 800, 800),
@@ -144,6 +147,9 @@ export const FIXTURE_PRESETS: readonly FixturePreset[] = [
  * to dance comfortably. Planners usually reckon a third to a half of the guests dance at once.
  */
 export const DANCER_AREA_MM2 = { packed: 420_000, comfortable: 750_000 } as const;
+
+/** Resizing a fixture on the plan: steps and the smallest side. */
+export const FIXTURE_RESIZE = { stepMm: 500, minMm: 500 } as const;
 
 /** A standing adult seen from above, for the reference people: shoulders and depth. */
 export const REFERENCE_PERSON_MM = { width: 500, depth: 300 } as const;
