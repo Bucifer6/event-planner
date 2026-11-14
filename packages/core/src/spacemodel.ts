@@ -45,7 +45,61 @@ export type {
 
 export const FIXTURE_KIND_VALUES = ["dance", "candybar", "photobooth", "stage", "bar", "other"] as const;
 export const POI_KIND_VALUES = ["toilets", "cloakroom", "bar", "entrance", "exit", "photo", "stage", "other"] as const;
-export const TABLE_SHAPE_VALUES = ["round", "rect"] as const;
+export const TABLE_SHAPE_VALUES = ["round", "rect", "oval", "halfmoon"] as const;
+
+/** Round and half-moon tables are sized by a diameter; rectangular and oval ones by two sides. */
+export function shapeUsesDiameter(shape: TableShape): boolean {
+  return shape === "round" || shape === "halfmoon";
+}
+
+/** A size is stated whole or not at all: keeps only the dimensions the shape uses. */
+export function shapeDims(shape: TableShape, d: { diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) {
+  return shapeUsesDiameter(shape) ? { diameterMm: d.diameterMm, widthMm: null, lengthMm: null } : { diameterMm: null, widthMm: d.widthMm, lengthMm: d.lengthMm };
+}
+
+/* ── Ready-made tables ───────────────────────────────────────────────────────────────── */
+
+export const TABLE_PRESET_GROUPS = ["round", "square", "rect", "oval", "halfmoon", "cocktail"] as const;
+export type TablePresetGroup = (typeof TABLE_PRESET_GROUPS)[number];
+export type TablePreset = {
+  key: string;
+  group: TablePresetGroup;
+  shape: TableShape;
+  diameterMm: number | null;
+  widthMm: number | null;
+  lengthMm: number | null;
+  /** Usual number of chairs; the planner can change it. Cocktail tables are for standing. */
+  seats: number;
+};
+
+const round = (key: string, d: number, seats: number, group: TablePresetGroup = "round"): TablePreset => ({ key, group, shape: "round", diameterMm: d, widthMm: null, lengthMm: null, seats });
+const sides = (key: string, group: TablePresetGroup, shape: TableShape, w: number, l: number, seats: number): TablePreset => ({ key, group, shape, diameterMm: null, widthMm: w, lengthMm: l, seats });
+const half = (key: string, d: number, seats: number): TablePreset => ({ key, group: "halfmoon", shape: "halfmoon", diameterMm: d, widthMm: null, lengthMm: null, seats });
+
+/** Common hire sizes (Romanian event-hire catalogues and UK/EU banqueting standards). */
+export const TABLE_PRESETS: readonly TablePreset[] = [
+  round("round-90", 900, 4),
+  round("round-120", 1200, 6),
+  round("round-150", 1500, 8),
+  round("round-160", 1600, 10),
+  round("round-180", 1800, 10),
+  round("round-200", 2000, 12),
+  sides("square-80", "square", "rect", 800, 800, 4),
+  sides("square-90", "square", "rect", 900, 900, 4),
+  sides("square-120", "square", "rect", 1200, 1200, 8),
+  sides("rect-120", "rect", "rect", 1200, 800, 4),
+  sides("rect-160", "rect", "rect", 1600, 800, 6),
+  sides("rect-180", "rect", "rect", 1800, 800, 6),
+  sides("rect-200", "rect", "rect", 2000, 900, 8),
+  sides("rect-240", "rect", "rect", 2400, 1000, 10),
+  sides("rect-300", "rect", "rect", 3000, 1000, 12),
+  sides("oval-200", "oval", "oval", 2000, 1100, 8),
+  sides("oval-240", "oval", "oval", 2400, 1200, 10),
+  half("halfmoon-150", 1500, 4),
+  half("halfmoon-180", 1800, 5),
+  round("cocktail-60", 600, 0, "cocktail"),
+  round("cocktail-80", 800, 0, "cocktail"),
+];
 
 /** Limits of one drawing / one plan (kept generous; they bound JSON size and render cost). */
 export const SPACE_LIMITS = {
@@ -249,7 +303,7 @@ export function ownSpaceAreas(widthMm: number | null, lengthMm: number | null): 
 
 /** V6: an item whose size nobody stated has no footprint — it is shown as unknown and excluded. */
 export function itemHasDims(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm">): boolean {
-  return item.shape === "round" ? item.diameterMm !== null && item.diameterMm > 0 : item.widthMm !== null && item.lengthMm !== null && item.widthMm > 0 && item.lengthMm > 0;
+  return shapeUsesDiameter(item.shape) ? item.diameterMm !== null && item.diameterMm > 0 : item.widthMm !== null && item.lengthMm !== null && item.widthMm > 0 && item.lengthMm > 0;
 }
 
 /* ── Geometry ─────────────────────────────────────────────────────────────────────────── */
@@ -270,10 +324,46 @@ function rectCorners(cx: number, cy: number, w: number, l: number, deg: number):
   ].map(([dx, dy]) => ({ x: cx + dx! * cos - dy! * sin, y: cy + dx! * sin + dy! * cos }));
 }
 
+const CURVE_STEPS = 32;
+
+/**
+ * The outline of an oval or half-moon table around its centre, before rotation (convex, so
+ * the gap maths below stays exact). A half-moon is `diameter` wide and half as deep: its flat
+ * side faces up (−y) and the curve faces down, where its chairs are.
+ */
+function curvedOutline(shape: "oval" | "halfmoon", d: { diameterMm: number | null; widthMm: number | null; lengthMm: number | null }, pad: number): PlanPoint[] {
+  const out: PlanPoint[] = [];
+  if (shape === "oval") {
+    const rx = d.widthMm! / 2 + pad;
+    const ry = d.lengthMm! / 2 + pad;
+    for (let i = 0; i < CURVE_STEPS; i++) {
+      const a = (i / CURVE_STEPS) * 2 * Math.PI;
+      out.push({ x: rx * Math.cos(a), y: ry * Math.sin(a) });
+    }
+    return out;
+  }
+  const r = d.diameterMm! / 2;
+  const flat = -r / 2; // the straight side, a quarter of the diameter above the centre
+  for (let i = 0; i <= CURVE_STEPS / 2; i++) {
+    const a = (i / (CURVE_STEPS / 2)) * Math.PI;
+    out.push({ x: (r + pad) * Math.cos(a), y: flat + (r + pad) * Math.sin(a) });
+  }
+  out.push({ x: -(r + pad), y: flat - pad }, { x: r + pad, y: flat - pad });
+  return out;
+}
+
+function placeLocal(points: PlanPoint[], cx: number, cy: number, deg: number): PlanPoint[] {
+  const a = (deg * Math.PI) / 180;
+  const cos = Math.cos(a);
+  const sin = Math.sin(a);
+  return points.map((p) => ({ x: cx + p.x * cos - p.y * sin, y: cy + p.x * sin + p.y * cos }));
+}
+
 /** The floor an item covers, optionally grown by `pad` mm on every side (chairs). null = unknown size. */
 export function itemFootprint(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm" | "x" | "y" | "rotation">, pad = 0): Footprint | null {
   if (!itemHasDims(item)) return null;
   if (item.shape === "round") return { type: "circle", cx: item.x, cy: item.y, r: item.diameterMm! / 2 + pad };
+  if (item.shape === "oval" || item.shape === "halfmoon") return { type: "poly", points: placeLocal(curvedOutline(item.shape, item, pad), item.x, item.y, item.rotation) };
   return { type: "poly", points: rectCorners(item.x, item.y, item.widthMm! + 2 * pad, item.lengthMm! + 2 * pad, item.rotation) };
 }
 
@@ -402,6 +492,109 @@ function footprintSamples(f: Footprint): PlanPoint[] {
 export function insideAreas(f: Footprint, areas: FloorArea[]): boolean {
   if (areas.length === 0) return false;
   return footprintSamples(f).every((p) => areas.some((a) => pointInPolygon(p, a.points)));
+}
+
+/* ── Drawn rooms ──────────────────────────────────────────────────────────────────────── */
+
+/** The smallest floor outline worth keeping: half a square metre. */
+export const MIN_ROOM_AREA_MM2 = 500_000;
+
+function cross(o: PlanPoint, a: PlanPoint, b: PlanPoint): number {
+  return (a.x - o.x) * (b.y - o.y) - (a.y - o.y) * (b.x - o.x);
+}
+
+/** Whether two segments cross or overlap anywhere other than at a shared end. */
+export function segmentsCross(a: PlanPoint, b: PlanPoint, c: PlanPoint, d: PlanPoint): boolean {
+  const d1 = cross(c, d, a);
+  const d2 = cross(c, d, b);
+  const d3 = cross(a, b, c);
+  const d4 = cross(a, b, d);
+  if (((d1 > 0 && d2 < 0) || (d1 < 0 && d2 > 0)) && ((d3 > 0 && d4 < 0) || (d3 < 0 && d4 > 0))) return true;
+  // collinear overlap (walls drawn back over themselves)
+  const on = (p: PlanPoint, q: PlanPoint, r: PlanPoint) => cross(p, q, r) === 0 && Math.min(p.x, q.x) <= r.x && r.x <= Math.max(p.x, q.x) && Math.min(p.y, q.y) <= r.y && r.y <= Math.max(p.y, q.y);
+  const same = (p: PlanPoint, q: PlanPoint) => p.x === q.x && p.y === q.y;
+  const touches = (p: PlanPoint) => same(p, a) || same(p, b);
+  return (on(a, b, c) && !touches(c)) || (on(a, b, d) && !touches(d)) || (on(c, d, a) && !same(a, c) && !same(a, d)) || (on(c, d, b) && !same(b, c) && !same(b, d));
+}
+
+/** Whether any two walls of the outline cross (a figure-of-eight is not a room). */
+export function polygonSelfIntersects(points: PlanPoint[]): boolean {
+  const n = points.length;
+  for (let i = 0; i < n; i++) {
+    const a = points[i]!;
+    const b = points[(i + 1) % n]!;
+    if (a.x === b.x && a.y === b.y) return true; // a wall of no length
+    for (let j = i + 1; j < n; j++) {
+      if (j === i || (j + 1) % n === i || j === (i + 1) % n) continue; // neighbours share a corner
+      if (segmentsCross(a, b, points[j]!, points[(j + 1) % n]!)) return true;
+    }
+  }
+  return false;
+}
+
+export type RoomProblem = { index: number; problem: "crossing" | "tooSmall" };
+
+/** What is wrong with a drawn room, outline by outline; empty = fine to save. */
+export function roomDrawingProblems(areas: FloorArea[]): RoomProblem[] {
+  const out: RoomProblem[] = [];
+  areas.forEach((a, index) => {
+    if (polygonSelfIntersects(a.points)) out.push({ index, problem: "crossing" });
+    else if (polygonArea(a.points) < MIN_ROOM_AREA_MM2) out.push({ index, problem: "tooSmall" });
+  });
+  return out;
+}
+
+/** The length of each wall of an outline (wall i runs from corner i to corner i + 1). */
+export function wallLengths(points: PlanPoint[]): number[] {
+  return points.map((p, i) => {
+    const q = points[(i + 1) % points.length]!;
+    return Math.hypot(q.x - p.x, q.y - p.y);
+  });
+}
+
+/** Changing one wall's length moves its far corner and the next one with it, so the following wall keeps its direction and length. */
+export function setWallLength(points: PlanPoint[], wall: number, lengthMm: number): PlanPoint[] {
+  const n = points.length;
+  const a = points[wall]!;
+  const b = points[(wall + 1) % n]!;
+  const len = Math.hypot(b.x - a.x, b.y - a.y);
+  if (len === 0) return points;
+  const k = (lengthMm - len) / len;
+  const dx = Math.round((b.x - a.x) * k);
+  const dy = Math.round((b.y - a.y) * k);
+  const move = new Set([(wall + 1) % n]);
+  if (n > 3) move.add((wall + 2) % n);
+  return points.map((p, i) => (move.has(i) ? { x: p.x + dx, y: p.y + dy } : p));
+}
+
+/**
+ * The nearest place to `near` where a new item stands on the floor with its chairs and an aisle
+ * clear of everything already placed (searched outwards on a 50 cm grid, up to 40 m away).
+ * null = no such place, or the item's size is unknown.
+ */
+export function findFreeSpot(model: PlanModel, item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm" | "rotation" | "seats" | "kind">, near: PlanPoint, others: PlanItem[] = model.items): PlanPoint | null {
+  if (!itemHasDims(item)) return null;
+  // the same zones as the fit check: every table keeps room for people around it
+  const pad = item.kind === "table" ? CHAIR_ZONE_MM : 0;
+  const placed = others
+    .map((o) => itemFootprint(o, o.kind === "table" ? CHAIR_ZONE_MM : 0))
+    .filter((f): f is Footprint => f !== null);
+  const step = 500;
+  const cx = Math.round(near.x / 100) * 100;
+  const cy = Math.round(near.y / 100) * 100;
+  for (let ring = 0; ring <= 80; ring++) {
+    for (let i = -ring; i <= ring; i++) {
+      for (const [dx, dy] of ring === 0 ? [[0, 0]] : [[i, -ring], [i, ring], [-ring, i], [ring, i]]) {
+        if (ring > 0 && Math.abs(dx!) !== ring && Math.abs(dy!) !== ring) continue;
+        const at = { x: cx + dx! * step, y: cy + dy! * step };
+        const f = itemFootprint({ ...item, ...at }, pad);
+        if (!f) return null;
+        if (model.areas.length > 0 && !insideAreas(f, model.areas)) continue;
+        if (placed.every((o) => shapeGap(f, o) >= model.aisleMm)) return at;
+      }
+    }
+  }
+  return null;
 }
 
 export type Bounds = { minX: number; minY: number; maxX: number; maxY: number };
@@ -637,6 +830,28 @@ function seatPositions(item: PlanItem): PlanPoint[] {
     }
     return out;
   }
+  if (item.shape === "oval") {
+    // evenly round the ellipse (by angle — close enough for a plan)
+    const local: PlanPoint[] = [];
+    const rx = item.widthMm! / 2 + SEAT_OFFSET_MM;
+    const ry = item.lengthMm! / 2 + SEAT_OFFSET_MM;
+    for (let i = 0; i < n; i++) {
+      const a = (i / n) * 2 * Math.PI - Math.PI / 2;
+      local.push({ x: rx * Math.cos(a), y: ry * Math.sin(a) });
+    }
+    return placeLocal(local, item.x, item.y, item.rotation);
+  }
+  if (item.shape === "halfmoon") {
+    // along the curve only; the flat side stays free (against a wall or the top table)
+    const r = item.diameterMm! / 2 + SEAT_OFFSET_MM;
+    const flat = -item.diameterMm! / 4;
+    const local: PlanPoint[] = [];
+    for (let i = 0; i < n; i++) {
+      const a = ((i + 0.5) / n) * Math.PI;
+      local.push({ x: r * Math.cos(a), y: flat + r * Math.sin(a) });
+    }
+    return placeLocal(local, item.x, item.y, item.rotation);
+  }
   // rectangular: along the two long sides; an odd one out sits at an end
   const w = item.widthMm!;
   const l = item.lengthMm!;
@@ -736,6 +951,11 @@ export function buildPlanScene(model: PlanModel, opts: PlanSceneOptions = {}): P
       const r = (it.diameterMm! / 2) * scale;
       halfW = halfH = r;
       nodes.push({ t: "circle", role: bodyRole, cx, cy, r: r2(r) });
+    } else if (it.shape === "oval" || it.shape === "halfmoon") {
+      const outline = placeLocal(curvedOutline(it.shape, it, 0), it.x, it.y, it.rotation);
+      halfW = ((Math.max(...outline.map((p) => p.x)) - Math.min(...outline.map((p) => p.x))) * scale) / 2;
+      halfH = ((Math.max(...outline.map((p) => p.y)) - Math.min(...outline.map((p) => p.y))) * scale) / 2;
+      nodes.push({ t: "polygon", role: bodyRole, points: pts(outline) });
     } else {
       const w = it.widthMm! * scale;
       const h = it.lengthMm! * scale;
@@ -929,5 +1149,5 @@ export function parseMetres(text: string | null | undefined): number | null {
 /** Size of an item in words-free form: "⌀ 1,8 m" or "0,9 × 2 m"; null = unknown. */
 export function itemSizeText(item: Pick<PlanItem, "shape" | "diameterMm" | "widthMm" | "lengthMm">, locale: "ro" | "en" = "ro"): string | null {
   if (!itemHasDims(item)) return null;
-  return item.shape === "round" ? `⌀ ${mmToMetresText(item.diameterMm!, locale)} m` : `${mmToMetresText(item.widthMm!, locale)} × ${mmToMetresText(item.lengthMm!, locale)} m`;
+  return shapeUsesDiameter(item.shape) ? `⌀ ${mmToMetresText(item.diameterMm!, locale)} m` : `${mmToMetresText(item.widthMm!, locale)} × ${mmToMetresText(item.lengthMm!, locale)} m`;
 }

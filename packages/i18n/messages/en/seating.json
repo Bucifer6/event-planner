@@ -187,7 +187,11 @@
     "customNote": "What you add is drawn with a dashed line and is not presented as the venue's.",
     "customDefault": "Own table",
     "customSubmit": "Add the table",
-    "fixtureSubmit": "Add the fixture"
+    "fixtureSubmit": "Add the fixture",
+    "preset": "Ready-made table",
+    "presetHint": "Common hire sizes. You can change anything after choosing.",
+    "presetCustom": "I'll set the size myself",
+    "standing": "standing"
   },
   "fields": {
     "name": "Name",
@@ -201,11 +205,14 @@
     "seats": "Seats",
     "howMany": "How many tables",
     "label": "Number or name of the table",
-    "labelHint": "Shown on the plan and on the guests' link: “3” or “Couple”."
+    "labelHint": "Shown on the plan and on the guests' link: “3” or “Couple”.",
+    "seatsHint": "One chair per place; the chairs show on the plan."
   },
   "shapes": {
     "round": "Round",
-    "rect": "Rectangular"
+    "rect": "Rectangular",
+    "oval": "Oval",
+    "halfmoon": "Half-moon"
   },
   "tables": {
     "title": "Tables ({count})",
@@ -340,5 +347,13 @@
     "pickSomeone": "Tick at least one person.",
     "seatOutOfRange": "The table has only {seats} seats.",
     "seatTaken": "Seat {seatNo} already belongs to someone else at this table."
+  },
+  "presetGroups": {
+    "round": "Round table",
+    "square": "Square table",
+    "rect": "Rectangular table",
+    "oval": "Oval table",
+    "halfmoon": "Half-moon table",
+    "cocktail": "Cocktail table"
   }
 }

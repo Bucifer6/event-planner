@@ -2,7 +2,7 @@
 
 import { checkFit, mm2ToM2, type FitIssue, type FitResult } from "@ed/core/fitcheck";
 import type { MealStageView, RosterHousehold } from "@ed/core/seating";
-import { applyStage, buildPlanScene, GRID_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, snapPosition, type PlanItem, type PlanModel, type StageItemState } from "@ed/core/spacemodel";
+import { applyStage, buildPlanScene, findFreeSpot, GRID_MM, itemHasDims, itemSizeText, mmToMetresText, parseMetres, shapeUsesDiameter, snapPosition, TABLE_PRESET_GROUPS, TABLE_PRESETS, TABLE_SHAPE_VALUES, type PlanItem, type PlanModel, type StageItemState, type TableShape } from "@ed/core/spacemodel";
 import { Button, Checkbox, IconButton, Notice, Section, SelectField, Sheet, Tag, TextField, Unknown } from "@ed/ui";
 import { IconAlert, IconArrowLeft, IconArrowRight, IconCheck, IconClose, IconInfo, IconMinus, IconPlus } from "@ed/ui/icons";
 import { useTranslations } from "next-intl";
@@ -1057,7 +1057,7 @@ function FitStrip({
 
 type AddSpec = {
   tableTypeId?: string;
-  custom?: { name: string; shape: "round" | "rect"; diameterMm: number | null; widthMm: number | null; lengthMm: number | null; seats: number };
+  custom?: { name: string; shape: TableShape; diameterMm: number | null; widthMm: number | null; lengthMm: number | null; seats: number };
   fixture?: { name: string; widthMm: number | null; lengthMm: number | null };
   x?: number;
   y?: number;
@@ -1069,14 +1069,40 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
   const id = useId();
   const [kind, setKind] = useState<"table" | "fixture">("table");
   const [v, setV] = useState<Record<string, string>>({ name: "", shape: "round", diameter: "", w: "", l: "", seats: "10", count: "1" });
+  const [preset, setPreset] = useState("");
+  const fm = (mm: number | null) => (mm === null ? "" : mmToMetresText(mm, locale));
+  const presetName = (p: (typeof TABLE_PRESETS)[number]) => `${t(`presetGroups.${p.group}`)} ${itemSizeText(p, locale) ?? ""}`.trim();
+  /** A ready-made table fills the form; every field stays editable. */
+  const choosePreset = (key: string) => {
+    setPreset(key);
+    const p = TABLE_PRESETS.find((x) => x.key === key);
+    if (!p) return;
+    setV((s) => ({ ...s, name: presetName(p), shape: p.shape, diameter: fm(p.diameterMm), w: fm(p.widthMm), l: fm(p.lengthMm), seats: String(p.seats) }));
+    setErr({});
+  };
   const [err, setErr] = useState<Record<string, string>>({});
   const set = (k: string) => (e: { target: { value: string } }) => setV((s) => ({ ...s, [k]: e.target.value }));
   const at = (n: number): { x?: number; y?: number } => {
     const c = centre();
     return c ? { x: c.x + (n % 4) * 2600, y: c.y + Math.floor(n / 4) * 2600 } : {};
   };
+  /** Each new item goes to the nearest free floor around the view's centre, never on top of another. */
+  const placeAll = (specs: AddSpec[]): AddSpec[] => {
+    const c = centre() ?? { x: 0, y: 0 };
+    const others = [...model.items];
+    return specs.map((spec, n) => {
+      const type = spec.tableTypeId ? model.tableTypes.find((x) => x.id === spec.tableTypeId) : undefined;
+      const dims = spec.custom ?? (type ? { shape: type.shape, diameterMm: type.diameterMm, widthMm: type.widthMm, lengthMm: type.lengthMm, seats: type.seats ?? 0 } : spec.fixture ? { shape: "rect" as const, diameterMm: null, widthMm: spec.fixture.widthMm, lengthMm: spec.fixture.lengthMm, seats: 0 } : null);
+      if (!dims) return spec;
+      const probe = { kind: spec.fixture ? ("fixture" as const) : ("table" as const), rotation: 0, ...dims };
+      const spot = findFreeSpot(model, probe, c, others);
+      const pos = spot ?? at(n);
+      if (pos.x !== undefined && pos.y !== undefined) others.push({ ...probe, id: `new${n}`, source: "custom", name: "", label: "", x: pos.x, y: pos.y });
+      return { ...spec, ...pos };
+    });
+  };
   const placed = (typeId: string) => model.items.filter((i) => i.kind === "table" && i.source === "venue" && i.venueRef === typeId).length;
-  const size = (x: { shape: "round" | "rect"; diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) => itemSizeText(x, locale);
+  const size = (x: { shape: TableShape; diameterMm: number | null; widthMm: number | null; lengthMm: number | null }) => itemSizeText(x, locale);
 
   function submit(e: FormEvent) {
     e.preventDefault();
@@ -1098,10 +1124,11 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
       if ((w === null) !== (l === null) && !errors.w && !errors.l) errors[w === null ? "w" : "l"] = t("errors.bothSides");
       setErr(errors);
       if (Object.keys(errors).length) return focusFirst(id, errors);
-      onAdd([{ fixture: { name, widthMm: w, lengthMm: l }, ...at(0) }]);
+      onAdd(placeAll([{ fixture: { name, widthMm: w, lengthMm: l } }]));
       return;
     }
-    const round = v.shape === "round";
+    const shape = (v.shape ?? "round") as TableShape;
+    const round = shapeUsesDiameter(shape);
     const d = round ? measure("diameter") : null;
     const w = round ? null : measure("w");
     const l = round ? null : measure("l");
@@ -1112,7 +1139,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
     if (Number.isNaN(count) || count < 1 || count > 40) errors.count = t("errors.count");
     setErr(errors);
     if (Object.keys(errors).length) return focusFirst(id, errors);
-    onAdd(Array.from({ length: count }, (_, n) => ({ custom: { name, shape: round ? "round" : "rect", diameterMm: d, widthMm: w, lengthMm: l, seats }, ...at(n) })));
+    onAdd(placeAll(Array.from({ length: count }, () => ({ custom: { name, shape, diameterMm: d, widthMm: w, lengthMm: l, seats } }))));
   }
 
   return (
@@ -1147,7 +1174,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
                       {left === null ? <Unknown label={t("add.countUnknown")} /> : t("add.left", { left, count: type.count ?? 0 })}
                     </span>
                   </span>
-                  <Button size="sm" disabled={left === 0} onClick={() => onAdd([{ tableTypeId: type.id, ...at(0) }])} aria-label={t("add.venueAddLabel", { name: type.name })}>
+                  <Button size="sm" disabled={left === 0} onClick={() => onAdd(placeAll([{ tableTypeId: type.id }]))} aria-label={t("add.venueAddLabel", { name: type.name })}>
                     {left === 0 ? t("add.allPlaced") : t("add.venueAdd")}
                   </Button>
                 </li>
@@ -1162,14 +1189,31 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
           <option value="fixture">{t("add.customFixture")}</option>
         </SelectField>
         <p className="ed-small ed-muted">{t("add.customNote")}</p>
+        {kind === "table" ? (
+          <SelectField id={`${id}-preset`} label={t("add.preset")} hint={t("add.presetHint")} value={preset} onChange={(e) => choosePreset(e.target.value)}>
+            <option value="">{t("add.presetCustom")}</option>
+            {TABLE_PRESET_GROUPS.map((g) => (
+              <optgroup key={g} label={t(`presetGroups.${g}`)}>
+                {TABLE_PRESETS.filter((p) => p.group === g).map((p) => (
+                  <option key={p.key} value={p.key}>
+                    {itemSizeText(p, locale)} · {p.seats === 0 ? t("add.standing") : t("add.seats", { count: p.seats })}
+                  </option>
+                ))}
+              </optgroup>
+            ))}
+          </SelectField>
+        ) : null}
         <TextField id={`${id}-name`} label={t("fields.name")} hint={kind === "table" ? t("fields.tableNameHint") : t("fields.fixtureNameHint")} value={v.name} onChange={set("name")} error={err.name} autoComplete="off" />
         {kind === "table" ? (
           <SelectField id={`${id}-shape`} label={t("fields.shape")} value={v.shape} onChange={set("shape")}>
-            <option value="round">{t("shapes.round")}</option>
-            <option value="rect">{t("shapes.rect")}</option>
+            {TABLE_SHAPE_VALUES.map((x) => (
+              <option key={x} value={x}>
+                {t(`shapes.${x}`)}
+              </option>
+            ))}
           </SelectField>
         ) : null}
-        {kind === "table" && v.shape === "round" ? (
+        {kind === "table" && shapeUsesDiameter(v.shape as TableShape) ? (
           <TextField id={`${id}-diameter`} label={t("fields.diameter")} optionalLabel={t("fields.emptyUnknown")} inputMode="decimal" value={v.diameter} onChange={set("diameter")} error={err.diameter} autoComplete="off" />
         ) : (
           <div className={styles.fields2}>
@@ -1179,7 +1223,7 @@ function AddSheet({ model, locale, onClose, onAdd, centre }: { model: PlanModel;
         )}
         {kind === "table" ? (
           <div className={styles.fields2}>
-            <TextField id={`${id}-seats`} label={t("fields.seats")} inputMode="numeric" value={v.seats} onChange={set("seats")} error={err.seats} autoComplete="off" />
+            <TextField id={`${id}-seats`} label={t("fields.seats")} hint={t("fields.seatsHint")} inputMode="numeric" value={v.seats} onChange={set("seats")} error={err.seats} autoComplete="off" />
             <TextField id={`${id}-count`} label={t("fields.howMany")} inputMode="numeric" value={v.count} onChange={set("count")} error={err.count} autoComplete="off" />
           </div>
         ) : null}
@@ -1252,7 +1296,7 @@ function EditSheet({
   item: PlanItem;
   locale: Locale;
   onClose: () => void;
-  onSave: (patch: { label?: string; custom?: { name?: string; shape?: "round" | "rect"; diameterMm?: number | null; widthMm?: number | null; lengthMm?: number | null; seats?: number } }) => Promise<boolean>;
+  onSave: (patch: { label?: string; custom?: { name?: string; shape?: TableShape; diameterMm?: number | null; widthMm?: number | null; lengthMm?: number | null; seats?: number } }) => Promise<boolean>;
 }) {
   const t = useTranslations("seating");
   const tc = useTranslations("common");
@@ -1283,14 +1327,15 @@ function EditSheet({
     if (custom) {
       const name = (v.name ?? "").trim();
       if (!name) errors.name = tc("validation.required");
-      const round = item.kind === "table" && v.shape === "round";
+      const shape: TableShape = item.kind === "table" ? (v.shape as TableShape) : "rect";
+      const round = shapeUsesDiameter(shape);
       const d = round ? measure("diameter") : null;
       const w = round ? null : measure("w");
       const l = round ? null : measure("l");
       if (!round && (w === null) !== (l === null) && !errors.w && !errors.l) errors[w === null ? "w" : "l"] = t("errors.bothSides");
       const seats = /^\d+$/.test((v.seats ?? "").trim()) ? Number(v.seats) : NaN;
       if (item.kind === "table" && (Number.isNaN(seats) || seats > 60)) errors.seats = t("errors.seats");
-      patch.custom = { name, shape: round ? "round" : "rect", diameterMm: d, widthMm: w, lengthMm: l, ...(item.kind === "table" ? { seats } : {}) };
+      patch.custom = { name, shape, diameterMm: d, widthMm: w, lengthMm: l, ...(item.kind === "table" ? { seats } : {}) };
     }
     setErr(errors);
     if (Object.keys(errors).length) return focusFirst(id, errors);
@@ -1320,11 +1365,14 @@ function EditSheet({
             <TextField id={`${id}-name`} label={t("fields.name")} value={v.name} onChange={set("name")} error={err.name} autoComplete="off" />
             {item.kind === "table" ? (
               <SelectField id={`${id}-shape`} label={t("fields.shape")} value={v.shape} onChange={set("shape")}>
-                <option value="round">{t("shapes.round")}</option>
-                <option value="rect">{t("shapes.rect")}</option>
+                {TABLE_SHAPE_VALUES.map((x) => (
+                  <option key={x} value={x}>
+                    {t(`shapes.${x}`)}
+                  </option>
+                ))}
               </SelectField>
             ) : null}
-            {item.kind === "table" && v.shape === "round" ? (
+            {item.kind === "table" && shapeUsesDiameter(v.shape as TableShape) ? (
               <TextField id={`${id}-diameter`} label={t("fields.diameter")} optionalLabel={t("fields.emptyUnknown")} inputMode="decimal" value={v.diameter} onChange={set("diameter")} error={err.diameter} autoComplete="off" />
             ) : (
               <div className={styles.fields2}>

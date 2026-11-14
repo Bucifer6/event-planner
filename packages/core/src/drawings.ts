@@ -36,6 +36,7 @@ import {
   zMm,
   zSpaceMarkings,
   type PlanModel,
+  shapeUsesDiameter,
 } from "./spacemodel";
 import { inTx } from "./tx";
 
@@ -333,7 +334,7 @@ export async function saveMarkings(ctx: Ctx, input: z.input<typeof markingsInput
   assertCalibrated(space);
   for (const t of data.markings.tableTypes) {
     // a size is stated whole or not at all: a round table by its diameter, a rectangular one by both sides
-    if (t.shape === "round") {
+    if (shapeUsesDiameter(t.shape)) {
       t.widthMm = null;
       t.lengthMm = null;
     } else {
@@ -420,7 +421,7 @@ export function describeSnapshot(after: DrawingSnapshot, before: DrawingSnapshot
       areas: m.areas.length ? String(m.areas.length) : null,
       tables:
         m.tableTypes
-          .map((t) => `${t.name}: ${t.shape === "round" ? (t.diameterMm === null ? "?" : `⌀ ${mmToMetresText(t.diameterMm)} m`) : t.widthMm === null ? "?" : `${mmToMetresText(t.widthMm)} × ${mmToMetresText(t.lengthMm!)} m`}, ${t.seats ?? "?"} loc., ${t.count ?? "?"} buc.`)
+          .map((t) => `${t.name}: ${shapeUsesDiameter(t.shape) ? (t.diameterMm === null ? "?" : `⌀ ${mmToMetresText(t.diameterMm)} m`) : t.widthMm === null ? "?" : `${mmToMetresText(t.widthMm)} × ${mmToMetresText(t.lengthMm!)} m`}, ${t.seats ?? "?"} loc., ${t.count ?? "?"} buc.`)
           .join("; ") || null,
       fixtures: m.fixtures.map((f) => `${f.name}${f.widthMm === null ? " (?)" : ` (${mmToMetresText(f.widthMm)} × ${mmToMetresText(f.lengthMm!)} m)`}`).join("; ") || null,
       pois: m.pois.map((p) => p.name ?? p.kind).join("; ") || null,

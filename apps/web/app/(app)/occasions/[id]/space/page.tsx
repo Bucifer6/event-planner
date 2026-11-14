@@ -146,7 +146,13 @@ export default async function SpacePage({ params, searchParams }: Props) {
           <Link href={`/occasions/${id}/seating`} className={buttonClassName({ variant: "primary" })}>
             {t("toSeating")}
           </Link>
+          {space.source === "own" && space.canManage ? (
+            <Link href={`${base}/draw`} className={buttonClassName({ variant: "secondary" })}>
+              {space.drawn ? t("own.redraw") : t("own.draw")}
+            </Link>
+          ) : null}
         </div>
+        {space.source === "own" && space.canManage ? <p className="ed-small ed-muted">{space.drawn ? t("own.drawnNote") : t("own.drawHint")}</p> : null}
       </Section>
 
       <Section title={t("facts.title")} level={3}>
@@ -238,6 +244,10 @@ export default async function SpacePage({ params, searchParams }: Props) {
                   ...(space.source === "own"
                     ? [
                         { name: "name", label: t("own.name"), required: true, maxLength: 120, defaultValue: space.name },
+                      ]
+                    : []),
+                  ...(space.source === "own" && !space.drawn
+                    ? [
                         { name: "widthMm", label: t("own.width"), hint: t("own.dimsHint"), defaultValue: model.widthMm === null ? "" : mmToMetresText(model.widthMm, ctx.locale) },
                         { name: "lengthMm", label: t("own.length"), defaultValue: model.lengthMm === null ? "" : mmToMetresText(model.lengthMm, ctx.locale) },
                       ]

@@ -187,7 +187,11 @@
     "customNote": "Ce adaugi tu apare cu linie întreruptă și nu este prezentat ca fiind al locației.",
     "customDefault": "Masă proprie",
     "customSubmit": "Adaugă masa",
-    "fixtureSubmit": "Adaugă elementul"
+    "fixtureSubmit": "Adaugă elementul",
+    "preset": "Masă gata făcută",
+    "presetHint": "Mărimi obișnuite la firmele de închirieri. Poți schimba orice după ce alegi.",
+    "presetCustom": "Aleg singur mărimea",
+    "standing": "în picioare"
   },
   "fields": {
     "name": "Nume",
@@ -201,11 +205,14 @@
     "seats": "Locuri",
     "howMany": "Câte mese",
     "label": "Numărul sau numele mesei",
-    "labelHint": "Apare pe plan și pe linkul invitaților: „3” sau „Miri”."
+    "labelHint": "Apare pe plan și pe linkul invitaților: „3” sau „Miri”.",
+    "seatsHint": "Un scaun pentru fiecare loc; scaunele apar pe plan."
   },
   "shapes": {
     "round": "Rotundă",
-    "rect": "Dreptunghiulară"
+    "rect": "Dreptunghiulară",
+    "oval": "Ovală",
+    "halfmoon": "Semilună"
   },
   "tables": {
     "title": "Mese ({count})",
@@ -340,5 +347,13 @@
     "pickSomeone": "Bifează cel puțin o persoană.",
     "seatOutOfRange": "Masa are doar {seats} locuri.",
     "seatTaken": "Locul {seatNo} este deja al altcuiva de la această masă."
+  },
+  "presetGroups": {
+    "round": "Masă rotundă",
+    "square": "Masă pătrată",
+    "rect": "Masă dreptunghiulară",
+    "oval": "Masă ovală",
+    "halfmoon": "Masă semilună",
+    "cocktail": "Masă de cocteil"
   }
 }

@@ -12,7 +12,7 @@ export type PlanPoint = { x: number; y: number };
 /** A usable floor area (V2): a closed outline; a rectangle is simply four points. */
 export type FloorArea = { id: string; name: string | null; points: PlanPoint[] };
 
-export const TABLE_SHAPES = ["round", "rect"] as const;
+export const TABLE_SHAPES = ["round", "rect", "oval", "halfmoon"] as const;
 export type TableShape = (typeof TABLE_SHAPES)[number];
 
 /** One line of the venue's standard table inventory (V2). */

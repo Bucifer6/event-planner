@@ -1,8 +1,8 @@
 import { sql } from "drizzle-orm";
-import { boolean, check, index, integer, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, check, index, integer, jsonb, pgTable, primaryKey, text, uniqueIndex } from "drizzle-orm/pg-core";
 import { createdAt, id, ref, timestamptz, updatedAt } from "./_helpers";
 import { accounts } from "./accounts";
-import { drawingVersions, spaces, type TableShape } from "./drawings";
+import { drawingVersions, spaces, type FloorArea, type TableShape } from "./drawings";
 import { guests, households } from "./guests";
 import { occasions } from "./occasions";
 
@@ -15,7 +15,7 @@ export type SpaceModelSource = (typeof SPACE_MODEL_SOURCES)[number];
 /**
  * ONE space model per occasion. source "venue": a frozen approved drawing version of a venue
  * space (version + effective date shown to the planner; it changes only when the planner
- * accepts a proposal, V4). source "own": a rectangle the planner typed in.
+ * accepts a proposal, V4). source "own": a rectangle the planner typed in, or a room they drew.
  */
 export const spaceModels = pgTable(
   "space_models",
@@ -34,6 +34,11 @@ export const spaceModels = pgTable(
     name: text("name").notNull(),
     ownWidthMm: integer("own_width_mm"),
     ownLengthMm: integer("own_length_mm"),
+    /**
+     * A room the planner drew with the drawing tool (source "own"): one or more floor outlines
+     * in mm. NULL = not drawn, the typed rectangle is used.
+     */
+    ownAreas: jsonb("own_areas").$type<FloorArea[]>(),
     /** Minimum free passage between tables, chairs included (C-01). */
     aisleMm: integer("aisle_mm").notNull().default(600),
     createdAt: createdAt(),
@@ -92,7 +97,7 @@ export const planItems = pgTable(
     index("plan_items_model_idx").on(t.spaceModelId),
     check("plan_items_kind_ck", sql`${t.kind} in ('table', 'fixture')`),
     check("plan_items_source_ck", sql`${t.source} in ('venue', 'custom')`),
-    check("plan_items_shape_ck", sql`${t.shape} in ('round', 'rect')`),
+    check("plan_items_shape_ck", sql`${t.shape} in ('round', 'rect', 'oval', 'halfmoon')`),
     check(
       "plan_items_dims_ck",
       sql`(${t.diameterMm} is null or ${t.diameterMm} > 0) and (${t.widthMm} is null or ${t.widthMm} > 0) and (${t.lengthMm} is null or ${t.lengthMm} > 0) and (${t.seats} is null or ${t.seats} >= 0)`,

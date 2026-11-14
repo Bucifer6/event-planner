@@ -199,7 +199,9 @@
   },
   "shapes": {
     "round": "Round",
-    "rect": "Rectangular"
+    "rect": "Rectangular",
+    "oval": "Oval",
+    "halfmoon": "Half-moon"
   },
   "fields": {
     "spaceName": "Name of the space",

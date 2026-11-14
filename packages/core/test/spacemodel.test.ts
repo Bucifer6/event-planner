@@ -5,15 +5,22 @@ import {
   buildPlanScene,
   calibrationScale,
   insideAreas,
+  findFreeSpot,
   itemFootprint,
+  itemHasDims,
   mmToPx,
   modelFromSnapshot,
   ownSpaceAreas,
   parseMetres,
   planToSvgString,
+  polygonSelfIntersects,
   pxToMm,
+  roomDrawingProblems,
+  setWallLength,
   shapeGap,
   snapPosition,
+  TABLE_PRESETS,
+  wallLengths,
   type DrawingSnapshot,
   type PlanItem,
   type PlanModel,
@@ -293,5 +300,89 @@ describe("the drawing routine", () => {
     expect(parseMetres("180 cm")).toBe(1800);
     expect(parseMetres("")).toBeNull();
     expect(Number.isNaN(parseMetres("mare"))).toBe(true);
+  });
+});
+
+describe("table shapes and ready-made tables", () => {
+  const base = { id: "t", kind: "table" as const, source: "custom" as const, name: "T", label: "1", x: 5000, y: 5000, rotation: 0, seats: 8 };
+
+  it("ovals and half-moons have real footprints, sized by sides or by a diameter", () => {
+    const oval = { ...base, shape: "oval" as const, diameterMm: null, widthMm: 2400, lengthMm: 1200 };
+    const half = { ...base, shape: "halfmoon" as const, diameterMm: 1500, widthMm: null, lengthMm: null };
+    expect(itemHasDims(oval)).toBe(true);
+    expect(itemHasDims(half)).toBe(true);
+    expect(itemHasDims({ ...half, diameterMm: null, widthMm: 1500, lengthMm: 750 })).toBe(false);
+    const fo = itemFootprint(oval)!;
+    const fh = itemFootprint(half)!;
+    expect(fo.type).toBe("poly");
+    const xs = (fo as { points: { x: number; y: number }[] }).points.map((p) => p.x);
+    expect(Math.round(Math.max(...xs) - Math.min(...xs))).toBe(2400);
+    // a half-moon is as wide as its diameter and half as deep
+    const ph = (fh as { points: { x: number; y: number }[] }).points;
+    expect(Math.round(Math.max(...ph.map((p) => p.x)) - Math.min(...ph.map((p) => p.x)))).toBe(1500);
+    expect(Math.round(Math.max(...ph.map((p) => p.y)) - Math.min(...ph.map((p) => p.y)))).toBe(750);
+    // an oval touching a round table: gap ≈ 0
+    const round = itemFootprint({ ...base, shape: "round", diameterMm: 1000, widthMm: null, lengthMm: null, x: 5000 + 1200 + 500, y: 5000 })!;
+    expect(Math.abs(shapeGap(fo, round))).toBeLessThan(5);
+  });
+
+  it("every ready-made table is drawable, its chairs clear of the table, and it fits a 20 × 20 m room on its own", () => {
+    expect(new Set(TABLE_PRESETS.map((p) => p.key)).size).toBe(TABLE_PRESETS.length);
+    for (const p of TABLE_PRESETS) {
+      const item = { ...base, ...p, id: p.key, name: p.key, label: "1", seats: p.seats };
+      expect(itemHasDims(item), p.key).toBe(true);
+      const model: PlanModel = { name: "R", source: "own", versionNo: null, effectiveAt: null, widthMm: 20_000, lengthMm: 20_000, backdrop: null, areas: ownSpaceAreas(20_000, 20_000), tableTypes: [], items: [{ ...item, x: 10_000, y: 10_000 }], pois: [], parkingAreas: [], aisleMm: 600 };
+      expect(checkFit(model, { needed: p.seats }).status, p.key).toBe("fits");
+      const scene = buildPlanScene(model, { width: 800 });
+      const seats = scene.items[0]!.nodes.filter((n) => n.role === "seat");
+      expect(seats, p.key).toHaveLength(p.seats);
+      expect(planToSvgString(model, { width: 400 })).toContain("<svg");
+    }
+  });
+});
+
+describe("drawn rooms", () => {
+  const sq = [
+    { x: 0, y: 0 },
+    { x: 4000, y: 0 },
+    { x: 4000, y: 3000 },
+    { x: 0, y: 3000 },
+  ];
+  it("finds crossing walls and outlines too small to be a room", () => {
+    expect(polygonSelfIntersects(sq)).toBe(false);
+    expect(polygonSelfIntersects([sq[0]!, sq[2]!, sq[1]!, sq[3]!])).toBe(true);
+    expect(polygonSelfIntersects([sq[0]!, sq[1]!, sq[1]!, sq[2]!])).toBe(true); // a wall of no length
+    expect(polygonSelfIntersects([{ x: 0, y: 0 }, { x: 4000, y: 0 }, { x: 2000, y: 0 }, { x: 2000, y: 2000 }])).toBe(true); // doubles back
+    const L = [{ x: 0, y: 0 }, { x: 6000, y: 0 }, { x: 6000, y: 5000 }, { x: 12_000, y: 5000 }, { x: 12_000, y: 10_000 }, { x: 0, y: 10_000 }];
+    expect(polygonSelfIntersects(L)).toBe(false);
+    expect(roomDrawingProblems([{ id: "a", name: null, points: sq }, { id: "b", name: null, points: [{ x: 0, y: 0 }, { x: 600, y: 0 }, { x: 0, y: 600 }] }])).toEqual([{ index: 1, problem: "tooSmall" }]);
+  });
+
+  it("setting a wall's length keeps the next wall's direction (a rectangle stays a rectangle)", () => {
+    const longer = setWallLength(sq, 0, 6500);
+    expect(longer).toEqual([{ x: 0, y: 0 }, { x: 6500, y: 0 }, { x: 6500, y: 3000 }, { x: 0, y: 3000 }]);
+    expect(wallLengths(longer)).toEqual([6500, 3000, 6500, 3000]);
+    const tri = [{ x: 0, y: 0 }, { x: 3000, y: 0 }, { x: 0, y: 4000 }];
+    expect(wallLengths(setWallLength(tri, 0, 6000))[0]).toBe(6000);
+  });
+});
+
+describe("placing new tables", () => {
+  it("finds the nearest free floor: never on another table, never outside the room", () => {
+    const L = [{ x: 0, y: 0 }, { x: 6000, y: 0 }, { x: 6000, y: 5000 }, { x: 12_000, y: 5000 }, { x: 12_000, y: 10_000 }, { x: 0, y: 10_000 }];
+    const model: PlanModel = { name: "L", source: "own", versionNo: null, effectiveAt: null, widthMm: 12_000, lengthMm: 10_000, backdrop: null, areas: [{ id: "a", name: null, points: L }], tableTypes: [], items: [], pois: [], parkingAreas: [], aisleMm: 600 };
+    const t = { kind: "table" as const, shape: "round" as const, diameterMm: 1800, widthMm: null, lengthMm: null, seats: 10, rotation: 0 };
+    const placed: PlanItem[] = [];
+    for (let i = 0; i < 5; i++) {
+      // ask for the empty corner of the L every time
+      const at = findFreeSpot(model, t, { x: 9000, y: 2500 }, placed)!;
+      expect(at, `table ${i}`).not.toBeNull();
+      placed.push({ ...t, id: `t${i}`, source: "custom", name: "", label: String(i), ...at });
+    }
+    const withPlaced = { ...model, items: placed };
+    expect(checkFit(withPlaced, { needed: 50 }).status).toBe("fits");
+    // a sixth 1.8 m table with chairs and aisles no longer fits in 90 m²
+    expect(findFreeSpot(model, t, { x: 9000, y: 2500 }, placed)).toBeNull();
+    expect(findFreeSpot(model, { ...t, diameterMm: null }, { x: 0, y: 0 })).toBeNull();
   });
 });

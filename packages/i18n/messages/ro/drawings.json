@@ -199,7 +199,9 @@
   },
   "shapes": {
     "round": "Rotundă",
-    "rect": "Dreptunghiulară"
+    "rect": "Dreptunghiulară",
+    "oval": "Ovală",
+    "halfmoon": "Semilună"
   },
   "fields": {
     "spaceName": "Numele spațiului",

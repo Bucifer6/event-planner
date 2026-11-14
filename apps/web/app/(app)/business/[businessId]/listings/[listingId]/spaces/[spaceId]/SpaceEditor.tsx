@@ -10,6 +10,9 @@ import {
   type PlanModel,
   type PlanPoint,
   type SpaceMarkings,
+  shapeUsesDiameter,
+  TABLE_SHAPE_VALUES,
+  type TableShape,
 } from "@ed/core/spacemodel";
 import { Button, Notice, Section, SelectField, Sheet, Tag, TextField, Unknown } from "@ed/ui";
 import { IconEdit, IconPlus, IconTrash } from "@ed/ui/icons";
@@ -453,7 +456,7 @@ export function SpaceEditor(props: SpaceEditorProps) {
                 title: x.name,
                 meta: (
                   <>
-                    {x.shape === "round" ? (x.diameterMm === null ? unknown : `⌀ ${m(x.diameterMm)} m`) : (sizeOf(x.widthMm, x.lengthMm) ?? unknown)} · {x.seats === null ? <>{t("tables.seatsLabel")} {unknown}</> : t("tables.seats", { count: x.seats })} ·{" "}
+                    {shapeUsesDiameter(x.shape) ? (x.diameterMm === null ? unknown : `⌀ ${m(x.diameterMm)} m`) : (sizeOf(x.widthMm, x.lengthMm) ?? unknown)} · {x.seats === null ? <>{t("tables.seatsLabel")} {unknown}</> : t("tables.seats", { count: x.seats })} ·{" "}
                     {x.count === null ? <>{t("tables.countLabel")} {unknown}</> : t("tables.count", { count: x.count })}
                   </>
                 ),
@@ -750,7 +753,8 @@ function MarkSheet({
       }
     } else if (group === "tableTypes") {
       if (!name) err.name = tc("validation.required");
-      const round = v.shape === "round";
+      const shape = (v.shape ?? "round") as TableShape;
+      const round = shapeUsesDiameter(shape);
       const diameter = round ? measure("diameter", false) : null;
       const w = round ? null : measure("w", false);
       const l = round ? null : measure("l", false);
@@ -758,7 +762,7 @@ function MarkSheet({
       const seats = int("seats", 60);
       const count = int("count", 2000);
       if (Object.keys(err).length === 0) {
-        const row = { id: newId, name, shape: round ? ("round" as const) : ("rect" as const), diameterMm: diameter, widthMm: w, lengthMm: l, seats, count };
+        const row = { id: newId, name, shape, diameterMm: diameter, widthMm: w, lengthMm: l, seats, count };
         next = { ...markings, tableTypes: id ? markings.tableTypes.map((o) => (o.id === id ? row : o)) : [...markings.tableTypes, row] };
       }
     } else if (group === "fixtures") {
@@ -851,10 +855,13 @@ function MarkSheet({
           <>
             {f("name", t("fields.tableName"), { mode: "text", hint: t("fields.tableNameHint") })}
             <SelectField id={`${formId}-shape`} label={t("fields.shape")} value={v.shape} onChange={set("shape")}>
-              <option value="round">{t("shapes.round")}</option>
-              <option value="rect">{t("shapes.rect")}</option>
+              {TABLE_SHAPE_VALUES.map((x) => (
+                <option key={x} value={x}>
+                  {t(`shapes.${x}`)}
+                </option>
+              ))}
             </SelectField>
-            {v.shape === "round" ? (
+            {shapeUsesDiameter(v.shape as TableShape) ? (
               f("diameter", t("fields.diameter"), { optional: true })
             ) : (
               <div className={plan.fields2}>

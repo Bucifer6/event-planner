@@ -98,7 +98,7 @@ export const helpArticles: HelpArticleDef[] = [
   a("suppliers", "check-in", [`${O}/operate`, `${O}/operate/checkin`, `${O}/operate/rehearsal`, `${O}/operate/checklist`], ["offline-check-in", "facts-and-corrections", "event-day"]),
 
   // Sala, mesele și papetăria
-  a("space", "room-plan", [`${O}/space`], ["seating", "business-drawings", "how-eventdesk-works"]),
+  a("space", "room-plan", [`${O}/space`, `${O}/space/draw`], ["seating", "business-drawings", "how-eventdesk-works"]),
   a("space", "seating", [`${O}/seating`], ["room-plan", "preview-changes", "add-guests"]),
   a("space", "stationery", [`${O}/stationery`], ["guest-links", "check-in", "upload-refused"]),
 
@@ -170,6 +170,7 @@ export const helpTopics = {
   suppliers: "suppliers",
   day: "event-day",
   seating: "seating",
+  "space-draw": "room-plan",
   stationery: "stationery",
   travel: "itinerary",
   operate: "check-in",

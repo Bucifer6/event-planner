@@ -1,8 +1,8 @@
 {
   "room-plan": {
     "title": "The room plan",
-    "summary": "The space where the occasion takes place, to scale. Seating and the fit checks start from here.",
-    "keywords": "room plan floor plan space dimensions venue drawing scale width length version",
+    "summary": "The space where the occasion takes place, to scale. Seating and the fit checks start from here. You can also draw it exactly, with walls and corners to scale.",
+    "keywords": "room plan floor plan space dimensions venue drawing scale width length version cad walls corners snap grid angle rectangle L-shape",
     "where": "Your occasion → Room plan",
     "need": "The owner and project managers.",
     "body": {
@@ -21,7 +21,16 @@
         "c": "Press “Create the space”."
       },
       "note2": "Missing dimensions are shown as “unknown” and are not guessed. Without them, the fit check tells you honestly that it does not know whether the tables fit.",
-      "p2": "Under “What we know about the space” you find what the venue has stated. The plan to scale can be printed from “Print and export”."
+      "p2": "Under “What we know about the space” you find what the venue has stated. The plan to scale can be printed from “Print and export”.",
+      "hDraw": "Draw the room",
+      "pDraw": "A space you described yourself can be drawn exactly: press “Draw the room”.",
+      "olDraw1": {
+        "a": "“Rectangle”: click two opposite corners, or type the width and depth.",
+        "b": "“Walls”: click each corner in turn, or type a “Length (m)” and a direction. Close on the first corner.",
+        "c": "“Select”: drag corners, or type a wall's exact length. “Add a corner in the middle” makes an L-shaped room."
+      },
+      "noteDraw1": "Snapping to the grid, corners and 15° angles can be turned off. The keys are listed under the drawing.",
+      "pDraw2": "Press “Save drawing”. Tables stay where they were; the fit check shows if any ended up outside the room."
     }
   },
   "seating": {
@@ -44,7 +53,8 @@
       "h2": "Show guests their seat",
       "p2": "Under “What guests see”, press “Show guests their seat”. Each guest sees their table (and seat, if you chose one) on their link. “Hide the seating again” takes it back.",
       "note2": "Nobody sees other people's names. Until you publish, guests see nothing of the seating.",
-      "p3": "A seating layout proposed by an AI assistant appears first as a preview in “What if?”."
+      "p3": "A seating layout proposed by an AI assistant appears first as a preview in “What if?”.",
+      "noteTables": "Under “Add a table”, pick a “Ready-made table”: round, square, rectangular, oval, half-moon or cocktail, in common hire sizes with the number of chairs filled in. You can change anything afterwards."
     }
   },
   "stationery": {

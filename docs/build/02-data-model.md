@@ -213,8 +213,8 @@ explains the change).
 
 | Table | Purpose | Key columns |
 | --- | --- | --- |
-| `space_models` | The one space model of an occasion: a frozen venue drawing version, or a rectangle the planner typed in | `source` (venue, own), `drawing_version_id`, `version_no`, `effective_at`, `own_width_mm`, `own_length_mm` |
-| `plan_items` | A table or fixture on the plan, in real millimetres | `kind`, `source`, `shape`, dimensions, `seats`, `x`, `y`, `rotation` |
+| `space_models` | The one space model of an occasion: a frozen venue drawing version, or a rectangle the planner typed in, or a room they drew with the drawing tool | `source` (venue, own), `drawing_version_id`, `version_no`, `effective_at`, `own_width_mm`, `own_length_mm`, `own_areas` (drawn floor outlines in mm; NULL = not drawn) |
+| `plan_items` | A table or fixture on the plan, in real millimetres | `kind`, `source`, `shape` (round, rect, oval, halfmoon; round and half-moon by diameter), dimensions, `seats`, `x`, `y`, `rotation` |
 | `seat_assignments` | Who sits at which table | `table_item_id`, `household_id`, `guest_id`, `places`, `seat_no` |
 | `meal_stages` | Stages of the meal or evening with their own layout | `name`, `position` |
 | `stage_item_states` | How an item differs from the base layout during one stage | `present`, `x`, `y`, `rotation` |
