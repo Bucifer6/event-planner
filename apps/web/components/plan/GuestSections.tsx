@@ -45,7 +45,7 @@ export function GuestSeatSection({ data, locale }: Props<GuestSeat>) {
       </ul>
       {data.plan ? (
         <>
-          <PlanView model={data.plan} label={t("planLabel")} mineIds={tableIds} options={{ showPois: false, showSeats: true }} title={null} />
+          <PlanView model={data.plan} label={t("planLabel")} mineIds={tableIds} options={{ showPois: false, showSeats: false }} title={null} />
           <p className="ed-small ed-muted">{t("planNote")}</p>
         </>
       ) : null}

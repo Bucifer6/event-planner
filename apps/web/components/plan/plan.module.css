@@ -1,7 +1,7 @@
 /* "Paper & Ink" — the architect's sheet. Tokens only; the base surface is .ed-plan (@ed/ui). */
 
 /* inline-size containment: wide tab rows and a zoomed sheet scroll inside, they never widen the page */
-.frame { display: flex; flex-direction: column; min-width: 0; max-width: 100%; contain: inline-size; }
+.frame { display: flex; flex-direction: column; min-width: 0; max-width: 100%; contain: inline-size; margin-bottom: var(--s-5); }
 
 /* the sheet: the metric grid is drawn in the SVG, so the decorative CSS grid is switched off */
 .sheet.sheet {

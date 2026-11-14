@@ -47,7 +47,7 @@ export async function ListingCatalogues({ listing }: { listing: PublicListing })
             {c.items.map((item) => (
               <li key={item.id} className={styles.variety}>
                 {item.imageUrl ? (
-                  // eslint-disable-next-line @next/next/no-img-element -- signed, short-lived same-origin link; not a static asset
+                  // signed, short-lived same-origin link; not a static asset
                   <img className={styles.varietyImage} src={item.imageUrl} alt={t("public.imageAlt", { name: item.varietyName })} loading="lazy" width={96} height={96} />
                 ) : (
                   <span className={styles.varietyNoImage} role="img" aria-label={t("public.noImage")}>

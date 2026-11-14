@@ -52,7 +52,7 @@ export default async function RemovePage({ params, searchParams }: { params: Pro
           {context.sourceUrl && /^https?:\/\//.test(context.sourceUrl) ? <ExternalLink href={context.sourceUrl}>{t("source")}</ExternalLink> : null}
         </div>
       </header>
-      <h2 className="ed-display">{t("remove.title")}</h2>
+      <h2>{t("remove.title")}</h2>
       <Lead>{t("remove.lead", { name: context.listingName })}</Lead>
       {context.viaInvitation ? <Notice tone="success" title={t("remove.viaInvitation")} /> : null}
       <RemovalForm listingId={context.listingId} token={context.viaInvitation ? token : ""} honeypot={{ name: HONEYPOT_FIELD, stampName: FORM_STAMP_FIELD, stamp: issueFormStamp() }} />

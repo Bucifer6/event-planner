@@ -85,7 +85,7 @@ export function SharedFacts({
           <p className={styles.pre}>{shared.description}</p>
           {shared.designRef ? <p className="ed-small ed-muted">{t("thread.design", { id: shared.designRef.designId, version: shared.designRef.version })}</p> : null}
           {shared.imageUrl ? (
-            // eslint-disable-next-line @next/next/no-img-element -- signed, short-lived link to a private file
+            // signed, short-lived link to a private file
             <img className={styles.sketch} src={shared.imageUrl} alt={t("thread.imageAlt")} loading="lazy" width={360} height={270} />
           ) : null}
         </div>

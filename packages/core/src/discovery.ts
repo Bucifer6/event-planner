@@ -164,7 +164,7 @@ export function dedupeKeysFor(c: { name: string; localityKey?: string | null; em
 
 /** Minimal RFC 4180 reader: quoted fields, "" escapes, `,` or `;` delimiter (auto), header row. */
 export function parseCsv(text: string): Array<Record<string, string>> {
-  const body = text.replace(/^﻿/, "");
+  const body = text.replace(/^\uFEFF/, "");
   const firstLine = body.split(/\r?\n/, 1)[0] ?? "";
   const delimiter = (firstLine.match(/;/g)?.length ?? 0) > (firstLine.match(/,/g)?.length ?? 0) ? ";" : ",";
   const rows: string[][] = [];

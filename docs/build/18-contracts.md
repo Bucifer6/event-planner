@@ -200,3 +200,34 @@ Propose tools: call `createPreview` from `@ed/core/whatif`, then `return mcpProp
 - Slots to fill in `apps/web/app/directory/_slots/`: `EnquiryCta.tsx` (`{ listing, occasionId? }`; keep the `acceptsEnquiries` guard), `ListingExtras.tsx` (drawings, catalogues).
 - Business area routes: `/business`, `/business/[businessId]` (+ `/listings/[listingId]`, `/team`, `/settings`). Console: `/console/moderation`, `/console/businesses`, `/console/directory`.
 - Source-scan test: any source line containing "rating", "testimonial", "stele", "★" etc. without a negation fails `directory.test.ts`.
+
+---
+
+# Wave 4 additions
+
+## Monetization / billing / Featured / business occasions
+- `@ed/core/monetization`: `isMonetizationOn(ctx)`, `getMonetizationState(ctx)`, `assertMonetizationOn(ctx)`, `PERMANENT_FREE_TIER`.
+- `@ed/core/directory`: `setFeaturedProvider`, `FeaturedCard = DirectoryCard & { featured: true; labelKey: "featured.label" }`. `@ed/core/featured` registers the provider (returns [] while OFF).
+- `@ed/core/access`: live members of a business get a synthetic `Member` (role pm, id `bm_<businessMemberId>`, `viaBusiness`) on business-owned occasions until handover. NEVER store a synthetic member id in an FK column — use `ensureBusinessSeat(ctx, occasionId)` for a real row.
+- `@ed/core/bizoccasions`: `getOccasionBranding(ctx, occasionId)` → `{ businessId, name, logoUrl, accent, onAccent } | null` (use on guest/public pages; see `apps/web/app/g/[token]/Branding.tsx`), `recordAssetUse(ctx, { businessId, kind, itemId? })`, `setBusinessEnquiryProvider(fn)`.
+- `@ed/core/handover`: `onOccasionHandover(fn)`. `@ed/core/library`. `@ed/core/billing`: `setPlatformEnquiryCounter(fn)`. `@ed/core/comms`.
+- Approval actions: `monetization.enable|disable`, `billing.prices.set`, `billing.refund`, `deploy.production`, `compliance.access`, `listing.claim`.
+
+## Deploys / compliance
+- `@ed/core/deploys`, `@ed/core/complianceaccess` (`assertComplianceAccess(staffCtx, { subjectType: "account", subjectId }, "what")`).
+- A migration that older code cannot live with needs a line in `scripts/deploy/irreversible.txt`. Adding a workspace package needs a `COPY` line in the Dockerfile `deps` stage.
+
+## Enquiries / catalogues / discovery / claims
+- `@ed/core/enquiries`: `sendEnquiry(ctx, { occasionId, listingId, occasionKind, date, guests, countyCode?, localityId?, budgetBand?, message, shareEmail?, idempotencyKey })`, `sendQuoteRequest(ctx, { occasionId, listingId, arrangement: { description, imageAssetId?, designRef?: { designId, version } }, date, guests, message, shareEmail?, idempotencyKey })` → `{ enquiryId, bookingId, supplierId }` (listing must be in `floristi` or `decoratiuni-si-styling`); `acceptQuote`, `getQuoteLink(ctx, { enquiryId } | { bookingId })` → `{ current, versions[], changes[], designChangedSinceQuote } | null`; `listOccasionEnquiries`, `listBusinessEnquiries`, `enquiryNumbers`. Limits: 10/occasion, 30/account/day. There is NO tool/API for an assistant to send enquiries (MCP6).
+- `@ed/core/catalogues`: `listPublicCatalogues(ctx, { listingId?, businessId?, q? })`, `getCatalogueItem(ctx, id)` (stable ids; indicative prices per stem/bunch, nullable = unknown).
+- `@ed/core/discovery`, `@ed/core/claims` (claim page `/claim/[listingId]`).
+- Uploads larger than 1 MB must go through a Route Handler, not a Server Action.
+
+## Drawings / space model / seating
+- `@ed/core/spacemodel` (pure, client-safe): `PlanModel`, `PlanItem`, `applyStage`, `buildPlanScene`, **`planToSvgString(model, { width?, title?, highlightIds?, showTables?, showPois?, onlyItemIds? })`**, geometry helpers, `mmToMetresText`.
+- `@ed/core/fitcheck`: `checkFit(model, { needed: number | null })` → `{ status: "fits"|"no"|"unknown", seats, area, issues, excluded, … }`.
+- `@ed/core/drawings`: `getListingSpaces(ctx, listingId)`, `onDrawingVersionPublished(fn)`.
+- `@ed/core/seating`: `getSpaceModel(ctx, occasionId)`, `getSeatingSummary(ctx, occasionId)` (counts only), `getFitChecks`, `getGuestSeat(ctx)`, `getGuestSpaceView(ctx)`, `listMealStages(ctx, occasionId)` → `[{ id, name, position, states }]`, `addMealStage` ….
+  What-if kinds: `space.updateDrawing`, `space.addCustomTable` (input `{ name, shape: "round"|"rect", diameterMm?, widthMm?, lengthMm?, seats, count = 1, x?, y? }`), `seating.applyLayout` (input `{ mode: "merge"|"replace", tables: [{ itemId | tableTypeId | custom{…}, label?, x, y, rotation?, guestIds?, groups? }] }`).
+- Web: `@/components/plan/PlanView` (read-only client), `PlanSvg` (server-safe), `@/app/directory/_slots/ParkingFacts`.
+- Guest sections so far: `polls` (20), `seat` (30), `contributions` (40), `spaceView` (60).

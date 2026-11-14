@@ -131,7 +131,7 @@ export default async function CatalogueEditorPage({ params, searchParams }: { pa
               {working.items.map((i) => (
                 <li key={i.id} className={styles.item}>
                   {i.imageUrl ? (
-                    // eslint-disable-next-line @next/next/no-img-element -- signed, short-lived same-origin link; not a static asset
+                    // signed, short-lived same-origin link; not a static asset
                     <img className={styles.thumb} src={i.imageUrl} alt="" loading="lazy" width={64} height={64} />
                   ) : (
                     <span className={styles.noThumb} aria-hidden="true">
