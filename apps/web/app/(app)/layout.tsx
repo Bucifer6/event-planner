@@ -5,14 +5,19 @@ import { requireUser } from '../lib/session';
 import { getLocale, tf } from '../lib/i18n';
 import { LangToggle } from '../../components/LangToggle';
 import { signOutAction } from '../actions/auth';
+import { getPlannerAppearance } from '../lib/planner-appearance';
 
 export default async function AppLayout({ children }: { children: ReactNode }) {
   const user = await requireUser().catch(() => redirect('/signin'));
   const locale = await getLocale();
   const t = tf(locale);
+  const appearance = await getPlannerAppearance();
   return (
-    <>
-      <header className="topbar">
+    <div
+      className={appearance === 'garden' ? undefined : 'planner-skin planner-shell'}
+      data-appearance={appearance}
+    >
+      <header className="topbar planner-topbar">
         <Link className="brand" href="/dashboard">
           {t('app.name')}
         </Link>
@@ -29,8 +34,10 @@ export default async function AppLayout({ children }: { children: ReactNode }) {
           </form>
         </nav>
       </header>
-      {children}
-      <footer>EventDesk.ro — {user.email ?? user.username}</footer>
-    </>
+      <div className="planner-content">
+        {children}
+        <footer>EventDesk.ro — {user.email ?? user.username}</footer>
+      </div>
+    </div>
   );
 }

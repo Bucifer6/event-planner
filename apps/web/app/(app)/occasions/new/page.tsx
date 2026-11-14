@@ -2,6 +2,7 @@ import { requireUser } from '../../../lib/session';
 import { getLocale, tf } from '../../../lib/i18n';
 import { listTemplates, TEMPLATE_KINDS } from '@eventdesk/core';
 import { createOccasionAction } from '../../../actions/occasions';
+import { additionalOccasionKinds } from '../../../lib/invitation-templates';
 
 export default async function NewOccasionPage() {
   await requireUser();
@@ -16,12 +17,11 @@ export default async function NewOccasionPage() {
         <input id="title" name="title" type="text" required />
         <label htmlFor="kind">{t('occ.kind.label')}</label>
         <select id="kind" name="kind">
-          {TEMPLATE_KINDS.map((k) => (
+          {[...TEMPLATE_KINDS, ...additionalOccasionKinds, 'custom'].map((k) => (
             <option key={k} value={k}>
               {t(`templates.${k}.name`)}
             </option>
           ))}
-          <option value="custom">—</option>
         </select>
         <label htmlFor="template">{t('occ.template.label')}</label>
         <select id="template" name="template">

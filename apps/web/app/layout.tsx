@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import './globals.css';
+import './planner-appearance.css';
 import { getLocale } from './lib/i18n';
 import { LangProvider } from '../components/LangProvider';
 import { CookieNotice } from '../components/CookieNotice';

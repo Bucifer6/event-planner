@@ -1,0 +1,1789 @@
+.invitation-card {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 12px;
+  min-height: 360px;
+  padding: clamp(24px, 6%, 56px);
+  overflow: hidden;
+  background: var(--inv-paper);
+  color: var(--inv-ink);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+.invitation-card::before,
+.invitation-card::after {
+  position: absolute;
+  content: '';
+  pointer-events: none;
+  z-index: -1;
+}
+.invitation-motif {
+  width: 72px;
+  height: 58px;
+  color: var(--inv-accent);
+}
+.invitation-copy {
+  min-width: 0;
+}
+.invitation-copy > span {
+  display: block;
+}
+.invitation-heading {
+  margin: 0;
+  font:
+    normal clamp(28px, 6vw, 60px)/1.04 Georgia,
+    serif;
+  letter-spacing: -0.05em;
+}
+.invitation-message {
+  white-space: pre-wrap;
+  font:
+    normal 16px/1.6 Georgia,
+    serif;
+  max-width: 40ch;
+  margin: 12px auto 0;
+}
+.invitation-detail {
+  margin: 15px 0 0;
+  font:
+    600 11px/1.4 system-ui,
+    sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+.invitation-card[data-composition='frame']::before {
+  inset: 9px;
+  border: 4px double var(--inv-accent);
+}
+.invitation-card[data-composition='arch']::before {
+  inset: 6% 5% -5%;
+  border: 1px solid var(--inv-accent);
+  border-radius: 48% 48% 0 0 / 42% 42% 0 0;
+}
+.invitation-card[data-composition='arch'] {
+  padding-inline: 10%;
+}
+.invitation-card[data-composition='arch'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='seal'] .invitation-motif {
+  border: 1px solid currentColor;
+  border-radius: 50%;
+  padding: 9px;
+  width: 72px;
+  height: 72px;
+}
+.invitation-card[data-composition='seal']::before {
+  inset: auto 10% 16px;
+  border-bottom: 1px solid var(--inv-accent);
+}
+.invitation-card[data-composition='ribbon'] {
+  justify-items: start;
+  text-align: left;
+  border-left: 12px solid var(--inv-accent);
+}
+.invitation-card[data-composition='ribbon']::before {
+  inset: 0 0 0 62%;
+  background: repeating-linear-gradient(
+    135deg,
+    transparent 0 8px,
+    color-mix(in srgb, var(--inv-accent) 23%, transparent) 9px 10px
+  );
+  mask-image: linear-gradient(90deg, transparent, black);
+}
+.invitation-card[data-composition='band'] {
+  align-content: start;
+  padding-top: 42px;
+}
+.invitation-card[data-composition='band']::before {
+  inset: 0 0 auto;
+  height: 24px;
+  background: repeating-linear-gradient(90deg, var(--inv-accent) 0 2px, transparent 2px 7px);
+  border-bottom: 1px solid var(--inv-accent);
+}
+.invitation-card[data-composition='band'] .invitation-heading {
+  font-family: system-ui, sans-serif;
+  font-weight: 800;
+}
+.invitation-card[data-composition='ticket'] {
+  border-block: 8px solid var(--inv-accent);
+}
+.invitation-card[data-composition='ticket']::before {
+  inset: 10px 8px;
+  border-inline: 2px dashed var(--inv-accent);
+}
+.invitation-card[data-composition='ticket'] .invitation-heading {
+  font-family: 'Courier New', monospace;
+}
+.invitation-card[data-composition='postcard'] {
+  align-content: end;
+  justify-items: start;
+  text-align: left;
+}
+.invitation-card[data-composition='postcard'] .invitation-motif {
+  justify-self: end;
+  border: 2px dotted currentColor;
+  padding: 3px;
+}
+.invitation-card[data-composition='postcard']::before {
+  inset: 12px;
+  border: 1px solid var(--inv-accent);
+}
+.invitation-card[data-composition='split'] {
+  text-align: left;
+  align-items: center;
+  grid-template-columns: minmax(0, 0.37fr) minmax(0, 1fr);
+}
+.invitation-card[data-composition='split']::before {
+  inset: 0 70% 0 0;
+  background: color-mix(in srgb, var(--inv-accent) 18%, transparent);
+}
+.invitation-card[data-composition='split'] .invitation-motif {
+  max-width: 100%;
+}
+.invitation-card[data-composition='crest']::before {
+  width: 180px;
+  height: 180px;
+  top: -86px;
+  border-radius: 50%;
+  border: 8px double var(--inv-accent);
+  opacity: 0.55;
+}
+.invitation-card[data-composition='crest'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='border'] {
+  border-bottom: 14px solid var(--inv-accent);
+}
+.invitation-card[data-composition='border']::before {
+  inset: 10px;
+  border-block: 1px solid var(--inv-accent);
+}
+.invitation-card[data-composition='border'] .invitation-motif {
+  order: 1;
+}
+.invitation-thumbnail {
+  min-height: 0;
+  aspect-ratio: 4 / 3;
+  padding: 10px;
+  gap: 5px;
+}
+.invitation-thumbnail .invitation-heading {
+  font-size: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.invitation-thumbnail .invitation-motif {
+  width: 38px;
+  height: 32px;
+  padding: 0;
+}
+.invitation-thumbnail[data-composition='seal'] .invitation-motif {
+  width: 38px;
+  height: 38px;
+  padding: 4px;
+}
+.invitation-thumbnail[data-composition='band'] {
+  padding-top: 32px;
+}
+.invitation-thumbnail[data-composition='crest']::before {
+  width: 78px;
+  height: 78px;
+  top: -43px;
+  border-width: 4px;
+}
+.invitation-thumbnail[data-composition='postcard'] {
+  padding: 17px;
+}
+.invitation-card[data-composition='triptych']::before {
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    var(--inv-accent) 12%,
+    transparent 12% 88%,
+    var(--inv-accent) 88%
+  );
+  opacity: 0.24;
+}
+.invitation-card[data-composition='triptych'] {
+  padding-inline: 15%;
+}
+.invitation-card[data-composition='medallion'] .invitation-motif {
+  border-radius: 50%;
+  outline: 1px solid currentColor;
+  outline-offset: 4px;
+  padding: 8px;
+}
+.invitation-card[data-composition='medallion']::after {
+  inset: 5%;
+  border: 1px dotted var(--inv-accent);
+}
+.invitation-card[data-composition='rays']::before {
+  inset: 0;
+  background: repeating-conic-gradient(
+    at 50% 115%,
+    var(--inv-accent) 0deg 2deg,
+    transparent 2deg 11deg
+  );
+  mask-image: linear-gradient(transparent 50%, black);
+  opacity: 0.27;
+}
+.invitation-card[data-composition='diagonal'] {
+  justify-items: start;
+  text-align: left;
+}
+.invitation-card[data-composition='diagonal']::before {
+  inset: 0;
+  background: var(--inv-accent);
+  opacity: 0.23;
+  clip-path: polygon(85% 0, 100% 0, 100% 100%, 42% 100%);
+}
+.invitation-card[data-composition='plaque'] .invitation-copy {
+  padding: 10px;
+  border: 1px solid var(--inv-accent);
+  outline: 1px solid var(--inv-accent);
+  outline-offset: 3px;
+}
+.invitation-card[data-composition='plaque'] .invitation-motif {
+  order: 1;
+}
+.invitation-card[data-composition='column'] {
+  justify-items: end;
+  text-align: right;
+}
+.invitation-card[data-composition='column']::before {
+  inset: 0 auto 0 0;
+  width: 14%;
+  background: repeating-linear-gradient(90deg, var(--inv-accent) 0 1px, transparent 1px 6px);
+  opacity: 0.5;
+}
+.invitation-card[data-composition='column'] {
+  padding-left: 20%;
+}
+.invitation-card[data-composition='scallop']::before {
+  inset: 0;
+  background: radial-gradient(circle at 50% 0, var(--inv-accent) 0 12px, transparent 13px) 0 0 /
+    28px 28px repeat-x;
+}
+.invitation-card[data-composition='scallop'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='imprint'] {
+  align-content: end;
+}
+.invitation-card[data-composition='imprint'] .invitation-motif {
+  position: absolute;
+  width: 72%;
+  height: 72%;
+  right: -12%;
+  top: -13%;
+  opacity: 0.16;
+  z-index: -1;
+}
+.invitation-card[data-composition='ruling']::after {
+  inset: 8% 6%;
+  border-block: 4px double var(--inv-accent);
+}
+.invitation-card[data-composition='ruling'] .invitation-heading {
+  font-family: system-ui, sans-serif;
+  font-weight: 650;
+}
+.invitation-card[data-composition='duotone'] {
+  justify-items: start;
+  text-align: left;
+}
+.invitation-card[data-composition='duotone']::before {
+  inset: 0;
+  background: linear-gradient(180deg, var(--inv-accent) 34%, transparent 34%);
+  opacity: 0.26;
+}
+.invitation-card[data-composition='duotone'] .invitation-motif {
+  justify-self: end;
+}
+.invitation-gallery {
+  margin-bottom: 24px;
+}
+.invitation-gallery summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding-block: 10px;
+}
+.invitation-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 148px), 1fr));
+  gap: 12px;
+  max-height: 50vh;
+  overflow-y: auto;
+  padding: 5px;
+  margin-block: 14px;
+}
+.invitation-option {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  margin: 0;
+  min-width: 0;
+  cursor: pointer;
+  border: 1px solid var(--sage);
+  padding: 4px;
+  border-radius: 5px;
+}
+.invitation-option:has(input:checked) {
+  outline: 2px solid var(--ink);
+  outline-offset: 1px;
+}
+.invitation-option:has(input:focus-visible) {
+  outline: 2px solid var(--terracotta);
+  outline-offset: 3px;
+}
+.invitation-option-name {
+  padding: 5px 3px;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.invitation-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  min-height: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.invitation-editor .invitation-card,
+.invitation-history .invitation-card {
+  max-width: 640px;
+  margin-block: 12px;
+}
+.invitation-history pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+@media (min-width: 1020px) {
+  .invitation-designer {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+  .invitation-gallery {
+    border-right: 1px solid var(--sage);
+    padding-right: 20px;
+  }
+}
+
+.invitation-card[data-palette='orchard'] {
+  --inv-paper: #f6efda;
+  --inv-ink: #33402a;
+  --inv-accent: #718347;
+}
+.invitation-card[data-palette='gingham'] {
+  --inv-paper: #fff1df;
+  --inv-ink: #762a35;
+  --inv-accent: #b34c57;
+}
+.invitation-card[data-palette='meadow'] {
+  --inv-paper: #e5efdc;
+  --inv-ink: #27463b;
+  --inv-accent: #64896a;
+}
+.invitation-card[data-palette='citrus'] {
+  --inv-paper: #fff0b9;
+  --inv-ink: #554014;
+  --inv-accent: #ad6a1c;
+}
+.invitation-card[data-palette='lakeside'] {
+  --inv-paper: #e0eff2;
+  --inv-ink: #203d53;
+  --inv-accent: #417f95;
+}
+.invitation-card[data-palette='confetti'] {
+  --inv-paper: #ffe9ea;
+  --inv-ink: #641f3d;
+  --inv-accent: #bb517d;
+}
+.invitation-card[data-palette='candle'] {
+  --inv-paper: #251c37;
+  --inv-ink: #fff0ed;
+  --inv-accent: #efa96e;
+}
+.invitation-card[data-palette='sorbet'] {
+  --inv-paper: #ffe2cb;
+  --inv-ink: #602b32;
+  --inv-accent: #b85c53;
+}
+.invitation-card[data-palette='disco'] {
+  --inv-paper: #ddd9fb;
+  --inv-ink: #322456;
+  --inv-accent: #6952b3;
+}
+.invitation-card[data-palette='sprinkles'] {
+  --inv-paper: #e0f3ed;
+  --inv-ink: #183d40;
+  --inv-accent: #258478;
+}
+.invitation-card[data-palette='silk'] {
+  --inv-paper: #f9f4e8;
+  --inv-ink: #3b3028;
+  --inv-accent: #9b7350;
+}
+.invitation-card[data-palette='olive'] {
+  --inv-paper: #e9ecda;
+  --inv-ink: #35412e;
+  --inv-accent: #72804e;
+}
+.invitation-card[data-palette='heirloom'] {
+  --inv-paper: #f7e7e4;
+  --inv-ink: #572f3c;
+  --inv-accent: #a45c72;
+}
+.invitation-card[data-palette='porcelain'] {
+  --inv-paper: #edf3f9;
+  --inv-ink: #223859;
+  --inv-accent: #4f729d;
+}
+.invitation-card[data-palette='vellum'] {
+  --inv-paper: #352b2c;
+  --inv-ink: #fff2df;
+  --inv-accent: #d7ad81;
+}
+.invitation-card[data-palette='cloud'] {
+  --inv-paper: #edf4f6;
+  --inv-ink: #2b4059;
+  --inv-accent: #6687ab;
+}
+.invitation-card[data-palette='lullaby'] {
+  --inv-paper: #f3e8f8;
+  --inv-ink: #493251;
+  --inv-accent: #9572a5;
+}
+.invitation-card[data-palette='nest'] {
+  --inv-paper: #f8ecda;
+  --inv-ink: #594331;
+  --inv-accent: #ab7e58;
+}
+.invitation-card[data-palette='lamb'] {
+  --inv-paper: #f3f2e9;
+  --inv-ink: #414537;
+  --inv-accent: #7d8868;
+}
+.invitation-card[data-palette='petal'] {
+  --inv-paper: #fae7e8;
+  --inv-ink: #633749;
+  --inv-accent: #b2768b;
+}
+.invitation-card[data-palette='champagne'] {
+  --inv-paper: #242322;
+  --inv-ink: #fff0d2;
+  --inv-accent: #d4ad6c;
+}
+.invitation-card[data-palette='fireworks'] {
+  --inv-paper: #201b3a;
+  --inv-ink: #fff0f8;
+  --inv-accent: #f58bb4;
+}
+.invitation-card[data-palette='frost'] {
+  --inv-paper: #e5f2fa;
+  --inv-ink: #243952;
+  --inv-accent: #6088a4;
+}
+.invitation-card[data-palette='emerald'] {
+  --inv-paper: #103933;
+  --inv-ink: #f1f7e5;
+  --inv-accent: #9dc59b;
+}
+.invitation-card[data-palette='velvet'] {
+  --inv-paper: #441e31;
+  --inv-ink: #ffe9ee;
+  --inv-accent: #e6a3a4;
+}
+.invitation-card[data-palette='compass'] {
+  --inv-paper: #eee7d5;
+  --inv-ink: #423831;
+  --inv-accent: #987044;
+}
+.invitation-card[data-palette='sunrise'] {
+  --inv-paper: #f8e3d3;
+  --inv-ink: #59382e;
+  --inv-accent: #b56d4a;
+}
+.invitation-card[data-palette='atlas'] {
+  --inv-paper: #e1e9de;
+  --inv-ink: #2a4b43;
+  --inv-accent: #5c856d;
+}
+.invitation-card[data-palette='horizon'] {
+  --inv-paper: #e0e8f3;
+  --inv-ink: #293a59;
+  --inv-accent: #627daa;
+}
+.invitation-card[data-palette='desert'] {
+  --inv-paper: #f1d9c5;
+  --inv-ink: #532f26;
+  --inv-accent: #a9563b;
+}
+.invitation-card[data-palette='railway'] {
+  --inv-paper: #f0e7cb;
+  --inv-ink: #3f3723;
+  --inv-accent: #957a39;
+}
+.invitation-card[data-palette='postmark'] {
+  --inv-paper: #f5e0d8;
+  --inv-ink: #53332e;
+  --inv-accent: #ad6357;
+}
+.invitation-card[data-palette='summit'] {
+  --inv-paper: #dfeae3;
+  --inv-ink: #284536;
+  --inv-accent: #4b7b61;
+}
+.invitation-card[data-palette='harbour'] {
+  --inv-paper: #d9ebf2;
+  --inv-ink: #203b55;
+  --inv-accent: #427b99;
+}
+.invitation-card[data-palette='caravan'] {
+  --inv-paper: #eee3f3;
+  --inv-ink: #473456;
+  --inv-accent: #8c639c;
+}
+.invitation-card[data-palette='paper'] {
+  --inv-paper: #f3eddf;
+  --inv-ink: #3c3428;
+  --inv-accent: #8e7650;
+}
+.invitation-card[data-palette='ink'] {
+  --inv-paper: #202b3e;
+  --inv-ink: #f2f2f7;
+  --inv-accent: #a1accd;
+}
+.invitation-card[data-palette='terrace'] {
+  --inv-paper: #e1ede2;
+  --inv-ink: #284835;
+  --inv-accent: #61856b;
+}
+.invitation-card[data-palette='studio'] {
+  --inv-paper: #f9e6db;
+  --inv-ink: #54302f;
+  --inv-accent: #b96d66;
+}
+.invitation-card[data-palette='gallery'] {
+  --inv-paper: #ebe4fa;
+  --inv-ink: #423157;
+  --inv-accent: #8761ac;
+}
+
+.invitation-card[data-palette='laurel'] {
+  --inv-paper: #f4efde;
+  --inv-ink: #3f4227;
+  --inv-accent: #7b8245;
+}
+.invitation-card[data-palette='tassel'] {
+  --inv-paper: #242439;
+  --inv-ink: #fdf1d7;
+  --inv-accent: #d0ab62;
+}
+.invitation-card[data-palette='diploma'] {
+  --inv-paper: #f7e8d7;
+  --inv-ink: #56342f;
+  --inv-accent: #b67359;
+}
+.invitation-card[data-palette='honours'] {
+  --inv-paper: #233947;
+  --inv-ink: #eff7f5;
+  --inv-accent: #86b9c7;
+}
+.invitation-card[data-palette='campus'] {
+  --inv-paper: #e6ecd9;
+  --inv-ink: #2e493e;
+  --inv-accent: #63846a;
+}
+.invitation-card[data-palette='blush'] {
+  --inv-paper: #fae9e8;
+  --inv-ink: #5d303d;
+  --inv-accent: #b2667b;
+}
+.invitation-card[data-palette='promise'] {
+  --inv-paper: #402733;
+  --inv-ink: #f6e9eb;
+  --inv-accent: #d69aab;
+}
+.invitation-card[data-palette='pearl'] {
+  --inv-paper: #f5efe7;
+  --inv-ink: #3f3542;
+  --inv-accent: #a1828a;
+}
+.invitation-card[data-palette='vow'] {
+  --inv-paper: #e3e8ef;
+  --inv-ink: #30445f;
+  --inv-accent: #6985a7;
+}
+.invitation-card[data-palette='bouquet'] {
+  --inv-paper: #e7ecdb;
+  --inv-ink: #304735;
+  --inv-accent: #708d65;
+}
+.invitation-card[data-palette='moon'] {
+  --inv-paper: #e7e5f4;
+  --inv-ink: #3f355c;
+  --inv-accent: #8474ac;
+}
+.invitation-card[data-palette='cotton'] {
+  --inv-paper: #f7f2ea;
+  --inv-ink: #455157;
+  --inv-accent: #869da3;
+}
+.invitation-card[data-palette='mint'] {
+  --inv-paper: #e1f1e5;
+  --inv-ink: #2c4e47;
+  --inv-accent: #639581;
+}
+.invitation-card[data-palette='apricot'] {
+  --inv-paper: #fae8d6;
+  --inv-ink: #624231;
+  --inv-accent: #bd8867;
+}
+.invitation-card[data-palette='starlight'] {
+  --inv-paper: #26334f;
+  --inv-ink: #f3effe;
+  --inv-accent: #a4afd9;
+}
+.invitation-card[data-palette='hearth'] {
+  --inv-paper: #f1dec9;
+  --inv-ink: #60372c;
+  --inv-accent: #a46243;
+}
+.invitation-card[data-palette='doorstep'] {
+  --inv-paper: #e6ebdd;
+  --inv-ink: #364939;
+  --inv-accent: #6f8867;
+}
+.invitation-card[data-palette='brick'] {
+  --inv-paper: #6b392e;
+  --inv-ink: #fff0e5;
+  --inv-accent: #e6a18e;
+}
+.invitation-card[data-palette='linen'] {
+  --inv-paper: #f3eddf;
+  --inv-ink: #47403b;
+  --inv-accent: #9c876f;
+}
+.invitation-card[data-palette='woodgrain'] {
+  --inv-paper: #e0c5ae;
+  --inv-ink: #482e27;
+  --inv-accent: #a77555;
+}
+.invitation-card[data-palette='keynote'] {
+  --inv-paper: #eff1f7;
+  --inv-ink: #233252;
+  --inv-accent: #6a7cac;
+}
+.invitation-card[data-palette='graphite'] {
+  --inv-paper: #262b30;
+  --inv-ink: #eef1f1;
+  --inv-accent: #a7b5bc;
+}
+.invitation-card[data-palette='signal'] {
+  --inv-paper: #eee8dc;
+  --inv-ink: #453626;
+  --inv-accent: #a36132;
+}
+.invitation-card[data-palette='grid'] {
+  --inv-paper: #e3ebef;
+  --inv-ink: #234250;
+  --inv-accent: #598b9a;
+}
+.invitation-card[data-palette='forum'] {
+  --inv-paper: #e8e4ef;
+  --inv-ink: #40324e;
+  --inv-accent: #8c739d;
+}
+.invitation-card[data-palette='spotlight'] {
+  --inv-paper: #1d2236;
+  --inv-ink: #f8effb;
+  --inv-accent: #bc9be1;
+}
+.invitation-card[data-palette='spectrum'] {
+  --inv-paper: #f1e1f3;
+  --inv-ink: #502659;
+  --inv-accent: #a755a8;
+}
+.invitation-card[data-palette='chrome'] {
+  --inv-paper: #e5edf0;
+  --inv-ink: #30424c;
+  --inv-accent: #728fa3;
+}
+.invitation-card[data-palette='prototype'] {
+  --inv-paper: #e9eed4;
+  --inv-ink: #344318;
+  --inv-accent: #859b44;
+}
+.invitation-card[data-palette='neon'] {
+  --inv-paper: #21233a;
+  --inv-ink: #f9eefe;
+  --inv-accent: #fa94cd;
+}
+.invitation-card[data-palette='gilded'] {
+  --inv-paper: #2c2620;
+  --inv-ink: #f8efd9;
+  --inv-accent: #d2ad6c;
+}
+.invitation-card[data-palette='sapphire'] {
+  --inv-paper: #25354f;
+  --inv-ink: #eef3fa;
+  --inv-accent: #9bb5d3;
+}
+.invitation-card[data-palette='patron'] {
+  --inv-paper: #f2e7d6;
+  --inv-ink: #54392c;
+  --inv-accent: #9e7752;
+}
+.invitation-card[data-palette='orchid'] {
+  --inv-paper: #ebe2ef;
+  --inv-ink: #553352;
+  --inv-accent: #a36f9e;
+}
+.invitation-card[data-palette='onyx'] {
+  --inv-paper: #242629;
+  --inv-ink: #f5f1ec;
+  --inv-accent: #b6a299;
+}
+.invitation-card[data-palette='album'] {
+  --inv-paper: #eee1cf;
+  --inv-ink: #543a30;
+  --inv-accent: #a17759;
+}
+.invitation-card[data-palette='postscript'] {
+  --inv-paper: #efe8ee;
+  --inv-ink: #573e56;
+  --inv-accent: #9c7295;
+}
+.invitation-card[data-palette='heritage'] {
+  --inv-paper: #e7ebd9;
+  --inv-ink: #374534;
+  --inv-accent: #77886a;
+}
+.invitation-card[data-palette='copper'] {
+  --inv-paper: #483130;
+  --inv-ink: #fff0e5;
+  --inv-accent: #d99679;
+}
+.invitation-card[data-palette='evergreen'] {
+  --inv-paper: #244139;
+  --inv-ink: #eff6e9;
+  --inv-accent: #8db397;
+}
+
+.invitation-card[data-palette='saffron'] {
+  --inv-paper: #f8ecd0;
+  --inv-ink: #49371f;
+  --inv-accent: #ab7326;
+}
+.invitation-card[data-palette='merlot'] {
+  --inv-paper: #4e2431;
+  --inv-ink: #fbede5;
+  --inv-accent: #ce8498;
+}
+.invitation-card[data-palette='stoneware'] {
+  --inv-paper: #ece6da;
+  --inv-ink: #3e4039;
+  --inv-accent: #8b8b70;
+}
+.invitation-card[data-palette='fig'] {
+  --inv-paper: #eee2ed;
+  --inv-ink: #4d3050;
+  --inv-accent: #a46a99;
+}
+.invitation-card[data-palette='tablecloth'] {
+  --inv-paper: #e4ede9;
+  --inv-ink: #27483f;
+  --inv-accent: #60927f;
+}
+.invitation-card[data-palette='alabaster'] {
+  --inv-paper: #f6f0e8;
+  --inv-ink: #423936;
+  --inv-accent: #a18a76;
+}
+.invitation-card[data-palette='celadon'] {
+  --inv-paper: #dcece0;
+  --inv-ink: #294638;
+  --inv-accent: #6f947c;
+}
+.invitation-card[data-palette='mulberry'] {
+  --inv-paper: #44243d;
+  --inv-ink: #fbeafa;
+  --inv-accent: #c78ab8;
+}
+.invitation-card[data-palette='lapis'] {
+  --inv-paper: #213a6c;
+  --inv-ink: #edf3fc;
+  --inv-accent: #96afe9;
+}
+.invitation-card[data-palette='marigold'] {
+  --inv-paper: #f9e7b4;
+  --inv-ink: #514017;
+  --inv-accent: #b27c27;
+}
+.invitation-card[data-palette='gesso'] {
+  --inv-paper: #f2eeea;
+  --inv-ink: #363039;
+  --inv-accent: #918795;
+}
+.invitation-card[data-palette='canvas'] {
+  --inv-paper: #eee3d1;
+  --inv-ink: #4b3d2d;
+  --inv-accent: #a48b63;
+}
+.invitation-card[data-palette='patina'] {
+  --inv-paper: #e2ece0;
+  --inv-ink: #304638;
+  --inv-accent: #738d73;
+}
+.invitation-card[data-palette='matboard'] {
+  --inv-paper: #e3e9f0;
+  --inv-ink: #32425a;
+  --inv-accent: #7385aa;
+}
+.invitation-card[data-palette='lacquer'] {
+  --inv-paper: #442728;
+  --inv-ink: #f9ece4;
+  --inv-accent: #d68875;
+}
+.invitation-card[data-palette='backstage'] {
+  --inv-paper: #21202b;
+  --inv-ink: #f9eef9;
+  --inv-accent: #baa9e4;
+}
+.invitation-card[data-palette='encore'] {
+  --inv-paper: #52253d;
+  --inv-ink: #fceaf2;
+  --inv-accent: #ec9abc;
+}
+.invitation-card[data-palette='soundcheck'] {
+  --inv-paper: #e8e6d9;
+  --inv-ink: #424129;
+  --inv-accent: #909259;
+}
+.invitation-card[data-palette='vinyl'] {
+  --inv-paper: #2c3032;
+  --inv-ink: #f7eddf;
+  --inv-accent: #d4ab78;
+}
+.invitation-card[data-palette='amp'] {
+  --inv-paper: #e4eaf8;
+  --inv-ink: #273860;
+  --inv-accent: #6f86c4;
+}
+.invitation-card[data-palette='notebook'] {
+  --inv-paper: #f5edda;
+  --inv-ink: #433931;
+  --inv-accent: #ad8565;
+}
+.invitation-card[data-palette='pigment'] {
+  --inv-paper: #f0e1ea;
+  --inv-ink: #52354b;
+  --inv-accent: #ad729e;
+}
+.invitation-card[data-palette='workbench'] {
+  --inv-paper: #e8e8db;
+  --inv-ink: #354532;
+  --inv-accent: #7a895e;
+}
+.invitation-card[data-palette='pencil'] {
+  --inv-paper: #ece9e3;
+  --inv-ink: #343434;
+  --inv-accent: #93918a;
+}
+.invitation-card[data-palette='indigo-dye'] {
+  --inv-paper: #223555;
+  --inv-ink: #f0f1fa;
+  --inv-accent: #a1b0de;
+}
+.invitation-card[data-palette='track'] {
+  --inv-paper: #f1dcd4;
+  --inv-ink: #562b24;
+  --inv-accent: #a65545;
+}
+.invitation-card[data-palette='court'] {
+  --inv-paper: #dae8f1;
+  --inv-ink: #2e425c;
+  --inv-accent: #6384ac;
+}
+.invitation-card[data-palette='turf'] {
+  --inv-paper: #dfedda;
+  --inv-ink: #2c4b2f;
+  --inv-accent: #729860;
+}
+.invitation-card[data-palette='scoreboard'] {
+  --inv-paper: #263434;
+  --inv-ink: #edf4e8;
+  --inv-accent: #abc682;
+}
+.invitation-card[data-palette='relay'] {
+  --inv-paper: #fcf0cb;
+  --inv-ink: #514014;
+  --inv-accent: #b08224;
+}
+.invitation-card[data-palette='afterglow'] {
+  --inv-paper: #f7e2da;
+  --inv-ink: #553836;
+  --inv-accent: #b2776a;
+}
+.invitation-card[data-palette='sundial'] {
+  --inv-paper: #eee7d1;
+  --inv-ink: #46432d;
+  --inv-accent: #99864e;
+}
+.invitation-card[data-palette='parchment'] {
+  --inv-paper: #f6ede2;
+  --inv-ink: #4d382d;
+  --inv-accent: #a4805d;
+}
+.invitation-card[data-palette='amber'] {
+  --inv-paper: #5a3b28;
+  --inv-ink: #fff1d8;
+  --inv-accent: #e5b266;
+}
+.invitation-card[data-palette='seaglass'] {
+  --inv-paper: #dcebe7;
+  --inv-ink: #31524d;
+  --inv-accent: #699a8f;
+}
+.invitation-card[data-palette='statuette'] {
+  --inv-paper: #2d2923;
+  --inv-ink: #fcf0d9;
+  --inv-accent: #d5ae6a;
+}
+.invitation-card[data-palette='marquee'] {
+  --inv-paper: #582833;
+  --inv-ink: #f9e8e7;
+  --inv-accent: #ea9899;
+}
+.invitation-card[data-palette='platinum'] {
+  --inv-paper: #e9ecef;
+  --inv-ink: #3b414e;
+  --inv-accent: #9299ae;
+}
+.invitation-card[data-palette='applause'] {
+  --inv-paper: #e9dfe9;
+  --inv-ink: #543a59;
+  --inv-accent: #9c729d;
+}
+.invitation-card[data-palette='laureate'] {
+  --inv-paper: #e7ebda;
+  --inv-ink: #3c4831;
+  --inv-accent: #808f65;
+}
+.invitation-card[data-palette='bunting'] {
+  --inv-paper: #f7e6d3;
+  --inv-ink: #5f3c37;
+  --inv-accent: #b97b53;
+}
+.invitation-card[data-palette='lantern'] {
+  --inv-paper: #30223e;
+  --inv-ink: #f9eafa;
+  --inv-accent: #d998c7;
+}
+.invitation-card[data-palette='parade'] {
+  --inv-paper: #e8e4f5;
+  --inv-ink: #46355f;
+  --inv-accent: #9679c2;
+}
+.invitation-card[data-palette='daybreak'] {
+  --inv-paper: #fbefc3;
+  --inv-ink: #554416;
+  --inv-accent: #b79538;
+}
+.invitation-card[data-palette='fairground'] {
+  --inv-paper: #dfefea;
+  --inv-ink: #2c534d;
+  --inv-accent: #659a87;
+}
+
+.invitation-card[data-palette='truffle'] {
+  --inv-paper: #f3e6d6;
+  --inv-ink: #433026;
+  --inv-accent: #ab7350;
+}
+.invitation-card[data-palette='vermilion'] {
+  --inv-paper: #fbe1d9;
+  --inv-ink: #651e25;
+  --inv-accent: #b95046;
+}
+.invitation-card[data-palette='sparkler'] {
+  --inv-paper: #f9e9cb;
+  --inv-ink: #543619;
+  --inv-accent: #c68a38;
+}
+.invitation-card[data-palette='nightshade'] {
+  --inv-paper: #292437;
+  --inv-ink: #fbebe8;
+  --inv-accent: #bb89bb;
+}
+.invitation-card[data-palette='peach'] {
+  --inv-paper: #fbe4d7;
+  --inv-ink: #62352d;
+  --inv-accent: #b77e68;
+}
+
+.invitation-card[data-palette='jellybean'] {
+  --inv-paper: #ffe8e6;
+  --inv-ink: #643047;
+  --inv-accent: #b66e8e;
+}
+.invitation-card[data-palette='crayon'] {
+  --inv-paper: #e5e5fa;
+  --inv-ink: #403861;
+  --inv-accent: #817acf;
+}
+.invitation-card[data-palette='balloon'] {
+  --inv-paper: #f8dbe8;
+  --inv-ink: #6b3053;
+  --inv-accent: #af577f;
+}
+.invitation-card[data-palette='lemonade'] {
+  --inv-paper: #f9eabb;
+  --inv-ink: #514013;
+  --inv-accent: #c08d20;
+}
+.invitation-card[data-palette='gumdrop'] {
+  --inv-paper: #e3f1dd;
+  --inv-ink: #2d513d;
+  --inv-accent: #72a477;
+}
+
+.invitation-card[data-palette='peony'] {
+  --inv-paper: #f5e2ea;
+  --inv-ink: #533343;
+  --inv-accent: #b17b97;
+}
+.invitation-card[data-palette='organza'] {
+  --inv-paper: #e7e4ef;
+  --inv-ink: #413749;
+  --inv-accent: #9a8db1;
+}
+.invitation-card[data-palette='gardenia'] {
+  --inv-paper: #f5f0de;
+  --inv-ink: #494831;
+  --inv-accent: #969366;
+}
+.invitation-card[data-palette='rhubarb'] {
+  --inv-paper: #f1d9dd;
+  --inv-ink: #632c40;
+  --inv-accent: #ae6377;
+}
+.invitation-card[data-palette='primrose'] {
+  --inv-paper: #ecf0dc;
+  --inv-ink: #3c4e31;
+  --inv-accent: #7b955d;
+}
+
+.invitation-card[data-palette='ribbon-silk'] {
+  --inv-paper: #f3e9dd;
+  --inv-ink: #493836;
+  --inv-accent: #9d7768;
+}
+.invitation-card[data-palette='rosewood'] {
+  --inv-paper: #4a2d33;
+  --inv-ink: #fff0ea;
+  --inv-accent: #d596a8;
+}
+.invitation-card[data-palette='quartz'] {
+  --inv-paper: #e9e1ed;
+  --inv-ink: #4b3954;
+  --inv-accent: #987ba4;
+}
+.invitation-card[data-palette='patinated-brass'] {
+  --inv-paper: #eee5d0;
+  --inv-ink: #493a21;
+  --inv-accent: #aa8b4d;
+}
+.invitation-card[data-palette='mist'] {
+  --inv-paper: #e1e9ee;
+  --inv-ink: #31465c;
+  --inv-accent: #809aac;
+}
+
+.invitation-card[data-palette='sugarplum'] {
+  --inv-paper: #e9dff2;
+  --inv-ink: #523658;
+  --inv-accent: #9e79b5;
+}
+.invitation-card[data-palette='buttermilk'] {
+  --inv-paper: #f6ebcf;
+  --inv-ink: #53472d;
+  --inv-accent: #a28f61;
+}
+.invitation-card[data-palette='morning-sky'] {
+  --inv-paper: #e1eef7;
+  --inv-ink: #304659;
+  --inv-accent: #789fc0;
+}
+.invitation-card[data-palette='bubblegum'] {
+  --inv-paper: #fbe2eb;
+  --inv-ink: #64364e;
+  --inv-accent: #b77498;
+}
+.invitation-card[data-palette='pistachio'] {
+  --inv-paper: #e7ecdb;
+  --inv-ink: #42523a;
+  --inv-accent: #899e72;
+}
+
+.invitation-card[data-palette='holly'] {
+  --inv-paper: #23443a;
+  --inv-ink: #f0f7e8;
+  --inv-accent: #9cbd91;
+}
+.invitation-card[data-palette='cranberry'] {
+  --inv-paper: #502631;
+  --inv-ink: #fff0e4;
+  --inv-accent: #d98b98;
+}
+.invitation-card[data-palette='snowfall'] {
+  --inv-paper: #ecf2f6;
+  --inv-ink: #34465a;
+  --inv-accent: #819ab1;
+}
+.invitation-card[data-palette='spruce'] {
+  --inv-paper: #e0ebe0;
+  --inv-ink: #284b3d;
+  --inv-accent: #729882;
+}
+.invitation-card[data-palette='tinsel'] {
+  --inv-paper: #342d42;
+  --inv-ink: #fff1e8;
+  --inv-accent: #e3c08b;
+}
+
+.invitation-card[data-palette='willow'] {
+  --inv-paper: #e3ebdd;
+  --inv-ink: #374b3c;
+  --inv-accent: #7f947c;
+}
+.invitation-card[data-palette='remembrance'] {
+  --inv-paper: #efebe7;
+  --inv-ink: #443e3f;
+  --inv-accent: #9e8b91;
+}
+.invitation-card[data-palette='soft-stone'] {
+  --inv-paper: #e4e1df;
+  --inv-ink: #41454c;
+  --inv-accent: #828994;
+}
+.invitation-card[data-palette='white-rose'] {
+  --inv-paper: #f7f2ea;
+  --inv-ink: #544943;
+  --inv-accent: #a99b84;
+}
+.invitation-card[data-palette='stillwater'] {
+  --inv-paper: #e3edf0;
+  --inv-ink: #304957;
+  --inv-accent: #7e9ba7;
+}
+
+.invitation-card[data-palette='blueprint'] {
+  --inv-paper: #263860;
+  --inv-ink: #f1f5fd;
+  --inv-accent: #9db6e5;
+}
+.invitation-card[data-palette='type-metal'] {
+  --inv-paper: #e6e7ea;
+  --inv-ink: #363844;
+  --inv-accent: #838a9c;
+}
+.invitation-card[data-palette='copperplate'] {
+  --inv-paper: #f0ddce;
+  --inv-ink: #51372c;
+  --inv-accent: #a97654;
+}
+.invitation-card[data-palette='sea-ink'] {
+  --inv-paper: #24433e;
+  --inv-ink: #ebf1ea;
+  --inv-accent: #8fb09f;
+}
+.invitation-card[data-palette='newsprint'] {
+  --inv-paper: #eeebdf;
+  --inv-ink: #403e34;
+  --inv-accent: #89836e;
+}
+.invitation-gallery-filters {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+  flex-wrap: wrap;
+}
+.invitation-gallery-filters [aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--cream);
+}
+.invitation-card[data-edition] {
+  min-height: 410px;
+  container-type: inline-size;
+  padding: 42px 14%;
+  gap: 12px;
+  background: radial-gradient(
+    ellipse at 40% 35%,
+    color-mix(in srgb, var(--inv-paper) 92%, white),
+    var(--inv-paper) 75%
+  );
+}
+.invitation-card[data-edition] .invitation-copy {
+  display: grid;
+  gap: 12px;
+}
+.invitation-card[data-edition] .invitation-heading {
+  font-size: clamp(23px, 14cqi, 54px);
+  line-height: 1;
+  text-wrap: balance;
+}
+.invitation-card[data-edition] .invitation-message {
+  margin: 0;
+  max-width: 31ch;
+}
+.invitation-card[data-edition] .invitation-detail {
+  margin: 3px 0 0;
+}
+.invitation-card[data-edition] .invitation-motif {
+  width: 49px;
+  height: 40px;
+  stroke-width: 1.2;
+}
+.invitation-edition-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: var(--inv-accent);
+  stroke-width: 1;
+  z-index: -1;
+}
+.invitation-card[data-composition='letterpress-edition']::before {
+  inset: 4%;
+  border: 1px solid var(--inv-accent);
+  box-shadow:
+    inset 0 0 0 3px var(--inv-paper),
+    inset 0 0 0 4px color-mix(in srgb, var(--inv-accent) 55%, transparent);
+}
+.invitation-card[data-composition='letterpress-edition'] .invitation-detail {
+  border-top: 1px solid var(--inv-accent);
+  padding-top: 12px;
+}
+.invitation-card[data-composition='botanical-edition'] {
+  padding-inline: 17%;
+}
+.invitation-card[data-composition='botanical-edition'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='botanical-edition'] .invitation-edition-art {
+  opacity: 0.6;
+}
+.invitation-card[data-composition='deco-edition'] {
+  background: var(--inv-ink);
+  color: var(--inv-paper);
+}
+.invitation-card[data-composition='deco-edition'] :is(.invitation-edition-art, .invitation-motif) {
+  color: var(--inv-paper);
+  stroke: currentColor;
+  opacity: 0.75;
+}
+.invitation-card[data-composition='deco-edition'] .invitation-heading {
+  text-transform: uppercase;
+  font-size: clamp(21px, 11cqi, 42px);
+  letter-spacing: 0.07em;
+}
+.invitation-card[data-composition='modernist-edition'] {
+  padding-inline: 25% 7%;
+  justify-items: start;
+  text-align: left;
+}
+.invitation-card[data-composition='modernist-edition']::before {
+  inset: 0 79% 0 0;
+  background: var(--inv-ink);
+}
+.invitation-card[data-composition='modernist-edition'] .invitation-heading {
+  font-family: system-ui, sans-serif;
+  font-weight: 750;
+}
+.invitation-card[data-composition='modernist-edition'] .invitation-message {
+  font-family: system-ui, sans-serif;
+}
+.invitation-card[data-composition='folded-edition'] {
+  padding-block: 64px;
+}
+.invitation-card[data-composition='folded-edition']::before {
+  inset: 0;
+  clip-path: polygon(0 0, 50% 37%, 100% 0);
+  background: color-mix(in srgb, var(--inv-accent) 33%, var(--inv-paper));
+}
+.invitation-card[data-composition='folded-edition'] .invitation-edition-art {
+  opacity: 0.65;
+}
+.invitation-card[data-composition='folded-edition'] .invitation-motif {
+  background: var(--inv-paper);
+  border: 1px solid var(--inv-accent);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+}
+.invitation-card[data-composition='engraved-edition'] .invitation-edition-art {
+  opacity: 0.25;
+}
+.invitation-card[data-composition='engraved-edition'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-edition].invitation-thumbnail {
+  min-height: 0;
+  padding-block: 12px;
+  gap: 5px;
+}
+.invitation-card[data-edition].invitation-thumbnail .invitation-heading {
+  font-size: 15px;
+}
+.invitation-card[data-edition].invitation-thumbnail .invitation-motif {
+  width: 26px;
+  height: 22px;
+}
+.invitation-card[data-composition='botanical-edition'] .invitation-edition-art {
+  mask-image: linear-gradient(90deg, black, transparent 29% 71%, black);
+}
+.invitation-card[data-palette='harvest-linen'] {
+  --inv-paper: #f2ebd7;
+  --inv-ink: #394331;
+  --inv-accent: #778053;
+}
+.invitation-card[data-palette='orchard-bark'] {
+  --inv-paper: #ebd9bd;
+  --inv-ink: #493025;
+  --inv-accent: #946745;
+}
+.invitation-card[data-palette='oat-cloth'] {
+  --inv-paper: #eee4cf;
+  --inv-ink: #443727;
+  --inv-accent: #927951;
+}
+.invitation-card[data-palette='antique-ivory'] {
+  --inv-paper: #faf3e0;
+  --inv-ink: #493426;
+  --inv-accent: #9a7337;
+}
+.invitation-card[data-palette='heritage-blue'] {
+  --inv-paper: #24374d;
+  --inv-ink: #f7efdd;
+  --inv-accent: #d8b779;
+}
+.invitation-card[data-palette='heirloom-red'] {
+  --inv-paper: #f7eddf;
+  --inv-ink: #612c32;
+  --inv-accent: #a64c52;
+}
+.invitation-card[data-composition='wildflower-edition'] {
+  align-content: start;
+  padding-block: 42px 80px;
+}
+.invitation-card[data-composition='wildflower-edition'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='wildflower-edition']::before {
+  inset: 8px;
+  border: 1px solid color-mix(in srgb, var(--inv-accent) 55%, transparent);
+}
+.invitation-card[data-composition='woodcut-edition'] {
+  align-content: end;
+  justify-items: start;
+  text-align: left;
+  padding: 112px 11% 34px;
+  background:
+    repeating-linear-gradient(1deg, #805a3612 0 1px, transparent 1px 5px), var(--inv-paper);
+}
+.invitation-card[data-composition='woodcut-edition'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='woodcut-edition'].invitation-thumbnail {
+  align-content: end;
+}
+.invitation-card[data-composition='woven-edition'] {
+  padding-inline: 30% 8%;
+  justify-items: start;
+  text-align: left;
+}
+.invitation-card[data-composition='woven-edition']::before {
+  inset: 0 74% 0 0;
+  background:
+    repeating-linear-gradient(0deg, #fff5 0 1px, transparent 1px 4px),
+    color-mix(in srgb, var(--inv-paper) 76%, var(--inv-accent));
+}
+.invitation-card[data-composition='woven-edition'] .invitation-heading {
+  font-family: 'Palatino Linotype', Georgia, serif;
+}
+.invitation-card[data-composition='damask-edition']::before {
+  inset: 4%;
+  border: 3px double var(--inv-accent);
+}
+.invitation-card[data-composition='damask-edition'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='heraldic-edition'] {
+  padding-inline: 15%;
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='heraldic-edition'] .invitation-motif {
+  box-sizing: content-box;
+  border: 1px solid currentColor;
+  border-radius: 50% 50% 42% 42%;
+  padding: 5px;
+}
+.invitation-card[data-composition='heraldic-edition'] .invitation-heading {
+  font-variant: small-caps;
+  letter-spacing: 0.01em;
+}
+.invitation-card[data-composition='embroidered-edition'] {
+  padding-block: 54px;
+}
+.invitation-card[data-composition='embroidered-edition']::before {
+  inset: 11% 0;
+  border-block: 1px solid var(--inv-accent);
+}
+.invitation-card[data-composition='embroidered-edition'] .invitation-heading {
+  font-style: italic;
+}
+
+.invitation-card[data-palette='maramures-oak'] {
+  --inv-paper: #f2dfbf;
+  --inv-ink: #473226;
+  --inv-accent: #885734;
+}
+.invitation-card[data-palette='maramures-ink'] {
+  --inv-paper: #392c27;
+  --inv-ink: #f8ebd2;
+  --inv-accent: #d5ab76;
+}
+.invitation-card[data-palette='bucovina-wax'] {
+  --inv-paper: #322b2b;
+  --inv-ink: #fff0d5;
+  --inv-accent: #e5b974;
+}
+.invitation-card[data-palette='bucovina-red'] {
+  --inv-paper: #faead5;
+  --inv-ink: #5e2328;
+  --inv-accent: #a94c42;
+}
+.invitation-card[data-palette='horezu-clay'] {
+  --inv-paper: #efd6b9;
+  --inv-ink: #512d20;
+  --inv-accent: #a05231;
+}
+.invitation-card[data-palette='horezu-glaze'] {
+  --inv-paper: #f7efd7;
+  --inv-ink: #354333;
+  --inv-accent: #73814d;
+}
+.invitation-card[data-palette='saxon-chest'] {
+  --inv-paper: #e8e8d4;
+  --inv-ink: #334637;
+  --inv-accent: #71875d;
+}
+.invitation-card[data-palette='saxon-blue'] {
+  --inv-paper: #2d465a;
+  --inv-ink: #fff0d6;
+  --inv-accent: #ddac87;
+}
+.invitation-card[data-composition='maramures-gate'] {
+  padding-block: 110px 45px;
+  background:
+    repeating-linear-gradient(92deg, #633c2015 0 1px, transparent 1px 12px), var(--inv-paper);
+}
+.invitation-card[data-composition='maramures-rosette'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='bucovina-wax'] {
+  padding-top: 100px;
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='bucovina-wax'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='bucovina-lozenge']::before {
+  inset: 5% 10%;
+  border-inline: 1px solid var(--inv-accent);
+  opacity: 0.65;
+}
+.invitation-card[data-composition='bucovina-lozenge'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='horezu-clay'] {
+  justify-items: start;
+  text-align: left;
+  padding-block: 95px 55px;
+}
+.invitation-card[data-composition='horezu-clay'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='horezu-medallion'] {
+  padding-inline: 18%;
+}
+.invitation-card[data-composition='horezu-medallion'] .invitation-edition-art {
+  opacity: 0.65;
+}
+.invitation-card[data-composition='saxon-chest'] {
+  padding-inline: 32% 8%;
+  text-align: left;
+  justify-items: start;
+}
+.invitation-card[data-composition='saxon-chest']::before {
+  inset: 0 70% 0 0;
+  background: color-mix(in srgb, var(--inv-accent) 22%, var(--inv-paper));
+}
+.invitation-card[data-composition='saxon-floral'] {
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='saxon-floral'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='maramures-gate'].invitation-thumbnail,
+.invitation-card[data-composition='bucovina-wax'].invitation-thumbnail,
+.invitation-card[data-composition='horezu-clay'].invitation-thumbnail {
+  padding-top: 24%;
+}
+.invitation-card[data-composition='maramures-gate'] {
+  padding-inline: 15%;
+}
+.invitation-card[data-composition='maramures-gate'] .invitation-edition-art {
+  opacity: 0.76;
+}
+.invitation-card[data-composition='saxon-floral'] .invitation-copy {
+  padding-bottom: 18px;
+}
+.invitation-card[data-composition='saxon-floral'].invitation-thumbnail .invitation-copy {
+  padding-bottom: 0;
+}
+
+.invitation-card[data-palette='muscel-thread'] {
+  --inv-paper: #fbf4e4;
+  --inv-ink: #24201e;
+  --inv-accent: #982c39;
+  --inv-thread: #a97326;
+}
+.invitation-card[data-palette='ciupag-thread'] {
+  --inv-paper: #f5ead4;
+  --inv-ink: #402b27;
+  --inv-accent: #9e3438;
+  --inv-thread: #365b57;
+}
+.invitation-card[data-palette='sibiu-cloth'] {
+  --inv-paper: #f7f4ea;
+  --inv-ink: #231f1e;
+  --inv-accent: #302927;
+  --inv-thread: #534c47;
+}
+.invitation-card[data-palette='moldova-wool'] {
+  --inv-paper: #252021;
+  --inv-ink: #fff2e6;
+  --inv-accent: #de8eac;
+  --inv-thread: #e5bb80;
+}
+.invitation-card[data-palette='dobrogea-cotton'] {
+  --inv-paper: #faf2e3;
+  --inv-ink: #282321;
+  --inv-accent: #9c2839;
+  --inv-thread: #2b2723;
+}
+.invitation-card[data-palette='dolj-wool'] {
+  --inv-paper: #542632;
+  --inv-ink: #fff0d6;
+  --inv-accent: #efdfc0;
+  --inv-thread: #ceb1ca;
+}
+.invitation-card[data-palette='moldova-diamond'] {
+  --inv-paper: #641e35;
+  --inv-ink: #fff4de;
+  --inv-accent: #ebbb55;
+  --inv-thread: #a8ac79;
+}
+.invitation-textile-accent {
+  stroke: var(--inv-thread);
+}
+.invitation-card[data-composition='muscel-altita'] {
+  padding-block: 108px 70px;
+}
+.invitation-card[data-composition='muscel-altita'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='muscel-rauri'] {
+  padding-inline: 25%;
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='muscel-rauri'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='maramures-ciupag'] {
+  text-align: left;
+  justify-items: start;
+  padding: 102px 12% 65px;
+  background:
+    repeating-linear-gradient(90deg, #aa603e10 0 1px, transparent 1px 7px), var(--inv-paper);
+}
+.invitation-card[data-composition='maramures-ciupag'] .invitation-textile-accent {
+  stroke: #375994;
+}
+.invitation-card[data-composition='maramures-ciupag'] .invitation-motif {
+  color: var(--inv-thread);
+}
+.invitation-card[data-composition='sibiu-fodori'] {
+  padding-inline: 20%;
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='sibiu-fodori'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='moldova-sirlau'] {
+  padding-inline: 32% 8%;
+  text-align: left;
+  justify-items: start;
+  background: var(--inv-paper);
+}
+.invitation-card[data-composition='moldova-sirlau']::before {
+  inset: 0 72% 0 0;
+  background: repeating-linear-gradient(0deg, #fff0 0 3px, #fff2 3px 4px), #644049;
+}
+.invitation-card[data-composition='dobrogea-stergar'] {
+  padding-block: 105px 88px;
+}
+.invitation-card[data-composition='dobrogea-stergar'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='oltenia-scoarta'] {
+  padding-block: 118px 78px;
+  background: linear-gradient(145deg, #694154, var(--inv-paper) 75%);
+}
+.invitation-card[data-composition='oltenia-scoarta'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card[data-composition='moldova-romburi'] {
+  background: repeating-linear-gradient(0deg, #fff0 0 3px, #fff1 3px 4px), var(--inv-paper);
+}
+.invitation-card[data-composition='moldova-romburi'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-card[data-composition='muscel-altita'].invitation-thumbnail,
+.invitation-card[data-composition='maramures-ciupag'].invitation-thumbnail,
+.invitation-card[data-composition='dobrogea-stergar'].invitation-thumbnail,
+.invitation-card[data-composition='oltenia-scoarta'].invitation-thumbnail {
+  padding-block: 23% 15%;
+}
+.invitation-card[data-composition='sibiu-fodori'] {
+  padding-block: 80px;
+}
+.invitation-card[data-palette='stitched-linen'] {
+  --inv-paper: #f8efdc;
+  --inv-ink: #26201e;
+  --inv-accent: #9d2533;
+}
+.invitation-card.invitation-embroidered {
+  grid-template: auto minmax(min-content, 1fr) auto / minmax(0, 1fr);
+  gap: 0;
+  padding: 0;
+  min-height: 360px;
+  align-content: stretch;
+  justify-items: stretch;
+  background:
+    repeating-linear-gradient(0deg, #8761320a 0 1px, transparent 1px 4px), var(--inv-paper);
+  border: 1px solid color-mix(in srgb, var(--inv-accent) 25%, transparent);
+}
+.invitation-stitchwork {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.invitation-embroidered .invitation-copy {
+  align-self: center;
+  padding: 24px 10%;
+}
+.invitation-embroidered .invitation-heading {
+  font-size: clamp(23px, 5vw, 48px);
+  text-wrap: balance;
+}
+.invitation-embroidered .invitation-detail {
+  letter-spacing: 0.07em;
+}
+.invitation-embroidered[data-composition='muscel-altita-grid'] {
+  padding-inline: 6%;
+  background: #f1e4c2;
+  box-shadow: inset 0 0 0 5px #241f21;
+}
+.invitation-embroidered[data-composition='muscel-altita-grid'] .invitation-heading {
+  font-variant: small-caps;
+}
+.invitation-embroidered[data-composition='comanesti-diamond'] {
+  --inv-paper: #262321;
+  --inv-ink: #fff0d2;
+}
+.invitation-embroidered[data-composition='comanesti-sprig'] {
+  padding-inline: 9%;
+}
+.invitation-embroidered[data-composition='comanesti-sprig'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-embroidered[data-composition='comanesti-sprig'] .invitation-stitchwork {
+  max-height: 58px;
+}
+.invitation-embroidered[data-composition='rasinari-woven'] {
+  --inv-paper: #ded0ae;
+}
+.invitation-embroidered[data-composition='rasinari-woven'] .invitation-copy {
+  text-align: left;
+}
+.invitation-embroidered[data-composition='dolj-woven'] {
+  --inv-paper: #552d3c;
+  --inv-ink: #fff0d2;
+}
+.invitation-embroidered[data-composition='dolj-woven'] .invitation-heading {
+  font-style: italic;
+}
+.invitation-card.invitation-embroidered.invitation-thumbnail {
+  min-height: 0;
+}
+.invitation-embroidered.invitation-thumbnail .invitation-copy {
+  padding: 7px 9%;
+}
+.invitation-embroidered.invitation-thumbnail .invitation-heading {
+  font-size: 15px;
+}
+.invitation-embroidered[data-stitch-placement='top'] {
+  grid-template-rows: auto minmax(min-content, 1fr);
+}
+.invitation-embroidered[data-stitch-placement='bottom'] {
+  grid-template-rows: minmax(min-content, 1fr) auto;
+}
+.invitation-embroidered[data-stitch-placement='sidebar'] {
+  grid-template: minmax(min-content, 1fr) / 17% minmax(0, 1fr);
+}
+.invitation-embroidered[data-stitch-placement='sidebar'] .invitation-stitchwork {
+  width: 100%;
+  height: 100%;
+  align-self: stretch;
+}
+.invitation-embroidered[data-composition='muscel-gold-lattice'] {
+  --inv-paper: #252022;
+  --inv-ink: #f7e7cc;
+}
+.invitation-embroidered[data-composition='moldova-woven-diamonds'] {
+  --inv-paper: #652737;
+  --inv-ink: #fff1d6;
+}
+.invitation-embroidered[data-composition='oltenia-floral-scoarta'] {
+  --inv-paper: #452735;
+  --inv-ink: #fff0d6;
+}
+.invitation-embroidered[data-composition='rasinari-stripe-rhythm'] {
+  --inv-paper: #eee0c7;
+}
+.invitation-embroidered[data-composition='bucovina-branching-flower'] .invitation-heading {
+  font-style: italic;
+}

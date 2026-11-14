@@ -12,6 +12,7 @@ import {
   createInvitationDesign,
   createMenu,
   estimateGift,
+  getOccasionForMember,
   notifyProgrammeChange,
   publishSeating,
   registerPublic,
@@ -23,6 +24,10 @@ import {
   updateProgrammeItem,
 } from '@eventdesk/core';
 import { prisma } from '@eventdesk/db';
+import { AppError } from '@eventdesk/shared';
+import { findInvitationTemplate, invitationKind } from '../lib/invitation-templates';
+import { invitationDetail } from '../lib/invitation-detail';
+import { getLocale } from '../lib/i18n';
 import { requireUser } from '../lib/session';
 
 export async function saveSeatingAction(occasionId: string, formData: FormData): Promise<void> {
@@ -156,10 +161,29 @@ export async function invitationDesignAction(
   formData: FormData
 ): Promise<void> {
   const user = await requireUser();
-  await createInvitationDesign(occasionId, user.accountId, {
-    text: String(formData.get('text') ?? ''),
-    layout: String(formData.get('layout') ?? 'classic'),
-  });
+  const text = String(formData.get('text') ?? '').trim();
+  if (!text) throw new AppError('INVALID_INPUT', 'Invitation text is required.');
+  const templateId = formData.get('templateId');
+  if (templateId !== null) {
+    const { occasion } = await getOccasionForMember(occasionId, user.accountId);
+    const template =
+      typeof templateId === 'string' ? findInvitationTemplate(templateId) : undefined;
+    if (!template || template.kind !== invitationKind(occasion.kind)) {
+      throw new AppError('INVALID_INPUT', 'Invalid invitation template for this occasion.');
+    }
+    const locale = await getLocale();
+    await createInvitationDesign(occasionId, user.accountId, {
+      text,
+      templateId: template.id,
+      title: occasion.title,
+      detail: invitationDetail(occasion, locale),
+    });
+  } else {
+    await createInvitationDesign(occasionId, user.accountId, {
+      text,
+      layout: formData.get('layout') === 'minimal' ? 'minimal' : 'classic',
+    });
+  }
   revalidatePath(`/occasions/${occasionId}/invitations`);
 }
 

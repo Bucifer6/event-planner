@@ -13,16 +13,18 @@ export default async function ConsoleLayout({ children }: { children: ReactNode 
   if (!staff) redirect('/console/signin');
   const locale = await getLocale();
   const t = tf(locale);
+  const canChangeAppearance = staff.roles.includes('platform_admin');
   const store = await cookies();
   void store;
   return (
     <>
-      <header className="topbar">
+      <header className="topbar console-topbar">
         <Link className="brand" href="/console">
           EventDesk — Consolă
         </Link>
         <nav>
           <Link href="/console">{t('console.dashboard')}</Link>
+          {canChangeAppearance && <Link href="/console/appearance">{t('appearance.title')}</Link>}
           <Link href="/console/approvals">{t('console.approvals')}</Link>
           <Link href="/console/audit">{t('console.audit')}</Link>
           <Link href="/console/monetization">{t('console.monetization')}</Link>

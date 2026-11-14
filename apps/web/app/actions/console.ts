@@ -20,7 +20,7 @@ import { requireUser } from '../lib/session';
 
 const STAFF_COOKIE = 'ed_staff_session';
 
-export async function currentStaff(): Promise<{ staffId: string; accountId: string } | null> {
+export async function currentStaff() {
   const store = await cookies();
   const token = store.get(STAFF_COOKIE)?.value;
   if (!token) return null;
@@ -28,7 +28,7 @@ export async function currentStaff(): Promise<{ staffId: string; accountId: stri
   if (!staffId) return null;
   const staff = await prisma.staffMember.findUnique({ where: { id: staffId } });
   if (!staff) return null;
-  return { staffId, accountId: staff.accountId };
+  return { staffId, accountId: staff.accountId, roles: staff.roles };
 }
 
 export async function requireStaffUser() {

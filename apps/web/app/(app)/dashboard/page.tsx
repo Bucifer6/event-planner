@@ -3,12 +3,34 @@ import { requireUser } from '../../lib/session';
 import { getLocale, tf } from '../../lib/i18n';
 import { listOccasionsForAccount } from '@eventdesk/core';
 import { formatDate } from '@eventdesk/shared';
+import { getPlannerAppearance } from '../../lib/planner-appearance';
+import { PlannerDashboard } from '../../../components/PlannerDashboard';
 
 export default async function DashboardPage() {
   const user = await requireUser();
   const locale = await getLocale();
   const t = tf(locale);
   const occasions = await listOccasionsForAccount(user.accountId);
+  if ((await getPlannerAppearance()) !== 'garden') {
+    return (
+      <PlannerDashboard
+        title={t('dash.title')}
+        createLabel={t('dash.new')}
+        emptyLabel={t('dash.empty')}
+        events={occasions.map((occasion) => ({
+          id: occasion.id,
+          title: occasion.title,
+          date: occasion.dateStart ? formatDate(occasion.dateStart, locale) : t('common.unknown'),
+          status: occasion.status,
+        }))}
+        renderLink={(href, className, content) => (
+          <Link href={href} className={className}>
+            {content}
+          </Link>
+        )}
+      />
+    );
+  }
   return (
     <main className="wrap">
       <div className="row between">
